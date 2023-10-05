@@ -1,0 +1,17 @@
+name: Notify on push
+on: push
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Send telegram notification
+      uses: Lukasss93/telegram-action@v2
+            
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          Êu, có commit mới rồi này ${{ github.repository }} bro ${{ github.actor }}
+          Nhắn rằng: ${{ github.event.commits[0].message }}
