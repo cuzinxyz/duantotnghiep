@@ -12,7 +12,7 @@ jobs:
       - name: Send Telegram Message
         uses: s00d/fast-telegram-action@v9
         with:
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          to: ${{ secrets.TELEGRAM_TO }}
+          token: AAHeu0Yv5_ywDqgnxCzAhvlmXrmodzimOJE
+          to: 6504928804
           message: 'This is a test message from GitHub Actions!'
          
