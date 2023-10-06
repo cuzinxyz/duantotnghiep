@@ -1,0 +1,17 @@
+@font-face {
+    font-family: VIEAvantGardeRegular;
+    src: url(../fonts/fonts-vie-avantgarde/vie-avantgarde.eot);
+    src: url(../fonts/fonts-vie-avantgarde/vie-avantgarde.eot) format('embedded-opentype'), url(../fonts/fonts-vie-avantgarde/vie-avantgarde.woff) format('woff'), url(../fonts/fonts-vie-avantgarde/vie-avantgarde.ttf) format('truetype'), url(../fonts/fonts-vie-avantgarde/vie-avantgarde.svg#VIEAvantGardeRegular) format('svg')
+}
+
+@font-face {
+    font-family: VIEAvantGardeBold;
+    src: url(../fonts/fonts-vie-avantgarde/vie-avantgardebold.eot);
+    src: url(../fonts/fonts-vie-avantgarde/vie-avantgardebold.eot) format('embedded-opentype'), url(../fonts/fonts-vie-avantgarde/vie-avantgardebold.woff) format('woff'), url(../fonts/fonts-vie-avantgarde/vie-avantgardebold.ttf) format('truetype'), url(../fonts/fonts-vie-avantgarde/vie-avantgardebold.svg#VIEAvantGardeBold) format('svg')
+}
+
+@font-face {
+    font-family: VIEAvantGardeDemibold;
+    src: url(../fonts/fonts-vie-avantgarde/vie-avantgardedemibold.eot);
+    src: url(../fonts/fonts-vie-avantgarde/vie-avantgardedemibold.eot) format('embedded-opentype'), url(../fonts/fonts-vie-avantgarde/vie-avantgardedemibold.woff) format('woff'), url(../fonts/fonts-vie-avantgarde/vie-avantgardedemibold.ttf) format('truetype'), url(../fonts/fonts-vie-avantgarde/vie-avantgardedemibold.svg#VIEAvantGardeDemibold) format('svg')
+}
