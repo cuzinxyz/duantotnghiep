@@ -11,6 +11,8 @@ hoặc sử dụng **Github Desktop** để clone về máy tính.
 
 B2: Chạy lần lượt các lệnh:
 
+`cd duantotnghiep`
+
 `cp .env.example .env`
 
 `composer install`
