@@ -10,14 +10,10 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('transactions', function (Blueprint $table) {
+    Schema::create('saved_cars', function (Blueprint $table) {
       $table->id();
-      $table->integer('buyer_id');
-      $table->integer('seller_id');
+      $table->integer('user_id');
       $table->integer('car_id');
-      $table->boolean('status')
-        ->default(0)
-        ->comment('Trạng thái: 0 đang giao dịch. 1 thành công. 2 thất bại');
       $table->timestamps();
       $table->softDeletes(); // add
     });
@@ -28,6 +24,6 @@ return new class extends Migration {
    */
   public function down(): void
   {
-    Schema::dropIfExists('transactions');
+    Schema::dropIfExists('saved_cars');
   }
 };
