@@ -84,3 +84,5 @@ $expired = $record->expiration_date->lt(now()->subMonths(3));
 
 Như vậy có thể linh hoạt thiết lập các giới hạn 30 ngày, 3 tháng, 1 năm hay bất kỳ khoảng thời gian nào cho cột expiration_date.
 
+
+# coming soon
