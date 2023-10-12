@@ -6,9 +6,11 @@ use App\Filament\Resources\DemnadResource\Pages;
 use App\Filament\Resources\DemnadResource\RelationManagers;
 use App\Models\Demnad;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -32,10 +34,13 @@ class DemnadResource extends Resource
                 Forms\Components\Select::make('car_model_id')
                     ->relationship('car_model', 'model_name')
                     ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->numeric()
-                    ->default(1),
+                Select::make('status')
+                ->label('Status')
+                ->options([
+                  '1' => 'Đã tìm được',
+                  '2' => 'Chưa tìm được'
+                ])
+                ->required()
             ]);
     }
 
@@ -51,18 +56,17 @@ class DemnadResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('car_model.model_name')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable(),
+                IconColumn::make('status')
+                ->icon(fn (string $state): string => match ($state) {
+                    '1' => 'heroicon-o-check-circle',
+                    '2' => 'heroicon-o-x-circle'
+                }),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->since()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->since()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
