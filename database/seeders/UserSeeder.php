@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'name' => 'user',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('12345678'),
-                'avatar' => 'avatars/QiZMDVQ7IRQhdL0I5bscxgI8FbJp2b-metacGV4ZWxzLXBob3RvLTE3MDc4MDU0LndlYnA=-.webp',
+                'avatar' => 'avatars/users/QiZMDVQ7IRQhdL0I5bscxgI8FbJp2b-metacGV4ZWxzLXBob3RvLTE3MDc4MDU0LndlYnA=-.webp',
                 'account_balence' => '1230000',
                 'service_id' => 1,
                 'phone_number' => '0988123456',
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'name' => 'test',
                 'email' => 'test@gmail.com',
                 'password' => Hash::make('12345678'),
-                'avatar' => 'avatars/pDE8TRKeH0OH3t6Tn3Bqevue5ESKfq-metaS0guanBn-.jpg',
+                'avatar' => 'avatars/users/pDE8TRKeH0OH3t6Tn3Bqevue5ESKfq-metaS0guanBn-.jpg',
                 'account_balence' => '234000',
                 'service_id' => 2,
                 'phone_number' => '0988123457'
