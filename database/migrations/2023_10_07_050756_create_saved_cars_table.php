@@ -12,8 +12,8 @@ return new class extends Migration {
   {
     Schema::create('saved_cars', function (Blueprint $table) {
       $table->id();
-      $table->integer('user_id');
-      $table->integer('car_id');
+      $table->foreignIdFor(\App\Models\User::class, 'user_id');
+      $table->foreignIdFor(\App\Models\Car::class, 'car_id');
       $table->timestamps();
       $table->softDeletes(); // add
     });
