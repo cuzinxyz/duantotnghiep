@@ -51,10 +51,12 @@ class BannerResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Ngày tạo')
                     ->dateTime()
+                    ->since()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Ngày cập nhật')
                     ->dateTime()
+                    ->since()
                     ->sortable()
             ])
             ->filters([
@@ -71,7 +73,6 @@ class BannerResource extends Resource
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
             ]);
     }
 

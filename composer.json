@@ -12,6 +12,7 @@
         "filament/filament": "3.0-stable",
         "filament/forms": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
+        "ibrahimbougaoua/filament-rating-star": "^0.0.1",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
