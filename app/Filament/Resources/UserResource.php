@@ -50,7 +50,7 @@ class UserResource extends Resource
                         FileUpload::make('avatar')
                             ->imageEditor()
                             ->disk('public')
-                            ->directory('avatars'),
+                            ->directory('avatars/users'),
                     ])->columnSpan([
                         'md' => 1,
                         'xl' => 1

@@ -34,9 +34,9 @@ class AdminObserver
      */
     public function deleted(Admin $admin): void
     {
-        if (! is_null($admin->avatar)) {
-            Storage::disk('public')->delete($admin->avatar);
-        }
+        // if (! is_null($admin->avatar)) {
+        //     Storage::disk('public')->delete($admin->avatar);
+        // }
     }
 
     /**

@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
         SavedCarSeeder::class,
         ServiceSeeder::class,
         UserSeeder::class,
-        AdminSeeder::class
+        AdminSeeder::class,
+        PartnerSeeder::class,
       ]);
     }
 }

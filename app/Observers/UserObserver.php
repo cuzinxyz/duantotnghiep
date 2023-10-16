@@ -34,9 +34,9 @@ class UserObserver
      */
     public function deleted(User $user): void
     {
-        if (! is_null($user->avatar)) {
-            Storage::disk('public')->delete($user->avatar);
-        }
+        // if (! is_null($user->avatar)) {
+        //     Storage::disk('public')->delete($user->avatar);
+        // }
     }
 
     /**

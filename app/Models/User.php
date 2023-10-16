@@ -50,6 +50,6 @@ class User extends Authenticatable
 
     public function service(): BelongsTo
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class, 'service_id', 'id');
     }
 }

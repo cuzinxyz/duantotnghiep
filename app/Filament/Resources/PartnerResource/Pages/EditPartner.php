@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\AdminResource\Pages;
+namespace App\Filament\Resources\PartnerResource\Pages;
 
-use App\Filament\Resources\AdminResource;
+use App\Filament\Resources\PartnerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditAdmin extends EditRecord
+class EditPartner extends EditRecord
 {
-    protected static string $resource = AdminResource::class;
+    protected static string $resource = PartnerResource::class;
 
     protected function getHeaderActions(): array
     {
