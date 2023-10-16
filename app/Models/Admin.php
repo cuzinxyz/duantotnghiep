@@ -8,9 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -24,8 +23,6 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
-        'account_balence',
-        'phone_number'
     ];
 
     /**
@@ -47,9 +44,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function service(): BelongsTo
-    {
-        return $this->belongsTo(Service::class, 'service_id', 'id');
-    }
 }

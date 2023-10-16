@@ -6,18 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Service extends Model
+class Partner extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'service_name',
-        'price',
-        'description',
-        'expiration_date',
-    ];
-
-    protected $casts = [
-        'description' => 'json'
+        'name',
+        'logo_url',
     ];
 }

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Admin;
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +17,10 @@ class DatabaseSeeder extends Seeder
     {
       $this->call([
         SavedCarSeeder::class,
+        ServiceSeeder::class,
+        UserSeeder::class,
+        AdminSeeder::class,
+        PartnerSeeder::class,
         SupportSeeder::class
       ]);
     }
