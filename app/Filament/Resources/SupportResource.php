@@ -27,8 +27,7 @@ class SupportResource extends Resource
   {
     return $form
       ->schema([
-        Forms\Components\Select::make('user_id')
-          ->relationship('user', 'name')
+        Forms\Components\Textarea::make('response')
       ]);
   }
 
