@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('category'); 
             $table->text('body');
             $table->text('response');
-            $table->string('review', 1);
+            $table->string('review', 1)->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
             $table->softDeletes(); // add
