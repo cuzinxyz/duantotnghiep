@@ -13,4 +13,8 @@ class HomeController extends Controller
     {
         return view('detail');
     }
+    public function info()
+    {
+        return view('info-user');
+    }
 }
