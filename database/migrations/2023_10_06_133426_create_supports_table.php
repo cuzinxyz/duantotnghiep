@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('title');
+            $table->string('category'); 
             $table->text('body');
+            $table->text('response');
+            $table->string('review', 1);
             $table->boolean('status')->default(0);
             $table->timestamps();
-          $table->softDeletes(); // add
-
+            $table->softDeletes(); // add
         });
     }
 
