@@ -11,6 +11,10 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('index');
+        return view('detail');
+    }
+    public function info()
+    {
+        return view('info-user');
     }
 }
