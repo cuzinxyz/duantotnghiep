@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\FormSellCar;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Http\Controllers\HomeController::class);
+Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
+
+
+Route::get('/dang-tin-ban-xe', FormSellCar::class)->name('dang-tin');
+
 Route::get('/info', [HomeController::class, 'info']);
