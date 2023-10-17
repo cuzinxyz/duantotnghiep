@@ -10,17 +10,14 @@
     "require": {
         "php": "^8.1",
         "filament/filament": "3.0-stable",
-<<<<<<< HEAD
-        "filament/forms": "^3.0-stable",
-=======
         "filament/tables": "3.0-stable",
->>>>>>> 1f0b04272f8fe9dee87e28c04be02c5384f167db
         "guzzlehttp/guzzle": "^7.2",
         "ibrahimbougaoua/filament-rating-star": "^0.0.1",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.0"
+        "livewire/livewire": "^3.0",
+        "robsontenorio/mary": "^0.44.2"
     },
     "require-dev": {
         "doctrine/dbal": "^3.7",
