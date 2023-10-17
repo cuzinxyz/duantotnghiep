@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\FormSellCar;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
@@ -40,3 +42,9 @@ Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name
 //  dd($array);
 //});
 //Route::get('service', [ServiceController::class,'index']);
+Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
+
+
+Route::get('/dang-tin-ban-xe', FormSellCar::class)->name('dang-tin');
+
+Route::get('/info', [HomeController::class, 'info']);
