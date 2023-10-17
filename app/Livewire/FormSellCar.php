@@ -7,8 +7,6 @@ use Livewire\Attributes\Layout;
 
 class FormSellCar extends Component
 {
-
-
     public $currentStep = 1;
 
 
@@ -134,9 +132,7 @@ class FormSellCar extends Component
 
 
     public function back($step)
-
     {
-
         $this->currentStep = $step;
     }
 
