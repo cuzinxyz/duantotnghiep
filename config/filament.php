@@ -24,6 +24,14 @@ return [
         // ],
 
     ],
+    'sidebar' => [
+        'is_collapsible_on_desktop' => true,
+        'groups' => [
+            'are_collapsible' => true,
+        ],
+        'width' => null,
+        'collapsed_width' => null,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -36,5 +44,4 @@ return [
     */
 
     'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
-    
 ];

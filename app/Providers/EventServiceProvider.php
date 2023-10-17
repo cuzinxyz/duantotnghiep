@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Banner;
+use App\Observers\BannerObserver;
 use App\Models\Admin;
 use App\Models\Partner;
 use App\Models\User;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Banner::observe(BannerObserver::class);
         User::observe(UserObserver::class);
         Admin::observe(AdminObserver::class);
         Partner::observe(PartnerObserver::class);

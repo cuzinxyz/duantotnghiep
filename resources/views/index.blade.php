@@ -2,9 +2,6 @@
 
 {{--  ví dụ nhỏ sử dụng livewire bên trong blade--}}
 {{--  chỉ sử dụng livewire khi cần tương tác CSDL như CRUD--}}
-{{--  demo begin--}}
-  <livewire:counter />
-{{--  demo end--}}
 
   <div class="home5-banner-area">
     <div class="paginations111"></div>
