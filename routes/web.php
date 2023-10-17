@@ -19,6 +19,5 @@ Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 
 
 Route::get('/dang-tin-ban-xe', FormSellCar::class)->name('dang-tin');
-Route::get('/', \App\Http\Controllers\HomeController::class);
 
 Route::get('/info', [HomeController::class, 'info']);
