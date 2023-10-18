@@ -17,6 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 
-Route::get('/dang-tin-ban-xe', [\App\Http\Controllers\CarController::class, 'sellCar'])->name('dang-tin');
-
 Route::get('/info', [HomeController::class, 'info']);
