@@ -28,15 +28,12 @@
 
     <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
 
-    <link data-navigate-once href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
-
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet" />
 
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
@@ -1328,18 +1325,47 @@
         });
     </script>
 
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
+    
     <script>
-        // Register the plugin
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        const inputElementImage = document.querySelector('input[type="file"]');
+        $(document).ready(function() {
+            $(".upload-area").click(function() {
+                $('#upload-input').trigger('click');
+            });
 
-        const pond = FilePond.create(inputElementImage);
+            $('#upload-input').change(event => {
+                if (event.target.files) {
+                    let filesAmount = event.target.files.length;
+                    $('.upload-img').html("");
 
-        // ... FilePond initialisation code here
+                    for (let i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function(event) {
+                            let html = `
+                        <div class = "uploaded-img">
+                            <img src = "${event.target.result}">
+                            <button type = "button" class = "remove-btn">
+                                <i class = "fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                            $(".upload-img").append(html);
+                        }
+                        reader.readAsDataURL(event.target.files[i]);
+                    }
+
+                    $('.upload-info-value').text(filesAmount);
+                    $('.upload-img').css('padding', "20px");
+                }
+            });
+
+            $(window).click(function(event) {
+                if ($(event.target).hasClass('remove-btn')) {
+                    $(event.target).parent().remove();
+                } else if ($(event.target).parent().hasClass('remove-btn')) {
+                    $(event.target).parent().parent().remove();
+                }
+            })
+        });
     </script>
 
 
