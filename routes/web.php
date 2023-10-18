@@ -18,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 
 Route::get('/info', [HomeController::class, 'info']);
+
+Route::get('dang-tin-ban-xe', function () {
+    return view('form-sell-car');
+});
+  
