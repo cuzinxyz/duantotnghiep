@@ -19,11 +19,11 @@ class FormSellCar extends Component
     public $phien_ban;
 
     public $nam_san_xuat;
-    
+
     public $tinh_trang;
-    
+
     public $km;
-    
+
     public $price;
 
     public $hop_so;
@@ -59,7 +59,7 @@ class FormSellCar extends Component
             'hang_xe' => 'required',
 
             'dong_xe' => 'required',
-            
+
             'phien_ban' => 'required',
 
             'nam_san_xuat' => 'required',
@@ -69,8 +69,8 @@ class FormSellCar extends Component
             'km' => 'required | numeric',
 
             'price' => 'required | numeric',
-            
-            
+
+
         ]);
 
 
@@ -96,7 +96,7 @@ class FormSellCar extends Component
             'tieu_de' => 'required',
 
             'mo_ta' => 'required',
-            
+
 
         ]);
 
@@ -127,7 +127,7 @@ class FormSellCar extends Component
 
         dd($this->all());
 
-        $this->reset(); 
+        $this->reset();
 
         $this->currentStep = 1;
     }

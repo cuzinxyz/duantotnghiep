@@ -16,11 +16,11 @@ class PartnerSeeder extends Seeder
         DB::table('partners')->insert([
             [
                 'name' => 'VinFast',
-                'avatar' => 'partners/8TCMJ1e7Had24EoqpMTRIeCgmXLYQU-metaZG93bmxvYWQucG5n-.png',
+                'logo_url' => 'partners/8TCMJ1e7Had24EoqpMTRIeCgmXLYQU-metaZG93bmxvYWQucG5n-.png',
             ],
             [
                 'name' => 'Škoda Auto',
-                'avatar' => 'partners/zR38QywOfCcynVpIqQ3A0vDRvOUftE-metaZG93bmxvYWQgKDEpLnBuZw==-.png',
+                'logo_url' => 'avatars/users/pDE8TRKeH0OH3t6Tn3Bqevue5ESKfq-metaS0guanBn-.jpg',
             ]
         ]);
     }
