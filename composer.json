@@ -16,7 +16,9 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.0"
+        "laravel/ui": "^4.2",
+        "livewire/livewire": "^3.0",
+        "munafio/chatify": "^1.6"
     },
     "require-dev": {
         "doctrine/dbal": "^3.7",

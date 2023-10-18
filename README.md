@@ -23,6 +23,14 @@ B2: Chạy lần lượt các lệnh:
 
 `php artisan filament:install --panels` chạy lệnh này để cài đặt filament
 
+// mới thêm
+
+`php artisan chatify:install`
+
+`php artisan breeze:install`
+
+// mới thêm
+
 #### Tạo 1 admin mới cho filament
 `php artisan make:filament-user`
 

@@ -86,43 +86,49 @@
                             class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <div class="form-inner">
-                                    <label>First Name*</label>
-                                    <input type="text" placeholder="Daniel">
+                                    <label>Name*</label>
+                                    <input id="name" type="text" class="@error('name') is-invalid @enderror" name="name"
+                                        value="{{ old('name') }}" required placeholder="Daniel" autofocus>
                                 </div>
+                                <span class="errorName">This field is required</span>	
                             </div>
                             <div class="col-md-6">
                                 <div class="form-inner">
-                                    <label>Last Name*</label>
-                                    <input type="text" placeholder="Last name">
+                                    <label>Email*</label>
+                                    <input id="email" type="text" class="@error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" required autocomplete="email"
+                                        placeholder="Email">
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Enter your email address*</label>
-                                    <input type="email" placeholder="Type email">
-                                </div>
+                                <span class="errorEmail">This field is required</span>	
                             </div>
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Password*</label>
-                                    <input id="password" type="password" placeholder="*** ***">
+                                    <input id="password" class="@error('password') is-invalid @enderror"
+                                        name="password" required autocomplete="new-password" type="password"
+                                        placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                 </div>
+                                <span class="errorPassword">This field is required</span>	
                             </div>
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Confirm Password*</label>
-                                    <input id="password2" type="password" placeholder="*** ***">
+                                    <input id="password2" class="@error('re-password') is-invalid @enderror"
+                                        name="re-password" required autocomplete="new-password" type="password"
+                                        placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword2"></i>
                                 </div>
+                                <span class="errorPassword2">This field is required</span>	
                             </div>
                             <div class="col-md-12">
                                 <div class="form-inner">
-                                    <button class="primary-btn2" type="submit">Sign Up Now</button>
+                                    <button class="primary-btn2 btn-sign-up" type="submit">Sign Up Now</button>
                                 </div>
                             </div>
                         </div>
@@ -1325,7 +1331,7 @@
         });
     </script>
 
-    
+
     <script>
         $(document).ready(function() {
             $(".upload-area").click(function() {
@@ -1368,7 +1374,61 @@
         });
     </script>
 
-
+    <script>
+        let validate = false;
+        $(".errorName").hide();$(".errorEmail").hide();$(".errorPassword").hide();$(".errorPassword2").hide();
+        $('#name').on('input', function() {
+            var input = $(this);
+            var is_name = input.val();
+            if (is_name) {
+                $(".errorName").hide();
+            } else {
+                validate = true;
+                $(".errorName").show();
+            }
+        });
+        $('#email').on('input', function() {
+            var input = $(this);
+            var is_email = input.val();
+            if (is_email) {
+                $(".errorEmail").hide();
+            } else {
+                validate = true;
+                $(".errorEmail").show();
+            }
+        });
+        $('#password').on('input', function() {
+            var input = $(this);
+            var is_password = input.val();
+            if (is_password) {
+                $(".errorPassword").hide();
+            } else {
+                validate = true;
+                $(".errorPassword").show();
+            }
+        });
+        $('#password2').on('input', function() {
+            var input = $(this);
+            var is_password2 = input.val();
+            if (is_password2) {
+                $(".errorPassword2").hide();
+            } else {
+                validate = true;
+                $(".errorPassword2").show();
+            }
+        });
+        $('.btn-sign-up').on('click', function(e) {
+            e.preventDefault();
+            if (validate) {
+                alert('ok')
+            } else {
+                $(".errorName").hide();
+                $(".errorEmail").hide();
+                $(".errorPassword").hide();
+                $(".errorPassword2").hide();
+            }
+        })
+    </script>
 </body>
 
 </html>
