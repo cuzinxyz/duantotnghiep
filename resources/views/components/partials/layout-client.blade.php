@@ -6,12 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <script src="https://kit.fontawesome.com/e3cf320e1f.js" crossorigin="anonymous"></script>
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+      <link rel="stylesheet" href="{{asset('css/goivip.css')}}">
 
     <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 
@@ -39,7 +42,7 @@
      rel="stylesheet" />
 
 
-    
+
 
 
     <title>Drivco - Car Dealer HTML Template</title>

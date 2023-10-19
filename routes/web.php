@@ -19,7 +19,10 @@ use App\Models\Service;
 */
 
 Route::get('/', \App\Http\Controllers\HomeController::class);
-Route::get('payment', [CheckOutController::class, 'checkout']);
+Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
+Route::get('login',function (){
+  return 'Đây là trang đăng nhập';
+})->name('login');
 Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
 //Route::get('test', function () {
 //  $array = [
@@ -48,3 +51,4 @@ Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 Route::get('/dang-tin-ban-xe', FormSellCar::class)->name('dang-tin');
 
 Route::get('/info', [HomeController::class, 'info']);
+Route::get('/service', [ServiceController::class, 'index'])->name('service');

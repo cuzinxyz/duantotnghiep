@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Authenticate;
+use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CheckOutController extends Controller
 {
+  public function __construct()
+  {
+//    $this->middleware('auth');
+  }
+
   public function checkout(Request $request)
   {
-    $request->total_price = 200000;
+    $request->total_price = $request->total_price * 1000;
+    session()->put('id_service', $request->id_service);
     error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
     $vnp_TmnCode = "DL0EA7AJ"; //Website ID in VNPAY System
@@ -85,6 +94,15 @@ class CheckOutController extends Controller
 
   public function handlePayment(Request $request)
   {
-    dd($request->all());
+    if ($request->vnp_ResponseCode == 00) {
+      $services = Service::all();
+      $user = User::find(1);
+      $user->service_id = session('id_service');
+      $user->save();
+      return view('service',compact('user','services'));
+    } else {
+      session()->forget('id_service');
+      dd('Thanh toán koo thành công');
+    }
   }
 }
