@@ -44,22 +44,22 @@ class CarResource extends Resource
                 TextInput::make('full_address')->required()->placeholder('Quận, Huyện, Thị xã'),
                 TextInput::make('recommended')->required()->numeric(),
                 Section::make('Contact')->schema([
-                    TextInput::make('email')->email()->required(),
-                    TextInput::make('phone_number')->numeric()->required(),
-                    TextInput::make('facebook'),
-                    TextInput::make('twitter'),
+                    TextInput::make('contact.email')->email()->required(),
+                    TextInput::make('contact.phone_number')->numeric()->required(),
+                    TextInput::make('contact.facebook'),
+                    TextInput::make('contact.twitter'),
                 ]),
                 Section::make('Car Infor')->schema([
-                    TextInput::make('Mileage')->required()->numeric(),
-                    TextInput::make('Engine')->required()->numeric(),
-                    Select::make('FuelType')->options([
+                    TextInput::make('car_info.mileage')->required()->numeric(),
+                    TextInput::make('car_info.engine')->required()->numeric(),
+                    Select::make('car_info.fuelType')->options([
                         'Petrol' => 'Petrol',
                         'Gas' => 'Gas'
                     ]),
-                    Select::make('Condition')->options([
+                    Select::make('car_info.condition')->options([
                         'used' => 'Used',
                     ]),
-                    CheckboxList::make('features')->required()->options([
+                    CheckboxList::make('car_info.features')->required()->options([
                         'PremiumWheel' => 'Premium Wheel',
                         'Moonroof' => 'Moonroof',
                         'PremiumAudio' => 'Premium Audio',
@@ -103,9 +103,11 @@ class CarResource extends Resource
                     ->searchable(),
                 Tables\Columns\IconColumn::make('recommended')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('car_info')
-                    ->separator(','),
+                Tables\Columns\IconColumn::make('car_info.mileage')
+                ->label('Số KM đã đi'),
                 Tables\Columns\ImageColumn::make('verhicle_image_library'),
+
+                Tables\Columns\ImageColumn::make('verhicle_videos'),
                 // Tables\Columns\ViewColumn::make('verhicle_image_library')->view('tables.columns.images-car'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

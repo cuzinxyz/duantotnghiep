@@ -178,7 +178,7 @@ class PostCarManagerResource extends Resource
                                             ->label('Số KM đã đi')
                                             ->default(1000),
 
-                                        TextEntry::make('seat')
+                                        TextEntry::make('car_info.seat')
                                             ->label('Số chỗ ngồi')
                                             ->default(7),
 
@@ -190,7 +190,7 @@ class PostCarManagerResource extends Resource
                                             ->label('Màu sắc')
                                             ->default('red'),
 
-                                        TextEntry::make('engine')
+                                        TextEntry::make('car_info.engine')
                                             ->label('Động cơ')
                                             ->default('Tubo'),
 
