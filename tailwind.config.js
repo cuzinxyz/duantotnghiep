@@ -1,12 +1,10 @@
 import preset from './vendor/filament/support/tailwind.config.preset'
 
 export default {
-  presets: [preset],
-  content: [
-    "./app/Filament/**/*.php",
-    "./resources/views/**/*.blade.php",
-    "./vendor/filament/**/*.blade.php",
-    "./vendor/robsontenorio/mary/src/View/Components/**/*.php",
-  ],
-  plugins:[]
-};
+    presets: [preset],
+    content: [
+        './app/Filament/**/*.php',
+        './resources/views/**/*.blade.php',
+        './vendor/filament/**/*.blade.php',
+    ],
+}

@@ -25,7 +25,7 @@ class Car extends Model
     protected $casts = [
         'contact' => 'json',
         'car_info' => 'json',
-        'verhicle_image_library' => 'json',
-        'verhicle_videos' => 'json'
+        'verhicle_image_library' => 'array',
+        'verhicle_videos' => 'array'
     ];
 }

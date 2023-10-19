@@ -13,7 +13,7 @@ class CreateCar extends CreateRecord
     {
         // $data['car_info'] = json_encode($data['car_info']);
         // var_dump($data['car_info']);
-        $data['verhicle_image_library'] = json_encode($data['verhicle_image_library']);
+        // $data['verhicle_image_library'] = json_encode($data['verhicle_image_library']);
         $contact = [
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
