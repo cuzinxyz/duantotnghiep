@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Brand extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = "brands";
     protected $fillable = [
-        'brand_name',
-        'logo_url'
+      'id', 'brand_name', 'logo_url'
     ];
 
     protected $guarded = ['id'];

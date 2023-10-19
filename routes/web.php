@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Client\CarController;
+use App\Livewire\Brands;
 use App\Livewire\FormSellCar;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,11 @@ Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 
 Route::get('/info', [HomeController::class, 'info']);
 
-Route::get('dang-tin-ban-xe', function () {
-    return view('form-sell-car');
-});
-  
+// Route::get('dang-tin-ban-xe', function () {
+//     return view('form-sell-car');
+// });
+
+Route::match(['GET','POSt'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
+// Route::get('get-model-cars',[CarController::class,'getModelCars']);
+
+Route::get('/test', Brands::class);
