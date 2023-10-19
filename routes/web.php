@@ -22,4 +22,11 @@ Route::get('/info', [HomeController::class, 'info']);
 Route::get('dang-tin-ban-xe', function () {
     return view('form-sell-car');
 });
-  
+
+
+Route::get('manage-post', function () {
+    return view('manage-postings');
+});
+Route::get('push-news', function () {
+    return view('push-news');
+});
