@@ -86,7 +86,7 @@
                             class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" id="register">
                         @csrf
                         <div class="row g-4">
                             <div class="col-md-6">
@@ -100,7 +100,7 @@
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Email*</label>
-                                    <input id="email" type="text" class="@error('email') is-invalid @enderror" name="email"
+                                    <input  type="text" class="@error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email"
                                         placeholder="Email">
                                 </div>
@@ -109,7 +109,7 @@
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Password*</label>
-                                    <input id="password" class="@error('password') is-invalid @enderror"
+                                    <input class="@error('password') is-invalid @enderror"
                                         name="password" required autocomplete="new-password" type="password"
                                         placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
@@ -160,18 +160,21 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        @csrf
                         <div class="row g-4">
                             <div class="col-md-12">
                                 <div class="form-inner">
                                     <label>Enter your email address*</label>
-                                    <input type="email" placeholder="Type email">
+                                    <input type="text" id="email" placeholder="Type email">
+                                    <span style="color: red; font-size:16px" class="error email_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-inner">
                                     <label>Password*</label>
-                                    <input id="password3" type="password" placeholder="*** ***">
+                                    <input id="password" name="password" type="password" placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword3"></i>
+                                    <span style="color: red; font-size:16px" class="error password_error"></span>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -1374,7 +1377,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         let validate = false;
         $(".errorName").hide();$(".errorEmail").hide();$(".errorPassword").hide();$(".errorPassword2").hide();
         $('#name').on('input', function() {
@@ -1427,6 +1430,44 @@
                 $(".errorPassword").hide();
                 $(".errorPassword2").hide();
             }
+        })
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            $('#logInModal01').on('submit', function (e) {
+                e.preventDefault();
+
+
+
+                let email = $('#email').val().trim();
+
+                let password = $('#password').val().trim();
+
+                let csrfToken = $(this).find('input[name="_token"]').val();
+
+                $('error').text('')
+                $.ajax({
+                    url: '/validate',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        'password': password,
+                        _token: csrfToken
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);  
+                    },
+                    error: function(error) {
+                        let responseJSON = error.responseJSON.errors;
+                        console.log(responseJSON);
+                        for( let key in responseJSON) {
+                            $(`.${key}_error`).text(responseJSON[key][0]);
+                        }
+                    }
+                });
+            })
         })
     </script>
 </body>
