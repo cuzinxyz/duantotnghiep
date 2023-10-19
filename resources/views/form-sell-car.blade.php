@@ -169,14 +169,14 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label>Họ tên*</label>
-                                            <input type="text" placeholder="Full Name*">
+                                            <input name="name" type="text" placeholder="Full Name*">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label>Số điện thoại*</label>
-                                            <input type="text" placeholder="+880- 123 234 ***">
+                                            <input name="phone" type="text" placeholder="+880- 123 234 ***">
                                         </div>
                                     </div>
 
