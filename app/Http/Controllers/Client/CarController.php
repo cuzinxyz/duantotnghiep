@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Car;
 use App\Models\ModelCar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
