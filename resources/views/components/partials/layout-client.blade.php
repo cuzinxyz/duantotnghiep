@@ -1304,7 +1304,7 @@
 
     <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
-    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
 
     <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
