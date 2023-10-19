@@ -1,5 +1,5 @@
 <div>
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('sellCar') }}">
         @csrf
         <div class="row g-4 mb-100">
             <div class="col-lg-4">
@@ -67,8 +67,8 @@
                                 <label>Hộp số</label>
                                 <select class="nice-select" name="transmission">
                                     <option disabled selected>-- Chọn hộp số --</option>
-                                    <option>Số tay</option>
-                                    <option>Số tự động</option>
+                                    <option value="sotay">Số tay</option>
+                                    <option value="sotudong">Số tự động</option>
                                 </select>
                             </div>
                         </div>
@@ -132,8 +132,8 @@
                                 <label>Tình trạng</label>
                                 <select class="nice-select" name="condition">
                                     <option disabled selected>-- Chọn tình trạng --</option>
-                                    <option>Xe đã qua sử dụng</option>
-                                    <option>Xe mới</option>
+                                    <option value="xedaquasudung">Xe đã qua sử dụng</option>
+                                    <option value="xemoi">Xe mới</option>
                                 </select>
                             </div>
                         </div>
@@ -165,13 +165,6 @@
                                 <textarea name="description" placeholder="Write somethings"></textarea>
                             </div>
                         </div>
-
-                        <!-- <div class="col-lg-12">
-                              <div class="form-inner">
-                                  <button class="primary-btn2" id="nextBtn" type="button">Tiếp tục</button>
-                              </div>
-                          </div> -->
-
                     </div>
                 </div>
 
@@ -183,48 +176,42 @@
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Họ tên*</label>
-                                <input type="text" placeholder="Full Name*">
+                                <input name="name" type="text" placeholder="Họ tên">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Số điện thoại*</label>
-                                <input type="text" placeholder="+880- 123 234 ***">
+                                <input name="phone" type="text" placeholder="+880- 123 234 ***">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Email (Optional)</label>
-                                <input name="email" type="text" placeholder="Enter your email address">
+                                <input name="email" type="text" placeholder="Email liên hệ">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Tỉnh, thành phố</label>
-                                <select class="nice-select" name="city">
-                                    <option value="mazda">Mazda</option>
-                                    <option value="vinfast">Vinfast</option>
-                                </select>
+                                <input type="text" name="city" placeholder="Tỉnh/Thành phố">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Quận, huyện</label>
-                                <select>
-                                    <option value="mazda">Mazda</option>
-                                    <option value="vinfast">Vinfast</option>
-                                </select>
+                                <input type="text" name="districts" name="Quận/huyện" placeholder="Quận/Huyện">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Địa chỉ cụ thể*</label>
-                                <input name="full_address" type="text" placeholder="">
+                                <input name="full_address" type="text" placeholder="Nhập địa chỉ cụ thể">
                             </div>
                         </div>
 

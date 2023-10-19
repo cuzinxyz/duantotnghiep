@@ -25,9 +25,4 @@ Route::get('/info', [HomeController::class, 'info']);
 //     return view('form-sell-car');
 // });
 
-// Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
-Route::get('/dang-tin', [App\Http\Controllers\Client\CarController::class, 'sellCar']);
-
-// Route::get('get-model-cars',[CarController::class,'getModelCars']);
-
-Route::get('/test', Brands::class);
+Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
