@@ -39,9 +39,4 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function validateLogin(FormUserRequest $request)
-    {
-        dd(response()->json());
-        return response()->json();
-    }
 }

@@ -93,15 +93,15 @@
                                 <div class="form-inner">
                                     <label>Name*</label>
                                     <input id="name" type="text" class="@error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required placeholder="Daniel" autofocus>
+                                        value="{{ old('name') }}"  placeholder="Daniel" autofocus>
                                 </div>
                                 <span class="errorName">This field is required</span>	
                             </div>
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Email*</label>
-                                    <input  type="text" class="@error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email"
+                                    <input id="email" type="text" class="@error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}"  autocompvare="email"
                                         placeholder="Email">
                                 </div>
                                 <span class="errorEmail">This field is required</span>	
@@ -109,8 +109,8 @@
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Password*</label>
-                                    <input class="@error('password') is-invalid @enderror"
-                                        name="password" required autocomplete="new-password" type="password"
+                                    <input id="password" class="@error('password') is-invalid @enderror"
+                                        name="password"  autocompvare="new-password" type="password"
                                         placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                 </div>
@@ -119,8 +119,8 @@
                             <div class="col-md-6">
                                 <div class="form-inner">
                                     <label>Confirm Password*</label>
-                                    <input id="password2" class="@error('re-password') is-invalid @enderror"
-                                        name="re-password" required autocomplete="new-password" type="password"
+                                    <input id="password2" class="@error('password_confirmation') is-invalid @enderror"
+                                        name="password_confirmation"  autocompvare="new-password" type="password"
                                         placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword2"></i>
                                 </div>
@@ -159,22 +159,22 @@
                             class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="loginForm" method="POST" action="{{ route('login') }}"  >
                         @csrf
                         <div class="row g-4">
                             <div class="col-md-12">
                                 <div class="form-inner">
                                     <label>Enter your email address*</label>
-                                    <input type="text" id="email" placeholder="Type email">
-                                    <span style="color: red; font-size:16px" class="error email_error"></span>
+                                    <input type="text" id="emailLogin" placeholder="Type email">
+                                    <span class="errorEmailLogin">This field is required</span>	
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-inner">
                                     <label>Password*</label>
-                                    <input id="password" name="password" type="password" placeholder="*** ***">
+                                    <input id="passwordLogin" name="password" type="password" placeholder="*** ***">
                                     <i class="bi bi-eye-slash" id="togglePassword3"></i>
-                                    <span style="color: red; font-size:16px" class="error password_error"></span>
+                                    <span class="errorPasswordLogin">This field is required</span>	
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -592,7 +592,7 @@
                                     <li><a href="single-brand-category.html">Audi A4</a></li>
                                     <li><a href="single-brand-category.html">Jeep Wrangler</a></li>
                                     <li><a href="single-brand-category.html">Mazda CX-5</a></li>
-                                    <li><a href="single-brand-category.html">Chevrolet Corvette</a></li>
+                                    <li><a href="single-brand-category.html">Chevrovar Corvette</a></li>
                                     <li class="explore-more-btn">
                                         <a href="brand-category.html">Explore More <i
                                                 class="bi bi-arrow-right"></i></a>
@@ -669,7 +669,7 @@
                                     <li><a href="single-brand-category.html">Audi A4</a></li>
                                     <li><a href="single-brand-category.html">Jeep Wrangler</a></li>
                                     <li><a href="single-brand-category.html">Mazda CX-5</a></li>
-                                    <li><a href="single-brand-category.html">Chevrolet Corvette</a></li>
+                                    <li><a href="single-brand-category.html">Chevrovar Corvette</a></li>
                                     <li class="explore-more-btn">
                                         <a href="brand-category.html">Explore More <i
                                                 class="bi bi-arrow-right"></i></a>
@@ -1051,7 +1051,7 @@
                                                 </path>
                                             </svg>
                                         </a></li>
-                                    <li><a href="single-brand-category.html">Chevrolet
+                                    <li><a href="single-brand-category.html">Chevrovar
                                             <svg width="10" height="10" viewBox="0 0 10 10"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -1335,50 +1335,10 @@
     </script>
 
 
+    @stack('scripts')
+
     <script>
-        $(document).ready(function() {
-            $(".upload-area").click(function() {
-                $('#upload-input').trigger('click');
-            });
-
-            $('#upload-input').change(event => {
-                if (event.target.files) {
-                    let filesAmount = event.target.files.length;
-                    $('.upload-img').html("");
-
-                    for (let i = 0; i < filesAmount; i++) {
-                        let reader = new FileReader();
-                        reader.onload = function(event) {
-                            let html = `
-                        <div class = "uploaded-img">
-                            <img src = "${event.target.result}">
-                            <button type = "button" class = "remove-btn">
-                                <i class = "fas fa-times"></i>
-                            </button>
-                        </div>
-                    `;
-                            $(".upload-img").append(html);
-                        }
-                        reader.readAsDataURL(event.target.files[i]);
-                    }
-
-                    $('.upload-info-value').text(filesAmount);
-                    $('.upload-img').css('padding', "20px");
-                }
-            });
-
-            $(window).click(function(event) {
-                if ($(event.target).hasClass('remove-btn')) {
-                    $(event.target).parent().remove();
-                } else if ($(event.target).parent().hasClass('remove-btn')) {
-                    $(event.target).parent().parent().remove();
-                }
-            })
-        });
-    </script>
-
-    {{-- <script>
-        let validate = false;
+        var validateRegister = false;
         $(".errorName").hide();$(".errorEmail").hide();$(".errorPassword").hide();$(".errorPassword2").hide();
         $('#name').on('input', function() {
             var input = $(this);
@@ -1386,7 +1346,7 @@
             if (is_name) {
                 $(".errorName").hide();
             } else {
-                validate = true;
+                validateRegister = true;
                 $(".errorName").show();
             }
         });
@@ -1396,7 +1356,7 @@
             if (is_email) {
                 $(".errorEmail").hide();
             } else {
-                validate = true;
+                validateRegister = true;
                 $(".errorEmail").show();
             }
         });
@@ -1406,7 +1366,7 @@
             if (is_password) {
                 $(".errorPassword").hide();
             } else {
-                validate = true;
+                validateRegister = true;
                 $(".errorPassword").show();
             }
         });
@@ -1416,60 +1376,66 @@
             if (is_password2) {
                 $(".errorPassword2").hide();
             } else {
-                validate = true;
+                validateRegister = true;
                 $(".errorPassword2").show();
             }
         });
-        $('.btn-sign-up').on('click', function(e) {
-            e.preventDefault();
-            if (validate) {
-                alert('ok')
-            } else {
+
+        $('#register').on('submit', function(e) {
+            if (!validateRegister) {
                 $(".errorName").hide();
                 $(".errorEmail").hide();
                 $(".errorPassword").hide();
                 $(".errorPassword2").hide();
+            } else {
+                e.preventDefault();
+                $(".errorName").show();
+                $(".errorEmail").show();
+                $(".errorPassword").show();
+                $(".errorPassword2").show();
             }
         })
-    </script> --}}
+    </script>
 
     <script>
-        $(document).ready(function() {
-            $('#logInModal01').on('submit', function (e) {
+        var validateLogin = false;
+        $(".errorEmailLogin").hide();$(".errorPasswordLogin").hide();
+        
+        $('#emailLogin').on('input', function() {
+            var input = $(this);
+            var is_email = input.val();
+            if (is_email) {
+                $(".errorEmailLogin").hide();
+            } else {
+                validateLogin = true;
+                $(".errorEmailLogin").show();
+            }
+        });
+        $('#passwordLogin').on('input', function() {
+            var input = $(this);
+            var is_password = input.val();
+            if (is_password) {
+                $(".errorPasswordLogin").hide();
+            } else {
+                validateLogin = true;
+                $(".errorPasswordLogin").show();
+            }
+        });
+       
+
+        $('#loginForm').on('submit', function(e) {
+            console.log(validateLogin);
+            if (!validateLogin) {
+                $(".errorEmailLogin").hide();
+                $(".errorPasswordLogin").hide();
+            } else {
                 e.preventDefault();
-
-
-
-                let email = $('#email').val().trim();
-
-                let password = $('#password').val().trim();
-
-                let csrfToken = $(this).find('input[name="_token"]').val();
-
-                $('error').text('')
-                $.ajax({
-                    url: '/validate',
-                    type: 'POST',
-                    data: {
-                        email: email,
-                        'password': password,
-                        _token: csrfToken
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        console.log(response);  
-                    },
-                    error: function(error) {
-                        let responseJSON = error.responseJSON.errors;
-                        console.log(responseJSON);
-                        for( let key in responseJSON) {
-                            $(`.${key}_error`).text(responseJSON[key][0]);
-                        }
-                    }
-                });
-            })
+                $(".errorEmailLogin").show();
+                $(".errorPasswordLogin").show();
+            }
         })
     </script>
+
 </body>
 
 </html>
