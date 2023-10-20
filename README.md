@@ -1,3 +1,10 @@
+> Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
+ 
+#  Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
+chạy lần luợt các lệnh sau khi pull về:
+`composer install`
+`npm install`
+
 > Yêu cầu cả nhóm: CẬP NHẬT file README này nếu task của mọi người cần lưu ý, bổ sung 1 cái gì đó, cần cài đặt v.v...
 
 > Note này sẽ được cập nhật liên tục!
@@ -22,6 +29,14 @@ B2: Chạy lần lượt các lệnh:
 `php artisan migrate --seed` sau khi chạy lệnh này hãy nhập "**yes**"  để tạo database mới và migrate database.
 
 `php artisan filament:install --panels` chạy lệnh này để cài đặt filament
+
+// mới thêm
+
+`php artisan chatify:install`
+
+`php artisan breeze:install`
+
+// mới thêm
 
 #### Tạo 1 admin mới cho filament
 `php artisan make:filament-user`
