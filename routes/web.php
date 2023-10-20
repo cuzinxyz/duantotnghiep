@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -23,7 +22,7 @@ Route::get('/dang-tin-ban-xe', function () {
     return view('form-sell-car');
 });
 
-Route::get('/demo', function() {
+Route::get('/', function() {
     return view('index');
 });
 
