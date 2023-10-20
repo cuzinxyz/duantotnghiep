@@ -32,3 +32,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Auth::routes();
+
+Route::get('manage-post', function () {
+    return view('manage-postings');
+});
+Route::get('push-news', function () {
+    return view('push-news');
+});
