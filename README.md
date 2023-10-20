@@ -1,7 +1,9 @@
 > Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
  
 #  Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
-
+chạy lần luợt các lệnh sau khi pull về:
+`composer install`
+`npm install`
 
 > Yêu cầu cả nhóm: CẬP NHẬT file README này nếu task của mọi người cần lưu ý, bổ sung 1 cái gì đó, cần cài đặt v.v...
 
