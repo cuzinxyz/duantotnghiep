@@ -1,3 +1,8 @@
+> Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
+ 
+#  Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
+
+
 > Yêu cầu cả nhóm: CẬP NHẬT file README này nếu task của mọi người cần lưu ý, bổ sung 1 cái gì đó, cần cài đặt v.v...
 
 > Note này sẽ được cập nhật liên tục!
