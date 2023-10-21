@@ -1,8 +1,9 @@
 <?php
 
-use App\Livewire\FormSellCar;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 
 Route::get('/info', [HomeController::class, 'info']);
 
-Route::get('/buy-car', function () {
-    return view('buy-car');
+Route::get('/dang-tin-ban-xe', function () {
+    return view('form-sell-car');
+});
+
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+Auth::routes();
+
+Route::get('manage-post', function () {
+    return view('manage-postings');
+});
+Route::get('push-news', function () {
+    return view('push-news');
 });
