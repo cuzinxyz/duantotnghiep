@@ -76,8 +76,12 @@ class CarResource extends Resource
                 ]),
                 FileUpload::make('verhicle_image_library')
                     ->multiple()->image(),
+
                 FileUpload::make('verhicle_videos')
-                    ->required(),
+                    ->required()
+                    ->acceptedFileTypes(['video/mp4', 'video/avi', 'video/mov', 'video/wmv', 'video/flv', 'video/mkv', 'video/webm'])
+                    ->directory('video_car')
+                    ->maxSize(551200),
                 //
             ]);
     }
@@ -104,7 +108,7 @@ class CarResource extends Resource
                 Tables\Columns\IconColumn::make('recommended')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('car_info.mileage')
-                ->label('Số KM đã đi'),
+                    ->label('Số KM đã đi'),
                 Tables\Columns\ImageColumn::make('verhicle_image_library'),
 
                 Tables\Columns\ImageColumn::make('verhicle_videos'),

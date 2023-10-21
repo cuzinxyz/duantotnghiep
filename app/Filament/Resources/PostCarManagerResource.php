@@ -11,6 +11,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Infolists\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\Layout\Split;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Actions;
@@ -23,6 +24,9 @@ use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
 use App\Filament\Resources\PostCarManagerResource\RelationManagers;
+use App\Infolists\Components\VideoEntry;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ViewRecord;
 
 class PostCarManagerResource extends Resource
 {
@@ -91,7 +95,7 @@ class PostCarManagerResource extends Resource
                                     ->icon('heroicon-o-user-circle')
                                     ->default('Tuấn'),
 
-                                TextEntry::make('email')
+                                TextEntry::make('contact.email')
                                     ->label('Email')
                                     ->icon('heroicon-m-envelope')
                                     ->default('tuannvn@gmail.com'),
@@ -101,7 +105,7 @@ class PostCarManagerResource extends Resource
                                     ->icon('heroicon-o-map-pin')
                                     ->default('Hà Nội'),
 
-                                TextEntry::make('phone')
+                                TextEntry::make('contact.phone_number')
                                     ->label('Số điện thoại')
                                     ->icon('heroicon-o-phone')
                                     ->default('0889967845'),
@@ -139,12 +143,30 @@ class PostCarManagerResource extends Resource
                                         ->action(function (Car $record) {
                                             $record->status = 1;
                                             $record->save();
-                                        }),
+                                        })
+                                        ->successNotificationTitle('Phê duyệt thành công'),
+
+
                                     Action::make('UnActivePost')
                                         ->label('Không duyệt')
                                         ->icon('heroicon-m-x-mark')
                                         ->color('danger')
                                         ->requiresConfirmation()
+                                        ->form([
+                                            TextInput::make('reason')
+                                                ->label('Vui lòng điền lý do ?')
+                                                ->required(),
+                                        ])
+                                        ->action(function (array $data, Car $record) {
+                                            $record->reason = $data['reason'];
+                                            $record->status = 0;
+                                            $record->save();
+                                        })
+                                        ->successNotification(
+                                            Notification::make()
+                                                ->success()
+                                                ->title('Đã gửi thông báo tới tác giả'),
+                                        ),
 
                                 ]),
                             ])->columnSpan([
@@ -174,7 +196,7 @@ class PostCarManagerResource extends Resource
                                             ->label('Hãng xe')
                                             ->default('Vinfast'),
 
-                                        TextEntry::make('mileage')
+                                        TextEntry::make('car_info.mileage')
                                             ->label('Số KM đã đi')
                                             ->default(1000),
 
@@ -194,17 +216,16 @@ class PostCarManagerResource extends Resource
                                             ->label('Động cơ')
                                             ->default('Tubo'),
 
-                                        TextEntry::make('fuelType')
+                                        TextEntry::make('car_info.fuelType')
                                             ->label('Nhiên liệu')
                                             ->default('Điện'),
 
-                                        TextEntry::make('condition')
+                                        TextEntry::make('car_info.condition')
                                             ->label('Tình trạng')
                                             ->default('Xe cũ'),
 
-                                        TextEntry::make('other')
+                                        TextEntry::make('car_info.features')
                                             ->label('Thông số cơ bản khác')
-                                            ->default('Dương lợn, Ghế mạ vàng, Loa bass cực phê')
                                     ])
                                     // ->collapsed()
                                     ->columns([
@@ -216,13 +237,24 @@ class PostCarManagerResource extends Resource
                                 Section::make('Hình ảnh')
                                     ->schema([
                                         ImageEntry::make('verhicle_image_library')
-                                        ->label('Hình ảnh')
-                                        ->default('https://picsum.photos/200')
+                                            ->label('Hình ảnh')
+                                            ->default('https://picsum.photos/200')
+                                    ])
+                                    ->columnSpan([
+                                        'xl' => 1,
+                                        '2xl' => 1,
+
                                     ]),
 
                                 Section::make('Video')
                                     ->schema([
-                                        ImageEntry::make('verhicle_videos')
+                                        VideoEntry::make('verhicle_videos')
+                                            ->label('Video')
+                                    ])
+                                    ->columnSpan([
+                                        'xl' => 1,
+                                        '2xl' => 1,
+
                                     ]),
 
                                 Section::make('Mô tả chi tiết về xe')
@@ -245,12 +277,8 @@ class PostCarManagerResource extends Resource
 
                             ])
                             ->columns([
-                                'xl' => 2,
+                                'default' => 1,
                                 '2xl' => 2,
-                            ])
-                            ->columnSpan([
-                                'xl' => 4,
-                                '2xl' => 5,
                             ]),
                     ])->columns([
                         'xl' => 4,
