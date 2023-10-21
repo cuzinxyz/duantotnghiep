@@ -28,18 +28,15 @@
 
     <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
 
-    <link data-navigate-once href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
 
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" --}}
-     rel="stylesheet" />
-
-
-    
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
 
     <title>Drivco - Car Dealer HTML Template</title>
@@ -49,30 +46,32 @@
 <body class="tt-magic-cursor home-5">
 
     <div class="egns-preloader">
-  <div class="preloader-close-btn">
-    <span><i class="bi bi-x-lg"></i> Close</span>
-  </div>
-  <div class="container">
-    <div class="row d-flex justify-content-center">
-      <div class="col-6">
-        <div class="circle-border">
-          <div class="moving-circle"></div>
-          <div class="moving-circle"></div>
-          <div class="moving-circle"></div>
-          <svg width="180px" height="150px" viewBox="0 0 187.3 93.7" preserveAspectRatio="xMidYMid meet"
-               style="left: 50%; top: 50%; position: absolute; transform: translate(-50%, -50%) matrix(1, 0, 0, 1, 0, 0);">
-            <path stroke="#D90A2C" id="outline" fill="none" stroke-width="4" stroke-linecap="round"
-                  stroke-linejoin="round" stroke-miterlimit="10"
-                  d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z"></path>
-            <path id="outline-bg" opacity="0.05" fill="none" stroke="#959595" stroke-width="4"
-                  stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
-                  d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z"></path>
-          </svg>
+        <div class="preloader-close-btn">
+            <span><i class="bi bi-x-lg"></i> Close</span>
         </div>
-      </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6">
+                    <div class="circle-border">
+                        <div class="moving-circle"></div>
+                        <div class="moving-circle"></div>
+                        <div class="moving-circle"></div>
+                        <svg width="180px" height="150px" viewBox="0 0 187.3 93.7" preserveAspectRatio="xMidYMid meet"
+                            style="left: 50%; top: 50%; position: absolute; transform: translate(-50%, -50%) matrix(1, 0, 0, 1, 0, 0);">
+                            <path stroke="#D90A2C" id="outline" fill="none" stroke-width="4" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-miterlimit="10"
+                                d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z">
+                            </path>
+                            <path id="outline-bg" opacity="0.05" fill="none" stroke="#959595" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                d="M93.9,46.4c9.3,9.5,13.8,17.9,23.5,17.9s17.5-7.8,17.5-17.5s-7.8-17.6-17.5-17.5c-9.7,0.1-13.3,7.2-22.1,17.1 c-8.9,8.8-15.7,17.9-25.4,17.9s-17.5-7.8-17.5-17.5s7.8-17.5,17.5-17.5S86.2,38.6,93.9,46.4z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <div class="modal signUp-modal fade" id="signUpModal01" tabindex="-1" aria-labelledby="signUpModal01Label"
         aria-hidden="true">
@@ -1326,18 +1325,47 @@
         });
     </script>
 
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
+    
     <script>
-        // Register the plugin
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        const inputElementImage = document.querySelector('input[type="file"]');
+        $(document).ready(function() {
+            $(".upload-area").click(function() {
+                $('#upload-input').trigger('click');
+            });
 
-        const pond = FilePond.create(inputElementImage);
+            $('#upload-input').change(event => {
+                if (event.target.files) {
+                    let filesAmount = event.target.files.length;
+                    $('.upload-img').html("");
 
-        // ... FilePond initialisation code here
+                    for (let i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function(event) {
+                            let html = `
+                        <div class = "uploaded-img">
+                            <img src = "${event.target.result}">
+                            <button type = "button" class = "remove-btn">
+                                <i class = "fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                            $(".upload-img").append(html);
+                        }
+                        reader.readAsDataURL(event.target.files[i]);
+                    }
+
+                    $('.upload-info-value').text(filesAmount);
+                    $('.upload-img').css('padding', "20px");
+                }
+            });
+
+            $(window).click(function(event) {
+                if ($(event.target).hasClass('remove-btn')) {
+                    $(event.target).parent().remove();
+                } else if ($(event.target).parent().hasClass('remove-btn')) {
+                    $(event.target).parent().parent().remove();
+                }
+            })
+        });
     </script>
 
 

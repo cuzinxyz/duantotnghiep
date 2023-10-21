@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ratings', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(\App\Models\User::class,'from_user_id');
-            $table->foreignIdFor(\App\Models\User::class,'to_user_id');
-            $table->integer('start');
+        Schema::table('demnads', function (Blueprint $table) {
             $table->text('content');
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ratings');
+        Schema::table('demnads', function (Blueprint $table) {
+            //
+        });
     }
 };
