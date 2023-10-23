@@ -10,9 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ModelCar extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = 'model_cars';
     protected $guarded = [
         'id'
     ];
+    protected $fillable = [
+      'id', 'brand_id', 'model_name'
+    ];
+
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);

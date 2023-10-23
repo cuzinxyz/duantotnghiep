@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Client\CarController;
+use App\Livewire\Brands;
 use App\Livewire\FormSellCar;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Service;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +23,9 @@ use App\Models\Service;
 
 Route::get('/', \App\Http\Controllers\HomeController::class);
 Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
-Route::get('login',function (){
-  return 'Đây là trang đăng nhập';
-})->name('login');
+
 Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
+
 //Route::get('test', function () {
 //  $array = [
 //    'abc',
@@ -45,10 +47,21 @@ Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name
 //  dd($array);
 //});
 //Route::get('service', [ServiceController::class,'index']);
-Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
 
-
-Route::get('/dang-tin-ban-xe', FormSellCar::class)->name('dang-tin');
+Route::get('/info', [HomeController::class, 'info']);
 
 Route::get('/info', [HomeController::class, 'info']);
 Route::get('/service', [ServiceController::class, 'index'])->name('service');
+
+Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('manage-post', function () {
+    return view('manage-postings');
+});
+Route::get('push-news', function () {
+    return view('push-news');
+});

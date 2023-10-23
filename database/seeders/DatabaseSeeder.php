@@ -10,20 +10,20 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-  /**
-   * Seed the application's database.
-   */
-  public function run(): void
-  {
-    $this->call([
-//        SavedCarSeeder::class,
-//        RatingSeeder::class,
-//        ReportedSeeder::class,
-      ServiceSeeder::class,
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+      $this->call([
         UserSeeder::class,
-//        AdminSeeder::class,
-//        PartnerSeeder::class,
-//        SupportSeeder::class
-    ]);
-  }
+        SavedCarSeeder::class,
+        // RatingSeeder::class,
+        // ReportedSeeder::class,
+        ServiceSeeder::class,
+        AdminSeeder::class,
+        // PartnerSeeder::class,
+        SupportSeeder::class
+      ]);
+    }
 }

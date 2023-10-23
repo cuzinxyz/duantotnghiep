@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('model_cars', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Brand::class,'brand_id');
+            $table->foreignId('brand_id')->constrained('brands');
             $table->string('model_name');
             $table->timestamps();
             $table->softDeletes(); // add
