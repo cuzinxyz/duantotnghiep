@@ -21,7 +21,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', \App\Http\Controllers\HomeController::class);
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
 
 Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
