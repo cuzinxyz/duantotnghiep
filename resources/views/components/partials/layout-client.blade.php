@@ -34,12 +34,13 @@
 
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 
   {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
 
-  <title>Drivco - Car Dealer HTML Template</title>
-  <link rel="icon" href="{{ asset('images/sm-logo.svg') }}" type="image/gif" sizes="20x20">
+
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -1297,6 +1298,8 @@
 
 <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
+    {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+
 <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
 <script src="{{ asset('js/gsap.min.js') }}"></script>
@@ -1305,6 +1308,15 @@
 
 <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
+
+    <script>
+        $(document).ready(function() {
+            $(".upload-area").click(function() {
+                $('#upload-input').trigger('click');
+            });
+        });
+    </script>
+    
 <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 
 <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
@@ -1403,6 +1415,35 @@
     }
   });
 </script>
+
+    {{-- <script type="text/javascript">
+        $(document).ready(function(){
+          $('#brands').change(function(){
+            var brand_id = $(this).val();
+            $('#model_cars').html('');
+            // console.log(brand_id);
+
+            if(brand_id){
+              $.ajax({
+                url: 'get-model-cars',
+                method: 'GET',
+                dataType: 'json',
+                data:{
+                  brand_id: brand_id
+                },
+                success: function(response){
+                  console.log(response);
+                  $('#model_cars').html('<option value="" selected>-- Chọn tên xe --</option>');
+                  $.each(response, function(index, value){
+                    $('#model_cars').append('<option value="'+value.id+'">'+value.name+'</option>');
+                  })
+                }
+              })
+            }
+          })
+
+        })
+    </script> --}}
 
 @stack('scripts')
 
