@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
-{
+{ 
   public function sellCar(Request $request)
   {
     if($request->isMethod("POST")){

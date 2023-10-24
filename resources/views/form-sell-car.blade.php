@@ -15,5 +15,4 @@
             </div>
         </div>
     </div>
-
 </x-partials.layout-client>

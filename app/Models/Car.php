@@ -14,13 +14,15 @@ class Car extends Model
         'price',
         'user_id',
         'brand_id',
+        'model_id',
         'city',
         'full_address',
         'recommended',
         'contact',
         'car_info',
         'verhicle_image_library',
-        'verhicle_videos'
+        'verhicle_videos',
+        'description'
     ];
     protected $casts = [
         'contact' => 'json',

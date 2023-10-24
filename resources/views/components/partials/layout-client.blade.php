@@ -34,12 +34,10 @@
   <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  {{-- alert library --}}
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
-
-  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-
+  @stack('styles')
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -1316,9 +1314,9 @@
         });
     </script>
     
-<script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
-
 <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
+  {{-- alert library --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 
 <script src="{{ asset('js/custom.js') }}"></script>
 <script>
@@ -1414,35 +1412,8 @@
     }
   });
 </script>
-
-    {{-- <script type="text/javascript">
-        $(document).ready(function(){
-          $('#brands').change(function(){
-            var brand_id = $(this).val();
-            $('#model_cars').html('');
-            // console.log(brand_id);
-
-            if(brand_id){
-              $.ajax({
-                url: 'get-model-cars',
-                method: 'GET',
-                dataType: 'json',
-                data:{
-                  brand_id: brand_id
-                },
-                success: function(response){
-                  console.log(response);
-                  $('#model_cars').html('<option value="" selected>-- Chọn tên xe --</option>');
-                  $.each(response, function(index, value){
-                    $('#model_cars').append('<option value="'+value.id+'">'+value.name+'</option>');
-                  })
-                }
-              })
-            }
-          })
-
-        })
-    </script> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@include('sweetalert::sweetalert')
 
 @stack('scripts')
 
