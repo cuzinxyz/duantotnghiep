@@ -22,6 +22,8 @@ use Filament\Tables\Columns\ViewColumn;
 
 class CarResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Quản lý nội dung';
+
     protected static ?string $model = Car::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -125,7 +127,7 @@ class CarResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                // 
+                //
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),

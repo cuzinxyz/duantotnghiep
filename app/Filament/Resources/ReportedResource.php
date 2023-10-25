@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReportedResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Hành động khách hàng';
+
     protected static ?string $model = Reported::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
@@ -68,7 +70,7 @@ class ReportedResource extends Resource
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
-                
+
             ])
             ->button()
             ->label('Hành động')

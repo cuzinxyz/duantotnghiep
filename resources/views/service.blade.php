@@ -1,104 +1,120 @@
-  <x-partials.layout-client>
-    <div class="" >
-      <div class="banner">
+@push('styles')
+    <script src="https://kit.fontawesome.com/e3cf320e1f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/services.css') }}">
+@endpush
 
-        <div class="container pricing-container">
-          <div class="row justify-content-center ">
-            @foreach($services as $service)
-              <div class="col-lg-3 col-sm-6">
-                <div class="pricing-card">
-                  <h2>{{$service->service_name}}</h2>
-                  <span class="price">{{number_format($service->price)}}k</span>
-                  <span class="donvi">VNĐ/ Tháng</span>
-                  <p>{{$service->title}}</p>
-                  <ul>
-                    @foreach($service->description as $description)
-                   
-                      <li><i class="fa-solid fa-check"></i>{{$description}}</li>
-                    @endforeach
-                  </ul>
-                  <div class="button-container mt-5 mb-3">
-                    <form action="{{route('payment-vnpay')}}" method="post">
-                      @csrf
-                      <input hidden="" name="id_service" value="{{$service->id}}">
-                      <input hidden="" name="total_price" value="{{$service->price}}">
-                    <button class="btn btn-success btn1">Thanh toán VNPay</button>
-                    </form>
-                  </div>
+<x-partials.layout-client>
+    <div class="pt-100">
+        <div class="row">
+            @foreach ($services as $serv)
+            <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="text-center p-3">
+                            <h5 class="card-title">{{ $serv->service_name }}</h5>
+                            <small>Individual</small>
+                            <br><br>
+                            <span class="h2">{{ $serv->price }}đ </span>/month
+                            <br><br>
+                        </div>
+                        <p class="card-text">{{ $serv->title }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      @foreach ($serv->description as $desc)
+
+                        <li class="list-group-item">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg>
+                          {{ $desc }}</li>
+                      @endforeach
+
+                        </ul>
+                    <div class="card-body text-center">
+                        <a href="{{ route('service.detail', $serv->id) }}">
+                          <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Select</button>
+                        </a>
+                    </div>
                 </div>
-              </div>
+            </div>
             @endforeach
-          </div>
+            {{-- <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="text-center p-3">
+                            <h5 class="card-title">Standard</h5>
+                            <small>Small Business</small>
+                            <br><br>
+                            <span class="h2">$20</span>/month
+                            <br><br>
+                        </div>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg> Cras justo odio</li>
+                        <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg> Dapibus ac facilisis in</li>
+                        <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg> Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-body text-center">
+                        <a href="{{ route('service.detail') }}">
+                          <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Select</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body">
+                        <div class="text-center p-3">
+                            <h5 class="card-title">Premium</h5>
+                            <small>Large Companies</small>
+                            <br><br>
+                            <span class="h2">$40</span>/month
+                            <br><br>
+                        </div>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg> Cras justo odio</li>
+                        <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg> Dapibus ac facilisis in</li>
+                        <li class="list-group-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg> Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-body text-center">
+                        <a href="{{ route('service.detail') }}">
+                          <button class="btn btn-outline-primary btn-lg" style="border-radius:30px">Select</button>
+                        </a>
+                    </div>
+                </div>
+            </div> --}}
         </div>
-      </div>
-  
-      <div class="container content">
-        <div class="row title">
-          <h1>Giới thiệu tính năng</h1>
-          <p>Khám phá tiện ích của gói Pro</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <img class="banner1"src="https://lambanner.com/wp-content/uploads/2016/09/lambanner-ky-thuat-thiet-ke-banner-1130x570.png" alt="">
-          </div>
-          <div class="col-lg-6 col-md-6 ">
-            <h4 class="text1" >Gia tăng độ tiếp cận đến với khách hàng</h4>
-            <h5 class="text2" >Đẩy tin "thả ga"với giá hời</h5>
-            <h7>Tăng độ hiển thị đến Khách hàng tiềm năng</h7>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-lg-6 col-md-6  ">
-            <h4 class="text3" >Tiết kiệm tối đa chi phí Quảng bá Xe online</h4>
-            <h5 class="text4" >Tiết kiệm chi phí Đẩy tin</h5>
-            <h6 class="text5" >Với giá mỗi lượt Đẩy tin giảm 8% - 13% so với giá gốc</h6><br>
-            <h5 class="text4" >Tiết kiệm chi phí làm Nổi Bật tin đăng</h5>
-            <h6 class="text5" >Gấp đôi diện tích hiển thị của Tin đăng với giá dịch vụ giảm đến 30%</h6>
-          </div>
-          <div class="col-lg-6 col-md-6">
-            <img class="banner2" src="https://img.pikbest.com/backgrounds/20190924/flat-and-simple-driving-school-city-background_1904040.jpg!bw700" alt="">
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <img class="banner1"  src="https://lambanner.com/wp-content/uploads/2016/09/lambanner_dich-vu-thiet-ke-banner-1130x570.png" alt="">
-          </div>
-          <div class="col-lg-6 col-md-6 content1">
-            <h4 class="text1" >Theo dõi sát sao hiệu quả tin đăng</h4>
-            <h5 class="text2" >Cập nhật hiệu quả tin đăng theo ngày</h5>
-            <h6 style="font-weight: 400;">Nắm bắt chi tiết số lượt quan tâm đến Tin đăng trong Gói "Bán Xe Tiết Kiệm" qua Báo cáo Hiệu suất</h6><br>
-            <h5 class="text2" >Giúp so sánh hiệu quả và đưa ra quyết định</h5>
-            <h6 style="font-weight: 400;">Dễ dàng theo dõi và so sánh độ hiệu quả của những hành vi quảng bá với Tin đăng</h6>
-          </div>
-        </div>
-  
-        <div class="row">
-  
-          <div class="col-lg-6 col-md-6 content1">
-            <h4 class="text3" >Mở rộng nguồn Khách hàng mới</h4>
-            <h5 class="text4" >Mở rộng tệp Khách hàng</h5>
-            <h6 style="margin-left: 200px;">Tiếp cận thêm 1 nguồn khách hàng thụ động cần được tư vấn</h6><br>
-            <h5 class="text4" >Quản lí thông tin Khách hàng hiệu quả</h5>
-            <h6 class="text5" >Dễ dàng theo dõi và chăm sóc Khách hàng trong từng giai đoạn, nhờ vào Hệ thống quản lí Khách hàng</h6>
-          </div>
-          <div class="col-lg-6 col-md-6">
-            <img class="banner2" src="https://vinads.vn/wp-content/uploads/2019/01/z2.png" alt="">
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <img class="banner1" src="https://lambanner.com/wp-content/uploads/2017/03/lambanner-thiet-ke-banner-xe-hoi.jpg" alt="">
-          </div>
-          <div class="col-lg-6 col-md-6 content1">
-            <h4 class="text1">Gia tăng diện tích hiển thị với Khách hàng</h4>
-            <h5 style="font-weight: 600;">Tin đăng tăng gấp đôi diện tích hiển thị và nổi bật hơn</h5>
-            <h6 style="font-weight: 400;">Giúp Khách hàng thấy được sản phẩm của bạn dễ hơn</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-  </x-partials.layout-client>
 
+    </div>
+</x-partials.layout-client>

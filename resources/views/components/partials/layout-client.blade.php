@@ -12,7 +12,7 @@
   <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
   <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/goivip.css')}}">
+  {{-- <link rel="stylesheet" href="{{asset('css/goivip.css')}}"> --}}
 
   <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 
@@ -34,10 +34,9 @@
   <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  {{-- alert library --}}
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 
   @stack('styles')
+
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -1305,20 +1304,10 @@
 
 <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
-
-    <script>
-        $(document).ready(function() {
-            $(".upload-area").click(function() {
-                $('#upload-input').trigger('click');
-            });
-        });
-    </script>
-    
 <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
-  {{-- alert library --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 
 <script src="{{ asset('js/custom.js') }}"></script>
+
 <script>
   $(".marquee_text").marquee({
     direction: "left",
@@ -1412,8 +1401,6 @@
     }
   });
 </script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@include('sweetalert::sweetalert')
 
 @stack('scripts')
 

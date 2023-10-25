@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8e1fc1627b5f26b04cffc360fa4b3d9",
+    "content-hash": "b0b0d2106602e266c4f477ca244117d4",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2131,6 +2131,70 @@
                 "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/3.2.4"
             },
             "time": "2023-09-12T17:02:05+00:00"
+        },
+        {
+            "name": "laralabs/toaster",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laralabs/toaster.git",
+                "reference": "6de0fe4779e0285318c2dd724a6dba3ce150d2c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laralabs/toaster/zipball/6de0fe4779e0285318c2dd724a6dba3ce150d2c6",
+                "reference": "6de0fe4779e0285318c2dd724a6dba3ce150d2c6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "illuminate/database": "^10.0",
+                "illuminate/session": "^10.0",
+                "illuminate/support": "^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^9.0",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laralabs\\Toaster\\ToasterServiceProvider"
+                    ],
+                    "aliases": {
+                        "Toaster": "Laralabs\\Toaster\\Facades\\Toaster"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/functions.php"
+                ],
+                "psr-4": {
+                    "Laralabs\\Toaster\\": "src/",
+                    "Laralabs\\Toaster\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Clinton",
+                    "email": "matt@laralabs.uk"
+                }
+            ],
+            "description": "Easily generate and bind message JSON data to the view for use in frontend toast components",
+            "support": {
+                "issues": "https://github.com/Laralabs/toaster/issues",
+                "source": "https://github.com/Laralabs/toaster/tree/5.0.0"
+            },
+            "time": "2023-05-01T17:41:11+00:00"
         },
         {
             "name": "laravel/framework",
@@ -7745,73 +7809,6 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
-        },
-        {
-            "name": "wavey/sweetalert",
-            "version": "v1.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/waveygroup/sweetalert.git",
-                "reference": "5816f56d21966f56a60a83ec1072c2cb96f7399d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/waveygroup/sweetalert/zipball/5816f56d21966f56a60a83ec1072c2cb96f7399d",
-                "reference": "5816f56d21966f56a60a83ec1072c2cb96f7399d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Wavey\\Sweetalert\\SweetalertServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Wavey\\Sweetalert\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kieran Heron",
-                    "email": "kieran@wavey.group"
-                }
-            ],
-            "description": "SweetAlert2 implementation for Laravel",
-            "keywords": [
-                "alert",
-                "alerts",
-                "laravel",
-                "sweet",
-                "sweetalert"
-            ],
-            "support": {
-                "issues": "https://github.com/waveygroup/sweetalert/issues",
-                "source": "https://github.com/waveygroup/sweetalert"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/waveygroup",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-11-19T19:41:10+00:00"
         },
         {
             "name": "webmozart/assert",

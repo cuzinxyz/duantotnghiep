@@ -20,6 +20,8 @@ use App\Filament\Resources\SavedCarResource\RelationManagers;
 
 class SavedCarResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Hành động khách hàng';
+
     protected static ?string $model = SavedCar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

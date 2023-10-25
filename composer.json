@@ -13,13 +13,13 @@
         "filament/tables": "3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "ibrahimbougaoua/filament-rating-star": "^0.0.1",
+        "laralabs/toaster": "^5.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "livewire/livewire": "^3.0",
-        "munafio/chatify": "^1.6",
-        "wavey/sweetalert": "^1.2"
+        "munafio/chatify": "^1.6"
     },
     "require-dev": {
         "doctrine/dbal": "^3.7",

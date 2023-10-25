@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ModelCarResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Thương hiệu';
+
     protected static ?string $model = ModelCar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -29,7 +31,7 @@ class ModelCarResource extends Resource
                 Forms\Components\TextInput::make('model_name')
                     ->required()
                     ->maxLength(191),
-                   
+
             ]);
     }
 
@@ -71,14 +73,14 @@ class ModelCarResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -87,5 +89,5 @@ class ModelCarResource extends Resource
             'view' => Pages\ViewModelCar::route('/{record}'),
             'edit' => Pages\EditModelCar::route('/{record}/edit'),
         ];
-    }    
+    }
 }
