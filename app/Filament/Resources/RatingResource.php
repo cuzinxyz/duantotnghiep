@@ -16,6 +16,8 @@ use IbrahimBougaoua\FilamentRatingStar\Columns\RatingStarColumn;
 
 class RatingResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Hành động khách hàng';
+
     protected static ?string $model = Rating::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
@@ -49,7 +51,7 @@ class RatingResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->since()
-                
+
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -69,14 +71,14 @@ class RatingResource extends Resource
             ->emptyStateActions([
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [

@@ -1,8 +1,5 @@
 <x-partials.layout-client>
 
-{{--  ví dụ nhỏ sử dụng livewire bên trong blade--}}
-{{--  chỉ sử dụng livewire khi cần tương tác CSDL như CRUD--}}
-
   <div class="home5-banner-area">
     <div class="paginations111"></div>
     <div class="swiper home3-banner-slider">

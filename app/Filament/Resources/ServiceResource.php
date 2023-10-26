@@ -17,6 +17,8 @@ use Filament\Forms\Components\Section;
 
 class ServiceResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Quản lý nội dung';
+
     protected static ?string $model = Service::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';

@@ -23,7 +23,8 @@ class Car extends Model
         'contact',
         'car_info',
         'verhicle_image_library',
-        'verhicle_videos'
+        'verhicle_videos',
+        'description'
     ];
     protected $casts = [
         'contact' => 'array',

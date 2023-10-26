@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CommentsResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Hành động khách hàng';
+
     protected static ?string $model = Comments::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function __invoke(Request $request)
+    public function index()
     {
-        return view('detail');
-    }
-    public function info()
-    {
-        return view('info-user');
+        return view('home');
     }
 }

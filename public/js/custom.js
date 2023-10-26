@@ -115,7 +115,7 @@
         preloader: false,
         fixedContentPos: false
     });
-    $('select').niceSelect();
+    // $('select').niceSelect();
     jQuery(window).on('load', function () {
         new WOW().init();
         window.wow = new WOW({
@@ -711,4 +711,7 @@
             }
         }, 1000);
     });
+
+
+
 }(jQuery));

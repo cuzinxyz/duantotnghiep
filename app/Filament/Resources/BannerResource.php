@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 
 class BannerResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Giao diện';
+
     protected static ?string $model = Banner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
