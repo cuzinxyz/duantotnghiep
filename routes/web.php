@@ -5,13 +5,13 @@ use App\Http\Controllers\Client\CarController;
 use App\Livewire\Brands;
 use App\Livewire\CarDetail;
 use App\Livewire\FormSellCar;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Service;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------

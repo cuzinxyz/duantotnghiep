@@ -14,7 +14,7 @@
                             <div class="price-model-and-fav-area">
                                 <div class="price-and-model">
                                     <div class="price">
-                                        <h3>$34,637.00</h3>
+                                        <h3>{{ number_format($car->price) }} đ</h3>
                                     </div>
                                     <div class="change-model-btn">
                                         <a href="#">
