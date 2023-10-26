@@ -41,6 +41,10 @@ B2: Chạy lần lượt các lệnh:
 #### Tạo 1 admin mới cho filament
 `php artisan make:filament-user`
 
+
+#### Import dữ liệu địa chỉ
+`php artisan vietnamzone:import`
+
 #### Sau cùng chạy dự án để test.
 `php artisan serve` 
 

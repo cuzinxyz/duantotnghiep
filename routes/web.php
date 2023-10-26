@@ -9,7 +9,6 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Service;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +52,4 @@ Route::get('manage-post', function () {
 Route::get('push-news', function () {
     return view('push-news');
 });
+  
