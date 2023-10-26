@@ -12,6 +12,7 @@
   <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
   <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+  {{-- <link rel="stylesheet" href="{{asset('css/goivip.css')}}"> --}}
 
   <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 
@@ -34,12 +35,8 @@
 
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+  @stack('styles')
 
-  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-
-
-  <title>Drivco - Car Dealer HTML Template</title>
-  <link rel="icon" href="{{ asset('images/sm-logo.svg') }}" type="image/gif" sizes="20x20">
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -1297,6 +1294,8 @@
 
 <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
+    {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+
 <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
 <script src="{{ asset('js/gsap.min.js') }}"></script>
@@ -1305,11 +1304,10 @@
 
 <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
-<script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
-
 <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
 <script src="{{ asset('js/custom.js') }}"></script>
+
 <script>
   $(".marquee_text").marquee({
     direction: "left",

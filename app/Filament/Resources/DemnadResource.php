@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DemnadResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Quản lý nội dung';
+
     protected static ?string $model = Demnad::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
