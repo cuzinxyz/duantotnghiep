@@ -9,6 +9,8 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Service;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
