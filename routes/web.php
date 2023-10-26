@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\Client\CarController;
 use App\Livewire\Brands;
+use App\Livewire\CarDetail;
 use App\Livewire\FormSellCar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +24,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get("/service/{idService}", function($idService) {
   $serv = Service::findOrFail($idService);
@@ -45,7 +47,7 @@ Route::get('/dang-xe', [CarController::class, 'sellCar']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('manage-post', function () {
     return view('manage-postings');
@@ -53,3 +55,5 @@ Route::get('manage-post', function () {
 Route::get('push-news', function () {
     return view('push-news');
 });
+
+Route::get('/car-detail/{id}', [CarDetailController::class,'carDetail'])->name('carDetail');
