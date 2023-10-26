@@ -3,6 +3,7 @@
 use App\Http\Controllers\Client\CarController;
 use App\Livewire\Brands;
 use App\Livewire\FormSellCar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
