@@ -9,9 +9,13 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
 use Filament\Infolists\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
+use App\Infolists\Components\VideoEntry;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ViewRecord;
 use Filament\Tables\Columns\Layout\Split;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Actions;
@@ -24,9 +28,6 @@ use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
 use App\Filament\Resources\PostCarManagerResource\RelationManagers;
-use App\Infolists\Components\VideoEntry;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ViewRecord;
 
 class PostCarManagerResource extends Resource
 {
@@ -68,6 +69,10 @@ class PostCarManagerResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                ->label('Bài đăng chưa duyệt')
+                ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                ->default()
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
@@ -116,11 +121,14 @@ class PostCarManagerResource extends Resource
 
                                 IconEntry::make('status')
                                     ->boolean()
-                                    ->label('Trạng thái'),
+                                    ->label('Trạng thái bài đăng'),
 
-                                TextEntry::make('type')
+                                IconEntry::make('recommended')
+                                    ->boolean()
+                                    ->label('Xu hướng'),
+
+                                TextEntry::make('user.service.service_name')
                                     ->label('Loại gói tin')
-                                    ->default('Tin vip')
                                     ->badge()
                                     ->color('warning'),
 
@@ -204,11 +212,10 @@ class PostCarManagerResource extends Resource
                                             ->label('Số chỗ ngồi')
                                             ->default(7),
 
-                                        TextEntry::make('year_created')
-                                            ->label('Năm sản xuất')
-                                            ->default(2022),
+                                        TextEntry::make('car_info.manufactured')
+                                            ->label('Năm sản xuất'),
 
-                                        ColorEntry::make('color')
+                                        ColorEntry::make('car_info.color')
                                             ->label('Màu sắc')
                                             ->default('red'),
 

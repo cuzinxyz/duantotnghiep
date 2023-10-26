@@ -2,6 +2,8 @@
 
 use App\Livewire\FormSellCar;
 use App\Http\Controllers\HomeController;
+use App\Models\Car;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +25,10 @@ Route::get('dang-tin-ban-xe', function () {
     return view('form-sell-car');
 });
   
+// Route::get('/goi-tin', function() {
+//     DB::enableQueryLog();
+//     $car = Car::find(1)->service()->get();
+//     $ser = $car->service;
+//     dd($car);
+//     dd(DB::getQueryLog());
+// });

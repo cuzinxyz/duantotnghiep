@@ -11,15 +11,11 @@ class EditCar extends EditRecord
     protected static string $resource = CarResource::class;
 
 
-    protected static string $view = 'filament.pages.view-video';
-
-    protected function getHeaderActions(): array
+    
+    protected function getRedirectUrl(): string
     {
-        return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
-            Actions\ForceDeleteAction::make(),
-            Actions\RestoreAction::make(),
-        ];
+        return $this->getResource()::getUrl('index');
     }
+
+    // protected static string $view = 'filament.pages.view-video';
 }

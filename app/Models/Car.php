@@ -12,10 +12,12 @@ class Car extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
+        'slug',
         'price',
         'user_id',
         'brand_id',
-        'city',
+        'city_id',
+        'district_id',
         'full_address',
         'recommended',
         'contact',
@@ -27,6 +29,7 @@ class Car extends Model
         'contact' => 'array',
         'car_info' => 'array',
         'verhicle_image_library' => 'array',
+        'verhicle_videos' => 'array',
         'recommended' => 'boolean',
     ];
 
@@ -37,4 +40,6 @@ class Car extends Model
     public function brand() {
         return $this->belongsTo(Brand::class);
     }
+    
+
 }

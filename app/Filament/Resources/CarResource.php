@@ -93,6 +93,18 @@ class CarResource extends Resource
                                         'silver' => 'Bạc'
                                     ]),
 
+                                Select::make('car_info.seat')
+                                    ->label('Số chỗ ngồi')
+                                    ->options([
+                                        '4' => '4',
+                                        '5' => '5',
+                                        '6' => '6',
+                                        '7' => '7',
+                                        '8' => '8',
+
+
+                                    ]),
+
                                 Select::make('car_info.manufactured')
                                     ->label('Năm sản xuất')
                                     ->options([
@@ -137,6 +149,7 @@ class CarResource extends Resource
                                     ->schema([
                                         Toggle::make('recommended')
                                             ->label('Xu hướng')
+                                            ->inline(false)
                                             ->onColor('success')
                                             ->offColor('danger'),
                                     ]),
@@ -181,19 +194,33 @@ class CarResource extends Resource
                                     ->required()
                                     ->placeholder('Chọn người đăng'),
 
-                                Select::make('city')
+                                Select::make('city_id')
                                     ->label('Thành phố')
-                                    ->options([
-                                        'Hà Nội' => 'Hà Nội',
-                                        'Tp Hồ Chí Minh' => 'Tp Hồ Chí Minh'
-                                    ])
+                                    ->options(\Kjmtrue\VietnamZone\Models\Province::all()->pluck('name', 'id'))
                                     ->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn (callable $set) => $set('district_id', null))
                                     ->placeholder('Chọn thành phố'),
+
+                                Select::make('district_id')
+                                    ->label('Quận, Huyện, Thị xã')
+
+                                    ->options(function (callable $get) {
+                                        $districts = \Kjmtrue\VietnamZone\Models\District::whereProvinceId($get('city_id'))->get()->pluck('name');
+
+                                        if (!$districts) {
+                                            return \Kjmtrue\VietnamZone\Models\District::all()->pluck('name');
+                                        }
+
+                                        return $districts;
+                                    })
+                                    ->required()
+                                    ->placeholder('Quận, Huyện, Thị xã'),
 
                                 TextInput::make('full_address')
                                     ->label('Địa chỉ cụ thể')
-                                    ->required()
-                                    ->placeholder('Quận, Huyện, Thị xã'),
+                                    ->string()
+                                    ->required(),
 
                                 TextInput::make('contact.email')
                                     ->email()
@@ -201,8 +228,8 @@ class CarResource extends Resource
 
                                 TextInput::make('contact.phone_number')
                                     ->label('Số điện thoại')
-                                    ->numeric()
-                                    ->required(),
+                                    ->required()
+                                    ->rule('regex:/^(84|0[3|5|7|8|9])+([0-9]{8})$/'),
 
                                 TextInput::make('contact.facebook'),
 
@@ -254,45 +281,27 @@ class CarResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Tiêu đề')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Tác giả')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('brand_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('city')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('full_address')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('recommended')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('car_info.mileage')
-                    ->label('Số KM đã đi'),
-                Tables\Columns\ImageColumn::make('verhicle_image_library'),
 
-                Tables\Columns\ImageColumn::make('verhicle_videos'),
-                // Tables\Columns\ViewColumn::make('verhicle_image_library')->view('tables.columns.images-car'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                // Tables\Columns\TextColumn::make('deleted_at')
-                //     ->dateTime()
-                //     ->sortable(),
+
+                Tables\Columns\TextColumn::make('user.service.service_name')
+                    ->label('Gói tin')
+                    ->sortable(),
+
+
+                Tables\Columns\IconColumn::make('recommended')
+                    ->label('Xu hướng')
+                    ->boolean(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 // 
                 Tables\Actions\DeleteAction::make(),
@@ -302,8 +311,8 @@ class CarResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
