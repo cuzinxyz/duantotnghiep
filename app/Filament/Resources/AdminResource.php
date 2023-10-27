@@ -18,11 +18,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AdminResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Người dùng';
-
     protected static ?string $model = Admin::class;
 
-    protected static ?string $navigationGroup = 'Quản lý tài khoản';
+    protected static ?string $navigationGroup = 'Tài khoản';
 
     protected static ?string $navigationLabel = 'Quản trị viên';
 
