@@ -10,10 +10,13 @@ class ViewCar extends ViewRecord
 {
     protected static string $resource = CarResource::class;
 
+    protected static string $view = 'filament.pages.view-video';
+
     protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),
         ];
     }
+
 }

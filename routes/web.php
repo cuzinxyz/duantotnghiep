@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\Client\CarController;
+use App\Livewire\Brands;
+use App\Livewire\FormSellCar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\ServiceController;
+use App\Models\Service;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\PostBuyCar;
 use App\Models\Demnad;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -19,16 +25,26 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+
+Route::get("/service/{idService}", function($idService) {
+  $serv = Service::findOrFail($idService);
+
+  return view('service-detail', compact('serv'));
+})->name('service.detail');
+
+Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
+
+Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
 
 Route::get('/info', [HomeController::class, 'info']);
 
-Route::get('/dang-tin-ban-xe', function () {
-    return view('form-sell-car');
-});
+Route::get('/info', [HomeController::class, 'info']);
+Route::get('/service', [ServiceController::class, 'index'])->name('service');
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
+
+Route::get('/dang-xe', [CarController::class, 'sellCar']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -46,3 +62,4 @@ Route::get('manage-post', function () {
 Route::get('push-news', function () {
     return view('push-news');
 });
+

@@ -2,30 +2,45 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Car extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
+        'slug',
         'price',
         'user_id',
         'brand_id',
-        'city',
+        'city_id',
+        'district_id',
         'full_address',
         'recommended',
         'contact',
         'car_info',
         'verhicle_image_library',
-        'verhicle_videos'
+        'verhicle_videos',
+        'description'
     ];
     protected $casts = [
-        'contact' => 'json',
-        'car_info' => 'json',
-        'verhicle_image_library' => 'json',
-        'verhicle_videos' => 'json'
+        'contact' => 'array',
+        'car_info' => 'array',
+        'verhicle_image_library' => 'array',
+        'verhicle_videos' => 'array',
+        'recommended' => 'boolean',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function brand() {
+        return $this->belongsTo(Brand::class);
+    }
+    
+
 }

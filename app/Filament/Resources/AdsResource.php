@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AdsResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Giao diện';
+
     protected static ?string $model = Ads::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

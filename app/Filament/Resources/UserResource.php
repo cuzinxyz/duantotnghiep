@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Người dùng';
+
     protected static ?string $model = User::class;
 
     protected static ?string $navigationGroup = 'Quản lý tài khoản';
