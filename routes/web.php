@@ -10,6 +10,9 @@ use App\Http\Controllers\ServiceController;
 use App\Models\Service;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\PostBuyCar;
+use App\Models\Demnad;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +54,14 @@ Route::controller(CheckOutController::class)->group(function () {
 // Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
 
 Route::get('/dang-xe', [CarController::class, 'sellCar']);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dang-tin-mua-xe', PostBuyCar::class)->middleware('auth');
+
+Route::get('manage-post-buy-car', function () {
+    return view('manage-post-buy-car');
+});
 
 Auth::routes();
 

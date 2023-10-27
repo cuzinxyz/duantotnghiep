@@ -23,6 +23,10 @@ class UserResource extends Resource
 
     protected static ?string $model = User::class;
 
+    protected static ?string $navigationGroup = 'Quản lý tài khoản';
+
+    protected static ?string $navigationLabel = 'Người dùng';
+
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
@@ -123,5 +127,10 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('người dùng');
     }
 }

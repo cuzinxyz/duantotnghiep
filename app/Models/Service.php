@@ -18,7 +18,7 @@ class Service extends Model
     'title'
   ];
 
-  protected $casts = [
-    'description' => 'json'
-  ];
+    protected $casts = [
+        'description' => 'array'
+    ];
 }

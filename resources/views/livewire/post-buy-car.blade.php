@@ -1,4 +1,4 @@
-<x-partials.layout-client>
+<div>
     <div class="inner-page-banner">
         <div class="banner-wrapper">
             <div class="container-fluid">
@@ -35,18 +35,20 @@
                                 <div class="title">
                                     <h4>Đăng tin bán xe:</h4>
                                 </div>
-                                <form>
+                                <form wire:submit="save">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-inner mb-30">
                                                 <label>Tiêu đề* :</label>
-                                                <input type="text" placeholder="Cần mua xe...">
+                                                <input type="text" placeholder="Cần mua xe..." wire:model="title">
+                                                <div style="padding-top:10px">@error('title') {{ $message }} @enderror</div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-inner mb-30">
                                                 <label>Nội dung* :</label>
-                                                <textarea placeholder="Nội dung..."></textarea>
+                                                <textarea placeholder="Nội dung..." wire:model="content"></textarea>
+                                                <div style="padding-top:10px">@error('content') {{ $message }} @enderror</div>
                                             </div>
                                         </div>
                                     </div>
@@ -63,4 +65,4 @@
             </div>
         </div>
     </div>
-</x-partials.layout-client>
+</div>

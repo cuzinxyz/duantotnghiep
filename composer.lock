@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb82c0aad72a257d573b6f3d5cb5d4d9",
+    "content-hash": "6478da5a40f2f7e40f6aec3825070921",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2275,6 +2275,17 @@
             "time": "2023-10-22T13:00:50+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "laravel/framework",
+            "version": "v10.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "2d002849a16ad131110a50cbea4d64dbb78515a3"
+            },
+            "dist": {
+                "type": "zip",
+=======
             "name": "kjmtrue/vietnam-zone",
             "version": "v1.0.5",
             "source": {
@@ -2396,6 +2407,7 @@
             },
             "dist": {
                 "type": "zip",
+>>>>>>> be4599a6606867d59c43b2bb6bde043f7e591214
                 "url": "https://api.github.com/repos/laravel/framework/zipball/2d002849a16ad131110a50cbea4d64dbb78515a3",
                 "reference": "2d002849a16ad131110a50cbea4d64dbb78515a3",
                 "shasum": ""
@@ -8627,6 +8639,18 @@
         },
         {
             "name": "laravel/pint",
+<<<<<<< HEAD
+            "version": "v1.13.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "428c1eae1be4d2994c88234ffe3fea6800532e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/428c1eae1be4d2994c88234ffe3fea6800532e0d",
+                "reference": "428c1eae1be4d2994c88234ffe3fea6800532e0d",
+=======
             "version": "v1.13.5",
             "source": {
                 "type": "git",
@@ -8637,6 +8661,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/pint/zipball/df105cf8ce7a8f0b8a9425ff45cd281a5448e423",
                 "reference": "df105cf8ce7a8f0b8a9425ff45cd281a5448e423",
+>>>>>>> be4599a6606867d59c43b2bb6bde043f7e591214
                 "shasum": ""
             },
             "require": {
@@ -8689,7 +8714,11 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
+<<<<<<< HEAD
+            "time": "2023-10-24T15:44:13+00:00"
+=======
             "time": "2023-10-26T09:26:10+00:00"
+>>>>>>> be4599a6606867d59c43b2bb6bde043f7e591214
         },
         {
             "name": "laravel/sail",
