@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\PostBuyCar;
+use App\Models\Demnad;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +32,11 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/dang-tin-mua-xe', PostBuyCar::class)->middleware('auth');
 
-
+Route::get('manage-post-buy-car', function () {
+    return view('manage-post-buy-car');
+});
 
 Auth::routes();
 

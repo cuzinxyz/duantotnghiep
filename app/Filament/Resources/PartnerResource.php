@@ -26,6 +26,7 @@ class PartnerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Tên')
                     ->required(),
                 FileUpload::make('logo_url')
                     ->imageEditor()
@@ -39,8 +40,10 @@ class PartnerResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('logo_url')
+                ->label('Logo')
                     ->square(),
                 Tables\Columns\TextColumn::make('name')
+                ->label('Tên công ty')
                     ->searchable(),
             ])
             ->filters([
@@ -85,5 +88,10 @@ class PartnerResource extends Resource
             'create' => Pages\CreatePartner::route('/create'),
             'edit' => Pages\EditPartner::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('đối tác');
     }
 }
