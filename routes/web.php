@@ -25,31 +25,22 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::controller(HomeController::class)->group(function () {
-  Route::get('/', 'index')->name('homepage');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
-Route::controller(CarController::class)->group(function () {
-  Route::get('/dang-tin-ban-xe', 'sellCar');
-});
+Route::get("/service/{idService}", function($idService) {
+  $serv = Service::findOrFail($idService);
 
-Route::controller(ServiceController::class)->group(function () {
-  Route::get('/danh-sach-dich-vu', 'index');
-  Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
-});
+  return view('service-detail', compact('serv'));
+})->name('service.detail');
 
-Route::controller(CheckOutController::class)->group(function () {
-   # payment
-   Route::post('/payment', 'checkout')->name('payment-vnpay');
-   # result after payment
-   Route::get('/ket-qua', 'result')->name('resultAfterPayment');
-});
+Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
 
+Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
 
-// Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
+Route::get('/info', [HomeController::class, 'info']);
 
-// Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
-
+Route::get('/info', [HomeController::class, 'info']);
+Route::get('/service', [ServiceController::class, 'index'])->name('service');
 
 // Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
 
