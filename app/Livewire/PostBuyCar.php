@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
-
 class PostBuyCar extends Component
 {
   public $user_id;
@@ -35,7 +34,6 @@ class PostBuyCar extends Component
     );
   }
 
-  #[Layout('components.partials.layout-client')]
   public function render()
   {
     return view('livewire.post-buy-car');
