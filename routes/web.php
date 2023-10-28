@@ -19,6 +19,7 @@ use App\Livewire\PostBuyCar;
 |
 */
 
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
 });
@@ -39,16 +40,6 @@ Route::controller(CheckOutController::class)->group(function () {
     # result after payment
     Route::get('/ket-qua', 'result')->name('resultAfterPayment');
 });
-
-
-// Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
-
-// Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
-
-
-// Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
-
-Route::get('/dang-xe', [CarController::class, 'sellCar']);
 
 Auth::routes();
 
