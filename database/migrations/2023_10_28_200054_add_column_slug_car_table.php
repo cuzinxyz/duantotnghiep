@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->text('reason')->nullable()->after('status');
+        Schema::table('cars',function (Blueprint $table) {
+            $table->string('slug')->after('title');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     {
         Schema::table('cars', function (Blueprint $table) {
 
-            $table->dropColumn(['status', 'reason']);
-        });    
+            $table->dropColumn(['slug']);
+        });
     }
 };
