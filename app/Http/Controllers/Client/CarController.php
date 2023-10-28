@@ -70,4 +70,9 @@ class CarController extends Controller
     // }
     return view("form-sell-car");
   }
+
+  public function buyCar()
+  {
+    return view("form-buy-car");
+  }
 }

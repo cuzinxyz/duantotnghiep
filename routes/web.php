@@ -1,18 +1,12 @@
 <?php
 
 use App\Http\Controllers\Client\CarController;
-use App\Livewire\Brands;
-use App\Livewire\FormSellCar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
-use App\Models\Service;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
 use App\Livewire\PostBuyCar;
-use App\Models\Demnad;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,34 +19,36 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('homepage');
+});
 
-Route::get("/service/{idService}", function($idService) {
-  $serv = Service::findOrFail($idService);
+Route::controller(CarController::class)->group(function () {
+    Route::get('/dang-tin-ban-xe', 'sellCar');
+    Route::get('/dang-tin-mua-xe', 'buyCar');
+});
 
-  return view('service-detail', compact('serv'));
-})->name('service.detail');
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/danh-sach-dich-vu', 'index');
+    Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
+});
 
-Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
+Route::controller(CheckOutController::class)->group(function () {
+    # payment
+    Route::post('/payment', 'checkout')->name('payment-vnpay');
+    # result after payment
+    Route::get('/ket-qua', 'result')->name('resultAfterPayment');
+});
 
-Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
 
-Route::get('/info', [HomeController::class, 'info']);
+// Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
 
-Route::get('/info', [HomeController::class, 'info']);
-Route::get('/service', [ServiceController::class, 'index'])->name('service');
+// Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
+
 
 // Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
 
 Route::get('/dang-xe', [CarController::class, 'sellCar']);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/dang-tin-mua-xe', PostBuyCar::class)->middleware('auth');
-
-Route::get('manage-post-buy-car', function () {
-    return view('manage-post-buy-car');
-});
 
 Auth::routes();
 
@@ -63,3 +59,6 @@ Route::get('push-news', function () {
     return view('push-news');
 });
 
+Route::get('manage-post-buy-car', function () {
+    return view('manage-post-buy-car');
+});
