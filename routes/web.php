@@ -21,6 +21,7 @@ use App\Livewire\PostBuyCar;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
+    Route::get('/laravel-ui', 'laravelui')->name('laravelui');
 });
 
 Route::controller(CarController::class)->group(function () {

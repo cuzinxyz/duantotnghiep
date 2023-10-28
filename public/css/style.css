@@ -28447,6 +28447,62 @@ backdrop-filter: blur(18.4px);
       stroke-dashoffset: -22;
    }
 }
+header.style-5 .nav-right .dropdown .account-menu {
+    min-height: 5rem;
+    background-color: var(--white-color);
+    box-shadow: 0 30px 80px rgba(8, 0, 42, .08);
+    border-radius: 0 0 10px 10px;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    padding: 20px;
+    z-index: 99;
+    display: none;
+    transform: scaleY(0);
+    transform-origin: top;
+    margin-right: -2.5rem
+ }
 
-
+header.style-5 .nav-right .dropdown .account-menu.active {
+    display: block;
+    transform: scaleY(1);
+    animation: fade-down .3s linear
+ }
+.user-dropdown {
+    padding: 5px 10px !important;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: var(--primary-color1);
+    color: var(--primary-color1) !important;
+    text-transform: capitalize;
+    transition: all 1s ease-in;
+}
+.user-dropdown:focus, .user-dropdown:hover {
+    background-color: var(--primary-color1) !important;
+    color: #fff !important;
+}
+.user-dropdown:focus img, .user-dropdown:hover img {
+    border-color: #fff;
+}
+.user-dropdown img {
+    border: .5px solid var(--primary-color1);
+    border-radius: 50%;
+    width: 30px;height: 30px;
+    object-fit: cover;
+}
+.btn-dark1 {
+    background-color: var(--title-color) !important;
+    color: var(--white-color) !important;
+    border-color: var(--title-color) !important;
+}
+.btn-dark1::after {
+    background-color: var(--white-color);
+}
+.btn-dark1:hover::after {
+    transform: skewX(45deg) scale(1, 1);
+}
+.btn-dark1:hover {
+    color: var(--title-color)!important;
+    /* background-color: #fff !important; */
+}
 /* custom css end  */
