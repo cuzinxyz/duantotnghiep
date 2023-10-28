@@ -1,8 +1,4 @@
 <x-partials.layout-client>
-
-
-
-
     <div class="product-details-page">
         <div class="container shadow">
             <div class="inner-page-banner ">
