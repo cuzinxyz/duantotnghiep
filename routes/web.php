@@ -42,12 +42,12 @@ Route::controller(CheckOutController::class)->group(function () {
 Auth::routes();
 
 Route::get('manage-post', function () {
-    return view('manage-postings');
+    return view('user-settings.manage-postings');
 });
 Route::get('push-news', function () {
-    return view('push-news');
+    return view('user-settings.push-news');
 });
 
 Route::get('manage-post-buy-car', function () {
-    return view('manage-post-buy-car');
+    return view('user-settings.manage-post-buy-car');
 });
