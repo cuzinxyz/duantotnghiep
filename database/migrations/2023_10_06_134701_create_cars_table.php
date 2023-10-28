@@ -16,6 +16,7 @@ return new class extends Migration {
       $table->integer('price');
       $table->integer('user_id');
       $table->integer('brand_id');
+      $table->integer('model_car_id');
       $table->string('city_id');
       $table->string('district_id');
       $table->string('full_address', 255);

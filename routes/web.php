@@ -25,8 +25,8 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::controller(CarController::class)->group(function () {
-    Route::get('/dang-tin-ban-xe', 'sellCar');
-    Route::get('/dang-tin-mua-xe', 'buyCar');
+    Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
+    Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
 });
 
 Route::controller(ServiceController::class)->group(function () {
