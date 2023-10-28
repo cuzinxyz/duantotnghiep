@@ -17,18 +17,18 @@
                                 <span class="fw-bolder">Lối tắt</span>
                                 <div class="d-flex align-items-center p-1 rounded-pill"
                                     style="background-color: #f4f4f4;">
-                                    <a href="">
+                                    {{-- <a href=""> --}}
                                         <img src="/images/goi-pro.svg" alt="Có gì mới"
                                             style="width: 1rem; height: 1rem;">
                                         <span class="ms-2">Gói PRO</span>
-                                    </a>
+                                    {{-- </a> --}}
                                 </div>
                                 <div class="d-flex align-items-center p-1 rounded-pill"
                                     style="background-color: #f4f4f4;">
-                                    <a href="">
+                                    {{-- <a href=""> --}}
                                         <i class="bi bi-people-fill"></i>
                                         <span class="ms-2">Danh sách liên hệ</span>
-                                    </a>
+                                    {{-- </a> --}}
                                 </div>
                             </div>
                             <div class="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4 mb-4">
@@ -86,16 +86,17 @@
                                                 <div class="author-and-review">
                                                     <div class="author-name-deg">
                                                         <h6>Sirius Fi Yamaha 2018 Đen Xám 90%</h6>
-
                                                     </div>
                                                     <div>
                                                         <p class="fw-bolder text-danger">10.000.000đ</p>
                                                     </div>
                                                 </div>
-                                                <p>Xã Lam Điền, Huyện Chương Mỹ, Hà Nội</p>
+                                                <p class="text-secondary fs-6 text">Xã Lam Điền, Huyện Chương Mỹ, Hà Nội</p>
                                                 <div class="replay-btn">
-                                                    <span>Hiển thị: </span><span>05 June, 2023</span> - <span>05
-                                                        June, 2023</span>
+                                                    <span class="text-secondary">Ngày đăng tin: </span><span>05 June, 2023</span>
+                                                </div>
+                                                <div class="replay-btn">
+                                                    <span class="text-secondary">Ngày hết hạn: </span><span>05 June, 2023</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -105,11 +106,11 @@
                                                 <label for="">Chọn tin</label>
                                             </div>
                                             <div>
-                                                <a href="" class="btn border"><i
+                                                <a href="" class="btn border fw-bolder"><i
                                                         class="bi bi-arrow-counterclockwise"></i> Gia hạn tin</a>
-                                                <a href="" class="btn border"><i class="bi bi-pencil"></i> Sửa
+                                                <a href="" class="btn border fw-bolder"><i class="bi bi-pencil"></i> Sửa
                                                     tin</a>
-                                                <a href="" class="btn border"><i class="bi bi-eye-slash"></i>
+                                                <a href="" class="btn border fw-bolder"><i class="bi bi-eye-slash"></i>
                                                     Ẩn tin</a>
                                             </div>
                                         </div>
@@ -151,5 +152,4 @@
 
         </div>
     </div>
-
 </x-partials.layout-client>
