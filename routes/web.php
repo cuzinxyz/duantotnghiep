@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Client\CarController;
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
-use App\Livewire\PostBuyCar;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,6 @@ use App\Livewire\PostBuyCar;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
-    Route::get('/laravel-ui', 'laravelui')->name('laravelui');
 });
 
 Route::controller(CarController::class)->group(function () {
