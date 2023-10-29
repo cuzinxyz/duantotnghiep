@@ -6,17 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\SettingsController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -39,15 +29,16 @@ Route::controller(CheckOutController::class)->group(function () {
     Route::get('/ket-qua', 'result')->name('resultAfterPayment');
 });
 
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('/cai-dat', 'settings')->name('settings');
+    Route::get('/quan-ly-tin-dang', 'managePostings');
+    Route::get('/day-tin', 'pushItem');
+    Route::get('/quan-ly-tin-mua', 'managerPostingsBuyCar');
+    # cái này cần sửa lại
+    Route::get('/thong-tin', 'infoUser');
+    Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
+});
+
 Auth::routes();
 
-Route::get('manage-post', function () {
-    return view('user-settings.manage-postings');
-});
-Route::get('push-news', function () {
-    return view('user-settings.push-news');
-});
 
-Route::get('manage-post-buy-car', function () {
-    return view('user-settings.manage-post-buy-car');
-});
