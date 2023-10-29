@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AdsResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Giao diện';
+
     protected static ?string $model = Ads::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -81,5 +83,10 @@ class AdsResource extends Resource
             'create' => Pages\CreateAds::route('/create'),
             'edit' => Pages\EditAds::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('quảng cáo');
     }
 }

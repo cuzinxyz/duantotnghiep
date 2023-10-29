@@ -17,6 +17,8 @@ use Filament\Forms\Components\Section;
 
 class ServiceResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Quản lý nội dung';
+
     protected static ?string $model = Service::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
@@ -28,15 +30,19 @@ class ServiceResource extends Resource
                 Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('service_name')
+                            ->label('Gói')
                             ->required(),
                         Forms\Components\TextInput::make('price')
+                            ->label('Giá')
                             ->required(),
                         Forms\Components\DateTimePicker::make('expiration_date')
+                            ->label('Ngày hết hạn')
                             ->required(),
                     ])->columnSpan(1),
                 Section::make()
                     ->schema([
                         MarkdownEditor::make('description')
+                            ->label('Mô tả')
                             ->required(),
                     ])->columnSpan(1),
             ])->columns(2);
@@ -47,16 +53,20 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('service_name')
+                ->label('Gói')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
+                ->label('Giá')
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
                         thousandsSeparator: ',',
                     )
                     ->money('VND'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('description')
+                ->label('Mô tả'),
                 Tables\Columns\TextColumn::make('expiration_date')
+                ->label('Ngày hết hạn')
 
             ])
             ->filters([
@@ -101,5 +111,10 @@ class ServiceResource extends Resource
             'create' => Pages\CreateService::route('/create'),
             'edit' => Pages\EditService::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('dịch vụ');
     }
 }

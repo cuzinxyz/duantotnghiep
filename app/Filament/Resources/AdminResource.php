@@ -20,6 +20,10 @@ class AdminResource extends Resource
 {
     protected static ?string $model = Admin::class;
 
+    protected static ?string $navigationGroup = 'Tài khoản';
+
+    protected static ?string $navigationLabel = 'Quản trị viên';
+
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
@@ -29,11 +33,13 @@ class AdminResource extends Resource
                 Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
+                            ->label('Tên')
                             ->required(),
                         Forms\Components\TextInput::make('email')
                             ->email()
                             ->required(),
                         Forms\Components\TextInput::make('password')
+                            ->label('Mật khẩu')
                             ->password()
                             ->required(),
                     ])->columnSpan([
@@ -45,7 +51,8 @@ class AdminResource extends Resource
                         FileUpload::make('avatar')
                             ->imageEditor()
                             ->disk('public')
-                            ->directory('avatars/admins'),
+                            ->directory('avatars/admins')
+                            ->label('Ảnh đại diện'),
                     ])->columnSpan([
                         'md' => 1,
                         'xl' => 1
@@ -62,8 +69,11 @@ class AdminResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('avatar')
+                    ->label('Ảnh đại diện')
                     ->circular(),
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Tên')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([
@@ -107,5 +117,10 @@ class AdminResource extends Resource
             'create' => Pages\CreateAdmin::route('/create'),
             'edit' => Pages\EditAdmin::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('quản trị viên');
     }
 }

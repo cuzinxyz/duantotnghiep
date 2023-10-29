@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Demnad extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $guarded = ['id'];
-    public function user():BelongsTo{
-      return $this->belongsTo(User::class);
-    }
-    public function brand():BelongsTo{
-      return $this->belongsTo(Brand::class);
-    }
-    public function car_model():BelongsTo{
-      return $this->belongsTo(ModelCar::class);
+
+    protected $fillable = [
+      'user_id',
+      'status',
+      'title',
+      'content',
+      'reason',
+    ];
+
+    public function user():BelongsTo
+    {
+      return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

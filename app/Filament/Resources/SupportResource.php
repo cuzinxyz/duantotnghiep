@@ -19,6 +19,8 @@ use App\Filament\Resources\SupportResource\RelationManagers;
 
 class SupportResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Hành động khách hàng';
+
   protected static ?string $model = Support::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

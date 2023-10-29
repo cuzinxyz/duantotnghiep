@@ -1,36 +1,42 @@
 <?php
 
-use App\Livewire\FormSellCar;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CarController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\BuyVip;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SettingsController;
 
-Route::get('/', \App\Http\Controllers\HomeController::class)->name('/');
-
-Route::get('/info', [HomeController::class, 'info']);
-
-Route::get('dang-tin-ban-xe', function () {
-    return view('form-sell-car');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('homepage');
 });
 
+Route::controller(CarController::class)->group(function () {
+    Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
+    Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
+});
 
-Route::get('manage-post', function () {
-    return view('manage-postings');
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/danh-sach-dich-vu', 'index');
+    Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
 });
-Route::get('push-news', function () {
-    return view('push-news');
+
+Route::controller(CheckOutController::class)->group(function () {
+    # payment
+    Route::post('/payment', 'checkout')->name('payment-vnpay');
+    # result after payment
+    Route::get('/ket-qua', 'result')->name('resultAfterPayment');
 });
-Route::get('detail', function () {
-    return view('detail');
+
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('/cai-dat', 'settings')->name('settings');
+    Route::get('/quan-ly-tin-dang', 'managePostings');
+    Route::get('/day-tin', 'pushItem');
+    Route::get('/quan-ly-tin-mua', 'managerPostingsBuyCar');
+    # cái này cần sửa lại
+    Route::get('/thong-tin', 'infoUser');
+    Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
-Route::get('buy_vip', BuyVip::class);
+
+Auth::routes();

@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 
 class BannerResource extends Resource
 {
+  protected static ?string $navigationGroup = 'Giao diện';
+
     protected static ?string $model = Banner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -60,15 +62,18 @@ class BannerResource extends Resource
                     ->sortable()
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
+
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make()
                 ]),
             ])
@@ -87,9 +92,9 @@ class BannerResource extends Resource
     {
         return [
             'index' => Pages\ListBanners::route('/'),
-            'create' => Pages\CreateBanner::route('/create'),
+            // 'create' => Pages\CreateBanner::route('/create'),
+            // 'edit' => Pages\EditBanner::route('/{record}/edit'),
             'view' => Pages\ViewBanner::route('/{record}'),
-            'edit' => Pages\EditBanner::route('/{record}/edit'),
         ];
     }
 
