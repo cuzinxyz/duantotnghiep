@@ -40,5 +40,3 @@ Route::controller(SettingsController::class)->group(function () {
 });
 
 Auth::routes();
-
-
