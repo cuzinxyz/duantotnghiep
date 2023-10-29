@@ -3,7 +3,7 @@
 use App\Livewire\FormSellCar;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
+use App\Livewire\BuyVip;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +30,7 @@ Route::get('manage-post', function () {
 Route::get('push-news', function () {
     return view('push-news');
 });
+Route::get('detail', function () {
+    return view('detail');
+});
+Route::get('buy_vip', BuyVip::class);
