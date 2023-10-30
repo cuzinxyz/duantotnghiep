@@ -22,6 +22,10 @@ class SettingsController extends Controller
         return view('user-settings.info-user');
     }
 
+    public function recharge() {
+        return view('user-settings.nap-tien');
+    }
+
     public function paymentHistory() {
         return view('user-settings.payment-history');
     }

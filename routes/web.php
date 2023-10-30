@@ -36,6 +36,7 @@ Route::controller(SettingsController::class)->group(function () {
     Route::get('/quan-ly-tin-mua', 'managerPostingsBuyCar');
     # cái này cần sửa lại
     Route::get('/thong-tin', 'infoUser');
+    Route::get('/nap-tien', 'recharge')->name('recharge');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
 
