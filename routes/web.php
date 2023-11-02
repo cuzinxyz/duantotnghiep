@@ -4,6 +4,7 @@ use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\Client\ListingSystemController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
@@ -39,5 +40,7 @@ Route::controller(SettingsController::class)->group(function () {
     Route::get('/nap-tien', 'recharge')->name('recharge');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
+
+Route::get('/danh-sach-xe', CarListingSystem::class);
 
 Auth::routes();
