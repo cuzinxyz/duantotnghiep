@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Service;
 use App\Models\TransactionsHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -123,6 +122,6 @@ class CheckOutController extends Controller
          session()->flash('status', 'Lỗi r nhé');
       }
 
-      return view('result');
+      return view('services.result');
    }
 }

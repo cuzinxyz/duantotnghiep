@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->integer('status')->default(0)->after('verhicle_videos');
             $table->text('reason')->nullable()->after('status');
         });
     }
