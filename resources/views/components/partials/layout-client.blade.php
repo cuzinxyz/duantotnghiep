@@ -281,9 +281,10 @@
                                                 <i class="bi bi-heart"></i> Tin đã lưu
                                             </div>
 
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2" onclick="window.location.href='{{ route('recharge') }}'">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('recharge') }}'">
                                                 <i class="bi bi-cash-coin"></i> Nạp
-                                                    tiền
+                                                tiền
                                             </div>
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2">
@@ -752,34 +753,26 @@
 
         <script src="{{ asset('js/custom.js') }}"></script>
 
-    <script>
-        //list grid view
-        jQuery(document).ready(function($) {
-            $('.lists').click(function(event) {
-                event.preventDefault();
-                $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
-                    'grid-group-wrapper');
+        <script>
+            //list grid view
+            jQuery(document).ready(function($) {
+                $('.lists').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
+                        'grid-group-wrapper');
+                });
+                $('.grid').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
+                        'grid-group-wrapper');
+                });
             });
-            $('.grid').click(function(event) {
-                event.preventDefault();
-                $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
-                    'grid-group-wrapper');
-            });
-        });
-        $('.list-grid-btn-group li').on('click', function() {
-            $(this).addClass('active').siblings().removeClass('active');
-        })
-    </script>
+            $('.list-grid-btn-group li').on('click', function() {
+                $(this).addClass('active').siblings().removeClass('active');
+            })
+        </script>
 
-    <script>
-        $("#registerForm").validate({
-            onfocusout: false,
-            onkeyup: false,
-            onclick: false,
-            rules: {
-                "name": {
-                    required: true,
-                    minlength: 3
+
         <script>
             $(".marquee_text").marquee({
                 direction: "left",
