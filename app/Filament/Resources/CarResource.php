@@ -21,6 +21,7 @@ use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\CarResource\Pages;
+use Filament\Forms\Components\MarkdownEditor;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarResource\RelationManagers;
 
@@ -63,6 +64,22 @@ class CarResource extends Resource
                                     ->label('Hãng xe')
                                     ->relationship(name: 'brand', titleAttribute: 'brand_name')
                                     ->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn (callable $set) => $set('model_car_id', null))
+                                    ->placeholder('Chọn loại xe'),
+
+                                Select::make('model_car_id')
+                                    ->label('Model xe')
+                                    ->required()
+                                    ->options(function (callable $get) {
+                                        $modelCar = \App\Models\ModelCar::where('brand_id' ,$get('brand_id'))->get()->pluck('model_name');
+
+                                        if (!$modelCar) {
+                                            return \App\Models\ModelCar::all()->pluck('model_name');
+                                        }
+
+                                        return $modelCar;
+                                    })
                                     ->placeholder('Chọn loại xe'),
 
                                 TextInput::make('car_info.mileage')
@@ -132,6 +149,23 @@ class CarResource extends Resource
                                     ->options([
                                         'used' => 'Đã qua sử dụng',
                                     ]),
+                                MarkdownEditor::make('description')
+                                    ->toolbarButtons([
+                                        'attachFiles',
+                                        'blockquote',
+                                        'bold',
+                                        'bulletList',
+                                        'codeBlock',
+                                        'heading',
+                                        'italic',
+                                        'link',
+                                        'orderedList',
+                                        'redo',
+                                        'strike',
+                                        'table',
+                                        'undo',
+                                    ])
+                                    ->columnSpanFull()
 
                             ])
                             ->columns([

@@ -17,6 +17,7 @@ class Car extends Model
         'price',
         'user_id',
         'brand_id',
+        'model_car_id',
         'city_id',
         'district_id',
         'full_address',
