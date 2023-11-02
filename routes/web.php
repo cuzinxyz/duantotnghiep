@@ -4,8 +4,10 @@ use App\Http\Controllers\Client\CarController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\Client\ListingSystemController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
+use App\Livewire\CarListingSystem;
 use App\Livewire\PostBuyCar;
 
 /*
@@ -40,6 +42,8 @@ Route::controller(CheckOutController::class)->group(function () {
     # result after payment
     Route::get('/ket-qua', 'result')->name('resultAfterPayment');
 });
+
+Route::get('/danh-sach-xe', CarListingSystem::class);
 
 Auth::routes();
 

@@ -37,6 +37,7 @@
 
     @stack('styles')
 
+
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -514,7 +515,8 @@
 
     <header class="header-area style-5">
         <div class="header-logo d-lg-none d-flex">
-            <a href="index.html"><img alt="image" class="img-fluid" src="{{ asset('images/green-logo.svg') }}"></a>
+            <a href="index.html"><img alt="image" class="img-fluid"
+                    src="{{ asset('images/green-logo.svg') }}"></a>
         </div>
         <div class="main-menu">
             <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
@@ -1178,10 +1180,12 @@
                             <div class="app-download">
                                 <ul>
                                     <li>
-                                        <a href="#"><img src="{{ asset('images/google-app.svg') }}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/google-app.svg') }}"
+                                                alt=""></a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="{{ asset('images/apple-app.svg') }}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/apple-app.svg') }}"
+                                                alt=""></a>
                                     </li>
                                 </ul>
                             </div>
@@ -1287,8 +1291,6 @@
 
     <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-    {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
-
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
     <script src="{{ asset('js/gsap.min.js') }}"></script>
@@ -1296,6 +1298,8 @@
     <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 
     <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
+
+    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 
     <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
@@ -1318,6 +1322,25 @@
             duplicated: true,
             startVisible: true,
         });
+    </script>
+
+    <script>
+        //list grid view
+        jQuery(document).ready(function($) {
+            $('.lists').click(function(event) {
+                event.preventDefault();
+                $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
+                    'grid-group-wrapper');
+            });
+            $('.grid').click(function(event) {
+                event.preventDefault();
+                $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
+                    'grid-group-wrapper');
+            });
+        });
+        $('.list-grid-btn-group li').on('click', function() {
+            $(this).addClass('active').siblings().removeClass('active');
+        })
     </script>
 
     <script>

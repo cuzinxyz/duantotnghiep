@@ -6,6 +6,7 @@ use App\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Kjmtrue\VietnamZone\Models\Province;
 
 class Car extends Model
 {
@@ -41,6 +42,10 @@ class Car extends Model
     public function brand() {
         return $this->belongsTo(Brand::class);
     }
-    
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'city_id');
+    }
 
 }

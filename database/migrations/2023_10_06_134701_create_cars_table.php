@@ -25,7 +25,6 @@ return new class extends Migration {
       $table->json('car_info');
       $table->json('verhicle_image_library');
       $table->json('verhicle_videos')->nullable();
-      $table->string('status')->default(0); // 0 chờ duyệt - 1 Đã duyệt tin
       $table->timestamps();
       $table->softDeletes(); // add
     });
