@@ -39,8 +39,11 @@ class Car extends Model
     }
 
     public function brand() {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Comments::class);
     }
-    
+  public function comments() {
+    return $this->belongsTo(Comments::class);
+  }
+
 
 }

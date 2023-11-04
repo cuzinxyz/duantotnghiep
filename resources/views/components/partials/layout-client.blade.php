@@ -41,7 +41,7 @@
 
 <body class="tt-magic-cursor home-5">
 
-<div class="egns-preloader">
+{{-- <div class="egns-preloader">
   <div class="preloader-close-btn">
     <span><i class="bi bi-x-lg"></i> Close</span>
   </div>
@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 <div class="modal signUp-modal fade" id="signUpModal01" tabindex="-1" aria-labelledby="signUpModal01Label"
      aria-hidden="true">
@@ -82,7 +82,7 @@
             class="bi bi-x"></i></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('register') }}" id="registerForm">
+        <form method="POST" action="" id="registerForm">
           @csrf
           <div class="row g-4">
             <div class="col-md-6">
@@ -152,7 +152,7 @@
             class="bi bi-x"></i></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('login') }}" id="loginForm">
+        <form method="POST" action="" id="loginForm">
           @csrf
           <div class="row g-4">
             <div class="col-md-12">

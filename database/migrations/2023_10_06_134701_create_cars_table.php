@@ -21,11 +21,12 @@ return new class extends Migration {
       $table->string('district_id');
       $table->string('full_address', 255);
       $table->boolean('recommended')->default(false);
-      $table->json('contact');
-      $table->json('car_info');
-      $table->json('verhicle_image_library');
-      $table->json('verhicle_videos')->nullable();
+      $table->string('description');
       $table->string('status')->default(0); // 0 chờ duyệt - 1 Đã duyệt tin
+//      $table->json('contact');
+//      $table->json('car_info');
+//      $table->json('verhicle_image_library');
+      $table->json('verhicle_videos')->nullable();
       $table->timestamps();
       $table->softDeletes(); // add
     });
@@ -37,5 +38,6 @@ return new class extends Migration {
   public function down(): void
   {
     Schema::dropIfExists('cars');
+
   }
 };

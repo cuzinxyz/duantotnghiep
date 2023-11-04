@@ -10,16 +10,20 @@ class Comments extends Model
 {
     use HasFactory;
     protected $table = "comments";
+    protected $fillable = ['user_id','body','parent_id'];
 
     public function user(): BelongsTo{
       return $this->belongsTo(User::class);
     }
-
-    public function car(): BelongsTo{
-      return $this->belongsTo(Car::class);
+    public function comments(){
+      return $this->hasMany(Comments::class,'parent_id');
     }
-
-    public function news(): BelongsTo{
-      return $this->belongsTo(News::class);
-    }
+//
+//    public function car(): BelongsTo{
+//      return $this->belongsTo(Car::class);
+//    }
+//
+//    public function news(): BelongsTo{
+//      return $this->belongsTo(News::class);
+//    }
 }

@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('body');
             $table->foreignIdFor(\App\Models\User::class,'user_id');
-            $table->foreignIdFor(\App\Models\Car::class,'car_id');
-            $table->foreignIdFor(\App\Models\News::class,'news_id');
+//            $table->foreignIdFor(\App\Models\Car::class,'car_id');
+//            $table->foreignIdFor(\App\Models\News::class,'news_id');
+          $table->integer('parent_id')->default('0');
             $table->timestamps();
         });
     }

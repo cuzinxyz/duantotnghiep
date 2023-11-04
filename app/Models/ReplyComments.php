@@ -19,10 +19,10 @@ class ReplyComments extends Model
     public function user(): BelongsTo{
       return $this->belongsTo(User::class);
     }
-    public function car(): BelongsTo{
-      return $this->belongsTo(Car::class);
-    }
-    public function news(): BelongsTo{
-      return $this->belongsTo(News::class);
-    }
+//    public function car(): BelongsTo{
+//      return $this->belongsTo(Car::class);
+//    }
+//    public function news(): BelongsTo{
+//      return $this->belongsTo(News::class);
+//    }
 }

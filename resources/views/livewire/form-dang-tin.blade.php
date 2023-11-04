@@ -44,11 +44,11 @@
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Tên xe</label>
-                                <select class="nice-select" wire:model="model_select">
+                                <select name="model" class="nice-select" wire:model="model_select">
                                     <option value="0">-- Chọn model --</option>
 
                                     @foreach ($models as $model)
-                                        <option value="{{ $model->id }}">{{ $model->model_name }}</option>
+                                        <option>{{ $model->model_name }}</option>
                                     @endforeach
                                 </select>
                                 <div>
@@ -67,8 +67,8 @@
                                 <label>Hộp số</label>
                                 <select class="nice-select" wire:model="transmission">
                                     <option value="0">-- Chọn hộp số --</option>
-                                    <option value="sotay">Số tay</option>
-                                    <option value="sotudong">Số tự động</option>
+                                    <option value="Sotay">Số tay</option>
+                                    <option value="Sotudong">Số tự động</option>
                                 </select>
                             </div>
                             <div>
@@ -127,7 +127,7 @@
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Phiên bản</label>
-                                <input type="text" wire:model="version" placeholder="Hãy nhập phiên bản xe (nếu có)">
+                                <input name="version" type="text" wire:model="version" placeholder="Hãy nhập phiên bản xe (nếu có)">
                             </div>
                             <div>
                                 @error('version')
@@ -139,7 +139,7 @@
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Năm sản xuất</label>
-                                <select class="nice-select" wire:model="year_of_manufacture">
+                                <select name="year_of_manufacture" class="nice-select" wire:model="year_of_manufacture">
                                     <option value="0">-- Chọn năm sản xuất
                                         <link rel="stylesheet"
                                             href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
