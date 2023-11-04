@@ -266,11 +266,16 @@
 
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
-                                <label>Tỉnh, thành phố</label>
-                                <input type="text" wire:model="city" placeholder="Tỉnh/Thành phố">
+                                <label>Thành phố</label>
+                                <select class="nice-select" wire:model.live="city_id">
+                                    <option value="0" selected >-- Chọn tỉnh thành phố --</option>
+                                    @foreach (\Kjmtrue\VietnamZone\Models\Province::all() as $key => $item)
+                                        <option value="{{$item->id}}" wire.key={{$item->id}} >{{$item->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div>
-                                @error('city')
+                                @error('city_id')
                                     {{ $message }}
                                 @enderror
                             </div>
@@ -279,8 +284,14 @@
                         <div class="col-md-6 mb-20">
                             <div class="form-inner">
                                 <label>Quận, huyện</label>
-                                <input type="text" wire:model="districts" name="Quận/huyện"
-                                    placeholder="Quận/Huyện">
+                                <select class="nice-select" wire:model="district_id">
+                                    <option value="0" selected >-- Chọn quận huyện --</option>
+                                    @if(isset($city_id))
+                                        @foreach (\Kjmtrue\VietnamZone\Models\District::whereProvinceId($this->city_id)->get() as $key => $item)
+                                            <option value="{{$item->id}}" wire.key={{$item->id}} >{{$item->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                             <div>
                                 @error('districts')

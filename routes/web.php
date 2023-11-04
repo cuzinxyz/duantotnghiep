@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
+use App\Livewire\SingleBrandCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,5 @@ Route::get('push-news', function () {
 Route::get('manage-post-buy-car', function () {
     return view('user-settings.manage-post-buy-car');
 });
+
+Route::get('/single-category', SingleBrandCategory::class);

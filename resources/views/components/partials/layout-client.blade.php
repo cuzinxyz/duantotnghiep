@@ -1325,7 +1325,7 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
