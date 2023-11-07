@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    public function managePostings() {
-        return view('user-settings.quan-ly-tin-dang');
+    public function profile() {
+        return view('user-settings.profile');
     }
 
     public function pushItem() {

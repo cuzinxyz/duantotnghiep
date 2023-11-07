@@ -609,7 +609,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="pagination-and-next-prev">
+                                    {{ $cars->links() }}
+
+                                    {{-- <div class="pagination-and-next-prev">
                                         <div class="pagination">
                                             <ul>
                                                 <li class="active"><a href="#">01</a></li>
@@ -642,7 +644,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
