@@ -2,13 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Brand;
 use Kjmtrue\VietnamZone\Models\Province;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\Computed;
 
 class CarListingSystem extends Component
 {
@@ -64,4 +63,3 @@ class CarListingSystem extends Component
             'cars' => $carQuery->where('status', 1)->paginate(2)
         ]);
     }
-}

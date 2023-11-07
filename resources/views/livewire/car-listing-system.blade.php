@@ -603,11 +603,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="pagination-and-next-prev">
+                                    {{ $cars->links() }}
+
+                                    {{-- <div class="pagination-and-next-prev">
                                         <div class="pagination">
                                             {{ $cars->links('vendor.livewire.bootstrap') }}
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
