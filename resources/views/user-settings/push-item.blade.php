@@ -1,6 +1,57 @@
 <x-partials.layout-client>
-
-
+    <style>
+        .custom-hover:hover {
+            background-color: #e7e7e7;
+        }
+    </style>
+    <div class="modal signUp-modal fade" id="pushNews" tabindex="-1" aria-labelledby="pushNewsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="/images/bump.gif" alt="">
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <div class="form-inner">
+                                    <div class="border p-2 rounded">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span>Đẩy Tin 7 Ngày</span>
+                                                <span class="rounded text-light p-1"
+                                                    style="background-color: red;">-10%</span>
+                                            </div>
+                                            <div>
+                                                <i class="bi bi-arrow-up-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span style="color: #46D993; padding-right: 10px;">101.000đ</span>
+                                            <span class=" text-decoration-line-through text-secondary">112.000đ</span>
+                                        </div>
+                                        <div class="text-secondary">Đẩy tin mỗi ngày tại thời điểm mua gói. Thời gian: 7
+                                            ngày</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-inner">
+                                    <button class="primary-btn2 fw-bolder" type="submit">THANH TOÁN (1) | 16.000
+                                        đ</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-inner">
+                                    <button class="primary-btn2 fw-bolder" type="submit">+ Mua Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="news-section five mb-100">
         <div class="container-fluid p-5 shadow">
             <div>
