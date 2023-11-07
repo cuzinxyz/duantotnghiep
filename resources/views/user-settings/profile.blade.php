@@ -109,8 +109,8 @@
                                                 <label for="">Chọn tin</label>
                                             </div>
                                             <div>
-                                                <a href="" class="btn border fw-bolder"><i
-                                                        class="bi bi-arrow-counterclockwise"></i> Gia hạn tin</a>
+                                                <a href="{{ route('day-tin') }}" class="btn border fw-bolder"><i
+                                                        class="bi bi-arrow-counterclockwise"></i> Đẩy tin</a>
                                                 <a href="" class="btn border fw-bolder"><i class="bi bi-pencil"></i> Sửa
                                                     tin</a>
                                                 <a href="" class="btn border fw-bolder"><i class="bi bi-eye-slash"></i>

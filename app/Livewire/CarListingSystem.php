@@ -8,7 +8,6 @@ use Kjmtrue\VietnamZone\Models\Province;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\Computed;
 
 class CarListingSystem extends Component
 {

@@ -216,7 +216,7 @@
 
         <div class="nav-right d-flex jsutify-content-end align-items-center">
             @auth
-                <div>
+                <div onclick="window.location.href='/chatify'" style="cursor: pointer">
                     <i class="bi bi-chat"></i>
                 </div>
                 <div class="dropdown">
@@ -260,6 +260,14 @@
                                         </div>
                                     </div>
                                 </li>
+                                <hr class="m-0">
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-body_item" onclick="window.location.href='{{ route('profile') }}'">
+                                            <i class="bi bi-person-circle"></i> Trang cá nhân
+                                        </div>
+                                    </div>
+                                </li>
                                 <li class="my-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Quản lý đơn</div>
@@ -287,7 +295,7 @@
                                                 tiền
                                             </div>
 
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2" onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
                                         </div>
@@ -316,7 +324,7 @@
                     </div>
                 </div>
             @else
-                <div class="dropdown">
+                {{-- <div class="dropdown">
                     <button class="modal-btn header-account-btn user-dropdown" type="button">
                         <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
                         {{ auth()->user()->name }}
@@ -337,7 +345,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 @endif
                 <div class="sidebar-button mobile-menu-btn ">
                     <span></span>

@@ -32,8 +32,8 @@ Route::controller(CheckOutController::class)->group(function () {
 
 Route::controller(SettingsController::class)->group(function () {
     Route::get('/cai-dat', 'settings')->name('settings');
-    Route::get('/quan-ly-tin-dang', 'managePostings');
-    Route::get('/day-tin', 'pushItem');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/day-tin', 'pushItem')->name('day-tin');
     Route::get('/quan-ly-tin-mua', 'managerPostingsBuyCar');
     # cái này cần sửa lại
     Route::get('/thong-tin', 'infoUser');

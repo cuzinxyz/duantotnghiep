@@ -203,7 +203,7 @@
                                     <div>
                                         <input type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
-                                        <label>Lưu đăng nhập </label>
+                                        <label for="remember">Lưu đăng nhập </label>
                                     </div>
                                     @if (Route::has('password.request'))
                                         <a href="{{ route('password.request') }}" class="span">Forgot password?</a>
