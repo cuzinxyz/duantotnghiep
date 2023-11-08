@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
     public function profile() {
+        $cars = auth()->user()->car;
+
+        dd($cars);
+
         return view('user-settings.profile');
     }
 

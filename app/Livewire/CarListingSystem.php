@@ -63,3 +63,4 @@ class CarListingSystem extends Component
             'cars' => $carQuery->where('status', 1)->paginate(2)
         ]);
     }
+}

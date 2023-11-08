@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Service::class, 'service_id', 'id');
     }
+
+    public function car(): BelongsTo
+    {
+        return $this-> belongsTo(Car::class, 'user_id', 'id');
+    }
 }
