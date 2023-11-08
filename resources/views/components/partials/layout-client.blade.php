@@ -747,6 +747,8 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+        
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
         <script src="{{ asset('js/gsap.min.js') }}"></script>
@@ -756,8 +758,6 @@
         <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
-
-        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
 
         <script src="{{ asset('js/custom.js') }}"></script>
 
@@ -797,81 +797,6 @@
                 delayBeforeStart: 0,
                 duplicated: true,
                 startVisible: true,
-            });
-        </script>
-
-        <script>
-            $("#registerForm").validate({
-                onfocusout: false,
-                onkeyup: false,
-                onclick: false,
-                rules: {
-                    "name": {
-                        required: true,
-                        minlength: 3
-                    },
-                    "email": {
-                        required: true,
-                        minlength: 6
-                    },
-                    "password": {
-                        required: true,
-                        minlength: 6
-                    },
-                    "re-password": {
-                        required: true,
-                        equalTo: "#password",
-                        minlength: 6
-                    }
-                },
-                messages: {
-                    "name": {
-                        required: "Bắt buộc nhập name",
-                        minlength: "Hãy nhập tối thiểu 3 ký tự"
-                    },
-                    "email": {
-                        required: "Bắt buộc nhập email",
-                        minlength: "Hãy nhập tối thiểu 6 ký tự"
-                    },
-                    "password": {
-                        required: "Bắt buộc nhập password",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    },
-                    "re-password": {
-                        required: "Bắt buộc nhập re-password",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    },
-                    "re-password": {
-                        equalTo: "Hai password phải giống nhau",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    }
-                }
-            });
-
-            $("#loginForm").validate({
-                onfocusout: false,
-                onkeyup: false,
-                onclick: false,
-                rules: {
-                    "email": {
-                        required: true,
-                        minlength: 6
-                    },
-                    "password": {
-                        required: true,
-                        minlength: 6
-                    }
-                },
-                messages: {
-                    "email": {
-                        required: "Bắt buộc nhập email",
-                        minlength: "Hãy nhập tối thiểu 6 ký tự"
-                    },
-                    "password": {
-                        required: "Bắt buộc nhập password",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    }
-                }
             });
         </script>
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
+use App\Livewire\SingleBrandCategory;
 use App\Http\Controllers\SettingsController;
 use App\Livewire\CarListingSystem;
 
@@ -40,6 +41,8 @@ Route::controller(SettingsController::class)->group(function () {
     Route::get('/nap-tien', 'recharge')->name('recharge');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
+
+Route::get('/single-category', SingleBrandCategory::class);
 
 Route::get('/danh-sach-xe', CarListingSystem::class);
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
+use Kjmtrue\VietnamZone\Models\Province;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kjmtrue\VietnamZone\Models\Province;
@@ -44,9 +45,12 @@ class Car extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function city() {
+        return $this->belongsTo(Province::class);
+    }
+
     public function province()
     {
         return $this->belongsTo(Province::class, 'city_id');
     }
-
 }
