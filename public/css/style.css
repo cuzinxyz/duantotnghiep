@@ -28530,6 +28530,12 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     padding: 20px 20px 0 20px !important;
 }
 .cart-block-body_item {
-    padding: 10px 0;
+    cursor: pointer;
+    transition: all .2s ease;
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+.cart-block-body_item:hover {
+    background-color: #f1f1f1;
 }
 /* custom css end  */

@@ -7,17 +7,8 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
 use App\Livewire\SingleBrandCategory;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\SettingsController;
+use App\Livewire\CarListingSystem;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -40,17 +31,19 @@ Route::controller(CheckOutController::class)->group(function () {
     Route::get('/ket-qua', 'result')->name('resultAfterPayment');
 });
 
-Auth::routes();
-
-Route::get('manage-post', function () {
-    return view('user-settings.manage-postings');
-});
-Route::get('push-news', function () {
-    return view('user-settings.push-news');
-});
-
-Route::get('manage-post-buy-car', function () {
-    return view('user-settings.manage-post-buy-car');
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('/cai-dat', 'settings')->name('settings');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/day-tin', 'pushItem')->name('day-tin');
+    Route::get('/quan-ly-tin-mua', 'managerPostingsBuyCar');
+    # cái này cần sửa lại
+    Route::get('/thong-tin', 'infoUser');
+    Route::get('/nap-tien', 'recharge')->name('recharge');
+    Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
 
 Route::get('/single-category', SingleBrandCategory::class);
+
+Route::get('/danh-sach-xe', CarListingSystem::class);
+
+Auth::routes();
