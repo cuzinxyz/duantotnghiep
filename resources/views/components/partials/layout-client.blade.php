@@ -160,7 +160,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="contact.html" class="drop-down">CONTACT US</a>
+                    <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
                 </li>
             </ul>
             <div class="topbar-right d-lg-none d-block">
@@ -251,7 +251,7 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Số dư</span>
                                             <div class="fw-bold">
-                                                100,000 <i class="bi bi-cash"></i>
+                                                {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
 
@@ -752,6 +752,8 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
         <script src="{{ asset('js/gsap.min.js') }}"></script>
@@ -762,29 +764,7 @@
 
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
-        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
-
         <script src="{{ asset('js/custom.js') }}"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-        @if (Session::has('message'))
-            var type = "{{ Session::get('alert-type', 'info') }}"
-            switch (type) {
-            case 'info':
-            toastr.info(" {{ Session::get('message') }} ");
-            break;
-            case 'success':
-            toastr.success(" {{ Session::get('message') }} ");
-            break;
-            case 'warning':
-            toastr.warning(" {{ Session::get('message') }} ");
-            break;
-            case 'error':
-            toastr.error(" {{ Session::get('message') }} ");
-            break;
-            }
-        @endif
 
         <script>
             //list grid view
