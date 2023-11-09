@@ -508,7 +508,7 @@
                                                     <img src="fonts/gallery-icon-1.svg" alt="">
                                                     {{ count($car->verhicle_image_library) }}
                                                 </div>
-                                                <a href="#" class="fav">
+                                                <a href="#" class="fav" id="{{ $car->id }}" onclick="addToWishList(this.id)">
                                                     <svg width="14" height="13" viewBox="0 0 14 14"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -532,7 +532,7 @@
                                                         </svg>
                                                     </div>
                                                 </div>
-                                                <div wire:ignore class="swiper product-img-slider">
+                                                <div class="swiper product-img-slider">
                                                     <div class="swiper-wrapper">
                                                         @foreach ($car->verhicle_image_library as $carImage)
                                                             <div class="swiper-slide">

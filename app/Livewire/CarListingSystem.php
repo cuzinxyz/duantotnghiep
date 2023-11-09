@@ -21,6 +21,8 @@ class CarListingSystem extends Component
     public $minYear;
     public $maxYear;
     public $sortPrice;
+    public $minPrice;
+    public $maxPrice;
 
     public function mount()
     {
@@ -58,6 +60,10 @@ class CarListingSystem extends Component
                 $carQuery;
             }
         }
+
+        // if (!empty($this->minPrice && $this->maxPrice)) {
+        //     $carQuery->whereBetween('price', [$this->minPrice, $this->maxPrice]);
+        // }
 
         return view('livewire.car-listing-system', [
             'cars' => $carQuery->where('status', 1)->paginate(2)

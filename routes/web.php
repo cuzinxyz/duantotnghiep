@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\WishlishController;
 use App\Livewire\CarListingSystem;
 
 Route::controller(HomeController::class)->group(function () {
@@ -42,5 +43,10 @@ Route::controller(SettingsController::class)->group(function () {
 });
 
 Route::get('/danh-sach-xe', CarListingSystem::class);
+
+Route::controller(WishlishController::class)->group(function () {
+    Route::get('/yeu-thich', 'index');
+    Route::post('/them-yeu-thich/{car_id}', 'addToWishlist');
+});
 
 Auth::routes();

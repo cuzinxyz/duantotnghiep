@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
@@ -39,6 +40,8 @@
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     @stack('styles')
 
@@ -263,7 +266,8 @@
                                 <hr class="m-0">
                                 <li class="my-2">
                                     <div class="cart-block">
-                                        <div class="cart-block-body_item" onclick="window.location.href='{{ route('profile') }}'">
+                                        <div class="cart-block-body_item"
+                                            onclick="window.location.href='{{ route('profile') }}'">
                                             <i class="bi bi-person-circle"></i> Trang cá nhân
                                         </div>
                                     </div>
@@ -295,7 +299,8 @@
                                                 tiền
                                             </div>
 
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2" onclick="window.location.href='{{ route('paymentHistory') }}'">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
                                         </div>
@@ -761,7 +766,25 @@
 
         <script src="{{ asset('js/custom.js') }}"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+            case 'info':
+            toastr.info(" {{ Session::get('message') }} ");
+            break;
+            case 'success':
+            toastr.success(" {{ Session::get('message') }} ");
+            break;
+            case 'warning':
+            toastr.warning(" {{ Session::get('message') }} ");
+            break;
+            case 'error':
+            toastr.error(" {{ Session::get('message') }} ");
+            break;
+            }
+        @endif
 
         <script>
             //list grid view
@@ -875,6 +898,47 @@
                     }
                 }
             });
+        </script>
+
+        <script>
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
+
+        <script>
+            function addToWishList(car_id) {
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: "/them-yeu-thich/" + car_id,
+                    success: function(data) {
+                        //Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        //End Message
+                    }
+                })
+            }
         </script>
 
         @stack('scripts')
