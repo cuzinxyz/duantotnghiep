@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('service_name');
             $table->integer('price');
-            $table->jsonb('description');
+            $table->text('description');
             $table->integer('expiration_date');
             $table->timestamps();
             $table->softDeletes(); // add

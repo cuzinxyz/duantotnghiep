@@ -77,7 +77,7 @@ class FormDangTin extends Component
         if($result) {
           session()->flash('status', 'you are added successfully!');
 
-          return redirect('/');
+          return redirect()->route('profile')->with('status', 'Thành công!');
         }
     }
 

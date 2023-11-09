@@ -57,34 +57,27 @@
                     </div>
 
                     <div class="box-2 bg-light">
-                        <form action="{{route('payment-vnpay')}}" method="post">
-                            @csrf
-                            <input hidden="" name="total_price" value="1000000">
-                            <button class="btn-none w-100">
-                                <a href="">
-                                    <div class="recharge-item font-agbalumo">
-                                        Nạp 1.000.000 <i class="bi bi-cash-coin"></i>
-                                    </div>
-                                </a>
-                            </button>
-                        </form>
+                        <button class="btn-none w-100">
+                            <a href="">
+                                <div class="recharge-item font-agbalumo">
+                                    Nạp 1.000.000 <i class="bi bi-cash-coin"></i>
+                                </div>
+                            </a>
+                        </button>
 
-                        <form action="{{route('payment-vnpay')}}" method="post">
-                            @csrf
-                            <input hidden="" name="total_price" value="10000000">
-                            <button class="btn-none w-100">
-                                <a href="">
-                                    <div class="recharge-item font-agbalumo">
-                                        Nạp 10.000.000 <i class="bi bi-cash-coin"></i>
-                                    </div>
-                                </a>
-                            </button>
-                        </form>
+                        <button class="btn-none w-100">
+                            <a href="">
+                                <div class="recharge-item font-agbalumo">
+                                    Nạp 10.000.000 <i class="bi bi-cash-coin"></i>
+                                </div>
+                            </a>
+                        </button>
                     </div>
                 </div>
 
                 <div class="col-lg-7 col-md-6 col-sm-12">
-                    <div class="home3-available-car row row-cols-lg-3 row-cols-md-4 row-cols-sm-3 row-cols-2 g-4 justify-content-center">
+                    <div
+                        class="home3-available-car row row-cols-lg-3 row-cols-md-4 row-cols-sm-3 row-cols-2 g-4 justify-content-center">
                         <div class="col">
                             <a href="single-brand-category.html" class="car-category text-center">
                                 <div class="icon">

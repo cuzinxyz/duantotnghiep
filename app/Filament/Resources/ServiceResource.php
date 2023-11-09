@@ -41,6 +41,11 @@ class ServiceResource extends Resource
                             ->numeric()
                             ->placeholder('30')
                             ->required(),
+                        Forms\Components\TextInput::make('number_of_pushes')
+                            ->label('Số lượt đẩy tin')
+                            ->numeric()
+                            ->placeholder('ex: 2')
+                            ->required(),
                     ])->columnSpan(1),
                 Section::make()
                     ->schema([

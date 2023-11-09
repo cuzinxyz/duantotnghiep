@@ -2,91 +2,96 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
-use App\Models\TransactionsHistory;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\TransactionsHistory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CheckOutController extends Controller
 {
-    public function checkout(Request $request)
+    public function checkout(Request $request, $serviceID)
     {
-        // dd($request->all());
-        if ($request->total_price) {
-            Session::put('id_service', $request->id_service);
-            Session::put('user_id', Auth::id());
+        $service = Service::findOrFail($serviceID);
+        if(empty($service)) {
+            return redirect()->back()->with('status', 'Không tồn tại dịch vụ này!');
+        }
+        Session::put('purchased_service', $service);
+        Session::put('user_id', Auth::id());
 
-            error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-            # config
-            $vnp_TmnCode = "E1R9YLZT"; //Website ID in VNPAY System
-            $vnp_HashSecret = "LWYXHNCFHTXPEQEGZPKHJAVMJAYOZYNN"; //Secret key
-            $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = route('resultAfterPayment') . "?msg=success";
-            # time limit
-            $startTime = date("YmdHis");
-            $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
+        error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+        # config
+        $vnp_TmnCode = "E1R9YLZT"; //Website ID in VNPAY System
+        $vnp_HashSecret = "LWYXHNCFHTXPEQEGZPKHJAVMJAYOZYNN"; //Secret key
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = route('resultAfterPayment');
+        # time limit
+        $startTime = date("YmdHis");
+        $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
 
-            $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-            $vnp_OrderInfo = "Thanh-toan-don-hang"; //mô tả đơn hàng
-            $vnp_OrderType = "billpayment";
-            $vnp_Amount = $request->total_price * 100;
-            $vnp_Locale = "vn";
-            $vnp_BankCode = "NCB"; # fake
-            $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-            $vnp_ExpireDate = $expire;
+        $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = "Thanh toan tien dang ky dich vu ".$service->service_name." voi gia ".$service->price.""; //mô tả đơn hàng
+        $vnp_OrderType = "billpayment";
+        $vnp_Amount = $service->price * 100;
+        $vnp_Locale = "vn";
+        $vnp_BankCode = "NCB"; # fake
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        $vnp_ExpireDate = $expire;
 
-            $inputData = array(
-                "vnp_Version" => "2.1.0",
-                "vnp_TmnCode" => $vnp_TmnCode,
-                "vnp_Amount" => $vnp_Amount,
-                "vnp_Command" => "pay",
-                "vnp_CreateDate" => date('YmdHis'),
-                "vnp_CurrCode" => "VND",
-                "vnp_IpAddr" => $vnp_IpAddr,
-                "vnp_Locale" => $vnp_Locale,
-                "vnp_OrderInfo" => $vnp_OrderInfo,
-                "vnp_OrderType" => $vnp_OrderType,
-                "vnp_ReturnUrl" => $vnp_Returnurl,
-                "vnp_TxnRef" => $vnp_TxnRef,
-                "vnp_ExpireDate" => $vnp_ExpireDate,
-            );
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_ExpireDate" => $vnp_ExpireDate,
+        );
 
-            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-                $inputData['vnp_BankCode'] = $vnp_BankCode;
-            }
-            if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
-                $inputData['vnp_Bill_State'] = $vnp_Bill_State;
-            }
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        }
 
-            //var_dump($inputData);
-            ksort($inputData);
-            $query = "";
-            $i = 0;
-            $hashdata = "";
-            foreach ($inputData as $key => $value) {
-                if ($i == 1) {
-                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-                } else {
-                    $hashdata .= urlencode($key) . "=" . urlencode($value);
-                    $i = 1;
-                }
-                $query .= urlencode($key) . "=" . urlencode($value) . '&';
-            }
-
-            $vnp_Url = $vnp_Url . "?" . $query;
-            if (isset($vnp_HashSecret)) {
-                $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
-                $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-            }
-            $returnData = array(
-                'code' => '00', 'message' => 'success', 'data' => $vnp_Url
-            );
-            if ($request->total_price) {
-                return redirect($vnp_Url);
+        //var_dump($inputData);
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
             } else {
-                echo json_encode($returnData);
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
             }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $returnData = array(
+            'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+        );
+
+        if ($service) {
+            return redirect($vnp_Url);
+        } else {
+            echo json_encode($returnData);
         }
     }
 
@@ -98,11 +103,25 @@ class CheckOutController extends Controller
                 session()->flash('status', 'Mày thích bố láo không?');
             } else {
                 $userId = Session::get('user_id');
-
+                $purchased_service = Session::get('purchased_service');
                 $user = User::find($userId);
                 $amount = $request->vnp_Amount / 100;
 
+                $user->service_id = $purchased_service->id;
                 $user->account_balence += $amount;
+
+                $user->expired_date = Carbon::now()->addDays($purchased_service->expiration_date);
+                # save database
+                $purchased = DB::table('purchased_service')
+                        ->insert([
+                            'user_id' => $userId,
+                            'service_id' => $purchased_service->id,
+                            'remaining_push' => $purchased_service->number_of_pushes,
+                            'expired_date' => $user->expired_date,
+                            'created_at' => Carbon::now()
+                        ])
+                ;
+
                 $user->save();
 
                 $transaction_history = [
@@ -114,7 +133,7 @@ class CheckOutController extends Controller
                 ];
                 TransactionsHistory::create($transaction_history);
 
-                session()->flash('status', 'Nạp tiền thành công');
+                return redirect()->route('profile')->with('status', 'Đăng ký gói '.$purchased_service->service_name.' thành công!');
             }
         } else {
             session()->flash('status', 'Lỗi r nhé');

@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -53,8 +54,8 @@ class User extends Authenticatable
         return $this->belongsTo(Service::class, 'service_id', 'id');
     }
 
-    public function car(): BelongsTo
+    public function car(): HasMany
     {
-        return $this-> belongsTo(Car::class, 'user_id', 'id');
+        return $this->hasMany(Car::class);
     }
 }
