@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\WishlishController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -49,6 +50,11 @@ Route::controller(SettingsController::class)->group(function () {
 Route::get('/single-category', SingleBrandCategory::class);
 
 Route::get('/danh-sach-xe', CarListingSystem::class);
+
+Route::controller(WishlishController::class)->group(function () {
+    Route::get('/yeu-thich', 'index');
+    Route::post('/them-yeu-thich/{car_id}', 'addToWishlist');
+});
 
 Auth::routes();
 

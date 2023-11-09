@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
@@ -39,6 +40,8 @@
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     @stack('styles')
 
@@ -263,7 +266,8 @@
                                 <hr class="m-0">
                                 <li class="my-2">
                                     <div class="cart-block">
-                                        <div class="cart-block-body_item" onclick="window.location.href='{{ route('profile') }}'">
+                                        <div class="cart-block-body_item"
+                                            onclick="window.location.href='{{ route('profile') }}'">
                                             <i class="bi bi-person-circle"></i> Trang cá nhân
                                         </div>
                                     </div>
@@ -295,7 +299,8 @@
                                                 tiền
                                             </div>
 
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2" onclick="window.location.href='{{ route('paymentHistory') }}'">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
                                         </div>
@@ -798,6 +803,122 @@
                 duplicated: true,
                 startVisible: true,
             });
+        </script>
+
+        <script>
+            $("#registerForm").validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "name": {
+                        required: true,
+                        minlength: 3
+                    },
+                    "email": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "re-password": {
+                        required: true,
+                        equalTo: "#password",
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    "name": {
+                        required: "Bắt buộc nhập name",
+                        minlength: "Hãy nhập tối thiểu 3 ký tự"
+                    },
+                    "email": {
+                        required: "Bắt buộc nhập email",
+                        minlength: "Hãy nhập tối thiểu 6 ký tự"
+                    },
+                    "password": {
+                        required: "Bắt buộc nhập password",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    },
+                    "re-password": {
+                        required: "Bắt buộc nhập re-password",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    },
+                    "re-password": {
+                        equalTo: "Hai password phải giống nhau",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    }
+                }
+            });
+
+            $("#loginForm").validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "email": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    "email": {
+                        required: "Bắt buộc nhập email",
+                        minlength: "Hãy nhập tối thiểu 6 ký tự"
+                    },
+                    "password": {
+                        required: "Bắt buộc nhập password",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    }
+                }
+            });
+        </script>
+
+        <script>
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
+
+        <script>
+            function addToWishList(car_id) {
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: "/them-yeu-thich/" + car_id,
+                    success: function(data) {
+                        //Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        //End Message
+                    }
+                })
+            }
         </script>
 
         @stack('scripts')
