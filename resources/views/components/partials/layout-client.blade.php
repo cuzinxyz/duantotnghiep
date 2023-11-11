@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
@@ -41,6 +42,8 @@
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     
     @filamentStyles
@@ -162,7 +165,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="contact.html" class="drop-down">CONTACT US</a>
+                    <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
                 </li>
             </ul>
             <div class="topbar-right d-lg-none d-block">
@@ -221,7 +224,7 @@
 
         <div class="nav-right d-flex jsutify-content-end align-items-center">
             @auth
-                <div>
+                <div onclick="window.location.href='/chatify'" style="cursor: pointer">
                     <i class="bi bi-chat"></i>
                 </div>
                 <div class="dropdown">
@@ -253,7 +256,7 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Số dư</span>
                                             <div class="fw-bold">
-                                                100,000 <i class="bi bi-cash"></i>
+                                                {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
 
@@ -262,6 +265,15 @@
                                             <div class="fw-bold">
                                                 10 <i class="bi bi-app-indicator"></i>
                                             </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <hr class="m-0">
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-body_item"
+                                            onclick="window.location.href='{{ route('profile') }}'">
+                                            <i class="bi bi-person-circle"></i> Trang cá nhân
                                         </div>
                                     </div>
                                 </li>
@@ -292,7 +304,8 @@
                                                 tiền
                                             </div>
 
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
                                         </div>
@@ -321,7 +334,7 @@
                     </div>
                 </div>
             @else
-                <div class="dropdown">
+                {{-- <div class="dropdown">
                     <button class="modal-btn header-account-btn user-dropdown" type="button">
                         <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
                         {{ auth()->user()->name }}
@@ -342,7 +355,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 @endif
                 <div class="sidebar-button mobile-menu-btn ">
                     <span></span>
@@ -894,7 +907,6 @@
                 }
             });
         </script>
-
 
         @stack('scripts')
 

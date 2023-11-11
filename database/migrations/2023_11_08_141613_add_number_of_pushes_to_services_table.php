@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            // $table->integer('model_id')->nullable();
+        Schema::table('services', function (Blueprint $table) {
+            $table->integer("number_of_pushes")->default(0)
+                ->comment("Số lượt đẩy tin \ Miễn phí: 0, Tin lẻ, VIP");
         });
     }
 
@@ -21,9 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-
-            $table->dropColumn(['slug']);
+        Schema::table('services', function (Blueprint $table) {
+            //
         });
     }
 };

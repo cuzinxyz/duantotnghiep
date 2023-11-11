@@ -152,7 +152,7 @@
                             <div class="check-box-item">
                                 <h6 class="product-widget-title mb-20">Năm sản xuất</h6>
                                 <div class="checkbox-container">
-                                    <div class="row g-3">
+                                    <div wire:ignore class="row g-3">
                                         <div class="col-6">
                                             <div class="form-inner">
                                                 <select wire:model.live="minYear">
@@ -243,29 +243,22 @@
                             </div>
                         </div> --}}
                         <div class="product-widget mb-20">
-                            <div class="check-box-item">
+                            <div  class="check-box-item">
                                 <h6 class="product-widget-title mb-25">Giá</h6>
                                 <div class="range-wrapper">
-                                    <div class="slider-wrapper">
+                                    <div wire:ignore class="slider-wrapper">
                                         <div id="eg-range-slider"></div>
-                                        {{-- <p>
-                                            <label for="amount">Price range:</label>
-                                            <input type="text" id="amount" readonly
-                                                style="border:0; color:#f6931f; font-weight:bold;">
-                                        </p>
-
-                                        <div id="slider-range"></div> --}}
                                     </div>
-                                    {{-- <div class="valus">
+                                    <div class="valus">
                                         <div class="min-value">
-                                            <input type="text" class="from" value="500000000">
-                                            <span>₫</span>
+                                            <span>$</span>
+                                            <input type="text" class="from" value="200">
                                         </div>
                                         <div class="min-value">
-                                            <input type="text" class="to" value="10000000000">
-                                            <span>₫</span>
+                                            <span>$</span>
+                                            <input type="text" class="to" value="2000">
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -428,12 +421,12 @@
                     <div class="row mb-40">
                         <div class="col-lg-12">
                             <div class="show-item-and-filte">
-                                <p>Có <strong>{{ $count }}</strong> tin bán xe ô tô</p>
-                                <div class="filter-view">
+                                <p>Có <strong>{{ $cars->count() }}</strong> tin bán xe ô tô</p>
+                                <div  class="filter-view">
                                     <div class="filter-atra">
                                         <h6>Sắp xếp theo:</h6>
                                         <form>
-                                            <div class="form-inner">
+                                            <div wire:ignore class="form-inner">
                                                 <select wire:model.live="sortPrice">
                                                     <option value="0">Không sắp xếp</option>
                                                     <option value="1">Giá thấp -> cao</option>
@@ -515,7 +508,7 @@
                                                     <img src="fonts/gallery-icon-1.svg" alt="">
                                                     {{ count($car->verhicle_image_library) }}
                                                 </div>
-                                                <a href="#" class="fav">
+                                                <a href="#" class="fav" id="{{ $car->id }}" onclick="addToWishList(this.id)">
                                                     <svg width="14" height="13" viewBox="0 0 14 14"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -597,8 +590,8 @@
                                                     </a>
                                                     <div class="brand">
                                                         <a href="single-brand-category.html">
-                                                            <img src="/storage/{{ $car->brand->logo_url }}" alt="image">
-                                                            {{-- <img src="fonts/mercedes-01.svg" alt="image"> --}}
+                                                            {{-- <img src="/storage/{{ $car->brand->logo_url }}" alt="image"> --}}
+                                                            <img src="fonts/mercedes-01.svg" alt="image">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -606,43 +599,17 @@
                                         </div>
                                     </div>
                                 @endforeach
+
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="pagination-and-next-prev">
+                                    {{ $cars->links() }}
+
+                                    {{-- <div class="pagination-and-next-prev">
                                         <div class="pagination">
-                                            <ul>
-                                                <li class="active"><a href="#">01</a></li>
-                                                <li><a href="#">02</a></li>
-                                                <li><a href="#">03</a></li>
-                                                <li><a href="#">04</a></li>
-                                                <li><a href="#">05</a></li>
-                                            </ul>
+                                            {{ $cars->links('vendor.livewire.bootstrap') }}
                                         </div>
-                                        <div class="next-prev-btn">
-                                            <ul>
-                                                <li>
-                                                    <a href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="7"
-                                                            height="14" viewBox="0 0 7 14">
-                                                            <path d="M0 7.00008L7 0L2.54545 7.00008L7 14L0 7.00008Z">
-                                                            </path>
-                                                        </svg> Prev
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Next
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="7"
-                                                            height="14" viewBox="0 0 7 14">
-                                                            <path d="M7 7.00008L0 0L4.45455 7.00008L0 14L7 7.00008Z">
-                                                            </path>
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -736,9 +703,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-9 wow fadeInUp" data-wow-delay="200ms">
+                <div  class="col-lg-9 wow fadeInUp" data-wow-delay="200ms">
                     <div class="customer-feedback-right">
-                        <div class="swiper customer-feedback-slider mb-40">
+                        <div wire:ignore class="swiper customer-feedback-slider mb-40">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="feedback-card">
@@ -858,10 +825,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row wow fadeInUp" data-wow-delay="400ms">
+            <div wire:ignore class="row wow fadeInUp" data-wow-delay="400ms">
                 <div class="col-lg-12">
                     <div class="sub-title">
-                        <h6>Our Trusted Partners</h6>
+                        <h6>Đối Tác Đáng Tin Cậy Của Chúng Tôi</h6>
                         <div class="dash"></div>
                     </div>
                     <div class="partner-slider">

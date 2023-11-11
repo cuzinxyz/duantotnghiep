@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Service;
 use App\Livewire\CarListingSystem;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
@@ -11,16 +12,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\CartDetailController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\WishlishController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -32,46 +24,55 @@ Route::controller(CarController::class)->group(function () {
 });
 
 Route::controller(ServiceController::class)->group(function () {
-    Route::get('/danh-sach-dich-vu', 'index');
+    Route::get('/dich-vu', 'index')->name('service.list');
     Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
 });
 
 Route::controller(CheckOutController::class)->group(function () {
     # payment
-    Route::post('/payment', 'checkout')->name('payment-vnpay');
+    Route::post('/payment/{idService}', 'checkout')->name('payment-vnpay');
     # result after payment
     Route::get('/ket-qua', 'result')->name('resultAfterPayment');
 });
 
 Route::controller(SettingsController::class)->group(function () {
     Route::get('/cai-dat', 'settings')->name('settings');
-    Route::get('/quan-ly-tin-dang', 'managePostings');
-    Route::get('/day-tin', 'pushItem');
-    Route::get('/quan-ly-tin-mua', 'managerPostingsBuyCar');
+    Route::get('/profile', 'profile')->name('profile');
+
+    Route::get('/day-tin/{carID}', 'pushFeature')->name('day-tin');
+    Route::post('/day-tin/{carID}', 'confirmPush')->name('confirmPush');
+
+    Route::get('/quan-ly-tin-mua', 'needBuy');
     # cái này cần sửa lại
     Route::get('/thong-tin', 'infoUser');
     Route::get('/nap-tien', 'recharge')->name('recharge');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
 
+Route::get('/single-category', SingleBrandCategory::class);
+
 Route::get('/danh-sach-xe', CarListingSystem::class);
+
+Route::controller(WishlishController::class)->group(function () {
+    Route::get('/yeu-thich', 'index');
+    Route::post('/them-yeu-thich/{car_id}', 'addToWishlist');
+});
 
 Auth::routes();
 
-Route::get('manage-post', function () {
-    return view('user-settings.manage-postings');
-});
-Route::get('push-news', function () {
-    return view('user-settings.push-news');
-});
 
-Route::get('manage-post-buy-car', function () {
-    return view('user-settings.manage-post-buy-car');
-});
 
 Route::get('/single-category', SingleBrandCategory::class);
 
 // Trang chi tiết xe
 Route::controller(CartDetailController::class)->group(function() {
     Route::get('/chi-tiet-xe/{slug}', 'index')->name('car-detail');
+});
+
+Route::get('/test', function() {
+    $service = Service::find(5);
+
+    $array = preg_split("/\r\n|\n|\r/", $service['description']);
+
+    return $array;
 });

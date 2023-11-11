@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-            // $table->integer('model_id')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer("total_pushed")->default(0);
+            $table->timestamp("expired_date")->nullable()->comment("Ngày hết hạn của dịch vụ đã đăng ký");
         });
     }
 
@@ -21,9 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cars', function (Blueprint $table) {
-
-            $table->dropColumn(['slug']);
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 };
