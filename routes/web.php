@@ -37,6 +37,7 @@ Route::controller(SettingsController::class)->group(function () {
     # cái này cần sửa lại
     Route::get('/thong-tin', 'infoUser');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
+    Route::post('/cai-dat', 'settings')->name("update-profile");
 });
 
 Auth::routes();
