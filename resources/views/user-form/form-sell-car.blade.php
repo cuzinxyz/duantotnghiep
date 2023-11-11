@@ -11,7 +11,7 @@
                     </div>
                 </div>
 
-                <livewire:form-dang-tin />
+                <livewire:form2 />
             </div>
         </div>
     </div>

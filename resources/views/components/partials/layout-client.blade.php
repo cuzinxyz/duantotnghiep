@@ -34,13 +34,19 @@
 
     <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/intlTelInput.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    @stack('styles')
+    
+    @filamentStyles
+    @vite('resources/css/app.css')
+
+    
 
 </head>
 
@@ -68,409 +74,10 @@
 
     </div>
 
-    {{-- <div class="modal signUp-modal fade" id="signUpModal01" tabindex="-1" aria-labelledby="signUpModal01Label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="signUpModal01Label">Sign Up</h4>
-                    <p>Already have an account?
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#logInModal01">Log In</button>
-                    </p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                            class="bi bi-x"></i></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('register') }}" id="registerForm">
-                        @csrf
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="form-inner">
-                                    <label>Name*</label>
-                                    <input id="nameRegister" type="text" class="@error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}" placeholder="Daniel" autofocus>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-inner">
-                                    <label>Email*</label>
-                                    <input id="emailRegister" type="text"
-                                        class="@error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" autocompvare="email" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-inner">
-                                    <label>Password*</label>
-                                    <input id="password" class="@error('password') is-invalid @enderror"
-                                        name="password" autocompvare="new-password" type="password"
-                                        placeholder="*** ***">
-                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-inner">
-                                    <label>Confirm Password*</label>
-                                    <input id="re-password" class="@error('re-password') is-invalid @enderror"
-                                        name="re-password" type="password" placeholder="*** ***">
-                                    <i class="bi bi-eye-slash" id="togglePassword2"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <button class="primary-btn2 btn-sign-up" type="submit">Sign Up Now</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="terms-conditon">
-                            <p>By sign up,you agree to the <a href="#">‘terms &amp; conditons’</a></p>
-                        </div>
-                        <ul class="social-icon">
-                            <li><a href="#"><img src="images/google.svg" alt=""></a></li>
-                            <li><a href="#"><img src="images/facebook.svg" alt=""></a></li>
-                            <li><a href="#"><img src="images/twiter.svg" alt=""></a></li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal signUp-modal fade" id="logInModal01" tabindex="-1" aria-labelledby="logInModal01Label"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="logInModal01Label">Log In</h4>
-                    <p>Don’t have any account?
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#signUpModal01">Sign
-                            Up
-                        </button>
-                    </p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                            class="bi bi-x"></i></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="{{ route('login') }}" id="loginForm">
-                        @csrf
-                        <div class="row g-4">
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Enter your email address*</label>
-                                    <input type="text" id="emailLogin" name="email" placeholder="Type email">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Password*</label>
-                                    <input id="passwordLogin" name="password" type="password" placeholder="*** ***">
-                                    <i class="bi bi-eye-slash" id="togglePassword3"></i>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                                    <div class="form-group">
-                                        <input type="checkbox" id="html">
-                                        <label for="html">Remember Me</label>
-                                    </div>
-                                    <a href="#" class="forgot-pass">Forget Password?</a>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <button class="primary-btn2" type="submit">Log In</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="terms-conditon">
-                            <p>By sign up,you agree to the <a href="#">‘terms &amp; conditons’</a></p>
-                        </div>
-                        <ul class="social-icon">
-                            <li><a href="#"><img src="images/google.svg" alt=""></a></li>
-                            <li><a href="#"><img src="images/facebook.svg" alt=""></a></li>
-                            <li><a href="#"><img src="images/twiter.svg" alt=""></a></li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal signUp-modal sell-with-us fade" id="sellUsModal01" tabindex="-1"
-        aria-labelledby="sellUsModal01Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="sellUsModal01Label">Sell Your Car</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                            class="bi bi-x"></i></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-lg-12 mb-15">
-                                <h5>Your Personal Info</h5>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Full Name*</label>
-                                    <input type="text" placeholder="Full Name*">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Phone*</label>
-                                    <input type="text" placeholder="+880- 123 234 ***">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Email (Optional)</label>
-                                    <input type="text" placeholder="Enter your email address">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Location*</label>
-                                    <input type="text" placeholder="Enter your address">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 mb-15 mt-25">
-                                <h5>Your Car Info</h5>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Car Brand Name*</label>
-                                    <input type="text" placeholder="Toyota">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Model*</label>
-                                    <input type="text" placeholder="RS eTN 80">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Reg. Year*</label>
-                                    <input type="text" placeholder="2022">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Mileage*</label>
-                                    <input type="text" placeholder="23,456 miles">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Fuel Type*</label>
-                                    <input type="text" placeholder="Petrol">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-20">
-                                <div class="form-inner">
-                                    <label>Selling Price*</label>
-                                    <input type="text" placeholder="Ex- $23,342.000">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-35">
-                                <div class="form-inner">
-                                    <label>Your Car Note*</label>
-                                    <textarea placeholder="Write somethings"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-inner">
-                                    <button class="primary-btn2" type="submit">Submit Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    {{--
-    <div class="modal adSearch-modal fade" id="adSearchModal01" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                        class="bi bi-x"></i>
-                </button>
-                <div class="modal-body">
-                    <form>
-                        <h5 class="main-title">Advanced Option</h5>
-                        <div class="row">
-                            <div class="col-md-12 mb-30">
-                                <div class="form-inner">
-                                    <select>
-                                        <option value="1">Sydne City, Australia</option>
-                                        <option value="2">Dhaka, Bangladesh</option>
-                                        <option value="3">Tokyo, Japan</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <h5>More Filter</h5>
-                            <div class="row mb-10">
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Brand </label>
-                                        <select>
-                                            <option value="1"> Mercedes Benz</option>
-                                            <option value="2">Volkswagen</option>
-                                            <option value="3">Mitsubishi</option>
-                                            <option value="4 ">Tesla</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Body Type</label>
-                                        <select>
-                                            <option value="1">Hatchback</option>
-                                            <option value="2">Covertible</option>
-                                            <option value="3">Coupe</option>
-                                            <option value="4 ">Truck</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Fuel Type </label>
-                                        <select>
-                                            <option value="1"> Petrol + Gas</option>
-                                            <option value="2">Petrol</option>
-                                            <option value="3">Gas</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Steering Side</label>
-                                        <select>
-                                            <option value="1">Left</option>
-                                            <option value="2">Right</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Color</label>
-                                        <select>
-                                            <option value="1">Yellow</option>
-                                            <option value="2">Brown</option>
-                                            <option value="3">Red</option>
-                                            <option value="4">Silver</option>
-                                            <option value="5">Orange</option>
-                                            <option value="6">Blue</option>
-                                            <option value="7">Gray</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Doors</label>
-                                        <select>
-                                            <option value="1">03 doors</option>
-                                            <option value="2">04 doors</option>
-                                            <option value="3">06 doors</option>
-                                            <option value="4 ">08 doors</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5>Year &amp; Mileage</h5>
-                            <div class="row">
-                                <div class="col-md-6 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Year </label>
-                                        <select>
-                                            <option value="1">2021</option>
-                                            <option value="2">2020</option>
-                                            <option value="3">2019</option>
-                                            <option value="4 ">2018</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Min (miles)</label>
-                                        <select>
-                                            <option value="1">800 miles</option>
-                                            <option value="2">1500 miles</option>
-                                            <option value="3">2000 miles</option>
-                                            <option value="4 ">2500 miles</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-20">
-                                    <div class="form-inner">
-                                        <label>Select Max (miles)</label>
-                                        <select>
-                                            <option value="1">1200 miles</option>
-                                            <option value="2">3000 miles</option>
-                                            <option value="3">3500 miles</option>
-                                            <option value="4 ">4000 miles</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="mb-20">Price Range</h5>
-                            <div class="row">
-                                <div class="col-lg-6 mb-20">
-                                    <div class="range-wrapper2">
-                                        <div class="slider-wrapper">
-                                            <div id="eg-range-slider"></div>
-                                        </div>
-                                        <div class="valus">
-                                            <div class="min-value">
-                                                <span>$</span>
-                                                <input type="text" class="from" value="200">
-                                            </div>
-                                            <div class="min-value">
-                                                <span>$</span>
-                                                <input type="text" class="to" value="2000">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-20">
-                                    <div class="form-inner">
-                                        <label>Min (Price)</label>
-                                        <select>
-                                            <option value="1">$2,234</option>
-                                            <option value="2">$3,234</option>
-                                            <option value="3">$4,234</option>
-                                            <option value="4 ">$5,234</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 mb-20">
-                                    <div class="form-inner">
-                                        <label>Max (Price)</label>
-                                        <select>
-                                            <option value="1">$12,234</option>
-                                            <option value="2">$13,234</option>
-                                            <option value="3">$14,234</option>
-                                            <option value="4 ">$15,234</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="apply-btn pt-30">
-                            <button class="primary-btn2" type="submit">Apply Filter</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <div class="top-bar style-5">
         <div class="logo-and-menu">
             <div class="company-logo">
-                <a href="index.html"><img src="{{ asset('images/green-logo.svg') }}" alt=""></a>
+                <a href="/"><img src="{{ asset('images/green-logo.svg') }}" alt=""></a>
             </div>
         </div>
         <div class="search-area">
@@ -533,20 +140,20 @@
 
     <header class="header-area style-5">
         <div class="header-logo d-lg-none d-flex">
-            <a href="index.html"><img alt="image" class="img-fluid"
-                    src="{{ asset('images/green-logo.svg') }}"></a>
+            <a href="/"><img alt="image" class="img-fluid" src="{{ asset('images/green-logo.svg') }}"></a>
         </div>
+
         <div class="main-menu">
             <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
                 <div class="mobile-logo-wrap">
-                    <a href="index.html"><img alt="image" src="{{ asset('images/green-logo.svg') }}"></a>
+                    <a href="/"><img alt="image" src="{{ asset('images/green-logo.svg') }}"></a>
                 </div>
             </div>
             <ul class="menu-list">
                 <li class="menu-item-has-children" @class(['active' => request()->routeIs('homepage')])>
                     <a href="#" class="drop-down">Home</a><i class="bi bi-plus dropdown-icon"></i>
                     <ul class="sub-menu">
-                        <li><a href="index.html">Home 01</a></li>
+                        <li><a href="/">Home 01</a></li>
                         <li><a href="index2.html">Home 02</a></li>
                         <li><a href="index3.html">Home 03</a></li>
                         <li><a href="index4.html">Home 04</a></li>
@@ -554,205 +161,6 @@
                         <li><a href="index6.html">Home 06</a></li>
                     </ul>
                 </li>
-                {{-- <li class="position-inherit">
-                    <a href="#" class="drop-down">NEW CAR</a>
-                    <i class="bi bi-plus dropdown-icon d-lg-none d-block"></i>
-                    <div class="mega-menu">
-                        <ul class="menu-row">
-                            <li class="menu-single-item">
-                                <h6>Browse by Brand</h6>
-                                <ul>
-                                    <li><a href="single-brand-category.html">Merchedes Benz (10) <img
-                                                src="images/merchedes.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Volkswagen (10) <img
-                                                src="images/volkswagen.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Ferrari (10) <img
-                                                src="images/ferrari.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Mazda (10) <img src="images/mazda.svg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="single-brand-category.html">Mitsubishi (10) <img
-                                                src="images/mitsubishi.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Lamborghini (10) <img
-                                                src="images/lamborghini.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Tesla (10) <img src="images/tesla.svg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="single-brand-category.html">Toyota (10) <img src="images/toyota.svg"
-                                                alt=""></a></li>
-                                    <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
-                                                class="bi bi-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-single-item">
-                                <h6>Popular Models</h6>
-                                <ul>
-                                    <li><a href="single-brand-category.html">Toyota Camry</a></li>
-                                    <li><a href="single-brand-category.html">Ford Mustang</a></li>
-                                    <li><a href="single-brand-category.html">Volkswagen Golf</a></li>
-                                    <li><a href="single-brand-category.html">Mercedes C-Class</a></li>
-                                    <li><a href="single-brand-category.html">Audi A4</a></li>
-                                    <li><a href="single-brand-category.html">Jeep Wrangler</a></li>
-                                    <li><a href="single-brand-category.html">Mazda CX-5</a></li>
-                                    <li><a href="single-brand-category.html">Chevrovar Corvette</a></li>
-                                    <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
-                                                class="bi bi-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-single-item">
-                                <h6>Popular Cities </h6>
-                                <ul>
-                                    <li><a href="single-brand-category.html">Panama City (10)<img
-                                                src="images/panama.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Sydne City (10)<img
-                                                src="images/sydne.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Melbourne City (10)<img
-                                                src="images/melbourne.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">New Delhi (10)<img src="images/delhi.svg"
-                                                alt=""></a></li>
-                                    <li><a href="single-brand-category.html">New York (10)<img
-                                                src="images/newYork.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Menchester City (10)<img
-                                                src="images/menchester.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">City of Greece (10)<img
-                                                src="images/greece.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">City of Abu-dabi (10)<img
-                                                src="images/abudabi.svg" alt=""></a></li>
-                                    <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
-                                                class="bi bi-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="position-inherit">
-                    <a href="#" class="drop-down">USED CAR</a>
-                    <i class="bi bi-plus dropdown-icon d-lg-none d-block"></i>
-                    <div class="mega-menu">
-                        <ul class="menu-row">
-                            <li class="menu-single-item">
-                                <h6>Browse by Brand</h6>
-                                <ul>
-                                    <li><a href="single-brand-category.html">Merchedes Benz (10) <img
-                                                src="images/merchedes.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Volkswagen (10) <img
-                                                src="images/volkswagen.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Ferrari (10) <img
-                                                src="images/ferrari.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Mazda (10) <img src="images/mazda.svg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="single-brand-category.html">Mitsubishi (10) <img
-                                                src="images/mitsubishi.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Lamborghini (10) <img
-                                                src="images/lamborghini.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Tesla (10) <img src="images/tesla.svg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="single-brand-category.html">Toyota (10) <img src="images/toyota.svg"
-                                                alt=""></a></li>
-                                    <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
-                                                class="bi bi-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-single-item">
-                                <h6>Popular Models</h6>
-                                <ul>
-                                    <li><a href="single-brand-category.html">Toyota Camry</a></li>
-                                    <li><a href="single-brand-category.html">Ford Mustang</a></li>
-                                    <li><a href="single-brand-category.html">Volkswagen Golf</a></li>
-                                    <li><a href="single-brand-category.html">Mercedes C-Class</a></li>
-                                    <li><a href="single-brand-category.html">Audi A4</a></li>
-                                    <li><a href="single-brand-category.html">Jeep Wrangler</a></li>
-                                    <li><a href="single-brand-category.html">Mazda CX-5</a></li>
-                                    <li><a href="single-brand-category.html">Chevrovar Corvette</a></li>
-                                    <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
-                                                class="bi bi-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-single-item">
-                                <h6>Popular Cities </h6>
-                                <ul>
-                                    <li><a href="single-brand-category.html">Panama City (10)<img
-                                                src="images/panama.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Sydne City (10)<img
-                                                src="images/sydne.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Melbourne City (10)<img
-                                                src="images/melbourne.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">New Delhi (10)<img src="images/delhi.svg"
-                                                alt=""></a></li>
-                                    <li><a href="single-brand-category.html">New York (10)<img
-                                                src="images/newYork.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">Menchester City (10)<img
-                                                src="images/menchester.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">City of Greece (10)<img
-                                                src="images/greece.svg" alt=""></a></li>
-                                    <li><a href="single-brand-category.html">City of Abu-dabi (10)<img
-                                                src="images/abudabi.svg" alt=""></a></li>
-                                    <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
-                                                class="bi bi-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="menu-item-has-children">
-                    <a href="#" class="drop-down">Pages</a><i class="bi bi-plus dropdown-icon"></i>
-                    <ul class="sub-menu">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="brand-category.html">Brand Category</a></li>
-                        <li><a href="single-brand-category.html">Single Brand Category</a></li>
-                        <li>
-                            <a href="#">Car Listing System</a>
-                            <i class="d-lg-flex d-none bi bi-chevron-right dropdown-icon"></i>
-                            <i class="d-lg-none d-flex bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu">
-                                <li><a href="car-listing-left-sidebar.html">Car Listing Left Sidebar</a></li>
-                                <li><a href="car-listing-right-sidebar.html">Car Listing Right Sidebar</a></li>
-                                <li><a href="car-listing-no-sidebar.html">Car Listing No Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="special-offer.html">Special Offer</a></li>
-                        <li><a href="car-deatils.html">Car Details </a></li>
-                        <li><a href="car-auction-details.html">Car Auction Details</a></li>
-                        <li><a href="compare.html"> Compare Car</a></li>
-                        <li>
-                            <a href="#">Shop</a>
-                            <i class="d-lg-flex d-none bi bi-chevron-right dropdown-icon"></i>
-                            <i class="d-lg-none d-flex bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu">
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="product-details.html">Product Details</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Blog</a>
-                            <i class="d-lg-flex d-none bi bi-chevron-right dropdown-icon"></i>
-                            <i class="d-lg-none d-flex bi bi-plus dropdown-icon"></i>
-                            <ul class="sub-menu">
-                                <li><a href="blog-standard.html">Blog Standard</a></li>
-                                <li><a href="blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="faq.html">FAQ's</a></li>
-                        <li><a href="error.html">Error</a></li>
-                        <li><a href="customer-review.html">Customer Review </a></li>
-                        <li><a href="return-enchange.html">Return &amp; Exchange</a></li>
-                    </ul>
-                </li> --}}
                 <li>
                     <a href="contact.html" class="drop-down">CONTACT US</a>
                 </li>
@@ -813,77 +221,87 @@
 
         <div class="nav-right d-flex jsutify-content-end align-items-center">
             @auth
-            <div>
-                <i class="bi bi-chat"></i>
-            </div>
-            <div class="dropdown">
-                <button class="modal-btn header-cart-btn" type="button">
-                    <i class="bi bi-wallet2"></i> My wallet
-                </button>
-                <div class="cart-menu">
-                    <div class="cart-body" style="padding-bottom: 20px !important">
-                        <ul>
-                            <li class="pd-cart">
-                                <div class="d-flex align-items-start gap-3">
-                                    <img style="width: 50px;height:50px" class="object-fit-cover rounded-circle"
-                                        src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}"
-                                        alt="">
+                <div>
+                    <i class="bi bi-chat"></i>
+                </div>
+                <div class="dropdown">
+                    <button class="modal-btn header-cart-btn" type="button">
+                        <i class="bi bi-wallet2"></i> My wallet
+                    </button>
+                    <div class="cart-menu">
+                        <div class="cart-body" style="padding-bottom: 20px !important">
+                            <ul>
+                                <li class="pd-cart">
+                                    <div class="d-flex align-items-start gap-3">
+                                        <img style="width: 50px;height:50px" class="object-fit-cover rounded-circle"
+                                            src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}"
+                                            alt="">
 
-                                    <div class="d-flex flex-column">
-                                        <span
-                                            class="header-username fw-bold text-capitalize">{{ auth()->user()->name }}</span>
-                                        <div class="hr-custom my-2"></div>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <p class="m-0"><strong>0</strong> tin đã đăng</p>
-                                            <p class="m-0"><strong>0</strong> tin đã lưu</p>
+                                        <div class="d-flex flex-column">
+                                            <span
+                                                class="header-username fw-bold text-capitalize">{{ auth()->user()->name }}</span>
+                                            <div class="hr-custom my-2"></div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <p class="m-0"><strong>0</strong> tin đã đăng</p>
+                                                <p class="m-0"><strong>0</strong> tin đã lưu</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="pd-cart">
-                                <div class="d-flex gap-1 justify-content-center">
-                                    <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
-                                        <span>Số dư</span>
-                                        <div class="fw-bold">
-                                            100,000 <i class="bi bi-cash"></i>
+                                </li>
+                                <li class="pd-cart">
+                                    <div class="d-flex gap-1 justify-content-center">
+                                        <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
+                                            <span>Số dư</span>
+                                            <div class="fw-bold">
+                                                100,000 <i class="bi bi-cash"></i>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
-                                        <span>Tin hoạt động</span>
-                                        <div class="fw-bold">
-                                            10 <i class="bi bi-app-indicator"></i>
+                                        <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
+                                            <span>Tin hoạt động</span>
+                                            <div class="fw-bold">
+                                                10 <i class="bi bi-app-indicator"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="my-2">
-                                <div class="cart-block">
-                                    <div class="cart-block-header fw-bold">Quản lý đơn</div>
-                                    <div class="cart-block-body px-3">
-                                        <div class="cart-block-body_item d-flex gap-2">
-                                            <i class="bi bi-bag-check-fill"></i> Đơn mua
-                                        </div>
-                                        <div class="cart-block-body_item d-flex gap-2">
-                                            <i class="bi bi-journal-text"></i> Đơn bán
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="mb-2">
-                                <div class="cart-block">
-                                    <div class="cart-block-header fw-bold">Tiện ích</div>
-                                    <div class="cart-block-body px-3">
-                                        <div class="cart-block-body_item d-flex gap-2">
-                                            <i class="bi bi-heart"></i> Tin đã lưu
+                                </li>
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-header fw-bold">Quản lý đơn</div>
+                                        <div class="cart-block-body">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <i class="bi bi-bag-check-fill"></i> Đơn mua
+                                            </div>
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <i class="bi bi-journal-text"></i> Đơn bán
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                                <li class="mb-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-header fw-bold">Tiện ích</div>
+                                        <div class="cart-block-body">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <i class="bi bi-heart"></i> Tin đã lưu
+                                            </div>
+
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('recharge') }}'">
+                                                <i class="bi bi-cash-coin"></i> Nạp
+                                                tiền
+                                            </div>
+
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endauth
             @guest
                 <div class="dropdown">
@@ -912,7 +330,8 @@
                         <div class="account-footer" style="min-width: 230px">
                             <div class="footer-button">
                                 <div class="d-flex justify-content-between align-items-center gap-3">
-                                    <a class="w-50 primary-btn1 btn-dark1" href="/register"><i class="bi bi-gear"></i>
+                                    <a class="w-50 primary-btn1 btn-dark1" href="{{ route('settings') }}"><i
+                                            class="bi bi-gear"></i>
                                         Settings</a>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
@@ -929,7 +348,7 @@
                     <span></span>
                 </div>
             </div>
-    </header>
+        </header>
 
         {{ $slot }}
 
@@ -1306,6 +725,12 @@
             </div>
         </footer>
 
+
+        @filamentScripts
+        @vite('resources/js/app.js')
+
+
+
         <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.js') }}"></script>
@@ -1325,7 +750,6 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
@@ -1335,9 +759,37 @@
 
         <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
+        <script src="{{ asset('js/intlTelInput.min.js') }}"></script>
+
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+
+
+
+
+
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
         <script src="{{ asset('js/custom.js') }}"></script>
+
+        <script>
+            //list grid view
+            jQuery(document).ready(function($) {
+                $('.lists').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
+                        'grid-group-wrapper');
+                });
+                $('.grid').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
+                        'grid-group-wrapper');
+                });
+            });
+            $('.list-grid-btn-group li').on('click', function() {
+                $(this).addClass('active').siblings().removeClass('active');
+            })
+        </script>
+
 
         <script>
             $(".marquee_text").marquee({
@@ -1356,6 +808,16 @@
                 duplicated: true,
                 startVisible: true,
             });
+
+            // window.addEventListener('scroll', function() {
+            //     const services = document.querySelector('.car-details-menu');
+            //     services.classList.toggle("sticky", window.scrollY > 500);
+            // });
+            // // International phone Number
+            // const phoneInputField = document.querySelector("#phone");
+            // const phoneInput = window.intlTelInput(phoneInputField, {
+            //     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            // });
         </script>
 
         <script>
@@ -1433,8 +895,9 @@
             });
         </script>
 
+
         @stack('scripts')
 
     </body>
 
-</html>
+    </html>

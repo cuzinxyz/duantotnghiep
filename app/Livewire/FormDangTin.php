@@ -14,15 +14,23 @@ use Livewire\Attributes\Computed;
 class FormDangTin extends Component
 {
     use WithFileUploads;
+
+    public $currentStep = 1;
     #define requirement
     public $fuels = ["Xăng", "Dầu Diesl", "Điện", "Loại khác"];
-    public $colors = ['Đỏ', "Bạc", "Đen", "Ghi", "Trắng", "Vàng", "Xanh", "Nhiều màu"];
+    public $colors = ['red', "sliver", "black", "white", "yellow", "blue", "other"];
     public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
     #define requirement
 
     #[Rule(['image_library.*' => 'required|image|max:10024', 'brand_select' => 'required','model_select' => 'required','transmission' => 'required','fuel' => 'required','number_of_seats' => 'required','color' => 'required','version' => 'required','condition' => 'required','mileage_traveled' => 'required','price' => 'required','title' => 'required','description' => 'required','phone' => 'required','name' => 'required','email' => 'required','district_id' => 'required','city_id' => 'required','full_address' => 'required','year_of_manufacture'=>'required'])]
 
     public $brand_select = '';public $model_select = '';public $models = [];public $image_library;public $transmission;public $fuel;public $number_of_seats;public $color;public $version;public $condition;public $mileage_traveled;public $price;public $title;public $description;public $phone;public $name;public $email;public $district_id;public $city_id;public $full_address;public $year_of_manufacture;
+
+    public function firstStepSubmit()
+    {
+        $validated = $this->validateOnly('brand_select');
+        $this->currentStep = 2;
+    }
 
     public function saveCar()
     {
