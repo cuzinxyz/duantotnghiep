@@ -134,7 +134,7 @@
 
         <!-- Jumbotron -->
         <div class="container py-4" style="max-width:1200px">
-            <div class="row ">
+            <div class="row align-items-center">
                 <div class="col-lg-6  mb-lg-0">
                     <div class="card cascading-right"
                         style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px);">
@@ -203,7 +203,7 @@
                                     <div>
                                         <input type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
-                                        <label>Lưu đăng nhập </label>
+                                        <label for="remember">Lưu đăng nhập </label>
                                     </div>
                                     @if (Route::has('password.request'))
                                         <a href="{{ route('password.request') }}" class="span">Forgot password?</a>

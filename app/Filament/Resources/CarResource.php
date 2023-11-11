@@ -289,7 +289,8 @@ class CarResource extends Resource
                                     ->label('Hình ảnh')
                                     ->required()
                                     ->multiple()
-                                    ->image(),
+                                    ->image()
+                                    ->directory('car_photos'),
 
                                 FileUpload::make('verhicle_videos')
                                     ->label('video')

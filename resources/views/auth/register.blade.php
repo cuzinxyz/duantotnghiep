@@ -133,7 +133,7 @@
 
         <!-- Jumbotron -->
         <div class="container py-4" style="max-width:1200px">
-            <div class="row ">
+            <div class="row align-items-center">
                 <div class="col-lg-6 mb-lg-0">
                     <div class="card cascading-right"
                         style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px);">
@@ -247,7 +247,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                
+
                                 <button class="button-submit" type="submit">Đăng kí</button>
 
                                 </p>

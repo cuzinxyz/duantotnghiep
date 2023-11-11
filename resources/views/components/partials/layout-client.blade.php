@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
@@ -40,7 +41,10 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     @stack('styles')
+
 
 </head>
 
@@ -156,7 +160,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="contact.html" class="drop-down">CONTACT US</a>
+                    <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
                 </li>
             </ul>
             <div class="topbar-right d-lg-none d-block">
@@ -215,7 +219,11 @@
 
         <div class="nav-right d-flex jsutify-content-end align-items-center">
             @auth
+<<<<<<< HEAD
                 <div>
+=======
+                <div onclick="window.location.href='/chatify'" style="cursor: pointer">
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                     <i class="bi bi-chat"></i>
                 </div>
                 <div class="dropdown">
@@ -247,7 +255,11 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Số dư</span>
                                             <div class="fw-bold">
+<<<<<<< HEAD
                                                 100,000 <i class="bi bi-cash"></i>
+=======
+                                                {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                             </div>
                                         </div>
 
@@ -259,6 +271,7 @@
                                         </div>
                                     </div>
                                 </li>
+<<<<<<< HEAD
                                 <li class="my-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Quản lý đơn</div>
@@ -267,6 +280,25 @@
                                                 <i class="bi bi-bag-check-fill"></i> Đơn mua
                                             </div>
                                             <div class="cart-block-body_item d-flex gap-2">
+=======
+                                <hr class="m-0">
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-body_item"
+                                            onclick="window.location.href='{{ route('profile') }}'">
+                                            <i class="bi bi-person-circle"></i> Trang cá nhân
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-header fw-bold">Quản lý đơn</div>
+                                        <div class="cart-block-body">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <i class="bi bi-bag-check-fill"></i> Đơn mua
+                                            </div>
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                                 <i class="bi bi-journal-text"></i> Đơn bán
                                             </div>
                                         </div>
@@ -275,12 +307,28 @@
                                 <li class="mb-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
+<<<<<<< HEAD
                                         <div class="cart-block-body px-3">
                                             <div class="cart-block-body_item d-flex gap-2">
                                                 <i class="bi bi-heart"></i> Tin đã lưu
                                             </div>
 
                                             <div class="cart-block-body_item d-flex gap-2">
+=======
+                                        <div class="cart-block-body">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <i class="bi bi-heart"></i> Tin đã lưu
+                                            </div>
+
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('recharge') }}'">
+                                                <i class="bi bi-cash-coin"></i> Nạp
+                                                tiền
+                                            </div>
+
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('paymentHistory') }}'">
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
                                         </div>
@@ -309,7 +357,7 @@
                     </div>
                 </div>
             @else
-                <div class="dropdown">
+                {{-- <div class="dropdown">
                     <button class="modal-btn header-account-btn user-dropdown" type="button">
                         <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
                         {{ auth()->user()->name }}
@@ -330,7 +378,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 @endif
                 <div class="sidebar-button mobile-menu-btn ">
                     <span></span>
@@ -732,7 +780,11 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
+<<<<<<< HEAD
         {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+=======
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
@@ -745,6 +797,46 @@
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
         <script src="{{ asset('js/custom.js') }}"></script>
+
+        <script>
+<<<<<<< HEAD
+            $(".marquee_text").marquee({
+                direction: "left",
+                duration: 25000,
+                gap: 50,
+                delayBeforeStart: 0,
+                duplicated: true,
+                startVisible: true,
+            });
+            $(".marquee_text2").marquee({
+                direction: "left",
+                duration: 25000,
+                gap: 50,
+                delayBeforeStart: 0,
+                duplicated: true,
+                startVisible: true,
+            });
+        </script>
+
+=======
+            //list grid view
+            jQuery(document).ready(function($) {
+                $('.lists').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
+                        'grid-group-wrapper');
+                });
+                $('.grid').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
+                        'grid-group-wrapper');
+                });
+            });
+            $('.list-grid-btn-group li').on('click', function() {
+                $(this).addClass('active').siblings().removeClass('active');
+            })
+        </script>
+
 
         <script>
             $(".marquee_text").marquee({
@@ -765,6 +857,7 @@
             });
         </script>
 
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
         <script>
             $("#registerForm").validate({
                 onfocusout: false,
@@ -839,9 +932,58 @@
                 }
             });
         </script>
+<<<<<<< HEAD
 
         @stack('scripts')
 
     </body>
 
+=======
+
+        <script>
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
+
+        <script>
+            function addToWishList(car_id) {
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: "/them-yeu-thich/" + car_id,
+                    success: function(data) {
+                        //Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        //End Message
+                    }
+                })
+            }
+        </script>
+
+        @stack('scripts')
+
+    </body>
+
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
     </html>
