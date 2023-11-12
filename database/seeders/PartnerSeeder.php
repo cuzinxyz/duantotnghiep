@@ -20,7 +20,7 @@ class PartnerSeeder extends Seeder
             ],
             [
                 'name' => 'Škoda Auto',
-                'logo_url' => 'partners/zR38QywOfCcynVpIqQ3A0vDRvOUftE-metaZG93bmxvYWQgKDEpLnBuZw==-.png',
+                'logo_url' => 'partners/DXd9HgdBxFfGt64zuNx4Xk8uKu3u4b-metaZG93bmxvYWQgKDEpLnBuZw==-.png',
             ]
         ]);
     }

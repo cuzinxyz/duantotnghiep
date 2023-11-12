@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('demnads', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->foreignIdFor(\App\Models\Brand::class, 'brand_id');
-            $table->foreignIdFor(\App\Models\ModelCar::class, 'car_model_id');
             $table->integer('status');
+            $table->text('content');
+            $table->string('title');
+            $table->text('reason');
             $table->softDeletes();
             $table->timestamps();
         });
