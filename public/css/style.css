@@ -28795,4 +28795,8 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     color: var(--main-color);
 }
 
+.hoverWishlist:hover {
+    background-color: #eee;
+}
+
 /* custom push featured page  */

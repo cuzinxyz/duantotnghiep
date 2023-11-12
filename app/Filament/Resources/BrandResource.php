@@ -38,7 +38,7 @@ class BrandResource extends Resource
               ->image()
               ->imageEditor()
               ->openable()
-              ->directory('banner_image')
+              ->directory('brand_image')
               ->required(),
           ])
 
