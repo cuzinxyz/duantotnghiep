@@ -219,7 +219,11 @@
 
         <div class="nav-right d-flex jsutify-content-end align-items-center">
             @auth
+<<<<<<< HEAD
+                <div>
+=======
                 <div onclick="window.location.href='/chatify'" style="cursor: pointer">
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                     <i class="bi bi-chat"></i>
                 </div>
                 <div class="dropdown">
@@ -251,8 +255,16 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Số dư</span>
                                             <div class="fw-bold">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                                100,000 <i class="bi bi-cash"></i>
+=======
+                                                {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
+=======
                                                 {{ number_format(auth()->user()->account_balence) }} <i
                                                     class="bi bi-cash"></i>
+>>>>>>> 84ab234c672f41951b0261c271b534da180dccb4
                                             </div>
                                         </div>
 
@@ -264,6 +276,16 @@
                                         </div>
                                     </div>
                                 </li>
+<<<<<<< HEAD
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-header fw-bold">Quản lý đơn</div>
+                                        <div class="cart-block-body px-3">
+                                            <div class="cart-block-body_item d-flex gap-2">
+                                                <i class="bi bi-bag-check-fill"></i> Đơn mua
+                                            </div>
+                                            <div class="cart-block-body_item d-flex gap-2">
+=======
                                 <hr class="m-0">
                                 <li class="my-2">
                                     <div class="cart-block">
@@ -281,6 +303,7 @@
                                                 <i class="bi bi-bag-check-fill"></i> Đơn mua
                                             </div>
                                             <div class="cart-block-body_item d-flex align-items-center gap-2">
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                                 <i class="bi bi-journal-text"></i> Đơn bán
                                             </div>
                                         </div>
@@ -289,6 +312,14 @@
                                 <li class="mb-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
+<<<<<<< HEAD
+                                        <div class="cart-block-body px-3">
+                                            <div class="cart-block-body_item d-flex gap-2">
+                                                <i class="bi bi-heart"></i> Tin đã lưu
+                                            </div>
+
+                                            <div class="cart-block-body_item d-flex gap-2">
+=======
                                         <div class="cart-block-body">
                                             <div class="cart-block-body_item d-flex align-items-center gap-2">
                                                 <i class="bi bi-heart"></i> Tin đã lưu
@@ -302,6 +333,7 @@
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('paymentHistory') }}'">
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
                                         </div>
@@ -754,7 +786,11 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
+<<<<<<< HEAD
+        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+=======
         <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
@@ -771,6 +807,26 @@
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
         <script>
+<<<<<<< HEAD
+            $(".marquee_text").marquee({
+                direction: "left",
+                duration: 25000,
+                gap: 50,
+                delayBeforeStart: 0,
+                duplicated: true,
+                startVisible: true,
+            });
+            $(".marquee_text2").marquee({
+                direction: "left",
+                duration: 25000,
+                gap: 50,
+                delayBeforeStart: 0,
+                duplicated: true,
+                startVisible: true,
+            });
+        </script>
+
+=======
             //list grid view
             jQuery(document).ready(function($) {
                 $('.lists').click(function(event) {
@@ -809,6 +865,7 @@
             });
         </script>
 
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
         <script>
             $("#registerForm").validate({
                 onfocusout: false,
@@ -883,9 +940,17 @@
                 }
             });
         </script>
+<<<<<<< HEAD
 
         @stack('scripts')
 
     </body>
 
+=======
+
+        @stack('scripts')
+
+    </body>
+
+>>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
     </html>

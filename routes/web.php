@@ -45,6 +45,7 @@ Route::controller(SettingsController::class)->group(function () {
     Route::get('/thong-tin', 'infoUser');
     Route::get('/nap-tien', 'recharge')->name('recharge');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
+    Route::post('/cai-dat', 'settings')->name("update-profile");
 });
 
 Route::get('/single-category', SingleBrandCategory::class);
