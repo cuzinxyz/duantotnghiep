@@ -53,15 +53,10 @@ Route::get('/single-category', SingleBrandCategory::class);
 Route::get('/danh-sach-xe', CarListingSystem::class);
 
 Route::controller(WishlishController::class)->group(function () {
-    Route::get('/yeu-thich', 'index');
-    Route::post('/them-yeu-thich/{car_id}', 'addToWishlist');
+    Route::get('/yeu-thich', 'index')->name('wishlish')->middleware('auth');
 });
 
 Auth::routes();
-
-
-
-
 
 Route::get('/test', function() {
     $service = Service::find(5);

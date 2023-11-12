@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @livewireStyles
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
@@ -41,10 +42,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     @stack('styles')
-
 
 </head>
 
@@ -108,7 +108,7 @@
                 </li>
                 <li>
                     @auth
-                        <a href="#">
+                        <a href="{{ route('wishlish') }}">
                         @else
                             <a href="{{ route('login') }}">
                             @endauth
@@ -118,7 +118,7 @@
                                     d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
                                 </path>
                             </svg>
-                            SAVE
+                            LƯU TIN
                         </a>
                 </li>
                 <li>
@@ -256,10 +256,15 @@
                                             <span>Số dư</span>
                                             <div class="fw-bold">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 100,000 <i class="bi bi-cash"></i>
 =======
                                                 {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
 >>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
+=======
+                                                {{ number_format(auth()->user()->account_balence) }} <i
+                                                    class="bi bi-cash"></i>
+>>>>>>> 84ab234c672f41951b0261c271b534da180dccb4
                                             </div>
                                         </div>
 
@@ -760,6 +765,7 @@
                 </div>
             </div>
         </footer>
+        @livewireScripts
 
         <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
@@ -797,6 +803,8 @@
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
         <script src="{{ asset('js/custom.js') }}"></script>
+
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
         <script>
 <<<<<<< HEAD
@@ -939,47 +947,6 @@
     </body>
 
 =======
-
-        <script>
-            $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        </script>
-
-        <script>
-            function addToWishList(car_id) {
-                $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: "/them-yeu-thich/" + car_id,
-                    success: function(data) {
-                        //Start Message
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000
-                        })
-                        if ($.isEmptyObject(data.error)) {
-                            Toast.fire({
-                                type: 'success',
-                                icon: 'success',
-                                title: data.success
-                            })
-                        } else {
-                            Toast.fire({
-                                type: 'error',
-                                icon: 'error',
-                                title: data.error
-                            })
-                        }
-                        //End Message
-                    }
-                })
-            }
-        </script>
 
         @stack('scripts')
 
