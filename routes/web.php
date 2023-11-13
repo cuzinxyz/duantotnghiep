@@ -43,6 +43,8 @@ Route::controller(SettingsController::class)->group(function () {
     # cái này cần sửa lại
     Route::get('/thong-tin', 'infoUser');
     Route::get('/nap-tien', 'recharge')->name('recharge');
+    Route::post('/nap-tien', 'rechargeMoney')->name('recharge.submit');
+    Route::get('/ket-qua-nap-tien', 'resultRecharge')->name('resultRecharge');
     Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 
     Route::match(['get', 'post'], '/cai-dat', 'settings')->name('settings');
