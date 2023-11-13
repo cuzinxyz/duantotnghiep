@@ -1,4 +1,5 @@
 <div>
+    @if ($cars->count() > 0)
     @foreach ($cars as $value)
     @php
         App\Models\User::pluck('name');
@@ -6,7 +7,7 @@
     <div class="card mb-3 hoverWishlist">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="{{ asset('/storage/'. $value->car->verhicle_image_library[0]) }}" class="img-fluid rounded-start"
+                <img src="{{ ($value->car->verhicle_image_library ? asset('/storage/'. $value->car->verhicle_image_library[0]) : '') }}" class="img-fluid rounded-start"
                     alt="...">
             </div>
             <div class="col-md-8">
@@ -35,4 +36,7 @@
         </div>
     </div>
     @endforeach
+    @else
+    <h5>Chưa lưu tin nào cả</h5>
+    @endif
 </div>

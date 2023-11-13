@@ -60,6 +60,9 @@
                         </div>
                         <p class="card-text">Giải pháp tiết kiệm cho hộ kinh doanh.</p>
                     </div>
+                    {{-- @php
+                        var_dump($services)
+                    @endphp --}}
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16"

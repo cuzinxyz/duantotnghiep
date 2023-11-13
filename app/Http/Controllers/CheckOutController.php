@@ -100,38 +100,43 @@ class CheckOutController extends Controller
         if (!empty($request->vnp_ResponseCode) && $request->vnp_ResponseCode == 00) {
             $checkAvailableToken = TransactionsHistory::where('token', $request->vnp_SecureHash)->first();
             if ($checkAvailableToken) {
-                session()->flash('status', 'Mày thích bố láo không?');
+                session()->flash('status', 'Nếu thấy thông báo này hãy liên hệ với Admin!');
             } else {
                 $userId = Session::get('user_id');
                 $purchased_service = Session::get('purchased_service');
-                $user = User::find($userId);
                 $amount = $request->vnp_Amount / 100;
-
+                # user registed service
+                $user = User::find($userId);
                 $user->service_id = $purchased_service->id;
                 $user->account_balence += $amount;
-
                 $user->expired_date = Carbon::now()->addDays($purchased_service->expiration_date);
                 # save database
                 $purchased = DB::table('purchased_service')
-                        ->insert([
-                            'user_id' => $userId,
-                            'service_id' => $purchased_service->id,
-                            'remaining_push' => $purchased_service->number_of_pushes,
-                            'expired_date' => $user->expired_date,
-                            'created_at' => Carbon::now()
-                        ])
+                    ->insert([
+                        'user_id' => $userId,
+                        'service_id' => $purchased_service->id,
+                        'remaining_push' => $purchased_service->number_of_pushes,
+                        'expired_date' => $user->expired_date,
+                        'created_at' => Carbon::now()
+                    ])
                 ;
-
-                $user->save();
-
-                $transaction_history = [
+                # lưu lịch sử nạp tiền
+                TransactionsHistory::create([
                     'user_id' => Session::get('user_id'),
-                    'transaction_type' => 'nạp tiền',
+                    'transaction_type' => 'nạp tiền mua gói dịch vụ',
                     'amount' => $amount,
                     'balance_after_transaction' => $user->account_balence,
                     'token' => $request->vnp_SecureHash,
-                ];
-                TransactionsHistory::create($transaction_history);
+                ]);
+                # lịch sử trừ tiền mua gói dvu.
+                $user->account_balence -= $purchased_service->price;
+                $user->save();
+                TransactionsHistory::create([
+                    'user_id' => auth()->id(),
+                    'transaction_type' => 'mua gói: ' . $purchased_service->service_name,
+                    'amount' => $purchased_service->price,
+                    'balance_after_transaction' => $user->account_balence
+                ]);
 
                 return redirect()->route('profile')->with('status', 'Đăng ký gói '.$purchased_service->service_name.' thành công!');
             }

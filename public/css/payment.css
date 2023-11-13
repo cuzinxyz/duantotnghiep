@@ -9,16 +9,17 @@
     max-width: 900px;
     margin: 20px auto;
     overflow: hidden;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
 }
 
 .payment .box-1 {
     position: relative;
-    max-width: 450px;
-    padding: 10px 40px;
+    max-width: 100%;
+    padding: 10px 30px;
     user-select: none;
     background-image: url(/fonts/background-animation.svg);
     z-index: 3;
+    border-radius: 16px;
 }
 
 .box-1::before {
@@ -287,7 +288,7 @@
     .payment .box-1,
     .payment .box-2 {
         max-width: 600px;
-        padding: 20px 90px;
+        /* padding: 20px 90px; */
         margin: 20px auto;
     }
 
@@ -310,13 +311,66 @@
     background: #2c2c2c;
     color: #fff;
     padding: 10px 20px;
-    margin: 10px 0;
+
     border-radius: 8px;
     transition: all .3s linear;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .recharge-item:hover {
-    transform: scale(1.04);
     background-color: #161616;
 }
+
+.container.options-recharge-money {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .options-recharge-money .custom-radio {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .options-recharge-money .custom-radio input[type="radio"] {
+    display: none;
+  }
+
+  .options-recharge-money .radio-label {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .options-recharge-money .radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffcc00;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+
+  .options-recharge-money .radio-text {
+    font-size: 1rem;
+    color: #333;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .options-recharge-money .custom-radio input[type="radio"]:checked + .radio-label {
+    background-color: #ffcc00;
+  }
+
+  .options-recharge-money .custom-radio input[type="radio"]:checked + .radio-label .radio-circle {
+    border-color: #fff;
+    background-color: #ffcc00;
+  }
+
+  .options-recharge-money .custom-radio input[type="radio"]:checked + .radio-label .radio-text {
+    color: #fff;
+  }

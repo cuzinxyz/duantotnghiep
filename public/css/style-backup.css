@@ -12147,6 +12147,32 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     font-weight: 600
 }
 
+.text-slider2 .marquee_service.text-black .js-marquee img {
+    width: 50px;
+    height: 50px;
+}
+
+.text-slider2 .marquee_service.text-black .js-marquee {
+    /* gap: 15px; */
+    color: #000 !important;
+    margin-right: 100px !important;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.marquee_service-item {
+    float: left;
+    margin-right: 100px !important;
+    /* From https://css.glass */
+    background: rgb(0 0 0 / 11%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+}
+
 .topbar-header {
     position: absolute;
     z-index: 999;
@@ -28829,9 +28855,3 @@ header.style-5 .nav-right .dropdown .account-menu.active {
 
 
 /* custom push featured page */
-
-.hoverWishlist:hover {
-    background-color: #eee;
-}
-
-/* custom push featured page  */

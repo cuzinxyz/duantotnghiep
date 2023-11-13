@@ -219,11 +219,7 @@
 
         <div class="nav-right d-flex jsutify-content-end align-items-center">
             @auth
-<<<<<<< HEAD
-                <div>
-=======
                 <div onclick="window.location.href='/chatify'" style="cursor: pointer">
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                     <i class="bi bi-chat"></i>
                 </div>
                 <div class="dropdown">
@@ -235,8 +231,8 @@
                             <ul>
                                 <li class="pd-cart">
                                     <div class="d-flex align-items-start gap-3">
-                                        <img style="width: 50px;height:50px" class="object-fit-cover rounded-circle"
-                                            src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}"
+                                        <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                            src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name='.auth()->user()->name }}"
                                             alt="">
 
                                         <div class="d-flex flex-column">
@@ -255,16 +251,8 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Số dư</span>
                                             <div class="fw-bold">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                                100,000 <i class="bi bi-cash"></i>
-=======
-                                                {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
-=======
                                                 {{ number_format(auth()->user()->account_balence) }} <i
                                                     class="bi bi-cash"></i>
->>>>>>> 84ab234c672f41951b0261c271b534da180dccb4
                                             </div>
                                         </div>
 
@@ -276,16 +264,6 @@
                                         </div>
                                     </div>
                                 </li>
-<<<<<<< HEAD
-                                <li class="my-2">
-                                    <div class="cart-block">
-                                        <div class="cart-block-header fw-bold">Quản lý đơn</div>
-                                        <div class="cart-block-body px-3">
-                                            <div class="cart-block-body_item d-flex gap-2">
-                                                <i class="bi bi-bag-check-fill"></i> Đơn mua
-                                            </div>
-                                            <div class="cart-block-body_item d-flex gap-2">
-=======
                                 <hr class="m-0">
                                 <li class="my-2">
                                     <div class="cart-block">
@@ -303,7 +281,6 @@
                                                 <i class="bi bi-bag-check-fill"></i> Đơn mua
                                             </div>
                                             <div class="cart-block-body_item d-flex align-items-center gap-2">
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                                 <i class="bi bi-journal-text"></i> Đơn bán
                                             </div>
                                         </div>
@@ -312,14 +289,6 @@
                                 <li class="mb-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
-<<<<<<< HEAD
-                                        <div class="cart-block-body px-3">
-                                            <div class="cart-block-body_item d-flex gap-2">
-                                                <i class="bi bi-heart"></i> Tin đã lưu
-                                            </div>
-
-                                            <div class="cart-block-body_item d-flex gap-2">
-=======
                                         <div class="cart-block-body">
                                             <div class="cart-block-body_item d-flex align-items-center gap-2">
                                                 <i class="bi bi-heart"></i> Tin đã lưu
@@ -333,8 +302,27 @@
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('paymentHistory') }}'">
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <hr class="m-0">
+                                <li class="my-2">
+                                    <div class="cart-block">
+                                        <div class="account-footer" style="min-width: 230px">
+                                            <div class="footer-button mx-3">
+                                                <div class="d-flex justify-content-between align-items-center gap-3">
+                                                    <a href="{{ route('settings') }}" class="w-50 primary-btn1 btn-dark1">
+                                                        <i class="bi bi-gear"></i>
+                                                        Settings
+                                                    </a>
+                                                    <form class="w-50" action="{{ route('logout') }}" method="POST">
+                                                        @csrf
+                                                        <button class="w-100 primary-btn1" type="submit"><i
+                                                                class="bi bi-box-arrow-right"></i> Logout</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -786,11 +774,7 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-<<<<<<< HEAD
-        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
-=======
         <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
@@ -807,7 +791,6 @@
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
         <script>
-<<<<<<< HEAD
             $(".marquee_text").marquee({
                 direction: "left",
                 duration: 25000,
@@ -826,131 +809,9 @@
             });
         </script>
 
-=======
-            //list grid view
-            jQuery(document).ready(function($) {
-                $('.lists').click(function(event) {
-                    event.preventDefault();
-                    $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
-                        'grid-group-wrapper');
-                });
-                $('.grid').click(function(event) {
-                    event.preventDefault();
-                    $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
-                        'grid-group-wrapper');
-                });
-            });
-            $('.list-grid-btn-group li').on('click', function() {
-                $(this).addClass('active').siblings().removeClass('active');
-            })
-        </script>
-
-
-        <script>
-            $(".marquee_text").marquee({
-                direction: "left",
-                duration: 25000,
-                gap: 50,
-                delayBeforeStart: 0,
-                duplicated: true,
-                startVisible: true,
-            });
-            $(".marquee_text2").marquee({
-                direction: "left",
-                duration: 25000,
-                gap: 50,
-                delayBeforeStart: 0,
-                duplicated: true,
-                startVisible: true,
-            });
-        </script>
-
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
-        <script>
-            $("#registerForm").validate({
-                onfocusout: false,
-                onkeyup: false,
-                onclick: false,
-                rules: {
-                    "name": {
-                        required: true,
-                        minlength: 3
-                    },
-                    "email": {
-                        required: true,
-                        minlength: 6
-                    },
-                    "password": {
-                        required: true,
-                        minlength: 6
-                    },
-                    "re-password": {
-                        required: true,
-                        equalTo: "#password",
-                        minlength: 6
-                    }
-                },
-                messages: {
-                    "name": {
-                        required: "Bắt buộc nhập name",
-                        minlength: "Hãy nhập tối thiểu 3 ký tự"
-                    },
-                    "email": {
-                        required: "Bắt buộc nhập email",
-                        minlength: "Hãy nhập tối thiểu 6 ký tự"
-                    },
-                    "password": {
-                        required: "Bắt buộc nhập password",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    },
-                    "re-password": {
-                        required: "Bắt buộc nhập re-password",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    },
-                    "re-password": {
-                        equalTo: "Hai password phải giống nhau",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    }
-                }
-            });
-
-            $("#loginForm").validate({
-                onfocusout: false,
-                onkeyup: false,
-                onclick: false,
-                rules: {
-                    "email": {
-                        required: true,
-                        minlength: 6
-                    },
-                    "password": {
-                        required: true,
-                        minlength: 6
-                    }
-                },
-                messages: {
-                    "email": {
-                        required: "Bắt buộc nhập email",
-                        minlength: "Hãy nhập tối thiểu 6 ký tự"
-                    },
-                    "password": {
-                        required: "Bắt buộc nhập password",
-                        minlength: "Hãy nhập ít nhất 6 ký tự"
-                    }
-                }
-            });
-        </script>
-<<<<<<< HEAD
 
         @stack('scripts')
 
     </body>
 
-=======
-
-        @stack('scripts')
-
-    </body>
-
->>>>>>> 99c349ad3d125a01c4045befda23e60ee9a0b73c
     </html>

@@ -4,8 +4,7 @@
 
 <x-partials.layout-client>
     <div class="container mt-5">
-        <form action="{{ route('update-profile', ['id' => request()->route('id')]) }}" method="POST"
-            enctype="multipart/form-data" style="display: inline">
+        <form action="{{ route('settings') }}" method="POST" enctype="multipart/form-data" style="display: inline">
             @csrf
             <div class="row">
                 <div class="col-lg-4 pb-5">
@@ -15,12 +14,13 @@
                             style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);">
                             <a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip"
                                 title=""
-                                data-original-title="You currently have 290 Reward points to spend">$&nbsp;{{ $user->account_balence }}</a>
+                                data-original-title="You currently have 290 Reward points to spend">{{ number_format($user->account_balence) }}
+                                đ</a>
                         </div>
                         <div class="author-card-profile">
                             <div for="avatar" class="author-card-avatar">
                                 <label for="avatar" class="avatar__label">
-                                    <img src="{{ $user->avatar ? Storage::url($user->avatar) : 'https://bootdey.com/img/Content/avatar/avatar1.png' }}"
+                                    <img src="{{ $user->avatar ? Storage::url($user->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                         alt="Daniel Adams" id="avatar__img">
                                 </label>
                                 <input type="file" name="avatar" hidden id="avatar">
@@ -33,39 +33,23 @@
                     </div>
                     <div class="wizard">
                         <nav class="list-group list-group-flush">
-                            <a class="list-group-item active" href="#"><i
-                                    class="fe-icon-user text-muted"></i>Profile Settings</a>
-                            <a class="list-group-item" href="#">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div><i class="fe-icon-shopping-bag mr-1 text-muted"></i>
-                                        <div class="d-inline-block font-weight-medium text-uppercase">Orders List</div>
-                                    </div><span class="badge badge-secondary">6</span>
-                                </div>
+                            <a class="list-group-item active" href="#">
+                                <i class="bi bi-gear-wide-connected"></i> Cài đặt trang cá nhân
                             </a>
-                            <a class="list-group-item" href="#"><i
-                                    class="fe-icon-map-pin text-muted"></i>Addresses</a>
-                            <a class="list-group-item"
-                                href="https://www.bootdey.com/snippets/view/bs4-wishlist-profile-page" target="__blank">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div><i class="fe-icon-heart mr-1 text-muted"></i>
-                                        <div class="d-inline-block font-weight-medium text-uppercase">My Wishlist</div>
-                                    </div><span class="badge badge-secondary">3</span>
-                                </div>
-                            </a>
-                            <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-account-tickets"
-                                target="__blank">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div><i class="fe-icon-tag mr-1 text-muted"></i>
-                                        <div class="d-inline-block font-weight-medium text-uppercase">My Tickets</div>
-                                    </div><span class="badge badge-secondary">4</span>
-                                </div>
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                <button type="submit" class="text-start list-group-item">
+                                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                </button>
+                            </form>
                         </nav>
                     </div>
                 </div>
                 <!-- Profile Settings-->
                 <div class="col-lg-8 pb-5">
-                    <div class="col-md-12">
+                    <div class="col-12">
+                        @include('components.nofication')
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="account-fn">Name</label>
                             <input class="form-control" type="text" id="account-fn" value="{{ $user->name }}"

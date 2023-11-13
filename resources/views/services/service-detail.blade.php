@@ -3,8 +3,17 @@
 @endpush
 
 <x-partials.layout-client>
-    <div class="my-5">
+    <div class="mb-5">
         <!-- content -->
+        <div class="pt-5 pb-3 text-center">
+            <span class="ms-2">
+                {!!
+                (auth()->user()->service_id != 0) && (auth()->user()->expired_date >= \Carbon\Carbon::now())
+                ? 'Bạn đang đăng ký dịch vụ: <strong>' . auth()->user()->service->service_name . '</strong> - còn: <strong>' .\DB::table('purchased_service')->where('user_id', auth()->id())->orderBy('expired_date', 'desc')->first()->remaining_push. '</strong> lượt đẩy!'
+                : 'Bạn chưa đăng ký dịch vụ'
+                !!}
+            </span>
+        </div>
         <div class="payment container d-flex justify-content-center">
             <div class="box-1 bg-light user">
                 <div class="box-inner-1 pb-3 mb-3 ">
@@ -61,7 +70,7 @@
                 <div class="box-inner-2">
                     <div>
                         <div>
-                            <p class="fw-bold">{{ $serv->service_name }}</p>
+                            <p class="fw-bold fs-4 font-monospace">{{ $serv->service_name }}</p>
                             @php
                                 $descArr = preg_split("/\r\n|\n|\r/", $serv->description);
                             @endphp

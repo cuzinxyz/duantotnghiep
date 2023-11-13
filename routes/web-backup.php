@@ -34,6 +34,7 @@ Route::controller(CheckOutController::class)->group(function () {
 });
 
 Route::controller(SettingsController::class)->group(function () {
+    Route::get('/cai-dat', 'settings')->name('settings');
     Route::get('/profile', 'profile')->name('profile');
 
     Route::get('/day-tin/{carID}', 'pushFeature')->name('day-tin');
@@ -43,9 +44,10 @@ Route::controller(SettingsController::class)->group(function () {
     # cái này cần sửa lại
     Route::get('/thong-tin', 'infoUser');
     Route::get('/nap-tien', 'recharge')->name('recharge');
-    Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
+    Route::post('/nap-tien', 'rechargeMoney')->name('recharge.submit');
+    Route::get('/ket-qua-nap-tien', 'resultRecharge')->name('resultRecharge');
 
-    Route::match(['get', 'post'], '/cai-dat', 'settings')->name('settings');
+    Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 });
 
 Route::get('/single-category', SingleBrandCategory::class);
@@ -64,9 +66,4 @@ Route::get('/test', function() {
     $array = preg_split("/\r\n|\n|\r/", $service['description']);
 
     return $array;
-});
-
-Route::get('logout', function() {
-    Auth::logout();
-    return redirect()->route('homepage');
 });
