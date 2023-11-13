@@ -18,7 +18,7 @@ class SettingsController extends Controller
     public function profile()
     {
         $cars = auth()->user()->car;
-
+// dd($cars);
         return view('user-settings.profile', compact('cars'));
     }
 

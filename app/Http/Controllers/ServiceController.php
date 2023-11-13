@@ -9,12 +9,12 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        // $services = Service::whereNotIn('service_name', Service::where('service_name', 'LIKE', '%gói tin lẻ%')->get()->toArray())
-        //     ->get();
+        $services = Service::whereNotIn('id', Service::where('service_name', 'LIKE', '%gói tin lẻ%')->pluck('id'))
+            ->get();
 
-        $services = Service::where('service_name', 'LIKE', '%gói tin lẻ%')->get()->toArray();
+        // $services = Service::where('service_name', 'LIKE', '%gói tin lẻ%')->get()->toArray();
         // $services = array_values($servicesList);
-dd($services);
+// dd($services);
         return view('services.service', compact('services'));
     }
 

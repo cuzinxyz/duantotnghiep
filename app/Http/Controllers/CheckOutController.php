@@ -16,7 +16,34 @@ class CheckOutController extends Controller
     public function checkout(Request $request, $serviceID)
     {
         $service = Service::findOrFail($serviceID);
-        if(empty($service)) {
+        # thanh toán bằng số dư tài khoản
+        if ($request->input('payment-method') == 'balance') {
+            $user = User::findOrFail(auth()->id());
+            $user->service_id = $service->id;
+            $user->account_balence -= $service->price;
+            $user->expired_date = Carbon::now()->addDays($service->expiration_date);
+            # save database
+            $purchased = DB::table('purchased_service')
+                ->insert([
+                    'user_id' => $user->id,
+                    'service_id' => $service->id,
+                    'remaining_push' => $service->number_of_pushes,
+                    'expired_date' => $user->expired_date,
+                    'created_at' => Carbon::now()
+                ]);
+            # lịch sử trừ tiền mua gói dvu.
+            $user->save();
+            TransactionsHistory::create([
+                'user_id' => auth()->id(),
+                'transaction_type' => 'mua gói: ' . $service->service_name,
+                'amount' => $service->price,
+                'balance_after_transaction' => $user->account_balence
+            ]);
+
+            return redirect()->route('profile')->with('status', 'Đăng ký gói ' . $service->service_name . ' thành công!');
+        }
+
+        if (empty($service)) {
             return redirect()->back()->with('status', 'Không tồn tại dịch vụ này!');
         }
         Session::put('purchased_service', $service);
@@ -33,7 +60,7 @@ class CheckOutController extends Controller
         $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
 
         $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = "Thanh toan tien dang ky dich vu ".$service->service_name." voi gia ".$service->price.""; //mô tả đơn hàng
+        $vnp_OrderInfo = "Thanh toan tien dang ky dich vu " . $service->service_name . " voi gia " . $service->price . ""; //mô tả đơn hàng
         $vnp_OrderType = "billpayment";
         $vnp_Amount = $service->price * 100;
         $vnp_Locale = "vn";
@@ -118,8 +145,7 @@ class CheckOutController extends Controller
                         'remaining_push' => $purchased_service->number_of_pushes,
                         'expired_date' => $user->expired_date,
                         'created_at' => Carbon::now()
-                    ])
-                ;
+                    ]);
                 # lưu lịch sử nạp tiền
                 TransactionsHistory::create([
                     'user_id' => Session::get('user_id'),
@@ -138,7 +164,7 @@ class CheckOutController extends Controller
                     'balance_after_transaction' => $user->account_balence
                 ]);
 
-                return redirect()->route('profile')->with('status', 'Đăng ký gói '.$purchased_service->service_name.' thành công!');
+                return redirect()->route('profile')->with('status', 'Đăng ký gói ' . $purchased_service->service_name . ' thành công!');
             }
         } else {
             session()->flash('status', 'Lỗi r nhé');

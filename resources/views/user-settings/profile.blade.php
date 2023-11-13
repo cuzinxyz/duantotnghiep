@@ -15,8 +15,14 @@
                                 <div class="d-flex align-items-center p-1 rounded-pill"
                                     style="background-color: #f4f4f4;">
                                     <img src="/images/goi-pro.svg" alt="Có gì mới" style="width: 1rem; height: 1rem;">
+                                    @php
+                                        $expired_date = \Carbon\Carbon::parse(auth()->user()->expired_date);
+                                        $current_date = \Carbon\Carbon::now();
+
+                                        $days_left = $current_date->diffInDays($expired_date) . ' ngày';
+                                    @endphp
                                     <span
-                                        class="ms-2">{{ auth()->user()->service_id != 0 && auth()->user()->expired_date >= \Carbon\Carbon::now() ? auth()->user()->service->service_name : 'Bạn chưa đăng ký dịch vụ' }}</span>
+                                        class="ms-2">{{ auth()->user()->service_id != 0 && auth()->user()->expired_date >= \Carbon\Carbon::now() ? auth()->user()->service->service_name . ' còn ' . $days_left : 'Bạn chưa đăng ký dịch vụ' }}</span>
                                 </div>
                             </li>
                         </ul>
@@ -103,7 +109,9 @@
                                                             </svg>
                                                         </a>
                                                         <div class="car-img">
-                                                            <img class="img-fluid" style="object-fit:cover;max-height: 121px" src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}"
+                                                            <img class="img-fluid"
+                                                                style="object-fit:cover;max-height: 121px"
+                                                                src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
                                                                 alt="image">
                                                         </div>
                                                     </div>
@@ -111,16 +119,19 @@
                                                         <h6><a href="#">{{ $car->title }}</a></h6>
                                                         <ul class="features">
                                                             <li>
-                                                              {{-- @dd($car) --}}
-                                                                <img src="{{ asset('images/menual.svg') }}" alt="">
+                                                                {{-- @dd($car) --}}
+                                                                <img src="{{ asset('images/menual.svg') }}"
+                                                                    alt="">
                                                                 {{ $car->car_info['transmission'] }}
                                                             </li>
                                                             <li>
-                                                                <img src="{{ asset('images/fuel.svg') }}" alt="">
+                                                                <img src="{{ asset('images/fuel.svg') }}"
+                                                                    alt="">
                                                                 {{ $car->car_info['fuel'] }}
                                                             </li>
                                                             <li>
-                                                                <img src="{{ asset('images/electric.svg') }}" alt="">
+                                                                <img src="{{ asset('images/electric.svg') }}"
+                                                                    alt="">
                                                                 {{ $car->car_info['mileage_traveled'] }}
                                                             </li>
                                                         </ul>
