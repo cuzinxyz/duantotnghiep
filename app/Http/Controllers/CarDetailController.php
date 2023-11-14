@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 class CarDetailController extends Controller
 {
   public function carDetail(){
-//    $car = Car::find($id);
-//    $brands = Brand::all();
-    return view('car-detail' );
+    $car = Car::find(1);
+    $brands = Brand::all();
+    return view('car-detail',compact('car','brands') );
   }
     //
 }

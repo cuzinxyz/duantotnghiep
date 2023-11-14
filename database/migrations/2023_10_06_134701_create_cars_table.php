@@ -13,20 +13,20 @@ return new class extends Migration {
     Schema::create('cars', function (Blueprint $table) {
       $table->id();
       $table->string('title');
-      $table->string('slug');
+      $table->string('slug')->nullable();
       $table->integer('price');
       $table->integer('user_id');
       $table->integer('brand_id');
-      $table->string('city_id');
-      $table->string('district_id');
+      $table->string('city_id')->nullable();
+      $table->string('district_id')->nullable();
       $table->string('full_address', 255);
       $table->boolean('recommended')->default(false);
+      $table->json('contact');
+      $table->json('car_info');
+      $table->json('verhicle_image_library');
+      $table->json('verhicle_videos')->nullable();
       $table->string('description');
       $table->string('status')->default(0); // 0 chờ duyệt - 1 Đã duyệt tin
-//      $table->json('contact');
-//      $table->json('car_info');
-//      $table->json('verhicle_image_library');
-      $table->json('verhicle_videos')->nullable();
       $table->timestamps();
       $table->softDeletes(); // add
     });
