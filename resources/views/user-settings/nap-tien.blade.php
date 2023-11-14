@@ -4,6 +4,7 @@
 
 <x-partials.layout-client>
     <div class="my-3">
+        @include('components.nofication')
         <!-- content -->
         <div class="payment container d-flex flex-column gap-2">
             <div class="row">
@@ -59,7 +60,7 @@
                                             </div>
                                         </div>
                                     </label>
-                                    <label for="two" class="box py-2 second">
+                                    {{-- <label for="two" class="box py-2 second">
                                         <div class="d-flex">
                                             <span class="circle"></span>
                                             <div class="course">
@@ -71,7 +72,7 @@
                                                 <span>Thanh toán bằng số dư có trong tài khoản</span>
                                             </div>
                                         </div>
-                                    </label>
+                                    </label> --}}
                                 </div>
                             </div>
 

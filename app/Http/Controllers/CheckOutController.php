@@ -21,6 +21,10 @@ class CheckOutController extends Controller
             $user = User::findOrFail(auth()->id());
             $user->service_id = $service->id;
             $user->account_balence -= $service->price;
+            if($user->account_balence < 0) {
+                return redirect()->route('recharge')
+                    ->with('warning', 'Số dư hiện tại của bạn không đủ để mua dịch vụ này, vui lòng nạp thêm!');
+            }
             $user->expired_date = Carbon::now()->addDays($service->expiration_date);
             # save database
             $purchased = DB::table('purchased_service')

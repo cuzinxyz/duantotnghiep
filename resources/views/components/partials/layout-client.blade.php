@@ -148,19 +148,14 @@
                 </div>
             </div>
             <ul class="menu-list">
-                <li class="menu-item-has-children" @class(['active' => request()->routeIs('homepage')])>
-                    <a href="#" class="drop-down">Home</a><i class="bi bi-plus dropdown-icon"></i>
-                    <ul class="sub-menu">
-                        <li><a href="/">Home 01</a></li>
-                        <li><a href="index2.html">Home 02</a></li>
-                        <li><a href="index3.html">Home 03</a></li>
-                        <li><a href="index4.html">Home 04</a></li>
-                        <li><a href="index5.html">Home 05</a></li>
-                        <li><a href="index6.html">Home 06</a></li>
-                    </ul>
+                <li @class(['active' => request()->routeIs('homepage')])>
+                    <a href="#" class="drop-down">Trang Chủ</a>
                 </li>
-                <li>
+                <li @class(['active' => request()->routeIs('service.list')])>
                     <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
+                </li>
+                <li @class(['active' => request()->routeIs('recharge')])>
+                    <a href="{{ route('recharge') }}" class="drop-down">Nạp Tiền</a>
                 </li>
             </ul>
             <div class="topbar-right d-lg-none d-block">

@@ -1,13 +1,10 @@
 <x-partials.layout-client>
-    @if (session('status'))
-        <p class="bg-success py-4">
-            {{ session('status') }}
-        </p>
-    @endif
+    @include('components.nofication')
+
     <div class="product-details-page">
         <div class="container shadow">
             <div class="inner-page-banner ">
-                <div class="banner-wrapper">
+                <div class="banner-wrapper p-0">
                     <div class="container-fluid">
                         <ul class="breadcrumb-list d-flex justify-content-between">
                             <li><a href="/">Trang chủ</a></li>
@@ -109,7 +106,7 @@
                                                             </svg>
                                                         </a>
                                                         <div class="car-img">
-                                                            <img class="img-fluid"
+                                                            <img class="img-fluid w-100"
                                                                 style="object-fit:cover;max-height: 121px"
                                                                 src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
                                                                 alt="image">
@@ -134,6 +131,26 @@
                                                                     alt="">
                                                                 {{ $car->car_info['mileage_traveled'] }}
                                                             </li>
+                                                            @php
+                                                                $purchased_service = DB::table('purchased_service')
+                                                                    ->where('user_id', auth()->id())
+                                                                    ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                                                    ->orderBy('expired_date', 'desc')
+                                                                    ->first();
+                                                                if ($purchased_service) {
+                                                                    if (str_contains($purchased_service->car_id, $car->id)) {
+                                                                        $isPush = true;
+                                                                    } else {
+                                                                        $isPush = false;
+                                                                    }
+                                                                }
+                                                            @endphp
+                                                            @if (isset($isPush) && $isPush)
+                                                                <li class="text-success">
+                                                                    <i class="text-success bi bi-check2-circle"></i>
+                                                                    {{ $isPush ? 'Tin này đã được đẩy!' : '' }}
+                                                                </li>
+                                                            @endif
                                                         </ul>
                                                     </div>
                                                     <label class="popup">

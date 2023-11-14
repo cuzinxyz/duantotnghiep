@@ -18,7 +18,7 @@ class SettingsController extends Controller
     public function profile()
     {
         $cars = auth()->user()->car;
-// dd($cars);
+        // dd($cars);
         return view('user-settings.profile', compact('cars'));
     }
 
@@ -26,50 +26,63 @@ class SettingsController extends Controller
     {
         $carInfo = auth()->user()->car->find($carID);
 
-        $check_expired_date = DB::table("purchased_service")
+        $purchased_service = DB::table("purchased_service")
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', Carbon::now())
-            ->orderBy('expired_date', 'desc')
-            ->first();
+            ->get();
 
-        // dd($check_expired_date);
+        // ->orderBy('expired_date', 'desc')
+        // ->first();
 
-        if (!$check_expired_date) {
+        // $carids = collect($purchased_service)->unique();
+
+        // // Chuyển đổi kết quả sang mảng và loại bỏ giá trị trống
+        // $uniqueCarIdsArray = array_unique(explode(',', $purchased_service->implode(',')));
+
+        // // Kết quả là một chuỗi chứa các giá trị car_id không trùng nhau
+        // $result = implode(',', $uniqueCarIdsArray);
+
+        // dd($purchased_service);
+
+        if ($purchased_service->count() == 0) {
             $buyVIP = true;
 
             // dd('đây là case user chưa mua gói tin');
 
             return view('user-settings.push-featured', compact('carInfo', 'buyVIP'));
         } else {
-
-            $service = $check_expired_date;
+            // dd('case nay` da mua');
+            $services = $purchased_service;
 
             # nếu user đã đanwg kí dịch vụ và còn thời hạn
             # và còn lượt đẩy tin
             # thì có thể đẩy tin mới
-            if ($service->remaining_push != 0) {
-                # kiểm tra tin này đã đc đẩy hay ch?
-                if (str_contains($service->car_id, $carID)) {
-                    return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này rồi');
+            foreach ($services as $service) :
+                if ($service->remaining_push != 0) {
+                    # case này sẽ render ra trang để đẩy tin, vì còn lượt đẩy
+
+                    # kiểm tra tin này đã đc đẩy hay ch?
+                    if (str_contains($service->car_id, $carID)) {
+                        return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này rồi');
+                    }
+                    $buyVIP = false;
+
+                    // dd('đây là case user đã mua gói tin, và còn lượt đẩy tin');
+
+                    return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service'));
+                } else {
+                    # user đã đăng ký dịch vụ nhưng đã hết lượt đẩy tin, cho phép mua lượt đẩy tin mới
+                    $buyVIP = true;
+
+                    # kiểm tra xem tin đã được đẩy hay chưa
+                    if (str_contains($service->car_id, $carID)) {
+                        return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này rồi');
+                    }
+                    // dd('đây là case user đã mua gói tin, nhưng đã hết lượt đẩy tin, allow mua gói mới');
+
+                    return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service', 'check_expired_date'));
                 }
-                $buyVIP = false;
-
-                // dd('đây là case user đã mua gói tin, và còn lượt đẩy tin');
-
-                return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service'));
-            } else {
-                # user đã đăng ký dịch vụ nhưng đã hết lượt đẩy tin, cho phép mua lượt đẩy tin mới
-                $buyVIP = true;
-
-                # kiểm tra xem tin đã được đẩy hay chưa
-                if (str_contains($service->car_id, $carID)) {
-                    return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này rồi');
-                }
-                // dd('đây là case user đã mua gói tin, nhưng đã hết lượt đẩy tin, allow mua gói mới');
-
-
-                return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service', 'check_expired_date'));
-            }
+            endforeach;
             // dd($check_expired_date);
             # nếu đã đăng ký 1 dịch vụ nào đó khác, và vẫn còn thời hạn sử dụng.
         }
@@ -81,16 +94,19 @@ class SettingsController extends Controller
         $valid = DB::table("purchased_service")
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', \Carbon\Carbon::now())
-            ->orderBy('expired_date', 'desc')
-            ->first();
+            ->get();
 
 
-        if (!$valid) {
+        if ($valid->count() == 0) {
             # TH: CHưa đăng kí gói tin nào
             $service = Service::findOrFail($request->service_id);
 
             $user = User::find(auth()->id());
             $user->account_balence -= $service->price;
+            if ($user->account_balence < 0) {
+                return redirect()->route('recharge')
+                    ->with('warning', 'Số dư hiện tại của bạn không đủ để mua dịch vụ này, vui lòng nạp thêm!');
+            }
             $user->service_id = $service->id;
             $user->expired_date = \Carbon\Carbon::now()->addDays($service->expiration_date);
             // dd($user);
@@ -115,48 +131,49 @@ class SettingsController extends Controller
                 ]);
 
             if ($purchased_service) {
-                return redirect()->route('profile')->with('status', 'Mua gói '.$service->service_name.' & đẩy tin thành công!');
+                return redirect()->route('profile')->with('status', 'Mua gói ' . $service->service_name . ' & đẩy tin thành công!');
             }
         } else {
             # TH: Đã mua gói tin
 
-            # kiểm tra xem còn lượt đẩy tin hay không
-            if ($valid->remaining_push >= 0) {
-                $purchased_service = DB::table("purchased_service")
-                    ->where('user_id', auth()->id())
-                    ->where('expired_date', '>=', \Carbon\Carbon::now())
-                    ->orderBy('expired_date', 'desc')
-                    ->first();
+            foreach ($valid as $pur_service) :
+                # kiểm tra xem còn lượt đẩy tin hay không
+                if ($pur_service->remaining_push > 0) {
+                    // $purchased_service = DB::table("purchased_service")
+                    //     ->where('user_id', auth()->id())
+                    //     ->where('expired_date', '>=', \Carbon\Carbon::now())
+                    //     ->get();
 
-                # kiểm tra xem tin hiện tại được đâry chưa/
-                if (str_contains($purchased_service->car_id, $carID)) {
-                    return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này!');
-                } else {
-                    if($purchased_service->car_id) {
-                        $purchased_service = DB::table("purchased_service")
-                            ->where('user_id', auth()->id())
-                            ->where('expired_date', '>=', \Carbon\Carbon::now())
-                            ->orderBy('expired_date', 'desc')
-                            ->update([
-                                'car_id' => $purchased_service->car_id . ',' . $carID,
-                                'remaining_push' => $purchased_service->remaining_push - 1,
-                            ]);
-                        return redirect()->route('profile')->with('status', 'Đẩy tin lên thành công!');
+                    # kiểm tra xem tin hiện tại được đẩy chưa/
+                    if (str_contains($pur_service->car_id, $carID)) {
+                        return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này!');
                     } else {
-                        $purchased_service = DB::table("purchased_service")
-                            ->where('user_id', auth()->id())
-                            ->where('expired_date', '>=', \Carbon\Carbon::now())
-                            ->orderBy('expired_date', 'desc')
-                            ->update([
-                                'car_id' => $purchased_service->car_id . ',' . $carID,
-                                'remaining_push' => $purchased_service->remaining_push - 1,
-                            ]);
-                        return redirect()->route('profile')->with('status', 'Đẩy tin lên thành công!');
+                        # tin hiện chưa được đẩy, thì sẽ đẩy tin mới vào gói đã mua đó
+                        if ($pur_service->car_id) {
+                            $update_pur_service = DB::table("purchased_service")
+                                ->where('user_id', auth()->id())
+                                ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                ->update([
+                                    'car_id' => $pur_service->car_id . ',' . $carID,
+                                    'remaining_push' => $pur_service->remaining_push - 1,
+                                ]);
+                            return redirect()->route('profile')->with('status', 'Đẩy tin lên thành công!');
+                        } else {
+                            $update_pur_service = DB::table("purchased_service")
+                                ->where('user_id', auth()->id())
+                                ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                ->orderBy('expired_date', 'desc')
+                                ->update([
+                                    'car_id' => $carID,
+                                    'remaining_push' => $pur_service->remaining_push - 1,
+                                ]);
+                            return redirect()->route('profile')->with('status', 'Đẩy tin lên thành công!');
+                        }
                     }
+                } else {
+                    return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua dịch vụ VIP!');
                 }
-            } else {
-                return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua dịch vụ VIP!');
-            }
+            endforeach;
         }
     }
 
@@ -322,5 +339,4 @@ class SettingsController extends Controller
         }
         return view('user-settings.settings', compact('user', 'err'));
     }
-
 }

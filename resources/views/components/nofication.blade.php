@@ -1,7 +1,7 @@
-@if (Session::has('info'))
+@if (Session::has('status'))
     <div class="alert alert-primary alert-dismissible" role="alert">
 
-        <strong>{{ Session::get('info') }}</strong>
+        <strong>{{ Session::get('status') }}</strong>
 
     </div>
 @endif
