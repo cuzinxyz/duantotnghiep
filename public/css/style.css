@@ -28835,3 +28835,15 @@ header.style-5 .nav-right .dropdown .account-menu.active {
 }
 
 /* custom push featured page  */
+
+/* custom recharge */
+.js-marquee {
+    display: flex;
+    column-gap: 80px;
+}
+.line-clamp-2 {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}

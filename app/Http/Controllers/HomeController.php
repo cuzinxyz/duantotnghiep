@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Banner;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
@@ -38,8 +39,6 @@ class HomeController extends Controller
 
         // $featured_cars = Car::where('recommended', 1)->get();
 
-
-
         $mark = false;
         $banners = Banner::all();
 
@@ -55,8 +54,9 @@ class HomeController extends Controller
             $mark = true;
         }
 
-        // dd($featured_cars);
+        # news data
+        $posts = News::all();
 
-        return view('index', compact('banners', 'mark', 'featured_cars'));
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts'));
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
+use App\Models\News;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -20,6 +21,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(CarController::class)->group(function () {
         Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
+
+        Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
+
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
     });
 
@@ -63,18 +67,31 @@ Route::controller(ServiceController::class)->group(function () {
     Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
 });
 
+# Posts Route
+Route::get("/bai-viet/{slug}.html", function($slug) {
+    $post = News::where('slug', $slug)->first();
+
+    if(!$post) {
+        abort(404);
+    }
+    return view('news.detail', [
+        'post' => $post
+    ]);
+})->name('news.index');
 
 Route::get('/single-category', SingleBrandCategory::class);
 
 Route::get('/danh-sach-xe', CarListingSystem::class);
 
+Route::get('/testt', function () {
+
+    // $service = Service::find(11);
+
+    // dd($service);
+    // $array = preg_split("/\r\n|\n|\r/", $service['description']);
+
+    // return $array;
+});
 
 Auth::routes();
 
-Route::get('/test', function () {
-    $service = Service::find(5);
-
-    $array = preg_split("/\r\n|\n|\r/", $service['description']);
-
-    return $array;
-});
