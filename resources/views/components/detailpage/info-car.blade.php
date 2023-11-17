@@ -76,13 +76,13 @@
                             <div class="swiper product-img-slider">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img src="images/interior-01.png" alt="image">
+                                        <img src="{{asset('images/interior-01.png')}}" alt="image">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="images/interior-02.png" alt="image">
+                                        <img src="{{asset('images/interior-02.png')}}" alt="image">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="images/interior-03.png" alt="image">
+                                        <img src="{{asset('images/interior-03.png')}}" alt="image">
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                     <div class="tab-pane fade" id="video-clip" role="tabpanel" aria-labelledby="video-clip-tab">
                         <div class="video-area">
                             <video autoplay="" loop="loop" muted="" preload="auto" controls="">
-                                <source src="{{asset('/storage/' . $carDetail->verhicle_videos)}}" type="video/mp4">
+                                <source src="{{asset('/storage/' . $carDetail->verhicle_videos[0])}}" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                                     <div class="swiper-slide">
                                         <div class="car-color-wrap">
                                             <div class="car-img">
-                                                <img src="images/color-car-05.png" alt="">
+                                                <img src="{{asset('images/color-car-05.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <h5>Lamborghini Murciélago (Black)</h5>
@@ -126,7 +126,7 @@
                                     <div class="swiper-slide">
                                         <div class="car-color-wrap">
                                             <div class="car-img">
-                                                <img src="images/color-car-06.png" alt="">
+                                                <img src="{{asset('images/color-car-06.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <h5>Lamborghini Murciélago (Blue)</h5>
@@ -136,7 +136,7 @@
                                     <div class="swiper-slide">
                                         <div class="car-color-wrap">
                                             <div class="car-img">
-                                                <img src="images/color-car-07.png" alt="">
+                                                <img src="{{asset('images/color-car-07.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <h5>Lamborghini Murciélago (Pink)</h5>
@@ -146,7 +146,7 @@
                                     <div class="swiper-slide">
                                         <div class="car-color-wrap">
                                             <div class="car-img">
-                                                <img src="images/color-car-08.png" alt="">
+                                                <img src="{{asset('images/color-car-08.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <h5>Lamborghini Murciélago (Orange)</h5>
@@ -267,7 +267,7 @@
                             <img src="{{asset('images/condition.svg')}}" alt="">
                         </div>
                         <div class="content">
-                            <h6>{{$carDetail->car_info["condition"]}} </h6>
+                            <h6>Xe cũ </h6>
                             <span>Tình trạng</span>
                         </div>
                     </li>
@@ -305,7 +305,7 @@
                         <ul>
                             <li><span>Hãng xe</span> {{$carDetail->brand->brand_name}}</li>
                             <li><span>Dòng xe</span> {{$carDetail->model->model_name}}</li>
-                            <li><span>Năm sản xuất</span> {{$carDetail->car_info["manufactured"]}}</li>
+                            <li><span>Năm sản xuất</span> {{$carDetail->car_info["year_of_manufacture"]}}</li>
                             <li><span>Màu sắc</span> {{$carDetail->car_info["color"]}}</li>
                         </ul>
                         <ul>
@@ -428,7 +428,7 @@
                     <li>
                         <div class="single-comment-area">
                             <div class="author-img">
-                                <img src="images/comment-author-01.png" alt="">
+                                <img src="{{asset('images/comment-author-01.png')}}" alt="">
                             </div>
                             <div class="comment-content">
                                 <div class="author-name-deg">
@@ -453,7 +453,7 @@
                             <li>
                                 <div class="single-comment-area">
                                     <div class="author-img">
-                                        <img src="images/comment-author-02.png" alt="">
+                                        <img src="{{asset('images/comment-author-02.png')}}" alt="">
                                     </div>
                                     <div class="comment-content">
                                         <div class="author-name-deg">
@@ -479,7 +479,7 @@
                             <li>
                                 <div class="single-comment-area">
                                     <div class="author-img">
-                                        <img src="images/comment-author-03.png" alt="">
+                                        <img src="{{asset('images/comment-author-03.png')}}" alt="">
                                     </div>
                                     <div class="comment-content">
                                         <div class="author-name-deg">
@@ -507,7 +507,7 @@
                     <li>
                         <div class="single-comment-area">
                             <div class="author-img">
-                                <img src="images/comment-author-04.png" alt="">
+                                <img src="{{asset('images/comment-author-04.png')}}" alt="">
                             </div>
                             <div class="comment-content">
                                 <div class="author-name-deg">
@@ -532,7 +532,7 @@
                     <li>
                         <div class="single-comment-area">
                             <div class="author-img">
-                                <img src="images/comment-author-05.png" alt="">
+                                <img src="{{asset('images/comment-author-05.png')}}" alt="">
                             </div>
                             <div class="comment-content">
                                 <div class="author-name-deg">

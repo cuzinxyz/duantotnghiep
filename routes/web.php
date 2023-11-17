@@ -10,7 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\CartDetailController;
+use App\Http\Controllers\CarDetailController;
 
 use App\Http\Controllers\WishlishController;
 
@@ -19,7 +19,7 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 Route::controller(CarController::class)->group(function () {
-    Route::get('/dang-tin-ban-xe', \App\Livewire\Form2::class)->name('sellCar');
+    Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
     Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
 });
 
@@ -65,7 +65,7 @@ Auth::routes();
 Route::get('/single-category', SingleBrandCategory::class);
 
 // Trang chi tiết xe
-Route::controller(CartDetailController::class)->group(function() {
+Route::controller(CarDetailController::class)->group(function() {
     Route::get('/chi-tiet-xe/{slug}', 'index')->name('car-detail');
 });
 
