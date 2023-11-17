@@ -45,6 +45,12 @@ class Car extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function model()
+    {
+        return $this->belongsTo(ModelCar::class, 'model_car_id', 'id');
+    }
+
+
     public function city() {
         return $this->belongsTo(Province::class);
     }
@@ -53,4 +59,6 @@ class Car extends Model
     {
         return $this->belongsTo(Province::class, 'city_id');
     }
+
+
 }

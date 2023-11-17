@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\CarDetailController;
+
 use App\Http\Controllers\WishlishController;
 use App\Models\News;
 
@@ -95,3 +97,19 @@ Route::get('/testt', function () {
 
 Auth::routes();
 
+
+
+Route::get('/single-category', SingleBrandCategory::class);
+
+// Trang chi tiết xe
+Route::controller(CarDetailController::class)->group(function() {
+    Route::get('/chi-tiet-xe/{slug}', 'index')->name('car-detail');
+});
+
+Route::get('/test', function() {
+    $service = Service::find(5);
+
+    $array = preg_split("/\r\n|\n|\r/", $service['description']);
+
+    return $array;
+});

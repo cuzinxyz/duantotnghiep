@@ -1,92 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+    <meta charset="utf-8" />
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="{{ config('app.name') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
 
-  <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
 
-  <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
 
-  <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
 
-  <link href="{{ asset('css/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link href="css/jquery.fancybox.min.css" rel="stylesheet">
 
-  <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">
+    <link href="css/fontawesome.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
+    {{-- <link rel="stylesheet" href="css/swiper-bundle.min.css"> --}}
 
-  <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
 
-  <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="css/magnific-popup.css">
 
-  <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="css/boxicons.min.css" rel="stylesheet">
 
-  <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+    {{-- <link href="css/nice-select.css" rel="stylesheet"> --}}
 
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="css/style.css">
+    <title>{{ $title ?? 'Page Title' }}</title>
 
-  <title>Drivco - Car Dealer HTML Template</title>
-  <link rel="icon" href="{{asset('images/sm-logo.svg')}}" type="image/gif" sizes="20x20">
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    @filamentStyles
+    @vite('resources/css/app.css')
 </head>
-<body class="tt-magic-cursor home-5">
 
-{{ $slot }}
+<body class="antialiase tt-magic-cursord">
 
-<script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
-<script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
+    @include('components.partials.header')
 
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
+    {{ $slot }}
 
-<script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
-<script src="{{ asset('js/slick.js') }}"></script>
+    @include('components.partials.footer')
 
-<script src="{{ asset('js/waypoints.min.js') }}"></script>
+    @livewire('notifications')
 
-<script src="{{ asset('js/wow.min.js') }}"></script>
 
-<script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
 
-<script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
+    {{-- <script data-cfasync="false" src="js/email-decode.min.js"></script> --}}
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
 
-<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
 
-<script src="{{ asset('js/gsap.min.js') }}"></script>
-<script src="{{ asset('js/simpleParallax.min.js') }}"></script>
-<script src="{{ asset('js/TweenMax.min.js') }}"></script>
+    {{-- <script src="js/swiper-bundle.min.js"></script> --}}
+    {{-- <script src="js/slick.js"></script> --}}
 
-<script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
+    <script src="js/waypoints.min.js"></script>
 
-<script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+    <script src="js/wow.min.js"></script>
 
-<script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
+    {{-- <script src="js/jquery.counterup.min.js"></script> --}}
 
-<script src="{{ asset('js/custom.js') }}"></script>
-<script>
-  $(".marquee_text").marquee({
-    direction: "left",
-    duration: 25000,
-    gap: 50,
-    delayBeforeStart: 0,
-    duplicated: true,
-    startVisible: true,
-  });
-  $(".marquee_text2").marquee({
-    direction: "left",
-    duration: 25000,
-    gap: 50,
-    delayBeforeStart: 0,
-    duplicated: true,
-    startVisible: true,
-  });
-</script>
+    <script src="js/isotope.pkgd.min.js"></script>
 
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
+    <script src="js/gsap.min.js"></script>
+    <script src="js/simpleParallax.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+
+    <script src="js/jquery.marquee.min.js"></script>
+
+    <script src="js/jquery.nice-select.min.js"></script>
+
+    <script src="js/jquery.fancybox.min.js"></script>
+
+    <script src="js/custom.js"></script>
+    <script>
+        $(".marquee_text").marquee({
+            direction: "left",
+            duration: 25000,
+            gap: 50,
+            delayBeforeStart: 0,
+            duplicated: true,
+            startVisible: true,
+        });
+        $(".marquee_text2").marquee({
+            direction: "left",
+            duration: 25000,
+            gap: 50,
+            delayBeforeStart: 0,
+            duplicated: true,
+            startVisible: true,
+        });
+    </script>
+
+    @filamentScripts
+    @vite('resources/js/app.js')
 </body>
+
 </html>

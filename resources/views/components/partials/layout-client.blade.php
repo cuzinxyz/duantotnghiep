@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="application-name" content="{{ config('app.name') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -38,13 +39,14 @@
 
     <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
+    
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     @stack('styles')
+
 
 </head>
 
@@ -108,7 +110,7 @@
                 </li>
                 <li>
                     @auth
-                        <a href="{{ route('wishlish') }}">
+                        <a href="#">
                         @else
                             <a href="{{ route('login') }}">
                             @endauth
@@ -118,7 +120,7 @@
                                     d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
                                 </path>
                             </svg>
-                            LƯU TIN
+                            SAVE
                         </a>
                 </li>
                 <li>
@@ -148,14 +150,19 @@
                 </div>
             </div>
             <ul class="menu-list">
-                <li @class(['active' => request()->routeIs('homepage')])>
-                    <a href="#" class="drop-down">Trang Chủ</a>
+                <li class="menu-item-has-children" @class(['active' => request()->routeIs('homepage')])>
+                    <a href="#" class="drop-down">Home</a><i class="bi bi-plus dropdown-icon"></i>
+                    <ul class="sub-menu">
+                        <li><a href="/">Home 01</a></li>
+                        <li><a href="index2.html">Home 02</a></li>
+                        <li><a href="index3.html">Home 03</a></li>
+                        <li><a href="index4.html">Home 04</a></li>
+                        <li><a href="index5.html">Home 05</a></li>
+                        <li><a href="index6.html">Home 06</a></li>
+                    </ul>
                 </li>
-                <li @class(['active' => request()->routeIs('service.list')])>
+                <li>
                     <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
-                </li>
-                <li @class(['active' => request()->routeIs('recharge')])>
-                    <a href="{{ route('recharge') }}" class="drop-down">Nạp Tiền</a>
                 </li>
             </ul>
             <div class="topbar-right d-lg-none d-block">
@@ -226,8 +233,8 @@
                             <ul>
                                 <li class="pd-cart">
                                     <div class="d-flex align-items-start gap-3">
-                                        <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                            src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name='.auth()->user()->name }}"
+                                        <img style="width: 50px;height:50px" class="object-fit-cover rounded-circle"
+                                            src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}"
                                             alt="">
 
                                         <div class="d-flex flex-column">
@@ -246,8 +253,7 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Số dư</span>
                                             <div class="fw-bold">
-                                                {{ number_format(auth()->user()->account_balence) }} <i
-                                                    class="bi bi-cash"></i>
+                                                {{ number_format(auth()->user()->account_balence) }} <i class="bi bi-cash"></i>
                                             </div>
                                         </div>
 
@@ -298,26 +304,6 @@
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <hr class="m-0">
-                                <li class="my-2">
-                                    <div class="cart-block">
-                                        <div class="account-footer" style="min-width: 230px">
-                                            <div class="footer-button mx-3">
-                                                <div class="d-flex justify-content-between align-items-center gap-3">
-                                                    <a href="{{ route('settings') }}" class="w-50 primary-btn1 btn-dark1">
-                                                        <i class="bi bi-gear"></i>
-                                                        Settings
-                                                    </a>
-                                                    <form class="w-50" action="{{ route('logout') }}" method="POST">
-                                                        @csrf
-                                                        <button class="w-100 primary-btn1" type="submit"><i
-                                                                class="bi bi-box-arrow-right"></i> Logout</button>
-                                                    </form>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -374,7 +360,7 @@
             </div>
         </header>
 
-        {{ $slot }}
+    {{ $slot }}
 
         <footer class="style-2">
             <div class="container-fluid">
@@ -748,42 +734,63 @@
                 </div>
             </div>
         </footer>
-        @livewireScripts
 
-        <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
-        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
 
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
 
-        <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
-        <script src="{{ asset('js/slick.js') }}"></script>
+    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('js/slick.js') }}"></script>
 
-        <script src="{{ asset('js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('js/waypoints.min.js') }}"></script>
 
-        <script src="{{ asset('js/wow.min.js') }}"></script>
+    <script src="{{ asset('js/wow.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
 
-        <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
-        <script src="{{ asset('js/gsap.min.js') }}"></script>
-        <script src="{{ asset('js/simpleParallax.min.js') }}"></script>
-        <script src="{{ asset('js/TweenMax.min.js') }}"></script>
+    <script src="{{ asset('js/gsap.min.js') }}"></script>
+    <script src="{{ asset('js/simpleParallax.min.js') }}"></script>
+    <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.marquee.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
 
-        <script src="{{ asset('js/custom.js') }}"></script>
 
-        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+
+
+    <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
+
+    <script src="{{ asset('js/custom.js') }}"></script>
+
+        <script>
+            //list grid view
+            jQuery(document).ready(function($) {
+                $('.lists').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').addClass('list-group-wrapper').removeClass(
+                        'grid-group-wrapper');
+                });
+                $('.grid').click(function(event) {
+                    event.preventDefault();
+                    $('.list-grid-product-wrap').removeClass('list-group-wrapper').addClass(
+                        'grid-group-wrapper');
+                });
+            });
+            $('.list-grid-btn-group li').on('click', function() {
+                $(this).addClass('active').siblings().removeClass('active');
+            })
+        </script>
+
 
         <script>
             $(".marquee_text").marquee({
@@ -804,9 +811,124 @@
             });
         </script>
 
+        <script>
+            $("#registerForm").validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "name": {
+                        required: true,
+                        minlength: 3
+                    },
+                    "email": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "re-password": {
+                        required: true,
+                        equalTo: "#password",
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    "name": {
+                        required: "Bắt buộc nhập name",
+                        minlength: "Hãy nhập tối thiểu 3 ký tự"
+                    },
+                    "email": {
+                        required: "Bắt buộc nhập email",
+                        minlength: "Hãy nhập tối thiểu 6 ký tự"
+                    },
+                    "password": {
+                        required: "Bắt buộc nhập password",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    },
+                    "re-password": {
+                        required: "Bắt buộc nhập re-password",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    },
+                    "re-password": {
+                        equalTo: "Hai password phải giống nhau",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    }
+                }
+            });
 
-        @stack('scripts')
+            $("#loginForm").validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "email": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    "email": {
+                        required: "Bắt buộc nhập email",
+                        minlength: "Hãy nhập tối thiểu 6 ký tự"
+                    },
+                    "password": {
+                        required: "Bắt buộc nhập password",
+                        minlength: "Hãy nhập ít nhất 6 ký tự"
+                    }
+                }
+            });
+        </script>
 
-    </body>
+        <script>
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
 
-    </html>
+        <script>
+            function addToWishList(car_id) {
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: "/them-yeu-thich/" + car_id,
+                    success: function(data) {
+                        //Start Message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                icon: 'error',
+                                title: data.error
+                            })
+                        }
+                        //End Message
+                    }
+                })
+            }
+        </script>
+
+    @stack('scripts')
+
+</body>
+
+</html>
