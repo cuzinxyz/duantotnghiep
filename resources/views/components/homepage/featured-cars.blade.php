@@ -31,7 +31,7 @@
                             <div class="product-card5">
                                 <div class="product-img">
                                     <div class="product-price">
-                                        <span>$7,656.00</span>
+                                        <span>{{ number_format($car->price) }}đ</span>
                                     </div>
                                     <a href="#" class="fav">
                                         <svg width="14" height="13" viewBox="0 0 14 14"
@@ -56,25 +56,29 @@
                                         </div>
                                     </div>
                                     <div class="swiper product-img-slider">
+                                        {{-- <div class="swiper-wrapper">
+                                            @foreach ($car->verhicle_image_library as $carImage)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset('storage/' . $carImage) }}" alt="{{ $car->title }}">
+                                            </div>
+                                            @endforeach
+                                        </div> --}}
+                                        @php
+                                            // $car->verhicle_image_library = json_decode($car->verhicle_image_library, true);
+                                        @endphp
                                         <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
+                                            @foreach ($car->verhicle_image_library as $carImage)
+                                                <div class="swiper-slide">
+                                                    <img src="/storage/{{ $carImage }}"
+                                                        alt="image">
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
                                 <div class="product-content">
                                     <div class="location">
-                                        <a href="#"><i class="bi bi-geo-alt"></i> Panama City</a>
+                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
                                     </div>
                                     <h6><a href="car-deatils.html">Mercedes-Benz Class-2023</a></h6>
                                     <ul class="features">

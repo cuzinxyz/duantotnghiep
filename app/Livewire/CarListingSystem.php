@@ -88,7 +88,7 @@ class CarListingSystem extends Component
         // }
 
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->where('status', 0)->paginate(2)
+            'cars' => $carQuery->where('status', 3)->paginate(2)
         ]);
     }
 }

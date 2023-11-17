@@ -30,6 +30,8 @@ class NewsResource extends Resource
 {
     protected static ?string $navigationGroup = 'Quản lý nội dung';
 
+    protected static ?string $navigationLabel = 'Tin tức';
+
     protected static ?string $model = News::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -58,7 +60,13 @@ class NewsResource extends Resource
                 Section::make('Meta')->schema(
                     [
                         Textarea::make('summary')->required()->label('Summary'),
-                        FileUpload::make('thumbnailImage')->image()->directory('news/thumbnails')->required()->label('Thumbnail Image'),
+                        FileUpload::make('thumbnailImage')
+                            ->directory('news/thumbnails')
+                            ->required()
+                            ->label('Thumbnail Image')
+                            ->image()
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('16:9'),
                         Checkbox::make('isPublished')->label('Published'),
                     ]
                 ),

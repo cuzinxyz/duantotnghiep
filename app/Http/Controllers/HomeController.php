@@ -34,7 +34,8 @@ class HomeController extends Controller
             Cookie::queue('recent_ids', json_encode($recentIds), 60);
         } else {
             // Nếu dữ liệu <= 5 thì không áp dụng điều kiện trên
-            $featured_cars = DB::table('cars')->inRandomOrder()->limit(5)->get();
+            $featured_cars = Car::inRandomOrder()->limit(5)->get();
+            // $featured_cars = DB::table('cars')->inRandomOrder()->limit(5)->get();
         }
 
         // $featured_cars = Car::where('recommended', 1)->get();
@@ -55,8 +56,9 @@ class HomeController extends Controller
         }
 
         # news data
-        $posts = News::all();
-
+        $posts = News::where('isPublished', 1)
+            ->get();
+// dd($featured_cars);
         return view('index', compact('banners', 'mark', 'featured_cars', 'posts'));
     }
 }

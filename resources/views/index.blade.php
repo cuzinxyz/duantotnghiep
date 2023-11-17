@@ -2524,7 +2524,7 @@
                 <div class="col-lg-4 col-md-6 wow fadeInUp" style="flex: 1" data-wow-delay="{{ $wowDelay+100 }}ms">
                     <div class="news-card style-2 d-flex flex-column h-100">
                         <div class="news-img" style="flex:1">
-                            <a href="{{ route('news.index', $post->slug) }}"><img style="height: 100%" src="{{ asset('storage/'.$post->thumbnailImage) }}" alt=""></a>
+                            <a href="{{ route('news.index', $post->slug) }}"><img src="{{ asset('storage/'.$post->thumbnailImage) }}" alt=""></a>
                             {{-- <div class="date">
                                 <a href="blog-standard.html">Buying Advice</a>
                             </div> --}}
