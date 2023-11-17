@@ -130,12 +130,12 @@
                                                             <li>
                                                                 <img src="{{ asset('images/fuel.svg') }}"
                                                                     alt="">
-                                                                {{ $car->car_info['fuel'] }}
+                                                                {{ $car->car_info['fuelType'] }}
                                                             </li>
                                                             <li>
                                                                 <img src="{{ asset('images/electric.svg') }}"
                                                                     alt="">
-                                                                {{ $car->car_info['mileage_traveled'] }}
+                                                                {{ $car->car_info['mileage'] }}
                                                             </li>
                                                             @php
                                                                 $purchased_services = DB::table('purchased_service')
@@ -315,12 +315,12 @@
                                                             <li>
                                                                 <img src="{{ asset('images/fuel.svg') }}"
                                                                     alt="">
-                                                                {{ $car->car_info['fuel'] }}
+                                                                {{ $car->car_info['fuelType'] }}
                                                             </li>
                                                             <li>
                                                                 <img src="{{ asset('images/electric.svg') }}"
                                                                     alt="">
-                                                                {{ $car->car_info['mileage_traveled'] }}
+                                                                {{ $car->car_info['mileage'] }}
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -373,12 +373,12 @@
                                                             <li>
                                                                 <img src="{{ asset('images/fuel.svg') }}"
                                                                     alt="">
-                                                                {{ $car->car_info['fuel'] }}
+                                                                {{ $car->car_info['fuelType'] }}
                                                             </li>
                                                             <li>
                                                                 <img src="{{ asset('images/electric.svg') }}"
                                                                     alt="">
-                                                                {{ $car->car_info['mileage_traveled'] }}
+                                                                {{ $car->car_info['mileage'] }}
                                                             </li>
                                                         </ul>
                                                     </div>

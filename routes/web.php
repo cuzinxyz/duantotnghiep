@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\News;
 use App\Models\Service;
 use App\Livewire\CarListingSystem;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
-use App\Models\News;
+use App\Http\Controllers\CarDetailController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -94,4 +95,10 @@ Route::get('/testt', function () {
 });
 
 Auth::routes();
+
+// Trang chi tiết xe
+Route::controller(CarDetailController::class)->group(function () {
+    Route::get('/chi-tiet-xe/{slug}', 'index')->name('car-detail');
+});
+
 
