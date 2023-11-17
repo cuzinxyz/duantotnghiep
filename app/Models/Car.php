@@ -58,4 +58,9 @@ class Car extends Model
     {
         return $this->belongsTo(District::class, 'district_id');
     }
+
+    public function model()
+    {
+        return $this->belongsTo(ModelCar::class, 'model_car_id', 'id');
+    }
 }
