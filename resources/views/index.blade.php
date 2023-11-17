@@ -2516,54 +2516,30 @@
                     </div>
                 </div>
             </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                    <div class="news-card style-2">
-                        <div class="news-img">
-                            <a href="blog-details.html"><img src="images/news-01.png" alt=""></a>
-                            <div class="date">
+            <div class="row g-4 justify-content-between">
+                @php
+                    $wowDelay = 100;
+                @endphp
+                @foreach ($posts as $post)
+                <div class="col-lg-4 col-md-6 wow fadeInUp" style="flex: 1" data-wow-delay="{{ $wowDelay+100 }}ms">
+                    <div class="news-card style-2 d-flex flex-column h-100">
+                        <div class="news-img" style="flex:1">
+                            <a href="{{ route('news.index', $post->slug) }}"><img style="height: 100%" src="{{ asset('storage/'.$post->thumbnailImage) }}" alt=""></a>
+                            {{-- <div class="date">
                                 <a href="blog-standard.html">Buying Advice</a>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="content">
-                            <h6><a href="blog-details.html">The Car Enthusiast: Exploring the World of Cars and
-                                    Driving.</a>
+                            <h6>
+                                <a href="{{ route('news.index', $post->slug) }}">{{ $post->title }}</a>
                             </h6>
-                            <div class="news-btm d-flex align-items-center justify-content-between">
-                                <div class="author-area">
-                                    <div class="author-img">
-                                        <img src="images/author-01.png" alt="">
-                                    </div>
-                                    <div class="author-content">
-                                        <h6>Mr. Morris Mannu</h6>
-                                        <a href="blog-standard.html">Posted on - 03 April, 2023</a>
-                                    </div>
-                                </div>
-                                <div class="social-area">
-                                    <ul class="social-icons">
-                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a>
-                                        </li>
-                                        <li><a href="https://twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i
-                                                    class="bx bxl-pinterest-alt"></i></a>
-                                        </li>
-                                        <li><a href="https://www.instagram.com/"><i
-                                                    class="bx bxl-instagram"></i></a></li>
-                                    </ul>
-                                    <div class="share-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13"
-                                            viewBox="0 0 12 13">
-                                            <path
-                                                d="M10.125 0.750223C9.82667 0.750223 9.54052 0.868748 9.32955 1.07972C9.11857 1.2907 9.00005 1.57684 9.00005 1.8752C9.00005 2.17357 9.11857 2.45971 9.32955 2.67069C9.54052 2.88166 9.82667 3.00019 10.125 3.00019C10.4234 3.00019 10.7095 2.88166 10.9205 2.67069C11.1315 2.45971 11.25 2.17357 11.25 1.8752C11.25 1.57684 11.1315 1.2907 10.9205 1.07972C10.7095 0.868748 10.4234 0.750223 10.125 0.750223ZM8.25006 1.8752C8.25001 1.43529 8.40464 1.00936 8.68691 0.671933C8.96917 0.33451 9.3611 0.107081 9.79411 0.0294379C10.2271 -0.0482056 10.6736 0.0288801 11.0556 0.247208C11.4375 0.465536 11.7305 0.811204 11.8833 1.22373C12.0361 1.63626 12.0389 2.08939 11.8914 2.50382C11.7439 2.91826 11.4553 3.26762 11.0762 3.49078C10.6971 3.71395 10.2515 3.7967 9.81758 3.72456C9.38362 3.65243 8.98883 3.42999 8.7023 3.09618L3.66389 5.43615C3.77972 5.80322 3.77972 6.19705 3.66389 6.56413L8.7023 8.90409C9.00518 8.55184 9.42804 8.32458 9.88893 8.26634C10.3498 8.2081 10.8159 8.32303 11.1969 8.58886C11.5779 8.85469 11.8466 9.25249 11.951 9.70517C12.0554 10.1578 11.988 10.6332 11.7619 11.039C11.5359 11.4448 11.1672 11.7523 10.7273 11.9018C10.2875 12.0512 9.8078 12.0321 9.38125 11.8481C8.9547 11.6641 8.61165 11.3282 8.4186 10.9057C8.22554 10.4832 8.19621 10.004 8.33631 9.56108L3.29789 7.22112C3.04847 7.51179 2.71602 7.7191 2.34524 7.81517C1.97447 7.91124 1.58317 7.89145 1.22398 7.75847C0.864793 7.62548 0.554947 7.38569 0.336124 7.07133C0.117301 6.75698 0 6.38315 0 6.00014C0 5.61712 0.117301 5.24329 0.336124 4.92894C0.554947 4.61459 0.864793 4.37479 1.22398 4.24181C1.58317 4.10882 1.97447 4.08903 2.34524 4.1851C2.71602 4.28117 3.04847 4.48848 3.29789 4.77916L8.33631 2.4392C8.27896 2.2567 8.24987 2.0665 8.25006 1.8752ZM1.87517 4.87515C1.5768 4.87515 1.29066 4.99368 1.07969 5.20465C0.868711 5.41563 0.750187 5.70177 0.750187 6.00014C0.750187 6.2985 0.868711 6.58464 1.07969 6.79562C1.29066 7.00659 1.5768 7.12512 1.87517 7.12512C2.17353 7.12512 2.45968 7.00659 2.67065 6.79562C2.88162 6.58464 3.00015 6.2985 3.00015 6.00014C3.00015 5.70177 2.88162 5.41563 2.67065 5.20465C2.45968 4.99368 2.17353 4.87515 1.87517 4.87515ZM10.125 9.00009C9.82667 9.00009 9.54052 9.11861 9.32955 9.32959C9.11857 9.54056 9.00005 9.8267 9.00005 10.1251C9.00005 10.4234 9.11857 10.7096 9.32955 10.9205C9.54052 11.1315 9.82667 11.25 10.125 11.25C10.4234 11.25 10.7095 11.1315 10.9205 10.9205C11.1315 10.7096 11.25 10.4234 11.25 10.1251C11.25 9.8267 11.1315 9.54056 10.9205 9.32959C10.7095 9.11861 10.4234 9.00009 10.125 9.00009Z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                            <p class="line-clamp-2">
+                                {{ $post->summary }}
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                {{-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="300ms">
                     <div class="news-card style-2">
                         <div class="news-img">
                             <a href="blog-details.html"><img src="images/news-02.png" alt=""></a>
@@ -2653,7 +2629,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                @endforeach
             </div>
         </div>
     </div>

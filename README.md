@@ -1,3 +1,9 @@
+STATUS CAR:
+0. chờ duyệt.
+1. đã duyệt.
+2. bị từ chối.
+3. vi phạm.
+
 > Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
  
 #  Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.

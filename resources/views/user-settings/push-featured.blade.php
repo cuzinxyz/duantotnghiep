@@ -1,10 +1,4 @@
 <x-partials.layout-client>
-    <style>
-        .custom-hover:hover {
-            background-color: #e7e7e7;
-        }
-    </style>
-
     @if ($buyVIP)
         <div class="news-section five mb-100">
             <div class="container-fluid p-5 rounded-3 shadow">
@@ -14,19 +8,36 @@
                     <span>Đẩy tin</span>
                 </div>
                 <hr class="border-2">
-                <div class="row">
+
+                <div class="row" style="row-gap: 20px">
+                    @if(isset($service))
+                    <div class="text-black">
+                        <p class="mb-1">Bạn đang đăng ký gói dịch vụ: <strong>
+                                {{ auth()->user()->service->service_name }} </strong></p>
+                        <p>Bạn còn: <strong> {{ $service->remaining_push }} </strong> lượt đẩy tin.</p>
+                    </div>
+                    @endif
                     <div class="col-lg-4 col-md-5 col-sm-6">
-                        <div class="card car_card"
-                            style="background-image: url({{ asset('storage/' . $carInfo->verhicle_image_library[0]) }})">
-                            <div class="card__img">
-                                {{-- <img class="svg" src="{{ asset('storage/' . $carInfo->verhicle_image_library[0]) }}" alt=""> --}}
+                        <div class="product-card2">
+                            <div class="product-img">
+                                <a href="#" class="fav">
+                                    <svg width="14" height="13" viewBox="0 0 14 14"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <img class="w-100" style="height: 300px;object-fit:cover" src="{{ asset('storage/' . $carInfo->verhicle_image_library[0]) }}" alt="">
                             </div>
-                            <div class="card__title">{{ $carInfo->title }}</div>
-                            <div class="card__subtitle">{{ $carInfo->brand->brand_name }}
-                                {{ $carInfo->brand->models->model_name }}</div>
-                            <div class="card__wrapper">
-                                <button class="card__btn">Button</button>
-                                <button class="card__btn card__btn-solid">Button</button>
+                            <div class="product-content">
+                                <div class="details-btn">
+                                    <a href="car-deatils.html"><i class="bi bi-arrow-right-short"></i></a>
+                                </div>
+                                <div class="price">
+                                    <strong>${{ number_format($carInfo->price) }}</strong>
+                                </div>
+                                <h6><a href="car-deatils.html">{{ $carInfo->title }}</a></h6>
                             </div>
                         </div>
                     </div>
@@ -42,97 +53,52 @@
                 </div>
                 <hr class="border-2">
 
-
-                <div class="row my-3">
-                    <div class="col-md-6 col-sm-12">
+                <div class="row my-3" style="row-gap: 20px">
+                    <div class="col-md-4 col-sm-3">
                         <img src="{{ asset('images/bump.gif') }}" alt="">
                     </div>
 
-                    <div class="col-md-6 col-sm-12">
-                        <form id="options">
-                            <div class="service_options wrapper">
-                                <div class="card">
-                                    {{-- <form action="{{ route('payment-vnpay', 6) }}"> --}}
-                                    <input class="input serviceOption" type="radio" name="radioName" value="6">
-                                    <span class="check"></span>
-                                    <label class="label">
-                                        <div class="title">7 NGÀY</div>
-                                        <div class="price">
-                                            <span class="span">
-                                                đ
-                                            </span>
-                                            50.000
-                                            <span class="span">/lượt</span>
-                                        </div>
+                    <div class="col-md-8 col-sm-9 d-flex flex-column">
+                        <form action="{{ route('confirmPush', $carInfo->id) }}" method="POST" class="mb-3">
+                            @csrf
+                            <label class="fw-bold font-monospace" for="">Chọn loại tin lẻ:</label>
+                            <div class="radio-inputs options-push w-100">
+                                @foreach (\App\Models\Service::where('service_name', 'LIKE', '%tin lẻ%')->get() as $service)
+                                    <label class="radio">
+                                        <input type="radio" name="service_id" required value="{{ $service->id }}">
+                                        <span class="name">{{ $service->service_name }}</span>
                                     </label>
-                                    {{-- </form> --}}
-                                </div>
-                                {{-- <form action="{{ route('payment-vnpay', 8) }}"> --}}
-                                <div class="card">
-                                    <input class="input serviceOption" type="radio" name="radioName" value="8">
-                                    <span class="check"></span>
-                                    <label class="label">
-                                        <div class="title">15 NGÀY</div>
-                                        <div class="price">
-                                            <span class="span">
-                                                đ
-                                            </span>
-                                            150.000
-                                            <span class="span">/lượt</span>
+                                @endforeach
+                            </div>
+
+                            <div class="mt-3 d-flex gap-4 justify-content-center">
+                                @foreach (\App\Models\Service::where('service_name', 'LIKE', '%tin lẻ%')->get() as $service)
+                                    <div class="text-center p-2 rounded-3 ">
+                                        <div class="icon">
+                                            <i class="fs-4 bi bi-award text-success"></i>
                                         </div>
-                                    </label>
-                                </div>
-                                {{-- </form> --}}
-                                {{-- <form action="{{ route('payment-vnpay', 7) }}"> --}}
-                                <div class="card">
-                                    <input class="input serviceOption" type="radio" name="radioName" value="7">
-                                    <span class="check"></span>
-                                    <label class="label">
-                                        <div class="title">30 NGÀY</div>
-                                        <div class="price">
-                                            <span class="span">
-                                                đ
+                                        <div class="content d-flex flex-column">
+                                            <span>{{ $service->service_name }}</span>
+                                            <span>
+                                                <strong>{{ number_format($service->price) }}</strong>
                                             </span>
-                                            200.000
-                                            <span class="span">/lượt</span>
                                         </div>
-                                    </label>
-                                </div>
-                                {{-- </form> --}}
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div class="text-center mt-auto d-flex justify-content-center">
+                                {{-- <input type="number" name="service_id" hidden value="{{ $service }}"> --}}
+                                <button id="payment" type="submit" class="primary-btn1 btn-dark1">THANH TOÁN</button>
+                                <button onclick="window.location='{{ route('profile') }}'" class="btn btn-light">QUAY LẠI</button>
                             </div>
                         </form>
+
                     </div>
-                </div>
-
-
-                <div class="text-center mt-5">
-                    <button id="payment" class="btn btn-secondary">THANH TOÁN</button>
-                    <button class="btn btn-light">QUAY LẠI</button>
                 </div>
 
             </div>
         </div>
-
-        @push('scripts')
-            <script>
-                $("#payment").on("click", () => {
-                    var servOptions = document.querySelectorAll(".serviceOption");
-                    servOptions.forEach(option => {
-                        // console.log(option);
-                        if (option.checked) {
-                            console.log(option.value);
-
-                            var url = `/payment/${option.value}`;
-                            var form = $('<form action="' + url + '" method="post">' +
-                                '<input type="hidden" name="_token" value="JGeLY6U22bg28pvCKU4aznXm7TISiSLF2nYJxfwR" autocomplete="off">' +
-                                '</form>');
-                            $('body').append(form);
-                            form.submit();
-                        }
-                    });
-                })
-            </script>
-        @endpush
     @else
         <div class="news-section five mb-100">
             <div class="container-fluid p-5 rounded-3 shadow">
@@ -153,19 +119,30 @@
 
                     <div class="card-confirm row">
                         <div class="col-lg-4 col-md-5 col-sm-6">
-                            <div class="card car_card"
-                                style="background-image: url({{ asset('storage/' . $carInfo->verhicle_image_library[0]) }})">
-                                <div class="card__img">
-                                    {{-- <img class="svg" src="{{ asset('storage/' . $carInfo->verhicle_image_library[0]) }}" alt=""> --}}
+                            <div class="product-card2">
+                                <div class="product-img">
+                                    <a href="#" class="fav">
+                                        <svg width="14" height="13" viewBox="0 0 14 14"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <img src="{{ asset('storage/' . $carInfo->verhicle_image_library[0]) }}"
+                                        alt="">
                                 </div>
-                                <div class="card__title">{{ $carInfo->title }}</div>
-                                <div class="card__subtitle">{{ $carInfo->brand->brand_name }}
-                                    {{ $carInfo->brand->models->model_name }}</div>
-                                <div class="card__wrapper">
-                                    <button class="card__btn">Button</button>
-                                    <button class="card__btn card__btn-solid">Button</button>
+                                <div class="product-content">
+                                    <div class="details-btn">
+                                        <a href="car-deatils.html"><i class="bi bi-arrow-right-short"></i></a>
+                                    </div>
+                                    <div class="price">
+                                        <strong>${{ number_format($carInfo->price) }}</strong>
+                                    </div>
+                                    <h6><a href="car-deatils.html">{{ $carInfo->title }}</a></h6>
                                 </div>
                             </div>
+
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-6">
                             <h1>Bạn có chắc muốn đẩy tin này?</h1>

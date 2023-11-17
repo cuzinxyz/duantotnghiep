@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('transaction_type')->comment('Loại giao dịch: nạp tiền | thanh toán dịch vụ');
             $table->double('amount');
             $table->double('balance_after_transaction');
-            $table->text('token');
+            $table->text('token')->nullable();
             $table->timestamps();
         });
     }

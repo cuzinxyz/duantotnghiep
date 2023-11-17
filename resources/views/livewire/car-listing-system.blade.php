@@ -1,3 +1,16 @@
+@push('scripts')
+    <script>
+        Livewire.on('showSuccess', message => {
+            toastr.success(message);
+        });
+        Livewire.on('showError', message => {
+            toastr.error(message);
+        });
+        Livewire.on('showInfo', message => {
+            toastr.info(message);
+        });
+    </script>
+@endpush
 @php
     $currentYear = date('Y');
     $startYear = $currentYear - 10;
@@ -508,7 +521,7 @@
                                                     <img src="fonts/gallery-icon-1.svg" alt="">
                                                     {{ count($car->verhicle_image_library) }}
                                                 </div>
-                                                <a href="#" class="fav" id="{{ $car->id }}" onclick="addToWishList(this.id)">
+                                                <a href="javascript:void(0)" class="fav" wire:click="addToWishlist({{ $car->id }})">
                                                     <svg width="14" height="13" viewBox="0 0 14 14"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -557,16 +570,16 @@
                                                 <ul class="features">
                                                     <li>
                                                         <img src="fonts/miles.svg" alt="">
-                                                        {{ $car->car_info['mileage'] }} kilometers
+                                                        {{ $car->car_info['mileage_traveled'] }} kilometers
                                                     </li>
                                                     <li>
                                                         <img src="fonts/fuel.svg" alt="" width="14px"
                                                             height="14px">
-                                                        {{ $car->car_info['fuelType'] }}
+                                                        {{ $car->car_info['fuel'] }}
                                                     </li>
                                                     <li>
                                                         <img src="fonts/electric.svg" alt="">
-                                                        {{ $car->car_info['engine'] }}
+                                                        {{ $car->car_info['transmission'] }}
                                                     </li>
                                                 </ul>
                                                 <div class="content-btm">

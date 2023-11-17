@@ -19,31 +19,51 @@ class ServiceSeeder extends Seeder
         DB::table('services')->insert([
           [
             'service_name' => 'Gói Cơ Bản',
-            'price' => 500,
-            'title' => 'Giải pháp tiết kiệm cho Người bán nhỏ lẻ.',
-            'description' => '["21 lượt Đẩy Tin cho mọi Tin đăng bán Xe","3 Tin Mới"]',
-            'expiration_date' => Carbon::now()->addMonth()
+            'price' => 100000,
+            'description' => 'Lượt đăng tin lên tới 10 tin \nMiễn phí 2 lượt đẩy tin',
+            'expiration_date' => 30,
+            'number_of_pushes' => 2,
+            'title' => 'Giải pháp tiết kiệm cho Người bán lẻ.'
           ],
           [
             'service_name' => 'Gói Tiêu Chuẩn',
-            'price' => 1400,
+            'price' => 300000,
+            'description' => 'Lượt đăng tin lên tới 20 tin \nMiễn phí 5 lượt đẩy tin',
+            'expiration_date' => 30,
+            'number_of_pushes' => 5,
             'title' => 'Giải pháp tối ưu cho Người bán nhỏ lẻ.',
-            'description' => '["65 lượt Đẩy Tin cho mọi Tin đăng bán Xe","5 Tin Mới","Báo cáo hiệu quả tin đăng giúp tối ưu vượt bậc chi phí"]',
-            'expiration_date' => Carbon::now()->addMonth()
           ],
           [
             'service_name' => 'Gói Chuyên Nghiệp',
-            'price' => 2690,
-            'title' => 'Giải pháp toàn diện cho Người bán chuyên.',
-            'description' => '["128 lượt Đẩy Tin cho mọi Tin đăng bán Xe","8 Tin Mới","Báo cáo hiệu quả tin đăng giúp tối ưu vượt bậc chi phí","Hệ thống quản lí Khách hàng giúp ‘tiết lộ’ tất cả Khách hàng quan tâm đến Tin đăng"]',
-            'expiration_date' => Carbon::now()->addMonth()
+            'price' => 500000,
+            'description' => 'Lượt đăng tin lên tới 50 tin \nMiễn phí 15 lượt đẩy tin',
+            'expiration_date' => 30,
+            'number_of_pushes' => 15,
+            'title' => 'Giải pháp tốt nhất dành cho doanh nghiệp / Garage',
           ],
           [
-            'service_name' => 'Gói Vip',
-            'price' => 3750,
-            'title' => 'Giải pháp toàn diện cho Người bán chuyên.',
-            'description' => '["190 lượt Đẩy Tin cho mọi Tin đăng bán Xe","10 Tin Mới","Báo cáo hiệu quả tin đăng giúp tối ưu vượt bậc chi phí","Hệ thống quản lí Khách hàng giúp ‘tiết lộ’ tất cả Khách hàng quan tâm đến Tin đăng","Chat tự động giúp phản hồi Khách hàng nhanh chóng"]',
-            'expiration_date' => Carbon::now()->addMonth()
+            'service_name' => "Gói tin lẻ: 1 tháng",
+            'price' => 200000,
+            'description' => "Đẩy tin lẻ duy trì trong 1 tháng, 1 lượt đẩy tin",
+            'expiration_date' => 30,
+            'number_of_pushes' => 1,
+            'title' => NULL
+          ],
+          [
+            'service_name' => "Gói tin lẻ: 7 ngày",
+            'price' => 50000,
+            'description' => "Đẩy tin lẻ duy trì trong 7 tháng, 1 lượt đẩy tin",
+            'expiration_date' => 7,
+            'number_of_pushes' => 1,
+            'title' => NULL
+          ],
+          [
+            'service_name' => "Gói tin lẻ: 15 ngày",
+            'price' => 150000,
+            'description' => "Đẩy tin lẻ duy trì trong 15 ngày, 1 lượt đẩy tin",
+            'expiration_date' => 15,
+            'number_of_pushes' => 1,
+            'title' => NULL
           ]
         ]);
     }

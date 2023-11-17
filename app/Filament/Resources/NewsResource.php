@@ -2,129 +2,116 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\NewsResource\Pages;
-use App\Filament\Resources\NewsResource\RelationManagers;
-use App\Models\News;
 use Filament\Forms;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\KeyValue;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\ViewField;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\News;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
+use Filament\Forms\Set;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Forms\Components\DateTimePicker;
+use App\Filament\Resources\NewsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Quản lý nội dung';
 
-  protected static ?string $model = News::class;
+    protected static ?string $model = News::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-  public static function form(Form $form): Form
-  {
-    return $form
-      ->schema([
-        TextInput::make('title')
-          ->required()
-          ->maxLength(255),
-        TextInput::make('content')
-          ->required()
-          ->maxLength(255),
-        TextInput::make('summary')
-          ->required()
-          ->maxLength(255),
-        Textarea::make('thumbnailImage')
-          ->required()
-          ->maxLength(65535),
-        TextInput::make('viewCount'),
-        TextInput::make('shareCount'),
-        Toggle::make('isPublished')
-          ->required(),
-        Select::make('user_id')
-        ->relationship('user','name')
-        ->required()
-        //
-      ]);
-  }
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Section::make('Main Content')->schema(
+                    [
+                        TextInput::make('title')
+                            ->label('Tiêu đề')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                            ->required(),
+                        TextInput::make('slug')
+                            ->label('Đường dẫn')
+                            ->required()
+                            ->disabled()
+                            ->dehydrated(),
+                        RichEditor::make('content')
+                            ->required()
+                            ->fileAttachmentsDirectory('news/images')->columnSpanFull()
+                    ]
+                )->columns(2),
+                Section::make('Meta')->schema(
+                    [
+                        Textarea::make('summary')->required()->label('Summary'),
+                        FileUpload::make('thumbnailImage')->image()->directory('news/thumbnails')->required()->label('Thumbnail Image'),
+                        Checkbox::make('isPublished')->label('Published'),
+                    ]
+                ),
+            ]);
+    }
 
-  public static function table(Table $table): Table
-  {
-    return $table
-      ->columns([
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                ImageColumn::make('thumbnailImage')->label('Hình ảnh')
+                    ->width(120)->height(120)->circular(),
+                TextColumn::make('title')->sortable()->searchable()->label('Tiêu đề'),
+                TextColumn::make('slug')->sortable()->searchable()->label('Đường dẫn'),
+                TextColumn::make('created_at')->date('Y-m-d')->sortable()->searchable()->label('Ngày đăng'),
+                IconColumn::make('isPublished')->label('Trạng thái')->boolean(),
+            ])
+            ->filters([
+                Tables\Filters\TrashedFilter::make(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                ]),
+            ]);
+    }
 
-        TextColumn::make('title')
-          ->searchable(),
-        TextColumn::make('content')
-          ->searchable(),
-        TextColumn::make('summary')
-          ->searchable(),
-        TextColumn::make('thumbnailImage')
-          ->searchable(),
-        TextColumn::make('viewCount'),
-        TextColumn::make('shareCount'),
-        ToggleColumn::make('isPublished'),
-        TextColumn::make('user.name'),
+    public static function getRelations(): array
+    {
+        return [
+            // CommentsRelationManager::class
+        ];
+    }
 
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListNews::route('/'),
+            'create' => Pages\CreateNews::route('/create'),
+            'edit' => Pages\EditNews::route('/{record}/edit'),
+        ];
+    }
 
-        TextColumn::make('created_at')
-          ->dateTime()
-          ->sortable()
-          ->toggleable(isToggledHiddenByDefault: true),
-        TextColumn::make('updated_at')
-          ->dateTime()
-          ->sortable()
-          ->toggleable(isToggledHiddenByDefault: true),
-        TextColumn::make('deleted_at')
-          ->dateTime()
-          ->sortable(),
-        //
-      ])
-      ->filters([
-        //
-      ])
-      ->actions([
-        Tables\Actions\ViewAction::make(),
-        Tables\Actions\EditAction::make(),
-        Tables\Actions\DeleteAction::make(),
-        Tables\Actions\ForceDeleteAction::make(),
-        Tables\Actions\RestoreAction::make(),
-      ])
-      ->bulkActions([
-        Tables\Actions\BulkActionGroup::make([
-          Tables\Actions\DeleteBulkAction::make(),
-          Tables\Actions\ForceDeleteBulkAction::make(),
-          Tables\Actions\RestoreBulkAction::make(),
-        ]),
-      ])
-      ->emptyStateActions([
-        Tables\Actions\CreateAction::make(),
-      ]);
-  }
-
-  public static function getRelations(): array
-  {
-    return [
-      //
-    ];
-  }
-
-  public static function getPages(): array
-  {
-    return [
-      'index' => Pages\ListNews::route('/'),
-      'create' => Pages\CreateNews::route('/create'),
-      'view' => Pages\ViewNews::route('/{record}'),
-      'edit' => Pages\EditNews::route('/{record}/edit'),
-    ];
-  }
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->comment('ID cuả người dùng đã đăng kí');
             $table->integer('service_id');
-            $table->integer('car_id')
+            $table->string('car_id')
                 ->nullable()
                 ->comment("Cột này để lưu các xe đã được đẩy tin");
             $table->integer('remaining_push');

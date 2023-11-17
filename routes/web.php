@@ -13,49 +13,86 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\CarDetailController;
 
 use App\Http\Controllers\WishlishController;
+use App\Models\News;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
 });
 
-Route::controller(CarController::class)->group(function () {
-    Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
-    Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
+Route::middleware(['auth'])->group(function () {
+
+    Route::controller(CarController::class)->group(function () {
+        Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
+
+        Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
+
+        Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
+    });
+
+    Route::controller(CheckOutController::class)->group(function () {
+        # payment
+        Route::post('/payment/{idService}', 'checkout')->name('payment-vnpay');
+        # result after payment
+        Route::get('/ket-qua', 'result')->name('resultAfterPayment');
+    });
+
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('/profile', 'profile')->name('profile');
+
+        Route::get('/day-tin/{carID}', 'pushFeature')->name('day-tin');
+        Route::post('/day-tin/{carID}', 'confirmPush')->name('confirmPush');
+
+        Route::get('/quan-ly-tin-mua', 'needBuy');
+        # cái này cần sửa lại
+        Route::get('/thong-tin', 'infoUser');
+        Route::get('/nap-tien', 'recharge')->name('recharge');
+        Route::post('/nap-tien', 'rechargeMoney')->name('recharge.submit');
+        Route::get('/ket-qua-nap-tien', 'resultRecharge')->name('resultRecharge');
+        Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
+
+        Route::match(['get', 'post'], '/cai-dat', 'settings')->name('settings');
+    });
+
+    Route::controller(WishlishController::class)->group(function () {
+        Route::get('/yeu-thich', 'index')->name('wishlish');
+    });
+
+    Route::get('logout', function () {
+        Auth::logout();
+        return redirect()->route('homepage');
+    });
 });
+
 
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/dich-vu', 'index')->name('service.list');
     Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
 });
 
-Route::controller(CheckOutController::class)->group(function () {
-    # payment
-    Route::post('/payment/{idService}', 'checkout')->name('payment-vnpay');
-    # result after payment
-    Route::get('/ket-qua', 'result')->name('resultAfterPayment');
-});
+# Posts Route
+Route::get("/bai-viet/{slug}.html", function($slug) {
+    $post = News::where('slug', $slug)->first();
 
-Route::controller(SettingsController::class)->group(function () {
-    Route::get('/cai-dat', 'settings')->name('settings');
-    Route::get('/profile', 'profile')->name('profile');
-
-    Route::get('/day-tin/{carID}', 'pushFeature')->name('day-tin');
-    Route::post('/day-tin/{carID}', 'confirmPush')->name('confirmPush');
-
-    Route::get('/quan-ly-tin-mua', 'needBuy');
-    # cái này cần sửa lại
-    Route::get('/thong-tin', 'infoUser');
-    Route::get('/nap-tien', 'recharge')->name('recharge');
-    Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
-});
+    if(!$post) {
+        abort(404);
+    }
+    return view('news.detail', [
+        'post' => $post
+    ]);
+})->name('news.index');
 
 Route::get('/single-category', SingleBrandCategory::class);
 
 Route::get('/danh-sach-xe', CarListingSystem::class);
 
-Route::controller(WishlishController::class)->group(function () {
-    Route::get('/yeu-thich', 'index');
-    Route::post('/them-yeu-thich/{car_id}', 'addToWishlist');
+Route::get('/testt', function () {
+
+    // $service = Service::find(11);
+
+    // dd($service);
+    // $array = preg_split("/\r\n|\n|\r/", $service['description']);
+
+    // return $array;
 });
 
 Auth::routes();
