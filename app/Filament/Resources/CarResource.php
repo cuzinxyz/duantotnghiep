@@ -24,11 +24,10 @@ use App\Filament\Resources\CarResource\Pages;
 use Filament\Forms\Components\MarkdownEditor;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarResource\RelationManagers;
-use Filament\Forms\Components\Radio;
 
 class CarResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Quản lý nội dung';
+  protected static ?string $navigationGroup = 'Quản lý nội dung';
 
     protected static ?string $model = Car::class;
 
@@ -73,7 +72,7 @@ class CarResource extends Resource
                                     ->label('Model xe')
                                     ->required()
                                     ->options(function (callable $get) {
-                                        $modelCar = \App\Models\ModelCar::where('brand_id', $get('brand_id'))->get()->pluck('model_name');
+                                        $modelCar = \App\Models\ModelCar::where('brand_id' ,$get('brand_id'))->get()->pluck('model_name');
 
                                         if (!$modelCar) {
                                             return \App\Models\ModelCar::all()->pluck('model_name');
@@ -88,10 +87,13 @@ class CarResource extends Resource
                                     ->required()
                                     ->numeric(),
 
-                                TextInput::make('car_info.engine')
-                                    ->label('Mã lực')
+                                Select::make('car_info.engine')
+                                    ->label('Loại động cơ')
                                     ->required()
-                                    ->numeric(),
+                                    ->options([
+                                        'tubo' => 'Turbo',
+                                        'haha' => 'haha'
+                                    ]),
 
                                 Select::make('car_info.fuelType')
                                     ->label('Loại nhiên liệu')
@@ -100,7 +102,7 @@ class CarResource extends Resource
                                         'Gas' => 'Gas'
                                     ]),
 
-                                Radio::make('car_info.color')
+                                Select::make('car_info.color')
                                     ->label('Màu sắc')
                                     ->options([
                                         'red' => 'Đỏ',
@@ -108,14 +110,9 @@ class CarResource extends Resource
                                         'white' => 'Trắng',
                                         'yellow' => 'Vàng',
                                         'silver' => 'Bạc'
-                                    ])
-                                    ->columns([
-                                        'default' => 1,
-                                        'xl' => 2,
-                                        '2xl' => 2
                                     ]),
 
-                                Select::make('car_info.number_of_seats')
+                                Select::make('car_info.seat')
                                     ->label('Số chỗ ngồi')
                                     ->options([
                                         '4' => '4',
@@ -127,20 +124,7 @@ class CarResource extends Resource
 
                                     ]),
 
-                                Radio::make('car_info.transmission')
-                                    ->required()
-                                    ->label('Hộp số')
-                                    ->options([
-                                        'sotay' => 'Số tay',
-                                        'sotudong' => 'Tự động'
-                                    ])
-                                    ->columns([
-                                        'default' => 1,
-                                        'xl' => 2,
-                                        '2xl' => 2
-                                    ]),
-
-                                Select::make('car_info.year_of_manufacture')
+                                Select::make('car_info.manufactured')
                                     ->label('Năm sản xuất')
                                     ->options([
                                         '2010' => '2010',
@@ -161,6 +145,10 @@ class CarResource extends Resource
 
                                     ]),
 
+                                Select::make('car_info.condition')
+                                    ->options([
+                                        'used' => 'Đã qua sử dụng',
+                                    ]),
                                 MarkdownEditor::make('description')
                                     ->toolbarButtons([
                                         'attachFiles',
