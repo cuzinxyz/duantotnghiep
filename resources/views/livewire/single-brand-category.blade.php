@@ -161,12 +161,12 @@
                                 <div class="price-location">
                                     <div class="price"><strong>{{ number_format($item->price, 0, '', ',') }}
                                             VNĐ</strong></div>
-                                    <div class="location"><a href="{{route('car-detail', $item->slug)}}"><i class="bi bi-geo-alt"></i>
-                                            {{ $item->province->name }} </a>
+                                    <div class="location"><a href="#"><i class="bi bi-geo-alt"></i>
+                                            {{ $item->city->name }} </a>
                                     </div>
                                 </div>
-                                <div class="content-btm"><a class="view-btn2" href="{{route('car-detail', $item->slug)}}">
-                                        <svg width="35" height="21" viewBox="0 0 35 21" xmlns="http://www.w3.org/2000/svg">
+                                <div class="content-btm"><a class="view-btn2" href="/car-deatils"><svg width="35"
+                                            height="21" viewBox="0 0 35 21" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1"
                                                 stroke-linecap="round"></path>
                                             <path
