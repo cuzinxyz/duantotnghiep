@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\News;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
@@ -58,7 +60,15 @@ class HomeController extends Controller
         # news data
         $posts = News::where('isPublished', 1)
             ->get();
-// dd($featured_cars);
-        return view('index', compact('banners', 'mark', 'featured_cars', 'posts'));
+
+        $brands = Brand::all();
+
+        # tam thoi
+        $cars = Car::all();
+
+        # partners
+        $partners = Partner::all();
+
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'cars', 'partners'));
     }
 }

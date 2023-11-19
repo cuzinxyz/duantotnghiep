@@ -2,6 +2,7 @@
     box-sizing: border-box;
     position: relative;
     display: block;
+    max-width: 100%;
 }
 
 .custom-file-container * {
@@ -21,7 +22,7 @@
     height: 26px;
     line-height: 26px;
     text-decoration: none;
-    transition: color 0.2s ease-in-out;
+    transition: color .2s ease-in-out;
 }
 
 .custom-file-container .clear-button:hover {
@@ -85,10 +86,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 4px;
-    height: 250px;
+    min-height: 200px;
     overflow: auto;
     padding: 4px;
-    transition: background 0.2s ease-in-out;
+    transition: background .2s ease-in-out;
     width: 100%;
 }
 
@@ -102,7 +103,7 @@
     height: 90px;
     margin: 1.858736059%;
     position: relative;
-    transition: background 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transition: background .2s ease-in-out, opacity .2s ease-in-out;
     width: 29.615861214%;
 }
 
@@ -119,7 +120,7 @@
     margin-top: -6px;
     position: absolute;
     text-align: center;
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background .2s ease-in-out, color .2s ease-in-out;
     width: 20px;
 }
 
@@ -135,16 +136,16 @@
 }
 
 #preview-container {
-    display: flex;
-    column-gap: 10px;
+  display: flex;
+  column-gap: 10px;
 }
 #preview-container img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+  width: 200px;
+  height: 200px;
+  object-fit:cover
 }
 
-#preview-container video {
-    width: 100%;
-    height: auto;
+#preview-container-video video {
+  width: 100%;
+  height: auto;
 }

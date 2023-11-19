@@ -100,7 +100,7 @@ class FormDangTin extends Component
             'fuel' => 'required',
             'number_of_seats' => 'required',
             'color' => 'required',
-            'version' => 'required',
+            // 'version' => 'required',
             "engine" => 'required',
             'year_of_manufacture' => 'required',
             'mileage' => 'required',
@@ -115,7 +115,7 @@ class FormDangTin extends Component
     {
         $this->validate([
             'phone' => 'required',
-            'email' => 'required',
+            // 'email' => 'required',
             'city_id' => 'required',
             'district_id' => 'required',
             'full_address' => 'required',

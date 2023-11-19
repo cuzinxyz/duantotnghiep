@@ -44,6 +44,8 @@
 
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
+    <script src="//unpkg.com/alpinejs" defer></script>
+
     @stack('styles')
 
 </head>
@@ -149,7 +151,7 @@
             </div>
             <ul class="menu-list">
                 <li @class(['active' => request()->routeIs('homepage')])>
-                    <a href="#" class="drop-down">Trang Chủ</a>
+                    <a href="/" class="drop-down">Trang Chủ</a>
                 </li>
                 <li @class(['active' => request()->routeIs('service.list')])>
                     <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
@@ -227,7 +229,7 @@
                                 <li class="pd-cart">
                                     <div class="d-flex align-items-start gap-3">
                                         <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                            src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name='.auth()->user()->name }}"
+                                            src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                             alt="">
 
                                         <div class="d-flex flex-column">
@@ -308,7 +310,8 @@
                                         <div class="account-footer" style="min-width: 230px">
                                             <div class="footer-button mx-3">
                                                 <div class="d-flex justify-content-between align-items-center gap-3">
-                                                    <a href="{{ route('settings') }}" class="w-50 primary-btn1 btn-dark1">
+                                                    <a href="{{ route('settings') }}"
+                                                        class="w-50 primary-btn1 btn-dark1">
                                                         <i class="bi bi-gear"></i>
                                                         Settings
                                                     </a>
@@ -804,6 +807,17 @@
             });
         </script>
 
+        <script>
+            Livewire.on('showSuccess', message => {
+                toastr.success(message);
+            });
+            Livewire.on('showError', message => {
+                toastr.error(message);
+            });
+            Livewire.on('showInfo', message => {
+                toastr.info(message);
+            });
+        </script>
 
         @stack('scripts')
 

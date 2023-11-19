@@ -27,7 +27,7 @@ use App\Filament\Resources\CarResource\RelationManagers;
 
 class CarResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Quản lý nội dung';
 
     protected static ?string $model = Car::class;
 
@@ -72,13 +72,16 @@ class CarResource extends Resource
                                     ->label('Model xe')
                                     ->required()
                                     ->options(function (callable $get) {
-                                        $modelCar = \App\Models\ModelCar::where('brand_id' ,$get('brand_id'))->get()->pluck('model_name');
+                                        $modelCar = \App\Models\ModelCar::where('brand_id', $get('brand_id'))->select('id', 'model_name')->get();
 
-                                        if (!$modelCar) {
-                                            return \App\Models\ModelCar::all()->pluck('model_name');
+                                        $output = [];
+
+                                        foreach ($modelCar as $car) {
+                                            $carData = $car->toArray();
+                                            $output[$car['id']] = $car['model_name'];
                                         }
 
-                                        return $modelCar;
+                                        return $output;
                                     })
                                     ->placeholder('Chọn loại xe'),
 
