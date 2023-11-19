@@ -15,7 +15,7 @@ class BrandSeeder extends Seeder
     DB::table('brands')->insert([
       [
         'brand_name' => 'Mercedes',
-        'logo_url' => 'brand_image/mercededs',
+        'logo_url' => 'brand_image/mercedes.svg',
       ],
       [
         'brand_name' => 'BMW',
