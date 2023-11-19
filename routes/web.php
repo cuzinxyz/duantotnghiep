@@ -80,18 +80,12 @@ Route::get("/bai-viet/{slug}.html", function($slug) {
     ]);
 })->name('news.index');
 
-Route::get('/single-category', SingleBrandCategory::class);
+Route::get('/single-category/{slug?}', SingleBrandCategory::class)->name('single-category');
 
 Route::get('/danh-sach-xe', CarListingSystem::class);
 
 Route::get('/testt', function () {
 
-    // $service = Service::find(11);
-
-    // dd($service);
-    // $array = preg_split("/\r\n|\n|\r/", $service['description']);
-
-    // return $array;
 });
 
 Auth::routes();

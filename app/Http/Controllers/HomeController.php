@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -58,7 +59,9 @@ class HomeController extends Controller
         # news data
         $posts = News::where('isPublished', 1)
             ->get();
-// dd($featured_cars);
-        return view('index', compact('banners', 'mark', 'featured_cars', 'posts'));
+
+        $brands = Brand::all();
+
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands'));
     }
 }
