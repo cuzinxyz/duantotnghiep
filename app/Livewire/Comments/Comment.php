@@ -4,6 +4,7 @@ namespace App\Livewire\Comments;
 
 use App\Models\Car;
 use App\Models\Comments as CommentsModel;
+use App\Models\News;
 use Livewire\Attributes\Locked;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,6 @@ class Comment extends Component
             return redirect()->route('login');
         }
 
-
         $user_id = Auth::user()->id;
 
         if ($this->page == 'car-detail') {
@@ -51,11 +51,23 @@ class Comment extends Component
                 'car_id' => $carComment->id,
                 'news_id' => 0
             ]);
-
-            $this->reset('comment');
-
-            $this->dispatch('renderComments');
         }
+        
+        if($this->page == 'news.index') {
+            $slug = str_replace('.html', '', $this->slug);
+            $newComment = News::where('slug', $slug)->first();
+
+            CommentsModel::create([
+                'body' => htmlspecialchars($this->comment),
+                'user_id' => $user_id,
+                'car_id' => 0,
+                'news_id' => $newComment->id
+            ]);
+        }
+
+        $this->reset('comment');
+    
+        $this->dispatch('renderComments');
     }
 
     

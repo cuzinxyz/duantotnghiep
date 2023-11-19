@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\News;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
@@ -62,6 +63,12 @@ class HomeController extends Controller
 
         $brands = Brand::all();
 
-        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands'));
+        # tam thoi
+        $cars = Car::all();
+
+        # partners
+        $partners = Partner::all();
+
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'cars', 'partners'));
     }
 }

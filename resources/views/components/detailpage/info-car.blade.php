@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
 @endpush
 
-<div class="col-lg-8">
+<div class="col-lg-8" wire:ignore>
     <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
         <div class="single-item mb-50" id="car-img">
             <div class="car-img-area">
@@ -95,7 +95,7 @@
                     <div class="tab-pane fade" id="video-clip" role="tabpanel" aria-labelledby="video-clip-tab">
                         <div class="video-area">
                             <video autoplay="" loop="loop" muted="" preload="auto" controls="">
-                                <source src="{{ asset('/storage/' . $carDetail->verhicle_videos[0]) }}"
+                                <source src="{{ asset('/storage/' . $carDetail->verhicle_videos) }}"
                                     type="video/mp4">
                             </video>
                         </div>

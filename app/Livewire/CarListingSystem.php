@@ -33,24 +33,24 @@ class CarListingSystem extends Component
     }
 
     // thêm danh sách tin yêu thích
-    public function addToWishlist($car_id)
-    {
-        if (Auth::check()) {
-            $exists = Wishlist::where('user_id', Auth::id())->where('car_id', $car_id)->first();
-            if (!$exists) {
-                Wishlist::insert([
-                    'user_id' => Auth::id(),
-                    'car_id' => $car_id,
-                    'created_at' => Carbon::now(),
-                ]);
-                $this->dispatch('showSuccess', 'Lưu tin thành công');
-            } else {
-                $this->dispatch('showInfo', 'Tin này đã có trong danh sách');
-            }
-        } else {
-            $this->dispatch('showError', 'Bạn cần đăng nhập để thực hiện chức năng này');
-        }
-    }
+    // public function addToWishlist($car_id)
+    // {
+    //     if (Auth::check()) {
+    //         $exists = Wishlist::where('user_id', Auth::id())->where('car_id', $car_id)->first();
+    //         if (!$exists) {
+    //             Wishlist::insert([
+    //                 'user_id' => Auth::id(),
+    //                 'car_id' => $car_id,
+    //                 'created_at' => Carbon::now(),
+    //             ]);
+    //             $this->dispatch('showSuccess', 'Lưu tin thành công');
+    //         } else {
+    //             $this->dispatch('showInfo', 'Tin này đã có trong danh sách');
+    //         }
+    //     } else {
+    //         $this->dispatch('showError', 'Bạn cần đăng nhập để thực hiện chức năng này');
+    //     }
+    // }
 
     #[Layout('components.partials.layout-client')]
     public function render()
@@ -88,7 +88,7 @@ class CarListingSystem extends Component
         // }
 
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->where('status', 3)->paginate(2)
+            'cars' => $carQuery->paginate(2)
         ]);
     }
 }

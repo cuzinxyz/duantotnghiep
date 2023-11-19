@@ -80,9 +80,9 @@ Route::get("/bai-viet/{slug}.html", function($slug) {
     ]);
 })->name('news.index');
 
-Route::get('/single-category/{slug?}', SingleBrandCategory::class)->name('single-category');
+Route::get('/single-category/{slug?}', SingleBrandCategory::class)->name('brand.detail');
 
-Route::get('/danh-sach-xe', CarListingSystem::class);
+Route::get('/xe', CarListingSystem::class)->name('car.list');
 
 Route::get('/testt', function () {
 
@@ -92,7 +92,7 @@ Auth::routes();
 
 // Trang chi tiết xe
 Route::controller(CarDetailController::class)->group(function () {
-    Route::get('/chi-tiet-xe/{slug}', 'index')->name('car-detail');
+    Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
 
 

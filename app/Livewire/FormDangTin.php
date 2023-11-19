@@ -100,7 +100,7 @@ class FormDangTin extends Component
             'fuel' => 'required',
             'number_of_seats' => 'required',
             'color' => 'required',
-            'version' => 'required',
+            // 'version' => 'required',
             "engine" => 'required',
             'year_of_manufacture' => 'required',
             'mileage' => 'required',
@@ -115,7 +115,7 @@ class FormDangTin extends Component
     {
         $this->validate([
             'phone' => 'required',
-            'email' => 'required',
+            // 'email' => 'required',
             'city_id' => 'required',
             'district_id' => 'required',
             'full_address' => 'required',
@@ -139,7 +139,6 @@ class FormDangTin extends Component
     {
         $carData = [];
         $photoName = [];
-        $videoName = [];
 
         $images = $this->verhicle_image_library;
         if (count($images) > 0) {
@@ -153,18 +152,17 @@ class FormDangTin extends Component
             }
         }
 
+        $videoName = "";
         if (count($this->verhicle_videos) > 0) {
             foreach ($this->verhicle_videos as $video) {
                 $dir_name = 'video_car';
                 $file = uploadFile($dir_name, $video);
-
-                array_push($videoName, $file);
-
+                $videoName = $file;
+                break;
             }
         }
 
-
-
+        
         $carData['verhicle_image_library'] = $photoName;
         $carData['verhicle_videos'] = $videoName;
         $carData['user_id'] = auth()->id();
@@ -201,7 +199,6 @@ class FormDangTin extends Component
         );
 
 
-        // dd($carData);
         $result = Car::create($carData);
         if ($result) {
             session()->flash('status', 'you are added successfully!');

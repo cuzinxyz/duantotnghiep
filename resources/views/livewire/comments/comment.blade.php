@@ -1,4 +1,4 @@
-<div>
+<div class="car-details-area">
     <div class="text-input-area mb-40">
         <form wire:submit="saveComment">
             <div class="form-inner">

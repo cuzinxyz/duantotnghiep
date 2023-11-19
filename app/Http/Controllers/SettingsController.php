@@ -19,12 +19,15 @@ class SettingsController extends Controller
     {
         $cars = Car::where('user_id', auth()->id())
             ->where('status', 1)
+            ->orderBy('created_at', 'desc')
             ->get();
         $pendingCars = Car::where('user_id', auth()->id())
             ->where('status', 0)
+            ->orderBy('created_at', 'desc')
             ->get();
         $deniedCars = Car::where('user_id', auth()->id())
             ->where('status', 2)
+            ->orderBy('created_at', 'desc')
             ->get();
         $hiddenCars = Car::onlyTrashed()->where('user_id', auth()->id())->get();
 
