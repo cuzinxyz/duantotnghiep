@@ -3,7 +3,7 @@
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
     @endpush
-    <form wire:submit="saveCar" enctype="multipart/form-data">
+    <form enctype="multipart/form-data">
         <div class="row g-4 mb-100">
             <div class="col-lg-12">
                 <div class="">
@@ -423,7 +423,7 @@
                             <div class="form-inner" style="text-align: center">
                                 <button class="primary-btn2" wire:click="previousStepSubmit" type="button">Quay
                                     lại</button>
-                                <button class="primary-btn2" type="submit">ĐĂNG TIN</button>
+                                <button class="primary-btn2" wire:click.prevent="saveCar">ĐĂNG TIN</button>
                             </div>
                         </div>
                     </div>

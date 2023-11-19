@@ -1,7 +1,7 @@
 <div class="home5-brand-category-area">
     <div class="container">
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
-            <div :class="open ? 'd-flex' : ''" class="col-lg-12 align-items-end justify-content-between gap-3 flex-wrap" x-show="showHeading">
+            <div :class="showHeading ? 'd-flex' : ''" class="col-lg-12 align-items-end justify-content-between gap-3 flex-wrap" x-show="showHeading">
                 <div class="section-title-2">
                     <h2>Lướt thương hiệu</h2>
                     <p>Đa dạng và phong phú các lựa chọn dành cho bạn.</p>
