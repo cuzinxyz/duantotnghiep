@@ -27753,8 +27753,8 @@ button {
 .contact-page .inquiry-form .form-inner label {
     color: var(--title-color);
     font-family: var(--font-montserrat);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 700;
     display: block;
     margin-bottom: 10px
 }
@@ -28889,4 +28889,23 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+}
+
+
+#style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	/* border: 2px solid #555555; */
 }

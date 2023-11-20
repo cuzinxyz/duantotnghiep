@@ -2,6 +2,7 @@
     @push('styles')
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/simplemde.min.css') }}">
     @endpush
     <form enctype="multipart/form-data">
         <div class="row g-4 mb-100">
@@ -9,7 +10,7 @@
                 <div class="">
                     <div class=" {{ $currentStep == 1 ? '' : 'd-none' }}" id="form-sell-1">
                         <div class="mb-15">
-                            <h5 class="">Bạn đang bán xe gì?</h5>
+                            <h4 class="">Bạn đang bán xe gì?</h4>
                         </div>
 
                         <div class="row d-flex justify-content-between">
@@ -159,7 +160,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-20">
+                                    <div class="col-md-12 mb-20">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Tiêu đề*</label>
                                             <input wire:model="title" type="text"
@@ -175,7 +176,7 @@
                                     <div class="col-md-12">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Mô tả*</label>
-                                            <textarea wire:model="description" placeholder="Write somethings"></textarea>
+                                            <textarea wire:model="description" id="description" placeholder="Write somethings"></textarea>
                                         </div>
                                         <div class="text-danger">
                                             @error('description')
@@ -190,7 +191,7 @@
                                 <div class="form-inner form-inner-padding mb-20 blurBG bg-shape"
                                     style="" id="changeColor">
                                     <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
-                                    <div class="radio-input">
+                                    <div class="radio-input" id="style-4" style="overflow:auto">
                                         @foreach ($colors as $key => $color)
                                             <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
                                                 id="color-{{ $key }}" type="radio" wire:model="color">
@@ -432,6 +433,10 @@
 
     @push('scripts')
         <script src="{{ asset('js/file_upload.js') }}"></script>
-        {{-- <script src="{{ asset('js/format-function.js') }}"></script> --}}
+        <script src="{{ asset('js/simplemde.min.js') }}"></script>
+
+        <script>
+            var simplemde = new SimpleMDE({ element: $("#description")[0] });
+        </script>
     @endpush
 </div>
