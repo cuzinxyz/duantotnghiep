@@ -15,7 +15,7 @@
                         <div class="row d-flex justify-content-between">
                             <div class="col-md-8 col-sm-12 mb-20 inquiry-form py-4 px-4 bg-shape">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Hãng chế tạo</label>
                                             <select class="nice-select beauty-shadow" wire:model.live="brand_select">
@@ -283,8 +283,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="inquiry-form {{ $currentStep == 2 ? '' : 'd-none' }}" id="form-sell-2">

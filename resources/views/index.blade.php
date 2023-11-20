@@ -1009,7 +1009,7 @@
                         {{-- <p>Quy trình mua bán của chú</p> --}}
                     </div>
                     <div class="video-btn">
-                        <a class="video-popup"
+                        <a class=""
                             href="{{ route('sellCar') }}"><i
                                 class="bi bi-play-circle"></i> Bán xe ngay</a>
                     </div>
