@@ -16,17 +16,29 @@ class SingleBrandCategory extends Component
 
     public $modelCars;
     public $brands;
+    public $slug;
     public $max_price, $min_price;
 
 
-    public function mount() {
+    public function mount($slug=null) {
+        $this->slug = $slug;
+
         $this->max_price = Car::max('price');
         $this->min_price = Car::min('price');
         
     }
 
+
     public function filterCategory() {
-        $cars = Car::where('status', 1)->get();
+        if($this->slug) {
+            $brand = Brand::where('brand_name', $this->slug)->select('id')->first();
+            $brand_id= $brand->id; 
+            $cars = Car::where('brand_id', $brand_id)->where('status', 1)->get();
+        }else {
+            $cars = Car::where('status', 1)->get();
+        }
+
+
         if ($this->price) {
             $parts = explode("-", $this->price);
 

@@ -192,13 +192,12 @@ class FormDangTin extends Component
         );
 
 
-        dd($carData);
-        // $result = Car::create($carData);
-        // if ($result) {
-        //     session()->flash('status', 'you are added successfully!');
+        $result = Car::create($carData);
+        if ($result) {
+            session()->flash('status', 'you are added successfully!');
 
-        //     return redirect()->route('profile')->with('status', 'Thành công!');
-        // }
+            return redirect()->route('profile')->with('status', 'Thành công!');
+        }
     }
 
     #[Computed()]

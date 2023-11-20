@@ -228,7 +228,9 @@
                     <div class="brand-list">
                         <ul>
                             @foreach ($brands as $item)
-                                <li><a href="">{{ $item->brand_name }} <span>(1,234)</span></a></li>
+                                @if($item->car->count() > 0) 
+                                    <li>{{ $item->brand_name }} <span>({{$item->car->count()}})</span></li>
+                                @endif
                             @endforeach
 
                         </ul>
