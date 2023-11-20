@@ -13,6 +13,7 @@
         "filament/filament": " ^3.0",
         "filament/infolists": "^3.0-stable",
         "filament/tables": "3.0-stable",
+        "filament/widgets": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "ibrahimbougaoua/filament-rating-star": "^0.0.1",
         "kjmtrue/vietnam-zone": "^1.0",

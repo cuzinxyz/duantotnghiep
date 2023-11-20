@@ -25,7 +25,7 @@ return new class extends Migration {
       $table->json('contact');
       $table->json('car_info');
       $table->json('verhicle_image_library');
-      $table->json('verhicle_videos')->nullable();
+      $table->string('verhicle_videos')->nullable();
       $table->integer('status')->default(0);
       $table->text('reason')->nullable();
       $table->text('description')->nullable();
