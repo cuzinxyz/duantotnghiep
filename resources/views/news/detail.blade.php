@@ -31,16 +31,16 @@
         </div>
     </div>
 
-    <div class="single-item mb-50" id="qus-ans">
-        <div class="user-qustion-area">
+    <div class="container row single-item mb-50" id="qus-ans">
+        <div class="user-qustion-area col-lg-8">
             <div class="section-title-and-filter mb-30">
                 <div class="title">
                     <h5>Latest User Question</h5>
                 </div>
             </div>
-            <livewire:comments.comment />
+            {{-- <livewire:comments.comment />
 
-            <livewire:comments.list-comment />
+            <livewire:comments.list-comment /> --}}
         </div>
     </div>
 </x-partials.layout-client>

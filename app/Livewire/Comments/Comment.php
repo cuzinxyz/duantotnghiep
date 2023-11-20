@@ -56,18 +56,26 @@ class Comment extends Component
         if($this->page == 'news.index') {
             $slug = str_replace('.html', '', $this->slug);
             $newComment = News::where('slug', $slug)->first();
+        
+            if(strlen($this->comment) > 0) {
+                CommentsModel::create([
+                    'body' => htmlspecialchars($this->comment),
+                    'user_id' => $user_id,
+                    'car_id' => 0,
+                    'news_id' => $newComment->id
+                ]);
+            }
 
-            CommentsModel::create([
-                'body' => htmlspecialchars($this->comment),
-                'user_id' => $user_id,
-                'car_id' => 0,
-                'news_id' => $newComment->id
-            ]);
         }
 
-        $this->reset('comment');
+        $this->resetComment();
     
         $this->dispatch('renderComments');
+    }
+
+
+    public function resetComment() {
+        $this->comment = '';
     }
 
     

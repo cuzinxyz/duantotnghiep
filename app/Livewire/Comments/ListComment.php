@@ -63,17 +63,19 @@ class ListComment extends Component
             $slug = str_replace('.html', '', $this->slug);
             $newComment = News::where('slug', $slug)->first();
 
-            ReplyComments::create([
-                'body' => htmlspecialchars($this->reply),
-                'comment_id' => $comment_id,
-                'user_id' => $user_id,
-                'car_id' => 0,
-                'news_id' => $newComment->id
-            ]);
-
-            $this->reset('reply');
-
-            $this->dispatch('renderReplyComments');
+            if(strlen($this->comment) > 0) {
+                ReplyComments::create([
+                    'body' => htmlspecialchars($this->reply),
+                    'comment_id' => $comment_id,
+                    'user_id' => $user_id,
+                    'car_id' => 0,
+                    'news_id' => $newComment->id
+                ]);
+    
+                $this->reset('reply');
+    
+                $this->dispatch('renderReplyComments');
+            }
         }
     }
 
