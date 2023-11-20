@@ -19,7 +19,7 @@ class BrandSeeder extends Seeder
       ],
       [
         'brand_name' => 'BMW',
-        'logo_url' => 'brand_image/d9hLKotyjOuiim6nPWgi8IWOBt7CQZ-metaQk1XLUxvZ28ucG5n-.png',
+        'logo_url' => 'brand_image/bmw.png',
       ],
       [
         'brand_name' => 'Audi',
@@ -38,10 +38,6 @@ class BrandSeeder extends Seeder
         'logo_url' => 'brand_image/ferarri.svg',
       ],
       [
-        'brand_name' => 'Audi ',
-        'logo_url' => 'brand_image/audi.svg',
-      ],
-      [
         'brand_name' => 'Mitsubishi ',
         'logo_url' => 'brand_image/mitsubishi.svg',
       ],
@@ -49,13 +45,10 @@ class BrandSeeder extends Seeder
         'brand_name' => 'Nissan ',
         'logo_url' => 'brand_image/nissan.svg',
       ],
+      # tiep tuc suzuki
       [
         'brand_name' => 'Suzuki ',
         'logo_url' => 'brand_image/suzuki.svg',
-      ],
-      [
-        'brand_name' => 'Tata ',
-        'logo_url' => 'brand_image/tata.svg',
       ],
       [
         'brand_name' => 'Tesla',

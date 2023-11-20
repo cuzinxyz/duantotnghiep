@@ -29,6 +29,7 @@ class Car extends Model
         'verhicle_videos',
         'description'
     ];
+
     protected $casts = [
         'contact' => 'array',
         'car_info' => 'array',

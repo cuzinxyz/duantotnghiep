@@ -17,7 +17,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-inner">
-                                            <label class="fontAvantRegular">Hãng xe</label>
+                                            <label class="fontAvantRegular">Hãng chế tạo</label>
                                             <select class="nice-select beauty-shadow" wire:model.live="brand_select">
                                                 <option value="0">-- Chọn hãng xe --</option>
                                                 @foreach ($brands as $brand)
@@ -434,6 +434,6 @@
 
     @push('scripts')
         <script src="{{ asset('js/file_upload.js') }}"></script>
-        <script src="{{ asset('js/format-function.js') }}"></script>
+        {{-- <script src="{{ asset('js/format-function.js') }}"></script> --}}
     @endpush
 </div>
