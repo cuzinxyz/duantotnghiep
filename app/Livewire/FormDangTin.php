@@ -79,7 +79,7 @@ class FormDangTin extends Component
     public $year_of_manufacture;
     public $engine;
 
-    public $verhicle_videos = [];
+    public $verhicle_videos;
 
     public $features = [];
 
@@ -147,13 +147,10 @@ class FormDangTin extends Component
         }
 
         $videoName = "";
-        if (count($this->verhicle_videos) > 0) {
-            foreach ($this->verhicle_videos as $video) {
-                $dir_name = 'video_car';
-                $file = uploadFile($dir_name, $video);
-                $videoName = $file;
-                break;
-            }
+        if (!empty($this->verhicle_videos)) {
+            $dir_name = 'video_car';
+            $file = uploadFile($dir_name, $this->verhicle_videos);
+            $videoName = $file;
         }
 
         $carData['verhicle_image_library'] = $photoName;
@@ -199,6 +196,7 @@ class FormDangTin extends Component
             return redirect()->route('profile')->with('status', 'Thành công!');
         }
     }
+
 
     #[Computed()]
     public function render()

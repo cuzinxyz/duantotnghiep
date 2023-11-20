@@ -34,7 +34,6 @@ class Car extends Model
         'contact' => 'array',
         'car_info' => 'array',
         'verhicle_image_library' => 'array',
-        'verhicle_videos' => 'array',
         'recommended' => 'boolean',
     ];
 
