@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="product-content">
                                             <div class="company-logo">
-                                                <a href="{{ route('brand.detail') }}"><img style="max-width: 40px;max-height:40px;object-fit:contain"
+                                                <a href="{{ route('brand.detail', $car->brand->brand_name) }}"><img style="max-width: 40px;max-height:40px;object-fit:contain"
                                                         src="{{ asset('storage/'.$car->brand->logo_url) }}" alt></a>
                                             </div>
                                             <div class="price">

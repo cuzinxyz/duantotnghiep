@@ -25,14 +25,15 @@ class SingleBrandCategory extends Component
 
         $this->max_price = Car::max('price');
         $this->min_price = Car::min('price');
-        
     }
 
 
     public function filterCategory() {
         if($this->slug) {
             $brand = Brand::where('brand_name', $this->slug)->select('id')->first();
-            $brand_id= $brand->id; 
+
+            // dd($brand);
+            $brand_id= $brand->id;
             $cars = Car::where('brand_id', $brand_id)->where('status', 1)->get();
         }else {
             $cars = Car::where('status', 1)->get();
@@ -49,13 +50,13 @@ class SingleBrandCategory extends Component
                 $cars = Car::where('price', '>=', $number1)->where('price', '<=', $number2)->where('status', 1)
                 ->get();
             }
-        } 
+        }
 
         if($this->brand) {
             $cars = Car::where('brand_id', $this->brand)->where('status', 1)
             ->get();
         }
-        
+
         if($this->price && $this->brand && $this->model ) {
             $parts = explode("-", $this->price);
             $number1 = intval(trim($parts[0]));
@@ -84,7 +85,7 @@ class SingleBrandCategory extends Component
 
         // $cars = $this->filterCategory();
         // dd($cars);
-        
+
         return view('livewire.single-brand-category', [
             'ModelCars' => $this->modelCars,
             'brands' => $this->brands,

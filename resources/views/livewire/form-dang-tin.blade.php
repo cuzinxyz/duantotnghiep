@@ -381,7 +381,7 @@
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
                             <div class="custom-file-container" data-upload-id="mySecondImage">
                                 <div class="label-container">
-                                    <label class="fontAvantRegular">Upload hình (* có thể upload nhiều hình)</label>
+                                    <label class="fw-bold fontAvantRegular">Upload hình (* có thể upload nhiều hình)</label>
                                     <a class="clear-button" href="javascript:void(0)" title="Clear Image">
                                         ×
                                     </a>
@@ -401,7 +401,7 @@
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
                             <div class="custom-file-container" data-upload-id="mySecondImage">
                                 <div class="label-container">
-                                    <label class="fontAvantRegular">Upload video (*)</label>
+                                    <label class="fw-bold fontAvantRegular">Upload video (*)</label>
                                     <a class="clear-button" href="javascript:void(0)" title="Clear Image">
                                         ×
                                     </a>
