@@ -263,7 +263,6 @@ class PostCarManagerResource extends Resource
                                     ->columnSpan([
                                         'xl' => 1,
                                         '2xl' => 1,
-
                                     ]),
 
                                 Section::make('Mô tả chi tiết về xe')

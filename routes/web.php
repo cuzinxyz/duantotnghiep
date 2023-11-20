@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/dich-vu', 'index')->name('service.list');
-    Route::get('/dich-vu/{idService}', 'detail')->name('service.detail');
+    Route::get('/dich-vu/{idService}', 'detail')->name('service.detail')->middleware('auth');
 });
 
 # Posts Route

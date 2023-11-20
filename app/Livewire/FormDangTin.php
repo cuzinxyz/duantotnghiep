@@ -54,9 +54,7 @@ class FormDangTin extends Component
 
     public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
 
-
     public $verhicle_image_library = [];
-
 
     public $brand_select = '';
     public $model_select = '';
@@ -81,7 +79,7 @@ class FormDangTin extends Component
     public $year_of_manufacture;
     public $engine;
 
-    public $verhicle_videos = [];
+    public $verhicle_videos;
 
     public $features = [];
 
@@ -128,12 +126,9 @@ class FormDangTin extends Component
     {
         $this->validate([
             'verhicle_image_library' => 'required|image|max:10024',
-            'verhicle_videos' => 'required',
+            'verhicle_videos' => 'required|video',
         ]);
     }
-
-
-
 
     public function saveCar(Request $request)
     {
@@ -142,7 +137,6 @@ class FormDangTin extends Component
 
         $images = $this->verhicle_image_library;
         if (count($images) > 0) {
-
             foreach ($images as $photo) {
                 $fileName = $photo->getFilename();
                 $dir_name = 'car_photos';
@@ -153,16 +147,12 @@ class FormDangTin extends Component
         }
 
         $videoName = "";
-        if (count($this->verhicle_videos) > 0) {
-            foreach ($this->verhicle_videos as $video) {
-                $dir_name = 'video_car';
-                $file = uploadFile($dir_name, $video);
-                $videoName = $file;
-                break;
-            }
+        if (!empty($this->verhicle_videos)) {
+            $dir_name = 'video_car';
+            $file = uploadFile($dir_name, $this->verhicle_videos);
+            $videoName = $file;
         }
 
-        
         $carData['verhicle_image_library'] = $photoName;
         $carData['verhicle_videos'] = $videoName;
         $carData['user_id'] = auth()->id();
@@ -206,6 +196,7 @@ class FormDangTin extends Component
             return redirect()->route('profile')->with('status', 'Thành công!');
         }
     }
+
 
     #[Computed()]
     public function render()

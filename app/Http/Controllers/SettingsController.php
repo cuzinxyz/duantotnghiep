@@ -320,7 +320,30 @@ class SettingsController extends Controller
 
     public function paymentHistory()
     {
-        return view('user-settings.payment-history');
+        // thống kê tiền
+        $currentBalance = User::where('id', Auth::id())
+            ->pluck('account_balence')
+            ->first();
+        $moneySpending = TransactionsHistory::where('user_id', Auth::id())
+            ->where('transaction_type', 'LIKE', '%mua gói%')
+            ->pluck('amount', 'id')
+            ->sum();
+        $totalAmount = TransactionsHistory::where('user_id', Auth::id())
+            ->where('transaction_type', 'LIKE', 'nạp tiền')
+            ->pluck('amount', 'id')
+            ->sum();
+        // lịch sử thanh toán dịch vụ
+        $serviceId = DB::table('purchased_service')
+            ->where('user_id', Auth::id())
+            ->pluck('service_id');
+        $billHistories = Service::whereIn('id', $serviceId)
+            ->get();
+        // lịch sử nạp tiền
+        $depositHistory = DB::table('transactions_histories')
+            ->select('id', 'amount', 'created_at')
+            ->where('transaction_type', 'LIKE', 'nạp tiền')
+            ->get();
+        return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory'));
     }
 
     public function settings(Request $request)

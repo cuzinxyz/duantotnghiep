@@ -14,8 +14,6 @@ class CarDetailController extends Controller
             $carDetail = Car::where('slug', $slug)->first();
         }
 
-        // dd($carDetail->model->model_name);
-
         return view('detail', compact('carDetail'));
     }
 }

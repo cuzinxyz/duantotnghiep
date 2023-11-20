@@ -236,7 +236,6 @@
             settings: { arrows: false, slidesToShow: 1 }
         }]
     });
-
     const sliders = document.querySelectorAll('.product-img-slider');
     sliders.forEach((slider) => {
         const nextBtn = slider.parentElement.querySelector('.product-stand-next');
@@ -256,7 +255,6 @@
             swiper.slidePrev();
         });
     });
-    
     var swiper = new Swiper(".most-search-slider", {
         slidesPerView: 1,
         speed: 1500,

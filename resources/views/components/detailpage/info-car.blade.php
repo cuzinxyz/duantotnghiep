@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
 @endpush
 
-<div class="col-lg-8" wire:ignore>
+<div class="col-lg-8">
     <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
         <div class="single-item mb-50" id="car-img">
             <div class="car-img-area">

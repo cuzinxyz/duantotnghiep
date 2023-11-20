@@ -1,5 +1,7 @@
 @props(['cars'])
 
+{{-- @dd($cars) --}}
+
 <div class="home5-featured-cars-section pt-100 mb-100">
     <div class="container">
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">

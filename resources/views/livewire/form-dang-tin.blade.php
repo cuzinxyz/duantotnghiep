@@ -2,22 +2,23 @@
     @push('styles')
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/simplemde.min.css') }}">
     @endpush
-    <form wire:submit="saveCar" enctype="multipart/form-data">
+    <form enctype="multipart/form-data">
         <div class="row g-4 mb-100">
             <div class="col-lg-12">
                 <div class="">
                     <div class=" {{ $currentStep == 1 ? '' : 'd-none' }}" id="form-sell-1">
                         <div class="mb-15">
-                            <h5 class="">Bạn đang bán xe gì?</h5>
+                            <h4 class="">Bạn đang bán xe gì?</h4>
                         </div>
 
                         <div class="row d-flex justify-content-between">
                             <div class="col-md-8 col-sm-12 mb-20 inquiry-form py-4 px-4 bg-shape">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="fontAvantRegular">Hãng xe</label>
+                                            <label class="fontAvantRegular">Hãng chế tạo</label>
                                             <select class="nice-select beauty-shadow" wire:model.live="brand_select">
                                                 <option value="0">-- Chọn hãng xe --</option>
                                                 @foreach ($brands as $brand)
@@ -36,7 +37,8 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Tên xe</label>
-                                            <select class="nice-select beauty-shadow form-control-lg" wire:model="model_select">
+                                            <select class="nice-select beauty-shadow form-control-lg"
+                                                wire:model="model_select">
                                                 <option value="0">-- Chọn model --</option>
 
                                                 @foreach ($models as $model)
@@ -74,7 +76,8 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Số chỗ ngồi</label>
-                                            <select class="nice-select beauty-shadow form-control-lg" wire:model="number_of_seats">
+                                            <select class="nice-select beauty-shadow form-control-lg"
+                                                wire:model="number_of_seats">
                                                 <option value="">--Chọn số chỗ ngồi--</option>
                                                 @foreach ($seats as $seat)
                                                     <option value="{{ $seat }}">{{ $seat }}</option>
@@ -104,7 +107,8 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Năm sản xuất</label>
-                                            <select class="nice-select beauty-shadow form-control-lg" wire:model="year_of_manufacture">
+                                            <select class="nice-select beauty-shadow form-control-lg"
+                                                wire:model="year_of_manufacture">
                                                 <option value="0">-- Chọn năm sản xuất
                                                     <link rel="stylesheet"
                                                         href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
@@ -159,7 +163,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 mb-20">
+                                    <div class="col-md-12 mb-20">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Tiêu đề*</label>
                                             <input wire:model="title" type="text"
@@ -175,7 +179,7 @@
                                     <div class="col-md-12">
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Mô tả*</label>
-                                            <textarea wire:model="description" placeholder="Write somethings"></textarea>
+                                            <textarea wire:model="description" id="description" placeholder="Write somethings"></textarea>
                                         </div>
                                         <div class="text-danger">
                                             @error('description')
@@ -187,10 +191,10 @@
                             </div>
 
                             <div class="col-md-4 col-sm-12 mb-20">
-                                <div class="form-inner form-inner-padding mb-20 blurBG bg-shape"
-                                    style="" id="changeColor">
+                                <div class="form-inner form-inner-padding mb-20 blurBG bg-shape" style=""
+                                    id="changeColor">
                                     <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
-                                    <div class="radio-input">
+                                    <div class="radio-input" id="style-4" style="overflow:auto">
                                         @foreach ($colors as $key => $color)
                                             <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
                                                 id="color-{{ $key }}" type="radio" wire:model="color">
@@ -277,14 +281,13 @@
 
                                 <div class="">
                                     <div class="form-inner" style="text-align: end">
-                                        <button class="primary-btn2" wire:click="secondStepSubmit" type="button">Tiếp
+                                        <button class="primary-btn2" wire:click="secondStepSubmit"
+                                            type="button">Tiếp
                                             tục</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="inquiry-form {{ $currentStep == 2 ? '' : 'd-none' }}" id="form-sell-2">
@@ -319,7 +322,8 @@
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
                                     <label class="fontAvantRegular">Thành phố</label>
-                                    <select class="nice-select beauty-shadow form-control-lg" wire:model.live="city_id">
+                                    <select class="nice-select beauty-shadow form-control-lg"
+                                        wire:model.live="city_id">
                                         <option value="0" selected>-- Chọn tỉnh thành phố --</option>
                                         @foreach (\Kjmtrue\VietnamZone\Models\Province::all() as $key => $item)
                                             <option value="{{ $item->id }}" wire.key={{ $item->id }}>
@@ -337,7 +341,8 @@
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
                                     <label class="fontAvantRegular">Quận, huyện</label>
-                                    <select class="nice-select beauty-shadow form-control-lg" wire:model="district_id">
+                                    <select class="nice-select beauty-shadow form-control-lg"
+                                        wire:model="district_id">
                                         <option value="0" selected>-- Chọn quận huyện --</option>
                                         @if (isset($city_id))
                                             @foreach (\Kjmtrue\VietnamZone\Models\District::whereProvinceId($this->city_id)->get() as $key => $item)
@@ -357,7 +362,8 @@
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
                                     <label class="fontAvantRegular">Địa chỉ cụ thể*</label>
-                                    <input wire:model="full_address" type="text" placeholder="Nhập địa chỉ cụ thể">
+                                    <input wire:model="full_address" type="text"
+                                        placeholder="Nhập địa chỉ cụ thể">
                                 </div>
                                 <div class="text-danger">
                                     @error('full_address')
@@ -377,7 +383,8 @@
                         </div>
                     </div>
 
-                    <div class="row {{ $currentStep == 3 ? '' : 'd-none' }} inquiry-form justify-content-evenly" id="form-sell-3">
+                    <div class="row {{ $currentStep == 3 ? '' : 'd-none' }} inquiry-form justify-content-evenly"
+                        id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
                             <div class="custom-file-container" data-upload-id="mySecondImage">
@@ -391,7 +398,8 @@
                                     <input accept="image/*" aria-label="Choose File" class="input-hidden"
                                         id="fileInput" multiple="" type="file"
                                         wire:model="verhicle_image_library">
-                                    <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i> Chọn files</span>
+                                    <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i> Chọn
+                                        files</span>
                                 </label>
                                 <div id="preview-container" class="image-preview" style="">
 
@@ -410,7 +418,8 @@
                                 <label class="input-container">
                                     <input accept="video/*" aria-label="Choose File" class="input-hidden"
                                         id="fileInputVideo" type="file" wire:model="verhicle_videos">
-                                    <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i> Chọn file</span>
+                                    <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i> Chọn
+                                        file</span>
                                 </label>
                                 <div id="preview-container-video" class="image-preview" style="">
 
@@ -423,7 +432,13 @@
                             <div class="form-inner" style="text-align: center">
                                 <button class="primary-btn2" wire:click="previousStepSubmit" type="button">Quay
                                     lại</button>
-                                <button class="primary-btn2" type="submit">ĐĂNG TIN</button>
+                                <button wire:loading.attr="disabled" class="primary-btn2"
+                                    wire:click.prevent="saveCar">ĐĂNG TIN</button>
+                                <div wire:loading class="loading-form__submit">
+                                    <svg viewBox="25 25 50 50">
+                                        <circle r="20" cy="50" cx="50"></circle>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -434,6 +449,12 @@
 
     @push('scripts')
         <script src="{{ asset('js/file_upload.js') }}"></script>
-        <script src="{{ asset('js/format-function.js') }}"></script>
+        <script src="{{ asset('js/simplemde.min.js') }}"></script>
+
+        <script>
+            var simplemde = new SimpleMDE({
+                element: $("#description")[0]
+            });
+        </script>
     @endpush
 </div>

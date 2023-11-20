@@ -17,14 +17,14 @@ class HomeController extends Controller
     {
         // Lấy danh sách ID đã lấy gần đây từ cookie
         $recentIds = json_decode(Cookie::get('recent_ids', '[]'), true);
+        // DB::enableQueryLog();
 
         // Lấy số lượng dữ liệu từ database
         $count = DB::table('cars')->count();
 
         if ($count > 5) {
             // Lấy 5 phần tử ngẫu nhiên không trùng với các ID gần đây
-            $featured_cars = DB::table('cars')
-                ->whereNotIn('id', $recentIds)
+            $featured_cars = Car::whereNotIn('id', $recentIds)
                 ->inRandomOrder()
                 ->limit(5)
                 ->get();
@@ -40,7 +40,10 @@ class HomeController extends Controller
             // $featured_cars = DB::table('cars')->inRandomOrder()->limit(5)->get();
         }
 
-        // $featured_cars = Car::where('recommended', 1)->get();
+        // dd(DB::getQueryLog());
+
+        // $featured_cars = Car::all();
+        // dd($featured_cars->toSql());
 
         $mark = false;
         $banners = Banner::all();
