@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Banner;
+use App\Models\Brand;
+use App\Models\News;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
@@ -33,12 +36,11 @@ class HomeController extends Controller
             Cookie::queue('recent_ids', json_encode($recentIds), 60);
         } else {
             // Nếu dữ liệu <= 5 thì không áp dụng điều kiện trên
-            $featured_cars = DB::table('cars')->inRandomOrder()->limit(5)->get();
+            $featured_cars = Car::inRandomOrder()->limit(5)->get();
+            // $featured_cars = DB::table('cars')->inRandomOrder()->limit(5)->get();
         }
 
         // $featured_cars = Car::where('recommended', 1)->get();
-
-
 
         $mark = false;
         $banners = Banner::all();
@@ -55,8 +57,18 @@ class HomeController extends Controller
             $mark = true;
         }
 
-        // dd($featured_cars);
+        # news data
+        $posts = News::where('isPublished', 1)
+            ->get();
 
-        return view('index', compact('banners', 'mark', 'featured_cars'));
+        $brands = Brand::all();
+
+        # tam thoi
+        $cars = Car::all();
+
+        # partners
+        $partners = Partner::all();
+
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'cars', 'partners'));
     }
 }

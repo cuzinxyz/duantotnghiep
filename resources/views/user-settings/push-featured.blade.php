@@ -10,7 +10,7 @@
                 <hr class="border-2">
 
                 <div class="row" style="row-gap: 20px">
-                    @if(isset($check_expired_date))
+                    @if(isset($service))
                     <div class="text-black">
                         <p class="mb-1">Bạn đang đăng ký gói dịch vụ: <strong>
                                 {{ auth()->user()->service->service_name }} </strong></p>
@@ -65,7 +65,7 @@
                             <div class="radio-inputs options-push w-100">
                                 @foreach (\App\Models\Service::where('service_name', 'LIKE', '%tin lẻ%')->get() as $service)
                                     <label class="radio">
-                                        <input type="radio" name="service_id" value="{{ $service->id }}">
+                                        <input type="radio" name="service_id" required value="{{ $service->id }}">
                                         <span class="name">{{ $service->service_name }}</span>
                                     </label>
                                 @endforeach

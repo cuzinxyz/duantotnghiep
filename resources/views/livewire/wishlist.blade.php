@@ -1,29 +1,29 @@
 <div>
     @if ($cars->count() > 0)
-    @foreach ($cars as $value)
-    @php
-        App\Models\User::pluck('name');
-    @endphp
+
+    @foreach ($cars as $car)
+    @if ($car->car)
     <div class="card mb-3 hoverWishlist">
-        <div class="row g-0">
+        {{-- {{ dd($car->car->verhicle_image_library) }} --}}
+         <div class="row g-0">
             <div class="col-md-4">
-                <img src="{{ ($value->car->verhicle_image_library ? asset('/storage/'. $value->car->verhicle_image_library[0]) : '') }}" class="img-fluid rounded-start"
+                <img src="{{ ($car->car->verhicle_image_library) ? asset('/storage/'. $car->car->verhicle_image_library[0]) : '' }}" class="img-fluid rounded-start"
                     alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
 
-                    <h5 class="card-title">{{ $value->car->title }}</h5>
-                    <p class="card-text">2022 - {{ $value->car->car_info['transmission'] }} - {{ number_format($value->car->car_info['mileage_traveled']) }} km</p>
-                    <p class="card-text text-danger fw-bold fs-5">{{ number_format($value->car->price) }} ₫</p>
-                    <p class="card-text"><small class="text-muted">{{ $value->car->created_at->diffForHumans() }}</small></p>
+                    <h5 class="card-title">{{ $car->car->title }}</h5>
+                    <p class="card-text">2022 - {{ $car->car->car_info['transmission'] }} - {{ number_format($car->car->car_info['mileage']) }} km</p>
+                    <p class="card-text text-danger fw-bold fs-5">{{ number_format($car->car->price) }} ₫</p>
+                    <p class="card-text"><small class="text-muted">{{ $car->car->created_at->diffForHumans() }}</small></p>
                     <p class="card-text px-2">
                         <small>
-                            <img src="/storage/{{ $value->car->user->avatar }}" class="rounded-circle" width="25px" height="25px">
+                            <img style="object-fit:cover;width:30px;height:30px" src="/storage/{{ $car->car->user->avatar }}" class="rounded-circle">
                         </small>
-                        <small>- {{ $value->car->user->name }} -</small>
-                        <small class="text-muted">{{ $value->car->province->name }}</small>
-                        <svg wire:click="remove({{ $value->id }})" class="position-absolute bottom-0 end-0 m-4" xmlns="http://www.w3.org/2000/svg"
+                        <small class="fw-bold"> {{ $car->car->user->name }} </small>
+                        <small class="text-muted">{{ $car->car->province->name }}</small>
+                        <svg wire:click="remove({{ $car->id }})" class="position-absolute bottom-0 end-0 m-4" xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                             <path
                                 d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
@@ -35,7 +35,9 @@
             </div>
         </div>
     </div>
+    @endif
     @endforeach
+
     @else
     <h5>Chưa lưu tin nào cả</h5>
     @endif

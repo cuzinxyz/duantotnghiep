@@ -14,16 +14,60 @@ class BrandSeeder extends Seeder
   {
     DB::table('brands')->insert([
       [
-        'brand_name' => 'Mercedes ',
-        'logo_url' => 'brand_image/gjIjAyhNlegnqpXIFZaHGGufRXpTAE-metaTWVyY2VkZXMtQmVuei1Mb2dvLnBuZw==-.png',
+        'brand_name' => 'Mercedes',
+        'logo_url' => 'brand_image/mercedes.svg',
       ],
       [
-        'brand_name' => 'BMW ',
+        'brand_name' => 'BMW',
         'logo_url' => 'brand_image/d9hLKotyjOuiim6nPWgi8IWOBt7CQZ-metaQk1XLUxvZ28ucG5n-.png',
       ],
       [
+        'brand_name' => 'Audi',
+        'logo_url' => 'brand_image/audi.svg',
+      ],
+      [
+        'brand_name' => 'Jeep',
+        'logo_url' => 'brand_image/jeep.svg',
+      ],
+      [
+        'brand_name' => 'Mazda',
+        'logo_url' => 'brand_image/mazda.svg',
+      ],
+      [
+        'brand_name' => 'Ferarri',
+        'logo_url' => 'brand_image/ferarri.svg',
+      ],
+      [
         'brand_name' => 'Audi ',
-        'logo_url' => 'brand_image/RSZc0MJuaH3ESrRoOW5o6WbRIMR5tp-metaQXVkaS1Mb2dvLnBuZw==-.png',
+        'logo_url' => 'brand_image/audi.svg',
+      ],
+      [
+        'brand_name' => 'Mitsubishi ',
+        'logo_url' => 'brand_image/mitsubishi.svg',
+      ],
+      [
+        'brand_name' => 'Nissan ',
+        'logo_url' => 'brand_image/nissan.svg',
+      ],
+      [
+        'brand_name' => 'Suzuki ',
+        'logo_url' => 'brand_image/suzuki.svg',
+      ],
+      [
+        'brand_name' => 'Tata ',
+        'logo_url' => 'brand_image/tata.svg',
+      ],
+      [
+        'brand_name' => 'Tesla',
+        'logo_url' => 'brand_image/tesla.svg',
+      ],
+      [
+        'brand_name' => 'Toyota ',
+        'logo_url' => 'brand_image/toyota.svg',
+      ],
+      [
+        'brand_name' => 'Volkswagen ',
+        'logo_url' => 'brand_image/volkswagen.svg',
       ],
     ]);
   }

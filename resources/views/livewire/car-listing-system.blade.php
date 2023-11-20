@@ -1,22 +1,9 @@
-@push('scripts')
-    <script>
-        Livewire.on('showSuccess', message => {
-            toastr.success(message);
-        });
-        Livewire.on('showError', message => {
-            toastr.error(message);
-        });
-        Livewire.on('showInfo', message => {
-            toastr.info(message);
-        });
-    </script>
-@endpush
 @php
     $currentYear = date('Y');
     $startYear = $currentYear - 10;
 @endphp
 <div>
-    <div class="inner-page-banner">
+    {{-- <div class="inner-page-banner">
         <div class="banner-wrapper">
             <div class="container-fluid">
                 <ul class="breadcrumb-list">
@@ -86,6 +73,10 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+
+    <div class="row" x-data="{ showHeading: false }">
+        <livewire:brand-list />
     </div>
 
     <div class="product-page pt-100 mb-100">
@@ -95,46 +86,7 @@
                     <div class="filter-area mb-40">
                         <div class="title-and-close-btn mb-20">
                             <h6>Bộ Lọc Tìm Kiếm</h6>
-                            {{-- <div class="close-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                    viewBox="0 0 14 14">
-                                    <path
-                                        d="M7 13.125C5.37555 13.125 3.81763 12.4797 2.66897 11.331C1.52031 10.1824 0.875 8.62445 0.875 7C0.875 5.37555 1.52031 3.81763 2.66897 2.66897C3.81763 1.52031 5.37555 0.875 7 0.875C8.62445 0.875 10.1824 1.52031 11.331 2.66897C12.4797 3.81763 13.125 5.37555 13.125 7C13.125 8.62445 12.4797 10.1824 11.331 11.331C10.1824 12.4797 8.62445 13.125 7 13.125ZM7 14C8.85652 14 10.637 13.2625 11.9497 11.9497C13.2625 10.637 14 8.85652 14 7C14 5.14348 13.2625 3.36301 11.9497 2.05025C10.637 0.737498 8.85652 0 7 0C5.14348 0 3.36301 0.737498 2.05025 2.05025C0.737498 3.36301 0 5.14348 0 7C0 8.85652 0.737498 10.637 2.05025 11.9497C3.36301 13.2625 5.14348 14 7 14Z">
-                                    </path>
-                                    <path
-                                        d="M4.06506 4.06506C4.1057 4.02431 4.15397 3.99199 4.20713 3.96993C4.26028 3.94788 4.31726 3.93652 4.37481 3.93652C4.43235 3.93652 4.48933 3.94788 4.54248 3.96993C4.59564 3.99199 4.64392 4.02431 4.68456 4.06506L6.99981 6.38118L9.31506 4.06506C9.35573 4.02438 9.40402 3.99211 9.45717 3.9701C9.51032 3.94808 9.56728 3.93675 9.62481 3.93675C9.68233 3.93675 9.73929 3.94808 9.79244 3.9701C9.84559 3.99211 9.89388 4.02438 9.93456 4.06506C9.97523 4.10573 10.0075 4.15402 10.0295 4.20717C10.0515 4.26032 10.0629 4.31728 10.0629 4.37481C10.0629 4.43233 10.0515 4.48929 10.0295 4.54244C10.0075 4.59559 9.97523 4.64388 9.93456 4.68456L7.61843 6.99981L9.93456 9.31506C9.97523 9.35573 10.0075 9.40402 10.0295 9.45717C10.0515 9.51032 10.0629 9.56728 10.0629 9.62481C10.0629 9.68233 10.0515 9.73929 10.0295 9.79244C10.0075 9.84559 9.97523 9.89388 9.93456 9.93456C9.89388 9.97523 9.84559 10.0075 9.79244 10.0295C9.73929 10.0515 9.68233 10.0629 9.62481 10.0629C9.56728 10.0629 9.51032 10.0515 9.45717 10.0295C9.40402 10.0075 9.35573 9.97523 9.31506 9.93456L6.99981 7.61843L4.68456 9.93456C4.64388 9.97523 4.59559 10.0075 4.54244 10.0295C4.48929 10.0515 4.43233 10.0629 4.37481 10.0629C4.31728 10.0629 4.26032 10.0515 4.20717 10.0295C4.15402 10.0075 4.10573 9.97523 4.06506 9.93456C4.02438 9.89388 3.99211 9.84559 3.9701 9.79244C3.94808 9.73929 3.93675 9.68233 3.93675 9.62481C3.93675 9.56728 3.94808 9.51032 3.9701 9.45717C3.99211 9.40402 4.02438 9.35573 4.06506 9.31506L6.38118 6.99981L4.06506 4.68456C4.02431 4.64392 3.99199 4.59564 3.96993 4.54248C3.94788 4.48933 3.93652 4.43235 3.93652 4.37481C3.93652 4.31726 3.94788 4.26028 3.96993 4.20713C3.99199 4.15397 4.02431 4.1057 4.06506 4.06506Z">
-                                    </path>
-                                </svg> Clear All
-                            </div> --}}
                         </div>
-                        {{-- <div class="tags">
-                            <ul>
-                                <li class="grid active">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-                                        viewBox="0 0 8 8">
-                                        <path
-                                            d="M0.167842 0.167842C0.220911 0.114638 0.283955 0.0724268 0.353363 0.0436257C0.422771 0.0148246 0.497179 0 0.572325 0C0.647471 0 0.72188 0.0148246 0.791287 0.0436257C0.860695 0.0724268 0.923739 0.114638 0.976809 0.167842L4.00015 3.19233L7.02349 0.167842C7.07661 0.114724 7.13967 0.072589 7.20907 0.043842C7.27847 0.015095 7.35286 0.000299116 7.42797 0.000299116C7.50309 0.000299116 7.57748 0.015095 7.64688 0.043842C7.71628 0.072589 7.77934 0.114724 7.83246 0.167842C7.88558 0.220959 7.92771 0.284019 7.95646 0.35342C7.98521 0.422821 8 0.497206 8 0.572325C8 0.647445 7.98521 0.721829 7.95646 0.79123C7.92771 0.860632 7.88558 0.923691 7.83246 0.976809L4.80797 4.00015L7.83246 7.02349C7.88558 7.07661 7.92771 7.13967 7.95646 7.20907C7.98521 7.27847 8 7.35286 8 7.42797C8 7.50309 7.98521 7.57748 7.95646 7.64688C7.92771 7.71628 7.88558 7.77934 7.83246 7.83246C7.77934 7.88558 7.71628 7.92771 7.64688 7.95646C7.57748 7.98521 7.50309 8 7.42797 8C7.35286 8 7.27847 7.98521 7.20907 7.95646C7.13967 7.92771 7.07661 7.88558 7.02349 7.83246L4.00015 4.80797L0.976809 7.83246C0.923691 7.88558 0.860632 7.92771 0.79123 7.95646C0.721829 7.98521 0.647445 8 0.572325 8C0.497206 8 0.422821 7.98521 0.35342 7.95646C0.284019 7.92771 0.220959 7.88558 0.167842 7.83246C0.114724 7.77934 0.072589 7.71628 0.043842 7.64688C0.015095 7.57748 0.000299116 7.50309 0.000299116 7.42797C0.000299116 7.35286 0.015095 7.27847 0.043842 7.20907C0.072589 7.13967 0.114724 7.07661 0.167842 7.02349L3.19233 4.00015L0.167842 0.976809C0.114638 0.923739 0.0724268 0.860695 0.0436257 0.791287C0.0148246 0.72188 0 0.647471 0 0.572325C0 0.497179 0.0148246 0.422771 0.0436257 0.353363C0.0724268 0.283955 0.114638 0.220911 0.167842 0.167842Z">
-                                        </path>
-                                    </svg> Wagon
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-                                        viewBox="0 0 8 8">
-                                        <path
-                                            d="M0.167842 0.167842C0.220911 0.114638 0.283955 0.0724268 0.353363 0.0436257C0.422771 0.0148246 0.497179 0 0.572325 0C0.647471 0 0.72188 0.0148246 0.791287 0.0436257C0.860695 0.0724268 0.923739 0.114638 0.976809 0.167842L4.00015 3.19233L7.02349 0.167842C7.07661 0.114724 7.13967 0.072589 7.20907 0.043842C7.27847 0.015095 7.35286 0.000299116 7.42797 0.000299116C7.50309 0.000299116 7.57748 0.015095 7.64688 0.043842C7.71628 0.072589 7.77934 0.114724 7.83246 0.167842C7.88558 0.220959 7.92771 0.284019 7.95646 0.35342C7.98521 0.422821 8 0.497206 8 0.572325C8 0.647445 7.98521 0.721829 7.95646 0.79123C7.92771 0.860632 7.88558 0.923691 7.83246 0.976809L4.80797 4.00015L7.83246 7.02349C7.88558 7.07661 7.92771 7.13967 7.95646 7.20907C7.98521 7.27847 8 7.35286 8 7.42797C8 7.50309 7.98521 7.57748 7.95646 7.64688C7.92771 7.71628 7.88558 7.77934 7.83246 7.83246C7.77934 7.88558 7.71628 7.92771 7.64688 7.95646C7.57748 7.98521 7.50309 8 7.42797 8C7.35286 8 7.27847 7.98521 7.20907 7.95646C7.13967 7.92771 7.07661 7.88558 7.02349 7.83246L4.00015 4.80797L0.976809 7.83246C0.923691 7.88558 0.860632 7.92771 0.79123 7.95646C0.721829 7.98521 0.647445 8 0.572325 8C0.497206 8 0.422821 7.98521 0.35342 7.95646C0.284019 7.92771 0.220959 7.88558 0.167842 7.83246C0.114724 7.77934 0.072589 7.71628 0.043842 7.64688C0.015095 7.57748 0.000299116 7.50309 0.000299116 7.42797C0.000299116 7.35286 0.015095 7.27847 0.043842 7.20907C0.072589 7.13967 0.114724 7.07661 0.167842 7.02349L3.19233 4.00015L0.167842 0.976809C0.114638 0.923739 0.0724268 0.860695 0.0436257 0.791287C0.0148246 0.72188 0 0.647471 0 0.572325C0 0.497179 0.0148246 0.422771 0.0436257 0.353363C0.0724268 0.283955 0.114638 0.220911 0.167842 0.167842Z">
-                                        </path>
-                                    </svg> Panama City
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-                                        viewBox="0 0 8 8">
-                                        <path
-                                            d="M0.167842 0.167842C0.220911 0.114638 0.283955 0.0724268 0.353363 0.0436257C0.422771 0.0148246 0.497179 0 0.572325 0C0.647471 0 0.72188 0.0148246 0.791287 0.0436257C0.860695 0.0724268 0.923739 0.114638 0.976809 0.167842L4.00015 3.19233L7.02349 0.167842C7.07661 0.114724 7.13967 0.072589 7.20907 0.043842C7.27847 0.015095 7.35286 0.000299116 7.42797 0.000299116C7.50309 0.000299116 7.57748 0.015095 7.64688 0.043842C7.71628 0.072589 7.77934 0.114724 7.83246 0.167842C7.88558 0.220959 7.92771 0.284019 7.95646 0.35342C7.98521 0.422821 8 0.497206 8 0.572325C8 0.647445 7.98521 0.721829 7.95646 0.79123C7.92771 0.860632 7.88558 0.923691 7.83246 0.976809L4.80797 4.00015L7.83246 7.02349C7.88558 7.07661 7.92771 7.13967 7.95646 7.20907C7.98521 7.27847 8 7.35286 8 7.42797C8 7.50309 7.98521 7.57748 7.95646 7.64688C7.92771 7.71628 7.88558 7.77934 7.83246 7.83246C7.77934 7.88558 7.71628 7.92771 7.64688 7.95646C7.57748 7.98521 7.50309 8 7.42797 8C7.35286 8 7.27847 7.98521 7.20907 7.95646C7.13967 7.92771 7.07661 7.88558 7.02349 7.83246L4.00015 4.80797L0.976809 7.83246C0.923691 7.88558 0.860632 7.92771 0.79123 7.95646C0.721829 7.98521 0.647445 8 0.572325 8C0.497206 8 0.422821 7.98521 0.35342 7.95646C0.284019 7.92771 0.220959 7.88558 0.167842 7.83246C0.114724 7.77934 0.072589 7.71628 0.043842 7.64688C0.015095 7.57748 0.000299116 7.50309 0.000299116 7.42797C0.000299116 7.35286 0.015095 7.27847 0.043842 7.20907C0.072589 7.13967 0.114724 7.07661 0.167842 7.02349L3.19233 4.00015L0.167842 0.976809C0.114638 0.923739 0.0724268 0.860695 0.0436257 0.791287C0.0148246 0.72188 0 0.647471 0 0.572325C0 0.497179 0.0148246 0.422771 0.0436257 0.353363C0.0724268 0.283955 0.114638 0.220911 0.167842 0.167842Z">
-                                        </path>
-                                    </svg> Toyota
-                                </li>
-                            </ul>
-                        </div> --}}
                     </div>
                     <div class="product-sidebar">
                         <div class="product-widget mb-20">
@@ -145,7 +97,7 @@
                                         <input wire:model.live="make" type="search"
                                             placeholder="Tìm kiếm xe theo Từ khóa">
                                     </div>
-                                    <ul>
+                                    <ul style="overflow: auto; max-height: 200px">
                                         @foreach ($brands as $brand)
                                             <li>
                                                 <label class="containerss">
@@ -190,71 +142,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="product-widget mb-20">
-                            <div class="check-box-item">
-                                <h6 class="product-widget-title mb-20">Body Type</h6>
-                                <div class="checkbox-container">
-                                    <ul>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Wagon</span>
-                                                <span class="qty">(1,234)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Hatchback</span>
-                                                <span class="qty">(11,353)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Sedan</span>
-                                                <span class="qty">(1,234)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Cab Chassis</span>
-                                                <span class="qty">(4,345)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Utility </span>
-                                                <span class="qty">(23,990)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Tata</span>
-                                                <span class="qty">(2,345)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Hyundai</span>
-                                                <span class="qty">(5,632)</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="product-widget mb-20">
                             <div  class="check-box-item">
                                 <h6 class="product-widget-title mb-25">Giá</h6>
@@ -275,136 +162,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="product-widget mb-20">
-                            <div class="check-box-item">
-                                <h6 class="product-widget-title mb-20">Mileage</h6>
-                                <div class="checkbox-container">
-                                    <div class="row g-3">
-                                        <div class="col-6">
-                                            <div class="form-inner">
-                                                <select>
-                                                    <option value="1">Min </option>
-                                                    <option value="2">10000</option>
-                                                    <option value="3">11000</option>
-                                                    <option value="4">13200</option>
-                                                    <option value="5">15000</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-inner">
-                                                <select>
-                                                    <option value="1">Max</option>
-                                                    <option value="2">25000</option>
-                                                    <option value="3">27000</option>
-                                                    <option value="4">30000</option>
-                                                    <option value="5">320000</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="product-widget mb-20">
-                            <div class="check-box-item">
-                                <h6 class="product-widget-title mb-20">Colors</h6>
-                                <div class="checkbox-container d-flex gap-5">
-                                    <ul class="color-area">
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Yellow</span>
-                                                <span class="qty">(10)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Black</span>
-                                                <span class="qty">(113)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Silver</span>
-                                                <span class="qty">(23)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Orange</span>
-                                                <span class="qty">(58)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Green </span>
-                                                <span class="qty">(89)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Blue</span>
-                                                <span class="qty">(76)</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                    <ul class="color-area">
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Gold</span>
-                                                <span class="qty">(32)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Gray</span>
-                                                <span class="qty">(50)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">White</span>
-                                                <span class="qty">(43)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Red</span>
-                                                <span class="qty">(77)</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="containerss">
-                                                <input type="checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="text">Beige</span>
-                                                <span class="qty">(35)</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="product-widget mb-20">
                             <div class="check-box-item">
                                 <h6 class="product-widget-title mb-20">Địa điểm</h6>
@@ -521,14 +278,9 @@
                                                     <img src="fonts/gallery-icon-1.svg" alt="">
                                                     {{ count($car->verhicle_image_library) }}
                                                 </div>
-                                                <a href="javascript:void(0)" class="fav" wire:click="addToWishlist({{ $car->id }})">
-                                                    <svg width="14" height="13" viewBox="0 0 14 14"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-                                                        </path>
-                                                    </svg>
-                                                </a>
+
+                                                <livewire:add-to-wish-list carID="{{ $car->id }}" />
+
                                                 <div class="slider-btn-group">
                                                     <div class="product-stand-next swiper-arrow">
                                                         <svg width="8" height="13" viewBox="0 0 8 13"
@@ -557,10 +309,10 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h5><a href="car-deatils.html">{{ $car->title }}</a></h5>
+                                                <h5><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h5>
                                                 <div class="price-location">
                                                     <div class="price">
-                                                        <strong>{{ number_format($car->price) }}₫</strong>
+                                                        <strong>{{ number_format($car->price) }} ₫</strong>
                                                     </div>
                                                     <div class="location">
                                                         <a href="#"><i class="bi bi-geo-alt"></i>
@@ -570,20 +322,20 @@
                                                 <ul class="features">
                                                     <li>
                                                         <img src="fonts/miles.svg" alt="">
-                                                        {{ $car->car_info['mileage_traveled'] }} kilometers
+                                                        {{ number_format($car->car_info['mileage']) }} km
                                                     </li>
                                                     <li>
                                                         <img src="fonts/fuel.svg" alt="" width="14px"
                                                             height="14px">
-                                                        {{ $car->car_info['fuel'] }}
+                                                        {{ $car->car_info['fuelType'] }}
                                                     </li>
                                                     <li>
                                                         <img src="fonts/electric.svg" alt="">
-                                                        {{ $car->car_info['transmission'] }}
+                                                        {{ $car ? $car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay' : '' }}
                                                     </li>
                                                 </ul>
                                                 <div class="content-btm">
-                                                    <a class="view-btn2" href="car-deatils.html">
+                                                    <a class="view-btn2" href="{{ route('car-detail', $car->slug) }}">
                                                         <svg width="35" height="21" viewBox="0 0 35 21"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -599,12 +351,12 @@
                                                                 d="M11 8.14151C11 8.03664 11.0408 7.93606 11.1135 7.86191C11.1862 7.78775 11.2848 7.74609 11.3877 7.74609H15.7489C15.8517 7.74609 15.9503 7.78775 16.023 7.86191C16.0957 7.93606 16.1365 8.03664 16.1365 8.14151C16.1365 8.24638 16.0957 8.34696 16.023 8.42111C15.9503 8.49527 15.8517 8.53693 15.7489 8.53693H11.3877C11.2848 8.53693 11.1862 8.49527 11.1135 8.42111C11.0408 8.34696 11 8.24638 11 8.14151ZM26.6836 8.65278C26.7563 8.72694 26.7971 8.82749 26.7971 8.93234C26.7971 9.03719 26.7563 9.13775 26.6836 9.2119L26.6532 9.24294C26.2897 9.61367 25.7968 9.82197 25.2828 9.82203H19.1409C19.0381 9.82203 18.9395 9.78037 18.8668 9.70622C18.7941 9.63206 18.7532 9.53149 18.7532 9.42662C18.7532 9.32174 18.7941 9.22117 18.8668 9.14701C18.9395 9.07286 19.0381 9.0312 19.1409 9.0312H25.2826C25.4354 9.03122 25.5866 9.00055 25.7277 8.94095C25.8688 8.88134 25.997 8.79397 26.105 8.68382L26.1355 8.65278C26.2082 8.57866 26.3068 8.53701 26.4096 8.53701C26.5123 8.53701 26.6109 8.57866 26.6836 8.65278ZM19.5286 17.7304C19.5286 17.6255 19.5694 17.5249 19.6421 17.4508C19.7148 17.3766 19.8134 17.335 19.9162 17.335H21.5638C21.6666 17.335 21.7652 17.3766 21.8379 17.4508C21.9106 17.5249 21.9514 17.6255 21.9514 17.7304C21.9514 17.8352 21.9106 17.9358 21.8379 18.01C21.7652 18.0841 21.6666 18.1258 21.5638 18.1258H19.9162C19.8134 18.1258 19.7148 18.0841 19.6421 18.01C19.5694 17.9358 19.5286 17.8352 19.5286 17.7304ZM22.2422 17.7304C22.2422 17.6255 22.283 17.5249 22.3557 17.4508C22.4284 17.3766 22.527 17.335 22.6299 17.335H26.991C27.0939 17.335 27.1925 17.3766 27.2652 17.4508C27.3379 17.5249 27.3787 17.6255 27.3787 17.7304C27.3787 17.8352 27.3379 17.9358 27.2652 18.01C27.1925 18.0841 27.0939 18.1258 26.991 18.1258H22.6299C22.527 18.1258 22.4284 18.0841 22.3557 18.01C22.283 17.9358 22.2422 17.8352 22.2422 17.7304Z">
                                                             </path>
                                                         </svg>
-                                                        Xem chi tiết
+                                                        Xem xe
                                                     </a>
                                                     <div class="brand">
-                                                        <a href="single-brand-category.html">
+                                                        <a href="{{ route('brand.detail') }}">
                                                             {{-- <img src="/storage/{{ $car->brand->logo_url }}" alt="image"> --}}
-                                                            <img src="fonts/mercedes-01.svg" alt="image">
+                                                            <img style="width: 30px;height:30px;object-fit:cover" src="{{ asset('storage/'. $car->brand->logo_url) }}" alt="{{ $car->title }}">
                                                         </a>
                                                     </div>
                                                 </div>

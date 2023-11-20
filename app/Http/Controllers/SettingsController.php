@@ -17,9 +17,23 @@ class SettingsController extends Controller
 {
     public function profile()
     {
-        $cars = auth()->user()->car;
-        // dd($cars);
-        return view('user-settings.profile', compact('cars'));
+        $cars = Car::where('user_id', auth()->id())
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $pendingCars = Car::where('user_id', auth()->id())
+            ->where('status', 0)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $deniedCars = Car::where('user_id', auth()->id())
+            ->where('status', 2)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $hiddenCars = Car::onlyTrashed()->where('user_id', auth()->id())->get();
+
+        // dd($hiddenCars);
+
+        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars'));
     }
 
     public function pushFeature($carID)
@@ -79,8 +93,8 @@ class SettingsController extends Controller
                         return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này rồi');
                     }
                     // dd('đây là case user đã mua gói tin, nhưng đã hết lượt đẩy tin, allow mua gói mới');
-
-                    return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service', 'check_expired_date'));
+// dd($service);
+                    return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service'));
                 }
             endforeach;
             // dd($check_expired_date);
@@ -94,11 +108,13 @@ class SettingsController extends Controller
         $valid = DB::table("purchased_service")
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', \Carbon\Carbon::now())
+            ->orderBy('expired_date', 'desc')
             ->get();
 
-
-        if ($valid->count() == 0) {
+        // dd($valid);
+        if (($valid->count() == 0) || ($valid[0]->remaining_push == 0)) {
             # TH: CHưa đăng kí gói tin nào
+            # tin lẻ
             $service = Service::findOrFail($request->service_id);
 
             $user = User::find(auth()->id());
@@ -171,6 +187,7 @@ class SettingsController extends Controller
                         }
                     }
                 } else {
+                    // dd('here');
                     return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua dịch vụ VIP!');
                 }
             endforeach;
@@ -362,4 +379,6 @@ class SettingsController extends Controller
         }
         return view('user-settings.settings', compact('user', 'err'));
     }
+
+
 }

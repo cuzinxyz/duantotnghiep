@@ -12,16 +12,18 @@ class News extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'news';
     protected $fillable = [
-      'title',
-     'content',
-     'summary',
-     'thumbnailImage',
-     'viewCount',
-     'shareCount',
-    'isPublished',
-    'user_id',
+        'title',
+        'slug',
+        'content',
+        'summary',
+        'thumbnailImage',
+        'viewCount',
+        'shareCount',
+        'isPublished',
+        'user_id',
     ];
-  public function user(): BelongsTo {
-    return $this->belongsTo(User::class);
-  }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

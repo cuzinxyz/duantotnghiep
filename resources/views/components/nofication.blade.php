@@ -1,5 +1,5 @@
 @if (Session::has('status'))
-    <div class="alert alert-primary alert-dismissible" role="alert">
+    <div class="container alert alert-primary alert-dismissible" role="alert">
 
         <strong>{{ Session::get('status') }}</strong>
 
@@ -7,7 +7,7 @@
 @endif
 
 @if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible" role="alert">
+    <div class="container alert alert-success alert-dismissible" role="alert">
 
         <strong>{{ Session::get('success') }}</strong>
 
@@ -15,7 +15,7 @@
 @endif
 
 @if (Session::has('warning'))
-    <div class="alert alert-warning alert-dismissible" role="alert">
+    <div class="container alert alert-warning alert-dismissible" role="alert">
 
         <strong>{{ Session::get('warning') }}</strong>
 
@@ -23,7 +23,7 @@
 @endif
 
 @if (Session::has('error'))
-    <div class="alert alert-danger alert-dismissible" role="alert">
+    <div class="container alert alert-danger alert-dismissible" role="alert">
 
         <strong>{{ Session::get('error') }}</strong>
 

@@ -31,16 +31,11 @@
                             <div class="product-card5">
                                 <div class="product-img">
                                     <div class="product-price">
-                                        <span>$7,656.00</span>
+                                        <span>{{ number_format($car->price) }} đ</span>
                                     </div>
-                                    <a href="#" class="fav">
-                                        <svg width="14" height="13" viewBox="0 0 14 14"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-                                            </path>
-                                        </svg>
-                                    </a>
+
+                                    <livewire:add-to-wish-list carID="{{ $car->id }}" />
+
                                     <div class="slider-btn-group">
                                         <div class="product-stand-next swiper-arrow">
                                             <svg width="8" height="13" viewBox="0 0 8 13"
@@ -57,46 +52,37 @@
                                     </div>
                                     <div class="swiper product-img-slider">
                                         <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="images/feature-car-01.png" alt="image">
-                                            </div>
+                                            @foreach ($car->verhicle_image_library as $carImage)
+                                                <div class="swiper-slide">
+                                                    <img src="/storage/{{ $carImage }}"
+                                                        alt="image">
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
                                 <div class="product-content">
                                     <div class="location">
-                                        <a href="#"><i class="bi bi-geo-alt"></i> Panama City</a>
+                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
                                     </div>
-                                    <h6><a href="car-deatils.html">Mercedes-Benz Class-2023</a></h6>
+                                    <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
                                     <ul class="features">
                                         <li>
-                                            <img src="images/miles.svg" alt="">
-                                            2500 miles
+                                            {{-- @dd($car) --}}
+                                            <img src="{{ asset('images/miles.svg') }}" alt="">
+                                            {{ $car ? number_format($car->car_info['mileage']) : '' }}
                                         </li>
                                         <li>
-                                            <img src="images/menual.svg" alt="">
-                                            Automatic
+                                            <img src="{{ asset('images/menual.svg') }}" alt="">
+                                            {{ $car ? $car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay' : '' }}
                                         </li>
                                         <li>
-                                            <img src="images/fuel.svg" alt="">
-                                            Petrol
-                                        </li>
-                                        <li>
-                                            <img src="images/electric.svg" alt="">
-                                            Electric
+                                            <img src="{{ asset('images/fuel.svg') }}" alt="">
+                                            {{ $car ? $car->car_info['fuelType'] : '' }}
                                         </li>
                                     </ul>
                                     <div class="content-btm">
-                                        <a class="view-btn2" href="car-deatils.html">
+                                        <a class="view-btn2" href="{{ route('car-detail', $car->slug) }}">
                                             <svg width="35" height="21" viewBox="0 0 35 21"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -112,7 +98,7 @@
                                                     d="M11 8.14151C11 8.03664 11.0408 7.93606 11.1135 7.86191C11.1862 7.78775 11.2848 7.74609 11.3877 7.74609H15.7489C15.8517 7.74609 15.9503 7.78775 16.023 7.86191C16.0957 7.93606 16.1365 8.03664 16.1365 8.14151C16.1365 8.24638 16.0957 8.34696 16.023 8.42111C15.9503 8.49527 15.8517 8.53693 15.7489 8.53693H11.3877C11.2848 8.53693 11.1862 8.49527 11.1135 8.42111C11.0408 8.34696 11 8.24638 11 8.14151ZM26.6836 8.65278C26.7563 8.72694 26.7971 8.82749 26.7971 8.93234C26.7971 9.03719 26.7563 9.13775 26.6836 9.2119L26.6532 9.24294C26.2897 9.61367 25.7968 9.82197 25.2828 9.82203H19.1409C19.0381 9.82203 18.9395 9.78037 18.8668 9.70622C18.7941 9.63206 18.7532 9.53149 18.7532 9.42662C18.7532 9.32174 18.7941 9.22117 18.8668 9.14701C18.9395 9.07286 19.0381 9.0312 19.1409 9.0312H25.2826C25.4354 9.03122 25.5866 9.00055 25.7277 8.94095C25.8688 8.88134 25.997 8.79397 26.105 8.68382L26.1355 8.65278C26.2082 8.57866 26.3068 8.53701 26.4096 8.53701C26.5123 8.53701 26.6109 8.57866 26.6836 8.65278ZM19.5286 17.7304C19.5286 17.6255 19.5694 17.5249 19.6421 17.4508C19.7148 17.3766 19.8134 17.335 19.9162 17.335H21.5638C21.6666 17.335 21.7652 17.3766 21.8379 17.4508C21.9106 17.5249 21.9514 17.6255 21.9514 17.7304C21.9514 17.8352 21.9106 17.9358 21.8379 18.01C21.7652 18.0841 21.6666 18.1258 21.5638 18.1258H19.9162C19.8134 18.1258 19.7148 18.0841 19.6421 18.01C19.5694 17.9358 19.5286 17.8352 19.5286 17.7304ZM22.2422 17.7304C22.2422 17.6255 22.283 17.5249 22.3557 17.4508C22.4284 17.3766 22.527 17.335 22.6299 17.335H26.991C27.0939 17.335 27.1925 17.3766 27.2652 17.4508C27.3379 17.5249 27.3787 17.6255 27.3787 17.7304C27.3787 17.8352 27.3379 17.9358 27.2652 18.01C27.1925 18.0841 27.0939 18.1258 26.991 18.1258H22.6299C22.527 18.1258 22.4284 18.0841 22.3557 18.01C22.283 17.9358 22.2422 17.8352 22.2422 17.7304Z">
                                                 </path>
                                             </svg>
-                                            View Details
+                                            Xem xe
                                         </a>
                                     </div>
                                 </div>

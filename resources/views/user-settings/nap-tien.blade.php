@@ -13,11 +13,11 @@
                         {{-- @dd(\App\Models\Service::all()) --}}
                         <div class="marquee_service text-black">
                             @foreach (\App\Models\Service::all() as $service)
-                            <div class="marquee_service-item">
-                                <img src="{{ asset('images/car.svg') }}" alt="">
-                                <span class="fw-lighter">{{ $service->service_name }}</span> -
-                                {{ number_format($service->price) }}
-                            </div>
+                                <div class="marquee_service-item">
+                                    <img src="{{ asset('images/car.svg') }}" alt="">
+                                    <span class="fw-lighter">{{ $service->service_name }}</span> -
+                                    {{ number_format($service->price) }}
+                                </div>
                             @endforeach
                         </div>
                     </div>
@@ -26,7 +26,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-8 col-sm-12 d-flex justify-content-center">
-                    <form action="{{ route('recharge.submit') }}" method="POST" class="w-100">
+                    <form action="{{ route('recharge.submit') }}" method="POST" id="form-recharge" class="w-100">
 
                         @csrf
 
@@ -41,8 +41,8 @@
                                         class="fw-bold">{{ number_format(auth()->user()->account_balence) }}</span>
                                 </div>
                                 <div class="radiobtn">
-                                    <input type="radio" id="one">
-                                    <input type="radio" id="two">
+                                    <input type="radio" id="one" checked>
+                                    {{-- <input type="radio" id="two"> --}}
                                     <label for="one" class="box py-2 first">
                                         <div class="d-flex align-items-start">
                                             <span class="circle"></span>
@@ -134,7 +134,8 @@
                             </div>
 
                             <div class="w-100 mb-3">
-                                <button class="w-100 primary-btn2 btn-dark1 justify-content-center">Nạp tiền
+                                <button id="recharge-btn"
+                                    class="w-100 primary-btn2 btn-dark1 justify-content-center">Nạp tiền
                                     ngay</button>
                             </div>
 
@@ -148,6 +149,23 @@
 
     @push('scripts')
         <script>
+            const form = document.querySelector('#form-recharge');
+            // console.log(document.querySelector('#form-recharge'));
+            form.addEventListener("submit", (e) => {
+                // Ngăn chặn submit mặc định
+                e.preventDefault();
+                // Kiểm tra xem có input nào được chọn
+                const checkedRadio = document.querySelector('input[name="money"]:checked');
+                const otherValue = document.getElementById('other').value;
+                if (checkedRadio || otherValue) {
+                    // Nếu có 1 input được chọn thì cho phép submit
+                    e.target.submit();
+                } else {
+                    // Ngược lại thông báo lỗi
+                    alert('Vui lòng chọn 1 trong 2 phương thức nạp tiền!');
+                }
+            });
+
             $(".marquee_service").marquee({
                 direction: "left",
                 duration: 25000,

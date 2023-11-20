@@ -823,7 +823,7 @@ p {
 
 .nice-select {
     width: 100%;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
     border-radius: 5px;
     height: 50px;
     display: flex;
@@ -833,6 +833,10 @@ p {
     outline: none !important;
     box-shadow: none !important;
     border: 1px solid #f3f3f3
+}
+
+.beauty-shadow {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
 }
 
 .nice-select::after {
@@ -15988,7 +15992,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .product-card2 .product-content .company-logo {
     position: absolute;
     right: 20px;
-    top: -22px
+    top: -22px;
+    background: #fff;
+    border-radius: 50%;
+    width: fit-content;
+    height: fit-content;
 }
 
 .product-card2 .product-content .details-btn {
@@ -27684,13 +27692,32 @@ button {
 }
 
 .contact-page .inquiry-form {
-    background-image: url(../images/inquary-form-bg2.png);
+    border-radius: 10px;
+    /* padding: 10px 35px 50px; */
+}
+.bg-shape {
+    position: relative;
+    background-image: url(../images/bg-shape.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 10px;
-    padding: 10px 35px 50px
+    z-index: 12;
+    border-radius: 10px !important;
 }
-
+.bg-shape::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* background: rgba(255, 255, 255, 0.2); */
+    background-color: #fafafa7a;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: -1;
+}
 
 @media (max-width: 767px) {
     .contact-page .inquiry-form {
@@ -27831,7 +27858,8 @@ button {
     font-weight: 400;
     height: 50px;
     width: 100%;
-    padding: 10px 20px
+    padding: 10px 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .contact-page .inquiry-form .form-inner input::-moz-placeholder {
@@ -27852,7 +27880,21 @@ button {
     padding: 20px;
     outline: none;
     border: none;
-    min-height: 100px
+    min-height: 100px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.blurBG{
+    position: relative;
+
+}
+.blurBG::after {
+    position: absolute;
+    content: "";
+    top: 0;bottom: 0;left: 0;right: 0;
+    /* opacity: .5; */
+    z-index: -10;
+    background: transparent !important;
 }
 
 .contact-page .inquiry-form .form-inner textarea::-moz-placeholder {
@@ -28835,3 +28877,16 @@ header.style-5 .nav-right .dropdown .account-menu.active {
 }
 
 /* custom push featured page  */
+
+/* custom recharge */
+.js-marquee {
+    display: flex;
+    column-gap: 80px;
+}
+
+.line-clamp-2 {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
