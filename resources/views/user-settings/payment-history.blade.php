@@ -23,16 +23,7 @@
                 <div class="card h-100 border-start-lg border-start-primary">
                     <div class="card-body">
                         <div class="small text-muted">Số dư hiện tại</div>
-                        <div class="h3">$20.00</div>
-                        <a class="text-arrow-icon small" href="#!">
-                            Switch to yearly billing
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-arrow-right">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
+                        <div class="h3">{{ number_format($currentBalance) }}₫</div>
                     </div>
                 </div>
             </div>
@@ -40,17 +31,8 @@
                 <!-- Billing card 2-->
                 <div class="card h-100 border-start-lg border-start-secondary">
                     <div class="card-body">
-                        <div class="small text-muted">Số tiền đang xử lý</div>
-                        <div class="h3">July 15</div>
-                        <a class="text-arrow-icon small text-secondary" href="#!">
-                            View payment history
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-arrow-right">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
+                        <div class="small text-muted">Số tiền đã sử dụng</div>
+                        <div class="h3">{{ number_format($moneySpending) }}₫</div>
                     </div>
                 </div>
             </div>
@@ -59,16 +41,7 @@
                 <div class="card h-100 border-start-lg border-start-success">
                     <div class="card-body">
                         <div class="small text-muted">Tổng tiền đã nạp</div>
-                        <div class="h3 d-flex align-items-center">Freelancer</div>
-                        <a class="text-arrow-icon small text-success" href="#!">
-                            Upgrade plan
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-arrow-right">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </a>
+                        <div class="h3 d-flex align-items-center">{{ number_format($totalAmount) }}₫</div>
                     </div>
                 </div>
             </div>
@@ -77,52 +50,41 @@
         <div class="card card-header-actions mb-4">
             <div class="card-header">
                 Lịch sử thanh toán dịch vụ
-                <button class="btn btn-sm btn-primary" type="button">Add Payment Method</button>
             </div>
             <div class="card-body px-0">
-                <!-- Payment method 1-->
-                <div class="d-flex align-items-center justify-content-between px-4">
-                    <div class="d-flex align-items-center">
-                        <i class="fab fa-cc-visa fa-2x cc-color-visa"></i>
-                        <div class="ms-4">
-                            <div class="small">Visa ending in 1234</div>
-                            <div class="text-xs text-muted">Expires 04/2024</div>
-                        </div>
-                    </div>
-                    <div class="ms-4 small">
-                        <div class="badge bg-light text-dark me-3">Default</div>
-                        <a href="#!">Edit</a>
-                    </div>
-                </div>
-                <hr>
-                <!-- Payment method 2-->
-                <div class="d-flex align-items-center justify-content-between px-4">
-                    <div class="d-flex align-items-center">
-                        <i class="fab fa-cc-mastercard fa-2x cc-color-mastercard"></i>
-                        <div class="ms-4">
-                            <div class="small">Mastercard ending in 5678</div>
-                            <div class="text-xs text-muted">Expires 05/2022</div>
-                        </div>
-                    </div>
-                    <div class="ms-4 small">
-                        <a class="text-muted me-3" href="#!">Make Default</a>
-                        <a href="#!">Edit</a>
-                    </div>
-                </div>
-                <hr>
-                <!-- Payment method 3-->
-                <div class="d-flex align-items-center justify-content-between px-4">
-                    <div class="d-flex align-items-center">
-                        <i class="fab fa-cc-amex fa-2x cc-color-amex"></i>
-                        <div class="ms-4">
-                            <div class="small">American Express ending in 9012</div>
-                            <div class="text-xs text-muted">Expires 01/2026</div>
-                        </div>
-                    </div>
-                    <div class="ms-4 small">
-                        <a class="text-muted me-3" href="#!">Make Default</a>
-                        <a href="#!">Edit</a>
-                    </div>
+                <div class="table-responsive table-billing-history text-center">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th class="border-gray-200" scope="col">Tên gói</th>
+                                <th class="border-gray-200" scope="col">Giá</th>
+                                <th class="border-gray-200" scope="col">Mô tả</th>
+                                <th class="border-gray-200" scope="col">Thời gian sử dụng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($billHistories as $value)
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            {{ $value->service_name }}
+                                        </span>
+                                        <br>
+                                        ({{ $value->title }})
+                                    </td>
+                                    <td>{{ number_format($value->price) }}₫</td>
+                                    <td>
+                                        @php
+                                            $string = $value->description;
+                                            $newString = str_replace(' \n', '<br>', $string);
+                                            echo $newString;
+                                        @endphp
+                                    </td>
+                                    <td>{{ $value->expiration_date }} ngày</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -131,41 +93,31 @@
             <div class="card-header">Lịch sử nạp tiền</div>
             <div class="card-body p-0">
                 <!-- Billing history table-->
-                <div class="table-responsive table-billing-history">
+                <div class="table-responsive table-billing-history text-center">
                     <table class="table mb-0">
                         <thead>
                             <tr>
-                                <th class="border-gray-200" scope="col">Transaction ID</th>
-                                <th class="border-gray-200" scope="col">Date</th>
-                                <th class="border-gray-200" scope="col">Amount</th>
-                                <th class="border-gray-200" scope="col">Status</th>
+                                <th class="border-gray-200" scope="col">Mã giao dịch</th>
+                                <th class="border-gray-200" scope="col">Ngày</th>
+                                <th class="border-gray-200" scope="col">Số tiền</th>
+                                <th class="border-gray-200" scope="col">Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>#39201</td>
-                                <td>06/15/2021</td>
-                                <td>$29.99</td>
-                                <td><span class="badge bg-light text-dark">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>#38594</td>
-                                <td>05/15/2021</td>
-                                <td>$29.99</td>
-                                <td><span class="badge bg-success">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>#38223</td>
-                                <td>04/15/2021</td>
-                                <td>$29.99</td>
-                                <td><span class="badge bg-success">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>#38125</td>
-                                <td>03/15/2021</td>
-                                <td>$29.99</td>
-                                <td><span class="badge bg-success">Paid</span></td>
-                            </tr>
+                            @foreach ($depositHistory as $value)
+                                <tr>
+                                    <td>#{{ $value->id }}</td>
+                                    @php
+                                        $dateString = $value->created_at;
+                                        $dateTime = new DateTime($dateString);
+                                        $formattedDate = $dateTime->format('d/m/Y H:i:s');
+                                    @endphp
+                                    <td>{{ $formattedDate }}</td>
+                                    <td>{{ number_format($value->amount) }}₫</td>
+                                    <td><span class="badge bg-light text-dark">Thành công</span></td>
+                                    {{-- <td><span class="badge bg-success">Paid</span></td> --}}
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
