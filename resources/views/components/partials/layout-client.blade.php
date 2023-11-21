@@ -264,24 +264,11 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="my-2">
-                                    <div class="cart-block">
-                                        <div class="cart-block-header fw-bold">Quản lý đơn</div>
-                                        <div class="cart-block-body">
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
-                                                <i class="bi bi-bag-check-fill"></i> Đơn mua
-                                            </div>
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
-                                                <i class="bi bi-journal-text"></i> Đơn bán
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
                                 <li class="mb-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
                                         <div class="cart-block-body">
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2" onclick="window.location.href='{{ route('wishlish') }}'">
                                                 <i class="bi bi-heart"></i> Tin đã lưu
                                             </div>
 

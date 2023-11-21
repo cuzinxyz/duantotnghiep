@@ -341,7 +341,8 @@ class SettingsController extends Controller
         // lịch sử nạp tiền
         $depositHistory = DB::table('transactions_histories')
             ->select('id', 'amount', 'created_at')
-            ->where('transaction_type', 'LIKE', 'nạp tiền')
+            ->where('user_id', auth()->id())
+            ->where('transaction_type', 'LIKE', '%nạp tiền%')
             ->get();
         return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory'));
     }

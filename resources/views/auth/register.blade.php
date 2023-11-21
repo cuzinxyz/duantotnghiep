@@ -1,136 +1,91 @@
 <x-partials.layout-client>
     <style>
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 30px;
-            max-width: 100%;
-            width: 550px;
-            border-radius: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
         ::placeholder {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        .form button {
-            align-self: flex-end;
-        }
-
-        .flex-column>label {
-            color: #151717;
-            font-weight: 600;
-        }
-
-        .inputForm {
-            border: 1.5px solid #ecedec;
-            border-radius: 10px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            padding-left: 10px;
-            transition: 0.2s ease-in-out;
-        }
-
-        .input {
-            margin-left: 10px;
-            border-radius: 10px;
-            border: none;
-            width: 85%;
-            height: 100%;
-        }
-
-        .input:focus {
-            outline: none;
-        }
-
-        .inputForm:focus-within {
-            border: 1.5px solid #2d79f3;
-        }
-
-        .flex-row {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            justify-content: space-between;
-        }
-
-        .flex-row>div>label {
-            font-size: 14px;
-            color: black;
-            font-weight: 400;
-        }
-
-        .span {
-            font-size: 14px;
-            margin-left: 5px;
-            color: #2d79f3;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .button-submit {
-            margin: 20px 0 10px 0;
-            background-color: #151717;
-            border: none;
-            color: white;
-            font-size: 15px;
-            font-weight: 500;
-            border-radius: 10px;
-            height: 50px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .button-submit:hover {
-            background-color: #252727;
-        }
-
-        .p {
-            text-align: center;
-            color: black;
-            font-size: 14px;
-            margin: 5px 0;
-        }
-
-        .btn {
-            margin-top: 10px;
-            width: 100%;
-            height: 50px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 500;
-            gap: 10px;
-            border: 1px solid #ededef;
-            /* background-color: white; */
-            cursor: pointer;
-            transition: 0.2s ease-in-out;
-        }
-
-        .btn:hover {
-            border: 1px solid #2d79f3;
-            ;
+            font-size: .5em !important;
         }
     </style>
+    <div class="container">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Đăng Ký</h4>
+                    {{-- <p>Don’t have any account? <button type="button" data-bs-toggle="modal"
+                            data-bs-target="#signUpModal01">Sign Up</button></p> --}}
+                    <button class="rounded-2 px-2" type="button" onclick="window.location.href='{{ url()->previous() }}'">
+                        <i class="bi bi-house-door"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="form-inner">
+                                    <label for="">Họ và tên</label>
+                                    <input type="text" class="w-100 border px-1 fs-4 @error('name') is-invalid @enderror" style="height:60px"
+                                        id="name" value="{{ old('name') }}" autocomplete="name" placeholder="Type your name"
+                                        name="name" autofocus>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-inner">
+                                    <label>Email của bạn*</label>
+                                    <input class="w-100 border px-1 fs-4 @error('email') border border-danger @enderror"
+                                        style="height: 60px" type="email" placeholder="Type email" id="email"
+                                        type="email" value="{{ old('email') }}" autocomplete="email" name="email"
+                                        autofocus>
+                                </div>
+                                @error('email')
+                                    <p class="text-danger fw-bold" style="display:block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-inner">
+                                    <label>Mật khẩu*</label>
+                                    <input class="w-100 border px-1 fs-4 @error('password') border border-danger @enderror"
+                                        style="height: 60px" id="password3" type="password" placeholder="*** ***" name="password">
+                                    <i class="bi bi-eye-slash d-none" id="togglePassword3"></i>
+                                </div>
+                                @error('password')
+                                    <p class="text-danger fw-bold" style="display:block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-inner">
+                                    <label>Xác nhận mật khẩu*</label>
+                                    <input class="w-100 border px-1 fs-4 @error('password') border border-danger @enderror"
+                                        style="height: 60px" id="password3" type="password" placeholder="*** ***" name="password_confirmation" autocomplete="new-password">
+                                    <i class="bi bi-eye-slash d-none" id="togglePassword3"></i>
+                                </div>
+                                @error('password')
+                                    <p class="text-danger fw-bold" style="display:block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </p>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-inner">
+                                    <button class="primary-btn6 w-100 text-center justify-content-center"
+                                        type="submit"><i class="text-success bi bi-door-open"></i> Đăng ký</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex align-items-center flex-column justify-content-center text-center" style="height:60px">
+                            Nếu đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="text-center text-lg-start">
-        <style>
-            .cascading-right {
-                margin-right: -50px;
-            }
-
-            @media (max-width: 991.98px) {
-                .cascading-right {
-                    margin-right: 0;
-                }
-            }
-        </style>
-
         <!-- Jumbotron -->
         <div class="container py-4" style="max-width:1200px">
             <div class="row align-items-center">
@@ -151,7 +106,7 @@
                                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                                     </svg>
                                     <input type="text" class="input @error('name') is-invalid @enderror"
-                                        id="name" type="name" value="{{ old('name') }}" autocomplete="name"
+                                        id="name" value="{{ old('name') }}" autocomplete="name"
                                         name="name" autofocus>
 
                                 </div>

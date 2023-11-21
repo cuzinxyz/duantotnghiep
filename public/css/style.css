@@ -28597,6 +28597,7 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     transition: all .2s ease;
     padding: 5px 15px;
     border-radius: 3px;
+    font-weight: 500;
 }
 
 .cart-block-body_item:hover {

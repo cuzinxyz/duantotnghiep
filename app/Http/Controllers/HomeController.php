@@ -22,11 +22,11 @@ class HomeController extends Controller
         // Lấy số lượng dữ liệu từ database
         $count = DB::table('cars')->count();
 
-        if ($count > 5) {
+        if ($count > 6) {
             // Lấy 5 phần tử ngẫu nhiên không trùng với các ID gần đây
             $featured_cars = Car::whereNotIn('id', $recentIds)
                 ->inRandomOrder()
-                ->limit(5)
+                ->limit(10)
                 ->get();
 
             // Cập nhật danh sách ID gần đây

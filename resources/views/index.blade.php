@@ -4,7 +4,7 @@
 
     <x-homepage.featured-cars :cars="$featured_cars" />
 
-    <div class="pt-100 mb-100" x-data="{ showHeading : true }">
+    <div class="mb-100" x-data="{ showHeading : true }">
         <livewire:brand-list />
     </div>
 
@@ -67,9 +67,9 @@
         <div class="container">
             <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12">
-                    <div class="section-title-2 text-center">
-                        <h2>Browse Used Car </h2>
-                        <p>There has 30+ Brand Category Available </p>
+                    <div class="section-title-2 text-left">
+                        <h2>Xe Gần Đây</h2>
+                        <p>Có hơn {{ \DB::table('brands')->get()->count() }}+ thương hiệu xe được đề xuất.</p>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
 
                                 <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="{{ $wowDelayRecommend + 100 }}ms">
                                     <div class="product-card2 two">
-                                        <div class="product-img">
+                                        <div class="product-img" onclick="window.location='{{ route('car-detail', $car->slug) }}'">
                                             <img src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}" alt="{{ $car->title }}">
                                         </div>
                                         <div class="product-content">

@@ -7,8 +7,8 @@
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
             <div class="col-lg-12 d-flex align-items-end justify-content-between gap-3 flex-wrap">
                 <div class="section-title-2">
-                    <h2>Featured Cars</h2>
-                    <p>To get the most accurate and up-to-date information.</p>
+                    <h2>Xe Được Đề Xuất</h2>
+                    <p>Xe được đề xuất bởi Drivco.</p>
                 </div>
                 <div class="slider-btn-group2 d-flex align-items-center justify-content-between">
                     <div class="slider-btn prev-51">
