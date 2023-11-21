@@ -3,77 +3,6 @@
     $startYear = $currentYear - 10;
 @endphp
 <div>
-    {{-- <div class="inner-page-banner">
-        <div class="banner-wrapper">
-            <div class="container-fluid">
-                <ul class="breadcrumb-list">
-                    <li><a href="index.html">Home</a></li>
-                    <li>Car Listing System</li>
-                </ul>
-                <div class="banner-main-content-wrap">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-7 d-flex align-items-center">
-                            <div class="banner-content">
-                                <span class="sub-title">Car Grid System</span>
-                                <h1>To Choose Dream Car</h1>
-                                <div class="customar-review">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <div class="review-top">
-                                                    <div class="logo">
-                                                        <img src="fonts/trstpilot-logo.svg" alt="">
-                                                    </div>
-                                                    <div class="star">
-                                                        <img src="fonts/trustpilot-star.svg" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <ul>
-                                                        <li>Trust Rating <span>5.0</span></li>
-                                                        <li><span>2348</span> Reviews</li>
-                                                    </ul>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="review-top">
-                                                    <div class="logo">
-                                                        <img src="fonts/google-logo.svg" alt="">
-                                                    </div>
-                                                    <div class="star">
-                                                        <ul>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-half"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <ul>
-                                                        <li>Trust Rating <span>5.0</span></li>
-                                                        <li><span>2348</span> Reviews</li>
-                                                    </ul>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-5 d-lg-flex d-none align-items-center justify-content-end">
-                            <div class="banner-img">
-                                <img src="images/inner-banner-img.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <div class="row" x-data="{ showHeading: false }">
         <livewire:brand-list />
@@ -279,7 +208,7 @@
                                                     {{ count($car->verhicle_image_library) }}
                                                 </div>
 
-                                                <livewire:add-to-wish-list carID="{{ $car->id }}" />
+                                                {{-- <livewire:add-to-wish-list carID="{{ $car->id }}" /> --}}
 
                                                 <div class="slider-btn-group">
                                                     <div class="product-stand-next swiper-arrow">
@@ -368,13 +297,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    {{ $cars->links() }}
+                                    {{-- {{ $cars->links() }} --}}
 
-                                    {{-- <div class="pagination-and-next-prev">
+                                    <div class="pagination-and-next-prev">
                                         <div class="pagination">
-                                            {{ $cars->links('vendor.livewire.bootstrap') }}
+                                            {{ $cars->links('vendor.livewire.simple-bootstrap') }}
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
