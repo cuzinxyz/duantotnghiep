@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         ServiceSeeder::class,
         NewsSeeder::class,
         CarsSeeder::class,
+        SavedCarSeeder::class,
       ]);
     }
 }

@@ -70,7 +70,7 @@ class CarListingSystem extends Component
         }
 
         if (!empty($this->minYear && $this->maxYear)) {
-            $carQuery->whereBetween('car_info->manufactured', [$this->minYear, $this->maxYear]);
+            $carQuery->whereBetween('car_info->year_of_manufacture', [$this->minYear, $this->maxYear]);
         }
 
         if (!empty($this->sortPrice)) {
@@ -88,7 +88,7 @@ class CarListingSystem extends Component
         // }
 
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->paginate(2)
+            'cars' => $carQuery->paginate(6)
         ]);
     }
 }
