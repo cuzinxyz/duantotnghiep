@@ -13,6 +13,8 @@ class CarDetailController extends Controller
         if ($slug) {
             $carDetail = Car::where('slug', $slug)->first();
         }
+        # save view
+        views($carDetail)->record();
 
         return view('detail', compact('carDetail'));
     }

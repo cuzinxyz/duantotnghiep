@@ -324,6 +324,16 @@
             </div>
         </div>
 
+        <div class="single-item mb-50" id="description">
+            <div class="description-area">
+                <div class="title mb-20">
+                    <h5>Mô tả</h5>
+                </div>
+                <div class="description-car">
+                    {!! \Illuminate\Mail\Markdown::parse($carDetail->description) !!}
+                </div>
+            </div>
+        </div>
 
         <div class="single-item mb-50" id="qus-ans">
             <div class="user-qustion-area">
@@ -331,24 +341,12 @@
                     <div class="title">
                         <h5>Latest User Question</h5>
                     </div>
-                    {{-- <div class="filter-atra">
-                    <h6>Filter By:</h6>
-                    <form>
-                        <div class="form-inner">
-                            <select>
-                                <option value="1">Newest</option>
-                                <option value="2">Older</option>
-                            </select>
-                        </div>
-                    </form>
-                </div> --}}
                 </div>
                 <livewire:comments.comment :id="$carDetail->id" />
 
                 <livewire:comments.list-comment />
             </div>
         </div>
-
 
         <div class="single-item mb-50" id="faqs">
             <div class="faq-area">
@@ -425,7 +423,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 </div>

@@ -453,7 +453,7 @@
 
         <script>
             var simplemde = new SimpleMDE({
-                element: $("#description")[0]
+                element: document.getElementById("description")
             });
         </script>
     @endpush

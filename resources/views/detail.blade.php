@@ -1,7 +1,6 @@
 <x-partials.layout-client>
     <x-detailpage.banner :$carDetail />
 
-
     <div class="car-details-area pt-100 mb-100">
         <div class="container">
             <div class="row mb-50">
@@ -34,6 +33,7 @@
             </div>
             <div class="row">
                 <x-detailpage.info-car :$carDetail />
+
                 <div class="col-lg-4">
                     <div class="car-details-sidebar">
                         <div class="contact-info mb-50">
