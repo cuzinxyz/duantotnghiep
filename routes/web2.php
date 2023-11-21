@@ -60,7 +60,7 @@ Route::controller(WishlishController::class)->group(function () {
 
 Auth::routes();
 
-Route::get('/test', function() {
+Route::get('/test', function () {
     $service = Service::find(5);
 
     $array = preg_split("/\r\n|\n|\r/", $service['description']);

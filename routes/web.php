@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
 
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
+
+        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
     });
 
     Route::controller(CheckOutController::class)->group(function () {
@@ -69,10 +71,10 @@ Route::controller(ServiceController::class)->group(function () {
 });
 
 # Posts Route
-Route::get("/bai-viet/{slug}.html", function($slug) {
+Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
 
-    if(!$post) {
+    if (!$post) {
         abort(404);
     }
     return view('news.detail', [
@@ -85,7 +87,6 @@ Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail')
 Route::get('/xe', CarListingSystem::class)->name('car.list');
 
 Route::get('/testt', function () {
-
 });
 
 Auth::routes();
@@ -94,5 +95,3 @@ Auth::routes();
 Route::controller(CarDetailController::class)->group(function () {
     Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
-
-
