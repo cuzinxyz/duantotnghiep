@@ -28,7 +28,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get("/service/{idService}", function($idService) {
   $serv = Service::findOrFail($idService);
 
-  return view('service-detail', compact('serv'));
+  return view('service-detail', compact('serv '));
 })->name('service.detail');
 
 Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
