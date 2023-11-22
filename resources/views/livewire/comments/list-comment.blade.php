@@ -1,5 +1,5 @@
 <div>
-    <ul class="comment">
+    <ul class="comment" wire:loading.remove>
         @if (empty($listComments))
             <p>Không có bình luận</p>
         @else
@@ -25,9 +25,9 @@
                                 Reply
                             </div>
 
-                            <div class="group" x-show="open">
+                            <div class="group" x-show="open" x-trap="open">
                                 <form action="" wire:submit.prevent="replyComment({{ $item->id }})">
-                                    <input type="text" class="input" wire:model="reply">
+                                    <input type="text" class="input" wire:model="reply" placeholder="Nhập phản hồi">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <div
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (!empty($item->reply))
+                    @if ($item->reply->count() > 0)
                         <ul class="comment-replay">
                             @foreach ($item->reply as $reply)
                                 <li wire:key="{{ $reply->id }}">
@@ -82,10 +82,9 @@
                     @endif
                 </li>
             @endforeach
-
+                <li>
+                    {{ $listComments->links() }}
+                </li>
         @endif
     </ul>
-    <div class="load-moer-btn">
-        <a class="primary-btn3" href="#">Load More Question</a>
-    </div>
 </div>

@@ -35,7 +35,7 @@
         <div class="user-qustion-area col-lg-8">
             <div class="section-title-and-filter mb-30">
                 <div class="title">
-                    <h5>Latest User Question</h5>
+                    <h5>Đặt câu hỏi cho tác giả</h5>
                 </div>
             </div>
             {{-- <livewire:comments.comment />

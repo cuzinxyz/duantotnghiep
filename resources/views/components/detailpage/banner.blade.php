@@ -5,38 +5,27 @@
         <div class="container-fluid">
             <div class="banner-main-content-wrap">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-7 d-flex align-items-center">
+                    <div class="col-xl-6 col-lg-7 d-flex align-items-center py-md-4 px-md-5 py-sm-4 px-sm-5">
                         <div class="banner-content style-2">
+                            <h2>{{ $carDetail->title }}</h2>
                             <div class="price-model-and-fav-area">
-                                <div class="price-and-model">
-                                    <div class="price">
-                                        <h3>{{ number_format($carDetail->price, 0, '', ',') }} VNĐ</h3>
-                                    </div>
+                                <div class="price-and-model" style="gap:30px">
+                                    <h5 class="text-danger m-0 fw-bolder">{{ number_format($carDetail->price, 0, '', ',') }} VNĐ</h5>
+
+                                    <ul class="share-and-fav">
+                                        <li class="fs-4">
+                                            <livewire:add-to-wish-list carID="{{ $carDetail->id }}" />
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="share-and-fav">
-                                    <li>
-                                        <livewire:add-to-wish-list carID="{{ $carDetail->id }}" />
-                                    </li>
-                                </ul>
                             </div>
-                            <h1>{{ $carDetail->title }}</h1>
-                            <div class="location-and-notification">
+                            <div class="location-and-notification mb-3">
                                 <ul>
                                     <li><i class="bi bi-geo-alt"></i> {{ $carDetail->province->name }}</li>
-                                    <li class="alart">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#alartModal01">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                viewBox="0 0 13 14">
-                                                <path
-                                                    d="M10.9778 7.18763V5.87891C10.9778 3.96971 9.63702 2.35154 7.80001 1.82301V1.23047C7.80001 0.551988 7.21684 0 6.50002 0C5.7832 0 5.20003 0.551988 5.20003 1.23047V1.82301C3.36299 2.35154 2.02226 3.96968 2.02226 5.87891V7.18763C2.02226 8.86468 1.3469 10.4549 0.120605 11.6653C0.0618066 11.7234 0.0223205 11.7965 0.00705533 11.8755C-0.00820982 11.9546 0.00141928 12.0362 0.0347455 12.1102C0.0680718 12.1841 0.123625 12.2472 0.1945 12.2915C0.265375 12.3358 0.348445 12.3594 0.433383 12.3594H4.37696C4.57825 13.2943 5.4537 14 6.50002 14C7.54637 14 8.42176 13.2943 8.62308 12.3594H12.5667C12.6516 12.3594 12.7346 12.3358 12.8055 12.2914C12.8764 12.2471 12.9319 12.1841 12.9653 12.1101C12.9986 12.0362 13.0082 11.9546 12.9929 11.8755C12.9777 11.7965 12.9382 11.7234 12.8794 11.6653C11.6531 10.4549 10.9778 8.86465 10.9778 7.18763ZM6.06669 1.23047C6.06669 1.00431 6.26108 0.820312 6.50002 0.820312C6.73896 0.820312 6.93335 1.00431 6.93335 1.23047V1.66053C6.79073 1.64752 6.6462 1.64062 6.50002 1.64062C6.35384 1.64062 6.20931 1.64752 6.06669 1.66053V1.23047ZM6.50002 13.1797C5.9351 13.1797 5.45344 12.8368 5.27456 12.3594H7.72548C7.5466 12.8368 7.06494 13.1797 6.50002 13.1797ZM1.36736 11.5391C2.35422 10.2869 2.88893 8.77166 2.88893 7.18763V5.87891C2.88893 3.99424 4.50886 2.46094 6.50002 2.46094C8.49118 2.46094 10.1111 3.99424 10.1111 5.87891V7.18763C10.1111 8.77166 10.6458 10.2869 11.6327 11.5391H1.36736ZM12.1333 5.87891C12.1333 6.10542 12.3273 6.28906 12.5667 6.28906C12.806 6.28906 13 6.10542 13 5.87891C13 4.23555 12.3239 2.69054 11.0962 1.52852C10.927 1.36836 10.6526 1.36834 10.4834 1.52852C10.3141 1.6887 10.3141 1.94838 10.4834 2.10856C11.5474 3.11566 12.1333 4.45465 12.1333 5.87891ZM0.433383 6.28906C0.672698 6.28906 0.866714 6.10542 0.866714 5.87891C0.866714 4.45468 1.45269 3.11568 2.51667 2.10859C2.6859 1.94841 2.6859 1.68872 2.51667 1.52854C2.34746 1.36836 2.07308 1.36836 1.90385 1.52854C0.676164 2.69057 5.22303e-05 4.23555 5.22303e-05 5.87891C5.22303e-05 6.10542 0.194069 6.28906 0.433383 6.28906Z">
-                                                </path>
-                                            </svg>Thông báo cho bạn nếu giảm giá
-                                        </button>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="find-btn">
-                                <a href="/danh-sach-xe" class="primary-btn3 btn btn-sm">
+                                <a href="{{ route('car.list') }}" class="primary-btn3 btn btn-sm">
                                     <svg width="24" height="15" viewBox="0 0 24 15"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -56,8 +45,8 @@
                     </div>
                     <div class="col-xl-6 col-lg-5 d-lg-flex d-none align-items-center justify-content-end">
                         <div class="banner-img">
-                            <img class="rounded" src="{{ asset('/storage/' . $carDetail->verhicle_image_library[0]) }}" alt=""
-                                style="width:400px">
+                            <img class="rounded" src="{{ asset('/storage/' . $carDetail->verhicle_image_library[0]) }}"
+                                alt="" style="width:450px">
                         </div>
                     </div>
                 </div>
@@ -65,3 +54,20 @@
         </div>
     </div>
 </div>
+
+@push('styles')
+    <style>
+        ul.share-and-fav li a svg {
+            width: 30px;height: 30px;
+        }
+        ul.share-and-fav li a svg:hover, ul.share-and-fav li a svg:focus {
+            fill: coral
+        }
+        .inner-page-banner .banner-main-content-wrap {
+            padding: 30px 0;
+        }
+        .inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav::before {
+            all: unset;
+        }
+    </style>
+@endpush

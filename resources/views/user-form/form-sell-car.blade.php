@@ -1,6 +1,6 @@
 <x-partials.layout-client>
     <div>
-        <div class="contact-page pt-100 mb-100">
+        <div class="pt-50 mb-50">
             <div class="container">
                 {{-- <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms"
                     style="visibility: visible; animation-delay: 200ms;">
