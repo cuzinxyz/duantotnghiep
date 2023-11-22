@@ -5,7 +5,127 @@
         .product-st-card1 {
             min-height: 200px
         }
+
+        .bg-drivco {
+            background-color: #46D993
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #fff;
+            border-radius: .75rem;
+        }
+
+        .icon-link {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .icon-link>.bi {
+            margin-top: .125rem;
+            margin-left: .125rem;
+            transition: transform .25s ease-in-out;
+            fill: currentColor;
+        }
+
+        .icon-link:hover>.bi {
+            transform: translate(.25rem);
+        }
+
+        .icon-square {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.5rem;
+            border-radius: .75rem;
+        }
+
+        .rounded-4 {
+            border-radius: .5rem;
+        }
+
+        .rounded-5 {
+            border-radius: 1rem;
+        }
+
+        .text-shadow-1 {
+            text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25);
+        }
+
+        .text-shadow-2 {
+            text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25);
+        }
+
+        .text-shadow-3 {
+            text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25);
+        }
+
+        .card-cover {
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
     </style>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="collection" viewBox="0 0 16 16">
+            <path
+                d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z">
+            </path>
+        </symbol>
+        <symbol id="eye" viewBox="0 0 16 16">
+            <path
+                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+        </symbol>
+        <symbol id="chat-quote-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM7.194 6.766a1.688 1.688 0 0 0-.227-.272 1.467 1.467 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 5.734 6C4.776 6 4 6.746 4 7.667c0 .92.776 1.666 1.734 1.666.343 0 .662-.095.931-.26-.137.389-.39.804-.81 1.22a.405.405 0 0 0 .011.59c.173.16.447.155.614-.01 1.334-1.329 1.37-2.758.941-3.706a2.461 2.461 0 0 0-.227-.4zM11 9.073c-.136.389-.39.804-.81 1.22a.405.405 0 0 0 .012.59c.172.16.446.155.613-.01 1.334-1.329 1.37-2.758.942-3.706a2.466 2.466 0 0 0-.228-.4 1.686 1.686 0 0 0-.227-.273 1.466 1.466 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 10.07 6c-.957 0-1.734.746-1.734 1.667 0 .92.777 1.666 1.734 1.666.343 0 .662-.095.931-.26z">
+            </path>
+        </symbol>
+        <symbol id="chevron-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z" />
+        </symbol>
+        <symbol id="heart" viewBox="0 0 16 16">
+            <path
+                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+        </symbol>
+    </svg>
     <div class="product-details-page">
         <div class="container shadow">
             <div class="inner-page-banner ">
@@ -62,18 +182,14 @@
                         <button class="nav-link active" id="v-pills-1-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-1" type="button" role="tab" aria-controls="v-pills-1"
                             aria-selected="false">Đang Hiển Thị ({{ $cars->count() }})</button>
-                        {{-- <button class="nav-link" id="v-pills-2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-2"
-                            type="button" role="tab" aria-controls="v-pills-2" aria-selected="true">Hết hạn
-                            (0)</button> --}}
+                        @if ($billHistories->count() > 0)
+                            <button class="nav-link" id="v-pills-2-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-2" type="button" role="tab" aria-controls="v-pills-2"
+                                aria-selected="true">Thống kê</button>
+                        @endif
                         <button class="nav-link" id="v-pills-3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-3"
                             type="button" role="tab" aria-controls="v-pills-3" aria-selected="true">Bị Từ Chối
                             ({{ $deniedCars->count() }})</button>
-                        {{-- <button class="nav-link" id="v-pills-4-tab" data-bs-toggle="pill" data-bs-target="#v-pills-4"
-                            type="button" role="tab" aria-controls="v-pills-4" aria-selected="true">Cần Thanh Toán
-                            (0)</button>
-                        <button class="nav-link" id="v-pills-5-tab" data-bs-toggle="pill" data-bs-target="#v-pills-5"
-                            type="button" role="tab" aria-controls="v-pills-5" aria-selected="true">Tin Nháp
-                            (0)</button> --}}
                         <button class="nav-link" id="v-pills-6-tab" data-bs-toggle="pill" data-bs-target="#v-pills-6"
                             type="button" role="tab" aria-controls="v-pills-6" aria-selected="true">Chờ duyệt
                             ({{ $pendingCars->count() }})</button>
@@ -103,14 +219,6 @@
                                                         <div class="product-price">
                                                             <span>{{ number_format($car->price) }}</span>
                                                         </div>
-                                                        <a href="#" class="fav">
-                                                            <svg width="14" height="13" viewBox="0 0 14 14"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-                                                                </path>
-                                                            </svg>
-                                                        </a>
                                                         <div class="car-img">
                                                             <img class="img-fluid w-100"
                                                                 style="object-fit:cover;max-height: 121px"
@@ -204,7 +312,8 @@
                                                                 </li>
                                                                 <hr>
                                                                 <li>
-                                                                    <button onclick="window.location.href='{{ route('hiddenCar', $car->id) }}'">
+                                                                    <button
+                                                                        onclick="window.location.href='{{ route('hiddenCar', $car->id) }}'">
                                                                         <svg stroke-linejoin="round"
                                                                             stroke-linecap="round" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
@@ -229,9 +338,92 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                        {{-- DASHBOARD --}}
+                        @if ($billHistories->count() > 0)
+                            <div class="tab-pane fade" id="v-pills-2" role="tabpanel"
+                                aria-labelledby="v-pills-common-tab">
+                                <div class="reviews-area">
+                                    <div class="container px-4 py-1" id="featured-3">
+                                        <h2 class="pb-2 border-bottom">Gói đăng
+                                            ký&nbsp;({{ $billHistories->count() }})</h2>
+                                        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                                            @foreach ($billHistories as $item)
+                                                <div class="feature col">
+                                                    <div class="feature-icon bg-drivco bg-gradient">
+                                                        <svg class="bi" width="1em" height="1em">
+                                                            <use xlink:href="#collection"></use>
+                                                        </svg>
+                                                    </div>
+                                                    <h4>{{ $item->service_name }}</h4>
+                                                    <p class="text-success fw-bolder">
+                                                        @php
+                                                            $string = $item->description;
+                                                            $newString = str_replace(' \n', ', ', $string);
+                                                            echo $newString;
+                                                        @endphp
+                                                    </p>
+                                                    <div class="icon-link fw-bolder text-secondary">
+                                                        <span>Số lượt đẩy tin còn lại:&nbsp;</span>
+                                                        <span>
+                                                            {{ $item->purchased_service($item->id) }}
+                                                        </span>
+                                                        <svg class="bi" width="1em" height="1em">
+                                                            <use xlink:href="#chevron-up"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
 
+                                    <div class="b-example-divider"></div>
+
+                                    <div class="container px-4 py-1" id="custom-cards">
+                                        <h2 class="pb-2 border-bottom">Tin đã đẩy&nbsp;({{ $carPushed->count() }})
+                                        </h2>
+                                        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+                                            @foreach ($carPushed as $item)
+                                                <div class="col">
+                                                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                                                        style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
+                                                        <div
+                                                            class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                                            <h2 class="pt-5 mt-5 mb-4 fs-6 lh-1 fw-bold text-white">
+                                                                {{ $item->title }}</h2>
+                                                            <ul class="d-flex list-unstyled mt-auto">
+                                                                <li class="me-auto">
+                                                                    {{ $item->countComments($item->id) }}
+                                                                    <svg class="bi me-2" width="1em"
+                                                                        height="1em">
+                                                                        <use xlink:href="#chat-quote-fill"></use>
+                                                                    </svg>
+                                                                    {{-- <img src="2918581" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white"> --}}
+                                                                </li>
+                                                                <li class="d-flex align-items-center me-3">
+                                                                    <svg class="bi me-2" width="1em"
+                                                                        height="1em">
+                                                                        <use xlink:href="#heart"></use>
+                                                                    </svg>
+                                                                    <small>{{ $item->countWishlish($item->id) }}</small>
+                                                                </li>
+                                                                <li class="d-flex align-items-center">
+                                                                    <svg class="bi me-2" width="1em"
+                                                                        height="1em">
+                                                                        <use xlink:href="#eye"></use>
+                                                                    </svg>
+                                                                    <small>{{ views($item)->count() }}</small>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         {{-- DENIED CAR --}}
                         <div class="tab-pane fade" id="v-pills-3" role="tabpanel"
                             aria-labelledby="v-pills-common-tab">
@@ -346,14 +538,6 @@
                                                         <div class="product-price">
                                                             <span>{{ number_format($car->price) }}</span>
                                                         </div>
-                                                        <a href="#" class="fav">
-                                                            <svg width="14" height="13" viewBox="0 0 14 14"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-                                                                </path>
-                                                            </svg>
-                                                        </a>
                                                         <div class="car-img">
                                                             <img class="img-fluid w-100"
                                                                 style="object-fit:cover;max-height: 121px"
