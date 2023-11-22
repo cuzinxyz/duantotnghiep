@@ -8,11 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Kjmtrue\VietnamZone\Models\Province;
-use Kjmtrue\VietnamZone\Models\District;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Car extends Model implements Viewable
 {
@@ -44,43 +41,30 @@ class Car extends Model implements Viewable
         'recommended' => 'boolean',
     ];
 
-    public function user(): BelongsTo
-    {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function brand(): BelongsTo
-    {
+    public function brand() {
         return $this->belongsTo(Brand::class);
     }
 
-    public function city(): BelongsTo
-    {
+    public function city() {
         return $this->belongsTo(Province::class);
     }
 
-    public function province(): BelongsTo
+    public function province()
     {
         return $this->belongsTo(Province::class, 'city_id');
     }
 
-    public function district(): BelongsTo
+    public function district()
     {
         return $this->belongsTo(District::class, 'district_id');
     }
 
-    public function model(): BelongsTo
+    public function model()
     {
         return $this->belongsTo(ModelCar::class, 'model_car_id', 'id');
-    }
-
-    public function countWishlish($carID)
-    {
-        return Wishlist::where('car_id', $carID)->count();
-    }
-
-    public function countComments($carID)
-    {
-        return Comments::where('car_id', $carID)->count();
     }
 }
