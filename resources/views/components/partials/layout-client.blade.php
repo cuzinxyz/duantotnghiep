@@ -94,7 +94,7 @@
                     @auth
                         <a href="{{ route('sellCar') }}">
                         @else
-                            <a href="{{ route('login') }}">
+                            <a href="/login">
                             @endauth
                             <button class="sell-btn" type="button" data-bs-toggle="modal"
                                 data-bs-target="#sellUsModal01">
@@ -112,7 +112,7 @@
                     @auth
                         <a href="{{ route('wishlish') }}">
                         @else
-                            <a href="{{ route('login') }}">
+                            <a href="/login">
                             @endauth
                             <svg width="16" height="16" viewBox="0 0 14 14"
                                 xmlns="http://www.w3.org/2000/svg">

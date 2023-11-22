@@ -88,7 +88,7 @@ Route::get('/testt', function () {
 
 });
 
-// Auth::routes();
+Auth::routes();
 
 // Trang chi tiết xe
 Route::controller(CarDetailController::class)->group(function () {
