@@ -340,9 +340,9 @@ class CarResource extends Resource
                     ->sortable(),
 
 
-                Tables\Columns\IconColumn::make('recommended')
-                    ->label('Xu hướng')
-                    ->boolean(),
+                // Tables\Columns\IconColumn::make('recommended')
+                //     ->label('Xu hướng')
+                //     ->boolean(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

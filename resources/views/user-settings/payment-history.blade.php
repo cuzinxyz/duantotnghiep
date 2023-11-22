@@ -63,7 +63,9 @@
                                             {{ $value->service_name }}
                                         </span>
                                         <br>
+                                        @if ($value->title)
                                         ({{ $value->title }})
+                                        @endif
                                     </td>
                                     <td>{{ number_format($value->price) }}₫</td>
                                     <td>
