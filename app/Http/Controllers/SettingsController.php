@@ -29,20 +29,11 @@ class SettingsController extends Controller
             ->where('status', 2)
             ->orderBy('created_at', 'desc')
             ->get();
-        $hiddenCars = Car::onlyTrashed()
-            ->where('user_id', auth()->id())
-            ->get();
-        $serviceId = DB::table('purchased_service')
-            ->where('user_id', Auth::id())
-            ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
-            ->pluck('service_id');
-        $billHistories = Service::whereIn('id', $serviceId)
-            ->get();
-        $carPushed = Car::where('user_id', Auth::id())
-            ->get();
-        // dd($billHistories);
+        $hiddenCars = Car::onlyTrashed()->where('user_id', auth()->id())->get();
 
-        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'carPushed'));
+        // dd($hiddenCars);
+
+        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars'));
     }
 
     public function pushFeature($carID)
@@ -102,7 +93,7 @@ class SettingsController extends Controller
                         return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này rồi');
                     }
                     // dd('đây là case user đã mua gói tin, nhưng đã hết lượt đẩy tin, allow mua gói mới');
-                    // dd($service);
+// dd($service);
                     return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service'));
                 }
             endforeach;
