@@ -25,17 +25,11 @@ return new class extends Migration {
       $table->json('contact');
       $table->json('car_info');
       $table->json('verhicle_image_library');
-<<<<<<< HEAD
-      $table->json('verhicle_videos')->nullable();
-      $table->string('description');
-      $table->string('status')->default(0); // 0 chờ duyệt - 1 Đã duyệt tin
-=======
       $table->string('verhicle_videos')->nullable();
       $table->integer('status')->default(0);
       $table->text('reason')->nullable();
       $table->text('description')->nullable();
       $table->integer('model_id')->nullable();
->>>>>>> main
       $table->timestamps();
       $table->softDeletes(); // add
     });

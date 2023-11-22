@@ -1,17 +1,6 @@
 <?php
 
-<<<<<<< HEAD
-use App\Http\Controllers\CarDetailController;
-use App\Http\Controllers\Client\CarController;
-use App\Livewire\Brands;
-use App\Livewire\CarDetail;
-use App\Livewire\FormSellCar;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CheckOutController;
-use App\Http\Controllers\ServiceController;
-=======
 use App\Models\News;
->>>>>>> main
 use App\Models\Service;
 use App\Livewire\CarListingSystem;
 use Illuminate\Support\Facades\Auth;
@@ -29,11 +18,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
 });
 
-<<<<<<< HEAD
-Route::get('/', [HomeController::class, 'index']);
-=======
 Route::middleware(['auth'])->group(function () {
->>>>>>> main
 
     Route::controller(CarController::class)->group(function () {
         Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
@@ -109,13 +94,5 @@ Route::get('/testt', function () {
 Route::controller(CarDetailController::class)->group(function () {
     Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
-<<<<<<< HEAD
-Route::get('push-news', function () {
-    return view('push-news');
-});
-
-Route::get('/car-detail/{id}', [CarDetailController::class,'carDetail'])->name('carDetail');
-=======
 
 
->>>>>>> main

@@ -154,26 +154,6 @@ class FormDangTin extends Component
         }
 
         $carData['verhicle_image_library'] = $photoName;
-<<<<<<< HEAD
-        $carData['user_id'] = 1;
-        $carData['title'] = $validated['title'];
-        $carData['price'] = $validated['price'];
-        $carData['brand_id'] = $validated['brand_select'];
-        $carData['city'] = $validated['city'];
-        $carData['full_address'] = $validated['full_address'];
-        $carData['description'] = $validated['description'];
-
-        $carData['car_info'] = array(
-            'model'=> $validated['model_select'],
-            'transmission' => $validated['transmission'],
-            'fuel' => $validated['fuel'],
-            'number_of_seats' => $validated['number_of_seats'],
-            'color' => $validated['color'],
-            'version' => $validated['version'],
-            'condition' => $validated['condition'],
-            'mileage_traveled' => $validated['mileage_traveled'],
-            'year_of_manufacture' => $validated['year_of_manufacture']
-=======
         $carData['verhicle_videos'] = $videoName;
         $carData['user_id'] = auth()->id();
         $carData['title'] = $this->title;
@@ -197,7 +177,6 @@ class FormDangTin extends Component
             'mileage' => $this->mileage,
             "features" => $this->features,
             'engine' => $this->engine,
->>>>>>> main
         );
 
         $carData['contact'] = array(
