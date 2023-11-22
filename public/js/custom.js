@@ -30,6 +30,17 @@
             $(".cart-menu").removeClass("active");
         }
     });
+
+    $(".header-account-btn").on("click", function (e) {
+        e.stopPropagation();
+        $(".account-menu").toggleClass("active");
+    });
+    $(document).on("click", function (e) {
+        if (!$(e.target).closest(".account-menu, .header-account-btn").length) {
+            $(".account-menu").removeClass("active");
+        }
+    });
+
     $('[data-fancybox]').fancybox({
         buttons: ['close'],
         wheel: false,
@@ -47,6 +58,13 @@
     $('.preloader-close-btn').on("click", function () {
         $('.egns-preloader').addClass('close');
     });
+
+    //  custom loading
+    jQuery(window).on('load', function () {
+        $(".pre-loader").delay(100).fadeOut("slow");
+    });
+    //  custom loading
+
     $('.sidebar-btn2').on("click", function () {
         $('.header-sidebar').addClass('slide');
     });
@@ -92,7 +110,7 @@
         let whatsapp = $(this).data('whatsapp');
         $("#emailAdresss a").replaceWith(`<a href="${emails}"><i class='bx bxl-whatsapp'></i>${whatsapp}</a>`);
     });
-    $('.counter').counterUp({delay: 10, time: 1000});
+    $('.counter').counterUp({ delay: 10, time: 1000 });
     $('.sidebar-button').click(function () {
         $(this).toggleClass('active');
     });
@@ -165,15 +183,15 @@
         speed: 2000,
         slidesToShow: 6,
         slidesToScroll: 2,
-        responsive: [{breakpoint: 1200, settings: {slidesToShow: 5}}, {
+        responsive: [{ breakpoint: 1200, settings: { slidesToShow: 5 } }, {
             breakpoint: 991,
-            settings: {arrows: false, slidesToShow: 4}
-        }, {breakpoint: 768, settings: {arrows: false, slidesToShow: 3}}, {
+            settings: { arrows: false, slidesToShow: 4 }
+        }, { breakpoint: 768, settings: { arrows: false, slidesToShow: 3 } }, {
             breakpoint: 576,
-            settings: {arrows: false, slidesToShow: 2}
-        }, {breakpoint: 480, settings: {arrows: false, slidesToShow: 2}}, {
+            settings: { arrows: false, slidesToShow: 2 }
+        }, { breakpoint: 480, settings: { arrows: false, slidesToShow: 2 } }, {
             breakpoint: 350,
-            settings: {arrows: false, slidesToShow: 1}
+            settings: { arrows: false, slidesToShow: 1 }
         }]
     });
     $('#slick2').slick({
@@ -186,15 +204,15 @@
         speed: 2000,
         slidesToShow: 3,
         slidesToScroll: 2,
-        responsive: [{breakpoint: 1200, settings: {slidesToShow: 2}}, {
+        responsive: [{ breakpoint: 1200, settings: { slidesToShow: 2 } }, {
             breakpoint: 991,
-            settings: {arrows: false, slidesToShow: 3}
-        }, {breakpoint: 768, settings: {arrows: false, slidesToShow: 3}}, {
+            settings: { arrows: false, slidesToShow: 3 }
+        }, { breakpoint: 768, settings: { arrows: false, slidesToShow: 3 } }, {
             breakpoint: 576,
-            settings: {arrows: false, slidesToShow: 2}
-        }, {breakpoint: 480, settings: {arrows: false, slidesToShow: 2}}, {
+            settings: { arrows: false, slidesToShow: 2 }
+        }, { breakpoint: 480, settings: { arrows: false, slidesToShow: 2 } }, {
             breakpoint: 350,
-            settings: {arrows: false, slidesToShow: 1}
+            settings: { arrows: false, slidesToShow: 1 }
         }]
     });
     $('#slick3').slick({
@@ -207,15 +225,15 @@
         speed: 2000,
         slidesToShow: 2,
         slidesToScroll: 2,
-        responsive: [{breakpoint: 1200, settings: {arrows: false, slidesToShow: 2}}, {
+        responsive: [{ breakpoint: 1200, settings: { arrows: false, slidesToShow: 2 } }, {
             breakpoint: 991,
-            settings: {arrows: false, slidesToShow: 1}
-        }, {breakpoint: 768, settings: {arrows: false, slidesToShow: 1}}, {
+            settings: { arrows: false, slidesToShow: 1 }
+        }, { breakpoint: 768, settings: { arrows: false, slidesToShow: 1 } }, {
             breakpoint: 576,
-            settings: {arrows: false, slidesToShow: 1}
-        }, {breakpoint: 480, settings: {arrows: false, slidesToShow: 1}}, {
+            settings: { arrows: false, slidesToShow: 1 }
+        }, { breakpoint: 480, settings: { arrows: false, slidesToShow: 1 } }, {
             breakpoint: 350,
-            settings: {arrows: false, slidesToShow: 1}
+            settings: { arrows: false, slidesToShow: 1 }
         }]
     });
     const sliders = document.querySelectorAll('.product-img-slider');
@@ -228,7 +246,7 @@
             spaceBetween: 10,
             loop: true,
             autoplay: false,
-            navigation: {nextEl: nextBtn, prevEl: prevBtn,},
+            navigation: { nextEl: nextBtn, prevEl: prevBtn, },
         });
         nextBtn.addEventListener('click', () => {
             swiper.slideNext();
@@ -241,16 +259,16 @@
         slidesPerView: 1,
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-1", prevEl: ".prev-1",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-1", prevEl: ".prev-1", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 4, spaceBetween: 15,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 4, spaceBetween: 15, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".compare-car-slider", {
@@ -258,31 +276,31 @@
         speed: 1500,
         spaceBetween: 25,
         loop: true,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-3", prevEl: ".prev-3",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-3", prevEl: ".prev-3", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 24,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 24, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".upcoming-car-slider", {
         slidesPerView: 3,
         speed: 1500,
         spaceBetween: 25,
-        navigation: {nextEl: ".next-2", prevEl: ".prev-2",},
+        navigation: { nextEl: ".next-2", prevEl: ".prev-2", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 24,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 24, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".customer-feedback-slider", {
@@ -290,16 +308,16 @@
         speed: 1500,
         spaceBetween: 25,
         loop: true,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-4", prevEl: ".prev-4",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-4", prevEl: ".prev-4", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 2, spaceBetween: 15,},
-            1200: {slidesPerView: 2, spaceBetween: 24,},
-            1400: {slidesPerView: 2},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 2, spaceBetween: 15, },
+            1200: { slidesPerView: 2, spaceBetween: 24, },
+            1400: { slidesPerView: 2 },
         }
     });
     var swiper = new Swiper(".customer-feedback-slider2", {
@@ -307,16 +325,16 @@
         speed: 1500,
         spaceBetween: 25,
         loop: true,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-6", prevEl: ".prev-6",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-6", prevEl: ".prev-6", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 2, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 24,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 2, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 24, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".news-slider", {
@@ -324,15 +342,15 @@
         speed: 1500,
         spaceBetween: 25,
         loop: true,
-        navigation: {nextEl: ".next-4", prevEl: ".prev-4",},
+        navigation: { nextEl: ".next-4", prevEl: ".prev-4", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 24,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 24, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".home2-featured-slider", {
@@ -341,16 +359,16 @@
         spaceBetween: 25,
         slidesPerView: 1,
         centerSlides: true,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-1", prevEl: ".prev-1",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-1", prevEl: ".prev-1", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 4, spaceBetween: 15,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 4, spaceBetween: 15, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".recent-launch-car-slider", {
@@ -360,16 +378,16 @@
         slidesPerView: 1,
         centerSlides: true,
         loop: true,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-5", prevEl: ".prev-5",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-5", prevEl: ".prev-5", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 4, spaceBetween: 15,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 4, spaceBetween: 15, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".home2-compare-slider", {
@@ -382,9 +400,9 @@
         parallax: true,
         effect: 'fade',
         navigation: false,
-        fadeEffect: {crossFade: true,},
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-7", prevEl: ".prev-7",},
+        fadeEffect: { crossFade: true, },
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-7", prevEl: ".prev-7", },
     });
     var swiper = new Swiper(".home3-banner-slider", {
         slidesPerView: 1,
@@ -394,25 +412,25 @@
         centerSlides: true,
         loop: true,
         effect: 'fade',
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-4", prevEl: ".prev-4",},
-        pagination: {el: ".paginations111", clickable: true,},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-4", prevEl: ".prev-4", },
+        pagination: { el: ".paginations111", clickable: true, },
     });
     var swiper = new Swiper(".brand-category-slider", {
         slidesPerView: 1,
         speed: 1500,
         spaceBetween: 25,
         slidesPerView: 1,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-5", prevEl: ".prev-5",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-5", prevEl: ".prev-5", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 4, spaceBetween: 15,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 4, spaceBetween: 15, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".home3-featured-car-slider", {
@@ -421,16 +439,16 @@
         spaceBetween: 30,
         slidesPerView: 1,
         centerSlides: true,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-8", prevEl: ".prev-8",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-8", prevEl: ".prev-8", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 4, spaceBetween: 15,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 4, spaceBetween: 15, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".testimonial-slider3", {
@@ -440,8 +458,8 @@
         slidesPerView: 1,
         centerSlides: true,
         loop: true,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-10", prevEl: ".prev-10",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-10", prevEl: ".prev-10", },
     });
     var swiper = new Swiper(".categoty-filter-slider", {
         slidesPerView: 3,
@@ -449,38 +467,38 @@
         spaceBetween: 15,
         centerSlides: true,
         loop: false,
-        navigation: {nextEl: ".next-10", prevEl: ".prev-10",},
+        navigation: { nextEl: ".next-10", prevEl: ".prev-10", },
     });
     var swiper = new Swiper(".home4-latest-car-slider", {
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-11", prevEl: ".prev-11",},
-        pagination: {el: ".pagination11", clickable: "true",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-11", prevEl: ".prev-11", },
+        pagination: { el: ".pagination11", clickable: "true", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 15,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 15, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".home4-featured-car-slider", {
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-12", prevEl: ".prev-12",},
-        pagination: {el: ".pagination12", clickable: "true",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-12", prevEl: ".prev-12", },
+        pagination: { el: ".pagination12", clickable: "true", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 15,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 15, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".customer-feedback-slider4", {
@@ -488,130 +506,130 @@
         speed: 1500,
         spaceBetween: 25,
         loop: true,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-6", prevEl: ".prev-6",},
-        pagination: {el: ".pagination8", clickable: "true",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-6", prevEl: ".prev-6", },
+        pagination: { el: ".pagination8", clickable: "true", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 1, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 2, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 24,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 1, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 2, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 24, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".home5-fetured-slider", {
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-51", prevEl: ".prev-51",},
-        pagination: {el: ".pagination8", clickable: "true",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-51", prevEl: ".prev-51", },
+        pagination: { el: ".pagination8", clickable: "true", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            386: {slidesPerView: 1,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 4, spaceBetween: 24,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            386: { slidesPerView: 1, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 4, spaceBetween: 24, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".home5-brand-category-slider", {
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 3000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-52", prevEl: ".prev-52",},
+        autoplay: { delay: 3000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-52", prevEl: ".prev-52", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            420: {slidesPerView: 2, spaceBetween: 15,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 4, spaceBetween: 15,},
-            1200: {slidesPerView: 5, spaceBetween: 24,},
-            1400: {slidesPerView: 6},
+            280: { slidesPerView: 1, },
+            420: { slidesPerView: 2, spaceBetween: 15, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 4, spaceBetween: 15, },
+            1200: { slidesPerView: 5, spaceBetween: 24, },
+            1400: { slidesPerView: 6 },
         }
     });
     var swiper = new Swiper(".home6-brand-category-slider", {
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-1", prevEl: ".prev-1",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-1", prevEl: ".prev-1", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            420: {slidesPerView: 2, spaceBetween: 15,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 3, spaceBetween: 15,},
-            992: {slidesPerView: 4, spaceBetween: 15,},
-            1200: {slidesPerView: 5, spaceBetween: 24,},
-            1400: {slidesPerView: 6},
+            280: { slidesPerView: 1, },
+            420: { slidesPerView: 2, spaceBetween: 15, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 3, spaceBetween: 15, },
+            992: { slidesPerView: 4, spaceBetween: 15, },
+            1200: { slidesPerView: 5, spaceBetween: 24, },
+            1400: { slidesPerView: 6 },
         }
     });
     var swiper = new Swiper(".home6-top-use-car-slider", {
         speed: 1500,
         spaceBetween: 25,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-2", prevEl: ".prev-2",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-2", prevEl: ".prev-2", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            420: {slidesPerView: 1, spaceBetween: 15,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 2, spaceBetween: 15,},
-            992: {slidesPerView: 3, spaceBetween: 15,},
-            1200: {slidesPerView: 3, spaceBetween: 24,},
-            1400: {slidesPerView: 3},
+            280: { slidesPerView: 1, },
+            420: { slidesPerView: 1, spaceBetween: 15, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 2, spaceBetween: 15, },
+            992: { slidesPerView: 3, spaceBetween: 15, },
+            1200: { slidesPerView: 3, spaceBetween: 24, },
+            1400: { slidesPerView: 3 },
         }
     });
     var swiper = new Swiper(".car-color-slider", {
         speed: 1500,
         spaceBetween: 40,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-2", prevEl: ".prev-2",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-2", prevEl: ".prev-2", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            420: {slidesPerView: 1, spaceBetween: 15,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 2,},
-            992: {slidesPerView: 2,},
-            1200: {slidesPerView: 2,},
-            1400: {slidesPerView: 2},
+            280: { slidesPerView: 1, },
+            420: { slidesPerView: 1, spaceBetween: 15, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 2, },
+            992: { slidesPerView: 2, },
+            1200: { slidesPerView: 2, },
+            1400: { slidesPerView: 2 },
         }
     });
     var swiper = new Swiper(".product-details-slider", {
         speed: 1500,
         spaceBetween: 24,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-2", prevEl: ".prev-2",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-2", prevEl: ".prev-2", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            420: {slidesPerView: 1, spaceBetween: 15,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 2,},
-            992: {slidesPerView: 3,},
-            1200: {slidesPerView: 4,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            420: { slidesPerView: 1, spaceBetween: 15, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 2, },
+            992: { slidesPerView: 3, },
+            1200: { slidesPerView: 4, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".product-details-slider2", {
         speed: 1500,
         spaceBetween: 24,
-        autoplay: {delay: 2000, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-2", prevEl: ".prev-2",},
+        autoplay: { delay: 2000, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-2", prevEl: ".prev-2", },
         breakpoints: {
-            280: {slidesPerView: 1,},
-            420: {slidesPerView: 1, spaceBetween: 15,},
-            576: {slidesPerView: 2, spaceBetween: 15,},
-            768: {slidesPerView: 2,},
-            992: {slidesPerView: 3,},
-            1200: {slidesPerView: 4,},
-            1400: {slidesPerView: 4},
+            280: { slidesPerView: 1, },
+            420: { slidesPerView: 1, spaceBetween: 15, },
+            576: { slidesPerView: 2, spaceBetween: 15, },
+            768: { slidesPerView: 2, },
+            992: { slidesPerView: 3, },
+            1200: { slidesPerView: 4, },
+            1400: { slidesPerView: 4 },
         }
     });
     var swiper = new Swiper(".recent-post-sidebar-slider", {
         speed: 1500,
         spaceBetween: 24,
-        autoplay: {delay: 2500, disableOnInteraction: false,},
-        navigation: {nextEl: ".next-51", prevEl: ".prev-51",},
+        autoplay: { delay: 2500, disableOnInteraction: false, },
+        navigation: { nextEl: ".next-51", prevEl: ".prev-51", },
     });
     const sliders2 = document.querySelectorAll('.category-pages-slider');
     sliders2.forEach((slider) => {
@@ -620,15 +638,15 @@
         const swiper = new Swiper(slider, {
             speed: 1500,
             spaceBetween: 24,
-            navigation: {nextEl: nextBtn, prevEl: prevBtn,},
+            navigation: { nextEl: nextBtn, prevEl: prevBtn, },
             breakpoints: {
-                280: {slidesPerView: 1,},
-                420: {slidesPerView: 1, spaceBetween: 15,},
-                576: {slidesPerView: 2, spaceBetween: 15,},
-                768: {slidesPerView: 2,},
-                992: {slidesPerView: 3,},
-                1200: {slidesPerView: 3,},
-                1400: {slidesPerView: 3},
+                280: { slidesPerView: 1, },
+                420: { slidesPerView: 1, spaceBetween: 15, },
+                576: { slidesPerView: 2, spaceBetween: 15, },
+                768: { slidesPerView: 2, },
+                992: { slidesPerView: 3, },
+                1200: { slidesPerView: 3, },
+                1400: { slidesPerView: 3 },
             }
         });
         nextBtn.addEventListener('click', () => {
@@ -711,7 +729,6 @@
             }
         }, 1000);
     });
-
 
 
 }(jQuery));

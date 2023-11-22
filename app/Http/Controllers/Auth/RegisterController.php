@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -64,10 +65,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $newUser = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        if($newUser){
+            $name = $data['name'];
+            $email = $data['email'];
+            $password = $data['password'];
+            Mail::send('mails.notification-register', compact('name', 'email', 'password'), function($email) use($data){
+                $email->subject('Demo Notification Register');
+                $email->to($data['email'], $data['name']);
+            });
+        }
+        return $newUser;
     }
 }

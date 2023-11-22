@@ -16,8 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default(config('chatify.user_avatar.default'));
             $table->string('account_balence')->default(0);
+            $table->integer('service_id')->default(0);
+            $table->string('phone_number')->nullable();
+            $table->boolean('active_status')->default(0);
+            $table->boolean('dark_mode')->default(0);
+            $table->string('messenger_color')->nullable();
+            $table->integer("total_pushed")->default(0);
+            $table->timestamp("expired_date")->nullable()->comment("Ngày hết hạn của dịch vụ đã đăng ký");
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); // add

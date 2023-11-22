@@ -11,6 +11,14 @@ class ReplyComments extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+      'body',
+      'comment_id',
+      'user_id',
+      'car_id',
+      'news_id'
+    ];
+
     protected $table = "reply_comments";
 
     public function comment(): BelongsTo{

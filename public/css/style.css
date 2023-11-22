@@ -60,7 +60,12 @@ body.home-5 {
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-montserrat);
     font-weight: 600;
     line-height: 1.4;
@@ -818,7 +823,7 @@ p {
 
 .nice-select {
     width: 100%;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
     border-radius: 5px;
     height: 50px;
     display: flex;
@@ -828,6 +833,10 @@ p {
     outline: none !important;
     box-shadow: none !important;
     border: 1px solid #f3f3f3
+}
+
+.beauty-shadow {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
 }
 
 .nice-select::after {
@@ -1021,6 +1030,7 @@ p {
     0% {
         transform: rotate(0deg) translate(-70px) rotate(0deg)
     }
+
     100% {
         transform: rotate(360deg) translate(-70px) rotate(-360deg)
     }
@@ -1037,10 +1047,12 @@ p {
         stroke-dasharray: 33.98873px, 242.77666px;
         stroke-dashoffset: -26.70543px
     }
+
     43.75% {
         stroke-dasharray: 84.97183px, 242.77666px;
         stroke-dashoffset: -84.97183px
     }
+
     100% {
         stroke-dasharray: 2.42777px, 242.77666px;
         stroke-dashoffset: -240.34889px
@@ -1922,7 +1934,7 @@ p {
     cursor: pointer
 }
 
-.signUp-modal .modal-dialog .modal-content .form-agreement input[type=checkbox] + label:before {
+.signUp-modal .modal-dialog .modal-content .form-agreement input[type=checkbox]+label:before {
     content: "";
     -webkit-appearance: none;
     background: #fff;
@@ -1937,7 +1949,7 @@ p {
     margin-right: 5px
 }
 
-.signUp-modal .modal-dialog .modal-content .form-agreement input[type=checkbox]:checked + label:after {
+.signUp-modal .modal-dialog .modal-content .form-agreement input[type=checkbox]:checked+label:after {
     content: "";
     display: block;
     position: absolute;
@@ -2257,6 +2269,7 @@ header.style-1.sticky {
     0% {
         transform: translateY(-30px)
     }
+
     100% {
         transform: translateY(0px)
     }
@@ -2301,16 +2314,16 @@ header.style-1.style-2 .menu-button span {
     color: var(--white-color)
 }
 
-header.style-1.style-2 .main-menu > ul li:hover i {
+header.style-1.style-2 .main-menu>ul li:hover i {
     color: var(--primary-color1);
     font-size: 20px
 }
 
-header.style-1.style-2 .main-menu > ul li a {
+header.style-1.style-2 .main-menu>ul li a {
     color: var(--white-color)
 }
 
-header.style-1.style-2 .main-menu > ul li.menu-item-has-children::after {
+header.style-1.style-2 .main-menu>ul li.menu-item-has-children::after {
     color: var(--white-color)
 }
 
@@ -2727,6 +2740,7 @@ header.style-1 .nav-right .dropdown .cart-footer .footer-button ul li:first-chil
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -2862,23 +2876,23 @@ header.style-1 .main-menu ul {
     padding: 0
 }
 
-header.style-1 .main-menu ul > li {
+header.style-1 .main-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px
 }
 
-header.style-1 .main-menu ul > li.position-inherit {
+header.style-1 .main-menu ul>li.position-inherit {
     position: inherit
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li.position-inherit {
+    header.style-1 .main-menu ul>li.position-inherit {
         position: relative
     }
 }
 
-header.style-1 .main-menu ul > li.position-inherit > a::after {
+header.style-1 .main-menu ul>li.position-inherit>a::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -2891,34 +2905,34 @@ header.style-1 .main-menu ul > li.position-inherit > a::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li.position-inherit > a::after {
+    header.style-1 .main-menu ul>li.position-inherit>a::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li.position-inherit > a::after {
+    header.style-1 .main-menu ul>li.position-inherit>a::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-1 .main-menu ul > li:hover i {
+header.style-1 .main-menu ul>li:hover i {
     color: var(--black-color2);
     font-size: 20px
 }
 
 @media (min-width: 992px) {
-    header.style-1 .main-menu ul > li:first-child {
+    header.style-1 .main-menu ul>li:first-child {
         padding-left: 0
     }
 
-    header.style-1 .main-menu ul > li:first-child a {
+    header.style-1 .main-menu ul>li:first-child a {
         padding-left: 0
     }
 }
 
-header.style-1 .main-menu ul > li a {
+header.style-1 .main-menu ul>li a {
     color: var(--title-color);
     display: block;
     text-transform: capitalize;
@@ -2933,12 +2947,12 @@ header.style-1 .main-menu ul > li a {
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li a {
+    header.style-1 .main-menu ul>li a {
         padding: 32px 9px
     }
 }
 
-header.style-1 .main-menu ul > li i {
+header.style-1 .main-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -2954,20 +2968,20 @@ header.style-1 .main-menu ul > li i {
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li i {
+    header.style-1 .main-menu ul>li i {
         opacity: 1
     }
 }
 
-header.style-1 .main-menu ul > li i.active {
+header.style-1 .main-menu ul>li i.active {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li i.active::before {
+header.style-1 .main-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu {
+header.style-1 .main-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -2982,18 +2996,18 @@ header.style-1 .main-menu ul > li ul.sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li ul.sub-menu {
+    header.style-1 .main-menu ul>li ul.sub-menu {
         box-shadow: none
     }
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li {
+header.style-1 .main-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li i {
+header.style-1 .main-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 14px;
     right: 6px;
@@ -3002,7 +3016,7 @@ header.style-1 .main-menu ul > li ul.sub-menu > li i {
     font-size: 14px
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+header.style-1 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--title-color);
     opacity: 1;
     top: 14px;
@@ -3011,14 +3025,14 @@ header.style-1 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+    header.style-1 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
         right: 0;
         top: 8px;
         font-size: 20px
     }
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li a {
+header.style-1 .main-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 15px;
     color: var(--text-color1);
@@ -3031,7 +3045,7 @@ header.style-1 .main-menu ul > li ul.sub-menu > li a {
     border-bottom: 1px solid rgba(233, 228, 228, .5)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li a::before {
+header.style-1 .main-menu ul>li ul.sub-menu>li a::before {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -3046,56 +3060,56 @@ header.style-1 .main-menu ul > li ul.sub-menu > li a::before {
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li ul.sub-menu > li a {
+    header.style-1 .main-menu ul>li ul.sub-menu>li a {
         border-color: rgba(233, 228, 228, .5)
     }
 
-    header.style-1 .main-menu ul > li ul.sub-menu > li a::before {
+    header.style-1 .main-menu ul>li ul.sub-menu>li a::before {
         background: linear-gradient(90deg, #ddd, #06D889, #ddd)
     }
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li a:hover {
+header.style-1 .main-menu ul>li ul.sub-menu>li a:hover {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li a:hover::before {
+header.style-1 .main-menu ul>li ul.sub-menu>li a:hover::before {
     transform: scale(1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li a.active {
+header.style-1 .main-menu ul>li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li a.active::before {
+header.style-1 .main-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li:last-child a {
+header.style-1 .main-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li:last-child a::before {
+header.style-1 .main-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li:hover > a {
+header.style-1 .main-menu ul>li ul.sub-menu>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li:hover .dropdown-icon {
+header.style-1 .main-menu ul>li ul.sub-menu>li:hover .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li.active > a {
+header.style-1 .main-menu ul>li ul.sub-menu>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li.active .dropdown-icon {
+header.style-1 .main-menu ul>li ul.sub-menu>li.active .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu {
+header.style-1 .main-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     position: absolute;
     max-width: 230px;
@@ -3106,18 +3120,18 @@ header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-1 .main-menu ul>li ul.sub-menu>li .sub-menu {
         box-shadow: none
     }
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
+header.style-1 .main-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
 @media only screen and (max-width: 991px) {
-    header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-1 .main-menu ul>li ul.sub-menu>li .sub-menu {
         position: unset;
         max-width: 230px;
         min-width: 215px;
@@ -3126,15 +3140,15 @@ header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
     }
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li .sub-menu > li i {
+header.style-1 .main-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-header.style-1 .main-menu ul > li ul.sub-menu > li:last-child {
+header.style-1 .main-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-header.style-1 .main-menu ul > li .mega-menu {
+header.style-1 .main-menu ul>li .mega-menu {
     display: none;
     position: absolute;
     left: 0;
@@ -3151,13 +3165,13 @@ header.style-1 .main-menu ul > li .mega-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li .mega-menu {
+    header.style-1 .main-menu ul>li .mega-menu {
         min-width: 935px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li .mega-menu {
+    header.style-1 .main-menu ul>li .mega-menu {
         position: static;
         min-width: 200px;
         background: 0 0;
@@ -3175,17 +3189,17 @@ header.style-1 .main-menu ul > li .mega-menu {
     }
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row {
+header.style-1 .main-menu ul>li .mega-menu .menu-row {
     display: flex
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row {
         display: block
     }
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
     display: block;
     padding: 0;
     padding-right: 70px;
@@ -3194,24 +3208,24 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 55px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 0;
         margin-bottom: 15px;
         flex-basis: unset
     }
 
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
         margin-bottom: 0
     }
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
     content: "";
     height: 100%;
     width: 1px;
@@ -3222,28 +3236,28 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after 
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         right: 18px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     padding-right: 0
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child::after {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child::after {
     display: none;
     visibility: hidden
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
     margin-bottom: 10px;
     color: var(--title-color);
     font-family: var(--font-montserrat);
@@ -3252,13 +3266,13 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
         color: #b5b5b5;
         position: relative;
         padding-left: 15px
     }
 
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6::before {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6::before {
         height: 8px;
         width: 8px;
         background-color: #b5b5b5;
@@ -3271,13 +3285,13 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
     }
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li {
     display: block;
     line-height: 1;
     padding: 0
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 14px;
@@ -3290,28 +3304,28 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li
     padding: 12px 0
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a:hover {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a:hover {
     color: var(--primary-color1)
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
         font-size: 12px;
         font-weight: 600;
         border-bottom: 1px solid rgba(233, 228, 228, .5)
     }
 
-    header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a img {
+    header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a img {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn {
     padding-top: 20px
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
     padding: 0;
     display: flex;
     align-items: center;
@@ -3320,7 +3334,7 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     font-weight: 600
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -3334,15 +3348,15 @@ header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     opacity: 1
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
+header.style-1 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li.menu-item-has-children::after {
+header.style-1 .main-menu ul>li.menu-item-has-children::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -3355,27 +3369,27 @@ header.style-1 .main-menu ul > li.menu-item-has-children::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-1 .main-menu ul > li.menu-item-has-children::after {
+    header.style-1 .main-menu ul>li.menu-item-has-children::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-1 .main-menu ul > li.menu-item-has-children::after {
+    header.style-1 .main-menu ul>li.menu-item-has-children::after {
         display: none;
         visibility: hidden
     }
 }
 
 @media (min-width: 992px) {
-    header.style-1 .main-menu ul > li:hover > ul.sub-menu {
+    header.style-1 .main-menu ul>li:hover>ul.sub-menu {
         display: block;
         animation: fade-down .45s linear
     }
 }
 
 @media (min-width: 992px) {
-    header.style-1 .main-menu ul > li:hover .mega-menu {
+    header.style-1 .main-menu ul>li:hover .mega-menu {
         display: block;
         animation: fade-down .45s linear
     }
@@ -3387,6 +3401,7 @@ header.style-1 .main-menu ul > li.menu-item-has-children::after {
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -3394,39 +3409,39 @@ header.style-1 .main-menu ul > li.menu-item-has-children::after {
     }
 }
 
-header.style-1 .main-menu ul > li:hover > a {
+header.style-1 .main-menu ul>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li:hover::after {
+header.style-1 .main-menu ul>li:hover::after {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li:hover .dropdown-icon2 {
+header.style-1 .main-menu ul>li:hover .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li:hover.position-inherit > a::after {
+header.style-1 .main-menu ul>li:hover.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li.active > a {
+header.style-1 .main-menu ul>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li.active::after {
+header.style-1 .main-menu ul>li.active::after {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li.active .dropdown-icon2 {
+header.style-1 .main-menu ul>li.active .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul > li.active.position-inherit > a::after {
+header.style-1 .main-menu ul>li.active.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-1 .main-menu ul li.menu-item-has-children > i {
+header.style-1 .main-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -3600,25 +3615,25 @@ header.style-1 .main-menu .hotline-area .content h6 a:hover {
         padding-left: 10px
     }
 
-    header.style-1 .main-menu ul li ul.sub-menu > li {
+    header.style-1 .main-menu ul li ul.sub-menu>li {
         border-bottom: 1px solid transparent
     }
 
-    header.style-1 .main-menu ul li ul.sub-menu > li a {
+    header.style-1 .main-menu ul li ul.sub-menu>li a {
         color: var(--title-color);
         padding: 12px 0
     }
 
-    header.style-1 .main-menu ul li ul.sub-menu > li a:hover {
+    header.style-1 .main-menu ul li ul.sub-menu>li a:hover {
         color: var(--primary-color1);
         margin-left: 10px
     }
 
-    header.style-1 .main-menu ul li ul.sub-menu > li a.active {
+    header.style-1 .main-menu ul li ul.sub-menu>li a.active {
         color: var(--primary-color1)
     }
 
-    header.style-1 .main-menu ul li ul.sub-menu > li i {
+    header.style-1 .main-menu ul li ul.sub-menu>li i {
         color: var(--primary-color1);
         right: -13px
     }
@@ -3676,6 +3691,7 @@ header.style-2.sticky {
     0% {
         transform: translateY(-30px)
     }
+
     100% {
         transform: translateY(0px)
     }
@@ -4142,6 +4158,7 @@ header.style-2 .nav-right .dropdown .cart-footer .footer-button ul li:first-chil
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -4540,23 +4557,23 @@ header.style-2 .main-menu ul {
     padding: 0
 }
 
-header.style-2 .main-menu ul > li {
+header.style-2 .main-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px
 }
 
-header.style-2 .main-menu ul > li.position-inherit {
+header.style-2 .main-menu ul>li.position-inherit {
     position: inherit
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li.position-inherit {
+    header.style-2 .main-menu ul>li.position-inherit {
         position: relative
     }
 }
 
-header.style-2 .main-menu ul > li.position-inherit > a::after {
+header.style-2 .main-menu ul>li.position-inherit>a::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -4569,34 +4586,34 @@ header.style-2 .main-menu ul > li.position-inherit > a::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li.position-inherit > a::after {
+    header.style-2 .main-menu ul>li.position-inherit>a::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li.position-inherit > a::after {
+    header.style-2 .main-menu ul>li.position-inherit>a::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-2 .main-menu ul > li:hover i {
+header.style-2 .main-menu ul>li:hover i {
     color: var(--black-color2);
     font-size: 20px
 }
 
 @media (min-width: 992px) {
-    header.style-2 .main-menu ul > li:first-child {
+    header.style-2 .main-menu ul>li:first-child {
         padding-left: 0
     }
 
-    header.style-2 .main-menu ul > li:first-child a {
+    header.style-2 .main-menu ul>li:first-child a {
         padding-left: 0
     }
 }
 
-header.style-2 .main-menu ul > li a {
+header.style-2 .main-menu ul>li a {
     color: var(--white-color);
     display: block;
     text-transform: capitalize;
@@ -4611,12 +4628,12 @@ header.style-2 .main-menu ul > li a {
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li a {
+    header.style-2 .main-menu ul>li a {
         padding: 32px 9px
     }
 }
 
-header.style-2 .main-menu ul > li i {
+header.style-2 .main-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -4632,20 +4649,20 @@ header.style-2 .main-menu ul > li i {
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li i {
+    header.style-2 .main-menu ul>li i {
         opacity: 1
     }
 }
 
-header.style-2 .main-menu ul > li i.active {
+header.style-2 .main-menu ul>li i.active {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li i.active::before {
+header.style-2 .main-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu {
+header.style-2 .main-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -4659,18 +4676,18 @@ header.style-2 .main-menu ul > li ul.sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li ul.sub-menu {
+    header.style-2 .main-menu ul>li ul.sub-menu {
         box-shadow: none
     }
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li {
+header.style-2 .main-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li i {
+header.style-2 .main-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 14px;
     right: 6px;
@@ -4679,7 +4696,7 @@ header.style-2 .main-menu ul > li ul.sub-menu > li i {
     font-size: 14px
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+header.style-2 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--title-color);
     opacity: 1;
     top: 14px;
@@ -4688,12 +4705,12 @@ header.style-2 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+    header.style-2 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
         right: 0
     }
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li a {
+header.style-2 .main-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 15px 25px;
     color: var(--text-color1);
@@ -4706,7 +4723,7 @@ header.style-2 .main-menu ul > li ul.sub-menu > li a {
     border-bottom: 1px solid rgba(233, 228, 228, .5)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li a::before {
+header.style-2 .main-menu ul>li ul.sub-menu>li a::before {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -4721,56 +4738,56 @@ header.style-2 .main-menu ul > li ul.sub-menu > li a::before {
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li ul.sub-menu > li a {
+    header.style-2 .main-menu ul>li ul.sub-menu>li a {
         border-color: rgba(233, 228, 228, .5)
     }
 
-    header.style-2 .main-menu ul > li ul.sub-menu > li a::before {
+    header.style-2 .main-menu ul>li ul.sub-menu>li a::before {
         background: linear-gradient(90deg, #ddd, #06D889, #ddd)
     }
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li a:hover {
+header.style-2 .main-menu ul>li ul.sub-menu>li a:hover {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li a:hover::before {
+header.style-2 .main-menu ul>li ul.sub-menu>li a:hover::before {
     transform: scale(1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li a.active {
+header.style-2 .main-menu ul>li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li a.active::before {
+header.style-2 .main-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li:last-child a {
+header.style-2 .main-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li:last-child a::before {
+header.style-2 .main-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li:hover > a {
+header.style-2 .main-menu ul>li ul.sub-menu>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li:hover .dropdown-icon {
+header.style-2 .main-menu ul>li ul.sub-menu>li:hover .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li.active > a {
+header.style-2 .main-menu ul>li ul.sub-menu>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li.active .dropdown-icon {
+header.style-2 .main-menu ul>li ul.sub-menu>li.active .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu {
+header.style-2 .main-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     position: absolute;
     max-width: 230px;
@@ -4781,18 +4798,18 @@ header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-2 .main-menu ul>li ul.sub-menu>li .sub-menu {
         box-shadow: none
     }
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
+header.style-2 .main-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
 @media only screen and (max-width: 910px) {
-    header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-2 .main-menu ul>li ul.sub-menu>li .sub-menu {
         margin-left: 10px;
         position: unset;
         max-width: 230px;
@@ -4802,15 +4819,15 @@ header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
     }
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li .sub-menu > li i {
+header.style-2 .main-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-header.style-2 .main-menu ul > li ul.sub-menu > li:last-child {
+header.style-2 .main-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-header.style-2 .main-menu ul > li .mega-menu {
+header.style-2 .main-menu ul>li .mega-menu {
     display: none;
     position: absolute;
     left: 0;
@@ -4827,19 +4844,19 @@ header.style-2 .main-menu ul > li .mega-menu {
 }
 
 @media (max-width: 1699px) {
-    header.style-2 .main-menu ul > li .mega-menu {
+    header.style-2 .main-menu ul>li .mega-menu {
         margin-left: -6rem
     }
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu {
+    header.style-2 .main-menu ul>li .mega-menu {
         min-width: 935px
     }
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu {
+    header.style-2 .main-menu ul>li .mega-menu {
         position: static;
         min-width: 200px;
         background: 0 0;
@@ -4857,17 +4874,17 @@ header.style-2 .main-menu ul > li .mega-menu {
     }
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row {
+header.style-2 .main-menu ul>li .mega-menu .menu-row {
     display: flex
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu .menu-row {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row {
         display: block
     }
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
     display: block;
     padding: 0;
     padding-right: 60px;
@@ -4876,17 +4893,17 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 0;
         margin-bottom: 15px
     }
 
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
         margin-bottom: 0
     }
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
     content: "";
     height: 100%;
     width: 1px;
@@ -4897,28 +4914,28 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after 
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         right: 18px
     }
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     padding-right: 0
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child::after {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child::after {
     display: none;
     visibility: hidden
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
     margin-bottom: 10px;
     color: var(--title-color);
     font-family: var(--font-montserrat);
@@ -4927,13 +4944,13 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
         color: #b5b5b5;
         position: relative;
         padding-left: 15px
     }
 
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6::before {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6::before {
         height: 8px;
         width: 8px;
         background-color: #b5b5b5;
@@ -4946,13 +4963,13 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
     }
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li {
     display: block;
     line-height: 1;
     padding: 0
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 14px;
@@ -4965,28 +4982,28 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li
     padding: 12px 0
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a:hover {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a:hover {
     color: var(--primary-color1)
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
         font-size: 12px;
         font-weight: 600;
         border-bottom: 1px solid rgba(233, 228, 228, .5)
     }
 
-    header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a img {
+    header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a img {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn {
     padding-top: 20px
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
     padding: 0;
     display: flex;
     align-items: center;
@@ -4996,7 +5013,7 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     font-weight: 600
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -5010,15 +5027,15 @@ header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     opacity: 1
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
+header.style-2 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li.menu-item-has-children::after {
+header.style-2 .main-menu ul>li.menu-item-has-children::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -5031,27 +5048,27 @@ header.style-2 .main-menu ul > li.menu-item-has-children::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-2 .main-menu ul > li.menu-item-has-children::after {
+    header.style-2 .main-menu ul>li.menu-item-has-children::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-2 .main-menu ul > li.menu-item-has-children::after {
+    header.style-2 .main-menu ul>li.menu-item-has-children::after {
         display: none;
         visibility: hidden
     }
 }
 
 @media (min-width: 1200px) {
-    header.style-2 .main-menu ul > li:hover > ul.sub-menu {
+    header.style-2 .main-menu ul>li:hover>ul.sub-menu {
         display: block;
         animation: fade-up .45s linear
     }
 }
 
 @media (min-width: 1200px) {
-    header.style-2 .main-menu ul > li:hover .mega-menu {
+    header.style-2 .main-menu ul>li:hover .mega-menu {
         display: block;
         animation: fade-down .45s linear
     }
@@ -5063,6 +5080,7 @@ header.style-2 .main-menu ul > li.menu-item-has-children::after {
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -5070,39 +5088,39 @@ header.style-2 .main-menu ul > li.menu-item-has-children::after {
     }
 }
 
-header.style-2 .main-menu ul > li:hover > a {
+header.style-2 .main-menu ul>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li:hover::after {
+header.style-2 .main-menu ul>li:hover::after {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li:hover .dropdown-icon2 {
+header.style-2 .main-menu ul>li:hover .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li:hover.position-inherit > a::after {
+header.style-2 .main-menu ul>li:hover.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li.active > a {
+header.style-2 .main-menu ul>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li.active::after {
+header.style-2 .main-menu ul>li.active::after {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li.active .dropdown-icon2 {
+header.style-2 .main-menu ul>li.active .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul > li.active.position-inherit > a::after {
+header.style-2 .main-menu ul>li.active.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-2 .main-menu ul li.menu-item-has-children > i {
+header.style-2 .main-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -5183,25 +5201,25 @@ header.style-2 .main-menu ul li.menu-item-has-children > i {
         transform: translateY(0px)
     }
 
-    header.style-2 .main-menu ul li ul.sub-menu > li {
+    header.style-2 .main-menu ul li ul.sub-menu>li {
         border-bottom: 1px solid transparent
     }
 
-    header.style-2 .main-menu ul li ul.sub-menu > li a {
+    header.style-2 .main-menu ul li ul.sub-menu>li a {
         color: var(--title-color);
         padding: 12px 0
     }
 
-    header.style-2 .main-menu ul li ul.sub-menu > li a:hover {
+    header.style-2 .main-menu ul li ul.sub-menu>li a:hover {
         color: var(--primary-color1);
         margin-left: 10px
     }
 
-    header.style-2 .main-menu ul li ul.sub-menu > li a.active {
+    header.style-2 .main-menu ul li ul.sub-menu>li a.active {
         color: var(--primary-color1)
     }
 
-    header.style-2 .main-menu ul li ul.sub-menu > li i {
+    header.style-2 .main-menu ul li ul.sub-menu>li i {
         color: var(--primary-color1);
         right: -13px
     }
@@ -5260,6 +5278,7 @@ header.style-3.sticky {
     0% {
         transform: translateY(-30px)
     }
+
     100% {
         transform: translateY(0px)
     }
@@ -5436,23 +5455,23 @@ header.style-3 .main-menu ul {
     padding: 0
 }
 
-header.style-3 .main-menu ul > li {
+header.style-3 .main-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px
 }
 
-header.style-3 .main-menu ul > li.position-inherit {
+header.style-3 .main-menu ul>li.position-inherit {
     position: inherit
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li.position-inherit {
+    header.style-3 .main-menu ul>li.position-inherit {
         position: relative
     }
 }
 
-header.style-3 .main-menu ul > li.position-inherit > a::after {
+header.style-3 .main-menu ul>li.position-inherit>a::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -5465,34 +5484,34 @@ header.style-3 .main-menu ul > li.position-inherit > a::after {
 }
 
 @media (max-width: 1399px) {
-    header.style-3 .main-menu ul > li.position-inherit > a::after {
+    header.style-3 .main-menu ul>li.position-inherit>a::after {
         right: -5px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li.position-inherit > a::after {
+    header.style-3 .main-menu ul>li.position-inherit>a::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-3 .main-menu ul > li:hover i {
+header.style-3 .main-menu ul>li:hover i {
     color: var(--black-color2);
     font-size: 20px
 }
 
 @media (min-width: 992px) {
-    header.style-3 .main-menu ul > li:first-child {
+    header.style-3 .main-menu ul>li:first-child {
         padding-left: 0
     }
 
-    header.style-3 .main-menu ul > li:first-child a {
+    header.style-3 .main-menu ul>li:first-child a {
         padding-left: 0
     }
 }
 
-header.style-3 .main-menu ul > li a {
+header.style-3 .main-menu ul>li a {
     color: var(--white-color);
     display: block;
     text-transform: capitalize;
@@ -5507,19 +5526,19 @@ header.style-3 .main-menu ul > li a {
 }
 
 @media (max-width: 1399px) {
-    header.style-3 .main-menu ul > li a {
+    header.style-3 .main-menu ul>li a {
         padding: 24px 12px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li a {
+    header.style-3 .main-menu ul>li a {
         padding: 32px 9px;
         color: var(--title-color)
     }
 }
 
-header.style-3 .main-menu ul > li i {
+header.style-3 .main-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -5535,20 +5554,20 @@ header.style-3 .main-menu ul > li i {
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li i {
+    header.style-3 .main-menu ul>li i {
         opacity: 1
     }
 }
 
-header.style-3 .main-menu ul > li i.active {
+header.style-3 .main-menu ul>li i.active {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li i.active::before {
+header.style-3 .main-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu {
+header.style-3 .main-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -5563,18 +5582,18 @@ header.style-3 .main-menu ul > li ul.sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-3 .main-menu ul > li ul.sub-menu {
+    header.style-3 .main-menu ul>li ul.sub-menu {
         box-shadow: none
     }
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li {
+header.style-3 .main-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li i {
+header.style-3 .main-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 14px;
     right: 6px;
@@ -5583,7 +5602,7 @@ header.style-3 .main-menu ul > li ul.sub-menu > li i {
     font-size: 14px
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+header.style-3 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--title-color);
     opacity: 1;
     top: 14px;
@@ -5592,14 +5611,14 @@ header.style-3 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+    header.style-3 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
         right: 0;
         top: 8px;
         font-size: 20px
     }
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li a {
+header.style-3 .main-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 15px;
     color: var(--text-color1);
@@ -5612,7 +5631,7 @@ header.style-3 .main-menu ul > li ul.sub-menu > li a {
     border-bottom: 1px solid rgba(233, 228, 228, .5)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li a::before {
+header.style-3 .main-menu ul>li ul.sub-menu>li a::before {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -5627,56 +5646,56 @@ header.style-3 .main-menu ul > li ul.sub-menu > li a::before {
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li ul.sub-menu > li a {
+    header.style-3 .main-menu ul>li ul.sub-menu>li a {
         border-color: rgba(233, 228, 228, .5)
     }
 
-    header.style-3 .main-menu ul > li ul.sub-menu > li a::before {
+    header.style-3 .main-menu ul>li ul.sub-menu>li a::before {
         background: linear-gradient(90deg, #ddd, #06D889, #ddd)
     }
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li a:hover {
+header.style-3 .main-menu ul>li ul.sub-menu>li a:hover {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li a:hover::before {
+header.style-3 .main-menu ul>li ul.sub-menu>li a:hover::before {
     transform: scale(1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li a.active {
+header.style-3 .main-menu ul>li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li a.active::before {
+header.style-3 .main-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li:last-child a {
+header.style-3 .main-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li:last-child a::before {
+header.style-3 .main-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li:hover > a {
+header.style-3 .main-menu ul>li ul.sub-menu>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li:hover .dropdown-icon {
+header.style-3 .main-menu ul>li ul.sub-menu>li:hover .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li.active > a {
+header.style-3 .main-menu ul>li ul.sub-menu>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li.active .dropdown-icon {
+header.style-3 .main-menu ul>li ul.sub-menu>li.active .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu {
+header.style-3 .main-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     position: absolute;
     max-width: 230px;
@@ -5687,18 +5706,18 @@ header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-3 .main-menu ul>li ul.sub-menu>li .sub-menu {
         box-shadow: none
     }
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
+header.style-3 .main-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
 @media only screen and (max-width: 991px) {
-    header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-3 .main-menu ul>li ul.sub-menu>li .sub-menu {
         margin-left: 10px;
         position: unset;
         max-width: 230px;
@@ -5708,15 +5727,15 @@ header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
     }
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li .sub-menu > li i {
+header.style-3 .main-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-header.style-3 .main-menu ul > li ul.sub-menu > li:last-child {
+header.style-3 .main-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-header.style-3 .main-menu ul > li .mega-menu {
+header.style-3 .main-menu ul>li .mega-menu {
     display: none;
     position: absolute;
     left: 0;
@@ -5733,19 +5752,19 @@ header.style-3 .main-menu ul > li .mega-menu {
 }
 
 @media (max-width: 1699px) {
-    header.style-3 .main-menu ul > li .mega-menu {
+    header.style-3 .main-menu ul>li .mega-menu {
         margin-left: -5rem
     }
 }
 
 @media (max-width: 1199px) {
-    header.style-3 .main-menu ul > li .mega-menu {
+    header.style-3 .main-menu ul>li .mega-menu {
         min-width: 935px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li .mega-menu {
+    header.style-3 .main-menu ul>li .mega-menu {
         position: static;
         min-width: 200px;
         background: 0 0;
@@ -5764,17 +5783,17 @@ header.style-3 .main-menu ul > li .mega-menu {
     }
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row {
+header.style-3 .main-menu ul>li .mega-menu .menu-row {
     display: flex
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row {
         display: block
     }
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
     display: block;
     padding: 0;
     padding-right: 70px;
@@ -5783,24 +5802,24 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
 }
 
 @media (max-width: 1199px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 55px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 0;
         margin-bottom: 15px;
         flex-basis: unset
     }
 
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
         margin-bottom: 0
     }
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
     content: "";
     height: 100%;
     width: 1px;
@@ -5811,28 +5830,28 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after 
 }
 
 @media (max-width: 1199px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         right: 18px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     padding-right: 0
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child::after {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child::after {
     display: none;
     visibility: hidden
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
     margin-bottom: 10px;
     color: var(--title-color);
     font-family: var(--font-montserrat);
@@ -5841,13 +5860,13 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
         color: #b5b5b5;
         position: relative;
         padding-left: 15px
     }
 
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6::before {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6::before {
         height: 8px;
         width: 8px;
         background-color: #b5b5b5;
@@ -5860,13 +5879,13 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
     }
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li {
     display: block;
     line-height: 1;
     padding: 0
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 14px;
@@ -5879,32 +5898,32 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li
     padding: 12px 0
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a:hover {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a:hover {
     color: var(--primary-color1)
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
         font-size: 12px;
         font-weight: 600;
         border-bottom: 1px solid rgba(233, 228, 228, .5)
     }
 
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a img {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a img {
         display: none;
         visibility: hidden
     }
 
-    header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a:hover {
+    header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a:hover {
         padding-left: 10px
     }
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn {
     padding-top: 20px
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
     padding: 0;
     display: flex;
     align-items: center;
@@ -5914,7 +5933,7 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     font-weight: 600
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
     font-size: 20px;
     text-align: center;
     color: var(--title-color);
@@ -5928,15 +5947,15 @@ header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     opacity: 1
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
+header.style-3 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li.menu-item-has-children::after {
+header.style-3 .main-menu ul>li.menu-item-has-children::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -5949,71 +5968,71 @@ header.style-3 .main-menu ul > li.menu-item-has-children::after {
 }
 
 @media (max-width: 1399px) {
-    header.style-3 .main-menu ul > li.menu-item-has-children::after {
+    header.style-3 .main-menu ul>li.menu-item-has-children::after {
         right: 3px
     }
 }
 
 @media (max-width: 1199px) {
-    header.style-3 .main-menu ul > li.menu-item-has-children::after {
+    header.style-3 .main-menu ul>li.menu-item-has-children::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-3 .main-menu ul > li.menu-item-has-children::after {
+    header.style-3 .main-menu ul>li.menu-item-has-children::after {
         display: none;
         visibility: hidden
     }
 }
 
 @media (min-width: 992px) {
-    header.style-3 .main-menu ul > li:hover > ul.sub-menu {
+    header.style-3 .main-menu ul>li:hover>ul.sub-menu {
         display: block;
         animation: fade-down .45s linear
     }
 }
 
 @media (min-width: 992px) {
-    header.style-3 .main-menu ul > li:hover .mega-menu {
+    header.style-3 .main-menu ul>li:hover .mega-menu {
         display: block;
         animation: fade-down .45s linear
     }
 }
 
-header.style-3 .main-menu ul > li:hover > a {
+header.style-3 .main-menu ul>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li:hover::after {
+header.style-3 .main-menu ul>li:hover::after {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li:hover .dropdown-icon2 {
+header.style-3 .main-menu ul>li:hover .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li:hover.position-inherit > a::after {
+header.style-3 .main-menu ul>li:hover.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li.active > a {
+header.style-3 .main-menu ul>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li.active::after {
+header.style-3 .main-menu ul>li.active::after {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li.active .dropdown-icon2 {
+header.style-3 .main-menu ul>li.active .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul > li.active.position-inherit > a::after {
+header.style-3 .main-menu ul>li.active.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-3 .main-menu ul li.menu-item-has-children > i {
+header.style-3 .main-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -6223,25 +6242,25 @@ header.style-3 .main-menu .hotline-area .content h6 a:hover {
         transform: translateY(0px)
     }
 
-    header.style-3 .main-menu ul li ul.sub-menu > li {
+    header.style-3 .main-menu ul li ul.sub-menu>li {
         border-bottom: 1px solid transparent
     }
 
-    header.style-3 .main-menu ul li ul.sub-menu > li a {
+    header.style-3 .main-menu ul li ul.sub-menu>li a {
         color: var(--title-color);
         padding: 12px 0
     }
 
-    header.style-3 .main-menu ul li ul.sub-menu > li a:hover {
+    header.style-3 .main-menu ul li ul.sub-menu>li a:hover {
         color: var(--primary-color1);
         margin-left: 10px
     }
 
-    header.style-3 .main-menu ul li ul.sub-menu > li a.active {
+    header.style-3 .main-menu ul li ul.sub-menu>li a.active {
         color: var(--primary-color1)
     }
 
-    header.style-3 .main-menu ul li ul.sub-menu > li i {
+    header.style-3 .main-menu ul li ul.sub-menu>li i {
         color: var(--primary-color1);
         right: -13px
     }
@@ -6294,6 +6313,7 @@ header.style-4.sticky {
     0% {
         transform: translateY(-30px)
     }
+
     100% {
         transform: translateY(0px)
     }
@@ -6330,7 +6350,7 @@ header.style-4 .header-right ul li {
     line-height: 1
 }
 
-header.style-4 .header-right ul li > a {
+header.style-4 .header-right ul li>a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6344,19 +6364,19 @@ header.style-4 .header-right ul li > a {
     cursor: pointer
 }
 
-header.style-4 .header-right ul li > a svg {
+header.style-4 .header-right ul li>a svg {
     fill: var(--primary-color1)
 }
 
-header.style-4 .header-right ul li > a:hover {
+header.style-4 .header-right ul li>a:hover {
     background-color: var(--primary-color1)
 }
 
-header.style-4 .header-right ul li > a:hover svg {
+header.style-4 .header-right ul li>a:hover svg {
     fill: var(--title-color)
 }
 
-header.style-4 .header-right ul li .search-btn > a {
+header.style-4 .header-right ul li .search-btn>a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6370,15 +6390,15 @@ header.style-4 .header-right ul li .search-btn > a {
     cursor: pointer
 }
 
-header.style-4 .header-right ul li .search-btn > a svg {
+header.style-4 .header-right ul li .search-btn>a svg {
     fill: var(--primary-color1)
 }
 
-header.style-4 .header-right ul li .search-btn > a:hover {
+header.style-4 .header-right ul li .search-btn>a:hover {
     background-color: var(--primary-color1)
 }
 
-header.style-4 .header-right ul li .search-btn > a:hover svg {
+header.style-4 .header-right ul li .search-btn>a:hover svg {
     fill: var(--title-color)
 }
 
@@ -6889,34 +6909,34 @@ header.style-4 .main-menu ul {
     padding: 0
 }
 
-header.style-4 .main-menu ul > li {
+header.style-4 .main-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px
 }
 
 @media (max-width: 1199px) {
-    header.style-4 .main-menu ul > li {
+    header.style-4 .main-menu ul>li {
         padding: 0
     }
 }
 
-header.style-4 .main-menu ul > li:hover i {
+header.style-4 .main-menu ul>li:hover i {
     color: var(--black-color2);
     font-size: 20px
 }
 
 @media (min-width: 992px) {
-    header.style-4 .main-menu ul > li:first-child {
+    header.style-4 .main-menu ul>li:first-child {
         padding-left: 0
     }
 
-    header.style-4 .main-menu ul > li:first-child a {
+    header.style-4 .main-menu ul>li:first-child a {
         padding-left: 0
     }
 }
 
-header.style-4 .main-menu ul > li a {
+header.style-4 .main-menu ul>li a {
     color: var(--white-color);
     display: block;
     text-transform: capitalize;
@@ -6931,12 +6951,12 @@ header.style-4 .main-menu ul > li a {
 }
 
 @media (max-width: 991px) {
-    header.style-4 .main-menu ul > li a {
+    header.style-4 .main-menu ul>li a {
         padding: 32px 9px
     }
 }
 
-header.style-4 .main-menu ul > li i {
+header.style-4 .main-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--white-color);
@@ -6952,20 +6972,20 @@ header.style-4 .main-menu ul > li i {
 }
 
 @media (max-width: 991px) {
-    header.style-4 .main-menu ul > li i {
+    header.style-4 .main-menu ul>li i {
         opacity: 1
     }
 }
 
-header.style-4 .main-menu ul > li i.active {
+header.style-4 .main-menu ul>li i.active {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li i.active::before {
+header.style-4 .main-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu {
+header.style-4 .main-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -6979,18 +6999,18 @@ header.style-4 .main-menu ul > li ul.sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-4 .main-menu ul > li ul.sub-menu {
+    header.style-4 .main-menu ul>li ul.sub-menu {
         box-shadow: none
     }
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li {
+header.style-4 .main-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li i {
+header.style-4 .main-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 14px;
     right: 6px;
@@ -6999,7 +7019,7 @@ header.style-4 .main-menu ul > li ul.sub-menu > li i {
     font-size: 14px
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+header.style-4 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--title-color);
     opacity: 1;
     top: 14px;
@@ -7008,14 +7028,14 @@ header.style-4 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
 }
 
 @media (max-width: 991px) {
-    header.style-4 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+    header.style-4 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
         right: 0;
         top: 8px;
         font-size: 20px
     }
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li a {
+header.style-4 .main-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 15px 25px;
     color: var(--title-color);
@@ -7028,7 +7048,7 @@ header.style-4 .main-menu ul > li ul.sub-menu > li a {
     border-bottom: 1px solid #ddd
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li a::before {
+header.style-4 .main-menu ul>li ul.sub-menu>li a::before {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -7043,56 +7063,56 @@ header.style-4 .main-menu ul > li ul.sub-menu > li a::before {
 }
 
 @media (max-width: 991px) {
-    header.style-4 .main-menu ul > li ul.sub-menu > li a {
+    header.style-4 .main-menu ul>li ul.sub-menu>li a {
         border-color: #ddd
     }
 
-    header.style-4 .main-menu ul > li ul.sub-menu > li a::before {
+    header.style-4 .main-menu ul>li ul.sub-menu>li a::before {
         background: linear-gradient(90deg, #ddd, #06D889, #ddd)
     }
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li a:hover {
+header.style-4 .main-menu ul>li ul.sub-menu>li a:hover {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li a:hover::before {
+header.style-4 .main-menu ul>li ul.sub-menu>li a:hover::before {
     transform: scale(1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li a.active {
+header.style-4 .main-menu ul>li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li a.active::before {
+header.style-4 .main-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li:last-child a {
+header.style-4 .main-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li:last-child a::before {
+header.style-4 .main-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li:hover > a {
+header.style-4 .main-menu ul>li ul.sub-menu>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li:hover .dropdown-icon {
+header.style-4 .main-menu ul>li ul.sub-menu>li:hover .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li.active > a {
+header.style-4 .main-menu ul>li ul.sub-menu>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li.active .dropdown-icon {
+header.style-4 .main-menu ul>li ul.sub-menu>li.active .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu {
+header.style-4 .main-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     position: absolute;
     max-width: 230px;
@@ -7103,18 +7123,18 @@ header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-4 .main-menu ul>li ul.sub-menu>li .sub-menu {
         box-shadow: none
     }
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
+header.style-4 .main-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
 @media only screen and (max-width: 991px) {
-    header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-4 .main-menu ul>li ul.sub-menu>li .sub-menu {
         position: unset;
         max-width: 230px;
         min-width: 215px;
@@ -7123,15 +7143,15 @@ header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
     }
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li .sub-menu > li i {
+header.style-4 .main-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-header.style-4 .main-menu ul > li ul.sub-menu > li:last-child {
+header.style-4 .main-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-header.style-4 .main-menu ul > li.menu-item-has-children::after {
+header.style-4 .main-menu ul>li.menu-item-has-children::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 0;
@@ -7144,20 +7164,20 @@ header.style-4 .main-menu ul > li.menu-item-has-children::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-4 .main-menu ul > li.menu-item-has-children::after {
+    header.style-4 .main-menu ul>li.menu-item-has-children::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-4 .main-menu ul > li.menu-item-has-children::after {
+    header.style-4 .main-menu ul>li.menu-item-has-children::after {
         display: none;
         visibility: hidden
     }
 }
 
 @media (min-width: 992px) {
-    header.style-4 .main-menu ul > li:hover > ul.sub-menu {
+    header.style-4 .main-menu ul>li:hover>ul.sub-menu {
         display: block;
         animation: fade-up .45s linear
     }
@@ -7169,6 +7189,7 @@ header.style-4 .main-menu ul > li.menu-item-has-children::after {
         transform: translateY(10px);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: translateY(0px);
@@ -7176,31 +7197,31 @@ header.style-4 .main-menu ul > li.menu-item-has-children::after {
     }
 }
 
-header.style-4 .main-menu ul > li:hover > a {
+header.style-4 .main-menu ul>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li:hover::after {
+header.style-4 .main-menu ul>li:hover::after {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li:hover .dropdown-icon2 {
+header.style-4 .main-menu ul>li:hover .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li.active > a {
+header.style-4 .main-menu ul>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li.active::after {
+header.style-4 .main-menu ul>li.active::after {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul > li.active .dropdown-icon2 {
+header.style-4 .main-menu ul>li.active .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-4 .main-menu ul li.menu-item-has-children > i {
+header.style-4 .main-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -7281,25 +7302,25 @@ header.style-4 .main-menu ul li.menu-item-has-children > i {
         transform: translateY(0px)
     }
 
-    header.style-4 .main-menu ul li ul.sub-menu > li {
+    header.style-4 .main-menu ul li ul.sub-menu>li {
         border-bottom: 1px solid transparent
     }
 
-    header.style-4 .main-menu ul li ul.sub-menu > li a {
+    header.style-4 .main-menu ul li ul.sub-menu>li a {
         color: var(--title-color);
         padding: 12px 0
     }
 
-    header.style-4 .main-menu ul li ul.sub-menu > li a:hover {
+    header.style-4 .main-menu ul li ul.sub-menu>li a:hover {
         color: var(--primary-color1);
         margin-left: 10px
     }
 
-    header.style-4 .main-menu ul li ul.sub-menu > li a.active {
+    header.style-4 .main-menu ul li ul.sub-menu>li a.active {
         color: var(--primary-color1)
     }
 
-    header.style-4 .main-menu ul li ul.sub-menu > li i {
+    header.style-4 .main-menu ul li ul.sub-menu>li i {
         color: var(--primary-color1);
         right: -13px
     }
@@ -7353,6 +7374,7 @@ header.style-5.sticky {
     0% {
         transform: translateY(-30px)
     }
+
     100% {
         transform: translateY(0px)
     }
@@ -7410,6 +7432,7 @@ header.style-5 .nav-right .modal-btn:hover i {
 }
 
 header.style-5 .nav-right .dropdown .cart-menu {
+    min-width: 20rem;
     min-height: 10rem;
     background-color: var(--white-color);
     box-shadow: 0 30px 80px rgba(8, 0, 42, .08);
@@ -7417,7 +7440,7 @@ header.style-5 .nav-right .dropdown .cart-menu {
     position: absolute;
     right: 0;
     top: 45px;
-    padding: 20px;
+    /* padding: 20px; */
     z-index: 99;
     display: none;
     transform: scaleY(0);
@@ -7439,7 +7462,7 @@ header.style-5 .nav-right .dropdown .cart-body ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    height: 221px;
+    min-height: 50px;
     overflow-y: auto
 }
 
@@ -7733,6 +7756,7 @@ header.style-5 .nav-right .dropdown .cart-footer .footer-button ul li:first-chil
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -8199,23 +8223,23 @@ header.style-5 .main-menu ul {
     padding: 0
 }
 
-header.style-5 .main-menu ul > li {
+header.style-5 .main-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px
 }
 
-header.style-5 .main-menu ul > li.position-inherit {
+header.style-5 .main-menu ul>li.position-inherit {
     position: inherit
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li.position-inherit {
+    header.style-5 .main-menu ul>li.position-inherit {
         position: relative
     }
 }
 
-header.style-5 .main-menu ul > li.position-inherit > a::after {
+header.style-5 .main-menu ul>li.position-inherit>a::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -8228,34 +8252,34 @@ header.style-5 .main-menu ul > li.position-inherit > a::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li.position-inherit > a::after {
+    header.style-5 .main-menu ul>li.position-inherit>a::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li.position-inherit > a::after {
+    header.style-5 .main-menu ul>li.position-inherit>a::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-5 .main-menu ul > li:hover i {
+header.style-5 .main-menu ul>li:hover i {
     color: var(--black-color2);
     font-size: 20px
 }
 
 @media (min-width: 992px) {
-    header.style-5 .main-menu ul > li:first-child {
+    header.style-5 .main-menu ul>li:first-child {
         padding-left: 0
     }
 
-    header.style-5 .main-menu ul > li:first-child a {
+    header.style-5 .main-menu ul>li:first-child a {
         padding-left: 0
     }
 }
 
-header.style-5 .main-menu ul > li a {
+header.style-5 .main-menu ul>li a {
     color: var(--title-color);
     display: block;
     text-transform: capitalize;
@@ -8270,12 +8294,12 @@ header.style-5 .main-menu ul > li a {
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li a {
+    header.style-5 .main-menu ul>li a {
         padding: 32px 9px
     }
 }
 
-header.style-5 .main-menu ul > li i {
+header.style-5 .main-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -8291,20 +8315,20 @@ header.style-5 .main-menu ul > li i {
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li i {
+    header.style-5 .main-menu ul>li i {
         opacity: 1
     }
 }
 
-header.style-5 .main-menu ul > li i.active {
+header.style-5 .main-menu ul>li i.active {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li i.active::before {
+header.style-5 .main-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu {
+header.style-5 .main-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -8319,18 +8343,18 @@ header.style-5 .main-menu ul > li ul.sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li ul.sub-menu {
+    header.style-5 .main-menu ul>li ul.sub-menu {
         box-shadow: none
     }
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li {
+header.style-5 .main-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li i {
+header.style-5 .main-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 14px;
     right: 6px;
@@ -8339,7 +8363,7 @@ header.style-5 .main-menu ul > li ul.sub-menu > li i {
     font-size: 14px
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+header.style-5 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--title-color);
     opacity: 1;
     top: 14px;
@@ -8348,14 +8372,14 @@ header.style-5 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+    header.style-5 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
         font-size: 20px;
         top: 8px;
         right: 0
     }
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li a {
+header.style-5 .main-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 15px;
     color: var(--text-color1);
@@ -8368,7 +8392,7 @@ header.style-5 .main-menu ul > li ul.sub-menu > li a {
     border-bottom: 1px solid rgba(233, 228, 228, .5)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li a::before {
+header.style-5 .main-menu ul>li ul.sub-menu>li a::before {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -8383,56 +8407,56 @@ header.style-5 .main-menu ul > li ul.sub-menu > li a::before {
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li ul.sub-menu > li a {
+    header.style-5 .main-menu ul>li ul.sub-menu>li a {
         border-color: rgba(233, 228, 228, .5)
     }
 
-    header.style-5 .main-menu ul > li ul.sub-menu > li a::before {
+    header.style-5 .main-menu ul>li ul.sub-menu>li a::before {
         background: linear-gradient(90deg, #ddd, #06D889, #ddd)
     }
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li a:hover {
+header.style-5 .main-menu ul>li ul.sub-menu>li a:hover {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li a:hover::before {
+header.style-5 .main-menu ul>li ul.sub-menu>li a:hover::before {
     transform: scale(1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li a.active {
+header.style-5 .main-menu ul>li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li a.active::before {
+header.style-5 .main-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li:last-child a {
+header.style-5 .main-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li:last-child a::before {
+header.style-5 .main-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li:hover > a {
+header.style-5 .main-menu ul>li ul.sub-menu>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li:hover .dropdown-icon {
+header.style-5 .main-menu ul>li ul.sub-menu>li:hover .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li.active > a {
+header.style-5 .main-menu ul>li ul.sub-menu>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li.active .dropdown-icon {
+header.style-5 .main-menu ul>li ul.sub-menu>li.active .dropdown-icon {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu {
+header.style-5 .main-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     position: absolute;
     max-width: 230px;
@@ -8443,18 +8467,18 @@ header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-5 .main-menu ul>li ul.sub-menu>li .sub-menu {
         box-shadow: none
     }
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
+header.style-5 .main-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
 @media only screen and (max-width: 991px) {
-    header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-5 .main-menu ul>li ul.sub-menu>li .sub-menu {
         margin-left: 10px;
         position: unset;
         max-width: 230px;
@@ -8464,15 +8488,15 @@ header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
     }
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li .sub-menu > li i {
+header.style-5 .main-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-header.style-5 .main-menu ul > li ul.sub-menu > li:last-child {
+header.style-5 .main-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-header.style-5 .main-menu ul > li .mega-menu {
+header.style-5 .main-menu ul>li .mega-menu {
     display: none;
     position: absolute;
     left: 0;
@@ -8489,13 +8513,13 @@ header.style-5 .main-menu ul > li .mega-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li .mega-menu {
+    header.style-5 .main-menu ul>li .mega-menu {
         min-width: 935px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li .mega-menu {
+    header.style-5 .main-menu ul>li .mega-menu {
         position: static;
         min-width: 200px;
         background: 0 0;
@@ -8513,17 +8537,17 @@ header.style-5 .main-menu ul > li .mega-menu {
     }
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row {
+header.style-5 .main-menu ul>li .mega-menu .menu-row {
     display: flex
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row {
         display: block
     }
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
     display: block;
     padding: 0;
     padding-right: 70px;
@@ -8532,24 +8556,24 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 55px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 0;
         margin-bottom: 15px;
         flex-basis: unset
     }
 
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
         margin-bottom: 0
     }
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
     content: "";
     height: 100%;
     width: 1px;
@@ -8560,28 +8584,28 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after 
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         right: 18px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     padding-right: 0
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child::after {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child::after {
     display: none;
     visibility: hidden
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
     margin-bottom: 10px;
     color: var(--title-color);
     font-family: var(--font-montserrat);
@@ -8590,13 +8614,13 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
         color: #b5b5b5;
         position: relative;
         padding-left: 15px
     }
 
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6::before {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6::before {
         height: 8px;
         width: 8px;
         background-color: #b5b5b5;
@@ -8609,13 +8633,13 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
     }
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li {
     display: block;
     line-height: 1;
     padding: 0
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 14px;
@@ -8628,28 +8652,28 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li
     padding: 12px 0
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a:hover {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a:hover {
     color: var(--primary-color1)
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
         font-size: 12px;
         font-weight: 600;
         border-bottom: 1px solid rgba(233, 228, 228, .5)
     }
 
-    header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a img {
+    header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a img {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn {
     padding-top: 20px
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
     padding: 0;
     display: flex;
     align-items: center;
@@ -8658,7 +8682,7 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     font-weight: 600
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -8672,15 +8696,15 @@ header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     opacity: 1
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
+header.style-5 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li.menu-item-has-children::after {
+header.style-5 .main-menu ul>li.menu-item-has-children::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -8693,27 +8717,27 @@ header.style-5 .main-menu ul > li.menu-item-has-children::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-5 .main-menu ul > li.menu-item-has-children::after {
+    header.style-5 .main-menu ul>li.menu-item-has-children::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-5 .main-menu ul > li.menu-item-has-children::after {
+    header.style-5 .main-menu ul>li.menu-item-has-children::after {
         display: none;
         visibility: hidden
     }
 }
 
 @media (min-width: 992px) {
-    header.style-5 .main-menu ul > li:hover > ul.sub-menu {
+    header.style-5 .main-menu ul>li:hover>ul.sub-menu {
         display: block;
         animation: fade-down .45s linear
     }
 }
 
 @media (min-width: 992px) {
-    header.style-5 .main-menu ul > li:hover .mega-menu {
+    header.style-5 .main-menu ul>li:hover .mega-menu {
         display: block;
         animation: fade-down .45s linear
     }
@@ -8725,6 +8749,7 @@ header.style-5 .main-menu ul > li.menu-item-has-children::after {
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -8732,39 +8757,39 @@ header.style-5 .main-menu ul > li.menu-item-has-children::after {
     }
 }
 
-header.style-5 .main-menu ul > li:hover > a {
+header.style-5 .main-menu ul>li:hover>a {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li:hover::after {
+header.style-5 .main-menu ul>li:hover::after {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li:hover .dropdown-icon2 {
+header.style-5 .main-menu ul>li:hover .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li:hover.position-inherit > a::after {
+header.style-5 .main-menu ul>li:hover.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li.active > a {
+header.style-5 .main-menu ul>li.active>a {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li.active::after {
+header.style-5 .main-menu ul>li.active::after {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li.active .dropdown-icon2 {
+header.style-5 .main-menu ul>li.active .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul > li.active.position-inherit > a::after {
+header.style-5 .main-menu ul>li.active.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-header.style-5 .main-menu ul li.menu-item-has-children > i {
+header.style-5 .main-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -8974,25 +8999,25 @@ header.style-5 .main-menu .hotline-area .content h6 a:hover {
         transform: translateY(0px)
     }
 
-    header.style-5 .main-menu ul li ul.sub-menu > li {
+    header.style-5 .main-menu ul li ul.sub-menu>li {
         border-bottom: 1px solid transparent
     }
 
-    header.style-5 .main-menu ul li ul.sub-menu > li a {
+    header.style-5 .main-menu ul li ul.sub-menu>li a {
         color: var(--title-color);
         padding: 12px 0
     }
 
-    header.style-5 .main-menu ul li ul.sub-menu > li a:hover {
+    header.style-5 .main-menu ul li ul.sub-menu>li a:hover {
         color: var(--primary-color1);
         margin-left: 10px
     }
 
-    header.style-5 .main-menu ul li ul.sub-menu > li a.active {
+    header.style-5 .main-menu ul li ul.sub-menu>li a.active {
         color: var(--primary-color1)
     }
 
-    header.style-5 .main-menu ul li ul.sub-menu > li i {
+    header.style-5 .main-menu ul li ul.sub-menu>li i {
         color: var(--primary-color1);
         right: -13px
     }
@@ -9046,6 +9071,7 @@ header.style-6.sticky {
     0% {
         transform: translateY(-30px)
     }
+
     100% {
         transform: translateY(0px)
     }
@@ -9418,6 +9444,7 @@ header.style-6 .nav-right .dropdown .cart-footer .footer-button ul li:first-chil
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -9881,23 +9908,23 @@ header.style-6 .main-menu ul {
     padding: 0
 }
 
-header.style-6 .main-menu ul > li {
+header.style-6 .main-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px
 }
 
-header.style-6 .main-menu ul > li.position-inherit {
+header.style-6 .main-menu ul>li.position-inherit {
     position: inherit
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li.position-inherit {
+    header.style-6 .main-menu ul>li.position-inherit {
         position: relative
     }
 }
 
-header.style-6 .main-menu ul > li.position-inherit > a::after {
+header.style-6 .main-menu ul>li.position-inherit>a::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -9910,34 +9937,34 @@ header.style-6 .main-menu ul > li.position-inherit > a::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li.position-inherit > a::after {
+    header.style-6 .main-menu ul>li.position-inherit>a::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li.position-inherit > a::after {
+    header.style-6 .main-menu ul>li.position-inherit>a::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-6 .main-menu ul > li:hover i {
+header.style-6 .main-menu ul>li:hover i {
     color: var(--black-color2);
     font-size: 20px
 }
 
 @media (min-width: 992px) {
-    header.style-6 .main-menu ul > li:first-child {
+    header.style-6 .main-menu ul>li:first-child {
         padding-left: 0
     }
 
-    header.style-6 .main-menu ul > li:first-child a {
+    header.style-6 .main-menu ul>li:first-child a {
         padding-left: 0
     }
 }
 
-header.style-6 .main-menu ul > li a {
+header.style-6 .main-menu ul>li a {
     color: var(--title-color);
     display: block;
     text-transform: capitalize;
@@ -9952,12 +9979,12 @@ header.style-6 .main-menu ul > li a {
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li a {
+    header.style-6 .main-menu ul>li a {
         padding: 32px 9px
     }
 }
 
-header.style-6 .main-menu ul > li i {
+header.style-6 .main-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -9973,16 +10000,16 @@ header.style-6 .main-menu ul > li i {
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li i {
+    header.style-6 .main-menu ul>li i {
         opacity: 1
     }
 }
 
-header.style-6 .main-menu ul > li i.active::before {
+header.style-6 .main-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu {
+header.style-6 .main-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -9997,18 +10024,18 @@ header.style-6 .main-menu ul > li ul.sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li ul.sub-menu {
+    header.style-6 .main-menu ul>li ul.sub-menu {
         box-shadow: none
     }
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li {
+header.style-6 .main-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li i {
+header.style-6 .main-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 14px;
     right: 6px;
@@ -10017,7 +10044,7 @@ header.style-6 .main-menu ul > li ul.sub-menu > li i {
     font-size: 14px
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+header.style-6 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--title-color);
     opacity: 1;
     top: 14px;
@@ -10026,14 +10053,14 @@ header.style-6 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li ul.sub-menu > li .dropdown-icon {
+    header.style-6 .main-menu ul>li ul.sub-menu>li .dropdown-icon {
         right: 0;
         font-size: 20px;
         top: 8px
     }
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li a {
+header.style-6 .main-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 15px;
     color: var(--text-color1);
@@ -10047,28 +10074,28 @@ header.style-6 .main-menu ul > li ul.sub-menu > li a {
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li ul.sub-menu > li a {
+    header.style-6 .main-menu ul>li ul.sub-menu>li a {
         border-color: rgba(233, 228, 228, .5)
     }
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li a:hover::before {
+header.style-6 .main-menu ul>li ul.sub-menu>li a:hover::before {
     transform: scale(1)
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li a.active::before {
+header.style-6 .main-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li:last-child a {
+header.style-6 .main-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li:last-child a::before {
+header.style-6 .main-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu {
+header.style-6 .main-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     position: absolute;
     max-width: 230px;
@@ -10079,18 +10106,18 @@ header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-6 .main-menu ul>li ul.sub-menu>li .sub-menu {
         box-shadow: none
     }
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
+header.style-6 .main-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
 @media only screen and (max-width: 991px) {
-    header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu {
+    header.style-6 .main-menu ul>li ul.sub-menu>li .sub-menu {
         margin-left: 10px;
         position: unset;
         max-width: 230px;
@@ -10100,15 +10127,15 @@ header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu::before {
     }
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li .sub-menu > li i {
+header.style-6 .main-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-header.style-6 .main-menu ul > li ul.sub-menu > li:last-child {
+header.style-6 .main-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-header.style-6 .main-menu ul > li .mega-menu {
+header.style-6 .main-menu ul>li .mega-menu {
     display: none;
     position: absolute;
     left: 0;
@@ -10125,13 +10152,13 @@ header.style-6 .main-menu ul > li .mega-menu {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li .mega-menu {
+    header.style-6 .main-menu ul>li .mega-menu {
         min-width: 935px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li .mega-menu {
+    header.style-6 .main-menu ul>li .mega-menu {
         position: static;
         min-width: 200px;
         background: 0 0;
@@ -10149,17 +10176,17 @@ header.style-6 .main-menu ul > li .mega-menu {
     }
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row {
+header.style-6 .main-menu ul>li .mega-menu .menu-row {
     display: flex
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row {
         display: block
     }
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
     display: block;
     padding: 0;
     padding-right: 70px;
@@ -10168,24 +10195,24 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 55px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item {
         padding-right: 0;
         margin-bottom: 15px;
         flex-basis: unset
     }
 
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
         margin-bottom: 0
     }
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
     content: "";
     height: 100%;
     width: 1px;
@@ -10196,28 +10223,28 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after 
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         right: 18px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item::after {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item::after {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     padding-right: 0
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item:last-child::after {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item:last-child::after {
     display: none;
     visibility: hidden
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
     margin-bottom: 10px;
     color: var(--title-color);
     font-family: var(--font-montserrat);
@@ -10226,13 +10253,13 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
         color: #b5b5b5;
         position: relative;
         padding-left: 15px
     }
 
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6::before {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item h6::before {
         height: 8px;
         width: 8px;
         background-color: #b5b5b5;
@@ -10245,13 +10272,13 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
     }
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li {
     display: block;
     line-height: 1;
     padding: 0
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 14px;
@@ -10265,23 +10292,23 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
         font-size: 12px;
         font-weight: 600;
         border-bottom: 1px solid rgba(233, 228, 228, .5)
     }
 
-    header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a img {
+    header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a img {
         display: none;
         visibility: hidden
     }
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn {
     padding-top: 20px
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
     padding: 0;
     display: flex;
     align-items: center;
@@ -10290,7 +10317,7 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     font-weight: 600
 }
 
-header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
+header.style-6 .main-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -10304,7 +10331,7 @@ header.style-6 .main-menu ul > li .mega-menu .menu-row .menu-single-item .explor
     opacity: 1
 }
 
-header.style-6 .main-menu ul > li.menu-item-has-children::after {
+header.style-6 .main-menu ul>li.menu-item-has-children::after {
     content: "\f282";
     font-family: bootstrap-icons;
     font-weight: 500;
@@ -10317,27 +10344,27 @@ header.style-6 .main-menu ul > li.menu-item-has-children::after {
 }
 
 @media (max-width: 1199px) {
-    header.style-6 .main-menu ul > li.menu-item-has-children::after {
+    header.style-6 .main-menu ul>li.menu-item-has-children::after {
         right: 2px
     }
 }
 
 @media (max-width: 991px) {
-    header.style-6 .main-menu ul > li.menu-item-has-children::after {
+    header.style-6 .main-menu ul>li.menu-item-has-children::after {
         display: none;
         visibility: hidden
     }
 }
 
 @media (min-width: 992px) {
-    header.style-6 .main-menu ul > li:hover > ul.sub-menu {
+    header.style-6 .main-menu ul>li:hover>ul.sub-menu {
         display: block;
         animation: fade-down .45s linear
     }
 }
 
 @media (min-width: 992px) {
-    header.style-6 .main-menu ul > li:hover .mega-menu {
+    header.style-6 .main-menu ul>li:hover .mega-menu {
         display: block;
         animation: fade-down .45s linear
     }
@@ -10349,6 +10376,7 @@ header.style-6 .main-menu ul > li.menu-item-has-children::after {
         transform: scaleY(0);
         visibility: hidden
     }
+
     100% {
         opacity: 1;
         transform: scaleY(1);
@@ -10356,7 +10384,7 @@ header.style-6 .main-menu ul > li.menu-item-has-children::after {
     }
 }
 
-header.style-6 .main-menu ul li.menu-item-has-children > i {
+header.style-6 .main-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -10562,20 +10590,20 @@ header.style-6 .main-menu .hotline-area .content h6 a {
         transform: translateY(0px)
     }
 
-    header.style-6 .main-menu ul li ul.sub-menu > li {
+    header.style-6 .main-menu ul li ul.sub-menu>li {
         border-bottom: 1px solid transparent
     }
 
-    header.style-6 .main-menu ul li ul.sub-menu > li a {
+    header.style-6 .main-menu ul li ul.sub-menu>li a {
         color: var(--title-color);
         padding: 12px 0
     }
 
-    header.style-6 .main-menu ul li ul.sub-menu > li a:hover {
+    header.style-6 .main-menu ul li ul.sub-menu>li a:hover {
         margin-left: 10px
     }
 
-    header.style-6 .main-menu ul li ul.sub-menu > li i {
+    header.style-6 .main-menu ul li ul.sub-menu>li i {
         right: -13px
     }
 
@@ -10842,18 +10870,18 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding: 0
 }
 
-.sidebar-menu ul > li {
+.sidebar-menu ul>li {
     display: inline-block;
     position: relative;
     padding: 0 8px;
     padding-left: 0
 }
 
-.sidebar-menu ul > li a {
+.sidebar-menu ul>li a {
     padding-left: 0
 }
 
-.sidebar-menu ul > li a {
+.sidebar-menu ul>li a {
     color: var(--title-color);
     display: block;
     text-transform: capitalize;
@@ -10867,7 +10895,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     position: relative
 }
 
-.sidebar-menu ul > li i {
+.sidebar-menu ul>li i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -10882,15 +10910,15 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     opacity: 1
 }
 
-.sidebar-menu ul > li i.active {
+.sidebar-menu ul>li i.active {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li i.active::before {
+.sidebar-menu ul>li i.active::before {
     content: "\f2ea"
 }
 
-.sidebar-menu ul > li ul.sub-menu {
+.sidebar-menu ul>li ul.sub-menu {
     position: absolute;
     left: 0;
     right: 0;
@@ -10902,13 +10930,13 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     text-align: left
 }
 
-.sidebar-menu ul > li ul.sub-menu > li {
+.sidebar-menu ul>li ul.sub-menu>li {
     padding: 0;
     display: block;
     position: relative
 }
 
-.sidebar-menu ul > li ul.sub-menu > li i {
+.sidebar-menu ul>li ul.sub-menu>li i {
     position: absolute;
     top: 10px;
     right: 6px;
@@ -10917,7 +10945,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     font-size: 20px
 }
 
-.sidebar-menu ul > li ul.sub-menu > li .dropdown-icon {
+.sidebar-menu ul>li ul.sub-menu>li .dropdown-icon {
     color: var(--text-color);
     opacity: 1;
     top: 3px;
@@ -10925,7 +10953,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     right: 0
 }
 
-.sidebar-menu ul > li ul.sub-menu > li a {
+.sidebar-menu ul>li ul.sub-menu>li a {
     display: block;
     padding: 12px 25px;
     color: var(--text-color1);
@@ -10938,7 +10966,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     border-bottom: 1px solid rgba(233, 228, 228, .5)
 }
 
-.sidebar-menu ul > li ul.sub-menu > li a::before {
+.sidebar-menu ul>li ul.sub-menu>li a::before {
     content: "";
     position: absolute;
     bottom: -1px;
@@ -10952,31 +10980,31 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     z-index: 1
 }
 
-.sidebar-menu ul > li ul.sub-menu > li a.active {
+.sidebar-menu ul>li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li ul.sub-menu > li a.active::before {
+.sidebar-menu ul>li ul.sub-menu>li a.active::before {
     transform: scale(1)
 }
 
-.sidebar-menu ul > li ul.sub-menu > li:last-child a {
+.sidebar-menu ul>li ul.sub-menu>li:last-child a {
     border-bottom: none
 }
 
-.sidebar-menu ul > li ul.sub-menu > li:last-child a::before {
+.sidebar-menu ul>li ul.sub-menu>li:last-child a::before {
     display: none
 }
 
-.sidebar-menu ul > li ul.sub-menu > li.active > a {
+.sidebar-menu ul>li ul.sub-menu>li.active>a {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li ul.sub-menu > li.active .dropdown-icon {
+.sidebar-menu ul>li ul.sub-menu>li.active .dropdown-icon {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li ul.sub-menu > li .sub-menu {
+.sidebar-menu ul>li ul.sub-menu>li .sub-menu {
     left: 220px;
     top: 0;
     margin-left: 10px;
@@ -10987,20 +11015,20 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     top: 0
 }
 
-.sidebar-menu ul > li ul.sub-menu > li .sub-menu::before {
+.sidebar-menu ul>li ul.sub-menu>li .sub-menu::before {
     display: none;
     visibility: hidden
 }
 
-.sidebar-menu ul > li ul.sub-menu > li .sub-menu > li i {
+.sidebar-menu ul>li ul.sub-menu>li .sub-menu>li i {
     display: block
 }
 
-.sidebar-menu ul > li ul.sub-menu > li:last-child {
+.sidebar-menu ul>li ul.sub-menu>li:last-child {
     border-bottom: none
 }
 
-.sidebar-menu ul > li .mega-menu {
+.sidebar-menu ul>li .mega-menu {
     display: none;
     left: 0;
     right: 0;
@@ -11023,7 +11051,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding-left: 10px
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item {
     display: block;
     padding: 0;
     position: relative;
@@ -11031,20 +11059,20 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     margin-bottom: 15px
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     margin-bottom: 0
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item:last-child {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item:last-child {
     padding-right: 0
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item:last-child::after {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item:last-child::after {
     display: none;
     visibility: hidden
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item h6 {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item h6 {
     margin-bottom: 10px;
     font-family: var(--font-montserrat);
     font-size: 15px;
@@ -11054,7 +11082,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding-left: 15px
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item h6::before {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item h6::before {
     height: 8px;
     width: 8px;
     background-color: #b5b5b5;
@@ -11066,13 +11094,13 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transform: translateY(-50%)
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item > ul li {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item>ul li {
     display: block;
     line-height: 1;
     padding: 0
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 12px;
@@ -11086,21 +11114,21 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding: 12px 0
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a:hover {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a:hover {
     color: var(--primary-color1);
     padding-left: 10px
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item > ul li a img {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item>ul li a img {
     display: none;
     visibility: hidden
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn {
     padding-top: 20px
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a {
     padding: 0;
     display: flex;
     align-items: center;
@@ -11109,7 +11137,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     font-weight: 600
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a i {
     font-size: 20px;
     text-align: center;
     color: var(--text-color);
@@ -11123,47 +11151,47 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     opacity: 1
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
+.sidebar-menu ul>li .mega-menu .menu-row .menu-single-item .explore-more-btn a:hover i {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li:hover > a {
+.sidebar-menu ul>li:hover>a {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li:hover::after {
+.sidebar-menu ul>li:hover::after {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li:hover .dropdown-icon2 {
+.sidebar-menu ul>li:hover .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li:hover.position-inherit > a::after {
+.sidebar-menu ul>li:hover.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li.active > a {
+.sidebar-menu ul>li.active>a {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li.active::after {
+.sidebar-menu ul>li.active::after {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li.active .dropdown-icon2 {
+.sidebar-menu ul>li.active .dropdown-icon2 {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul > li.active.position-inherit > a::after {
+.sidebar-menu ul>li.active.position-inherit>a::after {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul li.menu-item-has-children > i {
+.sidebar-menu ul li.menu-item-has-children>i {
     display: block
 }
 
@@ -11219,25 +11247,25 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transform: translateY(0px)
 }
 
-.sidebar-menu ul li ul.sub-menu > li {
+.sidebar-menu ul li ul.sub-menu>li {
     border-bottom: 1px solid transparent
 }
 
-.sidebar-menu ul li ul.sub-menu > li a {
+.sidebar-menu ul li ul.sub-menu>li a {
     color: var(--title-color);
     padding: 12px 0
 }
 
-.sidebar-menu ul li ul.sub-menu > li a:hover {
+.sidebar-menu ul li ul.sub-menu>li a:hover {
     color: var(--primary-color1);
     margin-left: 10px
 }
 
-.sidebar-menu ul li ul.sub-menu > li a.active {
+.sidebar-menu ul li ul.sub-menu>li a.active {
     color: var(--primary-color1)
 }
 
-.sidebar-menu ul li ul.sub-menu > li i {
+.sidebar-menu ul li ul.sub-menu>li i {
     color: var(--primary-color1);
     right: -13px
 }
@@ -11666,7 +11694,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding-top: 50px
 }
 
-.banner-section1 .banner-content .customar-review > ul {
+.banner-section1 .banner-content .customar-review>ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -11676,18 +11704,18 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 
 @media (max-width: 576px) {
-    .banner-section1 .banner-content .customar-review > ul {
+    .banner-section1 .banner-content .customar-review>ul {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px
     }
 }
 
-.banner-section1 .banner-content .customar-review > ul > li {
+.banner-section1 .banner-content .customar-review>ul>li {
     position: relative
 }
 
-.banner-section1 .banner-content .customar-review > ul > li::after {
+.banner-section1 .banner-content .customar-review>ul>li::after {
     content: "";
     height: 48px;
     width: 2px;
@@ -11699,29 +11727,29 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 
 @media (max-width: 576px) {
-    .banner-section1 .banner-content .customar-review > ul > li::after {
+    .banner-section1 .banner-content .customar-review>ul>li::after {
         display: none;
         visibility: hidden
     }
 }
 
-.banner-section1 .banner-content .customar-review > ul > li:first-child::after {
+.banner-section1 .banner-content .customar-review>ul>li:first-child::after {
     display: none;
     visibility: hidden
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a {
+.banner-section1 .banner-content .customar-review>ul>li a {
     display: inline-block
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .review-top {
+.banner-section1 .banner-content .customar-review>ul>li a .review-top {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 8px
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .review-top .star ul {
+.banner-section1 .banner-content .customar-review>ul>li a .review-top .star ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -11731,16 +11759,16 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     gap: 5px
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .review-top .star ul li {
+.banner-section1 .banner-content .customar-review>ul>li a .review-top .star ul li {
     line-height: 1
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .review-top .star ul li i {
+.banner-section1 .banner-content .customar-review>ul>li a .review-top .star ul li i {
     font-size: 12px;
     color: #dda701
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .content ul {
+.banner-section1 .banner-content .customar-review>ul>li a .content ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -11749,7 +11777,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     gap: 18px
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .content ul li {
+.banner-section1 .banner-content .customar-review>ul>li a .content ul li {
     font-family: var(--font-open-sans);
     font-weight: 400;
     font-size: 14px;
@@ -11758,11 +11786,11 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     position: relative
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .content ul li span {
+.banner-section1 .banner-content .customar-review>ul>li a .content ul li span {
     font-weight: 600
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .content ul li::after {
+.banner-section1 .banner-content .customar-review>ul>li a .content ul li::after {
     content: "";
     height: 10px;
     width: 1px;
@@ -11773,7 +11801,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transform: translateY(-50%)
 }
 
-.banner-section1 .banner-content .customar-review > ul > li a .content ul li:first-child::after {
+.banner-section1 .banner-content .customar-review>ul>li a .content ul li:first-child::after {
     display: none;
     visibility: hidden
 }
@@ -11812,7 +11840,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     }
 }
 
-.banner-section1 .car-filter-area .car-category > li button {
+.banner-section1 .car-filter-area .car-category>li button {
     border-radius: 41.5px;
     border: none;
     padding: 8px 22px;
@@ -11827,11 +11855,11 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     background-repeat: no-repeat
 }
 
-.banner-section1 .car-filter-area .car-category > li button img {
+.banner-section1 .car-filter-area .car-category>li button img {
     margin-bottom: 3px
 }
 
-.banner-section1 .car-filter-area .car-category > li button span {
+.banner-section1 .car-filter-area .car-category>li button span {
     font-family: var(--font-open-sans);
     font-weight: 600;
     font-size: 14px;
@@ -11839,7 +11867,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     color: var(--title-color)
 }
 
-.banner-section1 .car-filter-area .car-category > li button.active {
+.banner-section1 .car-filter-area .car-category>li button.active {
     background: linear-gradient(#fff, #fff) padding-box, linear-gradient(180deg, #fff 0%, #46D993 100%) border-box
 }
 
@@ -13223,7 +13251,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding-top: 30px
 }
 
-.why-choose-area .trustpilot-review > strong {
+.why-choose-area .trustpilot-review>strong {
     font-family: var(--font-montserrat);
     font-weight: 600;
     font-size: 18px;
@@ -14185,24 +14213,24 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul {
+.shop-car-parts-section .shop-big-img>ul {
     margin: 0;
     padding: 0;
     list-style: none
 }
 
-.shop-car-parts-section .shop-big-img > ul > li {
+.shop-car-parts-section .shop-big-img>ul>li {
     position: absolute;
     transition: .35s
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main {
     position: relative;
     display: inline-block;
     cursor: pointer
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main::after {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main::after {
     content: url(../images/shop-vec.svg);
     position: absolute;
     left: 5px;
@@ -14213,7 +14241,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transform-origin: left
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main.left::after {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main.left::after {
     content: url(../images/shop-vec2.svg);
     position: absolute;
     right: 5px;
@@ -14225,7 +14253,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transform-origin: left
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main .waves {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main .waves {
     position: absolute;
     width: 35px;
     height: 35px;
@@ -14238,15 +14266,15 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     animation: waves 3s ease-in-out infinite
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main .wave-1 {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main .wave-1 {
     animation-delay: 0s
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main .wave-2 {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main .wave-2 {
     animation-delay: 1s
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot-main .wave-3 {
+.shop-car-parts-section .shop-big-img>ul>li .dot-main .wave-3 {
     animation-delay: 2s;
     background: #46d993
 }
@@ -14257,10 +14285,12 @@ header.style-6 .main-menu .hotline-area .content h6 a {
         opacity: 0;
         -ms-filter: "alpha(opacity=0)"
     }
+
     50% {
         opacity: .9;
         -ms-filter: "alpha(opacity=90)"
     }
+
     100% {
         transform: scale(.9, .9);
         opacity: 0;
@@ -14268,7 +14298,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot {
+.shop-car-parts-section .shop-big-img>ul>li .dot {
     height: 16px;
     width: 16px;
     border: 1px solid var(--white-color);
@@ -14278,7 +14308,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transition: .35s
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot::after {
+.shop-car-parts-section .shop-big-img>ul>li .dot::after {
     content: "";
     height: 12px;
     width: 12px;
@@ -14291,137 +14321,137 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transition: .35s
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot:hover {
+.shop-car-parts-section .shop-big-img>ul>li .dot:hover {
     border-color: var(--primary-color1)
 }
 
-.shop-car-parts-section .shop-big-img > ul > li .dot:hover::after {
+.shop-car-parts-section .shop-big-img>ul>li .dot:hover::after {
     background-color: var(--primary-color1)
 }
 
-.shop-car-parts-section .shop-big-img > ul > li:nth-child(5) {
+.shop-car-parts-section .shop-big-img>ul>li:nth-child(5) {
     left: 25px;
     top: 127px
 }
 
 @media (min-width: 1400px) and (max-width: 1599px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(5) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(5) {
         top: 93px
     }
 }
 
 @media (max-width: 1399px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(5) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(5) {
         top: 80px
     }
 }
 
 @media (max-width: 1199px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(5) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(5) {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%)
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul > li:nth-child(2) {
+.shop-car-parts-section .shop-big-img>ul>li:nth-child(2) {
     left: 50px;
     bottom: 127px
 }
 
 @media (min-width: 1400px) and (max-width: 1599px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(2) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(2) {
         bottom: 40px
     }
 }
 
 @media (max-width: 1399px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(2) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(2) {
         left: 40px;
         bottom: 40px
     }
 }
 
 @media (max-width: 1199px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(2) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(2) {
         display: none;
         visibility: hidden
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul > li:nth-child(3) {
+.shop-car-parts-section .shop-big-img>ul>li:nth-child(3) {
     right: 40px;
     bottom: 40px
 }
 
 @media (min-width: 1400px) and (max-width: 1599px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(3) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(3) {
         bottom: 30px
     }
 }
 
 @media (max-width: 1199px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(3) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(3) {
         display: none;
         visibility: hidden
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul > li:nth-child(4) {
+.shop-car-parts-section .shop-big-img>ul>li:nth-child(4) {
     right: 105px;
     top: 47%
 }
 
 @media (min-width: 1400px) and (max-width: 1599px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(4) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(4) {
         right: 90px
     }
 }
 
 @media (max-width: 1199px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(4) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(4) {
         display: none;
         visibility: hidden
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul > li:nth-child(1) {
+.shop-car-parts-section .shop-big-img>ul>li:nth-child(1) {
     right: 190px;
     top: 115px
 }
 
 @media (min-width: 1400px) and (max-width: 1599px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(1) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(1) {
         top: 75px
     }
 }
 
 @media (max-width: 1399px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(1) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(1) {
         right: 130px;
         top: 45px
     }
 }
 
 @media (max-width: 1199px) {
-    .shop-car-parts-section .shop-big-img > ul > li:nth-child(1) {
+    .shop-car-parts-section .shop-big-img>ul>li:nth-child(1) {
         display: none;
         visibility: hidden
     }
 }
 
-.shop-car-parts-section .shop-big-img > ul > li.active .dot-main::after {
+.shop-car-parts-section .shop-big-img>ul>li.active .dot-main::after {
     opacity: 1;
     transform: scaleX(1)
 }
 
-.shop-car-parts-section .shop-big-img > ul > li.active .shop-card {
+.shop-car-parts-section .shop-big-img>ul>li.active .shop-card {
     transform: scaleX(1);
     opacity: 1
 }
 
 @media (max-width: 1199px) {
-    .shop-car-parts-section .shop-big-img > ul > li.active .shop-card {
+    .shop-car-parts-section .shop-big-img>ul>li.active .shop-card {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scaleX(1);
@@ -14855,14 +14885,14 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     padding-bottom: 15px
 }
 
-.news-section .news-card .content > h6 {
+.news-section .news-card .content>h6 {
     margin-bottom: 0;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
     margin-bottom: 20px
 }
 
-.news-section .news-card .content > h6 a {
+.news-section .news-card .content>h6 a {
     font-family: var(--font-montserrat);
     font-weight: 600;
     font-size: 18px;
@@ -14871,7 +14901,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
     transition: .35s
 }
 
-.news-section .news-card .content > h6 a:hover {
+.news-section .news-card .content>h6 a:hover {
     color: var(--primary-color1)
 }
 
@@ -15962,7 +15992,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 .product-card2 .product-content .company-logo {
     position: absolute;
     right: 20px;
-    top: -22px
+    top: -22px;
+    background: #fff;
+    border-radius: 50%;
+    width: fit-content;
+    height: fit-content;
 }
 
 .product-card2 .product-content .details-btn {
@@ -16267,7 +16301,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     padding-top: 30px
 }
 
-.how-it-work-section .trustpilot-review > strong {
+.how-it-work-section .trustpilot-review>strong {
     font-family: var(--font-montserrat);
     font-weight: 600;
     font-size: 18px;
@@ -16443,12 +16477,15 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 @media (max-width: 576px) {
-    .home2-compare-area .compare-content .compare-wrap .compare-left, .home2-compare-area .compare-content .compare-wrap .compare-right {
+
+    .home2-compare-area .compare-content .compare-wrap .compare-left,
+    .home2-compare-area .compare-content .compare-wrap .compare-right {
         text-align: center
     }
 }
 
-.home2-compare-area .compare-content .compare-wrap .compare-left span, .home2-compare-area .compare-content .compare-wrap .compare-right span {
+.home2-compare-area .compare-content .compare-wrap .compare-left span,
+.home2-compare-area .compare-content .compare-wrap .compare-right span {
     color: var(--white-color);
     font-size: 16px;
     font-family: var(--font-open-sans);
@@ -16457,11 +16494,13 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     margin-bottom: 5px
 }
 
-.home2-compare-area .compare-content .compare-wrap .compare-left h6, .home2-compare-area .compare-content .compare-wrap .compare-right h6 {
+.home2-compare-area .compare-content .compare-wrap .compare-left h6,
+.home2-compare-area .compare-content .compare-wrap .compare-right h6 {
     margin-bottom: 10px
 }
 
-.home2-compare-area .compare-content .compare-wrap .compare-left h6 a, .home2-compare-area .compare-content .compare-wrap .compare-right h6 a {
+.home2-compare-area .compare-content .compare-wrap .compare-left h6 a,
+.home2-compare-area .compare-content .compare-wrap .compare-right h6 a {
     color: var(--white-color);
     font-size: 24px;
     font-family: var(--font-montserrat);
@@ -16469,11 +16508,13 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     transition: .35s
 }
 
-.home2-compare-area .compare-content .compare-wrap .compare-left h6 a:hover, .home2-compare-area .compare-content .compare-wrap .compare-right h6 a:hover {
+.home2-compare-area .compare-content .compare-wrap .compare-left h6 a:hover,
+.home2-compare-area .compare-content .compare-wrap .compare-right h6 a:hover {
     color: var(--primary-color1)
 }
 
-.home2-compare-area .compare-content .compare-wrap .compare-left .price strong, .home2-compare-area .compare-content .compare-wrap .compare-right .price strong {
+.home2-compare-area .compare-content .compare-wrap .compare-left .price strong,
+.home2-compare-area .compare-content .compare-wrap .compare-right .price strong {
     color: var(--primary-color1);
     font-size: 20px;
     font-family: var(--font-montserrat);
@@ -16863,7 +16904,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     padding-top: 40px
 }
 
-.home3-banner-area .banner-wrapper .banner-content .trustpilot-review > strong {
+.home3-banner-area .banner-wrapper .banner-content .trustpilot-review>strong {
     font-family: var(--font-montserrat);
     font-weight: 600;
     font-size: 18px;
@@ -17937,7 +17978,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     top: 25%
 }
 
-.home3-testimonial-area .testimonial-wrap .author-image-area > img {
+.home3-testimonial-area .testimonial-wrap .author-image-area>img {
     height: 79px;
     width: 79px;
     border-radius: 50%
@@ -17994,7 +18035,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     gap: 10px
 }
 
-.home3-testimonial-area .trustpilot-review > strong {
+.home3-testimonial-area .trustpilot-review>strong {
     font-family: var(--font-montserrat);
     font-weight: 600;
     font-size: 18px;
@@ -18942,7 +18983,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     background-color: var(--white-color)
 }
 
-.home4-inner-banner-section .section-title-2 .sell-btn-and-contact-info > span {
+.home4-inner-banner-section .section-title-2 .sell-btn-and-contact-info>span {
     color: rgba(255, 255, 255, .5);
     font-family: var(--font-montserrat);
     font-size: 16px;
@@ -19097,7 +19138,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     background-color: var(--white-color)
 }
 
-.home4-inner-banner-section.style-2 .section-title-2 .sell-btn-and-contact-info > span {
+.home4-inner-banner-section.style-2 .section-title-2 .sell-btn-and-contact-info>span {
     color: rgba(255, 255, 255, .5);
     font-family: var(--font-montserrat);
     font-size: 16px;
@@ -20882,7 +20923,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     }
 }
 
-.home5-compare-car-section .compare-card5 .single-compare .content > span {
+.home5-compare-car-section .compare-card5 .single-compare .content>span {
     color: var(--text-color);
     font-family: var(--font-open-sans);
     font-size: 13px;
@@ -21100,7 +21141,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     gap: 10px
 }
 
-.home5-testimonial-section .trustpilot-review > strong {
+.home5-testimonial-section .trustpilot-review>strong {
     font-family: var(--font-montserrat);
     font-weight: 600;
     font-size: 18px;
@@ -21146,7 +21187,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     }
 }
 
-.home6-banner-area .banner-content > span {
+.home6-banner-area .banner-content>span {
     color: var(--black-color2);
     font-family: var(--font-montserrat);
     font-size: 20px;
@@ -21156,7 +21197,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     position: relative
 }
 
-.home6-banner-area .banner-content > span::after {
+.home6-banner-area .banner-content>span::after {
     content: "";
     position: absolute;
     right: -70px;
@@ -21607,7 +21648,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     background-color: #faf8fb
 }
 
-.eg-table tbody tr td, .eg-table thead tr th {
+.eg-table tbody tr td,
+.eg-table thead tr th {
     color: var(--text-color);
     font-family: var(--font-open-sans);
     font-size: 14px;
@@ -21944,7 +21986,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     padding-top: 10px
 }
 
-.inner-page-banner .banner-content .customar-review > ul {
+.inner-page-banner .banner-content .customar-review>ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -21954,18 +21996,18 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 @media (max-width: 576px) {
-    .inner-page-banner .banner-content .customar-review > ul {
+    .inner-page-banner .banner-content .customar-review>ul {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px
     }
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li {
+.inner-page-banner .banner-content .customar-review>ul>li {
     position: relative
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li::after {
+.inner-page-banner .banner-content .customar-review>ul>li::after {
     content: "";
     height: 48px;
     width: 2px;
@@ -21977,29 +22019,29 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 @media (max-width: 576px) {
-    .inner-page-banner .banner-content .customar-review > ul > li::after {
+    .inner-page-banner .banner-content .customar-review>ul>li::after {
         display: none;
         visibility: hidden
     }
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li:first-child::after {
+.inner-page-banner .banner-content .customar-review>ul>li:first-child::after {
     display: none;
     visibility: hidden
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a {
+.inner-page-banner .banner-content .customar-review>ul>li a {
     display: inline-block
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .review-top {
+.inner-page-banner .banner-content .customar-review>ul>li a .review-top {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 8px
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .review-top .star ul {
+.inner-page-banner .banner-content .customar-review>ul>li a .review-top .star ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -22009,16 +22051,16 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     gap: 5px
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .review-top .star ul li {
+.inner-page-banner .banner-content .customar-review>ul>li a .review-top .star ul li {
     line-height: 1
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .review-top .star ul li i {
+.inner-page-banner .banner-content .customar-review>ul>li a .review-top .star ul li i {
     font-size: 12px;
     color: #dda701
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .content ul {
+.inner-page-banner .banner-content .customar-review>ul>li a .content ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -22027,7 +22069,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     gap: 18px
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .content ul li {
+.inner-page-banner .banner-content .customar-review>ul>li a .content ul li {
     font-family: var(--font-open-sans);
     font-weight: 400;
     font-size: 14px;
@@ -22036,11 +22078,11 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     position: relative
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .content ul li span {
+.inner-page-banner .banner-content .customar-review>ul>li a .content ul li span {
     font-weight: 600
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .content ul li::after {
+.inner-page-banner .banner-content .customar-review>ul>li a .content ul li::after {
     content: "";
     height: 10px;
     width: 1px;
@@ -22051,7 +22093,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     transform: translateY(-50%)
 }
 
-.inner-page-banner .banner-content .customar-review > ul > li a .content ul li:first-child::after {
+.inner-page-banner .banner-content .customar-review>ul>li a .content ul li:first-child::after {
     display: none;
     visibility: hidden
 }
@@ -22146,12 +22188,12 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     }
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li {
     position: relative;
     transition: .5s
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li .share-icon {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li .share-icon {
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -22164,12 +22206,12 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     cursor: pointer
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li .share-icon:hover {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li .share-icon:hover {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1)
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li .social-icons {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li .social-icons {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -22185,7 +22227,7 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     transition: .5s
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li .social-icons > li > a {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li .social-icons>li>a {
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -22197,17 +22239,17 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
     transition: .35s
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li .social-icons > li > a i {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li .social-icons>li>a i {
     transition: .35s;
     color: var(--title-color)
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li .social-icons > li > a:hover {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li .social-icons>li>a:hover {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1)
 }
 
-.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav > li:hover .social-icons {
+.inner-page-banner .banner-content.style-2 .price-model-and-fav-area .share-and-fav>li:hover .social-icons {
     transform: scaleX(1) translateY(-50%);
     opacity: 1
 }
@@ -23141,19 +23183,19 @@ button {
     list-style: none
 }
 
-.comment > li {
+.comment>li {
     margin-bottom: 40px
 }
 
-.comment > li > .single-comment-area {
+.comment>li>.single-comment-area {
     margin-bottom: 24px
 }
 
-.comment > li:last-child {
+.comment>li:last-child {
     margin-bottom: 0
 }
 
-.comment > li:last-child > .single-comment-area {
+.comment>li:last-child>.single-comment-area {
     margin-bottom: 0
 }
 
@@ -23240,11 +23282,11 @@ button {
     padding: 24px 0
 }
 
-.comment .comment-replay > li {
+.comment .comment-replay>li {
     margin-bottom: 30px
 }
 
-.comment .comment-replay > li:last-child {
+.comment .comment-replay>li:last-child {
     margin-bottom: 0
 }
 
@@ -23691,7 +23733,8 @@ button {
     gap: 8px
 }
 
-.product-details-page .product-details-content .product-quantity .quantity .quantity__minus, .product-details-page .product-details-content .product-quantity .quantity .quantity__plus {
+.product-details-page .product-details-content .product-quantity .quantity .quantity__minus,
+.product-details-page .product-details-content .product-quantity .quantity .quantity__plus {
     height: 40px;
     width: 40px;
     border-radius: 5px;
@@ -23704,13 +23747,15 @@ button {
     transition: .35s
 }
 
-.product-details-page .product-details-content .product-quantity .quantity .quantity__minus span i, .product-details-page .product-details-content .product-quantity .quantity .quantity__plus span i {
+.product-details-page .product-details-content .product-quantity .quantity .quantity__minus span i,
+.product-details-page .product-details-content .product-quantity .quantity .quantity__plus span i {
     font-size: 20px;
     color: var(--title-color);
     transition: .35s
 }
 
-.product-details-page .product-details-content .product-quantity .quantity .quantity__minus:hover, .product-details-page .product-details-content .product-quantity .quantity .quantity__plus:hover {
+.product-details-page .product-details-content .product-quantity .quantity .quantity__minus:hover,
+.product-details-page .product-details-content .product-quantity .quantity .quantity__plus:hover {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1)
 }
@@ -23760,7 +23805,7 @@ button {
     line-height: 1
 }
 
-.product-details-page .product-details-content .aditional-info > li {
+.product-details-page .product-details-content .aditional-info>li {
     line-height: 1;
     color: var(--text-color);
     font-family: var(--font-open-sans);
@@ -23772,18 +23817,18 @@ button {
     gap: 3px
 }
 
-.product-details-page .product-details-content .aditional-info > li:last-child {
+.product-details-page .product-details-content .aditional-info>li:last-child {
     margin-bottom: 0
 }
 
-.product-details-page .product-details-content .aditional-info > li span {
+.product-details-page .product-details-content .aditional-info>li span {
     color: var(--title-color);
     font-weight: 600;
     display: inline-block;
     margin-right: 5px
 }
 
-.product-details-page .product-details-content .aditional-info > li a {
+.product-details-page .product-details-content .aditional-info>li a {
     color: var(--text-color);
     font-family: var(--font-open-sans);
     font-size: 14px;
@@ -23793,11 +23838,11 @@ button {
     margin-bottom: 0
 }
 
-.product-details-page .product-details-content .aditional-info > li a:hover {
+.product-details-page .product-details-content .aditional-info>li a:hover {
     color: var(--primary-color1)
 }
 
-.product-details-page .product-details-content .aditional-info > li .social-icons {
+.product-details-page .product-details-content .aditional-info>li .social-icons {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -23808,12 +23853,12 @@ button {
     padding-left: 5px
 }
 
-.product-details-page .product-details-content .aditional-info > li .social-icons li {
+.product-details-page .product-details-content .aditional-info>li .social-icons li {
     margin-bottom: 0;
     line-height: 1
 }
 
-.product-details-page .product-details-content .aditional-info > li .social-icons li a {
+.product-details-page .product-details-content .aditional-info>li .social-icons li a {
     width: 26px;
     height: 26px;
     display: flex;
@@ -23824,17 +23869,17 @@ button {
     transition: .35s
 }
 
-.product-details-page .product-details-content .aditional-info > li .social-icons li a i {
+.product-details-page .product-details-content .aditional-info>li .social-icons li a i {
     color: var(--primary-color1);
     transition: .35s
 }
 
-.product-details-page .product-details-content .aditional-info > li .social-icons li a:hover {
+.product-details-page .product-details-content .aditional-info>li .social-icons li a:hover {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1)
 }
 
-.product-details-page .product-details-content .aditional-info > li .social-icons li a:hover i {
+.product-details-page .product-details-content .aditional-info>li .social-icons li a:hover i {
     color: var(--title-color)
 }
 
@@ -23939,15 +23984,15 @@ button {
     font-weight: 600
 }
 
-.product-details-page .tab-content2 .reviews-area .comment > li .single-comment-area .comment-content .author-and-review {
+.product-details-page .tab-content2 .reviews-area .comment>li .single-comment-area .comment-content .author-and-review {
     margin-bottom: 8px
 }
 
-.product-details-page .tab-content2 .reviews-area .comment > li .single-comment-area .comment-content .author-and-review .author-name-deg {
+.product-details-page .tab-content2 .reviews-area .comment>li .single-comment-area .comment-content .author-and-review .author-name-deg {
     margin-bottom: 7px
 }
 
-.product-details-page .tab-content2 .reviews-area .comment > li .single-comment-area .comment-content .author-and-review .review {
+.product-details-page .tab-content2 .reviews-area .comment>li .single-comment-area .comment-content .author-and-review .review {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -23955,11 +24000,11 @@ button {
     line-height: 1
 }
 
-.product-details-page .tab-content2 .reviews-area .comment > li .single-comment-area .comment-content .author-and-review .review li {
+.product-details-page .tab-content2 .reviews-area .comment>li .single-comment-area .comment-content .author-and-review .review li {
     line-height: 1
 }
 
-.product-details-page .tab-content2 .reviews-area .comment > li .single-comment-area .comment-content .author-and-review .review li i {
+.product-details-page .tab-content2 .reviews-area .comment>li .single-comment-area .comment-content .author-and-review .review li i {
     color: #dda701;
     font-size: 12px
 }
@@ -24062,12 +24107,12 @@ button {
     float: left
 }
 
-.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked) > input {
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked)>input {
     position: absolute;
     top: -9999px
 }
 
-.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked) > label {
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked)>label {
     float: right;
     width: 1em;
     overflow: hidden;
@@ -24081,20 +24126,25 @@ button {
     margin-right: 8px
 }
 
-.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked) > label::before {
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked)>label::before {
     content: "\f586";
     font-family: bootstrap-icons !important
 }
 
-.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate input:checked ~ label {
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate input:checked~label {
     color: #dda701
 }
 
-.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked) > label:hover, .product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked) > label:hover ~ label {
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked)>label:hover,
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area .rate:not(:checked)>label:hover~label {
     color: #dda701
 }
 
-.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked + label:hover, .product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked + label:hover ~ label, .product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked ~ label:hover, .product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked ~ label:hover ~ label, .product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area label:hover ~ input:checked ~ label {
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked+label:hover,
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked+label:hover~label,
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked~label:hover,
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area input:checked~label:hover~label,
+.product-details-page .tab-content2 .review-form .form-inner2 .review-rate-area label:hover~input:checked~label {
     color: #dda701
 }
 
@@ -24342,24 +24392,24 @@ button {
     border-color: var(--primary-color1)
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul {
     margin: 0;
     padding: 0;
     list-style: none
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li:last-child {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li:last-child {
     margin-bottom: 0
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss {
     display: flex;
     gap: 5px;
     width: 100%;
@@ -24371,7 +24421,7 @@ button {
     user-select: none
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss span {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss span {
     color: var(--text-color);
     font-family: var(--font-open-sans);
     font-size: 14px;
@@ -24379,11 +24429,11 @@ button {
     line-height: 1
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss span.text {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss span.text {
     font-weight: 600
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss input {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -24391,20 +24441,20 @@ button {
     width: 0
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss input:checked ~ .checkmark {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss input:checked~.checkmark {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1);
     border-radius: 2px
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss input:checked ~ .checkmark::after {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss input:checked~.checkmark::after {
     content: url(../images/checkbox-check.svg);
     left: 1.5px;
     top: -2px;
     position: absolute
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss .checkmark {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -24415,11 +24465,11 @@ button {
     border-radius: 2px
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss:hover input ~ .checkmark {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss:hover input~.checkmark {
     border-color: var(--primary-color1)
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss .stars {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss .stars {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -24430,12 +24480,12 @@ button {
     margin-top: -2px
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss .stars i {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss .stars i {
     color: #dda701;
     font-size: 13px
 }
 
-.product-sidebar .product-widget .check-box-item .checkbox-container > ul > li .containerss .stars a {
+.product-sidebar .product-widget .check-box-item .checkbox-container>ul>li .containerss .stars a {
     color: var(--text-color);
     font-family: var(--font-open-sans);
     font-size: 14px;
@@ -24493,12 +24543,12 @@ button {
     font-weight: 600
 }
 
-.product-sidebar .product-widget .recent-product-list .recent-product .content > h6 {
+.product-sidebar .product-widget .recent-product-list .recent-product .content>h6 {
     margin-bottom: 0;
     line-height: 1
 }
 
-.product-sidebar .product-widget .recent-product-list .recent-product .content > h6 a {
+.product-sidebar .product-widget .recent-product-list .recent-product .content>h6 a {
     color: var(--title-color);
     font-family: var(--font-montserrat);
     font-size: 13px;
@@ -24507,7 +24557,7 @@ button {
     transition: .35s
 }
 
-.product-sidebar .product-widget .recent-product-list .recent-product .content > h6 a:hover {
+.product-sidebar .product-widget .recent-product-list .recent-product .content>h6 a:hover {
     color: var(--primary-color1)
 }
 
@@ -24547,7 +24597,8 @@ button {
     align-items: center
 }
 
-.range-wrapper .valus .min-value, .range-wrapper .valus .max-value {
+.range-wrapper .valus .min-value,
+.range-wrapper .valus .max-value {
     max-width: 45%;
     width: 100%;
     height: 40px;
@@ -24562,13 +24613,15 @@ button {
     padding: 15px
 }
 
-.range-wrapper .valus .min-value span, .range-wrapper .valus .max-value span {
+.range-wrapper .valus .min-value span,
+.range-wrapper .valus .max-value span {
     line-height: 1;
     display: flex;
     margin-top: 3px
 }
 
-.range-wrapper .valus .min-value input, .range-wrapper .valus .max-value input {
+.range-wrapper .valus .min-value input,
+.range-wrapper .valus .max-value input {
     width: 100%;
     background-color: transparent;
     color: var(--text-color);
@@ -25721,7 +25774,7 @@ button {
     transition: .35s
 }
 
-.blog-details-page .details-navigation .single-navigation .content > a {
+.blog-details-page .details-navigation .single-navigation .content>a {
     color: var(--text-color);
     font-family: var(--font-montserrat);
     font-size: 14px;
@@ -25826,13 +25879,13 @@ button {
     width: 0
 }
 
-.blog-details-page .inquiry-form .form-inner label.containerss input:checked ~ .checkmark {
+.blog-details-page .inquiry-form .form-inner label.containerss input:checked~.checkmark {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1);
     border-radius: 2px
 }
 
-.blog-details-page .inquiry-form .form-inner label.containerss input:checked ~ .checkmark::after {
+.blog-details-page .inquiry-form .form-inner label.containerss input:checked~.checkmark::after {
     content: url(../images/checkbox-check.svg);
     left: 1.5px;
     top: -2px;
@@ -25850,7 +25903,7 @@ button {
     border-radius: 2px
 }
 
-.blog-details-page .inquiry-form .form-inner label.containerss:hover input ~ .checkmark {
+.blog-details-page .inquiry-form .form-inner label.containerss:hover input~.checkmark {
     border-color: var(--primary-color1)
 }
 
@@ -26700,7 +26753,7 @@ button {
     }
 }
 
-.checkout-page .login-and-coupon-area .cupor-code-area .cupon > button {
+.checkout-page .login-and-coupon-area .cupor-code-area .cupon>button {
     color: #000;
     font-family: var(--font-open-sans);
     font-size: 15px;
@@ -26713,7 +26766,7 @@ button {
     transition: .35s
 }
 
-.checkout-page .login-and-coupon-area .cupor-code-area .cupon > button:hover {
+.checkout-page .login-and-coupon-area .cupor-code-area .cupon>button:hover {
     color: var(--primary-color1)
 }
 
@@ -26841,13 +26894,13 @@ button {
     width: 0
 }
 
-.checkout-page .inquiry-form .form-inner label.containerss input:checked ~ .checkmark {
+.checkout-page .inquiry-form .form-inner label.containerss input:checked~.checkmark {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1);
     border-radius: 2px
 }
 
-.checkout-page .inquiry-form .form-inner label.containerss input:checked ~ .checkmark::after {
+.checkout-page .inquiry-form .form-inner label.containerss input:checked~.checkmark::after {
     content: url(../images/checkbox-check.svg);
     left: 1.5px;
     top: -3px;
@@ -26865,7 +26918,7 @@ button {
     border-radius: 2px
 }
 
-.checkout-page .inquiry-form .form-inner label.containerss:hover input ~ .checkmark {
+.checkout-page .inquiry-form .form-inner label.containerss:hover input~.checkmark {
     border-color: var(--primary-color1)
 }
 
@@ -27639,13 +27692,32 @@ button {
 }
 
 .contact-page .inquiry-form {
-    background-image: url(../images/inquary-form-bg2.png);
+    border-radius: 10px;
+    /* padding: 10px 35px 50px; */
+}
+.bg-shape {
+    position: relative;
+    background-image: url(../images/bg-shape.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 10px;
-    padding: 10px 35px 50px
+    z-index: 12;
+    border-radius: 10px !important;
 }
-
+.bg-shape::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* background: rgba(255, 255, 255, 0.2); */
+    background-color: #fafafa7a;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: -1;
+}
 
 @media (max-width: 767px) {
     .contact-page .inquiry-form {
@@ -27681,8 +27753,8 @@ button {
 .contact-page .inquiry-form .form-inner label {
     color: var(--title-color);
     font-family: var(--font-montserrat);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 700;
     display: block;
     margin-bottom: 10px
 }
@@ -27722,13 +27794,13 @@ button {
     width: 0
 }
 
-.contact-page .inquiry-form .form-inner label.containerss input:checked ~ .checkmark {
+.contact-page .inquiry-form .form-inner label.containerss input:checked~.checkmark {
     background-color: var(--primary-color1);
     border-color: var(--primary-color1);
     border-radius: 2px
 }
 
-.contact-page .inquiry-form .form-inner label.containerss input:checked ~ .checkmark::after {
+.contact-page .inquiry-form .form-inner label.containerss input:checked~.checkmark::after {
     content: url(../images/checkbox-check.svg);
     left: 1.5px;
     top: -3px;
@@ -27746,7 +27818,7 @@ button {
     border-radius: 2px
 }
 
-.contact-page .inquiry-form .form-inner label.containerss:hover input ~ .checkmark {
+.contact-page .inquiry-form .form-inner label.containerss:hover input~.checkmark {
     border-color: var(--primary-color1)
 }
 
@@ -27786,7 +27858,8 @@ button {
     font-weight: 400;
     height: 50px;
     width: 100%;
-    padding: 10px 20px
+    padding: 10px 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .contact-page .inquiry-form .form-inner input::-moz-placeholder {
@@ -27807,7 +27880,21 @@ button {
     padding: 20px;
     outline: none;
     border: none;
-    min-height: 100px
+    min-height: 100px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.blurBG{
+    position: relative;
+
+}
+.blurBG::after {
+    position: absolute;
+    content: "";
+    top: 0;bottom: 0;left: 0;right: 0;
+    /* opacity: .5; */
+    z-index: -10;
+    background: transparent !important;
 }
 
 .contact-page .inquiry-form .form-inner textarea::-moz-placeholder {
@@ -28101,7 +28188,8 @@ button {
     align-items: center
 }
 
-.range-wrapper2 .valus .min-value, .range-wrapper2 .valus .max-value {
+.range-wrapper2 .valus .min-value,
+.range-wrapper2 .valus .max-value {
     max-width: 45%;
     width: 100%;
     height: 50px;
@@ -28116,13 +28204,15 @@ button {
     padding: 15px
 }
 
-.range-wrapper2 .valus .min-value span, .range-wrapper2 .valus .max-value span {
+.range-wrapper2 .valus .min-value span,
+.range-wrapper2 .valus .max-value span {
     line-height: 1;
     display: flex;
     margin-top: 3px
 }
 
-.range-wrapper2 .valus .min-value input, .range-wrapper2 .valus .max-value input {
+.range-wrapper2 .valus .min-value input,
+.range-wrapper2 .valus .max-value input {
     width: 100%;
     background-color: transparent;
     color: var(--text-color);
@@ -28132,20 +28222,24 @@ button {
     line-height: 1
 }
 
-.range-wrapper2 .valus .min-value input::-moz-placeholder, .range-wrapper2 .valus .max-value input::-moz-placeholder {
+.range-wrapper2 .valus .min-value input::-moz-placeholder,
+.range-wrapper2 .valus .max-value input::-moz-placeholder {
     color: rgba(19, 20, 26, .5)
 }
 
-.range-wrapper2 .valus .min-value input::placeholder, .range-wrapper2 .valus .max-value input::placeholder {
+.range-wrapper2 .valus .min-value input::placeholder,
+.range-wrapper2 .valus .max-value input::placeholder {
     color: rgba(19, 20, 26, .5)
 }
 
 .cl-green {
     color: var(--text-green);
 }
+
 .bg-gray {
     background-color: #f5f7fa;
 }
+
 /*.bank-info {*/
 /*    font-family: 'VIEAvantGardeBold';*/
 /*    font-size: 12px;*/
@@ -28157,31 +28251,39 @@ button {
 .fsz12 {
     font-size: 12px;
 }
+
 .fsz14 {
     font-size: 14px;
 }
+
 .fsz16 {
     font-size: 16px;
 }
+
 .fontAvantRegular {
     font-family: 'VIEAvantGardeRegular';
 }
+
 .fontAvantBold {
     font-family: 'VIEAvantGardeBold';
 }
+
 .fontAvantDemibold {
     font-family: 'VIEAvantGardeDemibold';
 }
+
 .alert.primary-btn3 {
     padding: 5px;
     font-size: 12px;
 }
+
 .bg-img {
     background-image: url(../images/product-wd-bg.png), linear-gradient(#FAF8FB, #FAF8FB);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
 }
+
 /*tab custom payment page*/
 @media (max-width: 767px) {
     .tabs-two .nav {
@@ -28260,4 +28362,551 @@ button {
 .tabs-two .tab-content .tab-text .text {
     color: black;
 }
+
 /*tab custom payment page*/
+
+/* custom css  */
+
+
+.pre-loader {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100vh;
+    z-index: 99999999999999999;
+}
+
+
+.loader {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(18.4px);
+    -webkit-backdrop-filter: blur(18.4px);
+}
+
+.car__body {
+    -webkit-animation: shake 0.2s ease-in-out infinite alternate;
+    animation: shake 0.2s ease-in-out infinite alternate;
+}
+
+.car__line {
+    transform-origin: center right;
+    stroke-dasharray: 22;
+    -webkit-animation: line 0.8s ease-in-out infinite;
+    animation: line 0.8s ease-in-out infinite;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.car__line--top {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+}
+
+.car__line--middle {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.car__line--bottom {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+
+@-webkit-keyframes shake {
+    0% {
+        transform: translateY(-1%);
+    }
+
+    100% {
+        transform: translateY(3%);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(-1%);
+    }
+
+    100% {
+        transform: translateY(3%);
+    }
+}
+
+@-webkit-keyframes line {
+    0% {
+        stroke-dashoffset: 22;
+    }
+
+    25% {
+        stroke-dashoffset: 22;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    51% {
+        stroke-dashoffset: 0;
+    }
+
+    80% {
+        stroke-dashoffset: -22;
+    }
+
+    100% {
+        stroke-dashoffset: -22;
+    }
+}
+
+@keyframes line {
+    0% {
+        stroke-dashoffset: 22;
+    }
+
+    25% {
+        stroke-dashoffset: 22;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    51% {
+        stroke-dashoffset: 0;
+    }
+
+    80% {
+        stroke-dashoffset: -22;
+    }
+
+    100% {
+        stroke-dashoffset: -22;
+    }
+}
+
+header.style-5 .nav-right .dropdown .account-menu {
+    min-height: 5rem;
+    background-color: var(--white-color);
+    box-shadow: 0 30px 80px rgba(8, 0, 42, .08);
+    border-radius: 0 0 10px 10px;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    padding: 20px;
+    z-index: 99;
+    display: none;
+    transform: scaleY(0);
+    transform-origin: top;
+    margin-right: -2.5rem
+}
+
+header.style-5 .nav-right .dropdown .account-menu.active {
+    display: block;
+    transform: scaleY(1);
+    animation: fade-down .3s linear
+}
+
+.user-dropdown {
+    padding: 5px 10px !important;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: var(--primary-color1);
+    color: var(--primary-color1) !important;
+    text-transform: capitalize;
+    transition: all 1s ease-in;
+}
+
+.user-dropdown:focus,
+.user-dropdown:hover {
+    background-color: var(--primary-color1) !important;
+    color: #fff !important;
+}
+
+.user-dropdown:focus img,
+.user-dropdown:hover img {
+    border-color: #fff;
+}
+
+.user-dropdown img {
+    border: .5px solid var(--primary-color1);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.btn-dark1 {
+    background-color: var(--title-color) !important;
+    color: var(--white-color) !important;
+    border-color: var(--title-color) !important;
+}
+
+.btn-dark1::after {
+    background-color: var(--white-color);
+}
+
+.btn-dark1:hover::after {
+    transform: skewX(45deg) scale(1, 1);
+}
+
+.btn-dark1:hover {
+    color: var(--title-color) !important;
+    /* background-color: #fff !important; */
+}
+
+.hr-custom {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(238, 238, 238, .933333);
+}
+
+.cart-card {
+    padding: 0 5px;
+    /* From https://css.glass */
+    border: 1px solid #f0f0f0;
+    /* box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px; */
+    border-radius: 16px;
+}
+
+.cart-card i {
+    color: #00d264;
+}
+
+.cart-block-header {
+    background-color: #f5f5f5;
+    color: #777;
+    padding: 10px 0 10px 18px;
+}
+
+.pd-cart {
+    padding: 20px 20px 0 20px !important;
+}
+
+.cart-block-body_item {
+    cursor: pointer;
+    transition: all .2s ease;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.cart-block-body_item:hover {
+    background-color: #f1f1f1;
+}
+
+/* custom css end  */
+
+/* custom profile page  */
+
+/* The design is inspired from the mockapi.io */
+
+.popup {
+    --burger-line-width: 1.125em;
+    --burger-line-height: 0.125em;
+    --burger-offset: 0.625em;
+    --burger-bg: rgba(0, 0, 0, .05);
+    --burger-color: #333;
+    --burger-line-border-radius: 0.1875em;
+    --burger-diameter: 2.125em;
+    --burger-btn-border-radius: calc(var(--burger-diameter) / 2);
+    --burger-line-transition: .3s;
+    --burger-transition: all .1s ease-in-out;
+    --burger-hover-scale: 1.1;
+    --burger-active-scale: .95;
+    --burger-enable-outline-color: var(--burger-bg);
+    --burger-enable-outline-width: 0.125em;
+    --burger-enable-outline-offset: var(--burger-enable-outline-width);
+    /* nav */
+    --nav-padding-x: 0.25em;
+    --nav-padding-y: 0.625em;
+    --nav-border-radius: 0.375em;
+    --nav-border-color: #ccc;
+    --nav-border-width: 0.0625em;
+    --nav-shadow-color: rgba(0, 0, 0, .2);
+    --nav-shadow-width: 0 1px 5px;
+    --nav-bg: #eee;
+    --nav-font-family: Roboto, Roboto Mono, monospace;
+    --nav-default-scale: .8;
+    --nav-active-scale: 1;
+    --nav-position-left: 0;
+    --nav-position-right: unset;
+    /* if you want to change sides just switch one property */
+    /* from properties to "unset" and the other to 0 */
+    /* title */
+    --nav-title-size: 0.625em;
+    --nav-title-color: #777;
+    --nav-title-padding-x: 1rem;
+    --nav-title-padding-y: 0.25em;
+    /* nav button */
+    --nav-button-padding-x: 1rem;
+    --nav-button-padding-y: 0.375em;
+    --nav-button-border-radius: 0.375em;
+    --nav-button-font-size: 12px;
+    --nav-button-hover-bg: #6495ed;
+    --nav-button-hover-text-color: #fff;
+    --nav-button-distance: 0.875em;
+    /* underline */
+    --underline-border-width: 0.0625em;
+    --underline-border-color: #ccc;
+    --underline-margin-y: 0.3125em;
+}
+
+/* popup settings 👆 */
+
+.popup {
+    display: inline-block;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    margin-left: auto;
+}
+
+.popup input {
+    display: none;
+}
+
+.burger {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background: var(--burger-bg);
+    width: var(--burger-diameter);
+    height: var(--burger-diameter);
+    border-radius: var(--burger-btn-border-radius);
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: var(--burger-transition);
+    outline: var(--burger-enable-outline-width) solid transparent;
+    outline-offset: 0;
+}
+
+.burger span {
+    height: var(--burger-line-height);
+    width: var(--burger-line-width);
+    background: var(--burger-color);
+    border-radius: var(--burger-line-border-radius);
+    position: absolute;
+    transition: var(--burger-line-transition);
+}
+
+.burger span:nth-child(1) {
+    top: var(--burger-offset);
+}
+
+.burger span:nth-child(2) {
+    bottom: var(--burger-offset);
+}
+
+.burger span:nth-child(3) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.popup-window {
+    transform: scale(var(--nav-default-scale));
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    padding: var(--nav-padding-y) var(--nav-padding-x);
+    background: var(--nav-bg);
+    font-family: var(--nav-font-family);
+    color: var(--nav-text-color);
+    border-radius: var(--nav-border-radius);
+    box-shadow: var(--nav-shadow-width) var(--nav-shadow-color);
+    border: var(--nav-border-width) solid var(--nav-border-color);
+    top: calc(var(--burger-diameter) + var(--burger-enable-outline-width) + var(--burger-enable-outline-offset));
+    left: var(--nav-position-left);
+    right: var(--nav-position-right);
+    transition: var(--burger-transition);
+    z-index: 123;
+    user-select: none;
+}
+
+.popup-window legend {
+    padding: var(--nav-title-padding-y) var(--nav-title-padding-x);
+    margin: 0;
+    color: var(--nav-title-color);
+    font-size: var(--nav-title-size);
+    text-transform: uppercase;
+}
+
+.popup-window ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.popup-window ul button {
+    outline: none;
+    width: 100%;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    color: var(--burger-color);
+    font-size: var(--nav-button-font-size);
+    padding: var(--nav-button-padding-y) var(--nav-button-padding-x);
+    white-space: nowrap;
+    border-radius: var(--nav-button-border-radius);
+    cursor: pointer;
+    column-gap: var(--nav-button-distance);
+}
+
+.popup-window ul li:nth-child(1) svg,
+.popup-window ul li:nth-child(2) svg {
+    color: cornflowerblue;
+}
+
+.popup-window ul li:nth-child(4) svg,
+.popup-window ul li:nth-child(5) svg {
+    color: rgb(153, 153, 153);
+}
+
+.popup-window ul li:nth-child(7) svg {
+    color: red;
+}
+
+.popup-window hr {
+    margin: var(--underline-margin-y) 0;
+    border: none;
+    border-bottom: var(--underline-border-width) solid var(--underline-border-color);
+}
+
+/* actions */
+
+.popup-window ul button:hover,
+.popup-window ul button:focus-visible,
+.popup-window ul button:hover svg,
+.popup-window ul button:focus-visible svg {
+    color: var(--nav-button-hover-text-color);
+    background: var(--nav-button-hover-bg);
+}
+
+.burger:hover {
+    transform: scale(var(--burger-hover-scale));
+}
+
+.burger:active {
+    transform: scale(var(--burger-active-scale));
+}
+
+.burger:focus:not(:hover) {
+    outline-color: var(--burger-enable-outline-color);
+    outline-offset: var(--burger-enable-outline-offset);
+}
+
+.popup input:checked+.burger span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.popup input:checked+.burger span:nth-child(2) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+
+.popup input:checked+.burger span:nth-child(3) {
+    transform: translateX(calc(var(--burger-diameter) * -1 - var(--burger-line-width)));
+}
+
+.popup input:checked~nav {
+    transform: scale(var(--nav-active-scale));
+    visibility: visible;
+    opacity: 1;
+}
+
+/* custom profile page  */
+
+/* custom push featured page */
+
+.radio-inputs.options-push {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #EEE;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 300px;
+    font-size: 14px;
+}
+
+.options-push.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.options-push.radio-inputs .radio input {
+    display: none;
+}
+
+.options-push.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+}
+
+.options-push.radio-inputs .radio input:checked+.name,
+.options-push.radio-inputs .radio input:hover+.name {
+    background-color: #fff;
+    font-weight: 600;
+}
+
+
+/* custom push featured page */
+
+.hoverWishlist:hover {
+    background-color: #eee;
+}
+
+/* custom push featured page  */
+
+/* custom recharge */
+.js-marquee {
+    display: flex;
+    column-gap: 80px;
+}
+
+.line-clamp-2 {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+
+#style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	/* border: 2px solid #555555; */
+}

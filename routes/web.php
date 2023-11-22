@@ -1,55 +1,98 @@
 <?php
 
-use App\Http\Controllers\Client\CarController;
-use App\Livewire\Brands;
-use App\Livewire\FormSellCar;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CheckOutController;
-use App\Http\Controllers\ServiceController;
+use App\Models\News;
 use App\Models\Service;
+use App\Livewire\CarListingSystem;
+use Illuminate\Support\Facades\Auth;
+use App\Livewire\SingleBrandCategory;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\WishlishController;
+use App\Http\Controllers\CarDetailController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('homepage');
+});
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
 
-Route::get("/service/{idService}", function($idService) {
-  $serv = Service::findOrFail($idService);
+    Route::controller(CarController::class)->group(function () {
+        Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
 
-  return view('service-detail', compact('serv'));
-})->name('service.detail');
+        Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
 
-Route::post('payment', [CheckOutController::class, 'checkout'])->name('payment-vnpay');
+        Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
+    });
 
-Route::get('handle-payment', [CheckOutController::class, 'handlePayment'])->name('handlePayment');
+    Route::controller(CheckOutController::class)->group(function () {
+        # payment
+        Route::post('/payment/{idService}', 'checkout')->name('payment-vnpay');
+        # result after payment
+        Route::get('/ket-qua', 'result')->name('resultAfterPayment');
+    });
 
-Route::get('/info', [HomeController::class, 'info']);
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('/profile', 'profile')->name('profile');
 
-Route::get('/info', [HomeController::class, 'info']);
-Route::get('/service', [ServiceController::class, 'index'])->name('service');
+        Route::get('/day-tin/{carID}', 'pushFeature')->name('day-tin');
+        Route::post('/day-tin/{carID}', 'confirmPush')->name('confirmPush');
 
-// Route::match(['GET','POST'],'/dang-tin-ban-xe',[CarController::class,'sellCar'])->name('sellCar');
+        Route::get('/quan-ly-tin-mua', 'needBuy');
+        # cái này cần sửa lại
+        Route::get('/thong-tin', 'infoUser');
+        Route::get('/nap-tien', 'recharge')->name('recharge');
+        Route::post('/nap-tien', 'rechargeMoney')->name('recharge.submit');
+        Route::get('/ket-qua-nap-tien', 'resultRecharge')->name('resultRecharge');
+        Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 
-Route::get('/dang-xe', [CarController::class, 'sellCar']);
+        Route::match(['get', 'post'], '/cai-dat', 'settings')->name('settings');
+    });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::controller(WishlishController::class)->group(function () {
+        Route::get('/yeu-thich', 'index')->name('wishlish');
+    });
+
+    Route::get('logout', function () {
+        Auth::logout();
+        return redirect()->route('homepage');
+    });
+});
+
+
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/dich-vu', 'index')->name('service.list');
+    Route::get('/dich-vu/{idService}', 'detail')->name('service.detail')->middleware('auth');
+});
+
+# Posts Route
+Route::get("/bai-viet/{slug}.html", function($slug) {
+    $post = News::where('slug', $slug)->first();
+
+    if(!$post) {
+        abort(404);
+    }
+    return view('news.detail', [
+        'post' => $post
+    ]);
+})->name('news.index');
+
+Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail');
+
+Route::get('/xe', CarListingSystem::class)->name('car.list');
+
+Route::get('/testt', function () {
+
+});
 
 Auth::routes();
 
-Route::get('manage-post', function () {
-    return view('manage-postings');
+// Trang chi tiết xe
+Route::controller(CarDetailController::class)->group(function () {
+    Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
-Route::get('push-news', function () {
-    return view('push-news');
-});
+
+

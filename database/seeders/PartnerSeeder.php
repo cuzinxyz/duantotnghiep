@@ -20,8 +20,32 @@ class PartnerSeeder extends Seeder
             ],
             [
                 'name' => 'Škoda Auto',
-                'logo_url' => 'partners/zR38QywOfCcynVpIqQ3A0vDRvOUftE-metaZG93bmxvYWQgKDEpLnBuZw==-.png',
-            ]
+                'logo_url' => 'partners/DXd9HgdBxFfGt64zuNx4Xk8uKu3u4b-metaZG93bmxvYWQgKDEpLnBuZw==-.png',
+            ],
+            [
+                'name' => 'Car Toys',
+                'logo_url' => 'partners/company-logo-01.png'
+            ],
+            [
+                'name' => 'Be Car Care Aware',
+                'logo_url' => 'partners/company-logo-02.png'
+            ],
+            [
+                'name' => 'IR Club Car',
+                'logo_url' => 'partners/company-logo-03.png'
+            ],
+            [
+                'name' => 'WACKERLIN CAR',
+                'logo_url' => 'partners/company-logo-04.png'
+            ],
+            [
+                'name' => 'Enter Prise',
+                'logo_url' => 'partners/company-logo-05.png'
+            ],
+            [
+                'name' => 'Underfine',
+                'logo_url' => 'partners/company-logo-06.png'
+            ],
         ]);
     }
 }

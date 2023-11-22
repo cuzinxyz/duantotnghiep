@@ -1,3 +1,9 @@
+STATUS CAR:
+0. chờ duyệt.
+1. đã duyệt.
+2. bị từ chối.
+3. vi phạm.
+
 > Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
  
 #  Khi chuẩn bị Merge | push cần pull lại code từ nhánh main về.
@@ -40,6 +46,10 @@ B2: Chạy lần lượt các lệnh:
 
 #### Tạo 1 admin mới cho filament
 `php artisan make:filament-user`
+
+
+#### Import dữ liệu địa chỉ
+`php artisan vietnamzone:import`
 
 #### Sau cùng chạy dự án để test.
 `php artisan serve` 
