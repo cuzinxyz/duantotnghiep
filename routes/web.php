@@ -13,6 +13,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
+use App\Livewire\Showroom;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -95,3 +96,6 @@ Auth::routes();
 Route::controller(CarDetailController::class)->group(function () {
     Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
+
+// Showroom
+Route::get('/showroom', Showroom::class);

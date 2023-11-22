@@ -22,6 +22,10 @@ class CarController extends Controller
         return view("user-form.list-sell-car");
     }
 
+    public function showRoom()
+    {
+    }
+
     public function removeCar($id)
     {
         $car = Car::findOrFail($id);
