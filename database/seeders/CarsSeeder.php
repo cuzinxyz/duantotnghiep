@@ -31,7 +31,7 @@ class CarsSeeder extends Seeder
                 'contact' => json_decode('{"name": "abnerdo", "email": "cuzin2k3@gmail.com", "phone": "0961472726", "city_id": '.$i.', "district_id": '.$i.', "full_address": "Phuc Tho, Ha Noi"}'),
                 'car_info' => json_decode('{"color": "Đen", "engine": "1000", "mileage": "10000", "version": "two", "features": ["Bánh xe cao cấp", "Cửa sổ trời"], "fuelType": "Xăng", "transmission": "sotudong", "number_of_seats": "5", "year_of_manufacture": "2022"}'),
                 'verhicle_image_library' => ['car_photos/1699619631.jpg','car_photos/1699619631.jpg'],
-                'verhicle_videos' => ['video_car/1700227477_test_video.mp4'],
+                'verhicle_videos' => "video_car/1700227477_test_video.mp4",
                 'status' => 0,
                 'reason' => null,
                 'description' => 'xe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\n',
