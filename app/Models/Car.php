@@ -3,19 +3,26 @@
 namespace App\Models;
 
 use App\Models\Brand;
+use App\Models\ModelCar;
 use Illuminate\Database\Eloquent\Model;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use Kjmtrue\VietnamZone\Models\Province;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Car extends Model
+class Car extends Model implements Viewable
 {
     use HasFactory, SoftDeletes;
+    use InteractsWithViews;
+
     protected $fillable = [
         'title',
         'slug',
         'price',
         'user_id',
         'brand_id',
+        'model_car_id',
         'city_id',
         'district_id',
         'full_address',
@@ -26,11 +33,11 @@ class Car extends Model
         'verhicle_videos',
         'description'
     ];
+
     protected $casts = [
         'contact' => 'array',
         'car_info' => 'array',
         'verhicle_image_library' => 'array',
-        'verhicle_videos' => 'array',
         'recommended' => 'boolean',
     ];
 
@@ -41,6 +48,23 @@ class Car extends Model
     public function brand() {
         return $this->belongsTo(Brand::class);
     }
-    
 
+    public function city() {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'city_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(ModelCar::class, 'model_car_id', 'id');
+    }
 }

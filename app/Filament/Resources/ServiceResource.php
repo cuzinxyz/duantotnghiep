@@ -30,15 +30,27 @@ class ServiceResource extends Resource
                 Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('service_name')
+                            ->label('Tên gói')
                             ->required(),
                         Forms\Components\TextInput::make('price')
+                            ->label('Giá')
                             ->required(),
-                        Forms\Components\DateTimePicker::make('expiration_date')
+                        Forms\Components\TextInput::make('expiration_date')
+                            ->prefix('Số ngày sẽ hết hạn')
+                            ->label('Thời hạn')
+                            ->numeric()
+                            ->placeholder('30')
+                            ->required(),
+                        Forms\Components\TextInput::make('number_of_pushes')
+                            ->label('Số lượt đẩy tin')
+                            ->numeric()
+                            ->placeholder('ex: 2')
                             ->required(),
                     ])->columnSpan(1),
                 Section::make()
                     ->schema([
                         MarkdownEditor::make('description')
+                            ->label('Mô tả')
                             ->required(),
                     ])->columnSpan(1),
             ])->columns(2);
@@ -49,16 +61,21 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('service_name')
+                ->label('Gói')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
+                ->label('Giá')
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
                         thousandsSeparator: ',',
                     )
                     ->money('VND'),
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('description')
+                ->label('Mô tả')
+                ->limit(50),
                 Tables\Columns\TextColumn::make('expiration_date')
+                ->label('Ngày hết hạn')
 
             ])
             ->filters([
@@ -103,5 +120,10 @@ class ServiceResource extends Resource
             'create' => Pages\CreateService::route('/create'),
             'edit' => Pages\EditService::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('dịch vụ');
     }
 }

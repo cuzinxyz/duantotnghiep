@@ -14,9 +14,10 @@ return new class extends Migration {
       $table->id();
       $table->string('title');
       $table->string('slug');
-      $table->integer('price');
+      $table->bigInteger('price');
       $table->integer('user_id');
       $table->integer('brand_id');
+      $table->integer('model_car_id');
       $table->string('city_id');
       $table->string('district_id');
       $table->string('full_address', 255);
@@ -24,9 +25,17 @@ return new class extends Migration {
       $table->json('contact');
       $table->json('car_info');
       $table->json('verhicle_image_library');
+<<<<<<< HEAD
       $table->json('verhicle_videos')->nullable();
       $table->string('description');
       $table->string('status')->default(0); // 0 chờ duyệt - 1 Đã duyệt tin
+=======
+      $table->string('verhicle_videos')->nullable();
+      $table->integer('status')->default(0);
+      $table->text('reason')->nullable();
+      $table->text('description')->nullable();
+      $table->integer('model_id')->nullable();
+>>>>>>> main
       $table->timestamps();
       $table->softDeletes(); // add
     });

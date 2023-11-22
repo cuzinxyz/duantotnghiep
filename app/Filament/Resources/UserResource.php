@@ -19,9 +19,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Người dùng';
-
     protected static ?string $model = User::class;
+
+    protected static ?string $navigationGroup = 'Tài khoản';
+
+    protected static ?string $navigationLabel = 'Người dùng';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
@@ -123,5 +125,10 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('người dùng');
     }
 }

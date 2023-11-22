@@ -84,4 +84,9 @@ class AdsResource extends Resource
             'edit' => Pages\EditAds::route('/{record}/edit'),
         ];
     }
+
+    public static function getModelLabel(): string
+    {
+        return __('quảng cáo');
+    }
 }

@@ -15,10 +15,11 @@ class Service extends Model
     'price',
     'description',
     'expiration_date',
-    'title'
+    'title',
+    'number_of_pushes'
   ];
 
-  protected $casts = [
-    'description' => 'json'
-  ];
+    // protected $casts = [
+    //     'description' => 'array'
+    // ];
 }
