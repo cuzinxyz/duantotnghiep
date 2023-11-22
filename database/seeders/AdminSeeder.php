@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('12345678'),
-                'avatar' => 'avatars/admins/QiZMDVQ7IRQhdL0I5bscxgI8FbJp2b-metacGV4ZWxzLXBob3RvLTE3MDc4MDU0LndlYnA=-.webp',
+                'avatar' => 'avatars/admins/TU1HVHMHNeYSThDm2mbtsbh4lOodOv-metacGV4ZWxzLW96YW4tw6d1bGhhLTE3MDc4MDI4LmpwZw==-.jpg',
             ],
         ]);
     }

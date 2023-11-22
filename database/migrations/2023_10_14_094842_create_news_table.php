@@ -15,13 +15,13 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
+            $table->string('slug');
+            $table->text('content');
             $table->string('summary');
             $table->string('thumbnailImage');
-            $table->integer('viewCount');
-            $table->integer('shareCount');
-            $table->boolean('isPublished');
-            $table->foreignIdFor(User::class,'user_id');
+            $table->integer('viewCount')->default(0);
+            $table->integer('shareCount')->default(0);
+            $table->string('isPublished', 1)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

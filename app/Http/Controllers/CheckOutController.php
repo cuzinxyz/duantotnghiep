@@ -2,107 +2,178 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\Authenticate;
-use App\Models\Service;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\TransactionsHistory;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CheckOutController extends Controller
 {
-  public function __construct()
-  {
-//    $this->middleware('auth');
-  }
+    public function checkout(Request $request, $serviceID)
+    {
+        $service = Service::findOrFail($serviceID);
+        # thanh toán bằng số dư tài khoản
+        if ($request->input('payment-method') == 'balance') {
+            $user = User::findOrFail(auth()->id());
+            $user->service_id = $service->id;
+            $user->account_balence -= $service->price;
+            if($user->account_balence < 0) {
+                return redirect()->route('recharge')
+                    ->with('warning', 'Số dư hiện tại của bạn không đủ để mua dịch vụ này, vui lòng nạp thêm!');
+            }
+            $user->expired_date = Carbon::now()->addDays($service->expiration_date);
+            # save database
+            $purchased = DB::table('purchased_service')
+                ->insert([
+                    'user_id' => $user->id,
+                    'service_id' => $service->id,
+                    'remaining_push' => $service->number_of_pushes,
+                    'expired_date' => $user->expired_date,
+                    'created_at' => Carbon::now()
+                ]);
+            # lịch sử trừ tiền mua gói dvu.
+            $user->save();
+            TransactionsHistory::create([
+                'user_id' => auth()->id(),
+                'transaction_type' => 'mua gói: ' . $service->service_name,
+                'amount' => $service->price,
+                'balance_after_transaction' => $user->account_balence
+            ]);
 
-  public function checkout(Request $request)
-  {
-    $request->total_price = $request->total_price * 1000;
-    session()->put('id_service', $request->id_service);
-    error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+            return redirect()->route('profile')->with('status', 'Đăng ký gói ' . $service->service_name . ' thành công!');
+        }
 
-    $vnp_TmnCode = "DL0EA7AJ"; //Website ID in VNPAY System
-    $vnp_HashSecret = "GOGAQDDKQGSHOENQIKCHZBMXCIZBQVXJ"; //Secret key
-    $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    $vnp_Returnurl = route('handlePayment') . "?msg=success";
-//        $vnp_apiUrl = " https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-//Config input format
-//Expire
-    $startTime = date("YmdHis");
-    $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
+        if (empty($service)) {
+            return redirect()->back()->with('status', 'Không tồn tại dịch vụ này!');
+        }
+        Session::put('purchased_service', $service);
+        Session::put('user_id', Auth::id());
 
-    $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-    $vnp_OrderInfo = "Thanh-toan-don-hang"; //mô tả đơn hàng
-    $vnp_OrderType = "billpayment";
-    $vnp_Amount = $request->total_price * 100;
-    $vnp_Locale = "vn";
-    $vnp_BankCode = "NCB";
-    $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-    $vnp_ExpireDate = $expire;
+        error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+        # config
+        $vnp_TmnCode = "E1R9YLZT"; //Website ID in VNPAY System
+        $vnp_HashSecret = "LWYXHNCFHTXPEQEGZPKHJAVMJAYOZYNN"; //Secret key
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = route('resultAfterPayment');
+        # time limit
+        $startTime = date("YmdHis");
+        $expire = date('YmdHis', strtotime('+15 minutes', strtotime($startTime)));
 
-    $inputData = array(
-      "vnp_Version" => "2.1.0",
-      "vnp_TmnCode" => $vnp_TmnCode,
-      "vnp_Amount" => $vnp_Amount,
-      "vnp_Command" => "pay",
-      "vnp_CreateDate" => date('YmdHis'),
-      "vnp_CurrCode" => "VND",
-      "vnp_IpAddr" => $vnp_IpAddr,
-      "vnp_Locale" => $vnp_Locale,
-      "vnp_OrderInfo" => $vnp_OrderInfo,
-      "vnp_OrderType" => $vnp_OrderType,
-      "vnp_ReturnUrl" => $vnp_Returnurl,
-      "vnp_TxnRef" => $vnp_TxnRef,
-      "vnp_ExpireDate" => $vnp_ExpireDate,
-    );
+        $vnp_TxnRef = time(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = "Thanh toan tien dang ky dich vu " . $service->service_name . " voi gia " . $service->price . ""; //mô tả đơn hàng
+        $vnp_OrderType = "billpayment";
+        $vnp_Amount = $service->price * 100;
+        $vnp_Locale = "vn";
+        $vnp_BankCode = "NCB"; # fake
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        $vnp_ExpireDate = $expire;
 
-    if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-      $inputData['vnp_BankCode'] = $vnp_BankCode;
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_ExpireDate" => $vnp_ExpireDate,
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        }
+
+        //var_dump($inputData);
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $returnData = array(
+            'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+        );
+
+        if ($service) {
+            return redirect($vnp_Url);
+        } else {
+            echo json_encode($returnData);
+        }
     }
-    if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
-      $inputData['vnp_Bill_State'] = $vnp_Bill_State;
-    }
 
-//var_dump($inputData);
-    ksort($inputData);
-    $query = "";
-    $i = 0;
-    $hashdata = "";
-    foreach ($inputData as $key => $value) {
-      if ($i == 1) {
-        $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-      } else {
-        $hashdata .= urlencode($key) . "=" . urlencode($value);
-        $i = 1;
-      }
-      $query .= urlencode($key) . "=" . urlencode($value) . '&';
-    }
+    public function result(Request $request)
+    {
+        if (!empty($request->vnp_ResponseCode) && $request->vnp_ResponseCode == 00) {
+            $checkAvailableToken = TransactionsHistory::where('token', $request->vnp_SecureHash)->first();
+            if ($checkAvailableToken) {
+                session()->flash('status', 'Nếu thấy thông báo này hãy liên hệ với Admin!');
+            } else {
+                $userId = Session::get('user_id');
+                $purchased_service = Session::get('purchased_service');
+                $amount = $request->vnp_Amount / 100;
+                # user registed service
+                $user = User::find($userId);
+                $user->service_id = $purchased_service->id;
+                $user->account_balence += $amount;
+                $user->expired_date = Carbon::now()->addDays($purchased_service->expiration_date);
+                # save database
+                $purchased = DB::table('purchased_service')
+                    ->insert([
+                        'user_id' => $userId,
+                        'service_id' => $purchased_service->id,
+                        'remaining_push' => $purchased_service->number_of_pushes,
+                        'expired_date' => $user->expired_date,
+                        'created_at' => Carbon::now()
+                    ]);
+                # lưu lịch sử nạp tiền
+                TransactionsHistory::create([
+                    'user_id' => Session::get('user_id'),
+                    'transaction_type' => 'nạp tiền mua gói dịch vụ',
+                    'amount' => $amount,
+                    'balance_after_transaction' => $user->account_balence,
+                    'token' => $request->vnp_SecureHash,
+                ]);
+                # lịch sử trừ tiền mua gói dvu.
+                $user->account_balence -= $purchased_service->price;
+                $user->save();
+                TransactionsHistory::create([
+                    'user_id' => auth()->id(),
+                    'transaction_type' => 'mua gói: ' . $purchased_service->service_name,
+                    'amount' => $purchased_service->price,
+                    'balance_after_transaction' => $user->account_balence
+                ]);
 
-    $vnp_Url = $vnp_Url . "?" . $query;
-    if (isset($vnp_HashSecret)) {
-      $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
-      $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-    }
-    $returnData = array('code' => '00'
-    , 'message' => 'success'
-    , 'data' => $vnp_Url);
-    if ($request->total_price) {
-      return redirect($vnp_Url);
-    } else {
-      echo json_encode($returnData);
-    }
-  }
+                return redirect()->route('profile')->with('status', 'Đăng ký gói ' . $purchased_service->service_name . ' thành công!');
+            }
+        } else {
+            session()->flash('status', 'Lỗi r nhé');
+        }
 
-  public function handlePayment(Request $request)
-  {
-    if ($request->vnp_ResponseCode == 00) {
-      $services = Service::all();
-      $user = User::find(1);
-      $user->service_id = session('id_service');
-      $user->save();
-      return view('service',compact('user','services'));
-    } else {
-      session()->forget('id_service');
-      dd('Thanh toán koo thành công');
+        return view('services.result');
     }
-  }
 }

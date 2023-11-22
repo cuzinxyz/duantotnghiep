@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Mail\CarRegistMail;
 use App\Models\Car;
 use Filament\Forms;
 use Filament\Tables;
@@ -28,6 +29,7 @@ use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
 use App\Filament\Resources\PostCarManagerResource\RelationManagers;
+use Illuminate\Support\Facades\Mail;
 
 class PostCarManagerResource extends Resource
 {
@@ -149,6 +151,25 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
+                                            $data = [
+                                                'user' => $record->user['name'],
+                                                'title' => $record->title,
+                                                'price'=> $record->price,
+                                                'brand' => $record->brand->brand_name,
+                                                'mileage' => $record->car_info['mileage'],
+                                                'seat' => $record->car_info['number_of_seats'],
+                                                'manufactured' => $record->car_info['year_of_manufacture'],
+                                                'color' => $record->car_info['color'],
+                                                'engine' => $record->car_info['engine'],
+                                                'fuelType' => $record->car_info['fuelType'],
+                                                'condition' => $record->car_info['condition'],
+                                                'features' => $record->car_info['features'],
+                                                'verhicle_image' => $record->verhicle_image_library,
+                                                'verhicle_videos' => $record->verhicle_videos,
+                                                'description' => $record->description,
+                                            ];
+
+                                            Mail::to($record->contact['email'])->send(new CarRegistMail($data));
                                             $record->status = 1;
                                             $record->save();
                                         })
@@ -167,8 +188,10 @@ class PostCarManagerResource extends Resource
                                         ])
                                         ->action(function (array $data, Car $record) {
                                             $record->reason = $data['reason'];
-                                            $record->status = 0;
+                                            $record->status = 2;
                                             $record->save();
+
+                                            redirect()->route('filament.admin.resources.post-car-managers.index');
                                         })
                                         ->successNotification(
                                             Notification::make()
@@ -261,7 +284,6 @@ class PostCarManagerResource extends Resource
                                     ->columnSpan([
                                         'xl' => 1,
                                         '2xl' => 1,
-
                                     ]),
 
                                 Section::make('Mô tả chi tiết về xe')
@@ -270,13 +292,13 @@ class PostCarManagerResource extends Resource
                                             ->label('Mô tả chi tiết')
                                             ->markdown()
                                             ->html()
-                                            ->default('Lorem ipsum dolor sit amet, 
+                                            ->default('Lorem ipsum dolor sit amet,
                                             consectetur adipiscing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                            Ut enim ad minim veniam, 
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            Ut enim ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                            Excepteur sint occaecat cupidatat non proident, 
+                                            Excepteur sint occaecat cupidatat non proident,
                                             sunt in culpa qui officia deserunt mollit anim id est laborum.')
 
                                     ])
