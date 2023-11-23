@@ -350,7 +350,7 @@
             </div>
         </div>
 
-        <div class="single-item mb-50" >
+        <div class="single-item mb-50" id="comment-box">
             <div class="user-qustion-area">
                 <div class="section-title-and-filter mb-30">
                     <div class="title">
