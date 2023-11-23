@@ -2,7 +2,9 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom-detail.css') }}">
 @endpush
+
 
 <div class="col-lg-8">
     <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
@@ -347,7 +349,16 @@
                     {{-- <button type="button" class="text mb-0" data-bs-toggle="modal" data-bs-target="#report">
                         Báo Cáo
                     </button> --}}
-                    <p class="text mb-0" data-bs-toggle="modal" data-bs-target="#report">Báo Cáo</p>
+                    <button class="text mb-0 dialog__trigger">Báo
+                        Cáo</button>
+                    <div class="dialog">
+                        <span class="dialog__close">✕</span>
+                        <h2 class="dialog__title">This is a title</h2>
+                        <p class="dialog__content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
+                            necessitatibus illo deleniti doloremque culpa voluptas recusandae, sunt eligendi amet, ut
+                            modi voluptatibus ipsa quas voluptatem consectetur atque, velit reprehenderit debitis.</p>
+                        &lt;button class="dialog__action"&gt;Read more →&lt;/button&gt;
+                    </div>
                 </button>
                 <livewire:add-to-wish-list carID="{{ $carDetail->id }}" />
             </div>
@@ -523,5 +534,51 @@
                 fill: coral;
             }
         </style>
+    @endpush
+    @push('scripts')
+        <script>
+            function dialog() {
+
+                // Declare variables
+                var dialogBox = $('.dialog'),
+                    dialogTrigger = $('.dialog__trigger'),
+                    dialogClose = $('.dialog__close'),
+                    dialogTitle = $('.dialog__title'),
+                    dialogContent = $('.dialog__content'),
+                    dialogAction = $('.dialog__action');
+
+                // Open the dialog
+                dialogTrigger.on('click', function(e) {
+                    dialogBox.toggleClass('dialog--active');
+                    e.stopPropagation();
+                });
+
+                // Close the dialog - click close button
+                dialogClose.on('click', function() {
+                    dialogBox.removeClass('dialog--active');
+                });
+
+                // Close the dialog - press escape key // key#27
+                $(document).keyup(function(e) {
+                    if (e.keyCode === 27) {
+                        dialogBox.removeClass('dialog--active');
+                    }
+                });
+
+                // Close the dialog - click outside
+                $(document).on('click', function(e) {
+                    if ($(e.target).is(dialogBox) === false &&
+                        $(e.target).is(dialogTitle) === false &&
+                        $(e.target).is(dialogContent) === false &&
+                        $(e.target).is(dialogAction) === false) {
+                        dialogBox.removeClass('dialog--active');
+                    }
+                });
+
+            }
+
+            // Run function
+            $(dialog);
+        </script>
     @endpush
 </div>
