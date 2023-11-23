@@ -10,6 +10,7 @@ class Service extends Model
 {
   use HasFactory, SoftDeletes;
 
+
   protected $fillable = [
     'service_name',
     'price',
@@ -22,4 +23,8 @@ class Service extends Model
     // protected $casts = [
     //     'description' => 'array'
     // ];
+
+    public function purchased_service() {
+      return $this->hasMany(PurchasedService::class, 'service_id', 'id');
+    }
 }

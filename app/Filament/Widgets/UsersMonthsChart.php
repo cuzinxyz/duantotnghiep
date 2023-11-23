@@ -2,61 +2,83 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\User;
 use Flowframe\Trend\Trend;
 use Illuminate\Support\Carbon;
 use Flowframe\Trend\TrendValue;
-use Illuminate\Support\Facades\DB;
-use App\Models\TransactionsHistory;
 use Filament\Forms\Components\DatePicker;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
-class RevenueDaysChart extends ApexChartWidget
+class UsersMonthsChart extends ApexChartWidget
 {
+    /**
+     * Chart Id
+     *
+     * @var string
+     */
+    protected static string $chartId = 'usersMonthsChart';
 
-    protected static ?string $pollingInterval = null;
+    /**
+     * Widget Title
+     *
+     * @var string|null
+     */
+    protected static ?string $heading = 'Số lượng tài khoản đăng ký trong tháng';
 
 
+    protected int | string | array $columnSpan = 'full';
+
+    protected static ?int $sort = 9;
+
+
+    /**
+     * @return array
+     */
     protected function getOptions(): array
     {
-        $data = Trend::query(TransactionsHistory::where('transaction_type', "LIKE",  '%mua gói%'))
-            ->between(
-                start: Carbon::parse($this->filterFormData['date_start']),
-                end: Carbon::parse($this->filterFormData['date_end']),
-            )
+
+        $data = Trend::model(User::class)
+        ->between(
+            start: Carbon::parse($this->filterFormData['date_start']),
+            end: Carbon::parse($this->filterFormData['date_end']),
+        )
             ->perDay()
-            ->sum('amount');
+            ->count();
+
+        
 
         return [
             'chart' => [
-                'type' => 'line',
+                'type' => 'area',
                 'height' => 300,
             ],
             'series' => [
                 [
-                    'name' => 'Tổng tiền',
+                    'name' => 'Tài khoản',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
             'xaxis' => [
-                'categories' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d-m')),
+                'categories' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d')),
                 'labels' => [
                     'style' => [
-                        'colors' => '#9ca3af',
-                        'fontWeight' => 600,
+                        'fontFamily' => 'inherit',
                     ],
                 ],
             ],
             'yaxis' => [
                 'labels' => [
                     'style' => [
-                        'colors' => '#9ca3af',
-                        'fontWeight' => 600,
+                        'fontFamily' => 'inherit',
                     ],
                 ],
             ],
-            'colors' => ['#6366f1'],
+            'colors' => ['#00e396'],
             'stroke' => [
                 'curve' => 'smooth',
+            ],
+            'dataLabels' => [
+                'enabled' => false,
             ],
         ];
     }
@@ -65,26 +87,19 @@ class RevenueDaysChart extends ApexChartWidget
     {
         return [
             DatePicker::make('date_start')
-                ->label('Ngày bắt đầu')
-                ->default(now()->startOfMonth())
+            ->label('Ngày bắt đầu')
+            ->default(now()->startOfMonth())
                 ->reactive()
                 ->afterStateUpdated(function () {
                     $this->updateOptions();
                 }),
             DatePicker::make('date_end')
-                ->label('Ngày kết thúc')
-                ->default(now()->endOfMonth())
+            ->label('Ngày kết thúc')
+            ->default(now()->endOfMonth())
                 ->reactive()
                 ->afterStateUpdated(function () {
                     $this->updateOptions();
                 }),
         ];
     }
-
-    public function getHeading(): string
-    {
-        return __('Doanh thu theo ngày ');
-    }
 }
-
-
