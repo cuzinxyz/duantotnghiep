@@ -2,15 +2,17 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\Brand;
+use Livewire\Component;
 use App\Models\Wishlist;
-use Carbon\Carbon;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Kjmtrue\VietnamZone\Models\Province;
-use Livewire\Attributes\Layout;
-use Livewire\Component;
-use Livewire\WithPagination;
+
 class CarListingSystem extends Component
 {
     use WithPagination;
@@ -26,10 +28,26 @@ class CarListingSystem extends Component
     public $minPrice;
     public $maxPrice;
 
+    public $queryMax;
+    public $queryMin;
+
     public function mount()
     {
         $this->brands = Brand::all();
         $this->locations = Province::all();
+
+        $this->maxPrice = Car::max('price');
+        $this->minPrice = Car::min('price');
+
+
+    }
+
+    #[On('filterPrices')]
+    public function filterPrices($max, $min)
+    {
+        $this->queryMin = $min;
+        $this->queryMax = $max;
+
     }
 
     #[Layout('components.partials.layout-client')]
@@ -53,6 +71,10 @@ class CarListingSystem extends Component
             $carQuery->whereBetween('car_info->year_of_manufacture', [$this->minYear, $this->maxYear]);
         }
 
+        if (!empty($this->queryMin && $this->queryMax)) {
+            $carQuery->whereBetween('price', [$this->queryMin, $this->queryMax]);
+        }
+
         if (!empty($this->sortPrice)) {
             if ($this->sortPrice == 1) {
                 $carQuery->orderBy('price', 'asc');
@@ -62,6 +84,7 @@ class CarListingSystem extends Component
                 $carQuery;
             }
         }
+
 
         return view('livewire.car-listing-system', [
             'cars' => $carQuery->paginate(6)
