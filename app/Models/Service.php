@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Service extends Model
 {
@@ -19,7 +20,14 @@ class Service extends Model
     'number_of_pushes'
   ];
 
-    // protected $casts = [
-    //     'description' => 'array'
-    // ];
+  // protected $casts = [
+  //     'description' => 'array'
+  // ];
+
+  public function purchased_service($service_id)
+  {
+    return DB::table('purchased_service')
+      ->where('service_id', $service_id)
+      ->pluck('remaining_push');
+  }
 }

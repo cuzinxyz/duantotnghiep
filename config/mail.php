@@ -40,8 +40,8 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 587,
             'encryption' => 'tls',
-            'username' => 'tuonglm9703@gmail.com',
-            'password' => 'ubdc nifq cpgn mkog',
+            'username' => 'truongbq31@gmail.com',
+            'password' => 'ckow slmk sxjo yrfe',
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
@@ -99,7 +99,7 @@ return [
     */
 
     'from' => [
-        'address' => 'tuonglm9703@gmail.com',
+        'address' => 'truongbq31@gmail.com',
         'name' => 'Drivco',
     ],
 

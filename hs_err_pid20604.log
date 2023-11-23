@@ -1,0 +1,243 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 123731968 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3829), pid=20604, tid=24828
+#
+# JRE version:  (17.0.8.1+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.8.1+7-b1000.32, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: git4idea.http.GitAskPassApp Username for 'https://github.com': 
+
+Host: AMD Ryzen 5 5500U with Radeon Graphics         , 12 cores, 7G,  Windows 11 , 64 bit Build 22621 (10.0.22621.2506)
+Time: Thu Nov 23 19:33:38 2023 SE Asia Standard Time elapsed time: 0.015693 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000247b5359360):  JavaThread "Unknown thread" [_thread_in_vm, id=24828, stack(0x000000c587500000,0x000000c587600000)]
+
+Stack: [0x000000c587500000,0x000000c587600000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6852da]
+V  [jvm.dll+0x844c84]
+V  [jvm.dll+0x84659e]
+V  [jvm.dll+0x846c03]
+V  [jvm.dll+0x24b7cf]
+V  [jvm.dll+0x682049]
+V  [jvm.dll+0x67671a]
+V  [jvm.dll+0x30be2b]
+V  [jvm.dll+0x3132d6]
+V  [jvm.dll+0x36302e]
+V  [jvm.dll+0x36325f]
+V  [jvm.dll+0x2e1f48]
+V  [jvm.dll+0x2e2eb4]
+V  [jvm.dll+0x815c11]
+V  [jvm.dll+0x370df1]
+V  [jvm.dll+0x7f4fdc]
+V  [jvm.dll+0x3f3f1f]
+V  [jvm.dll+0x3f5b31]
+C  [jli.dll+0x528f]
+C  [ucrtbase.dll+0x29363]
+C  [KERNEL32.DLL+0x1257d]
+C  [ntdll.dll+0x5aa58]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffd375e00d8, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00000247b53ae600 GCTaskThread "GC Thread#0" [stack: 0x000000c587600000,0x000000c587700000] [id=19188]
+  0x00000247b53c0800 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000c587700000,0x000000c587800000] [id=12828]
+  0x00000247b53c1210 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000c587800000,0x000000c587900000] [id=2468]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffd36d92ab7]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000247b5352e20] Heap_lock - owner thread: 0x00000247b5359360
+
+Heap address: 0x000000008a800000, size: 1880 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x000000008a800000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+ Metaspace       used 0K, committed 0K, reserved 0K
+  class space    used 0K, committed 0K, reserved 0K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+
+Card table byte_map: [0x00000247ca2d0000,0x00000247ca680000] _byte_map_base: 0x00000247c9e7c000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x00000247b53b0c30, (CMBitMap*) 0x00000247b53b0c70
+ Prev Bits: [0x00000247caa30000, 0x00000247cc790000)
+ Next Bits: [0x00000247cc790000, 0x00000247ce4f0000)
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.010 Loaded shared library C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff70c2c0000 - 0x00007ff70c2ca000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\java.exe
+0x00007ffd9ea10000 - 0x00007ffd9ec27000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffd9df00000 - 0x00007ffd9dfc4000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffd9c1b0000 - 0x00007ffd9c555000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffd9bef0000 - 0x00007ffd9c001000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffd7de70000 - 0x00007ffd7de87000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\jli.dll
+0x00007ffd6a330000 - 0x00007ffd6a34b000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\VCRUNTIME140.dll
+0x00007ffd9d580000 - 0x00007ffd9d72e000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffd7e050000 - 0x00007ffd7e2e3000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.2506_none_270c5ae97388e100\COMCTL32.dll
+0x00007ffd9d8f0000 - 0x00007ffd9d997000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffd9c560000 - 0x00007ffd9c586000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffd9e8f0000 - 0x00007ffd9e919000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffd9c090000 - 0x00007ffd9c1a9000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffd9c650000 - 0x00007ffd9c6ea000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffd9e990000 - 0x00007ffd9e9c1000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffd96de0000 - 0x00007ffd96dec000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\vcruntime140_1.dll
+0x00007ffd51310000 - 0x00007ffd5139d000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\msvcp140.dll
+0x00007ffd36aa0000 - 0x00007ffd37723000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\server\jvm.dll
+0x00007ffd9dd50000 - 0x00007ffd9de01000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffd9c760000 - 0x00007ffd9c806000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffd9da50000 - 0x00007ffd9db67000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffd88180000 - 0x00007ffd88189000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffd948b0000 - 0x00007ffd948ba000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffd9e870000 - 0x00007ffd9e8e1000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffd961e0000 - 0x00007ffd96214000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffd9baa0000 - 0x00007ffd9baed000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ffd9ba80000 - 0x00007ffd9ba93000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ffd9ad20000 - 0x00007ffd9ad38000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffd98650000 - 0x00007ffd9865a000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\jimage.dll
+0x00007ffd994e0000 - 0x00007ffd99713000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffd9c810000 - 0x00007ffd9cb99000 	C:\WINDOWS\System32\combase.dll
+0x00007ffd9e790000 - 0x00007ffd9e867000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffd92fc0000 - 0x00007ffd92ff2000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffd9c010000 - 0x00007ffd9c08a000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffd7dfa0000 - 0x00007ffd7dfc5000 	C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.2506_none_270c5ae97388e100;C:\Program Files\JetBrains\PhpStorm 2023.2.3\jbr\bin\server
+
+VM Arguments:
+java_command: git4idea.http.GitAskPassApp Username for 'https://github.com': 
+java_class_path (initial): C:/Program Files/JetBrains/PhpStorm 2023.2.3/plugins/vcs-git/lib/git4idea-rt.jar;C:/Program Files/JetBrains/PhpStorm 2023.2.3/lib/externalProcess-rt.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 123731968                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1971322880                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1971322880                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=C:\Program Files\Git\mingw64\libexec\git-core;C:\Program Files\Git\mingw64\libexec\git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\ADMIN\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\Tools\Binn;C:\Program Files\Microsoft SQL Server\150\DTS\Binn;C:\Program Files\Azure Data Studio\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\ADMIN\AppData\Local\Microsoft\WindowsApps;C:\Users\ADMIN\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Azure Data Studio\bin;C:\Program Files\JetBrains\PhpStorm 2022.2.3\bin;C:\Users\ADMIN\AppData\Roaming\Composer\vendor\bin
+USERNAME=ManhTuong
+DISPLAY=:0.0
+LC_ALL=en_US.UTF-8
+TERM=xterm-256color
+TMPDIR=C:\Users\ADMIN\AppData\Local\Temp
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
+TMP=C:\Users\ADMIN\AppData\Local\Temp
+TEMP=C:\Users\ADMIN\AppData\Local\Temp
+
+
+JNI global refs:
+JNI global refs: 0, weak refs: 0
+
+JNI global refs memory usage: 0, weak refs: 0
+
+OOME stack traces (most recent first):
+Classloader memory used:
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.2506)
+OS uptime: 5 days 11:49 hours
+
+CPU: total 12 (initial active 12) (12 cores per cpu, 2 threads per core) family 23 model 104 stepping 1 microcode 0x0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt
+Processor Information for all 12 processors :
+  Max Mhz: 2100, Current Mhz: 2100, Mhz Limit: 2100
+
+Memory: 4k page, system-wide physical 7514M (538M free)
+TotalPageFile size 21461M (AvailPageFile size 107M)
+current process WorkingSet (physical memory assigned to process): 11M, peak: 11M
+current process commit charge ("private bytes"): 64M, peak: 182M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.8.1+7-b1000.32) for windows-amd64 JRE (17.0.8.1+7-b1000.32), built on 2023-09-15 by "builduser" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.

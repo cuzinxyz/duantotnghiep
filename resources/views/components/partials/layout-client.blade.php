@@ -142,6 +142,35 @@
                 <li @class(['active' => request()->routeIs('homepage')])>
                     <a href="/" class="drop-down">Trang Chủ</a>
                 </li>
+                <li class="position-inherit">
+                    <a href="#" class="drop-down">Xe</a>
+                    <i class="bi bi-plus dropdown-icon d-lg-none d-block"></i>
+                    <div class="mega-menu" style="min-width: fit-content">
+                        <ul class="menu-row">
+                            <li class="menu-single-item">
+                                <h5>Thương hiệu</h5>
+                                <ul>
+                                    @php
+                                        $popularBrands = \App\Models\Car::select('brand_id', \DB::raw('COUNT(*) as car_count'))
+                                            ->groupBy('brand_id')
+                                            ->orderByDesc('car_count')
+                                            ->limit(8)
+                                            ->get();
+                                        $brandIds = $popularBrands->pluck('brand_id');
+                                        $brandsInfo = \App\Models\Brand::whereIn('id', $brandIds)->inRandomOrder()->distinct()->get();
+                                    @endphp
+                                    @foreach ($brandsInfo as $brand)
+                                        <li><a href="{{ route('brand.detail', $brand->brand_name) }}">{{ $brand->brand_name }}</a></li>
+                                    @endforeach
+                                    <li class="explore-more-btn">
+                                        <a href="brand-category.html">Explore More <i
+                                                class="bi bi-arrow-right"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li @class(['active' => request()->routeIs('service.list')])>
                     <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
                 </li>
@@ -203,14 +232,14 @@
             </div>
         </div>
 
-        <div class="nav-right d-flex jsutify-content-end align-items-center">
+        <div class="nav-right d-flex jsutify-content-end align-items-center" style="gap: 45px">
             @auth
                 <div onclick="window.location.href='/chatify'" class="position-relative" style="cursor: pointer">
                     <i class="bi bi-chat"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         {{ \App\Models\ChMessage::where('to_id', auth()->id())->where('seen', 0)->count() }}
                         <span class="visually-hidden">unread messages</span>
-                      </span>
+                    </span>
 
                 </div>
                 <div class="dropdown">
@@ -223,12 +252,11 @@
                                 <li class="pd-cart">
                                     <div class="d-flex align-items-start gap-3">
                                         <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                            src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                            src="{{ file_exists(Storage::url(auth()->user()->avatar)) ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                             alt="">
 
                                         <div class="d-flex flex-column">
-                                            <span
-                                                class="header-username fw-bold text-capitalize">{{ auth()->user()->name }}</span>
+                                            <span class="header-username fw-bold">{{ auth()->user()->name }}</span>
                                             <div class="hr-custom my-2"></div>
                                             <div class="d-flex align-items-center gap-2">
                                                 <p class="m-0"><strong>0</strong> tin đã đăng</p>
@@ -268,7 +296,8 @@
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
                                         <div class="cart-block-body">
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2" onclick="window.location.href='{{ route('wishlish') }}'">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('wishlish') }}'">
                                                 <i class="bi bi-heart"></i> Tin đã lưu
                                             </div>
 
@@ -292,14 +321,15 @@
                                             <div class="footer-button mx-3">
                                                 <div class="d-flex justify-content-between align-items-center gap-3">
                                                     <a href="{{ route('settings') }}"
-                                                        class="w-50 primary-btn1 btn-dark1">
+                                                        class="w-50 primary-btn1 d-block visible btn-dark1">
                                                         <i class="bi bi-gear"></i>
                                                         Settings
                                                     </a>
                                                     <form class="w-50" action="{{ route('logout') }}" method="POST">
                                                         @csrf
-                                                        <button class="w-100 primary-btn1" type="submit"><i
-                                                                class="bi bi-box-arrow-right"></i> Logout</button>
+                                                        <button class="w-100 primary-btn1 d-block visible"
+                                                            type="submit"><i class="bi bi-box-arrow-right"></i>
+                                                            Logout</button>
                                                     </form>
                                                 </div>
                                             </div>
