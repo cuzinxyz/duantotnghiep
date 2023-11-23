@@ -5,56 +5,136 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Confirm Post Car</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
 
+        .container {
+            background-color: #ffffff;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333333;
+            font-size: 33px;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            color: #333333;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .info td {
+            padding: 10px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .info td:first-child {
+            font-weight: bold;
+            width: 30%;
+        }
+
+        .row {
+            margin-bottom: 10px;
+        }
+
+        video {
+            margin-bottom: 5px;
+        }
+        span {
+            font-size: 17px;
+        }
+        td {
+            font-size: 15px;
+        }
+    </style>
 </head>
+
 <body>
-<h2>Xin chào {{$data['user']}}</h2>
-<div class="container" style="font-family: Arial, sans-serif; padding: 20px; align-content: center">
-    <div>
-        <h4 style="margin-bottom: 10px;">Nội dung</h4>
-    </div>
-    <div>
-        <span style="margin-bottom: 5px;">Tiêu đề: {{$data['title']}}</span>
-        <br>
-        <span style="margin-bottom: 5px;">Giá muốn bán: {{$data['price']}}</span>
-    </div>
-    <div>
-        <h4 style="margin-bottom: 10px;">Thông số kĩ thuật</h4>
-    </div>
+<h2>Kính gửi {{$data['user']}}</h2>
+<div class="container">
     <div class="row">
-        <span style="margin-bottom: 5px;">Hãng xe: {{$data['brand']}}</span>
-        <span style="margin-bottom: 5px;margin-left: 100px;margin-right: 100px">Số KM đã đi: {{$data['mileage']}}</span>
-        <span style="margin-bottom: 5px;">Số chỗ ngồi: {{$data['seat']}}</span>
+        <h4>Nội dung</h4>
     </div>
     <br>
-    <div class="row">
-        <span style="margin-bottom: 5px;">Năm sản xuất: {{$data['manufactured']}}</span>
-        <span style="margin-bottom: 5px;margin-left: 100px;margin-right: 100px">Màu sắc: {{$data['color']}}</span>
-        <span style="margin-bottom: 5px;">Động cơ: {{$data['engine']}}</span>
+    <div>
+        <span style="font-weight:700;">Tiêu đề: </span>
+        <span>{{$data['title']}}</span>
+        <br><br>
+        <span style="font-weight:700;">Giá muốn bán: </span>
+        <span>{{$data['price']}}</span>
     </div>
-    <br>
-        <span style="margin-bottom: 5px;">Nhiên liệu: {{$data['fuelType']}}</span>
-        <span style="margin-bottom: 5px;margin-left: 100px;margin-right: 100px">Tình trạng: {{$data['condition']}}</span>
     <div class="row">
-        <h4 style="margin-bottom: 10px;">Mô tả chi tiết:</h4>
+        <h4>Thông số kĩ thuật</h4>
     </div>
-        <span style="margin-bottom: 5px;">{{$data['description']}}</span>
+    <table class="info">
+        <tr>
+            <td>Hãng xe:</td>
+            <td>{{$data['brand']}}</td>
+        </tr>
+        <tr>
+            <td>Số KM đã đi:</td>
+            <td>{{$data['mileage']}}</td>
+        </tr>
+        <tr>
+            <td>Số chỗ ngồi:</td>
+            <td>{{$data['seat']}}</td>
+        </tr>
+        <tr>
+            <td>Năm sản xuất:</td>
+            <td>{{$data['manufactured']}}</td>
+        </tr>
+        <tr>
+            <td>Màu sắc:</td>
+            <td>{{$data['color']}}</td>
+        </tr>
+        <tr>
+            <td>Động cơ:</td>
+            <td>{{$data['engine']}}</td>
+        </tr>
+        <tr>
+            <td>Nhiên liệu:</td>
+            <td>{{$data['fuelType']}}</td>
+        </tr>
+        <tr>
+            <td>Tình trạng:</td>
+            <td>{{$data['condition']}}</td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <h4>Mô tả chi tiết:</h4>
+    </div>
+    <span>{{$data['description']}}</span>
+
     @foreach($data['verhicle_image'] as $item)
-    <div>
-        <h4 style="margin-bottom: 10px;">Ảnh</h4>
-        <video width="320" height="240" controls style="margin-bottom: 5px;">
-            <source src="{{ asset('/storage/'. $item) }}">
-        </video>
-    </div>
+        <div class="row">
+            <h4>Ảnh</h4>
+            <img src="{{ asset('/storage/'. $item) }}" alt="Vehicle Image" style="margin-bottom: 5px;">
+        </div>
     @endforeach
-    <div>
-        <h4 style="margin-bottom: 10px;">Video</h4>
-        <video width="320" height="240" controls style="margin-bottom: 5px;">
-            <source src="{{ asset('/storage/'. $data['verhicle_videos']) }}"
+
+    <div class="row">
+        <h4>Video</h4>
+        <video width="320" height="240" controls>
+            <source src="{{ asset('/storage/'. $data['verhicle_videos']) }}">
         </video>
     </div>
 </div>
 </body>
-</html>
 
+</html>

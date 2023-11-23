@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row g-lg-4 gy-5">
                 <div class="col-lg-6 d-flex align-items-center">
-                    <div class="drivco-contendt">
+                    <div class="drivco-content">
                         <div class="section-title-2 mb-60 wow fadeInUp" data-wow-delay="200ms">
                             <h2>Tại sao là Drivco?</h2>
                             <p>Để có được thông tin chính xác và cập nhật nhất.</p>

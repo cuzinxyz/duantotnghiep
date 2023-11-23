@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="product-content">
                                     <div class="location">
-{{--                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name}}</a>--}}
+                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name}}</a>
                                     </div>
                                     <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
                                     <ul class="features">
