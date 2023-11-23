@@ -4,7 +4,35 @@
 
     <x-homepage.featured-cars :cars="$featured_cars" />
 
-    <div class="mb-100" x-data="{ showHeading : true }">
+    <div class="home2-inner-banner mb-100">
+        <div class="container">
+            <div class="row wow fadeInUp" data-wow-delay="700ms" style="visibility: visible; animation-delay: 700ms;">
+                <div class="col-lg-12">
+                    <div class="inner-banner-content section-title-2">
+                        <h2>Confusion, Which is Best Car?</h2>
+                        <p>Car servicing is the regular maintenance and inspection of a vehicle to ensure that it is
+                            operating safely and efficiently.</p>
+                        <button onclick="window.location.href='{{ route('sellCar') }}'" class="primary-btn3" type="button" data-bs-toggle="modal" data-bs-target="#sellUsModal01">
+                            <svg width="24" height="15" viewBox="0 0 24 15" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.25985 0C3.15704 0 3.05844 0.0413135 2.98574 0.114852C2.91304 0.18839 2.87219 0.28813 2.87219 0.392129C2.87219 0.496128 2.91304 0.595867 2.98574 0.669405C3.05844 0.742944 3.15704 0.784257 3.25985 0.784257H4.8105C4.91332 0.784257 5.01192 0.742944 5.08462 0.669405C5.15732 0.595867 5.19816 0.496128 5.19816 0.392129C5.19816 0.28813 5.15732 0.18839 5.08462 0.114852C5.01192 0.0413135 4.91332 0 4.8105 0H3.25985ZM5.77966 0C5.67684 0 5.57824 0.0413135 5.50554 0.114852C5.43284 0.18839 5.39199 0.28813 5.39199 0.392129C5.39199 0.496128 5.43284 0.595867 5.50554 0.669405C5.57824 0.742944 5.67684 0.784257 5.77966 0.784257H10.3347C10.4375 0.784257 10.5361 0.742944 10.6088 0.669405C10.6815 0.595867 10.7223 0.496128 10.7223 0.392129C10.7223 0.28813 10.6815 0.18839 10.6088 0.114852C10.5361 0.0413135 10.4375 0 10.3347 0H5.77966Z">
+                                </path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M4.22917 2.7464C4.12636 2.7464 4.02776 2.78771 3.95505 2.86125C3.88235 2.93479 3.84151 3.03453 3.84151 3.13853C3.84151 3.24253 3.88235 3.34227 3.95505 3.4158C4.02776 3.48934 4.12636 3.53066 4.22917 3.53066H13.1454C14.653 3.53066 15.5822 3.76829 16.3256 4.15002C16.9575 4.47431 17.4672 4.90546 18.1055 5.44542C18.2375 5.55698 18.3749 5.67305 18.5201 5.79402L18.6101 5.86892L18.726 5.88127C22.2653 6.25811 23.0622 7.46822 23.2246 8.08778V9.60865C23.2246 9.71265 23.1838 9.81239 23.1111 9.88593C23.0384 9.95947 22.9398 10.0008 22.8369 10.0008H21.8356C21.6511 8.88811 20.6943 8.04014 19.5418 8.04014C18.3893 8.04014 17.4325 8.88811 17.248 10.0008H10.2058C10.0212 8.88811 9.06448 8.04014 7.91196 8.04014C6.75944 8.04014 5.80269 8.88811 5.61816 10.0008H3.7446C3.64178 10.0008 3.54318 10.0421 3.47048 10.1156C3.39778 10.1892 3.35693 10.2889 3.35693 10.3929C3.35693 10.4969 3.39778 10.5966 3.47048 10.6702C3.54318 10.7437 3.64178 10.785 3.7446 10.785H5.61816C5.80269 11.8977 6.75944 12.7457 7.91196 12.7457C9.06448 12.7457 10.0212 11.8977 10.2058 10.785H17.248C17.4325 11.8977 18.3893 12.7457 19.5418 12.7457C20.6943 12.7457 21.6511 11.8977 21.8356 10.785H22.8369C23.1454 10.785 23.4412 10.6611 23.6593 10.4405C23.8774 10.2199 23.9999 9.92065 23.9999 9.60865V7.99543L23.99 7.95191C23.7431 6.86983 22.5791 5.52855 18.9239 5.11407C18.8217 5.02859 18.7215 4.9435 18.6227 4.85978C17.9828 4.31766 17.3942 3.81887 16.6766 3.45047C15.7966 2.99893 14.7391 2.7464 13.1454 2.7464H4.22917ZM17.9912 10.3929C17.9912 9.97691 18.1545 9.57795 18.4453 9.2838C18.7361 8.98965 19.1306 8.82439 19.5418 8.82439C19.9531 8.82439 20.3475 8.98965 20.6383 9.2838C20.9291 9.57795 21.0925 9.97691 21.0925 10.3929C21.0925 10.8089 20.9291 11.2079 20.6383 11.502C20.3475 11.7962 19.9531 11.9614 19.5418 11.9614C19.1306 11.9614 18.7361 11.7962 18.4453 11.502C18.1545 11.2079 17.9912 10.8089 17.9912 10.3929ZM7.91196 8.82439C7.5007 8.82439 7.10629 8.98965 6.81549 9.2838C6.52468 9.57795 6.36131 9.97691 6.36131 10.3929C6.36131 10.8089 6.52468 11.2079 6.81549 11.502C7.10629 11.7962 7.5007 11.9614 7.91196 11.9614C8.32322 11.9614 8.71763 11.7962 9.00843 11.502C9.29923 11.2079 9.46261 10.8089 9.46261 10.3929C9.46261 9.97691 9.29923 9.57795 9.00843 9.2838C8.71763 8.98965 8.32322 8.82439 7.91196 8.82439Z">
+                                </path>
+                                <path
+                                    d="M0 5.09873C0 4.99473 0.0408428 4.89499 0.113543 4.82146C0.186244 4.74792 0.284847 4.7066 0.387662 4.7066H4.74886C4.85167 4.7066 4.95027 4.74792 5.02297 4.82146C5.09567 4.89499 5.13652 4.99473 5.13652 5.09873C5.13652 5.20273 5.09567 5.30247 5.02297 5.37601C4.95027 5.44955 4.85167 5.49086 4.74886 5.49086H0.387662C0.284847 5.49086 0.186244 5.44955 0.113543 5.37601C0.0408428 5.30247 0 5.20273 0 5.09873ZM15.6836 5.60575C15.7563 5.67929 15.7971 5.77901 15.7971 5.88299C15.7971 5.98697 15.7563 6.08669 15.6836 6.16022L15.6532 6.19101C15.2897 6.55865 14.7968 6.76522 14.2828 6.76528H8.14089C8.03808 6.76528 7.93948 6.72397 7.86678 6.65043C7.79408 6.57689 7.75323 6.47715 7.75323 6.37315C7.75323 6.26915 7.79408 6.16941 7.86678 6.09587C7.93948 6.02234 8.03808 5.98102 8.14089 5.98102H14.2826C14.4354 5.98104 14.5866 5.95063 14.7277 5.89152C14.8688 5.83241 14.997 5.74577 15.105 5.63654L15.1355 5.60575C15.2082 5.53224 15.3068 5.49094 15.4096 5.49094C15.5123 5.49094 15.6109 5.53224 15.6836 5.60575ZM8.52856 14.6079C8.52856 14.5039 8.5694 14.4041 8.6421 14.3306C8.7148 14.257 8.8134 14.2157 8.91622 14.2157H10.5638C10.6666 14.2157 10.7652 14.257 10.8379 14.3306C10.9106 14.4041 10.9514 14.5039 10.9514 14.6079C10.9514 14.7118 10.9106 14.8116 10.8379 14.8851C10.7652 14.9587 10.6666 15 10.5638 15H8.91622C8.8134 15 8.7148 14.9587 8.6421 14.8851C8.5694 14.8116 8.52856 14.7118 8.52856 14.6079ZM11.2422 14.6079C11.2422 14.5039 11.283 14.4041 11.3557 14.3306C11.4284 14.257 11.527 14.2157 11.6298 14.2157H15.991C16.0939 14.2157 16.1925 14.257 16.2652 14.3306C16.3379 14.4041 16.3787 14.5039 16.3787 14.6079C16.3787 14.7118 16.3379 14.8116 16.2652 14.8851C16.1925 14.9587 16.0939 15 15.991 15H11.6298C11.527 15 11.4284 14.9587 11.3557 14.8851C11.283 14.8116 11.2422 14.7118 11.2422 14.6079Z">
+                                </path>
+                            </svg>
+                            Sell You Car
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-100" x-data="{ showHeading: true }">
         <livewire:brand-list />
     </div>
 
@@ -62,943 +90,8 @@
         </div>
     </div>
 
-    {{-- Recommend Product  --}}
-    <div class="browse-used-car-section mb-100">
-        <div class="container">
-            <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
-                <div class="col-lg-12">
-                    <div class="section-title-2 text-left">
-                        <h2>Xe Gần Đây</h2>
-                        <p>Có hơn {{ \DB::table('brands')->get()->count() }}+ thương hiệu xe được đề xuất.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row wow fadeInUp" data-wow-delay="300ms">
-                <div class="col-lg-12">
-                    <div class="browse-car-filter-area">
-                        <ul class="nav nav-tabs" id="myTab3" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="popular-tab" data-bs-toggle="tab"
-                                    data-bs-target="#popular" type="button" role="tab" aria-controls="popular"
-                                    aria-selected="true">Popular</button>
-                            </li>
-                            {{-- <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="fuel-type-tab" data-bs-toggle="tab"
-                                    data-bs-target="#fuel-type" type="button" role="tab" aria-controls="fuel-type"
-                                    aria-selected="false">Mercedes</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="transmission-tab" data-bs-toggle="tab"
-                                    data-bs-target="#transmission" type="button" role="tab"
-                                    aria-controls="transmission" aria-selected="false">Toyota</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="seating-capacity-tab" data-bs-toggle="tab"
-                                    data-bs-target="#seating-capacity" type="button" role="tab"
-                                    aria-controls="seating-capacity" aria-selected="false">Mitsubishi</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="doors-tab" data-bs-toggle="tab" data-bs-target="#doors"
-                                    type="button" role="tab" aria-controls="doors"
-                                    aria-selected="false">Tata</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="steering-side-tab" data-bs-toggle="tab"
-                                    data-bs-target="#steering-side" type="button" role="tab"
-                                    aria-controls="steering-side" aria-selected="false">Mazda</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="premium-car-tab" data-bs-toggle="tab"
-                                    data-bs-target="#premium-car" type="button" role="tab"
-                                    aria-controls="premium-car" aria-selected="false"><img
-                                        src="assets/img/home2/icon/premium.svg" alt> Premium Car</button> --}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tab-content" id="myTab3Content">
-                        <div class="tab-pane fade show active" id="popular" role="tabpanel"
-                            aria-labelledby="popular-tab">
-                            <div class="row justify-content-center g-4">
-
-                                @php
-                                    $wowDelayRecommend = 100;
-                                @endphp
-                                @foreach ($cars as $car)
-
-                                <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="{{ $wowDelayRecommend + 100 }}ms">
-                                    <div class="product-card2 two">
-                                        <div class="product-img" onclick="window.location='{{ route('car-detail', $car->slug) }}'">
-                                            <img src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}" alt="{{ $car->title }}">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="{{ route('brand.detail', $car->brand->brand_name) }}"><img style="max-width: 40px;max-height:40px;object-fit:contain"
-                                                        src="{{ asset('storage/'.$car->brand->logo_url) }}" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>{{ number_format($car->price) . ' đ' }}</strong>
-                                            </div>
-                                            <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @endforeach
-                            </div>
-                        </div>
-                        {{-- <div class="tab-pane fade" id="fuel-type" role="tabpanel" aria-labelledby="fuel-type-tab">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-01.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz-2023</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-02.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,543.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes A Class</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-03.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$78,432.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz C-Class</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-04.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$22,765.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz G-Class</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-05.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$44,745.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz GLE</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-06.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$23,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz CLA</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-07.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz EQB</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-08.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,665.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz S-Class</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="transmission" role="tabpanel"
-                            aria-labelledby="transmission-tab">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-01.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Camry</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-02.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,543.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Prius</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-03.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$78,432.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Fortuner</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-04.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$22,765.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota 4Runner</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-05.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$44,745.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Land Cruiser</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-06.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$23,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota HiAce</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-07.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Avanza</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-08.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,665.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Tundra</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="seating-capacity" role="tabpanel"
-                            aria-labelledby="seating-capacity-tab">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-01.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mitsubishi Lancer</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-02.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,543.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Montero Sport</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-03.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$78,432.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mitsubishi Triton</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-04.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$22,765.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mitsubishi Pajero</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-05.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$44,745.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mitsubishi Mirage</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-06.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$23,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Xpander</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-07.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mitsubishi i-MiEV</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-08.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,665.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mitsubishi Mirage G4</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="doors" role="tabpanel" aria-labelledby="doors-tab">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-01.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Tata Punch</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-02.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,543.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Tata Safari</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-03.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$78,432.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Tata Altroz</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-04.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$22,765.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Tata Harrier</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-05.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$44,745.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Tata Tiago</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-06.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$23,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">TATA Nexon EV</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-07.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Tata Zest</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-08.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,665.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">TATA Tiago EV</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="steering-side" role="tabpanel"
-                            aria-labelledby="steering-side-tab">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-01.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda Mazda5</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-02.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,543.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda BT-50</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-03.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$78,432.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">2018 Mazda Mazda3</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-04.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$22,765.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda MX-30</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-05.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$44,745.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda CX-8</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-06.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$23,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda CX-5-2023</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-07.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda MX-5</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-08.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,665.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda3</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="premium-car" role="tabpanel"
-                            aria-labelledby="premium-car-tab">
-                            <div class="row justify-content-center g-4">
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-01.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mercedes-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mercedes-Benz-2023</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-02.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/volkswagen-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,543.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Hyundai Sonata-2022</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-03.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/toyota-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$78,432.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Toyota Camry-2022</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-04.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mitsubishi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$22,765.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Nissan Altima-2023</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-05.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/tata-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$44,745.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Porsche 911-2022</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-06.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/mazda-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$23,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Mazda CX-5-2023</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-07.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/suziki-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$32,445.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Nissan Altima S-2022</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-card2 two">
-                                        <div class="product-img">
-                                            <img src="assets/img/home2/used-car-08.png" alt="img">
-                                        </div>
-                                        <div class="product-content">
-                                            <div class="company-logo">
-                                                <a href="single-brand-category.html"><img
-                                                        src="assets/img/home2/icon/audi-2.svg" alt></a>
-                                            </div>
-                                            <div class="price">
-                                                <strong>$65,665.00</strong>
-                                            </div>
-                                            <h6><a href="car-deatils.html">Audi A4-2023</a></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- Recent Product  --}}
+    <livewire:recent-cars />
 
     <div class="how-it-work-section style-2 mb-100">
         <div class="container">
@@ -1009,9 +102,8 @@
                         {{-- <p>Quy trình mua bán của chú</p> --}}
                     </div>
                     <div class="video-btn">
-                        <a class=""
-                            href="{{ route('sellCar') }}"><i
-                                class="bi bi-play-circle"></i> Bán xe ngay</a>
+                        <a class="" href="{{ route('sellCar') }}"><i class="bi bi-play-circle"></i> Bán xe
+                            ngay</a>
                     </div>
                 </div>
             </div>
@@ -1029,7 +121,8 @@
                                     </div>
                                     <div class="content">
                                         <h6>Đăng Tin Bán Xe</h6>
-                                        <p>Bắt đầu bằng việc điền đầy đủ thông tin về chiếc xe của bạn. Hãy mô tả rõ các đặc điểm, trạng thái kỹ thuật, và lịch sử bảo dưỡng.</p>
+                                        <p>Bắt đầu bằng việc điền đầy đủ thông tin về chiếc xe của bạn. Hãy mô tả rõ các
+                                            đặc điểm, trạng thái kỹ thuật, và lịch sử bảo dưỡng.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1057,7 +150,8 @@
                                     </div>
                                     <div class="content">
                                         <h6>Quảng Cáo Hiệu Quả</h6>
-                                        <p>Chọn gói quảng cáo phù hợp để đẩy tin xe lên trang đầu, tăng khả năng tiếp cận với đối tượng mua hàng mục tiêu.</p>
+                                        <p>Chọn gói quảng cáo phù hợp để đẩy tin xe lên trang đầu, tăng khả năng tiếp
+                                            cận với đối tượng mua hàng mục tiêu.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1071,7 +165,8 @@
                                     </div>
                                     <div class="content">
                                         <h6>Đến Với Khách Hàng</h6>
-                                        <p>Drivco mang sứ mệnh đưa các tin của người bán đến với khách hàng tiềm năng.</p>
+                                        <p>Drivco mang sứ mệnh đưa các tin của người bán đến với khách hàng tiềm năng.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -1087,13 +182,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="sub-title wow fadeInUp" data-wow-delay="200ms">
-                        <h6>Đối Tác Tin Cậy</h6>
+                        <h5>Đối Tác Tin Cậy</h5>
                         <div class="dash"></div>
                     </div>
                     <div class="partner-slider wow fadeInUp" data-wow-delay="300ms">
                         <div class="marquee_text2">
                             @foreach ($partners as $partner)
-                                <img src="{{ asset('storage/'.$partner->logo_url) }}" alt="{{ $partner->name }}" style="min-height: 60px;width:auto;">
+                                <img src="{{ asset('storage/' . $partner->logo_url) }}" alt="{{ $partner->name }}"
+                                    style="min-height: 60px;width:auto;">
                             @endforeach
                         </div>
                     </div>
@@ -1122,9 +218,9 @@
                         <div class="news-card style-2 d-flex flex-column h-100">
                             <div class="news-img" style="flex:1">
                                 <a href="{{ route('news.index', $post->slug) }}">
-                                    <img
-                                        src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}" alt="">
-                                    </a>
+                                    <img src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
+                                        alt="">
+                                </a>
                             </div>
                             <div class="content">
                                 <h6>

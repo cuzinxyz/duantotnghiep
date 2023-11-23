@@ -1,7 +1,5 @@
 @props(['cars'])
 
-{{-- @dd($cars) --}}
-
 <div class="home5-featured-cars-section pt-100 mb-100">
     <div class="container">
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
@@ -26,10 +24,9 @@
         </div>
         <div class="row wow fadeInUp" data-wow-delay="300ms">
             <div class="col-lg-12">
-                <div class="swiper home5-fetured-slider">
-                    <div class="swiper-wrapper">
-                        @foreach ($cars as $car)
-                        <div class="swiper-slide">
+                <div class="row">
+                    @foreach ($cars as $car)
+                        <div class="col-md-4 col-lg-3 col-sm-6 col-6">
                             <div class="product-card5">
                                 <div class="product-img">
                                     <div class="product-price">
@@ -56,8 +53,7 @@
                                         <div class="swiper-wrapper">
                                             @foreach ($car->verhicle_image_library as $carImage)
                                                 <div class="swiper-slide">
-                                                    <img src="/storage/{{ $carImage }}"
-                                                        alt="image">
+                                                    <img src="/storage/{{ $carImage }}" alt="image">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -65,18 +61,17 @@
                                 </div>
                                 <div class="product-content">
                                     <div class="location">
-                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->full_address }}</a>
+                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
                                     </div>
                                     <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
                                     <ul class="features">
                                         <li>
-                                            {{-- @dd($car) --}}
                                             <img src="{{ asset('images/miles.svg') }}" alt="">
                                             {{ $car ? number_format($car->car_info['mileage']) : '' }}
                                         </li>
                                         <li>
                                             <img src="{{ asset('images/menual.svg') }}" alt="">
-                                            {{ $car ? $car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay' : '' }}
+                                            {{ $car ? ($car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay') : '' }}
                                         </li>
                                         <li>
                                             <img src="{{ asset('images/fuel.svg') }}" alt="">
@@ -87,8 +82,7 @@
                                         <a class="view-btn2" href="{{ route('car-detail', $car->slug) }}">
                                             <svg width="35" height="21" viewBox="0 0 35 21"
                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1"
+                                                <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1"
                                                     stroke-linecap="round"></path>
                                                 <path
                                                     d="M14.2597 3C14.1569 3 14.0583 3.04166 13.9856 3.11582C13.9129 3.18997 13.8721 3.29055 13.8721 3.39542C13.8721 3.50029 13.9129 3.60086 13.9856 3.67502C14.0583 3.74917 14.1569 3.79083 14.2597 3.79083H15.8104C15.9132 3.79083 16.0118 3.74917 16.0845 3.67502C16.1572 3.60086 16.198 3.50029 16.198 3.39542C16.198 3.29055 16.1572 3.18997 16.0845 3.11582C16.0118 3.04166 15.9132 3 15.8104 3H14.2597ZM16.7795 3C16.6767 3 16.5781 3.04166 16.5054 3.11582C16.4327 3.18997 16.3919 3.29055 16.3919 3.39542C16.3919 3.50029 16.4327 3.60086 16.5054 3.67502C16.5781 3.74917 16.6767 3.79083 16.7795 3.79083H21.3346C21.4374 3.79083 21.536 3.74917 21.6087 3.67502C21.6814 3.60086 21.7222 3.50029 21.7222 3.39542C21.7222 3.29055 21.6814 3.18997 21.6087 3.11582C21.536 3.04166 21.4374 3 21.3346 3H16.7795Z">
@@ -106,10 +100,11 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>

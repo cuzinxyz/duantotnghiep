@@ -2,7 +2,7 @@
     <div class="text-input-area mb-40">
         <form wire:submit="saveComment">
             <div class="form-inner">
-                <textarea wire:model="comment" placeholder="Nội dung bình luận..."></textarea>
+                <textarea wire:model="comment" placeholder="Nội dung bình luận..." style="resize: none"></textarea>
                 <button type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
                         <path
@@ -11,7 +11,7 @@
                     </svg>
                 </button>
             </div>
+            <div class="text-danger">@error('comment') {{ $message }} @enderror</div>
         </form>
     </div>
-
 </div>

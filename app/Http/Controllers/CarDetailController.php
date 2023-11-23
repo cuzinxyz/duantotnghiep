@@ -16,6 +16,8 @@ class CarDetailController extends Controller
         # save view
         views($carDetail)->record();
 
-        return view('detail', compact('carDetail'));
+        $recentCars = Car::inRandomOrder()->limit(4)->get();
+
+        return view('detail', compact('carDetail', 'recentCars'));
     }
 }

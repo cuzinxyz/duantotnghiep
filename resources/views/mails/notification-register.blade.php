@@ -7,11 +7,11 @@
         <br>
         <span>Tài khoản: {{ $email }}</span>
         <br>
-        <span>Mật khẩu: Mật khẩu khởi tạo trong quá trình đăng ký</span>
+        <span>Mật khẩu: {{ $password }}</span>
         <br>
         <span><b>Không chia sẻ mật khẩu với bất kỳ ai để tránh trường hợp mất tài khoản!</b></span>
     </div>
     <br>
-    <span style="color: red">Cảm ơn bạn đã quan tâm đến website, chúc bạn có những trải nghiệm thật tuyệt với với <a href=""><i><h3>Drivco</h3></i></a></span>
+    <span style="color: red">Cảm ơn bạn đã quan tâm đến website, chúc bạn có những trải nghiệm thật tuyệt vời với <a href=""><i><h3>Drivco</h3></i></a></span>
 
 </div>

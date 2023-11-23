@@ -100,7 +100,7 @@ return [
 
     'from' => [
         'address' => 'truongbq31@gmail.com',
-        'name' => 'Demo Notification Register',
+        'name' => 'Drivco',
     ],
 
     /*
