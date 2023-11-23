@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\News;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 use App\Models\ReplyComments;
 use Livewire\Attributes\Locked;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ use App\Models\Comments as CommentsModel;
 
 class ListComment extends Component
 {
+    use WithPagination;
 
     public $comment;
 
@@ -33,7 +35,8 @@ class ListComment extends Component
         $this->page = Route::currentRouteName();
     }
 
-    public function replyComment($id=null) {
+    public function replyComment($id = null)
+    {
         if (!Auth::check()) {
             $this->dispatch('showError', 'Vui lòng đăng nhập để bình luận');
             return redirect()->route('login');
@@ -63,7 +66,7 @@ class ListComment extends Component
             $slug = str_replace('.html', '', $this->slug);
             $newComment = News::where('slug', $slug)->first();
 
-            if(strlen($this->comment) > 0) {
+            if (strlen($this->comment) > 0) {
                 ReplyComments::create([
                     'body' => htmlspecialchars($this->reply),
                     'comment_id' => $comment_id,
@@ -71,9 +74,9 @@ class ListComment extends Component
                     'car_id' => 0,
                     'news_id' => $newComment->id
                 ]);
-    
+
                 $this->reset('reply');
-    
+
                 $this->dispatch('renderReplyComments');
             }
         }
@@ -82,15 +85,15 @@ class ListComment extends Component
     public function getCommentsCar()
     {
         $carComment = Car::where('slug', $this->slug)->first();
-        
+
         return CommentsModel::with([
             'user', 'reply' => function ($query) {
                 $query->orderBy('created_at', 'desc');
-            }])
-        ->where('car_id', $carComment->id)
-        ->orderBy('created_at', 'desc')
-        ->limit(4)
-        ->get();
+            }
+        ])
+            ->where('car_id', $carComment->id)
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate(4);
     }
 
     public function getCommentsNew()
@@ -105,8 +108,7 @@ class ListComment extends Component
         ])
             ->where('news_id', $newComment->id)
             ->orderBy('created_at', 'desc')
-            ->limit(4)
-            ->get();
+            ->simplePaginate(4);
     }
 
 

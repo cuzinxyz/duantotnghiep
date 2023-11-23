@@ -3,55 +3,14 @@
         <div class="banner-wrapper">
             <div class="container-fluid">
                 <ul class="breadcrumb-list">
-                    <li><a href="/">Home</a></li>
-                    <li style="text-transform: capitalize;">single-brand-category</li>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li style="text-transform: capitalize;">{{ $brandDetail->brand_name }}</li>
                 </ul>
                 <div class="banner-main-content-wrap">
                     <div class="row">
                         <div class="col-xl-6 col-lg-7 d-flex align-items-center">
-                            <div class="banner-content"><span class="sub-title">Suzuki Brand</span>
-                                <h1>Top các thương hiệu xe</h1>
-                                <div class="customar-review">
-                                    <ul>
-                                        <li><a href="#">
-                                                <div class="review-top">
-                                                    <div class="logo"><img
-                                                            src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                            alt=""></div>
-                                                    <div class="star"><img
-                                                            src="{{ asset('images/trustpilot-star.svg') }}"
-                                                            alt=""></div>
-                                                </div>
-                                                <div class="content">
-                                                    <ul>
-                                                        <li>Trust Rating <span>5.0</span></li>
-                                                        <li><span>2348</span> Reviews</li>
-                                                    </ul>
-                                                </div>
-                                            </a></li>
-                                        <li><a href="#">
-                                                <div class="review-top">
-                                                    <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                            alt=""></div>
-                                                    <div class="star">
-                                                        <ul>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-fill"></i></li>
-                                                            <li><i class="bi bi-star-half"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <ul>
-                                                        <li>Trust Rating <span>5.0</span></li>
-                                                        <li><span>2348</span> Reviews</li>
-                                                    </ul>
-                                                </div>
-                                            </a></li>
-                                    </ul>
-                                </div>
+                            <div class="banner-content"><span class="sub-title">{{ $brandDetail->brand_name }}</span>
+                                <h2>Top các thương hiệu xe</h2>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-5 d-lg-flex d-none align-items-center justify-content-end">
@@ -62,79 +21,81 @@
                 </div>
             </div>
         </div>
-        <div class="product-search-area mb-100">
-            <div class="container">
-                <form>
-                    <div class="row row-cols-xl-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3 justify-content-center">
-                        <div class="col-md-6 mb-20">
-                            <div class="form-inner">
-                                <label>Thương hiệu xe</label>
-                                <select class="nice-select" wire:model.live="brand">
-                                    <option value="0" selected>-- Chọn thương hiệu --</option>
-                                    @foreach ($brands as $key => $item)
-                                        <option value="{{ $item->id }}" wire.key={{ $item->id }}>
-                                            {{ $item->brand_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-20">
-                            <div class="form-inner">
-                                <label>Thương hiệu xe</label>
-                                <select class="nice-select" wire:model="model">
-                                    <option value="0" selected>-- Chọn dòng xe --</option>
-                                    @if (isset($modelCars) && sizeof($modelCars) > 0)
-                                        @foreach ($modelCars as $key => $item)
-                                            <option value="{{ $item->id }}" wire.key={{ $item->id }}>
-                                                {{ $item->model_name }}
-                                            </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
+    </div>
 
-                        <div class="col-md-6 mb-20">
-                            <div class="form-inner">
-                                <label>Khoảng giá</label>
-                                <select class="nice-select" wire:model.live="price">
-                                    <option value="0" selected>-- Chọn Khoảng giá --</option>
-                                    <option value="0-{{ $min_price }}">0 VNĐ -
-                                        {{ number_format($min_price, 0, '', ',') }} VNĐ</option>
-                                    <option value="{{ $min_price }} - {{ $max_price }}">
-                                        {{ number_format($min_price, 0, '', ',') }} VNĐ -
-                                        {{ number_format($max_price, 0, '', ',') }} VNĐ</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        {{-- <div class="col">
-                            <div class="form-inner"><label>Select Budget*</label>
-                                <div class="nice-select" tabindex="0"><span class="current">1 - 5 lakh</span>
-                                    <ul class="list">
-                                        <li class="option selected focus" data-value="0">1 - 5 lakh</li>
-                                        <li class="option" data-value="1">5 - 10 lakh</li>
-                                        <li class="option" data-value="2">10 - 15 lakh</li>
-                                        <li class="option" data-value="3">15 - 20 lakh</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <div class="col-md-6 mb-20 d-flex align-items-end">
-                            <div class="form-inner"><button class="primary-btn3" type="submit"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M10.2746 9.04904C11.1219 7.89293 11.5013 6.45956 11.3371 5.0357C11.1729 3.61183 10.4771 2.30246 9.38898 1.36957C8.30083 0.436668 6.90056 -0.050966 5.46831 0.00422091C4.03607 0.0594078 2.67747 0.653346 1.66433 1.66721C0.651194 2.68107 0.0582276 4.04009 0.00406556 5.47238C-0.0500965 6.90466 0.43854 8.30458 1.37222 9.39207C2.30589 10.4795 3.61575 11.1744 5.03974 11.3376C6.46372 11.5008 7.89682 11.1203 9.05232 10.2722H9.05145C9.07769 10.3072 9.10569 10.3405 9.13719 10.3729L12.5058 13.7415C12.6699 13.9057 12.8924 13.9979 13.1245 13.998C13.3566 13.9981 13.5793 13.906 13.7435 13.7419C13.9076 13.5779 13.9999 13.3553 14 13.1232C14.0001 12.8911 13.908 12.6685 13.7439 12.5043L10.3753 9.13566C10.344 9.104 10.3104 9.07562 10.2746 9.04904ZM10.5004 5.68567C10.5004 6.31763 10.3759 6.9434 10.1341 7.52726C9.89223 8.11112 9.53776 8.64162 9.0909 9.08849C8.64403 9.53535 8.11352 9.88983 7.52967 10.1317C6.94581 10.3735 6.32003 10.498 5.68807 10.498C5.05611 10.498 4.43034 10.3735 3.84648 10.1317C3.26262 9.88983 2.73211 9.53535 2.28525 9.08849C1.83838 8.64162 1.48391 8.11112 1.24207 7.52726C1.00023 6.9434 0.875753 6.31763 0.875753 5.68567C0.875753 4.40936 1.38276 3.18533 2.28525 2.28284C3.18773 1.38036 4.41177 0.873346 5.68807 0.873346C6.96438 0.873346 8.18841 1.38036 9.0909 2.28284C9.99338 3.18533 10.5004 4.40936 10.5004 5.68567Z">
-                                        </path>
-                                    </svg>Search</button></div>
+    <div class="product-search-area mb-100">
+        <div class="container">
+            <form>
+                <div class="row row-cols-xl-4 row-cols-md-4 row-cols-sm-2 row-cols-2 g-3 justify-content-center">
+                    <div class="col-md-6 mb-20">
+                        <div class="form-inner">
+                            <label>Thương hiệu xe</label>
+                            <select class="nice-select" wire:model.live="brand">
+                                <option value="0" selected>-- Chọn thương hiệu --</option>
+                                @foreach ($brands as $key => $item)
+                                    <option value="{{ $item->id }}" wire.key={{ $item->id }}>
+                                        {{ $item->brand_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                </form>
-            </div>
+                    <div class="col-md-6 mb-20">
+                        <div class="form-inner">
+                            <label>Thương hiệu xe</label>
+                            <select class="nice-select" wire:model="model">
+                                <option value="0" selected>-- Chọn dòng xe --</option>
+                                @if (isset($modelCars) && sizeof($modelCars) > 0)
+                                    @foreach ($modelCars as $key => $item)
+                                        <option value="{{ $item->id }}" wire.key={{ $item->id }}>
+                                            {{ $item->model_name }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-20">
+                        <div class="form-inner">
+                            <label>Khoảng giá</label>
+                            <select class="nice-select" wire:model.live="price">
+                                <option value="0" selected>-- Chọn Khoảng giá --</option>
+                                <option value="0-{{ $min_price }}">0 VNĐ -
+                                    {{ number_format($min_price, 0, '', ',') }} VNĐ</option>
+                                <option value="{{ $min_price }} - {{ $max_price }}">
+                                    {{ number_format($min_price, 0, '', ',') }} VNĐ -
+                                    {{ number_format($max_price, 0, '', ',') }} VNĐ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{-- <div class="col">
+                        <div class="form-inner"><label>Select Budget*</label>
+                            <div class="nice-select" tabindex="0"><span class="current">1 - 5 lakh</span>
+                                <ul class="list">
+                                    <li class="option selected focus" data-value="0">1 - 5 lakh</li>
+                                    <li class="option" data-value="1">5 - 10 lakh</li>
+                                    <li class="option" data-value="2">10 - 15 lakh</li>
+                                    <li class="option" data-value="3">15 - 20 lakh</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <div class="col-md-6 mb-20 d-flex align-items-end">
+                        <div class="form-inner"><button class="primary-btn3" type="submit"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                    viewBox="0 0 14 14">
+                                    <path
+                                        d="M10.2746 9.04904C11.1219 7.89293 11.5013 6.45956 11.3371 5.0357C11.1729 3.61183 10.4771 2.30246 9.38898 1.36957C8.30083 0.436668 6.90056 -0.050966 5.46831 0.00422091C4.03607 0.0594078 2.67747 0.653346 1.66433 1.66721C0.651194 2.68107 0.0582276 4.04009 0.00406556 5.47238C-0.0500965 6.90466 0.43854 8.30458 1.37222 9.39207C2.30589 10.4795 3.61575 11.1744 5.03974 11.3376C6.46372 11.5008 7.89682 11.1203 9.05232 10.2722H9.05145C9.07769 10.3072 9.10569 10.3405 9.13719 10.3729L12.5058 13.7415C12.6699 13.9057 12.8924 13.9979 13.1245 13.998C13.3566 13.9981 13.5793 13.906 13.7435 13.7419C13.9076 13.5779 13.9999 13.3553 14 13.1232C14.0001 12.8911 13.908 12.6685 13.7439 12.5043L10.3753 9.13566C10.344 9.104 10.3104 9.07562 10.2746 9.04904ZM10.5004 5.68567C10.5004 6.31763 10.3759 6.9434 10.1341 7.52726C9.89223 8.11112 9.53776 8.64162 9.0909 9.08849C8.64403 9.53535 8.11352 9.88983 7.52967 10.1317C6.94581 10.3735 6.32003 10.498 5.68807 10.498C5.05611 10.498 4.43034 10.3735 3.84648 10.1317C3.26262 9.88983 2.73211 9.53535 2.28525 9.08849C1.83838 8.64162 1.48391 8.11112 1.24207 7.52726C1.00023 6.9434 0.875753 6.31763 0.875753 5.68567C0.875753 4.40936 1.38276 3.18533 2.28525 2.28284C3.18773 1.38036 4.41177 0.873346 5.68807 0.873346C6.96438 0.873346 8.18841 1.38036 9.0909 2.28284C9.99338 3.18533 10.5004 4.40936 10.5004 5.68567Z">
+                                    </path>
+                                </svg>Search</button></div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
     <div class="single-category-page mb-100">
         <div class="container">
             <div class="row g-4 mb-40">
@@ -157,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h5><a href="/car-deatils">{{ $item->title }}</a></h5>
+                                <h5><a href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a></h5>
                                 <div class="price-location">
                                     <div class="price"><strong>{{ number_format($item->price, 0, '', ',') }}
                                             VNĐ</strong></div>
@@ -186,7 +147,6 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -211,378 +171,6 @@
                                             <path d="M7 7.00008L0 0L4.45455 7.00008L0 14L7 7.00008Z"></path>
                                         </svg></a></li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="toprated-used-cars mb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title">
-                        <h4>Top các xe hãng xe được đánh giá cao</h4>
-                    </div>
-                    <div class="brand-list">
-                        <ul>
-                            @foreach ($brands as $item)
-                                @if($item->car->count() > 0) 
-                                    <li>{{ $item->brand_name }} <span>({{$item->car->count()}})</span></li>
-                                @endif
-                            @endforeach
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="customar-feedback-area mb-100">
-        <div class="container">
-            <div class="row mb-60 wow fadeInUp" data-wow-delay="200ms">
-                <div class="col-lg-12">
-                    <div class="section-title1"><span>Customer Feedback</span>
-                        <h2>What Our Customers Are Saying</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-4 mb-100">
-                <div class="col-lg-3 wow fadeInUp" data-wow-delay="200ms">
-                    <div class="customer-feedback-left">
-                        <div class="trustpilot">
-                            <h5>Excellent!</h5><img class="star" src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                alt=""><span>Based On <strong>2348</strong> Reviews</span><img class="logo"
-                                src="{{ asset('images/trustpilot-logo3.svg') }}" alt="">
-                        </div>
-                        <div class="google"><img class="logo" src="{{ asset('images/google.svg') }}"
-                                alt="">
-                            <div class="star">
-                                <ul>
-                                    <li class="active"><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-fill"></i></li>
-                                    <li><i class="bi bi-star-half"></i></li>
-                                </ul>
-                            </div><span>Based On <strong>1448</strong> Reviews</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 wow fadeInUp" data-wow-delay="200ms">
-                    <div class="customer-feedback-right">
-                        <div
-                            class="swiper swiper-initialized swiper-horizontal swiper-pointer-events customer-feedback-slider mb-40">
-                            <div class="swiper-wrapper"
-                                style="transition-duration: 1500ms; transform: translate3d(-2477.5px, 0px, 0px);">
-                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
-                                    data-swiper-slide-index="0" style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area">
-                                                <div class="star">
-                                                    <ul>
-                                                        <li class="active"><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-half"></i></li>
-                                                    </ul>
-                                                </div><span>Great Services!</span>
-                                            </div>
-                                            <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency to the actively encourage customers to leave reviews to the
-                                            help promote their products and services.”</p>
-                                        <div class="author-name">
-                                            <h6>Nowry Jahan</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
-                                    data-swiper-slide-index="1" style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area"><img
-                                                    src="{{ asset('images/trustpilot-star.svg') }}"
-                                                    alt=""><span>Trusted Company</span></div>
-                                            <div class="logo"><img src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency customer feedback is an invaluable source of information that
-                                            can help businesses improve their offerings and provide better experiences.
-                                        </p>
-                                        <div class="author-name">
-                                            <h6>Jhon Abraham</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next"
-                                    data-swiper-slide-index="2" style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area">
-                                                <div class="star">
-                                                    <ul>
-                                                        <li class="active"><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-half"></i></li>
-                                                    </ul>
-                                                </div><span>Great Services!</span>
-                                            </div>
-                                            <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency to the actively encourage customers to leave reviews to the
-                                            help promote their products and services.”</p>
-                                        <div class="author-name">
-                                            <h6>Nowry Jahan</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3"
-                                    style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area"><img
-                                                    src="{{ asset('images/trustpilot-star.svg') }}"
-                                                    alt=""><span>Trusted Company</span></div>
-                                            <div class="logo"><img src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency customer feedback is an invaluable source of information that
-                                            can help businesses improve their offerings and provide better experiences.
-                                        </p>
-                                        <div class="author-name">
-                                            <h6>Jhon Abraham</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="0"
-                                    style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area">
-                                                <div class="star">
-                                                    <ul>
-                                                        <li class="active"><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-half"></i></li>
-                                                    </ul>
-                                                </div><span>Great Services!</span>
-                                            </div>
-                                            <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency to the actively encourage customers to leave reviews to the
-                                            help promote their products and services.”</p>
-                                        <div class="author-name">
-                                            <h6>Nowry Jahan</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="1"
-                                    style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area"><img
-                                                    src="{{ asset('images/trustpilot-star.svg') }}"
-                                                    alt=""><span>Trusted Company</span></div>
-                                            <div class="logo"><img src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency customer feedback is an invaluable source of information that
-                                            can help businesses improve their offerings and provide better experiences.
-                                        </p>
-                                        <div class="author-name">
-                                            <h6>Jhon Abraham</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="2"
-                                    style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area">
-                                                <div class="star">
-                                                    <ul>
-                                                        <li class="active"><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-half"></i></li>
-                                                    </ul>
-                                                </div><span>Great Services!</span>
-                                            </div>
-                                            <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency to the actively encourage customers to leave reviews to the
-                                            help promote their products and services.”</p>
-                                        <div class="author-name">
-                                            <h6>Nowry Jahan</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide" data-swiper-slide-index="3"
-                                    style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area"><img
-                                                    src="{{ asset('images/trustpilot-star.svg') }}"
-                                                    alt=""><span>Trusted Company</span></div>
-                                            <div class="logo"><img src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency customer feedback is an invaluable source of information that
-                                            can help businesses improve their offerings and provide better experiences.
-                                        </p>
-                                        <div class="author-name">
-                                            <h6>Jhon Abraham</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
-                                    data-swiper-slide-index="0" style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area">
-                                                <div class="star">
-                                                    <ul>
-                                                        <li class="active"><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-half"></i></li>
-                                                    </ul>
-                                                </div><span>Great Services!</span>
-                                            </div>
-                                            <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency to the actively encourage customers to leave reviews to the
-                                            help promote their products and services.”</p>
-                                        <div class="author-name">
-                                            <h6>Nowry Jahan</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
-                                    data-swiper-slide-index="1" style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area"><img
-                                                    src="{{ asset('images/trustpilot-star.svg') }}"
-                                                    alt=""><span>Trusted Company</span></div>
-                                            <div class="logo"><img src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency customer feedback is an invaluable source of information that
-                                            can help businesses improve their offerings and provide better experiences.
-                                        </p>
-                                        <div class="author-name">
-                                            <h6>Jhon Abraham</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next"
-                                    data-swiper-slide-index="2" style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area">
-                                                <div class="star">
-                                                    <ul>
-                                                        <li class="active"><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-fill"></i></li>
-                                                        <li><i class="bi bi-star-half"></i></li>
-                                                    </ul>
-                                                </div><span>Great Services!</span>
-                                            </div>
-                                            <div class="logo"><img src="{{ asset('images/google.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency to the actively encourage customers to leave reviews to the
-                                            help promote their products and services.”</p>
-                                        <div class="author-name">
-                                            <h6>Nowry Jahan</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3"
-                                    style="width: 470.5px; margin-right: 25px;">
-                                    <div class="feedback-card">
-                                        <div class="feedback-top">
-                                            <div class="stat-area"><img
-                                                    src="{{ asset('images/trustpilot-star.svg') }}"
-                                                    alt=""><span>Trusted Company</span></div>
-                                            <div class="logo"><img src="{{ asset('images/trustpilot-logo3.svg') }}"
-                                                    alt=""></div>
-                                        </div>
-                                        <p>Drivco-Agency customer feedback is an invaluable source of information that
-                                            can help businesses improve their offerings and provide better experiences.
-                                        </p>
-                                        <div class="author-name">
-                                            <h6>Jhon Abraham</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-lg-12 divider">
-                                <div
-                                    class="slider-btn-group style-2 justify-content-md-between justify-content-center">
-                                    <div class="slider-btn prev-4 d-md-flex d-none"><svg width="11"
-                                            height="19" viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M0 6.50008L8 0L2.90909 6.50008L8 13L0 6.50008Z"></path>
-                                        </svg></div>
-                                    <div class="view-btn-area">
-                                        <p>Thousand of People Reviews to Us</p><a class="view-btn"
-                                            href="/customer-review">View All Review</a>
-                                    </div>
-                                    <div class="slider-btn next-4 d-md-flex d-none"><svg width="11"
-                                            height="19" viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8 6.50008L0 0L5.09091 6.50008L0 13L8 6.50008Z"></path>
-                                        </svg></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="trusted-partner-section mb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="sub-title wow fadeInUp" data-wow-delay="200ms">
-                        <h6>Our Trusted Partners</h6>
-                        <div class="dash"></div>
-                    </div>
-                    <div class="partner-slider wow fadeInUp" data-wow-delay="300ms">
-                        <div class="marquee_text2">
-                            <img src="images/company-logo-01.png" alt="">
-                            <img src="images/company-logo-02.png" alt="">
-                            <img src="images/company-logo-03.png" alt="">
-                            <img src="images/company-logo-04.png" alt="">
-                            <img src="images/company-logo-05.png" alt="">
-                            <img src="images/company-logo-06.png" alt="">
-                            <img src="images/company-logo-01.png" alt="">
-                            <img src="images/company-logo-02.png" alt="">
-                            <img src="images/company-logo-03.png" alt="">
-                            <img src="images/company-logo-04.png" alt="">
-                            <img src="images/company-logo-05.png" alt="">
-                            <img src="images/company-logo-06.png" alt="">
                         </div>
                     </div>
                 </div>

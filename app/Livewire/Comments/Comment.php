@@ -35,6 +35,11 @@ class Comment extends Component
 
     public function saveComment()
     {
+        // $this->validateOnly('comment');
+        $this->validate([
+            'comment' => 'required|min:3',
+        ]);
+
         if (!Auth::check()) {
             $this->dispatch('showError', 'Vui lòng đăng nhập để bình luận');
             return redirect()->route('login');
@@ -52,11 +57,11 @@ class Comment extends Component
                 'news_id' => 0
             ]);
         }
-        
+
         if($this->page == 'news.index') {
             $slug = str_replace('.html', '', $this->slug);
             $newComment = News::where('slug', $slug)->first();
-        
+
             if(strlen($this->comment) > 0) {
                 CommentsModel::create([
                     'body' => htmlspecialchars($this->comment),
@@ -69,21 +74,22 @@ class Comment extends Component
         }
 
         $this->resetComment();
-    
+
         $this->dispatch('renderComments');
     }
 
 
     public function resetComment() {
-        $this->comment = '';
+        $this->comment = null;
+        $this->reset();
+
+        // dd(123123123);
     }
 
-    
+
 
     public function render()
     {
-        
-
         return view('livewire.comments.comment');
     }
 }
