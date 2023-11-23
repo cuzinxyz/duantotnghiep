@@ -71,20 +71,28 @@
                             </div>
                         </div>
                         <div class="product-widget mb-20">
-                            <div  class="check-box-item">
+                            <div class="check-box-item" wire:ignore>
                                 <h6 class="product-widget-title mb-25">Giá</h6>
-                                <div class="range-wrapper">
-                                    <div wire:ignore class="slider-wrapper">
-                                        <div id="eg-range-slider"></div>
+                                <div class="range-wrapper" x-data="{ 
+                                    max_price: @js(number_format($maxPrice, 0, '', ',')),
+                                    min_price: @js(number_format($minPrice, 0, '', ',')) 
+                                }">
+                                    <div class="slider-wrapper">
+                                        <div id="eg-range-slider" x-on:click="filter_prices"></div>
                                     </div>
                                     <div class="valus">
+                                        <input id="rangeMin" type="number" max="{{ $maxPrice }}"
+                                            min="{{ $minPrice }}" step="100000" value="{{ $minPrice }}" hidden>
+                                        <input id="rangeMax" type="number" max="{{ $maxPrice }}"
+                                            min="{{ $minPrice }}" step="100000" value="{{ $maxPrice }}"
+                                            hidden>
                                         <div class="min-value">
-                                            <span>$</span>
-                                            <input type="text" class="from" value="200">
+                                            <input type="text" class="from" id="slider-range-value1"
+                                                x-bind:value="min_price" disabled>
                                         </div>
                                         <div class="min-value">
-                                            <span>$</span>
-                                            <input type="text" class="to" value="2000">
+                                            <input type="text" class="to" id="slider-range-value2"
+                                                x-bind:value="max_price" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +128,7 @@
                         <div class="col-lg-12">
                             <div class="show-item-and-filte">
                                 <p>Có <strong>{{ \App\Models\Car::count() }}</strong> tin bán xe ô tô</p>
-                                <div  class="filter-view">
+                                <div class="filter-view">
                                     <div class="filter-atra">
                                         <h6>Sắp xếp theo:</h6>
                                         <form>
@@ -148,11 +156,13 @@
                                     $wowDelay = 100;
                                 @endphp
                                 @foreach ($cars as $car)
-                                    <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item" data-wow-delay="{{ $wowDelay+100 }}ms">
+                                    <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item"
+                                        data-wow-delay="{{ $wowDelay + 100 }}ms">
                                         <div class="product-card">
                                             <div class="product-img">
                                                 <div class="number-of-img">
-                                                    <img src="{{ asset('fonts/gallery-icon-1.svg') }}" alt="">
+                                                    <img src="{{ asset('fonts/gallery-icon-1.svg') }}"
+                                                        alt="">
                                                     {{ count($car->verhicle_image_library) }}
                                                 </div>
 
@@ -184,7 +194,9 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h5><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h5>
+                                                <h5><a
+                                                        href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a>
+                                                </h5>
                                                 <div class="price-location">
                                                     <div class="price" style="font-size:15px">
                                                         <strong>{{ number_format($car->price) }} ₫</strong>
@@ -200,17 +212,18 @@
                                                         {{ number_format($car->car_info['mileage']) }} km
                                                     </li>
                                                     <li>
-                                                        <img src="{{ asset('fonts/fuel.svg') }}" alt="" width="14px"
-                                                            height="14px">
+                                                        <img src="{{ asset('fonts/fuel.svg') }}" alt=""
+                                                            width="14px" height="14px">
                                                         {{ $car->car_info['fuelType'] }}
                                                     </li>
                                                     <li>
                                                         <img src="{{ asset('fonts/electric.svg') }}" alt="">
-                                                        {{ $car ? $car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay' : '' }}
+                                                        {{ $car ? ($car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay') : '' }}
                                                     </li>
                                                 </ul>
                                                 <div class="content-btm">
-                                                    <a class="view-btn2" href="{{ route('car-detail', $car->slug) }}">
+                                                    <a class="view-btn2"
+                                                        href="{{ route('car-detail', $car->slug) }}">
                                                         <svg width="35" height="21" viewBox="0 0 35 21"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -231,7 +244,9 @@
                                                     <div class="brand">
                                                         <a href="{{ route('brand.detail') }}">
                                                             {{-- <img src="/storage/{{ $car->brand->logo_url }}" alt="image"> --}}
-                                                            <img style="width: 30px;height:30px;object-fit:contain" src="{{ asset('storage/'. $car->brand->logo_url) }}" alt="{{ $car->title }}">
+                                                            <img style="width: 30px;height:30px;object-fit:contain"
+                                                                src="{{ asset('storage/' . $car->brand->logo_url) }}"
+                                                                alt="{{ $car->title }}">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -256,4 +271,48 @@
         </div>
     </div>
 
+    @push('scripts')
+        <script>
+            function filter_prices() {
+                let max = parseInt(document.querySelector('#slider-range-value2').value.replace(/[^\d]/g, ''));
+                let min = parseInt(document.querySelector('#slider-range-value1').value.replace(/[^\d]/g, ''));
+                console.log(min, max);
+
+                @this.dispatch('filterPrices', {
+                    max: max,
+                    min: min
+                });
+            }
+
+
+            document.addEventListener('livewire:initialized', () => {
+
+                let maxPrice = parseInt(document.querySelector("#rangeMax").value);
+                let minPrice = parseInt(document.querySelector("#rangeMin").value);
+                if (minPrice <= 0) {
+                    minPrice = 0;
+                }
+
+                $("#eg-range-slider").slider({
+                    range: true,
+                    min: minPrice,
+                    max: maxPrice,
+                    values: [minPrice, maxPrice],
+                    slide: function(event, ui) {
+                        $(".from").val(ui.values[0].toLocaleString('vi', {style : 'currency', currency : 'VND'}));
+                        $(".to").val(ui.values[1].toLocaleString('vi', {style : 'currency', currency : 'VND'}));
+                    }
+                });
+                $(".from").change(function() {
+                    let value = $(this).val();
+                    $("#eg-range-slider").slider("values", 0, value);
+                });
+                $(".to").change(function() {
+                    let value = $(this).val();
+                    $("#eg-range-slider").slider("values", 1, value);
+                });
+
+            })
+        </script>
+    @endpush
 </div>

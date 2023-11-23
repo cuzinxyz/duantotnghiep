@@ -24599,7 +24599,7 @@ button {
 
 .range-wrapper .valus .min-value,
 .range-wrapper .valus .max-value {
-    max-width: 45%;
+    max-width: 49%;
     width: 100%;
     height: 40px;
     border-radius: 5px;
@@ -24610,7 +24610,7 @@ button {
     font-family: var(--font-open-sans);
     font-size: 14px;
     font-weight: 600;
-    padding: 15px
+    padding: 8px
 }
 
 .range-wrapper .valus .min-value span,
