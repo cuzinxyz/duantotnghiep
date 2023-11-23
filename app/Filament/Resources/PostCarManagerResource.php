@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Mail\CarRegistMail;
 use App\Models\Car;
 use Filament\Forms;
 use Filament\Tables;
@@ -28,6 +29,7 @@ use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
 use App\Filament\Resources\PostCarManagerResource\RelationManagers;
+use Illuminate\Support\Facades\Mail;
 
 class PostCarManagerResource extends Resource
 {
@@ -149,6 +151,25 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
+                                            $data = [
+                                                'user' => $record->user['name'],
+                                                'title' => $record->title,
+                                                'price'=> $record->price,
+                                                'brand' => $record->brand->brand_name,
+                                                'mileage' => $record->car_info['mileage'],
+                                                'seat' => $record->car_info['number_of_seats'],
+                                                'manufactured' => $record->car_info['year_of_manufacture'],
+                                                'color' => $record->car_info['color'],
+                                                'engine' => $record->car_info['engine'],
+                                                'fuelType' => $record->car_info['fuelType'],
+                                                'condition' => $record->car_info['condition'],
+                                                'features' => $record->car_info['features'],
+                                                'verhicle_image' => $record->verhicle_image_library,
+                                                'verhicle_videos' => $record->verhicle_videos,
+                                                'description' => $record->description,
+                                            ];
+
+                                            Mail::to($record->contact['email'])->send(new CarRegistMail($data));
                                             $record->status = 1;
                                             $record->save();
                                         })
