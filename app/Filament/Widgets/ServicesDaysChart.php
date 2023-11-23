@@ -25,7 +25,7 @@ class ServicesDaysChart extends ApexChartWidget
      */
     protected static ?string $heading = 'Dịch vụ đã đăng kí trong tháng';
 
-    // protected static ?string $pollingInterval = null;
+    protected static ?string $pollingInterval = null;
 
     protected static ?int $sort = 6;
 
@@ -36,23 +36,52 @@ class ServicesDaysChart extends ApexChartWidget
     protected function getOptions(): array
     {
         DB::enableQueryLog();
-        $serviceOne = Service::leftJoin('purchased_service', 'services.id', '=', 'purchased_service.service_id')
-        ->select(
-            DB::raw("DATE_FORMAT(purchased_service.created_at, '%Y-%m-%d') AS date"),
-            'services.service_name AS name',
-            DB::raw('SUM(CASE WHEN purchased_service.service_id IS NOT NULL THEN 1 ELSE 0 END) AS aggregate')
-        )
-        ->whereBetween('purchased_service.created_at', ['2023-11-01 00:00:00', '2023-11-30 00:00:00'])
-        ->orWhereNull('purchased_service.service_id') // Thêm điều kiện để lấy cả các dịch vụ không được mua
-        ->groupBy('date', 'services.service_name')
-        ->orderBy('date', 'ASC')
-        ->get();
+        // $serviceOne = Service::leftJoin('purchased_service', function ($join) {
+        //     $join->on('services.id', '=', 'purchased_service.service_id')
+        //     ->whereBetween('purchased_service.created_at', ['2023-11-01 00:00:00', '2023-11-30 23:59:59']);
+        // })
+        //     ->select(
+        //         DB::raw("DATE_FORMAT(purchased_service.created_at, '%Y-%m-%d') AS date"),
+        //         'services.service_name AS name',
+        //         DB::raw('COALESCE(COUNT(purchased_service.service_id), 0) AS aggregate')
+        //     )
+        //     ->groupBy('date', 'services.service_name')
+        //     ->orderBy('date', 'ASC')
+        //     ->get();
 
-        // dd($serviceOne);
 
-        $startDay = Carbon::now()->startOfMonth()->format('d');
-        $endDay = Carbon::now()->endOfMonth()->format('d');
-        
+
+        $now = Carbon::now();
+
+        $servicePerDay = [];
+
+        $days = collect(range(1, $now->endOfMonth()->day))->map(function ($day) use ($now, &$servicePerDay) {
+            $count =
+            DB::table('services')
+            ->leftJoin('purchased_service', function ($join) use ($now, $day) {
+                $join->on('services.id', '=', 'purchased_service.service_id')
+                ->whereDate('purchased_service.created_at', '=', $now->day($day)->format('Y-m-d'));
+            })
+                ->select(
+                    DB::raw("DATE_FORMAT(purchased_service.created_at, '%Y-%m-%d') AS date"),
+                    'services.service_name AS name',
+                    DB::raw('COALESCE(COUNT(purchased_service.service_id), 0) AS aggregate')
+                )
+                ->groupBy('date', 'services.service_name')
+                ->get();
+
+            $servicePerDay[] = $count;
+
+            return $now->day($day)->format('m-d');
+        })->toArray();
+
+        dd($servicePerDay);
+        foreach($servicePerDay as $serviceDay) {
+            foreach($serviceDay as $item) {
+                dd($item);
+            }
+        }
+
 
 
         return [
