@@ -75,15 +75,18 @@ class ServicesDaysChart extends ApexChartWidget
             return $now->day($day)->format('m-d');
         })->toArray();
 
-        dd($servicePerDay);
         foreach($servicePerDay as $serviceDay) {
-            foreach($serviceDay as $item) {
-                dd($item);
+            foreach($serviceDay as $key => $item) {
+                $aggregate = $item->aggregate;
+
+                if (!isset($result[$key])) {
+                    $result[$key] = [];
+                }
+
+                $result[$key][] = $aggregate;
             }
         }
-
-
-
+        
         return [
             'chart' => [
                 'type' => 'line',
@@ -91,17 +94,32 @@ class ServicesDaysChart extends ApexChartWidget
             ],
             'series' => [
                 [
-                    'name' => 'ServicesDaysChart',
-                    'data' => [2, 4, 6, 10, 14, 7, 2, 9, 10, 15, 13, 18],
+                    'name' => 'Gói Cơ Bản',
+                    'data' => $result[0],
                 ],
-
                 [
-                    'name' => 'ServicesDaysChart2',
-                    'data' => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    'name' => 'Gói Tiêu Chuẩn',
+                    'data' => $result[1],
                 ],
+                [
+                    'name' => 'Gói Chuyên Nghiệp',
+                    'data' => $result[2],
+                ],
+                [
+                    'name' => 'Gói tin lẻ: 1 tháng',
+                    'data' => $result[3],
+                ],
+                [
+                    'name' => 'Gói tin lẻ: 7 ngày',
+                    'data' => $result[4],
+                ],
+                [
+                    'name' => 'Gói tin lẻ: 15 ngày',
+                    'data' => $result[5],
+                ]
             ],
             'xaxis' => [
-                'categories' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'categories' => $days,
                 'labels' => [
                     'style' => [
                         'fontFamily' => 'inherit',
@@ -115,7 +133,7 @@ class ServicesDaysChart extends ApexChartWidget
                     ],
                 ],
             ],
-            'colors' => ['#f59e0b', '#77B6EA'],
+            'colors' => ['#f59e0b', '#77B6EA', '#e67e22', '#2980b9', '#f39c12', '#c0392b'],
             'stroke' => [
                 'curve' => 'smooth',
             ],
