@@ -95,8 +95,7 @@
                     <div class="tab-pane fade" id="video-clip" role="tabpanel" aria-labelledby="video-clip-tab">
                         <div class="video-area">
                             <video autoplay="" loop="loop" muted="" preload="auto" controls="">
-                                <source src="{{ asset('/storage/' . $carDetail->verhicle_videos) }}"
-                                    type="video/mp4">
+                                <source src="{{ asset('/storage/' . $carDetail->verhicle_videos) }}" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -280,7 +279,7 @@
                 </ul>
             </div>
         </div>
-        <div class="single-item mb-50" id="kye-features">
+        <div class="single-item mb-50" id="key-features">
             <div class="kye-features">
                 <div class="title mb-20">
                     <h5>Tính năng xe</h5>
@@ -324,31 +323,47 @@
             </div>
         </div>
 
-
-        <div class="single-item mb-50" id="qus-ans">
-            <div class="user-qustion-area">
-                <div class="section-title-and-filter mb-30">
-                    <div class="title">
-                        <h5>Latest User Question</h5>
-                    </div>
-                    {{-- <div class="filter-atra">
-                    <h6>Filter By:</h6>
-                    <form>
-                        <div class="form-inner">
-                            <select>
-                                <option value="1">Newest</option>
-                                <option value="2">Older</option>
-                            </select>
-                        </div>
-                    </form>
-                </div> --}}
+        <div class="single-item mb-50" id="description">
+            <div class="description-area">
+                <div class="title mb-20">
+                    <h5>Mô tả</h5>
                 </div>
-                <livewire:comments.comment :id="$carDetail->id" />
-
-                <livewire:comments.list-comment />
+                <div class="description-car">
+                    {!! \Illuminate\Mail\Markdown::parse($carDetail->description) !!}
+                </div>
+            </div>
+        </div>
+        {{-- share , report btn  --}}
+        <div class="single-item mb-50" id="btn-lists">
+            <div class="more-options d-flex flex-row-reverse align-items-center gap-3">
+                <button class="bookmarkBtn">
+                    <span class="IconContainer">
+                        <svg fill="white" viewBox="0 0 512 512" height="1em">
+                            <path
+                                d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z">
+                            </path>
+                        </svg>
+                    </span>
+                    <p class="text mb-0">Báo Cáo</p>
+                </button>
+                <livewire:add-to-wish-list carID="{{ $carDetail->id }}" />
             </div>
         </div>
 
+        <div class="single-item mb-50" >
+            <div class="user-qustion-area">
+                <div class="section-title-and-filter mb-30">
+                    <div class="title">
+                        <h5>Đặt câu hỏi cho người bán</h5>
+                    </div>
+                </div>
+                <livewire:comments.comment :id="$carDetail->id" />
+
+                <div wire:loading.remove>
+                    <livewire:comments.list-comment />
+                </div>
+            </div>
+        </div>
 
         <div class="single-item mb-50" id="faqs">
             <div class="faq-area">
@@ -425,7 +440,85 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+    @push('styles')
+        <style>
+            #btn-lists .bookmarkBtn {
+                /* width: 130px; */
+                padding: 5px 10px;
+                height: 40px;
+                border-radius: 40px;
+                border: none;
+                background-color: rgb(255, 255, 255);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition-duration: .3s;
+                overflow: hidden;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.062);
+            }
+
+            #btn-lists .IconContainer {
+                width: 30px;
+                height: 30px;
+                background-color: rgb(103, 74, 228);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                z-index: 2;
+                transition-duration: .3s;
+            }
+
+            #btn-lists .icon {
+                border-radius: 1px;
+            }
+
+            #btn-lists .text {
+                height: 100%;
+                width: 90px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgb(26, 26, 26);
+                z-index: 1;
+                transition-duration: .3s;
+                font-size: .89em;
+                font-weight: 600;
+            }
+
+            #btn-lists .bookmarkBtn:hover .IconContainer {
+                width: 120px;
+                border-radius: 40px;
+                transition-duration: .3s;
+            }
+
+            #btn-lists .bookmarkBtn:hover .text {
+                transform: translate(10px);
+                width: 0;
+                font-size: 0;
+                transition-duration: .3s;
+            }
+
+           #btn-lists .bookmarkBtn:active {
+                transform: scale(0.95);
+                transition-duration: .3s;
+            }
+
+            #btn-lists .heart-save-car {
+                font-size: 20px;
+                width: 26px;
+                height: 26px;
+                transition: fill .3s ease-in-out
+            }
+
+            #btn-lists .heart-save-car:hover,
+            #btn-lists .heart-save-car:visited {
+                fill: coral;
+            }
+        </style>
+    @endpush
 </div>

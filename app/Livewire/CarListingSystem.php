@@ -2,15 +2,17 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\Brand;
+use Livewire\Component;
 use App\Models\Wishlist;
-use Carbon\Carbon;
+use Livewire\Attributes\On;
+use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Kjmtrue\VietnamZone\Models\Province;
-use Livewire\Attributes\Layout;
-use Livewire\Component;
-use Livewire\WithPagination;
+
 class CarListingSystem extends Component
 {
     use WithPagination;
@@ -26,31 +28,27 @@ class CarListingSystem extends Component
     public $minPrice;
     public $maxPrice;
 
+    public $queryMax;
+    public $queryMin;
+
     public function mount()
     {
         $this->brands = Brand::all();
         $this->locations = Province::all();
+
+        $this->maxPrice = Car::max('price');
+        $this->minPrice = Car::min('price');
+
+
     }
 
-    // thêm danh sách tin yêu thích
-    // public function addToWishlist($car_id)
-    // {
-    //     if (Auth::check()) {
-    //         $exists = Wishlist::where('user_id', Auth::id())->where('car_id', $car_id)->first();
-    //         if (!$exists) {
-    //             Wishlist::insert([
-    //                 'user_id' => Auth::id(),
-    //                 'car_id' => $car_id,
-    //                 'created_at' => Carbon::now(),
-    //             ]);
-    //             $this->dispatch('showSuccess', 'Lưu tin thành công');
-    //         } else {
-    //             $this->dispatch('showInfo', 'Tin này đã có trong danh sách');
-    //         }
-    //     } else {
-    //         $this->dispatch('showError', 'Bạn cần đăng nhập để thực hiện chức năng này');
-    //     }
-    // }
+    #[On('filterPrices')]
+    public function filterPrices($max, $min)
+    {
+        $this->queryMin = $min;
+        $this->queryMax = $max;
+
+    }
 
     #[Layout('components.partials.layout-client')]
     public function render()
@@ -70,7 +68,11 @@ class CarListingSystem extends Component
         }
 
         if (!empty($this->minYear && $this->maxYear)) {
-            $carQuery->whereBetween('car_info->manufactured', [$this->minYear, $this->maxYear]);
+            $carQuery->whereBetween('car_info->year_of_manufacture', [$this->minYear, $this->maxYear]);
+        }
+
+        if (!empty($this->queryMin && $this->queryMax)) {
+            $carQuery->whereBetween('price', [$this->queryMin, $this->queryMax]);
         }
 
         if (!empty($this->sortPrice)) {
@@ -83,12 +85,9 @@ class CarListingSystem extends Component
             }
         }
 
-        // if (!empty($this->minPrice && $this->maxPrice)) {
-        //     $carQuery->whereBetween('price', [$this->minPrice, $this->maxPrice]);
-        // }
 
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->paginate(2)
+            'cars' => $carQuery->paginate(6)
         ]);
     }
 }

@@ -35,11 +35,11 @@
                                     <div class="d-flex align-items-center">
 
                                         <img src="
-                                        {{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                        {{ file_exists(Storage::url(auth()->user()->avatar)) ? Storage::url($user->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                             class="rounded-circle object-fit-cover shadow"
                                             style="width: 50px;height:50px" alt="avatar">
 
-                                        <p class="fw-bolder ms-2 text-capitalize">{{ auth()->user()->name }}</p>
+                                        <p class="fw-bolder ms-2">{{ auth()->user()->name }}</p>
 
                                         <i class="text-success ms-1 bi bi-check-circle-fill"></i>
 
@@ -62,18 +62,9 @@
                         <button class="nav-link active" id="v-pills-1-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-1" type="button" role="tab" aria-controls="v-pills-1"
                             aria-selected="false">Đang Hiển Thị ({{ $cars->count() }})</button>
-                        {{-- <button class="nav-link" id="v-pills-2-tab" data-bs-toggle="pill" data-bs-target="#v-pills-2"
-                            type="button" role="tab" aria-controls="v-pills-2" aria-selected="true">Hết hạn
-                            (0)</button> --}}
                         <button class="nav-link" id="v-pills-3-tab" data-bs-toggle="pill" data-bs-target="#v-pills-3"
                             type="button" role="tab" aria-controls="v-pills-3" aria-selected="true">Bị Từ Chối
                             ({{ $deniedCars->count() }})</button>
-                        {{-- <button class="nav-link" id="v-pills-4-tab" data-bs-toggle="pill" data-bs-target="#v-pills-4"
-                            type="button" role="tab" aria-controls="v-pills-4" aria-selected="true">Cần Thanh Toán
-                            (0)</button>
-                        <button class="nav-link" id="v-pills-5-tab" data-bs-toggle="pill" data-bs-target="#v-pills-5"
-                            type="button" role="tab" aria-controls="v-pills-5" aria-selected="true">Tin Nháp
-                            (0)</button> --}}
                         <button class="nav-link" id="v-pills-6-tab" data-bs-toggle="pill" data-bs-target="#v-pills-6"
                             type="button" role="tab" aria-controls="v-pills-6" aria-selected="true">Chờ duyệt
                             ({{ $pendingCars->count() }})</button>
@@ -89,8 +80,8 @@
                         <div class="tab-pane fade active show" id="v-pills-1" role="tabpanel"
                             aria-labelledby="v-pills-home-tab">
                             <div class="reviews-area">
-                                <div class="row g-lg-4 gy-5">
-                                    <div class="col-lg-7">
+                                <div class="row g-lg-4">
+                                    {{-- <div class="col-lg-7"> --}}
 
                                         @if ($cars->isEmpty())
                                             <p class="text-secondary text-uppercase">
@@ -98,6 +89,7 @@
                                             </p>
                                         @else
                                             @foreach ($cars as $car)
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="product-st-card1 two mb-30" style="position: relative">
                                                     <div class="product-img">
                                                         <div class="product-price">
@@ -223,10 +215,11 @@
                                                         </nav>
                                                     </label>
                                                 </div>
+                                            </div>
                                             @endforeach
                                         @endif
 
-                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                             </div>
 
@@ -304,7 +297,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">
-                                                        <h6><a href="#">{{ $car->title }}</a></h6>
+                                                        <h6><a href="javascript:void(0)">{{ $car->title }}</a></h6>
                                                         <ul class="features">
                                                             <li>
                                                                 {{-- @dd($car) --}}

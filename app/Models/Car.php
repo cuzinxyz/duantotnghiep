@@ -5,13 +5,17 @@ namespace App\Models;
 use App\Models\Brand;
 use App\Models\ModelCar;
 use Illuminate\Database\Eloquent\Model;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Kjmtrue\VietnamZone\Models\Province;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Car extends Model
+class Car extends Model implements Viewable
 {
     use HasFactory, SoftDeletes;
+    use InteractsWithViews;
+
     protected $fillable = [
         'title',
         'slug',

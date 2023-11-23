@@ -42,7 +42,7 @@
                                             <span>(23,533) +</span>
                                         </div>
                                         <div class="explore-btn5">
-                                            <a href="{{ route('brand.detail') }}"><span>Xem</span> <i
+                                            <a href="{{ route('brand.detail', $brand->brand_name) }}"><span>Xem</span> <i
                                                     class="bi bi-arrow-right-short"></i></a>
                                         </div>
                                     </div>

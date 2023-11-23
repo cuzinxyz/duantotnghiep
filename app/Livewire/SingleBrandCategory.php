@@ -18,21 +18,25 @@ class SingleBrandCategory extends Component
     public $brands;
     public $slug;
     public $max_price, $min_price;
+    public $brandDetail;
 
-
-    public function mount($slug=null) {
+    public function mount($slug=null)
+    {
         $this->slug = $slug;
 
         $this->max_price = Car::max('price');
         $this->min_price = Car::min('price');
-        
+
+        $this->brandDetail = Brand::where('brand_name', $slug)->first();
     }
 
 
     public function filterCategory() {
         if($this->slug) {
             $brand = Brand::where('brand_name', $this->slug)->select('id')->first();
-            $brand_id= $brand->id; 
+
+            // dd($brand);
+            $brand_id= $brand->id;
             $cars = Car::where('brand_id', $brand_id)->where('status', 1)->get();
         }else {
             $cars = Car::where('status', 1)->get();
@@ -49,13 +53,13 @@ class SingleBrandCategory extends Component
                 $cars = Car::where('price', '>=', $number1)->where('price', '<=', $number2)->where('status', 1)
                 ->get();
             }
-        } 
+        }
 
         if($this->brand) {
             $cars = Car::where('brand_id', $this->brand)->where('status', 1)
             ->get();
         }
-        
+
         if($this->price && $this->brand && $this->model ) {
             $parts = explode("-", $this->price);
             $number1 = intval(trim($parts[0]));
@@ -76,15 +80,15 @@ class SingleBrandCategory extends Component
     public function render()
     {
         if (!empty($this->brand) && $this->brand != 0) {
-            $this->modelCars = ModelCar::where('brand_id', $this->brand)->where('status', 1)
+            $this->modelCars = ModelCar::where('brand_id', $this->brand)
             ->get();
         }
 
         $this->brands = Brand::all();
 
         // $cars = $this->filterCategory();
-        // dd($cars);
-        
+        // dd($this->brands);
+
         return view('livewire.single-brand-category', [
             'ModelCars' => $this->modelCars,
             'brands' => $this->brands,
