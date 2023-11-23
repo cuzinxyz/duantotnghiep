@@ -35,22 +35,6 @@ class ServicesDaysChart extends ApexChartWidget
      */
     protected function getOptions(): array
     {
-        DB::enableQueryLog();
-        // $serviceOne = Service::leftJoin('purchased_service', function ($join) {
-        //     $join->on('services.id', '=', 'purchased_service.service_id')
-        //     ->whereBetween('purchased_service.created_at', ['2023-11-01 00:00:00', '2023-11-30 23:59:59']);
-        // })
-        //     ->select(
-        //         DB::raw("DATE_FORMAT(purchased_service.created_at, '%Y-%m-%d') AS date"),
-        //         'services.service_name AS name',
-        //         DB::raw('COALESCE(COUNT(purchased_service.service_id), 0) AS aggregate')
-        //     )
-        //     ->groupBy('date', 'services.service_name')
-        //     ->orderBy('date', 'ASC')
-        //     ->get();
-
-
-
         $now = Carbon::now();
 
         $servicePerDay = [];
@@ -77,14 +61,23 @@ class ServicesDaysChart extends ApexChartWidget
 
         foreach($servicePerDay as $serviceDay) {
             foreach($serviceDay as $key => $item) {
+                $name = $item->name;
                 $aggregate = $item->aggregate;
 
-                if (!isset($result[$key])) {
-                    $result[$key] = [];
+                if (!isset($results[$name])) {
+                    $results[$name] = [];
                 }
 
-                $result[$key][] = $aggregate;
+                $results[$name][] = $aggregate;
             }
+        }
+
+        $data = [];
+        foreach($results as $key => $result) {
+            $data[] = [
+                'name' => $key,
+                'data' => $result
+            ];
         }
         
         return [
@@ -92,32 +85,7 @@ class ServicesDaysChart extends ApexChartWidget
                 'type' => 'line',
                 'height' => 300,
             ],
-            'series' => [
-                [
-                    'name' => 'Gói Cơ Bản',
-                    'data' => $result[0],
-                ],
-                [
-                    'name' => 'Gói Tiêu Chuẩn',
-                    'data' => $result[1],
-                ],
-                [
-                    'name' => 'Gói Chuyên Nghiệp',
-                    'data' => $result[2],
-                ],
-                [
-                    'name' => 'Gói tin lẻ: 1 tháng',
-                    'data' => $result[3],
-                ],
-                [
-                    'name' => 'Gói tin lẻ: 7 ngày',
-                    'data' => $result[4],
-                ],
-                [
-                    'name' => 'Gói tin lẻ: 15 ngày',
-                    'data' => $result[5],
-                ]
-            ],
+            'series' => $data,
             'xaxis' => [
                 'categories' => $days,
                 'labels' => [
@@ -138,30 +106,5 @@ class ServicesDaysChart extends ApexChartWidget
                 'curve' => 'smooth',
             ],
         ];
-    }
-
-
-    protected function getFormSchema(): array
-    {
-        return [
-            DatePicker::make('date_start')
-                ->label('Ngày bắt đầu')
-                ->default(now()->startOfMonth())
-                ->reactive()
-                ->afterStateUpdated(function () {
-                    $this->updateOptions();
-                }),
-            DatePicker::make('date_end')
-                ->label('Ngày kết thúc')
-                ->default(now()->endOfMonth())
-                ->reactive()
-                ->afterStateUpdated(function () {
-                    $this->updateOptions();
-                }),
-        ];
-    }
-
-    private function getMonthServices()
-    {
     }
 }
