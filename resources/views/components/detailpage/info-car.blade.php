@@ -344,7 +344,10 @@
                             </path>
                         </svg>
                     </span>
-                    <p class="text mb-0">Báo Cáo</p>
+                    {{-- <button type="button" class="text mb-0" data-bs-toggle="modal" data-bs-target="#report">
+                        Báo Cáo
+                    </button> --}}
+                    <p class="text mb-0" data-bs-toggle="modal" data-bs-target="#report">Báo Cáo</p>
                 </button>
                 <livewire:add-to-wish-list carID="{{ $carDetail->id }}" />
             </div>
@@ -503,7 +506,7 @@
                 transition-duration: .3s;
             }
 
-           #btn-lists .bookmarkBtn:active {
+            #btn-lists .bookmarkBtn:active {
                 transform: scale(0.95);
                 transition-duration: .3s;
             }
