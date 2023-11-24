@@ -29,7 +29,14 @@ class SupportResource extends Resource
   {
     return $form
       ->schema([
-        Forms\Components\Textarea::make('response')
+        Forms\Components\Section::make("Hỗ trợ người dùng")
+          ->schema([
+            Forms\Components\Textarea::make('response')
+            ->label('Nội dung phản hồi khách hàng')
+            ->required()
+            ,
+        ])
+
       ]);
   }
 
@@ -41,16 +48,26 @@ class SupportResource extends Resource
         Tables\Columns\TextColumn::make('user.name')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
-          ->label('User name'),
+          ->label('User Name'),
         Tables\Columns\TextColumn::make('title')
-          ->fontFamily(FontFamily::Mono)
-          ->searchable()
-          ->label('Title')
-          ->words(10),
+        ->fontFamily(FontFamily::Mono)
+        ->searchable()
+        ->label('Title')
+        ->words(5),
         Tables\Columns\TextColumn::make('category')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
           ->label('Category'),
+        Tables\Columns\TextColumn::make('body')
+          ->fontFamily(FontFamily::Mono)
+          ->searchable()
+          ->label('Body')
+          ->words(10),
+        Tables\Columns\TextColumn::make('response')
+        ->fontFamily(FontFamily::Mono)
+        ->searchable()
+        ->words(5)
+        ->label('Response'),
         Tables\Columns\TextColumn::make('status')
           ->badge()
           ->color(fn(string $state): string => match ($state) {

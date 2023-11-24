@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Support extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = 'supports';
+    protected $fillable = ['id', 'user_id', 'title', 'category', 'body', 'response'];
 
     public function user()
     {
