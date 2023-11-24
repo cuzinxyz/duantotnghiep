@@ -1,4 +1,3 @@
-.dialog__trigger,
 .dialog__action {
     border: 3px solid #333333;
     background: #f1f1f1;
@@ -10,8 +9,6 @@
     transform: translateY(0px);
 }
 
-.dialog__trigger:hover,
-.dialog__trigger:focus,
 .dialog__action:hover,
 .dialog__action:focus {
     outline: 0;
@@ -20,7 +17,6 @@
     box-shadow: 0 5px 10px rgba(51, 51, 51, 0.4);
 }
 
-.dialog__trigger:active,
 .dialog__action:active {
     transform: translateY(-3px);
 }
@@ -28,15 +24,29 @@
 .dialog {
     background: #f1f1f1;
     width: 70%;
-    position: absolute;
-    left: calc(50% - 35%);
-    top: 0;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000000;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(51, 51, 51, 0.4);
     border: 3px solid #333333;
-    visibility: hidden;
-    opacity: 0;
     transition: all 180ms ease-in;
+}
+
+.report-box {
+    position: fixed;
+    top: 0;
+    z-index: 999999;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgb(255 255 255 / 0%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12.8px);
+    -webkit-backdrop-filter: blur(12.8px);
 }
 
 @media (max-width: 600px) {
@@ -48,8 +58,7 @@
 
 .dialog.dialog--active {
     top: 10%;
-    visibility: visible;
-    opacity: 1;
+    display: block;
     transition: all 250ms ease-out;
 }
 
@@ -65,7 +74,7 @@
 }
 
 .dialog .dialog__close:hover {
-    color: #e74c3c;
+    color: #E74C3C;
 }
 
 .dialog .dialog__title {
