@@ -74,230 +74,58 @@
 
     </div>
 
-<div class="modal adSearch-modal fade" id="adSearchModal01" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-          class="bi bi-x"></i>
-      </button>
-      <div class="modal-body">
-        <form>
-          <h5 class="main-title">Advanced Option</h5>
-          <div class="row">
-            <div class="col-md-12 mb-30">
-              <div class="form-inner">
-                <select>
-                  <option value="1">Sydne City, Australia</option>
-                  <option value="2">Dhaka, Bangladesh</option>
-                  <option value="3">Tokyo, Japan</option>
-                </select>
-              </div>
+    <div class="top-bar style-5">
+        <div class="logo-and-menu">
+            <div class="company-logo">
+                <a href="/"><img src="{{ asset('images/green-logo.svg') }}" alt=""></a>
             </div>
-            <h5>More Filter</h5>
-            <div class="row mb-10">
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Select Brand </label>
-                  <select>
-                    <option value="1"> Mercedes Benz</option>
-                    <option value="2">Volkswagen</option>
-                    <option value="3">Mitsubishi</option>
-                    <option value="4 ">Tesla</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Select Body Type</label>
-                  <select>
-                    <option value="1">Hatchback</option>
-                    <option value="2">Covertible</option>
-                    <option value="3">Coupe</option>
-                    <option value="4 ">Truck</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Select Fuel Type </label>
-                  <select>
-                    <option value="1"> Petrol + Gas</option>
-                    <option value="2">Petrol</option>
-                    <option value="3">Gas</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Steering Side</label>
-                  <select>
-                    <option value="1">Left</option>
-                    <option value="2">Right</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Select Color</label>
-                  <select>
-                    <option value="1">Yellow</option>
-                    <option value="2">Brown</option>
-                    <option value="3">Red</option>
-                    <option value="4">Silver</option>
-                    <option value="5">Orange</option>
-                    <option value="6">Blue</option>
-                    <option value="7">Gray</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Select Doors</label>
-                  <select>
-                    <option value="1">03 doors</option>
-                    <option value="2">04 doors</option>
-                    <option value="3">06 doors</option>
-                    <option value="4 ">08 doors</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <h5>Year &amp; Mileage</h5>
-            <div class="row">
-              <div class="col-md-6 mb-20">
-                <div class="form-inner">
-                  <label>Select Year </label>
-                  <select>
-                    <option value="1">2021</option>
-                    <option value="2">2020</option>
-                    <option value="3">2019</option>
-                    <option value="4 ">2018</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3 mb-20">
-                <div class="form-inner">
-                  <label>Select Min (miles)</label>
-                  <select>
-                    <option value="1">800 miles</option>
-                    <option value="2">1500 miles</option>
-                    <option value="3">2000 miles</option>
-                    <option value="4 ">2500 miles</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3 mb-20">
-                <div class="form-inner">
-                  <label>Select Max (miles)</label>
-                  <select>
-                    <option value="1">1200 miles</option>
-                    <option value="2">3000 miles</option>
-                    <option value="3">3500 miles</option>
-                    <option value="4 ">4000 miles</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <h5 class="mb-20">Price Range</h5>
-            <div class="row">
-              <div class="col-lg-6 mb-20">
-                <div class="range-wrapper2">
-                  <div class="slider-wrapper">
-                    <div id="eg-range-slider"></div>
-                  </div>
-                  <div class="valus">
-                    <div class="min-value">
-                      <span>$</span>
-                      <input type="text" class="from" value="200">
-                    </div>
-                    <div class="min-value">
-                      <span>$</span>
-                      <input type="text" class="to" value="2000">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 mb-20">
-                <div class="form-inner">
-                  <label>Min (Price)</label>
-                  <select>
-                    <option value="1">$2,234</option>
-                    <option value="2">$3,234</option>
-                    <option value="3">$4,234</option>
-                    <option value="4 ">$5,234</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3 mb-20">
-                <div class="form-inner">
-                  <label>Max (Price)</label>
-                  <select>
-                    <option value="1">$12,234</option>
-                    <option value="2">$13,234</option>
-                    <option value="3">$14,234</option>
-                    <option value="4 ">$15,234</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="apply-btn pt-30">
-            <button class="primary-btn2" type="submit">Apply Filter</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="top-bar style-5">
-  <div class="logo-and-menu">
-    <div class="company-logo">
-      <a href="index.html"><img src="images/green-logo.svg" alt=""></a>
-    </div>
-    <div class="menu">
-      <ul>
-        <li><a href="#">Newly Listed Car</a></li>
-        <li><a href="#">Lowest Mileage</a></li>
-        <li><a href="#">Offer</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="topbar-right">
-    <ul>
-      <li>
-        <button class="sell-btn" type="button" data-bs-toggle="modal" data-bs-target="#sellUsModal01">
-          <svg width="16" height="16" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M17.5588 0C17.447 0.00287726 17.3409 0.0492946 17.2629 0.129351L15.4245 1.97099L14.8707 1.4164C14.5627 1.10919 14.2078 0.938606 13.8585 0.928904C13.6483 0.923245 13.4543 0.953158 13.2231 0.985496L10.2237 1.40265C9.12021 1.55626 8.55995 2.02839 7.84852 2.69132L0.470643 9.56715C0.467641 9.5698 0.464677 9.5725 0.46175 9.57523C0.142414 9.89053 0.00416943 10.3206 0.000127199 10.7442C-0.00472348 11.1679 0.12867 11.6166 0.484386 11.9205L0.460133 11.8971L6.10309 17.5417L6.08045 17.5174C6.38443 17.8731 6.8323 18.0057 7.25674 18.0009C7.68036 17.9968 8.11127 17.8586 8.42575 17.54C8.42849 17.5368 8.43119 17.5336 8.43384 17.5303L8.94073 16.9863L10.9586 17.7381C11.1627 17.8161 11.3805 17.8522 11.5988 17.8442C11.8172 17.8361 12.0317 17.7841 12.2295 17.6912C12.6135 17.5109 12.9474 17.2062 13.101 16.7858L15.3161 10.1452C15.9758 9.4378 16.4455 8.87674 16.5983 7.77725L17.0155 4.77792C17.0478 4.5467 17.0777 4.35186 17.0721 4.14248C17.0624 3.79323 16.8926 3.43913 16.5846 3.1303L16.03 2.57652L17.87 0.736494C17.932 0.676327 17.9743 0.598838 17.9915 0.51419C18.0086 0.429542 17.9998 0.341686 17.9661 0.262143C17.9325 0.182601 17.8756 0.115085 17.8029 0.0684494C17.7302 0.0218141 17.6451 -0.00176348 17.5588 0.000808484V0ZM13.8351 1.78505C14.0032 1.78909 14.0372 1.79394 14.2643 2.02192L14.8189 2.57571L13.8351 3.5604C13.6631 3.47636 13.4743 3.43241 13.2829 3.43185C12.5779 3.43185 11.9967 4.01393 11.9967 4.71809C11.9967 5.42306 12.5779 6.00352 13.2821 6.00352C13.9871 6.00352 14.5683 5.42306 14.5683 4.71809C14.5683 4.52083 14.5214 4.33408 14.4406 4.16592L15.4245 3.18123L15.9783 3.73583C16.2062 3.963 16.2111 3.99696 16.2151 4.16431C16.2104 4.33015 16.1942 4.49547 16.1666 4.65907L15.7503 7.65841C15.6209 8.58812 15.342 8.85976 14.6831 9.56796L7.81537 16.9369C7.70462 17.0493 7.47583 17.1407 7.24704 17.1431C7.01825 17.1463 6.8226 17.0647 6.73286 16.9596C6.72537 16.9512 6.71755 16.9431 6.70942 16.9353L1.06647 11.2908C1.05869 11.2826 1.0506 11.2748 1.04221 11.2673C0.937116 11.1784 0.854655 10.9819 0.857888 10.7531C0.860314 10.5252 0.951668 10.2956 1.06404 10.1848L8.43303 3.31786C9.14123 2.65817 9.41286 2.38006 10.3426 2.25071L13.3419 1.83356C13.5731 1.80122 13.7348 1.78181 13.8351 1.78505ZM13.2829 4.28881C13.5246 4.28881 13.7114 4.47637 13.7114 4.71809C13.7114 4.95982 13.5246 5.14657 13.2829 5.14657C13.0404 5.14657 12.8544 4.95982 12.8544 4.71809C12.8544 4.47637 13.0404 4.28881 13.2829 4.28881ZM5.99314 8.99881C5.90784 8.99872 5.82446 9.0241 5.75367 9.07168C5.68288 9.11926 5.6279 9.18689 5.59578 9.2659C5.56365 9.34492 5.55584 9.43172 5.57334 9.5152C5.59084 9.59868 5.63286 9.67504 5.69401 9.7345L8.26568 12.3054C8.6699 12.7096 9.27624 12.1032 8.87201 11.699L6.30035 9.12816C6.26038 9.08717 6.2126 9.05461 6.15984 9.03239C6.10707 9.01017 6.05039 8.99876 5.99314 8.99881ZM4.70771 10.2834C4.62224 10.2832 4.53865 10.3085 4.46769 10.3561C4.39672 10.4037 4.34161 10.4715 4.30945 10.5507C4.27729 10.6299 4.26955 10.7168 4.28721 10.8005C4.30488 10.8841 4.34714 10.9605 4.40858 11.0199L6.98025 13.5908C7.38447 14.0217 8.01749 13.3879 7.58658 12.9845L5.01573 10.4144C4.9758 10.373 4.92795 10.3401 4.87503 10.3176C4.82212 10.2951 4.76521 10.2835 4.70771 10.2834ZM13.9094 11.6537L12.2958 16.4907C12.2408 16.6386 12.071 16.8181 11.8641 16.9151C11.6571 17.0121 11.4493 17.0097 11.32 16.9612L9.57213 16.3072L13.9094 11.6537Z">
-            </path>
-          </svg>
-          SELL WITH US
-        </button>
-      </li>
-      <li>
-        <a href="#">
-          <svg width="16" height="16" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-            </path>
-          </svg>
-          SAVE
-        </a>
-      </li>
-      <li>
-        <div class="hotline-area d-xl-flex d-none">
-          <div class="icon">
-            <img src="images/hotline-icon.svg" alt="">
-          </div>
-          <div class="content">
-            <span>To More Inquiry</span>
-            <h6><a href="tel:+990737621432">+990-737 621 432</a></h6>
-          </div>
         </div>
-      </li>
-    </ul>
-  </div>
-</div>
+        <div class="search-area">
+            <form>
+                <div class="form-inner">
+                    <input type="text" placeholder="Search for cars">
+                    <button type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="topbar-right">
+            <ul>
+                <li>
+                    @auth
+                        <a href="{{ route('sellCar') }}">
+                        @else
+                            <a href="{{ route('login') }}">
+                            @endauth
+                            <button class="sell-btn" type="button" data-bs-toggle="modal"
+                                data-bs-target="#sellUsModal01">
+                                <svg width="16" height="16" viewBox="0 0 18 18"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.5588 0C17.447 0.00287726 17.3409 0.0492946 17.2629 0.129351L15.4245 1.97099L14.8707 1.4164C14.5627 1.10919 14.2078 0.938606 13.8585 0.928904C13.6483 0.923245 13.4543 0.953158 13.2231 0.985496L10.2237 1.40265C9.12021 1.55626 8.55995 2.02839 7.84852 2.69132L0.470643 9.56715C0.467641 9.5698 0.464677 9.5725 0.46175 9.57523C0.142414 9.89053 0.00416943 10.3206 0.000127199 10.7442C-0.00472348 11.1679 0.12867 11.6166 0.484386 11.9205L0.460133 11.8971L6.10309 17.5417L6.08045 17.5174C6.38443 17.8731 6.8323 18.0057 7.25674 18.0009C7.68036 17.9968 8.11127 17.8586 8.42575 17.54C8.42849 17.5368 8.43119 17.5336 8.43384 17.5303L8.94073 16.9863L10.9586 17.7381C11.1627 17.8161 11.3805 17.8522 11.5988 17.8442C11.8172 17.8361 12.0317 17.7841 12.2295 17.6912C12.6135 17.5109 12.9474 17.2062 13.101 16.7858L15.3161 10.1452C15.9758 9.4378 16.4455 8.87674 16.5983 7.77725L17.0155 4.77792C17.0478 4.5467 17.0777 4.35186 17.0721 4.14248C17.0624 3.79323 16.8926 3.43913 16.5846 3.1303L16.03 2.57652L17.87 0.736494C17.932 0.676327 17.9743 0.598838 17.9915 0.51419C18.0086 0.429542 17.9998 0.341686 17.9661 0.262143C17.9325 0.182601 17.8756 0.115085 17.8029 0.0684494C17.7302 0.0218141 17.6451 -0.00176348 17.5588 0.000808484V0ZM13.8351 1.78505C14.0032 1.78909 14.0372 1.79394 14.2643 2.02192L14.8189 2.57571L13.8351 3.5604C13.6631 3.47636 13.4743 3.43241 13.2829 3.43185C12.5779 3.43185 11.9967 4.01393 11.9967 4.71809C11.9967 5.42306 12.5779 6.00352 13.2821 6.00352C13.9871 6.00352 14.5683 5.42306 14.5683 4.71809C14.5683 4.52083 14.5214 4.33408 14.4406 4.16592L15.4245 3.18123L15.9783 3.73583C16.2062 3.963 16.2111 3.99696 16.2151 4.16431C16.2104 4.33015 16.1942 4.49547 16.1666 4.65907L15.7503 7.65841C15.6209 8.58812 15.342 8.85976 14.6831 9.56796L7.81537 16.9369C7.70462 17.0493 7.47583 17.1407 7.24704 17.1431C7.01825 17.1463 6.8226 17.0647 6.73286 16.9596C6.72537 16.9512 6.71755 16.9431 6.70942 16.9353L1.06647 11.2908C1.05869 11.2826 1.0506 11.2748 1.04221 11.2673C0.937116 11.1784 0.854655 10.9819 0.857888 10.7531C0.860314 10.5252 0.951668 10.2956 1.06404 10.1848L8.43303 3.31786C9.14123 2.65817 9.41286 2.38006 10.3426 2.25071L13.3419 1.83356C13.5731 1.80122 13.7348 1.78181 13.8351 1.78505ZM13.2829 4.28881C13.5246 4.28881 13.7114 4.47637 13.7114 4.71809C13.7114 4.95982 13.5246 5.14657 13.2829 5.14657C13.0404 5.14657 12.8544 4.95982 12.8544 4.71809C12.8544 4.47637 13.0404 4.28881 13.2829 4.28881ZM5.99314 8.99881C5.90784 8.99872 5.82446 9.0241 5.75367 9.07168C5.68288 9.11926 5.6279 9.18689 5.59578 9.2659C5.56365 9.34492 5.55584 9.43172 5.57334 9.5152C5.59084 9.59868 5.63286 9.67504 5.69401 9.7345L8.26568 12.3054C8.6699 12.7096 9.27624 12.1032 8.87201 11.699L6.30035 9.12816C6.26038 9.08717 6.2126 9.05461 6.15984 9.03239C6.10707 9.01017 6.05039 8.99876 5.99314 8.99881ZM4.70771 10.2834C4.62224 10.2832 4.53865 10.3085 4.46769 10.3561C4.39672 10.4037 4.34161 10.4715 4.30945 10.5507C4.27729 10.6299 4.26955 10.7168 4.28721 10.8005C4.30488 10.8841 4.34714 10.9605 4.40858 11.0199L6.98025 13.5908C7.38447 14.0217 8.01749 13.3879 7.58658 12.9845L5.01573 10.4144C4.9758 10.373 4.92795 10.3401 4.87503 10.3176C4.82212 10.2951 4.76521 10.2835 4.70771 10.2834ZM13.9094 11.6537L12.2958 16.4907C12.2408 16.6386 12.071 16.8181 11.8641 16.9151C11.6571 17.0121 11.4493 17.0097 11.32 16.9612L9.57213 16.3072L13.9094 11.6537Z">
+                                    </path>
+                                </svg>
+                                Bán Xe
+                            </button>
+                        </a>
+                </li>
+                <li>
+                    @auth
+                        <a href="{{ route('wishlish') }}">
+                        @else
+                            <a href="{{ route('login') }}">
+                            @endauth
+                            <svg width="16" height="16" viewBox="0 0 14 14"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
+                                </path>
+                            </svg>
+                            Lưu Tin
+                        </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <header class="header-area style-5">
         <div class="header-logo d-lg-none d-flex">
