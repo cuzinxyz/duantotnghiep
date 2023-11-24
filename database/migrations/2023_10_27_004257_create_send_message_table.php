@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('send_message', function (Blueprint $table) {
             $table->id();
-            $table->string('body');
-            $table->foreignIdFor(\App\Models\User::class,'user_id');
-            $table->foreignIdFor(\App\Models\Car::class,'car_id');
-            $table->foreignIdFor(\App\Models\News::class,'news_id');
-//          $table->integer('parent_id')->default('0');
+            $table->string('user_name');
+            $table->string('email');
+            $table->string('phone_number');
+            $table->string('message');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('send_message');
     }
 };
