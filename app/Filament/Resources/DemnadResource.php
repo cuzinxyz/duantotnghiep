@@ -2,24 +2,29 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Demnad;
-use App\Filament\Resources\DemnadResource\Pages;
-use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\Actions;
-use Filament\Infolists\Components\Actions\Action;
-use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
+use App\Models\User;
 use Filament\Tables;
+use App\Models\Demnad;
+use App\Models\ChMessage;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Resources\Resource;
 use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Columns\IconColumn;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\DemnadResource\Pages;
+use Filament\Infolists\Components\Actions\Action;
 
 class DemnadResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Quản lý nội dung';
 
     protected static ?string $model = Demnad::class;
 
@@ -43,13 +48,12 @@ class DemnadResource extends Resource
                         TextEntry::make('created_at')
                             ->label('Thời gian tạo')
                             ->icon('heroicon-o-calendar-days'),
-                        IconEntry::make('status')
-                            ->boolean() 
+                        TextEntry::make('status')
+                            ->state(function (Model $record) {
+                                if ($record->status == 0) return 'Chưa được duyệt';
+                                if ($record->status == 1) return 'Đã được duyệt';
+                            })
                             ->label('Trạng thái'),
-                        TextEntry::make('service.service_name')
-                            ->label('Loại gói tin')
-                            ->badge()
-                            ->color('warning'),
                     ])->columns(2)
                     ->columnSpan(1),
                 Section::make('Hành động')
@@ -62,6 +66,14 @@ class DemnadResource extends Resource
                                 ->action(function (Demnad $record) {
                                     $record->status = 1;
                                     $record->save();
+
+
+                                    $bot = User::where('name', 'BOT')->first();
+                                    ChMessage::create([
+                                        'from_id' => $bot->id,
+                                        'to_id' => $record->user_id,
+                                        'body' => 'Duyệt thành công'
+                                    ]);
                                 })
                                 ->successNotificationTitle('Phê duyệt thành công'),
                             Action::make('unActivePost')
@@ -78,6 +90,13 @@ class DemnadResource extends Resource
                                     $record->reason = $data['reason'];
                                     $record->status = 0;
                                     $record->save();
+
+                                    $bot = User::where('name', 'BOT')->first();
+                                    ChMessage::create([
+                                        'from_id' => $bot->id,
+                                        'to_id' => $record->user_id,
+                                        'body' => $data['reason']
+                                    ]);
                                 })
                                 ->successNotification(
                                     Notification::make()
@@ -119,7 +138,11 @@ class DemnadResource extends Resource
                     })
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                    ->label('Bài đăng chưa duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default()
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -130,9 +153,7 @@ class DemnadResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
+            ->emptyStateHeading('Không có bài đăng cần duyệt');
     }
 
     public static function getRelations(): array

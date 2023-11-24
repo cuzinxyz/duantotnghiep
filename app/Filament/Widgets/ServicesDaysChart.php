@@ -12,15 +12,11 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 class ServicesDaysChart extends ApexChartWidget
 {
     /**
-     * Chart Id
-     *
      * @var string
      */
     protected static string $chartId = 'servicesDaysChart';
 
     /**
-     * Widget Title
-     *
      * @var string|null
      */
     protected static ?string $heading = 'Dịch vụ đã đăng kí trong tháng';
