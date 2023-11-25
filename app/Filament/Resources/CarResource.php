@@ -33,6 +33,7 @@ class CarResource extends Resource
     protected static ?string $model = Car::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Xe';
 
     public static function form(Form $form): Form
     {
@@ -390,5 +391,9 @@ class CarResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+    public static function getModelLabel(): string
+    {
+        return __('Xe  ');
     }
 }

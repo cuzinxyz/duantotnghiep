@@ -24,6 +24,7 @@ class SupportResource extends Resource
   protected static ?string $model = Support::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel= 'Hỗ trợ';
 
   public static function form(Form $form): Form
   {
@@ -41,17 +42,18 @@ class SupportResource extends Resource
         Tables\Columns\TextColumn::make('user.name')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
-          ->label('User name'),
+          ->label('Tên người dùng'),
         Tables\Columns\TextColumn::make('title')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
-          ->label('Title')
+          ->label('Tiêu đề')
           ->words(10),
         Tables\Columns\TextColumn::make('category')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
-          ->label('Category'),
+          ->label('Thể loại'),
         Tables\Columns\TextColumn::make('status')
+            ->label('Trạng thái')
           ->badge()
           ->color(fn(string $state): string => match ($state) {
             '0' => 'gray',
@@ -96,4 +98,8 @@ class SupportResource extends Resource
       'edit' => Pages\EditSupport::route('/{record}/edit'),
     ];
   }
+    public static function getModelLabel(): string
+    {
+        return __('Hỗ trợ');
+    }
 }

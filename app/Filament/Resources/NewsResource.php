@@ -122,4 +122,8 @@ class NewsResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+    public static function getModelLabel(): string
+    {
+        return __('Tin tức');
+    }
 }

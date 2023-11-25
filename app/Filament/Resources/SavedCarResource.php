@@ -25,6 +25,7 @@ class SavedCarResource extends Resource
     protected static ?string $model = SavedCar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Xe đã lưu';
 
     public static function form(Form $form): Form
     {
@@ -46,14 +47,14 @@ class SavedCarResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->fontFamily(FontFamily::Mono)
                     ->searchable()
-                    ->label('#'),
+                    ->label('TT'),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->searchable()
-                    ->label('User name'),
+                    ->label('Tên người dùng')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('car.title')
+                    ->label('Tiêu đề xe')
                     ->icon('heroicon-m-bookmark')
                     ->searchable()
-                    ->label('Car title')
                     ->iconPosition(IconPosition::After),
             ])
 
@@ -89,5 +90,9 @@ class SavedCarResource extends Resource
             'create' => Pages\CreateSavedCar::route('/create'),
             'edit' => Pages\EditSavedCar::route('/{record}/edit'),
         ];
+    }
+    public static function getModelLabel(): string
+    {
+        return __('Xe đã lưu');
     }
 }
