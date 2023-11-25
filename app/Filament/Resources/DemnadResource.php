@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables\Filters\Filter;
+use Illuminate\Support\Facades\Mail;
 use Filament\Tables\Columns\IconColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
@@ -20,6 +21,7 @@ use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\DemnadResource\Pages;
+use App\Mail\SendMailDemnad;
 use Filament\Infolists\Components\Actions\Action;
 
 class DemnadResource extends Resource
@@ -69,11 +71,19 @@ class DemnadResource extends Resource
 
 
                                     $bot = User::where('name', 'BOT')->first();
+                                    $user = User::where('id', $record->user_id)->first();
+
+                                    $reason = 'Chào bạn '.$user->name.', 
+                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã được duyệt thành công. 
+                                    Để xem bài viết đã đăng của bạn, vui lòng truy cập: '. route('homepage')
+                                    . ' .Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $record->user_id,
-                                        'body' => 'Duyệt thành công'
+                                        'body' => $reason
                                     ]);
+                                    Mail::to($user)->later(now()->addSeconds(5), new SendMailDemnad($record, $user));
+                                    redirect()->route('filament.admin.resources.demnads.index');
                                 })
                                 ->successNotificationTitle('Phê duyệt thành công'),
                             Action::make('unActivePost')
@@ -92,11 +102,20 @@ class DemnadResource extends Resource
                                     $record->save();
 
                                     $bot = User::where('name', 'BOT')->first();
+                                    $user = User::where('id', $record->user_id)->first();
+
+                                    $reason = 'Chào bạn '.$user->name.', 
+                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã không được duyệt. 
+                                    Vì lý do: '.$data['reason'].', vui lòng điều chỉnh lại bài viết của bạn để chúng tôi có thể hỗ trợ bạn dễ dàng tìm được chiếc xe như mong muốn.';
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $record->user_id,
-                                        'body' => $data['reason']
+                                        'body' => $reason
                                     ]);
+
+                                    $user = User::where('id', $record->user_id)->first();
+                                    Mail::to($user)->later(now()->addSeconds(5), new SendMailDemnad($record, $user));
+                                    redirect()->route('filament.admin.resources.demnads.index');
                                 })
                                 ->successNotification(
                                     Notification::make()
@@ -176,5 +195,10 @@ class DemnadResource extends Resource
     public static function getModelLabel(): string
     {
         return __('bài đăng mua');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::where('status', 0)->count();
     }
 }

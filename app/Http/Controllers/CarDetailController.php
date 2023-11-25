@@ -10,9 +10,11 @@ class CarDetailController extends Controller
     public function index($slug = null)
     {
         $carDetail = [];
-        if ($slug) {
+        if (!$slug) {
             $carDetail = Car::where('slug', $slug)->first();
         }
+
+
         # save view
         views($carDetail)->record();
 

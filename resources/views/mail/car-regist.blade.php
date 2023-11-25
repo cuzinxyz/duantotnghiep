@@ -110,10 +110,6 @@
             <td>Nhiên liệu:</td>
             <td>{{$data['fuelType']}}</td>
         </tr>
-        <tr>
-            <td>Tình trạng:</td>
-            <td>{{$data['condition']}}</td>
-        </tr>
     </table>
 
     <div class="row">

@@ -96,3 +96,4 @@ Route::controller(CarDetailController::class)->group(function () {
 });
 
 
+
