@@ -72,4 +72,5 @@ class HomeController extends Controller
 
         return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners'));
     }
+    
 }

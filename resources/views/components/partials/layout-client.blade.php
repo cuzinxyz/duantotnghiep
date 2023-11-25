@@ -291,11 +291,21 @@
                                             <i class="bi bi-person-circle"></i> Trang cá nhân
                                         </div>
                                     </div>
+                                    <div class="cart-block">
+                                        <div class="cart-block-body_item"
+                                            onclick="window.location.href='{{ route('garage') }}'">
+                                            <i class="bi bi-person-circle"></i> Quản lí Garage
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="mb-2">
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
                                         <div class="cart-block-body">
+                                        <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('dangki-garage')}}'">
+                                                <i class="bi bi-house"></i> Đăng kí doanh nghiệp
+                                            </div>
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('wishlish') }}'">
                                                 <i class="bi bi-heart"></i> Tin đã lưu

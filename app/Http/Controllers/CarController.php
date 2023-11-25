@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GarageRequest;
 use App\Models\Car;
+use App\Models\Garage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CarController extends Controller
 {
@@ -15,8 +19,7 @@ class CarController extends Controller
     public function buyCar()
     {
         return view("user-form.form-buy-car");
-    }
-
+    }   
     public function removeCar($id)
     {
         $car = Car::findOrFail($id);
