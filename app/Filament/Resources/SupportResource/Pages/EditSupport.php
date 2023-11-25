@@ -4,6 +4,7 @@ namespace App\Filament\Resources\SupportResource\Pages;
 
 use App\Filament\Resources\SupportResource;
 use App\Models\ChMessage;
+use App\Models\Support;
 use App\Models\User;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -24,18 +25,17 @@ class EditSupport extends EditRecord
     }
 
     protected function handleRecordUpdate(Model $record, array $data): Model{
-        $result = $record->update($data);
-        if($result){
+        if($record->update($data)){
             ChMessage::create([
-                'from_id' => 1,
+                'from_id' => Auth::user()->id,
                 'to_id' => $record->user_id,
-                'body' => $record->body,
+                'body' => $record->response,
                 'seen' => 0
             ]);
+            Support::where('id', $record->id)->update(['status' => 1]);
             $user = User::find($record->user_id);
-            // dd($user);
-            Mail::send('mails.response-support', compact('record', 'user'), function($email) use($user, $record){
-                $email->subject('PHẢN HỒI YÊU CẦU HỖ TRỢ KHÁCH HÀNG');
+            Mail::send('mails.response-support', compact('record', 'user'), function($email) use($user){
+                $email->subject('EMAIL PHẢN HỒI YÊU CẦU HỖ TRỢ CỦA KHÁCH HÀNG');
                 $email->to($user['email'], $user['name']);
             });
         }

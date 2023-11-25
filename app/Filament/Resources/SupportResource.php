@@ -43,44 +43,44 @@ class SupportResource extends Resource
   public static function table(Table $table): Table
   {
     return $table
-      ->description('Status! 0: chưa được hỗ trợ, 1: đang hỗ trợ, 2: đã hoàn thành, 3: lưu trữ')
+      ->description('Status! 0: chưa được hỗ trợ, 1: đã hoàn thành')
       ->columns([
         Tables\Columns\TextColumn::make('user.name')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
           ->label('User Name'),
         Tables\Columns\TextColumn::make('title')
-        ->fontFamily(FontFamily::Mono)
-        ->searchable()
-        ->label('Title')
-        ->words(5),
+          ->fontFamily(FontFamily::Mono)
+          ->searchable()
+          ->label('Title')
+          ->words(5),
         Tables\Columns\TextColumn::make('category')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
-          ->label('Category'),
+          ->label('Category')
+          ->words(5),
         Tables\Columns\TextColumn::make('body')
           ->fontFamily(FontFamily::Mono)
           ->searchable()
           ->label('Body')
-          ->words(10),
+          ->words(5),
         Tables\Columns\TextColumn::make('response')
-        ->fontFamily(FontFamily::Mono)
-        ->searchable()
-        ->words(5)
-        ->label('Response'),
+          ->fontFamily(FontFamily::Mono)
+          ->searchable()
+          ->words(5)
+          ->label('Response'),
         Tables\Columns\TextColumn::make('status')
           ->badge()
           ->color(fn(string $state): string => match ($state) {
             '0' => 'gray',
-            '1' => 'warning',
-            '2' => 'success',
-            '3' => 'danger',
+            '1' => 'success'
           })
       ])
       ->filters([
         //
       ])
       ->actions([
+        Tables\Actions\ViewAction::make(),
         Tables\Actions\EditAction::make(),
       ])
       ->bulkActions([
