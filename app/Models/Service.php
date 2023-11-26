@@ -11,7 +11,6 @@ class Service extends Model
 {
   use HasFactory, SoftDeletes;
 
-
   protected $fillable = [
     'service_name',
     'price',
@@ -21,11 +20,10 @@ class Service extends Model
     'number_of_pushes'
   ];
 
-    // protected $casts = [
-    //     'description' => 'array'
-    // ];
-
-    public function purchased_service() {
-      return $this->hasMany(PurchasedService::class, 'service_id', 'id');
-    }
+  public function purchased_services($service_id)
+  {
+    return DB::table('purchased_service')
+      ->where('service_id', $service_id)
+      ->pluck('remaining_push');
+  }
 }
