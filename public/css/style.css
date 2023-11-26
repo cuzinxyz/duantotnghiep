@@ -12137,8 +12137,8 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 
 .text-slider2 {
     overflow: hidden;
-    background: #13141a;
-    padding: 30px 0
+    background: #fff;
+    /* padding: 30px 0 */
 }
 
 .text-slider2 .marquee_text .js-marquee {

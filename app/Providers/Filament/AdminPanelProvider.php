@@ -54,6 +54,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->brandName('Drivco')
+            ->favicon(asset('images/favicon/favicon.ico'));
     }
 }
