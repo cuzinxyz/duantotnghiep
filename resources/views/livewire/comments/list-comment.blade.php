@@ -83,7 +83,7 @@
                 </li>
             @endforeach
                 <li>
-                    {{ $listComments->links() }}
+                    {{ $listComments->links(data: ['scrollTo' => '#comment-box']) }}
                 </li>
         @endif
     </ul>
