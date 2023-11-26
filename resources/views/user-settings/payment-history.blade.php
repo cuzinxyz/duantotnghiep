@@ -116,6 +116,42 @@
                 </div>
             </div>
         </div>
+
+        {{-- Rút tiền --}}
+        <div class="card mb-4">
+            <div class="card-header">Lịch sử rút tiền</div>
+            <div class="card-body p-0">
+                <!-- Billing history table-->
+                <div class="table-responsive table-billing-history text-center">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th class="border-gray-200" scope="col">Mã giao dịch</th>
+                                <th class="border-gray-200" scope="col">Ngày</th>
+                                <th class="border-gray-200" scope="col">Số tiền</th>
+                                <th class="border-gray-200" scope="col">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($withDrawHistory as $value)
+                                <tr>
+                                    <td>#{{ $value->id }}</td>
+                                    @php
+                                        $dateString = $value->created_at;
+                                        $dateTime = new DateTime($dateString);
+                                        $formattedDate = $dateTime->format('d/m/Y H:i:s');
+                                    @endphp
+                                    <td>{{ $formattedDate }}</td>
+                                    <td>{{ number_format($value->amount) }}₫</td>
+                                    <td><span class="badge bg-light text-dark">Thành công</span></td>
+                                    {{-- <td><span class="badge bg-success">Paid</span></td> --}}
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 </x-partials.layout-client>

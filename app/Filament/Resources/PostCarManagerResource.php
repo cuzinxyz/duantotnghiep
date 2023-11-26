@@ -198,7 +198,8 @@ class PostCarManagerResource extends Resource
                                         ->successNotification(
                                             Notification::make()
                                                 ->success()
-                                                ->title('Đã gửi thông báo tới tác giả'),
+                                                ->title('Đã gửi thông báo tới tác giả')
+                                                ->send(),
                                         ),
 
                                 ]),

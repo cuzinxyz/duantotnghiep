@@ -82,6 +82,7 @@ class DemnadResource extends Resource
                                         'to_id' => $record->user_id,
                                         'body' => $reason
                                     ]);
+                                    
                                     Mail::to($user)->later(now()->addSeconds(5), new SendMailDemnad($record, $user));
                                     redirect()->route('filament.admin.resources.demnads.index');
                                 })

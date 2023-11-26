@@ -46,6 +46,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/thong-tin', 'infoUser');
         Route::get('/nap-tien', 'recharge')->name('recharge');
         Route::post('/nap-tien', 'rechargeMoney')->name('recharge.submit');
+
+        Route::get('/rut-tien', 'withdraw')->name('withdraw');
+        Route::post('/rut-tien', 'withdrawMoney')->name('withdraw.submit');
+
         Route::get('/ket-qua-nap-tien', 'resultRecharge')->name('resultRecharge');
         Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 
