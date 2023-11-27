@@ -69,6 +69,17 @@ Route::controller(ServiceController::class)->group(function () {
 });
 
 # Posts Route
+Route::get("/bai-viet", function() {
+    $posts = News::all();
+
+    if(!$posts) {
+        abort(404);
+    }
+
+    return view('news.list', [
+        'posts' => $posts
+    ]);
+});
 Route::get("/bai-viet/{slug}.html", function($slug) {
     $post = News::where('slug', $slug)->first();
 

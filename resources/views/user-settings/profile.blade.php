@@ -365,7 +365,7 @@
                                                     <div class="icon-link fw-bolder text-secondary">
                                                         <span>Số lượt đẩy tin còn lại:&nbsp;</span>
                                                         <span>
-                                                            {{ $item->purchased_service($item->id) }}
+                                                            {{-- {{ $item->purchased_service($item->id) }} --}}
                                                         </span>
                                                         <svg class="bi" width="1em" height="1em">
                                                             <use xlink:href="#chevron-up"></use>

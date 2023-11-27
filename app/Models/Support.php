@@ -10,6 +10,8 @@ class Support extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['response'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
