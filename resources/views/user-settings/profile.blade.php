@@ -295,7 +295,7 @@
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button>
+                                                                    <button onclick="window.location='{{ route('editSellCar', $car->id) }}'">>
                                                                         <svg stroke-linejoin="round"
                                                                             stroke-linecap="round" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
@@ -365,7 +365,7 @@
                                                     <div class="icon-link fw-bolder text-secondary">
                                                         <span>Số lượt đẩy tin còn lại:&nbsp;</span>
                                                         <span>
-                                                            {{-- {{ $item->purchased_service($item->id) }} --}}
+                                                            {{ $item->purchased_services($item->id) }}
                                                         </span>
                                                         <svg class="bi" width="1em" height="1em">
                                                             <use xlink:href="#chevron-up"></use>

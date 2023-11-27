@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ads;
 use App\Models\Car;
 use App\Models\Banner;
 use App\Models\Brand;
@@ -41,6 +42,7 @@ class HomeController extends Controller
             $remainingCount = 12 - $featured_cars->count();
             // Lấy thêm các Car khác ngẫu nhiên để đạt đến tổng cộng 12
             $additional_cars = Car::whereNotIn('id', $featured_cars->pluck('id'))
+                ->where('status', 1)
                 ->inRandomOrder()
                 ->limit($remainingCount)
                 ->get();
@@ -68,8 +70,9 @@ class HomeController extends Controller
 
         # partners
         $partners = Partner::all();
-        // dd($cars);
 
-        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners'));
+        $adsPartners = Ads::where('priority', 1)->get();
+
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners', 'adsPartners'));
     }
 }

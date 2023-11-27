@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\Demnad;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 class PostBuyCar extends Component

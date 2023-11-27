@@ -22,9 +22,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(CarController::class)->group(function () {
         Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
-
+        Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
-
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
     });
 
@@ -62,7 +61,6 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/dich-vu', 'index')->name('service.list');
     Route::get('/dich-vu/{idService}', 'detail')->name('service.detail')->middleware('auth');
@@ -95,15 +93,9 @@ Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail')
 
 Route::get('/xe', CarListingSystem::class)->name('car.list');
 
-Route::get('/testt', function () {
-
-});
-
 Auth::routes();
 
 // Trang chi tiết xe
 Route::controller(CarDetailController::class)->group(function () {
     Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
-
-
