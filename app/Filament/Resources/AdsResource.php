@@ -3,22 +3,22 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdsResource\Pages;
-use App\Filament\Resources\AdsResource\RelationManagers;
 use App\Models\Ads;
 use App\Models\Partner;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AdsResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Giao diện';
+    protected static ?string $navigationGroup = 'Giao diện';
 
     protected static ?string $model = Ads::class;
 
@@ -28,22 +28,27 @@ class AdsResource extends Resource
     {
         return $form
             ->schema([
+
                 Select::make('partner_id')
-                    ->label('Partner')
-                    ->options(Partner::all()->pluck('name'))
-                    ->searchable(),
+                    ->label('Đối tác')
+                    ->relationship(name: 'partner', titleAttribute: 'name'),
                 FileUpload::make('image_url')
+                    ->label('Ảnh')
                     ->imageEditor()
                     ->disk('public')
                     ->directory('ads'),
-                FileUpload::make('video_url')
-                    ->imageEditor()
-                    ->disk('public')
-                    ->directory('ads'),
-                FileUpload::make('target_url')
-                    ->imageEditor()
-                    ->disk('public')
-                    ->directory('ads'),
+                TextInput::make('video_url')
+                    ->label('Đường dẫn video')
+                    ->url(),
+                TextInput::make('target_url')
+                    ->label('Đường dẫn đích')
+                    ->url(),
+                Radio::make('priority')
+                    ->label('Vị trí')
+                    ->options([
+                        '1' => 'Trang chủ',
+                        '2' => 'Các trang khác',
+                    ])
             ]);
     }
 
@@ -51,7 +56,14 @@ class AdsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('partner.name')
+                    ->label('Đối tác'),
+                ImageColumn::make('image_url')
+                    ->label('Đường dẫn ảnh'),
+                TextColumn::make('target_url')
+                    ->label('Đường dẫn đích'),
+
+
             ])
             ->filters([
                 //

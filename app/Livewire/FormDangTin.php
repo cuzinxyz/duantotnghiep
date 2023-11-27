@@ -7,10 +7,6 @@ use App\Models\Brand;
 use Livewire\Component;
 use App\Models\ModelCar;
 use Illuminate\Support\Str;
-use Livewire\Attributes\On;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\Rule;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
 
@@ -20,7 +16,6 @@ class FormDangTin extends Component
     #define requirement
 
     public $currentStep = 1;
-
     public $fuels = ["Xăng", "Dầu Diesl", "Điện", "Loại khác"];
     public $colors = [
         'red' => 'Đỏ',
@@ -32,7 +27,6 @@ class FormDangTin extends Component
         'blue' => 'Xanh',
         'multiple_color' => 'Nhiều màu'
     ];
-
     public $featureValues = [
         'PremiumWheel' => 'Bánh xe cao cấp',
         'Moonroof' => 'Cửa sổ trời',
@@ -43,7 +37,6 @@ class FormDangTin extends Component
         'RemoteEngineStart' => 'Khởi động từ xa',
         'Multi_ZoneClimateControl' => 'Điều hòa'
     ];
-
     public $seats = [
         '4' => '4',
         '5' => '5',
@@ -51,11 +44,8 @@ class FormDangTin extends Component
         '7' => '7',
         '8' => '8',
     ];
-
     public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
-
     public $verhicle_image_library = [];
-
     public $brand_select = '';
     public $model_select = '';
     public $models = [];
@@ -78,11 +68,8 @@ class FormDangTin extends Component
     public $full_address;
     public $year_of_manufacture;
     public $engine;
-
     public $verhicle_videos;
-
     public $features = [];
-
 
     public function previousStepSubmit()
     {
@@ -118,7 +105,6 @@ class FormDangTin extends Component
             'district_id' => 'required',
             'full_address' => 'required',
         ]);
-
         return $this->currentStep++;
     }
 
@@ -126,33 +112,29 @@ class FormDangTin extends Component
     {
         $this->validate([
             'verhicle_image_library' => 'required|image|max:10024',
-            'verhicle_videos' => 'required|video',
+            'verhicle_videos' => 'required|video|max:10024',
         ]);
     }
 
-    public function saveCar(Request $request)
+    public function saveCar()
     {
         $carData = [];
         $photoName = [];
-
         $images = $this->verhicle_image_library;
         if (count($images) > 0) {
             foreach ($images as $photo) {
                 $fileName = $photo->getFilename();
                 $dir_name = 'car_photos';
                 $photo->storeAs('car_photos', $fileName, 'public');
-
                 array_push($photoName, $dir_name . '/' . $fileName);
             }
         }
-
         $videoName = "";
         if (!empty($this->verhicle_videos)) {
             $dir_name = 'video_car';
             $file = uploadFile($dir_name, $this->verhicle_videos);
             $videoName = $file;
         }
-
         $carData['verhicle_image_library'] = $photoName;
         $carData['verhicle_videos'] = $videoName;
         $carData['user_id'] = auth()->id();
@@ -165,7 +147,6 @@ class FormDangTin extends Component
         $carData['district_id'] = $this->district_id;
         $carData['full_address'] = $this->full_address;
         $carData['description'] = $this->description;
-
         $carData['car_info'] = array(
             "year_of_manufacture" => $this->year_of_manufacture,
             'transmission' => $this->transmission,
@@ -178,7 +159,6 @@ class FormDangTin extends Component
             "features" => $this->features,
             'engine' => $this->engine,
         );
-
         $carData['contact'] = array(
             'name' => $this->name,
             'phone' => $this->phone,
@@ -187,16 +167,11 @@ class FormDangTin extends Component
             'city_id' => $this->city_id,
             'full_address' => $this->full_address,
         );
-
-
         $result = Car::create($carData);
         if ($result) {
-            session()->flash('status', 'you are added successfully!');
-
             return redirect()->route('profile')->with('status', 'Thành công!');
         }
     }
-
 
     #[Computed()]
     public function render()
