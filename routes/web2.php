@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\SearchCar;
 use App\Models\Service;
 use App\Livewire\CarListingSystem;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,7 @@ Route::get('/danh-sach-xe', CarListingSystem::class);
 Route::controller(WishlishController::class)->group(function () {
     Route::get('/yeu-thich', 'index')->name('wishlish')->middleware('auth');
 });
+
 
 Auth::routes();
 

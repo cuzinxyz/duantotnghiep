@@ -20,6 +20,7 @@ class BrandResource extends Resource
   protected static ?string $model = Brand::class;
 
   protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel= 'Thương hiệu';
 
   public static function form(Form $form): Form
   {
@@ -53,9 +54,11 @@ class BrandResource extends Resource
     return $table
       ->columns([
         Tables\Columns\TextColumn::make('brand_name')
+            ->label('Tên thương hiệu')
           ->searchable()
           ->searchable(),
         Tables\Columns\ImageColumn::make('logo_url')
+            ->label('Biểu tượng url')
           ->size(150),
       ])
       ->filters([
@@ -96,6 +99,10 @@ class BrandResource extends Resource
       'edit' => Pages\EditBrand::route('/{record}/edit'),
     ];
   }
+    public static function getModelLabel(): string
+    {
+        return __('Thương hiệu ');
+    }
 
   // public static function getEloquentQuery(): Builder
   // {
