@@ -311,6 +311,12 @@
                                                 onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>
+
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#GuideModal">
+                                                    <i class="bi bi-exclamation-octagon-fill"></i> Gửi yêu cầu hướng dẫn
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -389,6 +395,7 @@
         </header>
 
         {{ $slot }}
+        @include('modals.guide-modal')
 
         <footer class="style-2">
             <div class="container-fluid">

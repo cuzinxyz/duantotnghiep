@@ -15,6 +15,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
+use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -60,6 +61,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logout', function () {
         Auth::logout();
         return redirect()->route('homepage');
+    });
+
+    Route::controller(SendGuideRequestController::class)->group(function(){
+        Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
     });
 });
 
