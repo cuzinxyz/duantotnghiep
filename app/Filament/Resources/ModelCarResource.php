@@ -20,6 +20,7 @@ class ModelCarResource extends Resource
     protected static ?string $model = ModelCar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Dòng xe';
 
     public static function form(Form $form): Form
     {
@@ -40,9 +41,11 @@ class ModelCarResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('brand.brand_name')
+                    ->label('Thương hiệu')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('model_name')
+                    ->label('Tên dòng xe')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->since()
@@ -89,5 +92,9 @@ class ModelCarResource extends Resource
             'view' => Pages\ViewModelCar::route('/{record}'),
             'edit' => Pages\EditModelCar::route('/{record}/edit'),
         ];
+    }
+    public static function getModelLabel(): string
+    {
+        return __('Dòng xe');
     }
 }

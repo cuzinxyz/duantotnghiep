@@ -168,7 +168,7 @@
                                         </li>
                                     @endforeach
                                     <li class="explore-more-btn">
-                                        <a href="brand-category.html">Explore More <i
+                                        <a href="brand-category.html">Tìm hiểu thêm <i
                                                 class="bi bi-arrow-right"></i></a>
                                     </li>
                                 </ul>
@@ -240,7 +240,7 @@
                 </div>
                 <div class="dropdown">
                     <button class="modal-btn header-cart-btn" type="button">
-                        <i class="bi bi-wallet2"></i> My wallet
+                        <i class="bi bi-wallet2"></i> Ví của tôi
                     </button>
                     <div class="cart-menu">
                         <div class="cart-body" style="padding-bottom: 20px !important">
@@ -338,13 +338,13 @@
                                                     <a href="{{ route('settings') }}"
                                                         class="w-50 primary-btn1 d-block visible btn-dark1">
                                                         <i class="bi bi-gear"></i>
-                                                        Settings
+                                                        Cài đặt
                                                     </a>
                                                     <form class="w-50" action="{{ route('logout') }}" method="POST">
                                                         @csrf
                                                         <button class="w-100 primary-btn1 d-block visible"
                                                             type="submit"><i class="bi bi-box-arrow-right"></i>
-                                                            Logout</button>
+                                                            Đăng ký </button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -413,11 +413,11 @@
                         <div class="col d-flex justify-content-lg-start">
                             <div class="footer-widget">
                                 <div class="widget-title">
-                                    <h5>About Company</h5>
+                                    <h5>Giới thiệu về công ty</h5>
                                 </div>
                                 <div class="menu-container">
                                     <ul>
-                                        <li><a href="about.html">About Us
+                                        <li><a href="about.html">Về chúng tôi
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -425,7 +425,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="return-enchange.html">Return &amp; Exchange
+                                        <li><a href="return-enchange.html">Trả lại và Trao đổi
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -433,7 +433,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="return-enchange.html">Refund Policy
+                                        <li><a href="return-enchange.html">Chính sách hoàn tiền
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -441,7 +441,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="customer-review.html">Reviews
+                                        <li><a href="customer-review.html">Đánh giá
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -449,7 +449,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="faq.html">FAQ’s
+                                        <li><a href="faq.html">Các câu hỏi thường gặp
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -457,7 +457,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="contact.html">Contact Us
+                                        <li><a href="contact.html">Liên hệ chúng tôi
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -472,11 +472,11 @@
                         <div class="col d-flex justify-content-sm-center">
                             <div class="footer-widget">
                                 <div class="widget-title">
-                                    <h5>Search &amp; Explore</h5>
+                                    <h5>Tìm kiếm và Khám phá</h5>
                                 </div>
                                 <div class="menu-container">
                                     <ul>
-                                        <li><a href="car-listing-left-sidebar.html">Used Cars
+                                        <li><a href="car-listing-left-sidebar.html">Ô tô đã qua sử dụng
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -484,7 +484,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="car-listing-left-sidebar.html">New Cars
+                                        <li><a href="car-listing-left-sidebar.html">Xe mới
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -492,7 +492,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="car-listing-left-sidebar.html">Auction Cars
+                                        <li><a href="car-listing-left-sidebar.html">Xe đấu giá
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -500,7 +500,7 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="car-listing-left-sidebar.html">Sell My Car
+                                        <li><a href="car-listing-left-sidebar.html">Bán xe của tôi
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -508,7 +508,8 @@
                                                     </path>
                                                 </svg>
                                             </a></li>
-                                        <li><a href="shop.html">Shop Now
+                                        <li><a href="shop.html">
+                                                Mua ngay
                                                 <svg width="10" height="10" viewBox="0 0 10 10"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -523,7 +524,8 @@
                         <div class="col d-flex justify-content-lg-center justify-content-sm-end">
                             <div class="footer-widget">
                                 <div class="widget-title">
-                                    <h5>Car By Brands</h5>
+                                    <h5>
+                                        Xe theo thương hiệu</h5>
                                 </div>
                                 <div class="menu-container">
                                     <ul>
@@ -606,7 +608,8 @@
                         <div class="col d-flex justify-content-xl-center justify-content-lg-end justify-content-sm-center">
                             <div class="footer-widget">
                                 <div class="widget-title">
-                                    <h5>Car By Location</h5>
+                                    <h5>
+                                        Xe theo địa điểm</h5>
                                 </div>
                                 <div class="menu-container">
                                     <ul>
@@ -681,7 +684,7 @@
                         <div class="col d-flex justify-content-xl-end justify-content-sm-center">
                             <div class="footer-widget">
                                 <div class="widget-title">
-                                    <h5>Download App</h5>
+                                    <h5>Tải xuống ứng dụng</h5>
                                 </div>
                                 <div class="app-download">
                                     <ul>
@@ -720,7 +723,7 @@
                                 </svg>
                             </div>
                             <div class="content">
-                                <span>To More Inquiry</span>
+                                <span>Để biết thêm thông tin</span>
                                 <h6><a href="tel:+990737621432">+990-737 621 432</a></h6>
                             </div>
                         </div>
@@ -746,7 +749,7 @@
                                 </svg>
                             </div>
                             <div class="content">
-                                <span>To Send Mail</span>
+                                <span>Gửi Mail qua</span>
                                 <h6><a href="/cdn-cgi/l/email-protection#f1989f979eb1969c90989ddf929e9c"><span
                                             class="__cf_email__"
                                             data-cfemail="670e09010827000a060e0b4904080a">[email�&nbsp;protected]</span></a>
@@ -756,8 +759,9 @@
                     </div>
                     <div class="footer-btm-menu">
                         <ul>
-                            <li><a href="#">Advertise With Us</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
+                            <li><a href="#">Quảng cáo với chúng tôi</a></li>
+                            <li><a href="#">
+                                    Sơ đồ trang web của chúng tôi</a></li>
                         </ul>
                     </div>
                 </div>

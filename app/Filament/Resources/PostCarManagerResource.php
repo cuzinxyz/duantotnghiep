@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Mail\CarRegistMail;
 use App\Models\Car;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -273,7 +274,6 @@ class PostCarManagerResource extends Resource
                                     ->columnSpan([
                                         'xl' => 1,
                                         '2xl' => 1,
-
                                     ]),
 
                                 Section::make('Video')

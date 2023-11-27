@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SearchCarController;
+use App\Livewire\SearchCar;
 use App\Models\News;
 use App\Models\Service;
 use App\Livewire\CarListingSystem;
@@ -92,6 +94,9 @@ Route::get("/bai-viet/{slug}.html", function($slug) {
 Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail');
 
 Route::get('/xe', CarListingSystem::class)->name('car.list');
+Route::controller(SearchCarController::class)->group(function () {
+    Route::get('/tim-xe', 'index')->name('searchcar');
+});
 
 Auth::routes();
 
