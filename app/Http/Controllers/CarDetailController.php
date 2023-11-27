@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ads;
 use App\Models\Car;
-use Illuminate\Http\Request;
 
 class CarDetailController extends Controller
 {
@@ -18,6 +18,9 @@ class CarDetailController extends Controller
 
         $recentCars = Car::inRandomOrder()->limit(4)->get();
 
-        return view('detail', compact('carDetail', 'recentCars'));
+        $ads = Ads::where('priority', 2)->get();
+        // dd($ads);
+
+        return view('detail', compact('carDetail', 'recentCars', 'ads'));
     }
 }
