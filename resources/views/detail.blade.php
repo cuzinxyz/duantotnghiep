@@ -9,8 +9,7 @@
                 <div class="col-lg-4">
                     <div class="car-details-sidebar">
                         <div class="contact-info mb-50">
-                            <div class="single-contact" id="phoneNumber"
-                                data-phone="{{ $carDetail->user->phone_number }}">
+                            <div class="single-contact" id="phoneNumber" data-phone="{{ $carDetail->user->phone_number }}">
                                 <a><i class="bx bx-phone-call"></i>Xem số điện thoại</a>
                             </div>
                             <div class="single-contact" id="emailAdress" data-email="{{ $carDetail->user->email }}">
@@ -35,6 +34,28 @@
                                 </div>
                             </form>
                         </div>
+                        @if ($ads->count() > 0)
+                            <div class="recent-car-area">
+                                <div class="title mb-30">
+                                    <h5>Ads</h5>
+                                </div>
+                                <div class="tab-content mb-30">
+                                    <div class="product-st-card1 two mb-30">
+                                        <div class="text-slider2">
+                                            <div class="marquee_text">
+                                                @foreach ($ads as $value)
+                                                    <a href="{{ $value->target_url }}" target="_blank"
+                                                        rel="noopener noreferrer">
+                                                        <img src="{{ asset('storage/' . $value->image_url) }}"
+                                                            alt="" width="400" height="400">
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div class="recent-car-area">
                             <div class="title mb-30">
                                 <h5>Xe đã qua sử dụng gần đây</h5>
@@ -48,19 +69,22 @@
                                             </div>
                                             <livewire:add-to-wish-list carID="{{ $car->id }}" />
                                             <div class="car-img">
-                                                <img class="img-fluid" src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}"
+                                                <img class="img-fluid"
+                                                    src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
                                                     alt="image">
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
+                                            <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a>
+                                            </h6>
                                             <ul class="features">
                                                 <li>
                                                     <img src="{{ asset('images/menual.svg') }}" alt="">
                                                     {{ $car ? ($car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay') : '' }}
                                                 </li>
                                                 <li>
-                                                    <img width="13" height="13" src="{{ asset('images/fuel.svg') }}" alt="">
+                                                    <img width="13" height="13"
+                                                        src="{{ asset('images/fuel.svg') }}" alt="">
                                                     {{ $car ? $car->car_info['fuelType'] : '' }}
                                                 </li>
                                                 <li>
@@ -72,7 +96,8 @@
                                     </div>
                                 @endforeach
                                 <div class="view-all-btn">
-                                    <a style="margin-right: -10px;margin-left:-10px;" class="btn btn-sm primary-btn3 two" href="{{ route('car.list') }}">
+                                    <a style="margin-right: -10px;margin-left:-10px;"
+                                        class="btn btn-sm primary-btn3 two" href="{{ route('car.list') }}">
                                         <svg width="35" height="21" viewBox="0 0 35 21"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1"
@@ -97,4 +122,22 @@
             </div>
         </div>
     </div>
+    <script>
+        $(".marquee_text").marquee({
+            direction: "left",
+            duration: 25000,
+            gap: 50,
+            delayBeforeStart: 0,
+            duplicated: true,
+            startVisible: true,
+        });
+        $(".marquee_text2").marquee({
+            direction: "left",
+            duration: 25000,
+            gap: 50,
+            delayBeforeStart: 0,
+            duplicated: true,
+            startVisible: true,
+        });
+    </script>
 </x-partials.layout-client>

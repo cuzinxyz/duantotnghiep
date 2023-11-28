@@ -1,10 +1,9 @@
 <x-partials.layout-client>
-
   <div class="inner-page-banner">
     <div class="banner-wrapper">
         <div class="container-fluid">
             <ul class="breadcrumb-list">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">Trang chủ</a></li>
                 <li>{{ $car->car_info['model'] }}</li>
             </ul>
             <div class="banner-main-content-wrap">

@@ -72,13 +72,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('avatar')
+                ImageColumn::make('Avatar')
+                    ->label('Ảnh đại diện')
                     ->circular(),
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('Tên')->searchable(),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone_number'),
-                Tables\Columns\TextColumn::make('service.service_name'),
-                Tables\Columns\TextColumn::make('account_balence')
+                Tables\Columns\TextColumn::make('phone_number')->label('Số điện thoại'),
+                Tables\Columns\TextColumn::make('service.service_name')->label('Dịch vụ'),
+                Tables\Columns\TextColumn::make('account_balence')->label('Số dư tài khoản')
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
@@ -133,6 +134,6 @@ class UserResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('người dùng');
+        return __('Người dùng');
     }
 }

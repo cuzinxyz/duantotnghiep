@@ -20,6 +20,7 @@ class CommentsResource extends Resource
     protected static ?string $model = Comments::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Bình luận';
 
     public static function form(Form $form): Form
     {
@@ -45,14 +46,18 @@ class CommentsResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('body')
+                    ->label('Nội dung')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label('Tên')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('car.title')
+                    ->label('Tiêu đề')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('news.title')
+                    ->label('Tin tức')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -96,5 +101,9 @@ class CommentsResource extends Resource
             'view' => Pages\ViewComments::route('/{record}'),
             'edit' => Pages\EditComments::route('/{record}/edit'),
         ];
+    }
+    public static function getModelLabel(): string
+    {
+        return __('Bình luận');
     }
 }

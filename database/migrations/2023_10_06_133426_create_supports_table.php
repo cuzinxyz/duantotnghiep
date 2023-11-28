@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('title');
-            $table->string('category'); 
+            $table->string('category');
             $table->text('body');
-            $table->text('response');
+            $table->text('response')->nullable();
             $table->string('review', 1)->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();

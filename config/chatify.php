@@ -59,7 +59,7 @@ return [
     */
     'user_avatar' => [
         'folder' => 'users-avatar',
-        'default' => 'avatars/avatar.png',
+        'default' => 'avatar.png',
     ],
 
     /*
