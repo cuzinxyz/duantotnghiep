@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('homepage');
     });
 
-    Route::controller(SendGuideRequestController::class)->group(function(){
+    Route::controller(SendGuideRequestController::class)->group(function () {
         Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
     });
 });
@@ -108,4 +108,4 @@ Route::controller(CarDetailController::class)->group(function () {
 });
 
 // Showroom
-Route::get('/showroom', Showroom::class);
+Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
