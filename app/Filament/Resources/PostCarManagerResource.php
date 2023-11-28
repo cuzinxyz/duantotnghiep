@@ -40,6 +40,7 @@ class PostCarManagerResource extends Resource
 
     protected static ?string $navigationLabel = 'Duyệt bài đăng';
 
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
@@ -163,7 +164,6 @@ class PostCarManagerResource extends Resource
                                                 'color' => $record->car_info['color'],
                                                 'engine' => $record->car_info['engine'],
                                                 'fuelType' => $record->car_info['fuelType'],
-                                                'condition' => $record->car_info['condition'],
                                                 'features' => $record->car_info['features'],
                                                 'verhicle_image' => $record->verhicle_image_library,
                                                 'verhicle_videos' => $record->verhicle_videos,
@@ -173,6 +173,8 @@ class PostCarManagerResource extends Resource
                                             Mail::to($record->contact['email'])->send(new CarRegistMail($data));
                                             $record->status = 1;
                                             $record->save();
+
+                                            redirect()->route('filament.admin.resources.post-car-managers.index');
                                         })
                                         ->successNotificationTitle('Phê duyệt thành công'),
 
@@ -197,7 +199,7 @@ class PostCarManagerResource extends Resource
                                         ->successNotification(
                                             Notification::make()
                                                 ->success()
-                                                ->title('Đã gửi thông báo tới tác giả'),
+                                                ->title('Đã gửi thông báo tới khách hàng'),
                                         ),
 
                                 ]),
@@ -345,5 +347,10 @@ class PostCarManagerResource extends Resource
     public static function getModelLabel(): string
     {
         return __('duyệt bài đăng');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::where('status', 0)->count();
     }
 }

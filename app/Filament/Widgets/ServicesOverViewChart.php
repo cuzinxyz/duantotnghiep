@@ -24,8 +24,6 @@ class ServicesOverViewChart extends ApexChartWidget
 
     protected static ?int $sort = 5;
     /**
-     * Chart options (series, labels, types, size, animations...)
-     * https://apexcharts.com/docs/options
      *
      * @return array
      */
@@ -35,6 +33,7 @@ class ServicesOverViewChart extends ApexChartWidget
         ->select('services.service_name', DB::raw('COUNT(purchased_service.service_id) AS aggregate'))
         ->groupBy('services.service_name')
         ->get();
+        
 
         $data['name'] = $services->pluck('service_name')->toArray();
         $data['count'] = $services->pluck('aggregate')->toArray();

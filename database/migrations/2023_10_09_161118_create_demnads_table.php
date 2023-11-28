@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('demnads', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->integer('status');
-            $table->text('content');
-            $table->string('title');
-            $table->text('reason');
+            $table->integer('status')->nullable();
+            $table->text('content')->nullable();
+            $table->string('title')->nullable();
+            $table->text('reason')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

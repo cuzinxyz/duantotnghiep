@@ -7,12 +7,14 @@ use App\Models\Car;
 
 class CarDetailController extends Controller
 {
-    public function index($slug = null)
+    public function index(Request $request, $slug = null)
     {
         $carDetail = [];
         if ($slug) {
             $carDetail = Car::where('slug', $slug)->first();
         }
+
+
         # save view
         views($carDetail)->record();
 

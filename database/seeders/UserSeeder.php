@@ -34,6 +34,15 @@ class UserSeeder extends Seeder
                 'service_id' => 2,
                 'phone_number' => '0988123457'
             ],
+            [
+                'name' => 'BOT',
+                'email' => 'bot@gmail.com',
+                'password' => Hash::make('12345678'),
+                'avatar' => 'avatars/users/bot.jpg',
+                'account_balence' => 0,
+                'service_id' => 0,
+                'phone_number' => NULL
+            ]
         ]);
     }
 }
