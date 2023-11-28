@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ads;
 use App\Models\Car;
+use Illuminate\Http\Request;
 
 class CarDetailController extends Controller
 {

@@ -71,6 +71,11 @@ class FormDangTin extends Component
     public $verhicle_videos;
     public $features = [];
 
+    public function mount() {
+        $this->phone = auth()->user()->phone ? auth()->user()->phone : '';
+        $this->email = auth()->user()->email ? auth()->user()->email : '';
+    }
+
     public function previousStepSubmit()
     {
         return $this->currentStep--;

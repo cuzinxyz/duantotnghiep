@@ -2,18 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ReportedResource\Pages;
-use App\Filament\Resources\ReportedResource\RelationManagers;
-use App\Models\Reported;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\ReplicateAction;
+use App\Models\Reported;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Mail\CarRegistMail;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\ActionGroup;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Actions\ReplicateAction;
+use App\Filament\Resources\ReportedResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ReportedResource\RelationManagers;
 
 class ReportedResource extends Resource
 {
@@ -62,15 +66,15 @@ class ReportedResource extends Resource
             ->actions([
             ActionGroup::make([
                 ReplicateAction::make()
-                ->label('Xem bài đăng')
-                // ->successRedirectUrl(route('/'))
-                ->url('/')
-                ->openUrlInNewTab()
-                ->icon('heroicon-o-eye'),
+                    ->label('Xem bài đăng')
+                    // ->successRedirectUrl(route('/'))
+                    ->url('/')
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-eye'),
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
-
+                // Tables\Actions\ForceDeleteAction::make(),
+                // Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->button()
             ->label('Hành động')
@@ -111,7 +115,7 @@ class ReportedResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('bài đăng vi phạm');
+        return __('Report');
     }
 
     public function redirectToFrontend()

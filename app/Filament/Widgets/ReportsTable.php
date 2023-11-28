@@ -17,8 +17,7 @@ class ReportsTable extends BaseWidget
 {
     protected static ?int $sort = 7;
 
-
-    protected static ?string $heading = 'Bài đăng chưa được xử lý';
+    protected static ?string $heading = 'Tố cáo chưa được xử lý';
 
     public function table(Table $table): Table
     {

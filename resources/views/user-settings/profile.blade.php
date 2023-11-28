@@ -489,15 +489,11 @@
                                                             <span>{{ number_format($car->price) }}</span>
                                                         </div>
                                                         <div class="car-img">
-                                                            @foreach($car->verhicle_image_library as $img)
-
                                                             <img class="img-fluid w-100"
                                                                 style="object-fit:cover;max-height: 121px"
-                                                                src="{{ asset('storage/' .$img) }}"
+                                                                src="{{ asset('storage/' .$car->verhicle_image_library[0]) }}"
                                                                 alt="image">
-                                                            @endforeach
                                                         </div>
-
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">
                                                         <h6><a href="#">{{ $car->title }}</a></h6>

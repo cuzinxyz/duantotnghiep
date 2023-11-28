@@ -391,7 +391,7 @@
                         </div>
                     </div>
 
-                    <div class="row inquiry-form justify-content-evenly"
+                    <div class="row inquiry-form {{ $currentStep == 3 ? '' : 'd-none' }} justify-content-evenly"
                         id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
@@ -437,8 +437,8 @@
 
                         </div>
 
-                        <div class="col-lg-12" style="margin-top: 24px">
-                            <div wire:loading.remove class="form-inner" style="text-align: center">
+                        <div class="col-lg-12" style="margin-top: 24px" wire:loading.remove>
+                            <div class="form-inner" style="text-align: center">
                                 <button class="primary-btn2" wire:click="previousStepSubmit" type="button">Quay
                                     lại</button>
                                 <button wire:loading.attr="disabled" class="primary-btn2"
