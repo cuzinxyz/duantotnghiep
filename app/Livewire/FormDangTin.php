@@ -25,7 +25,7 @@ class FormDangTin extends Component
         'yellow' => 'Vàng',
         'gray' => 'Ghi',
         'blue' => 'Xanh',
-        'multiple_color' => 'Nhiều màu'
+        'different' => 'Khác'
     ];
     public $featureValues = [
         'PremiumWheel' => 'Bánh xe cao cấp',

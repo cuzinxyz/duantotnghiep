@@ -274,7 +274,7 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Tin hoạt động</span>
                                             <div class="fw-bold">
-                                                10 <i class="bi bi-app-indicator"></i>
+                                                {{ \App\Models\Car::where('user_id', auth()->id())->where('status', 1)->count() }} <i class="bi bi-app-indicator"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -344,7 +344,7 @@
                                                         @csrf
                                                         <button class="w-100 primary-btn1 d-block visible"
                                                             type="submit"><i class="bi bi-box-arrow-right"></i>
-                                                            Đăng ký </button>
+                                                            Đăng xuất </button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -365,9 +365,9 @@
                         <div class="account-footer" style="min-width: 230px">
                             <div class="footer-button">
                                 <div class="d-flex justify-content-between align-items-center gap-3">
-                                    <a class="w-50 primary-btn1" href="/login">Login now</a>
+                                    <a class="w-50 primary-btn1" href="/login">Đăng nhập</a>
                                     <span class="fs-6">or</span>
-                                    <a class="w-50 primary-btn1 btn-dark1" href="/register">Register</a>
+                                    <a class="w-50 primary-btn1 btn-dark1" href="/register">Đăng ký</a>
                                 </div>
                             </div>
                         </div>

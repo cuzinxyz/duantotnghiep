@@ -194,7 +194,15 @@
                                 <div class="form-inner form-inner-padding mb-20 blurBG bg-shape" style=""
                                     id="changeColor">
                                     <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
-                                    <div class="radio-input" id="style-4" style="overflow:auto">
+                                    <div class="color-select row gy-2">
+                                        @foreach ($colors as $key => $color)
+                                        <div class="col-6">
+                                            <input type="radio" wire:model="color" data-color="{{ $key }}" value="{{ $color }}">
+                                            <span for="{{ $key }}" id="{{ $key }}">{{ $color }}</span>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    {{-- <div class="radio-input" id="style-4" style="overflow:auto">
                                         @foreach ($colors as $key => $color)
                                             <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
                                                 id="color-{{ $key }}" type="radio" wire:model="color">
@@ -217,7 +225,7 @@
                                                 </span>
                                             </label>
                                         @endforeach
-                                    </div>
+                                    </div> --}}
 
                                     <div class="text-danger">
                                         @error('color')
@@ -436,13 +444,13 @@
                                 <button wire:loading.attr="disabled" class="primary-btn2"
                                     wire:click.prevent="saveCar">Đăng tin</button>
 
-                                </div>
                             </div>
-                            <div wire:loading class="loading-form__submit text-center">
-                                <svg viewBox="25 25 50 50">
-                                    <circle r="20" cy="50" cx="50"></circle>
-                                </svg>
-                            </div>
+                        </div>
+                        <div wire:loading class="loading-form__submit text-center">
+                            <svg viewBox="25 25 50 50">
+                                <circle r="20" cy="50" cx="50"></circle>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

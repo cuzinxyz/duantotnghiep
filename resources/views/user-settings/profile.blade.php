@@ -98,6 +98,7 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
+            z-index: 1;
         }
     </style>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -226,7 +227,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">
-                                                        <h6><a href="#">{{ $car->title }}</a></h6>
+                                                        <h6><a href="{{ route('car-detail',$car->slug) }}">{{ $car->title }}</a></h6>
                                                         <ul class="features">
                                                             <li>
                                                                 {{-- @dd($car) --}}
@@ -384,7 +385,7 @@
                                         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
                                             @foreach ($carPushed as $item)
                                                 <div class="col">
-                                                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                                                    <div class="overlay-product card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
                                                         style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
                                                         <div
                                                             class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
