@@ -7,11 +7,13 @@ use App\Models\User;
 use Filament\Tables;
 use App\Models\WithDraw;
 use Filament\Forms\Form;
+use App\Models\ChMessage;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use App\Models\TransactionsHistory;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
@@ -24,6 +26,9 @@ use App\Filament\Resources\WithDrawResource\RelationManagers;
 class WithDrawResource extends Resource
 {
     protected static ?string $model = WithDraw::class;
+
+    protected static ?string $navigationGroup = 'Tài khoản';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
@@ -58,7 +63,11 @@ class WithDrawResource extends Resource
                     ->money('VND'),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                    ->label('Yêu cầu rút tiền chưa được duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default()
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -84,7 +93,17 @@ class WithDrawResource extends Resource
                                 'account_balence' => $account_balence
                             ]);
 
-                            WithDraw::destroy($record->id);                            
+                            $bot = User::where('name', 'BOT')->first();
+
+                            $reason = 'Chào bạn ' . $user_balance->name . ', 
+                                    Yêu cầu rút tiền của bạn đã được duyệt thành công.
+                                    Chúng tôi đã hoàn thành chuyển khoản cho bạn.
+                                    Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
+                            ChMessage::create([
+                                'from_id' => $bot->id,
+                                'to_id' => $record->user_id,
+                                'body' => $reason
+                            ]);
                         })
                         ->icon('heroicon-o-check')
                         ->label('Xác nhận chuyển khoản'),
@@ -151,5 +170,10 @@ class WithDrawResource extends Resource
     public static function getModelLabel(): string
     {
         return __('rút tiền');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::where('status', 0)->count();
     }
 }

@@ -428,7 +428,7 @@ class SettingsController extends Controller
         ]);
 
         if ($resultWithdraw) {
-            return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu chuyển tiền, vui lòng chờ phản hồi~!');
+            return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
         }
 
     }
