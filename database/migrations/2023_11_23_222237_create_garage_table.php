@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('garage', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            // $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('name');
             $table->string('address');
             $table->string('phone');
             $table->string('email');
             $table->string('describe');
             $table->string('image');
+            $table->string('period');
             $table->softDeletes();
         });
     }

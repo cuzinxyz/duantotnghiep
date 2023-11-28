@@ -10,6 +10,7 @@ use App\Models\Garage;
 use App\Models\Car;
 use App\Models\ModelCar;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class GarageController extends Controller
@@ -20,6 +21,7 @@ class GarageController extends Controller
     }
     public function ownGarage(GarageRequest $request)
     {
+        $user_id = Auth::user()->id;
         if($request->isMethod('POST')){
             if($request->hasFile('image') && $request->file('image')->isValid()){
                 $request->image = uploadFile('image', $request->file('image'));
@@ -32,12 +34,11 @@ class GarageController extends Controller
 
             if($garage->id){
                 Session::flash('success', 'Đăng kí thành công');
-                
                 return redirect()->route('garage');
             }
 
         }
-        return view("garage.dangki-garage");
+        return view("garage.dangki-garage",compact('user_id'));
     }
     public function addCar(){
         return view("garage.addcar-garage");
