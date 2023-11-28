@@ -1354,7 +1354,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['condition']}}</td>
+                                                                                                {{-- {{$data['condition']}}</td> --}}
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -1723,11 +1723,11 @@
                                                                                                                 role="presentation"
                                                                                                                 align="left">
                                                                                                                 <tr>
-                                                                                                                    @foreach($data['verhicle_videos'] as $video)
+                                                                                                                    <img src="{{ $message->embed(public_path('storage/' . str_replace('public/', '', $data['verhicle_videos']))) }}" alt="Vehicle Image" style="margin-bottom: 5px;">
+                                                                                                                    {{-- @foreach($data['verhicle_videos'] as $video)
                                                                                                                         <td>
-                                                                                                                            <img src="{{ $message->embed(public_path('storage/' . str_replace('public/', '', $video))) }}" alt="Vehicle Image" style="margin-bottom: 5px;">
                                                                                                                         </td>
-                                                                                                                    @endforeach
+                                                                                                                    @endforeach --}}
 
                                                                                                                 </tr>
                                                                                                             </table>

@@ -322,6 +322,11 @@
                                             </div>
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{route('withdraw')}}'">
+                                                <i class="bi bi-cash-stack"></i> Rút tiền
+                                            </div>
+
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('paymentHistory') }}'">
                                                 <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
                                             </div>

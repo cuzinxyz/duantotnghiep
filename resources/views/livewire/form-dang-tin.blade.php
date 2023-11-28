@@ -391,7 +391,7 @@
                         </div>
                     </div>
 
-                    <div class="row {{ $currentStep == 3 ? '' : 'd-none' }} inquiry-form justify-content-evenly"
+                    <div class="row inquiry-form justify-content-evenly"
                         id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
