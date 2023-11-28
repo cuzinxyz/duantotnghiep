@@ -710,7 +710,8 @@ p {
     width: 150%;
     bottom: 0;
     border-radius: 2px;
-    background-color: #0a1019;
+    /* background-color: #0a1019; */
+    background-color: #46D993;
     transform: skewX(45deg) scale(0, 1);
     z-index: -1;
     transition: all .5s ease-out 0s
