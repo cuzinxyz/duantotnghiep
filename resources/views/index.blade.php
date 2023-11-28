@@ -6,19 +6,13 @@
 
     @if ($adsPartners->count() > 0)
         <div class="mb-100">
-            {{-- <div class="container"> --}}
-                <div class="text-slider2" style="border-radius: 20px;">
-                    <div class="marquee_text">
-                        @foreach ($adsPartners as $value)
-                            <a href="{{ $value->target_url }}" target="_blank"
-                                rel="noopener noreferrer">
-                                <img src="{{ asset('storage/' . $value->image_url) }}"
-                                    alt="">
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            {{-- </div> --}}
+            @foreach ($adsPartners as $value)
+                <a href="{{ $value->target_url }}" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="{{ asset('storage/' . $value->image_url) }}"
+                        alt="">
+                </a>
+            @endforeach
         </div>
     @else
         <div class="home2-inner-banner mb-100">
