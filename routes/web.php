@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SearchCarController;
+use App\Livewire\SearchCar;
 use App\Models\News;
 use App\Models\Service;
 use App\Livewire\CarListingSystem;
@@ -14,6 +16,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
 use App\Livewire\Showroom;
+use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -23,9 +26,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(CarController::class)->group(function () {
         Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
-
+        Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
-
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
 
         Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
@@ -49,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/thong-tin', 'infoUser');
         Route::get('/nap-tien', 'recharge')->name('recharge');
         Route::post('/nap-tien', 'rechargeMoney')->name('recharge.submit');
+
+        Route::get('/rut-tien', 'withdraw')->name('withdraw');
+        Route::post('/rut-tien', 'withdrawMoney')->name('withdraw.submit');
+
         Route::get('/ket-qua-nap-tien', 'resultRecharge')->name('resultRecharge');
         Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 
@@ -63,8 +69,11 @@ Route::middleware(['auth'])->group(function () {
         Auth::logout();
         return redirect()->route('homepage');
     });
-});
 
+    Route::controller(SendGuideRequestController::class)->group(function(){
+        Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
+    });
+});
 
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/dich-vu', 'index')->name('service.list');
@@ -87,7 +96,8 @@ Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail')
 
 Route::get('/xe', CarListingSystem::class)->name('car.list');
 
-Route::get('/testt', function () {
+Route::controller(SearchCarController::class)->group(function () {
+    Route::get('/tim-xe', 'index')->name('searchcar');
 });
 
 Auth::routes();

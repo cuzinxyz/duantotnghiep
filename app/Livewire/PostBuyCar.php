@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Comments;
 use App\Models\Demnad;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 

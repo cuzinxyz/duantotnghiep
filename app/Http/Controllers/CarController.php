@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use Illuminate\Support\Facades\Request;
 
 class CarController extends Controller
 {
@@ -39,5 +40,10 @@ class CarController extends Controller
                     ->with('success', 'Ẩn tin thành công !');
             }
         }
+    }
+
+    public function editSellCar($id)
+    {
+        return view("user-form.form-edit-sell-car", compact('id'));
     }
 }

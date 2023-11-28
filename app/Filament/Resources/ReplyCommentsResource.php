@@ -20,6 +20,7 @@ class ReplyCommentsResource extends Resource
     protected static ?string $model = ReplyComments::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Trả lời bình luận';
 
     public static function form(Form $form): Form
     {
@@ -48,17 +49,22 @@ class ReplyCommentsResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('body')
+                    ->label('Nội dung trả lời')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('comment.body')
+                    ->label('Nội dung bình luận')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label('Tên')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('car.title')
+                    ->label('Tiêu đề')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('news.title')
+                    ->label('Tin tức')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -102,5 +108,9 @@ class ReplyCommentsResource extends Resource
             'view' => Pages\ViewReplyComments::route('/{record}'),
             'edit' => Pages\EditReplyComments::route('/{record}/edit'),
         ];
+    }
+    public static function getModelLabel(): string
+    {
+        return __('Trả lời bình luận');
     }
 }

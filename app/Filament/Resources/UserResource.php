@@ -2,20 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
+use App\Models\User;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Table;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\UserResource\Pages\ViewUser;
+use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\TransactionsHistoriesRelationManager;
 
 class UserResource extends Resource
 {
@@ -70,13 +72,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('avatar')
+                ImageColumn::make('Avatar')
+                    ->label('Ảnh đại diện')
                     ->circular(),
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('Tên')->searchable(),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone_number'),
-                Tables\Columns\TextColumn::make('service.service_name'),
-                Tables\Columns\TextColumn::make('account_balence')
+                Tables\Columns\TextColumn::make('phone_number')->label('Số điện thoại'),
+                Tables\Columns\TextColumn::make('service.service_name')->label('Dịch vụ'),
+                Tables\Columns\TextColumn::make('account_balence')->label('Số dư tài khoản')
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
@@ -88,6 +91,7 @@ class UserResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 // Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
@@ -114,7 +118,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TransactionsHistoriesRelationManager::class
         ];
     }
 
@@ -123,12 +127,13 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
+            'view' => ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 
     public static function getModelLabel(): string
     {
-        return __('người dùng');
+        return __('Người dùng');
     }
 }
