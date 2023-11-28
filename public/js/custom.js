@@ -687,22 +687,23 @@
     $('.menu-close-btn').on("click", function () {
         $('.sidebar-menu').removeClass('show-menu');
     });
-    $("#eg-range-slider").slider({
-        range: true, min: 0, max: 3000, values: [200, 2000], slide: function (event, ui) {
-            $(".from").val(ui.values[0]);
-            $(".to").val(ui.values[1]);
-        }
-    });
-    $(".from").change(function () {
-        var value = $(this).val();
-        console.log(typeof (value));
-        $("#eg-range-slider").slider("values", 0, value);
-    });
-    $(".to").change(function () {
-        var value = $(this).val();
-        console.log(typeof (value));
-        $("#eg-range-slider").slider("values", 1, value);
-    });
+    
+    // $("#eg-range-slider").slider({
+    //     range: true, min: 0, max: 3000, values: [200, 2000], slide: function (event, ui) {
+    //         $(".from").val(ui.values[0]);
+    //         $(".to").val(ui.values[1]);
+    //     }
+    // });
+    // $(".from").change(function () {
+    //     var value = $(this).val();
+    //     console.log(typeof (value));
+    //     $("#eg-range-slider").slider("values", 0, value);
+    // });
+    // $(".to").change(function () {
+    //     var value = $(this).val();
+    //     console.log(typeof (value));
+    //     $("#eg-range-slider").slider("values", 1, value);
+    // });
     $("[data-countdown]").each(function () {
         var $deadline = new Date($(this).data("countdown")).getTime();
         var $dataDays = $(this).children("[data-days]");

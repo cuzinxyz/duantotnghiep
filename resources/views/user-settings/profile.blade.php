@@ -98,6 +98,7 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
+            z-index: 1;
         }
     </style>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -226,7 +227,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">
-                                                        <h6><a href="#">{{ $car->title }}</a></h6>
+                                                        <h6><a href="{{ route('car-detail',$car->slug) }}">{{ $car->title }}</a></h6>
                                                         <ul class="features">
                                                             <li>
                                                                 {{-- @dd($car) --}}
@@ -295,7 +296,7 @@
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button>
+                                                                    <button onclick="window.location='{{ route('editSellCar', $car->id) }}'">>
                                                                         <svg stroke-linejoin="round"
                                                                             stroke-linecap="round" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
@@ -365,7 +366,7 @@
                                                     <div class="icon-link fw-bolder text-secondary">
                                                         <span>Số lượt đẩy tin còn lại:&nbsp;</span>
                                                         <span>
-                                                            {{ $item->purchased_service($item->id) }}
+                                                            {{ $item->purchased_services($item->id) }}
                                                         </span>
                                                         <svg class="bi" width="1em" height="1em">
                                                             <use xlink:href="#chevron-up"></use>
@@ -384,7 +385,7 @@
                                         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
                                             @foreach ($carPushed as $item)
                                                 <div class="col">
-                                                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                                                    <div class="overlay-product card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
                                                         style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
                                                         <div
                                                             class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
@@ -490,7 +491,7 @@
                                                         <div class="car-img">
                                                             <img class="img-fluid w-100"
                                                                 style="object-fit:cover;max-height: 121px"
-                                                                src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
+                                                                src="{{ asset('storage/' .$car->verhicle_image_library[0]) }}"
                                                                 alt="image">
                                                         </div>
                                                     </div>

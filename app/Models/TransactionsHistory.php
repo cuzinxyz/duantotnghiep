@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TransactionsHistory extends Model
 {
@@ -16,4 +17,9 @@ class TransactionsHistory extends Model
       "balance_after_transaction",
       "token",
     ];
+    
+    public function user() {
+      return $this->hasMany(User::class, 'id', 'user_id');
+    }
+
 }

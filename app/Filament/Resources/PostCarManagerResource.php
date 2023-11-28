@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Mail\CarRegistMail;
 use App\Models\Car;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -28,6 +30,7 @@ use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
 use App\Filament\Resources\PostCarManagerResource\RelationManagers;
+use Illuminate\Support\Facades\Mail;
 
 class PostCarManagerResource extends Resource
 {
@@ -37,6 +40,7 @@ class PostCarManagerResource extends Resource
 
     protected static ?string $navigationLabel = 'Duyệt bài đăng';
 
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
@@ -122,16 +126,6 @@ class PostCarManagerResource extends Resource
                                 IconEntry::make('status')
                                     ->boolean()
                                     ->label('Trạng thái bài đăng'),
-
-                                IconEntry::make('recommended')
-                                    ->boolean()
-                                    ->label('Xu hướng'),
-
-                                TextEntry::make('user.service.service_name')
-                                    ->label('Loại gói tin')
-                                    ->badge()
-                                    ->color('warning'),
-
                             ])
                             ->columns([
                                 'xl' => 2,
@@ -149,8 +143,28 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
+                                            $data = [
+                                                'user' => $record->user['name'],
+                                                'title' => $record->title,
+                                                'price'=> $record->price,
+                                                'brand' => $record->brand->brand_name,
+                                                'mileage' => $record->car_info['mileage'],
+                                                'seat' => $record->car_info['number_of_seats'],
+                                                'manufactured' => $record->car_info['year_of_manufacture'],
+                                                'color' => $record->car_info['color'],
+                                                'engine' => $record->car_info['engine'],
+                                                'fuelType' => $record->car_info['fuelType'],
+                                                'features' => $record->car_info['features'],
+                                                'verhicle_image' => $record->verhicle_image_library,
+                                                'verhicle_videos' => $record->verhicle_videos,
+                                                'description' => $record->description,
+                                            ];
+
+                                            Mail::to($record->contact['email'])->send(new CarRegistMail($data));
                                             $record->status = 1;
                                             $record->save();
+
+                                            redirect()->route('filament.admin.resources.post-car-managers.index');
                                         })
                                         ->successNotificationTitle('Phê duyệt thành công'),
 
@@ -175,7 +189,7 @@ class PostCarManagerResource extends Resource
                                         ->successNotification(
                                             Notification::make()
                                                 ->success()
-                                                ->title('Đã gửi thông báo tới tác giả'),
+                                                ->title('Đã gửi thông báo tới khách hàng'),
                                         ),
 
                                 ]),
@@ -214,12 +228,12 @@ class PostCarManagerResource extends Resource
                                             ->label('Số chỗ ngồi')
                                             ->default(7),
 
-                                        TextEntry::make('car_info.manufactured')
+                                        TextEntry::make('car_info.year_of_manufacture')
                                             ->label('Năm sản xuất'),
 
-                                        ColorEntry::make('car_info.color')
+                                        TextEntry::make('car_info.color')
                                             ->label('Màu sắc')
-                                            ->default('red'),
+                                            ->default('Khác'),
 
                                         TextEntry::make('car_info.engine')
                                             ->label('Động cơ')
@@ -252,7 +266,6 @@ class PostCarManagerResource extends Resource
                                     ->columnSpan([
                                         'xl' => 1,
                                         '2xl' => 1,
-
                                     ]),
 
                                 Section::make('Video')
@@ -324,5 +337,10 @@ class PostCarManagerResource extends Resource
     public static function getModelLabel(): string
     {
         return __('duyệt bài đăng');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::where('status', 0)->count();
     }
 }

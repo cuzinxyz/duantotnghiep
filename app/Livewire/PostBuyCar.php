@@ -2,40 +2,62 @@
 
 namespace App\Livewire;
 
+use App\Models\Comments;
 use App\Models\Demnad;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
+
 class PostBuyCar extends Component
 {
-  public $user_id;
-
-  public $status;
-
-  public $reason;
-
-  #[Rule('required', message: 'Vui lòng cung cấp tiêu đề bài viết')]
-  #[Rule('min:10', message: 'Tiêu đề này quá ngắn')]
-  public $title = '';
-
   #[Rule('required', message: 'Vui lòng cung cấp nội dung bài viết')]
-  #[Rule('min:30', message: 'Nội dung này quá ngắn')]
-  public $content = '';
+  #[Rule('min:10', message: 'Nội dung này quá ngắn')]
+  public $content;
 
   public function save()
   {
-    $this->validate();
-    $this->user_id = Auth::id();
-    $this->status = 0;
-    $this->reason = '';
-    Demnad::create(
-      $this->only(['user_id', 'status', 'title', 'content', 'reason'])
-    );
+    if (!auth()->check()) {
+      $this->dispatch('showError', 'Bạn cần đăng nhập để thực hiện chức năng này');
+    }
+
+    $validated = $this->validate();
+
+    if ($validated) {
+      $validated['user_id'] = auth()->id();
+      $validated['content'] = htmlspecialchars($validated['content']);
+      $validated['status'] = 0;
+
+      $result = Demnad::create($validated);
+      $this->dispatch('showSuccess', 'Đăng tin thành công! Vui lòng chờ duyệt!');
+    }
+  }
+
+  public function remove($id)
+  {
+    if (auth()->check()) {
+      $demand = Demnad::find($id);
+      if ($demand->user_id == auth()->id()) {
+        $demand->delete();
+
+        $this->dispatch('showSuccess', 'Xoá tin thành công');
+      } else {
+        $this->dispatch('showError', 'Bạn không có quyền thực hiện');
+      }
+    }
   }
 
   public function render()
   {
-    return view('livewire.post-buy-car');
+    $demands = Demnad::where('status', 1)->orderBy('created_at', 'desc')->get();
+
+    $pending = '';
+    if (auth()->check()) {
+      $pending = Demnad::where('status', 0)->where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
+    }
+
+    return view('livewire.post-buy-car', [
+      'demands' => $demands,
+      'pending' => $pending
+    ]);
   }
 }

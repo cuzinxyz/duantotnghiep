@@ -51,6 +51,10 @@ B2: Chạy lần lượt các lệnh:
 #### Import dữ liệu địa chỉ
 `php artisan vietnamzone:import`
 
+
+#### Khi gửi mail, sử dụng hàng đợi
+`php artisan queue:work`
+
 #### Sau cùng chạy dự án để test.
 `php artisan serve` 
 

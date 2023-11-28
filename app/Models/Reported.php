@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Reported extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $fillable = ['from_user_id', 'to_user_id', 'car_id', 'content'];
     public function fromUsers()
     {
         return $this->belongsTo(User::class, 'from_user_id', 'id');
@@ -20,7 +20,8 @@ class Reported extends Model
         return $this->belongsTo(User::class, 'to_user_id', 'id');
     }
 
-    public function cars() {
+    public function cars()
+    {
         return $this->belongsTo(Car::class, 'car_id', 'id');
     }
 }

@@ -21,7 +21,7 @@
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Hãng chế tạo</label>
                                             <select class="nice-select beauty-shadow" wire:model.live="brand_select">
-                                                <option value="0">-- Chọn hãng xe --</option>
+                                                <option value="">-- Chọn hãng xe --</option>
                                                 @foreach ($brands as $brand)
                                                     <option value="{{ $brand->id }}">{{ $brand->brand_name }}
                                                     </option>
@@ -40,8 +40,7 @@
                                             <label class="fontAvantRegular">Tên xe</label>
                                             <select class="nice-select beauty-shadow form-control-lg"
                                                 wire:model="model_select">
-                                                <option value="0">-- Chọn model --</option>
-
+                                                <option value="">-- Chọn model --</option>
                                                 @foreach ($models as $model)
                                                     <option value="{{ $model->id }}">{{ $model->model_name }}
                                                     </option>
@@ -61,7 +60,7 @@
                                         <div class="form-inner">
                                             <label class="fontAvantRegular">Nhiên liệu</label>
                                             <select class="nice-select beauty-shadow form-control-lg" wire:model="fuel">
-                                                <option value="0">-- Chọn loại nhiên liệu --</option>
+                                                <option value="">-- Chọn loại nhiên liệu --</option>
                                                 @foreach ($fuels as $fuel)
                                                     <option>{{ $fuel }}</option>
                                                 @endforeach
@@ -110,7 +109,7 @@
                                             <label class="fontAvantRegular">Năm sản xuất</label>
                                             <select class="nice-select beauty-shadow form-control-lg"
                                                 wire:model="year_of_manufacture">
-                                                <option value="0">-- Chọn năm sản xuất
+                                                <option value="">-- Chọn năm sản xuất
                                                     <link rel="stylesheet"
                                                         href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
                                                         integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
@@ -195,7 +194,15 @@
                                 <div class="form-inner form-inner-padding mb-20 blurBG bg-shape" style=""
                                     id="changeColor">
                                     <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
-                                    <div class="radio-input" id="style-4" style="overflow:auto">
+                                    <div class="color-select row gy-2">
+                                        @foreach ($colors as $key => $color)
+                                        <div class="col-6">
+                                            <input type="radio" wire:model="color" data-color="{{ $key }}" value="{{ $color }}">
+                                            <span for="{{ $key }}" id="{{ $key }}">{{ $color }}</span>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    {{-- <div class="radio-input" id="style-4" style="overflow:auto">
                                         @foreach ($colors as $key => $color)
                                             <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
                                                 id="color-{{ $key }}" type="radio" wire:model="color">
@@ -218,7 +225,7 @@
                                                 </span>
                                             </label>
                                         @endforeach
-                                    </div>
+                                    </div> --}}
 
                                     <div class="text-danger">
                                         @error('color')
@@ -238,7 +245,7 @@
                                                     <div class="icon walk-icon">
 
                                                     </div>
-                                                    <label for="walk" class="radio-tile-label">Số tay</label>
+                                                    <label for="walk" class="radio-tile-label">Số sàn</label>
                                                 </div>
                                             </div>
 
@@ -325,7 +332,7 @@
                                     <label class="fontAvantRegular">Thành phố</label>
                                     <select class="nice-select beauty-shadow form-control-lg"
                                         wire:model.live="city_id">
-                                        <option value="0" selected>-- Chọn tỉnh thành phố --</option>
+                                        <option value="" selected>-- Chọn tỉnh thành phố --</option>
                                         @foreach (\Kjmtrue\VietnamZone\Models\Province::all() as $key => $item)
                                             <option value="{{ $item->id }}" wire.key={{ $item->id }}>
                                                 {{ $item->name }}</option>
@@ -344,7 +351,7 @@
                                     <label class="fontAvantRegular">Quận, huyện</label>
                                     <select class="nice-select beauty-shadow form-control-lg"
                                         wire:model="district_id">
-                                        <option value="0" selected>-- Chọn quận huyện --</option>
+                                        <option value="" selected>-- Chọn quận huyện --</option>
                                         @if (isset($city_id))
                                             @foreach (\Kjmtrue\VietnamZone\Models\District::whereProvinceId($this->city_id)->get() as $key => $item)
                                                 <option value="{{ $item->id }}" wire.key={{ $item->id }}>
@@ -384,7 +391,7 @@
                         </div>
                     </div>
 
-                    <div class="row {{ $currentStep == 3 ? '' : 'd-none' }} inquiry-form justify-content-evenly"
+                    <div class="row inquiry-form {{ $currentStep == 3 ? '' : 'd-none' }} justify-content-evenly"
                         id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
@@ -430,20 +437,20 @@
 
                         </div>
 
-                        <div class="col-lg-12" style="margin-top: 24px">
-                            <div wire:loading.remove class="form-inner" style="text-align: center">
+                        <div class="col-lg-12" style="margin-top: 24px" wire:loading.remove>
+                            <div class="form-inner" style="text-align: center">
                                 <button class="primary-btn2" wire:click="previousStepSubmit" type="button">Quay
                                     lại</button>
                                 <button wire:loading.attr="disabled" class="primary-btn2"
-                                    wire:click.prevent="saveCar">ĐĂNG TIN</button>
+                                    wire:click.prevent="saveCar">Đăng tin</button>
 
-                                </div>
                             </div>
-                            <div wire:loading class="loading-form__submit text-center">
-                                <svg viewBox="25 25 50 50">
-                                    <circle r="20" cy="50" cx="50"></circle>
-                                </svg>
-                            </div>
+                        </div>
+                        <div wire:loading class="loading-form__submit text-center">
+                            <svg viewBox="25 25 50 50">
+                                <circle r="20" cy="50" cx="50"></circle>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

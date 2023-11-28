@@ -58,4 +58,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Car::class);
     }
+
+    public function transactions_histories() {
+        return $this->HasMany(TransactionsHistory::class);
+    }
 }
