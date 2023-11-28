@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\User;
+use GuzzleHttp\Client;
 use App\Models\Service;
+use App\Models\WithDraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\TransactionsHistory;
@@ -340,6 +342,8 @@ class SettingsController extends Controller
             ->where('transaction_type', 'LIKE', 'nạp tiền')
             ->pluck('amount', 'id')
             ->sum();
+        
+
         // lịch sử thanh toán dịch vụ
         $serviceId = DB::table('purchased_service')
             ->where('user_id', Auth::id())
@@ -352,7 +356,14 @@ class SettingsController extends Controller
             ->where('user_id', auth()->id())
             ->where('transaction_type', 'LIKE', '%nạp tiền%')
             ->get();
-        return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory'));
+
+        $withDrawHistory = DB::table('transactions_histories')
+        ->select('id', 'amount', 'created_at')
+        ->where('user_id', auth()->id())
+            ->where('transaction_type', 'LIKE', '%rút tiền%')
+            ->get();
+        
+        return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory', 'withDrawHistory'));
     }
 
     public function settings(Request $request)
@@ -387,5 +398,38 @@ class SettingsController extends Controller
             }
         }
         return view('user-settings.settings', compact('user', 'err'));
+    }
+
+    public function withdraw() {
+        $client = new Client();
+
+        // Thay đổi URL thành URL thực tế của API bạn muốn truy cập
+        $response = $client->get('https://api.vietqr.io/v2/banks?utm_source=j2team&utm_medium=url_shortener&utm_campaign=bank-list-api');
+
+        $dataAPI = json_decode($response->getBody(), true);
+        return view('user-settings.withdraw', compact('dataAPI'));
+    }
+
+    public function withdrawMoney(Request $request) {
+        // dd($request->all());
+        $user_id = Auth::user()->id;
+        $user_balance = User::find($user_id);
+    
+        if(intval($request->bank_price) > intval($user_balance->account_balence)) {  
+            return redirect()->back()->with('error', 'Số tiền bạn muốn rút quá lớn');
+        }
+
+        $resultWithdraw = WithDraw::create([
+            'user_id' => $user_id,
+            'bank_name' => $request->bank_name,
+            'bank_price' => $request->bank_price,
+            'bank_number' => $request->bank_number,
+            'username' => $request->username
+        ]);
+
+        if ($resultWithdraw) {
+            return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
+        }
+
     }
 }

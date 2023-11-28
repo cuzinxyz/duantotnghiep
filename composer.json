@@ -16,7 +16,7 @@
         "filament/tables": "3.0-stable",
         "filament/widgets": "^3.0-stable",
         "flowframe/laravel-trend": "^0.1.5",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.8",
         "ibrahimbougaoua/filament-rating-star": "^0.0.1",
         "kjmtrue/vietnam-zone": "^1.0",
         "laralabs/toaster": "^5.0",

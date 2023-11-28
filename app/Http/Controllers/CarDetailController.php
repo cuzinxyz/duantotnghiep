@@ -13,13 +13,14 @@ class CarDetailController extends Controller
         if ($slug) {
             $carDetail = Car::where('slug', $slug)->first();
         }
+
+
         # save view
         views($carDetail)->record();
 
         $recentCars = Car::inRandomOrder()->limit(4)->get();
 
         $ads = Ads::where('priority', 2)->get();
-        // dd($ads);
 
         return view('detail', compact('carDetail', 'recentCars', 'ads'));
     }
