@@ -13,7 +13,7 @@ use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Kjmtrue\VietnamZone\Models\Province;
 
-class CarListingSystem extends Component
+class   CarListingSystem extends Component
 {
     use WithPagination;
 

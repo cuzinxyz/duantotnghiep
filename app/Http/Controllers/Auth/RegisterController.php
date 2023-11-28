@@ -71,10 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         if($newUser){
-            $name = $data['name'];
-            $email = $data['email'];
-            $password = $data['password'];
-            Mail::send('mails.notification-register', compact('name', 'email', 'password'), function($email) use($data){
+            Mail::send('mails.notification-register', compact('data'), function($email) use($data){
                 $email->subject('Chào mừng bạn đến với Drivco - Chi tiết thông tin đăng nhập tài khoản tại website');
                 $email->to($data['email'], $data['name']);
             });

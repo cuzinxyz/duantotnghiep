@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SearchCarController;
+use App\Livewire\SearchCar;
 use App\Models\News;
 use App\Models\Service;
 use App\Livewire\CarListingSystem;
@@ -13,6 +15,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
+use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -59,6 +62,10 @@ Route::middleware(['auth'])->group(function () {
         Auth::logout();
         return redirect()->route('homepage');
     });
+
+    Route::controller(SendGuideRequestController::class)->group(function(){
+        Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
+    });
 });
 
 Route::controller(ServiceController::class)->group(function () {
@@ -81,6 +88,9 @@ Route::get("/bai-viet/{slug}.html", function($slug) {
 Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail');
 
 Route::get('/xe', CarListingSystem::class)->name('car.list');
+Route::controller(SearchCarController::class)->group(function () {
+    Route::get('/tim-xe', 'index')->name('searchcar');
+});
 
 Auth::routes();
 
