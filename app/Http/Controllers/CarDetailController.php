@@ -20,7 +20,10 @@ class CarDetailController extends Controller
 
         $recentCars = Car::inRandomOrder()->limit(4)->get();
 
-        $ads = Ads::where('priority', 2)->get();
+        $ads = Ads::where('priority', 2)
+            ->inRandomOrder()
+            ->limit(1)
+            ->get();
 
         return view('detail', compact('carDetail', 'recentCars', 'ads'));
     }

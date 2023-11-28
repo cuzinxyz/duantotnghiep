@@ -71,7 +71,10 @@ class HomeController extends Controller
         # partners
         $partners = Partner::all();
 
-        $adsPartners = Ads::where('priority', 1)->get();
+        $adsPartners = Ads::where('priority', 1)
+            ->inRandomOrder()
+            ->limit(1)
+            ->get();
 
         return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners', 'adsPartners'));
     }
