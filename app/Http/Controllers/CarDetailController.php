@@ -7,7 +7,7 @@ use App\Models\Car;
 
 class CarDetailController extends Controller
 {
-    public function index($slug = null)
+    public function index(Request $request, $slug = null)
     {
         $carDetail = [];
         if ($slug) {

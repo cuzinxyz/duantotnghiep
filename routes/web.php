@@ -15,6 +15,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
+use App\Livewire\Showroom;
 use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
@@ -28,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
+
+        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
     });
 
     Route::controller(CheckOutController::class)->group(function () {
@@ -78,10 +81,10 @@ Route::controller(ServiceController::class)->group(function () {
 });
 
 # Posts Route
-Route::get("/bai-viet/{slug}.html", function($slug) {
+Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
 
-    if(!$post) {
+    if (!$post) {
         abort(404);
     }
     return view('news.detail', [
@@ -92,6 +95,7 @@ Route::get("/bai-viet/{slug}.html", function($slug) {
 Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail');
 
 Route::get('/xe', CarListingSystem::class)->name('car.list');
+
 Route::controller(SearchCarController::class)->group(function () {
     Route::get('/tim-xe', 'index')->name('searchcar');
 });
@@ -102,3 +106,6 @@ Auth::routes();
 Route::controller(CarDetailController::class)->group(function () {
     Route::get('/xe/{slug}', 'index')->name('car-detail');
 });
+
+// Showroom
+Route::get('/showroom', Showroom::class);
