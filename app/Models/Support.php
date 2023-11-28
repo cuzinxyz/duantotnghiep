@@ -12,8 +12,6 @@ class Support extends Model
     protected $table = 'supports';
     protected $fillable = ['id', 'user_id', 'title', 'category', 'body', 'response'];
 
-    protected $fillable = ['response'];
-
     public function user()
     {
         return $this->belongsTo(User::class);
