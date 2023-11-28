@@ -41,17 +41,13 @@
                                 </div>
                                 <div class="tab-content mb-30">
                                     <div class="product-st-card1 two mb-30">
-                                        <div class="text-slider2">
-                                            <div class="marquee_text">
-                                                @foreach ($ads as $value)
-                                                    <a href="{{ $value->target_url }}" target="_blank"
-                                                        rel="noopener noreferrer">
-                                                        <img src="{{ asset('storage/' . $value->image_url) }}"
-                                                            alt="" width="400" height="400">
-                                                    </a>
-                                                @endforeach
-                                            </div>
-                                        </div>
+                                        @foreach ($ads as $value)
+                                            <a href="{{ $value->target_url }}" target="_blank"
+                                                rel="noopener noreferrer">
+                                                <img src="{{ asset('storage/' . $value->image_url) }}"
+                                                    alt="">
+                                            </a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -122,22 +118,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(".marquee_text").marquee({
-            direction: "left",
-            duration: 25000,
-            gap: 50,
-            delayBeforeStart: 0,
-            duplicated: true,
-            startVisible: true,
-        });
-        $(".marquee_text2").marquee({
-            direction: "left",
-            duration: 25000,
-            gap: 50,
-            delayBeforeStart: 0,
-            duplicated: true,
-            startVisible: true,
-        });
-    </script>
 </x-partials.layout-client>
