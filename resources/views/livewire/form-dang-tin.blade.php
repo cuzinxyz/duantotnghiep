@@ -197,35 +197,11 @@
                                     <div class="color-select row gy-2">
                                         @foreach ($colors as $key => $color)
                                         <div class="col-6">
-                                            <input type="radio" wire:model="color" data-color="{{ $key }}" value="{{ $color }}">
-                                            <span for="{{ $key }}" id="{{ $key }}">{{ $color }}</span>
+                                            <input {{ $key == 'black' ? 'checked' : '' }} hidden type="radio" wire:model="color" data-color="{{ $key }}" value="{{ $color }}" id="{{ $key }}" name="colorpicker">
+                                            <label for="{{ $key }}" class="shadow-lg {{ $key }} text-center rounded-2" style="padding: 4px 10px">{{ $color }}</label>
                                         </div>
                                         @endforeach
                                     </div>
-                                    {{-- <div class="radio-input" id="style-4" style="overflow:auto">
-                                        @foreach ($colors as $key => $color)
-                                            <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
-                                                id="color-{{ $key }}" type="radio" wire:model="color">
-                                            <label for="color-{{ $key }}">
-                                                <span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24">
-                                                        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                                                        <g stroke-linejoin="round" stroke-linecap="round"
-                                                            id="SVGRepo_tracerCarrier"></g>
-                                                        <g id="SVGRepo_iconCarrier">
-                                                            <g id="Interface / Check">
-                                                                <path stroke-linejoin="round" stroke-linecap="round"
-                                                                    stroke-width="2" stroke="#ffffff"
-                                                                    d="M6 12L10.2426 16.2426L18.727 7.75732"
-                                                                    id="Vector"></path>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </label>
-                                        @endforeach
-                                    </div> --}}
 
                                     <div class="text-danger">
                                         @error('color')

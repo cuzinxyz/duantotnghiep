@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\Pages\ViewUser;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Filament\Resources\UserResource\RelationManagers\TransactionsHistoriesRelationManager;
 
@@ -46,6 +47,7 @@ class UserResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('password')
                             ->password()
+                            ->visible(fn ($livewire) => $livewire instanceof CreateUser)
                             ->required(),
                     ])->columnSpan([
                         'md' => 1,
@@ -56,6 +58,7 @@ class UserResource extends Resource
                         FileUpload::make('avatar')
                             ->imageEditor()
                             ->disk('public')
+                            ->required()
                             ->directory('avatars/users'),
                     ])->columnSpan([
                         'md' => 1,
@@ -72,13 +75,13 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('Avatar')
+                ImageColumn::make('avatar')
                     ->label('Ảnh đại diện')
                     ->circular(),
-                Tables\Columns\TextColumn::make('Tên')->searchable(),
+                Tables\Columns\TextColumn::make('name')->label("Tên")->searchable(),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('phone_number')->label('Số điện thoại'),
-                Tables\Columns\TextColumn::make('service.service_name')->label('Dịch vụ'),
+                // Tables\Columns\TextColumn::make('service.service_name')->label('Dịch vụ'),
                 Tables\Columns\TextColumn::make('account_balence')->label('Số dư tài khoản')
                     ->numeric(
                         decimalPlaces: 0,

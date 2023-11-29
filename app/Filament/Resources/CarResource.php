@@ -28,12 +28,12 @@ use Filament\Forms\Components\Radio;
 
 class CarResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Thương hiệu';
 
     protected static ?string $model = Car::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Xe';
+    protected static ?string $navigationLabel = 'Quản Lý Xe';
 
     public static function form(Form $form): Form
     {
@@ -298,7 +298,8 @@ class CarResource extends Resource
                                 TextInput::make('contact.phone_number')
                                     ->label('Số điện thoại')
                                     ->required()
-                                    ->rule('regex:/^(84|0[3|5|7|8|9])+([0-9]{8})$/'),
+                                    ->rule('regex:/^(84|0[3|5|7|8|9])+([0-9]{8})$/')
+                                    ->default('user.phone_number'),
 
                                 TextInput::make('contact.facebook'),
 
@@ -334,16 +335,9 @@ class CarResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Tác giả')
                     ->sortable(),
-
-
-                Tables\Columns\TextColumn::make('user.service.service_name')
-                    ->label('Gói tin')
-                    ->sortable(),
-
-
-                Tables\Columns\IconColumn::make('recommended')
-                    ->label('Xu hướng')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('brand.brand_name')
+                    ->label('Hãng sản xuất')
+                    ->searchable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
