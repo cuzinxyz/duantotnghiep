@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GarageRequest;
 use App\Models\Car;
-use Illuminate\Support\Facades\Request;
+use App\Models\Garage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class CarController extends Controller
 {
