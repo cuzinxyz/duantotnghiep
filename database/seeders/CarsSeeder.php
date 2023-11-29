@@ -32,6 +32,7 @@ class CarsSeeder extends Seeder
                 'car_info' => json_decode('{"color": "Đen", "engine": "1000", "mileage": "10000", "version": "two", "features": ["Bánh xe cao cấp", "Cửa sổ trời"], "fuelType": "Xăng", "transmission": "sotudong", "number_of_seats": "5", "year_of_manufacture": "2022"}'),
                 'verhicle_image_library' => ['car_photos/detail_1.png','car_photos/detail_2.png','car_photos/detail_3.png'],
                 'verhicle_videos' => 'video_car/1700227477_test_video.mp4',
+                'garage_id' => '1',
                 'status' => 1,
                 'reason' => null,
                 'description' => 'xe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\nxe nay so '.$i.'\n',
