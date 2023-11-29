@@ -47,7 +47,24 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 
     @stack('styles')
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -244,7 +261,7 @@
                     <button class="modal-btn header-cart-btn" type="button">
                         <i class="bi bi-wallet2"></i> Ví của tôi
                     </button>
-                    <div class="cart-menu">
+                    <div class="cart-menu" style="overflow-y: scroll;height: 500px;">
                         <div class="cart-body" style="padding-bottom: 20px !important">
                             <ul>
                                 <li class="pd-cart">
