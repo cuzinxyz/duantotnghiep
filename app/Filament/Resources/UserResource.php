@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\Pages\ViewUser;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Filament\Resources\UserResource\RelationManagers\TransactionsHistoriesRelationManager;
 
@@ -46,6 +47,7 @@ class UserResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('password')
                             ->password()
+                            ->visible(fn ($livewire) => $livewire instanceof CreateUser)
                             ->required(),
                     ])->columnSpan([
                         'md' => 1,
@@ -56,6 +58,7 @@ class UserResource extends Resource
                         FileUpload::make('avatar')
                             ->imageEditor()
                             ->disk('public')
+                            ->required()
                             ->directory('avatars/users'),
                     ])->columnSpan([
                         'md' => 1,
