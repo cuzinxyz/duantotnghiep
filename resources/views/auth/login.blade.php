@@ -39,11 +39,17 @@
             background-size: 100% 80px;
         }
 
-        /* .login__wrap {
-            display: grid;
-            grid-template-columns: 50% 50%;
-            grid-column-gap: 20px;
-        } */
+        .img__login {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px
+        }
+
+        .modal-dialog {
+            margin: 0;
+        }
+
         @media screen and (max-width: 1280px) {
 
             /* STYLES HERE */
@@ -52,15 +58,16 @@
             }
         }
     </style>
-    <div class="container">
+    <div class="container mb-5">
         <div class="login__wrap d-flex justify-content-center align-items-center">
-            <div class="banner__login" style="witdh: 400px; height: 510px; border-radius: 10px">
-                <img style="witdh:100%; height:100%; border-radius: 10px"
+            <div class="banner__login" style="witdh: 500px; height: 513px">
+                <img class="img__login" style="witdh:100%; height:100%;"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/800px-Shaqi_jrvej.jpg"
                     alt="">
             </div>
             <div class="modal-dialog">
-                <div style="border-radius: 10px" class="modal-content form__login">
+                <div class="modal-content form__login"
+                    style="border-top-right-radius:12px;border-bottom-right-radius:12px;border-top-left-radius:0;border-bottom-left-radius:0">
                     <div class="modal-header">
                         <h4 style="font-weight: 700" class="modal-title">Đăng Nhập</h4>
                         {{-- <p>Don’t have any account? <button type="button" data-bs-toggle="modal"
