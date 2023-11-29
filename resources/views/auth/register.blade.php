@@ -39,7 +39,7 @@
         }
     </style>
     <div class="container">
-        <div class="modal-dialog modal-dialog-centered align-items-stretch d-sm-none d-md-flex" style="max-width: 1000px">
+        <div class="modal-dialog modal-dialog-centered align-items-stretch d-sm-none d-md-block" style="max-width: 1000px">
             <div class="background">
                 <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" style="border-top-left-radius:12px;border-bottom-left-radius:12px" alt="">
             </div>

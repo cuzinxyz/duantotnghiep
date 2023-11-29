@@ -190,7 +190,8 @@
                 <div class="search-area">
                     <form>
                         <div class="form-inner d-flex">
-                            <input type="text" placeholder="Search for cars" class="border border-dark border-1 rounded px-2 py-1">
+                            <input type="text" placeholder="Search for cars"
+                                class="border border-dark border-1 rounded px-2 py-1">
                             <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
                         </div>
                     </form>
@@ -248,7 +249,7 @@
                                 <li class="pd-cart">
                                     <div class="d-flex align-items-start gap-3">
                                         <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                            src="{{ (auth()->user()->avatar) ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                            src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                             alt="">
 
                                         <div class="d-flex flex-column">
@@ -274,7 +275,8 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Tin hoạt động</span>
                                             <div class="fw-bold">
-                                                {{ \App\Models\Car::where('user_id', auth()->id())->where('status', 1)->count() }} <i class="bi bi-app-indicator"></i>
+                                                {{ \App\Models\Car::where('user_id', auth()->id())->where('status', 1)->count() }}
+                                                <i class="bi bi-app-indicator"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -287,10 +289,35 @@
                                             <i class="bi bi-person-circle"></i> Trang cá nhân
                                         </div>
                                     </div>
+
+                                </li>
+                                <li class="mb-2">
                                     <div class="cart-block">
-                                        <div class="cart-block-body_item"
-                                            onclick="window.location.href='{{ route('garage') }}'">
-                                            <i class="bi bi-person-circle"></i> Quản lí Garage
+                                        <div class="cart-block-header fw-bold">Salon</div>
+                                        <div class="cart-block-body">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2 text-warning"
+                                                onclick="window.location.href='{{ route('dangki-garage') }}'">
+                                                <i class="bi bi-house"></i> Salon
+                                            </div>
+                                            <div class="cart-block-body_item"
+                                                onclick="window.location.href='{{ route('garage') }}'">
+                                                <i class="bi bi-person-circle"></i> Quản lý garage
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-2">
+                                    <div class="cart-block">
+                                        <div class="cart-block-header fw-bold">Garage</div>
+                                        <div class="cart-block-body">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2 text-warning"
+                                                onclick="window.location.href='{{ route('dangki-garage') }}'">
+                                                <i class="bi bi-house"></i> Đăng ký garage
+                                            </div>
+                                            <div class="cart-block-body_item"
+                                                onclick="window.location.href='{{ route('garage') }}'">
+                                                <i class="bi bi-person-circle"></i> Quản lý garage
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -298,10 +325,6 @@
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
                                         <div class="cart-block-body">
-                                        <div class="cart-block-body_item d-flex align-items-center gap-2"
-                                                onclick="window.location.href='{{ route('dangki-garage')}}'">
-                                                <i class="bi bi-house"></i> Đăng kí doanh nghiệp
-                                            </div>
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('wishlish') }}'">
                                                 <i class="bi bi-megaphone"></i> Đăng tin mua xe
@@ -332,7 +355,7 @@
                                             </div>
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
-                                                onclick="window.location.href='{{route('withdraw')}}'">
+                                                onclick="window.location.href='{{ route('withdraw') }}'">
                                                 <i class="bi bi-cash-stack"></i> Rút tiền
                                             </div>
 

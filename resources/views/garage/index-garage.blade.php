@@ -200,7 +200,7 @@
                             aria-labelledby="v-pills-home-tab">
                             <div class="reviews-area">
                             <button class="nav-link mb-3 shadow" id="v-pills-4-tab" data-bs-toggle="pill" data-bs-target="#v-pills-4"
-                            type="button" role="tab" onclick="window.location.href='{{ route('addCar', 1) }}'">Add Car</button>   
+                            type="button" role="tab" onclick="window.location.href='{{ route('addCar', 1) }}'">Add Car</button>
                                 <div class="row g-lg-4 gy-5">
                                     <div class="col-lg-7">
                                     @foreach ($Cars_garage as $car)
@@ -248,12 +248,12 @@
                                                             <legend>Hành động</legend>
                                                             <ul>
                                                                 <hr>
-                                
+
                                                                 <li>
                                                                     <button
                                                                     onclick="window.location.href='{{ route('editcargarage', $car->id) }}'"
                                                                     >
-                                                                        
+
                                                                         <svg stroke-linejoin="round"
                                                                             stroke-linecap="round" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
@@ -291,9 +291,9 @@
                                                 </div>
                                             @endforeach
                                     </div>
-                                    
+
                                 </div>
-                               
+
                             </div>
 
                         </div>

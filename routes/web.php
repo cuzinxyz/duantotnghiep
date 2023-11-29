@@ -30,9 +30,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
-        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');       
+        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
     });
-  
+
     Route::controller(GarageController::class)->group(function(){
         Route::match(['GET','POST'],'/dangki-garage','ownGarage')->name('dangki-garage');
         Route::match(['GET','POST'],'/suathongtinxe/{id}','editCarGarage')->name('editcargarage');
@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/xoa-xe/{carID}', 'removeCar')->name('hiddenCarGarage');
         Route::get('/garage','garage')->name('garage');
     });
+
     Route::controller(CheckOutController::class)->group(function () {
         # payment
         Route::post('/payment/{idService}', 'checkout')->name('payment-vnpay');
