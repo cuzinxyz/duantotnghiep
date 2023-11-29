@@ -113,5 +113,15 @@ $expired = $record->expiration_date->lt(now()->subMonths(3));
 
 Như vậy có thể linh hoạt thiết lập các giới hạn 30 ngày, 3 tháng, 1 năm hay bất kỳ khoảng thời gian nào cho cột expiration_date.
 
+
+
+Task Đạt còn một số chỗ cần update :
++ Trang quản lí garage có thể quản lí đc list car và brand và News thì trong các db trên có cần thêm bảng garage nữa kh để có thể 
+quản lí giữa các garage khác nhau
++ Do chưa quen dùng Livewire nên khi render dữ liệu vào các ô input khi sửa thông tin car trong garage nên muốn hỏi render các yếu tố trong
+Car_info như kiểu fuelType... 
++ Do Add Car trong Garage tôi làm dựa vào đăng tin bán xe chỉ thêm trường Garage_id để quản lí nên khi add Car sẽ thêm vào id của Garage hay user vì tôi nghĩ 1 garage có thể 2 hoặc nhiều tài khoản quản lí đc kh ?
++ Những câu Sql toi dùng để render ra bảng edit car ví dụ như inner join giữa các bảng khóa ngoại kh hoạt động mặc dù đã tham khảo và xem từ file khác như RecentCars trong app\Livewire
+
 # coming soon...............................................
 # asdasdsadasdasd

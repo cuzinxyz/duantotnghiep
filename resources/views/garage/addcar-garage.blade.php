@@ -7,9 +7,8 @@
                         <div class="comment-area">
                             <div class="inquiry-form mt-100">
                                 <div class="title">
-                                    <h4>Đăng tin mua xe:</h4>
                                 </div>
-                                <livewire:post-buy-car />
+                                <livewire:add-car-garage />
                             </div>
                         </div>
                     </div>
