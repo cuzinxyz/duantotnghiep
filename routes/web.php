@@ -15,6 +15,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
+use App\Http\Controllers\GarageController;
 use App\Livewire\Showroom;
 use App\Http\Controllers\SendGuideRequestController;
 
@@ -29,8 +30,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
-
         Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
+    });
+
+    Route::controller(GarageController::class)->group(function(){
+        Route::match(['GET','POST'],'/dangki-garage','ownGarage')->name('dangki-garage');
+        Route::match(['GET','POST'],'/suathongtinxe/{id}','editCarGarage')->name('editcargarage');
+        Route::get('/them-xe-garage/{garage_id}', 'addCar')->name('addCar');
+        Route::get('/xoa-xe/{carID}', 'removeCar')->name('hiddenCarGarage');
+        Route::get('/garage','garage')->name('garage');
     });
 
     Route::controller(CheckOutController::class)->group(function () {
@@ -81,6 +89,18 @@ Route::controller(ServiceController::class)->group(function () {
 });
 
 # Posts Route
+Route::get("/bai-viet", function() {
+    $posts = News::all();
+
+    if(!$posts) {
+        abort(404);
+    }
+
+    return view('news.list', [
+        'posts' => $posts
+    ]);
+});
+
 Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
 

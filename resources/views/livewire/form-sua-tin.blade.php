@@ -197,7 +197,7 @@
                                     <div class="form-inner form-inner-padding mb-20 blurBG bg-shape" style=""
                                         id="changeColor">
                                         <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
-                                        <div class="radio-input" id="style-4" style="overflow:auto">
+                                        {{-- <div class="radio-input" id="style-4" style="overflow:auto">
                                             @foreach ($colors as $key => $color)
                                                 <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
                                                     id="color-{{ $key }}" type="radio" wire:model="color">
@@ -220,7 +220,17 @@
                                                     </span>
                                                 </label>
                                             @endforeach
+                                        </div> --}}
+
+                                        <div class="color-select row gy-2">
+                                            @foreach ($colors as $key => $color)
+                                            <div class="col-6">
+                                                <input {{ $key == 'black' ? 'checked' : '' }} hidden type="radio" wire:model="color" data-color="{{ $key }}" value="{{ $color }}" id="{{ $key }}" name="colorpicker">
+                                                <label for="{{ $key }}" class="shadow-lg {{ $key }} text-center rounded-2" style="padding: 4px 10px">{{ $color }}</label>
+                                            </div>
+                                            @endforeach
                                         </div>
+
                                         <div class="text-danger">
                                             @error('color')
                                                 {{ $message }}

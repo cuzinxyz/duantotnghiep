@@ -8,25 +8,13 @@
                     <h2>Xe Được Đề Xuất</h2>
                     <p>Xe được đề xuất bởi Drivco.</p>
                 </div>
-                <div class="slider-btn-group2 d-flex align-items-center justify-content-between">
-                    <div class="slider-btn prev-51">
-                        <svg width="9" height="15" viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 6.50008L8 0L2.90909 6.50008L8 13L0 6.50008Z"></path>
-                        </svg>
-                    </div>
-                    <div class="slider-btn next-51">
-                        <svg width="9" height="15" viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 6.50008L0 0L5.09091 6.50008L0 13L8 6.50008Z"></path>
-                        </svg>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row wow fadeInUp" data-wow-delay="300ms">
             <div class="col-lg-12">
-                <div class="row">
+                <div class="row gy-3">
                     @foreach ($cars as $car)
-                        <div class="col-md-4 col-lg-3 col-sm-6 col-6">
+                        <div class="col-md-6 col-lg-3 col-sm-12 col-12">
                             <div class="product-card5">
                                 <div class="product-img">
                                     <div class="product-price">
@@ -61,7 +49,7 @@
                                 </div>
                                 <div class="product-content">
                                     <div class="location">
-                                        <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name}}</a>
+                                        <a><i class="bi bi-geo-alt"></i> {{ $car->province->name}}</a>
                                     </div>
                                     <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
                                     <ul class="features">

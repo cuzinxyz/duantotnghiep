@@ -109,7 +109,7 @@
             <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12 d-flex align-items-end justify-content-between gap-3 flex-wrap">
                     <div class="section-title-2">
-                        <h2>Hoạt động như thế nào?</h2>
+                        <h2>Drivco hoạt động như thế nào?</h2>
                         {{-- <p>Quy trình mua bán của chú</p> --}}
                     </div>
                     <div class="video-btn">

@@ -49,7 +49,8 @@ class DemnadResource extends Resource
                             ->icon('heroicon-o-phone'),
                         TextEntry::make('created_at')
                             ->label('Thời gian tạo')
-                            ->icon('heroicon-o-calendar-days'),
+                            ->icon('heroicon-o-calendar-days')
+                            ->since(),
                         TextEntry::make('status')
                             ->state(function (Model $record) {
                                 if ($record->status == 0) return 'Chưa được duyệt';
@@ -73,8 +74,8 @@ class DemnadResource extends Resource
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $record->user_id)->first();
 
-                                    $reason = 'Chào bạn '.$user->name.', 
-                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã được duyệt thành công. 
+                                    $reason = 'Chào bạn '.$user->name.',
+                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã được duyệt thành công.
                                     Để xem bài viết đã đăng của bạn, vui lòng truy cập: '. route('homepage')
                                     . ' .Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
                                     ChMessage::create([
@@ -82,7 +83,7 @@ class DemnadResource extends Resource
                                         'to_id' => $record->user_id,
                                         'body' => $reason
                                     ]);
-                                    
+
                                     Mail::to($user)->later(now()->addSeconds(5), new SendMailDemnad($record, $user));
                                     redirect()->route('filament.admin.resources.demnads.index');
                                 })
@@ -105,8 +106,8 @@ class DemnadResource extends Resource
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $record->user_id)->first();
 
-                                    $reason = 'Chào bạn '.$user->name.', 
-                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã không được duyệt. 
+                                    $reason = 'Chào bạn '.$user->name.',
+                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã không được duyệt.
                                     Vì lý do: '.$data['reason'].', vui lòng điều chỉnh lại bài viết của bạn để chúng tôi có thể hỗ trợ bạn dễ dàng tìm được chiếc xe như mong muốn.';
                                     ChMessage::create([
                                         'from_id' => $bot->id,
@@ -127,8 +128,6 @@ class DemnadResource extends Resource
                     ])->columnSpan(1),
                 Section::make('Chi tiết')
                     ->schema([
-                        TextEntry::make('title')
-                            ->label('Tiêu đề'),
                         TextEntry::make('content')
                             ->label('Nội dung'),
                     ])
@@ -141,9 +140,6 @@ class DemnadResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Tác giả'),
-
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Tiêu đề'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Thời gian')

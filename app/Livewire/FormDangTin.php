@@ -25,7 +25,7 @@ class FormDangTin extends Component
         'yellow' => 'Vàng',
         'gray' => 'Ghi',
         'blue' => 'Xanh',
-        'multiple_color' => 'Nhiều màu'
+        'different' => 'Khác'
     ];
     public $featureValues = [
         'PremiumWheel' => 'Bánh xe cao cấp',
@@ -70,6 +70,11 @@ class FormDangTin extends Component
     public $engine;
     public $verhicle_videos;
     public $features = [];
+
+    public function mount() {
+        $this->phone = auth()->user()->phone ? auth()->user()->phone : '';
+        $this->email = auth()->user()->email ? auth()->user()->email : '';
+    }
 
     public function previousStepSubmit()
     {

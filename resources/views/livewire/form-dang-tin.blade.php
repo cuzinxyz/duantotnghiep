@@ -194,28 +194,12 @@
                                 <div class="form-inner form-inner-padding mb-20 blurBG bg-shape" style=""
                                     id="changeColor">
                                     <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
-                                    <div class="radio-input" id="style-4" style="overflow:auto">
+                                    <div class="color-select row gy-2">
                                         @foreach ($colors as $key => $color)
-                                            <input {{ $key == 'red' ? 'checked' : '' }} value="{{ $color }}"
-                                                id="color-{{ $key }}" type="radio" wire:model="color">
-                                            <label for="color-{{ $key }}">
-                                                <span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24">
-                                                        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                                                        <g stroke-linejoin="round" stroke-linecap="round"
-                                                            id="SVGRepo_tracerCarrier"></g>
-                                                        <g id="SVGRepo_iconCarrier">
-                                                            <g id="Interface / Check">
-                                                                <path stroke-linejoin="round" stroke-linecap="round"
-                                                                    stroke-width="2" stroke="#ffffff"
-                                                                    d="M6 12L10.2426 16.2426L18.727 7.75732"
-                                                                    id="Vector"></path>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </label>
+                                        <div class="col-6">
+                                            <input {{ $key == 'black' ? 'checked' : '' }} hidden type="radio" wire:model="color" data-color="{{ $key }}" value="{{ $color }}" id="{{ $key }}" name="colorpicker">
+                                            <label for="{{ $key }}" class="shadow-lg {{ $key }} text-center rounded-2" style="padding: 4px 10px">{{ $color }}</label>
+                                        </div>
                                         @endforeach
                                     </div>
 
@@ -383,7 +367,7 @@
                         </div>
                     </div>
 
-                    <div class="row inquiry-form justify-content-evenly"
+                    <div class="row inquiry-form {{ $currentStep == 3 ? '' : 'd-none' }} justify-content-evenly"
                         id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
@@ -429,20 +413,20 @@
 
                         </div>
 
-                        <div class="col-lg-12" style="margin-top: 24px">
-                            <div wire:loading.remove class="form-inner" style="text-align: center">
+                        <div class="col-lg-12" style="margin-top: 24px" wire:loading.remove>
+                            <div class="form-inner" style="text-align: center">
                                 <button class="primary-btn2" wire:click="previousStepSubmit" type="button">Quay
                                     lại</button>
                                 <button wire:loading.attr="disabled" class="primary-btn2"
                                     wire:click.prevent="saveCar">Đăng tin</button>
 
-                                </div>
                             </div>
-                            <div wire:loading class="loading-form__submit text-center">
-                                <svg viewBox="25 25 50 50">
-                                    <circle r="20" cy="50" cx="50"></circle>
-                                </svg>
-                            </div>
+                        </div>
+                        <div wire:loading class="loading-form__submit text-center">
+                            <svg viewBox="25 25 50 50">
+                                <circle r="20" cy="50" cx="50"></circle>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -126,16 +126,6 @@ class PostCarManagerResource extends Resource
                                 IconEntry::make('status')
                                     ->boolean()
                                     ->label('Trạng thái bài đăng'),
-
-                                IconEntry::make('recommended')
-                                    ->boolean()
-                                    ->label('Xu hướng'),
-
-                                TextEntry::make('user.service.service_name')
-                                    ->label('Loại gói tin')
-                                    ->badge()
-                                    ->color('warning'),
-
                             ])
                             ->columns([
                                 'xl' => 2,
@@ -238,12 +228,12 @@ class PostCarManagerResource extends Resource
                                             ->label('Số chỗ ngồi')
                                             ->default(7),
 
-                                        TextEntry::make('car_info.manufactured')
+                                        TextEntry::make('car_info.year_of_manufacture')
                                             ->label('Năm sản xuất'),
 
-                                        ColorEntry::make('car_info.color')
+                                        TextEntry::make('car_info.color')
                                             ->label('Màu sắc')
-                                            ->default('red'),
+                                            ->default('Khác'),
 
                                         TextEntry::make('car_info.engine')
                                             ->label('Động cơ')

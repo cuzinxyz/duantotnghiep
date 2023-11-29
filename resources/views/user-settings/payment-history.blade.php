@@ -109,7 +109,7 @@
                                     @endphp
                                     <td>{{ $formattedDate }}</td>
                                     <td>{{ number_format($value->amount) }}₫</td>
-                                    <td><span class="badge bg-light text-dark">Thành công</span></td>
+                                    <td><span class="badge bg-success text-dark">Thành công</span></td>
                                     {{-- <td><span class="badge bg-success">Paid</span></td> --}}
                                 </tr>
                             @endforeach
@@ -145,7 +145,7 @@
                                     @endphp
                                     <td>{{ $formattedDate }}</td>
                                     <td>{{ number_format($value->amount) }}₫</td>
-                                    <td><span class="badge bg-light text-dark">Thành công</span></td>
+                                    <td><span class="badge bg-success text-dark">Thành công</span></td>
                                     {{-- <td><span class="badge bg-success">Paid</span></td> --}}
                                 </tr>
                             @endforeach
