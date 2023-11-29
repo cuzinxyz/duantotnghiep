@@ -24,7 +24,9 @@ use App\Filament\Resources\CarResource\Pages;
 use Filament\Forms\Components\MarkdownEditor;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms\Components\Radio;
+use Illuminate\Database\Eloquent\Model;
 
 class CarResource extends Resource
 {
@@ -92,6 +94,11 @@ class CarResource extends Resource
                                     ->required()
                                     ->numeric(),
 
+                                TextInput::make('car_info.version')
+                                    ->label('Phiên bản')
+                                    ->required()
+                                    ->numeric(),
+
                                 TextInput::make('car_info.engine')
                                     ->label('Mã lực')
                                     ->required()
@@ -100,18 +107,23 @@ class CarResource extends Resource
                                 Select::make('car_info.fuelType')
                                     ->label('Loại nhiên liệu')
                                     ->options([
-                                        'Petrol' => 'Petrol',
-                                        'Gas' => 'Gas'
+                                        'Xăng' => 'Xăng',
+                                        'Dầu' => 'Dầu',
+                                        'Điện' => 'Điện',
+                                        'Loại khác' => 'Loại khác',
                                     ]),
 
                                 Radio::make('car_info.color')
                                     ->label('Màu sắc')
                                     ->options([
-                                        'red' => 'Đỏ',
-                                        'black' => 'Đen',
-                                        'white' => 'Trắng',
-                                        'yellow' => 'Vàng',
-                                        'silver' => 'Bạc'
+                                        'Đỏ' => 'Đỏ',
+                                        'Đen' => 'Đen',
+                                        'Trắng' => 'Trắng',
+                                        'Vàng' => 'Vàng',
+                                        'Bạc' => 'Bạc',
+                                        'Xanh' => 'Xanh',
+                                        'Ghi' => 'Ghi',
+                                        'Khác' => 'Khác',
                                     ])
                                     ->columns([
                                         'default' => 1,
@@ -161,6 +173,7 @@ class CarResource extends Resource
                                         '2021' => '2021',
                                         '2022' => '2022',
                                         '2023' => '2023',
+                                        'others' => 'others',
 
 
                                     ]),
@@ -212,18 +225,14 @@ class CarResource extends Resource
                                             ->label('Tính năng')
                                             ->required()
                                             ->options([
-                                                'PremiumWheel' => 'Premium Wheel',
-                                                'Moonroof' => 'Moonroof',
-                                                'PremiumAudio' => 'Premium Audio',
-                                                'Navigation' => 'Navigation',
-                                                'FrontHeatedSeats' => 'Front Heated Seats',
-                                                'PremiumSeatMaterial' => 'Premium Seat Material',
-                                                'Bluetooth' => 'Bluetooth',
-                                                'PremiumSeatMaterial' => 'Premium Seat Material',
-                                                'FrontHeatedSeats' => 'Front Heated Seats',
-                                                'RemoteEngineStart' => 'Remote Engine Start',
-                                                'BlindSpotSystem' => 'Blind Spot System',
-                                                'Multi_ZoneClimateControl' => 'Multi-Zone Climate Control'
+                                                'Bánh xe cao cấp' => 'Bánh xe cao cấp',
+                                                'Cửa sổ trời' => 'Cửa sổ trời',
+                                                'Âm thanh cao cấp' => 'Âm thanh cao cấp',
+                                                'Chế độ chỉ đường' => 'Chế độ chỉ đường',
+                                                'Ghế da cao cấp' => 'Ghế da cao cấp',
+                                                'Kết nối blutooth' => 'Kết nối bluetooth',
+                                                'Khởi động từ za' => 'Khởi động từ xa',
+                                                'Điều hòa' => 'Điều hòa'
                                             ])->columns([
                                                 'default' => 1,
                                                 'xl' => 2,
@@ -275,13 +284,16 @@ class CarResource extends Resource
                                     ->label('Quận, Huyện, Thị xã')
 
                                     ->options(function (callable $get) {
-                                        $districts = \Kjmtrue\VietnamZone\Models\District::whereProvinceId($get('city_id'))->get()->pluck('name');
+                                        $districts = \Kjmtrue\VietnamZone\Models\District::where('province_id', $get('city_id'))->select('id', 'name')->get();
 
-                                        if (!$districts) {
-                                            return \Kjmtrue\VietnamZone\Models\District::all()->pluck('name');
+                                        $output = [];
+
+                                        foreach ($districts as $district) {
+                                            $carData = $district->toArray();
+                                            $output[$district['id']] = $district['name'];
                                         }
 
-                                        return $districts;
+                                        return $output;
                                     })
                                     ->required()
                                     ->placeholder('Quận, Huyện, Thị xã'),
@@ -295,7 +307,7 @@ class CarResource extends Resource
                                     ->email()
                                     ->required(),
 
-                                TextInput::make('contact.phone_number')
+                                TextInput::make('contact.phone')
                                     ->label('Số điện thoại')
                                     ->required()
                                     ->rule('regex:/^(84|0[3|5|7|8|9])+([0-9]{8})$/'),
@@ -335,15 +347,6 @@ class CarResource extends Resource
                     ->label('Tác giả')
                     ->sortable(),
 
-
-                Tables\Columns\TextColumn::make('user.service.service_name')
-                    ->label('Gói tin')
-                    ->sortable(),
-
-
-                Tables\Columns\IconColumn::make('recommended')
-                    ->label('Xu hướng')
-                    ->boolean(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
