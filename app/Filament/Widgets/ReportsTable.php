@@ -23,7 +23,7 @@ class ReportsTable extends BaseWidget
     {
         return $table
             ->query(
-                ReportedResource::getEloquentQuery()
+                ReportedResource::getEloquentQuery()->where('deleted_at', null)
             )
             ->defaultPaginationPageOption(5)
             ->defaultSort('created_at', 'desc')
@@ -52,7 +52,7 @@ class ReportsTable extends BaseWidget
             ->actions([
                 Action::make('toReport')
                 ->make('Xem chi tiết')
-                ->url(fn (Action $action) => ' admin/reporteds/'.$action->getRecord()->id)
+                ->url(fn (Action $action) => ' admin/reporteds')
             ]);
     }
 

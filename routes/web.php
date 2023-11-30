@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\SearchCarController;
-use App\Livewire\SearchCar;
+use App\Models\Car;
 use App\Models\News;
 use App\Models\Service;
+use App\Livewire\Showroom;
+use App\Livewire\SearchCar;
 use App\Livewire\CarListingSystem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +17,8 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
+use App\Http\Controllers\SearchCarController;
 use App\Http\Controllers\GarageController;
-use App\Livewire\Showroom;
 use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
