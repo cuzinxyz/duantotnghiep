@@ -19,11 +19,13 @@
                                     </ul>
                                 </div>
                             </div>
+                            @if(!empty($carDetail->province->name))
                             <div class="location-and-notification mb-3">
                                 <ul>
                                     <li><i class="bi bi-geo-alt"></i> {{ $carDetail->province->name }}</li>
                                 </ul>
                             </div>
+                            @endif
                             <div class="find-btn">
                                 <a href="{{ route('car.list') }}" class="primary-btn3 btn btn-sm">
                                     <svg width="24" height="15" viewBox="0 0 24 15"

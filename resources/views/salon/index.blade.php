@@ -17,6 +17,78 @@
                 <div class="row my-5">
                     <h2 class="mb-3">Quản lý Salon của bạn. <button class="btn btn-sm btn-primary"
                             onclick="window.location.href='{{ route('salon.addcar') }}'">Thêm xe</button></h2>
+
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="align-self-center">
+                                                <i class="icon-pencil primary font-large-2 float-left"></i>
+                                            </div>
+                                            <div class="media-body text-right">
+                                                <h3>{{ $salonCars->count() }}</h3>
+                                                <span>tổng xe</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="align-self-center">
+                                                <i class="icon-speech warning font-large-2 float-left"></i>
+                                            </div>
+                                            <div class="media-body text-right">
+                                                <h3>{{ $totalView }}</h3>
+                                                <span>lượt tiếp cận</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="align-self-center">
+                                                <i class="icon-graph success font-large-2 float-left"></i>
+                                            </div>
+                                            <div class="media-body text-right">
+                                                <h3>{{ $totalComment }}</h3>
+                                                <span>Lượt bình luận</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="align-self-center">
+                                                <i class="icon-pointer danger font-large-2 float-left"></i>
+                                            </div>
+                                            <div class="media-body text-right">
+                                                <h3>{{ $totalSavedCar }}</h3>
+                                                <span>người lưu tin</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     @foreach ($salonCars as $car)
                         <div class="col-6">
                             <div class="product-st-card1">
@@ -56,17 +128,8 @@
                                     </div>
 
                                     <div class="d-flex pt-3 gap-3">
-                                        <a href="{{ route('salon.editcar', $car->id) }}">
-                                            <button class="btn btn-sm btn-warning">
-                                                Sửa tin
-                                            </button>
-                                        </a>
-                                        <a href="{{ route('salon.deletecar', $car->id) }}"
-                                            onclick="return confirm('Bạn có chắc muốn xóa xe này ?')">
-                                            <button class="btn btn-sm btn-danger">
-                                                Xóa tin
-                                            </button>
-                                        </a>
+                                        <button class="btn btn-sm btn-warning">Sửa tin</button>
+                                        <button class="btn btn-sm btn-danger">Xoá tin</button>
                                     </div>
                                 </div>
                             </div>
