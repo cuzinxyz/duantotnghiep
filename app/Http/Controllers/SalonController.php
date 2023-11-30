@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Comments;
 use App\Models\Salon;
 use App\Models\User;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class SalonController extends Controller
@@ -14,9 +16,24 @@ class SalonController extends Controller
         $salonCars = Car::where('user_id', auth()->id())
             ->whereNotNull('salon_id')
             ->get();
-// dd($salonCars);
+        // dd($salonCars);
+        $totalView = 0;
+        $totalComment = 0;
+        $totalSavedCar = 0;
+        foreach ($salonCars as $car) {
+            $view = views($car)->count();
+            $totalView += $view;
+            $totalComment += Comments::where('car_id', $car->id)
+                ->count();
+            $totalSavedCar += Wishlist::where('car_id', $car->id)
+                ->count();
+        }
+
         return view('salon.index', [
-            'salonCars' => $salonCars
+            'salonCars' => $salonCars,
+            'totalView' => $totalView,
+            'totalComment' => $totalComment,
+            'totalSavedCar' => $totalSavedCar
         ]);
     }
 
