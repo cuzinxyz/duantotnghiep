@@ -2,7 +2,6 @@
     @push('styles')
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/simplemde.min.css') }}">
     @endpush
 
     <form enctype="multipart/form-data">
@@ -368,6 +367,70 @@
                     </div>
 
                     <div class="row inquiry-form {{ $currentStep == 3 ? '' : 'd-none' }} justify-content-evenly"
+                            id="form-sell-3">
+                            <h5 class="mb-15">Hình ảnh xe</h5>
+                            <div class="col-12 p-4" wire:ignore>
+                                <div class="custom-file-container" data-upload-id="mySecondImage">
+                                    <div class="label-container">
+                                        <label class="fw-bold fontAvantRegular">Upload hình (* có thể upload nhiều
+                                            hình)</label>
+                                        <a class="clear-button" href="javascript:void(0)" title="Clear Image">
+                                            ×
+                                        </a>
+                                    </div>
+                                    <label class="input-container">
+                                        <input accept="image/*" aria-label="Choose File" class="input-hidden"
+                                            id="fileInput" multiple="" type="file"
+                                            wire:model="verhicle_image_library">
+                                        <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
+                                            Chọn
+                                            files</span>
+                                    </label>
+                                    <div id="preview-container" class="image-preview" style="">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 p-4" wire:ignore>
+                                <div class="custom-file-container" data-upload-id="mySecondImage">
+                                    <div class="label-container">
+                                        <label class="fw-bold fontAvantRegular">Upload video (*)</label>
+                                        <a class="clear-button" href="javascript:void(0)" title="Clear Image">
+                                            ×
+                                        </a>
+                                    </div>
+                                    <label class="input-container">
+                                        <input accept="video/*" aria-label="Choose File" class="input-hidden"
+                                            id="fileInputVideo" type="file" wire:model="verhicle_videos">
+                                        <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
+                                            Chọn
+                                            file</span>
+                                    </label>
+                                    <div id="preview-container-video" class="image-preview" style="">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-12" style="margin-top: 24px" wire:loading.remove>
+                                <div class="form-inner" style="text-align: center">
+                                    <div class="form-inner" style="text-align: center">
+                                        <button class="primary-btn2" wire:click="previousStepSubmit" type="button">Quay
+                                            lại</button>
+                                    <button wire:loading.attr="disabled" class="fs-6 btn btn-lg justify-content-center align-items-center primary-btn2 shadow-md" style="height: 50px"
+                                        wire:click.prevent="saveCar">Đăng tin</button>
+                                </div>
+                            </div>
+                            <div wire:loading class="loading-form__submit text-center">
+                                <svg viewBox="25 25 50 50">
+                                    <circle r="20" cy="50" cx="50"></circle>
+                                </svg>
+                            </div>
+                        </div>
+
+                    {{-- <div class="row inquiry-form {{ $currentStep == 3 ? '' : 'd-none' }} justify-content-evenly"
                         id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
@@ -428,7 +491,7 @@
                                 <circle r="20" cy="50" cx="50"></circle>
                             </svg>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

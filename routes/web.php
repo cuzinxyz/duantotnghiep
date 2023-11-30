@@ -12,13 +12,14 @@ use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SalonController;
+use App\Http\Controllers\GarageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\SearchCarController;
-use App\Http\Controllers\GarageController;
 use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
@@ -41,6 +42,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/them-xe-garage/{garage_id}', 'addCar')->name('addCar');
         Route::get('/xoa-xe/{carID}', 'removeCar')->name('hiddenCarGarage');
         Route::get('/garage','garage')->name('garage');
+    });
+
+    Route::controller(SalonController::class)->group(function() {
+        Route::prefix('salon')->group(function () {
+            Route::get('/', 'register')->name('salon');
+            Route::post('/register', 'registerSalon')->name('registerSalon');
+            Route::get('/them-xe', 'addCar')->name('salon.addcar');
+            Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
+        });
+        Route::post('/account-balance', 'getBalance');
     });
 
     Route::controller(CheckOutController::class)->group(function () {
@@ -80,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('homepage');
     });
 
-    Route::controller(SendGuideRequestController::class)->group(function(){
+    Route::controller(SendGuideRequestController::class)->group(function () {
         Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
     });
 });
@@ -130,4 +141,4 @@ Route::controller(CarDetailController::class)->group(function () {
 });
 
 // Showroom
-Route::get('/showroom', Showroom::class);
+Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');

@@ -39,7 +39,7 @@
                                         <div class="category-content">
                                             <h5><a href="single-brand-category.html">{{ $brand->brand_name }}</a>
                                             </h5>
-                                            <span>(23,533) +</span>
+                                            {{-- <span>(23,533) +</span> --}}
                                         </div>
                                         <div class="explore-btn5">
                                             <a href="{{ route('brand.detail', $brand->brand_name) }}"><span>Xem</span> <i

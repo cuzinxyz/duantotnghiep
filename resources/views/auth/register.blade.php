@@ -37,95 +37,115 @@
             background-position: bottom;
             background-size: 100% 80px;
         }
+
+        .img__login {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px
+        }
+
+        @media screen and (max-width: 1280) {
+
+            /* STYLES HERE */
+            .banner__login {
+                display: none;
+            }
+        }
     </style>
-    <div class="container">
-        <div class="modal-dialog modal-dialog-centered align-items-stretch d-sm-none d-md-block" style="max-width: 1000px">
-            <div class="background">
-                <img src="https://images.pexels.com/photos/2033997/pexels-photo-2033997.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" style="border-top-left-radius:12px;border-bottom-left-radius:12px" alt="">
+    <div class="container mb-5">
+        <div class="login__wrap d-flex justify-content-center align-items-center">
+            <div class="banner__login" style="witdh: 400px; height: 605px">
+                <img class="img__login" style="witdh:100%; height:100%;"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/800px-Shaqi_jrvej.jpg"
+                    alt="">
             </div>
-            <div class="modal-content form__login" style="border-top-right-radius:12px;border-bottom-right-radius:12px;border-top-left-radius:0;border-bottom-left-radius:0">
-                <div class="modal-header">
-                    <h4 class="modal-title">Đăng Ký</h4>
-                    {{-- <p>Don’t have any account? <button type="button" data-bs-toggle="modal"
-                            data-bs-target="#signUpModal01">Sign Up</button></p> --}}
-                    <button class="rounded-2 px-2" type="button"
-                        onclick="window.location.href='{{ url()->previous() }}'">
-                        <i class="bi bi-house-door"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('register') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label for="">Họ và tên</label>
-                                    <input type="text"
-                                        class="input_login w-100 border @error('name') border-danger @enderror"
-                                        style="height:60px" id="name" value="{{ old('name') }}"
-                                        autocomplete="name" placeholder="Nhập tên..." name="name" autofocus>
+            <div class="modal-dialog">
+                <div class="modal-content form__login"
+                    style="border-top-right-radius:12px;border-bottom-right-radius:12px;border-top-left-radius:0;border-bottom-left-radius:0">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Đăng Ký</h4>
+                        {{-- <p>Don’t have any account? <button type="button" data-bs-toggle="modal"
+                                data-bs-target="#signUpModal01">Sign Up</button></p> --}}
+                        <button class="rounded-2 px-2" type="button"
+                            onclick="window.location.href='{{ url()->previous() }}'">
+                            <i class="bi bi-house-door"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('register') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-inner">
+                                        <label for="">Họ và tên</label>
+                                        <input type="text"
+                                            class="input_login w-100 border @error('name') border-danger @enderror"
+                                            style="height:60px" id="name" value="{{ old('name') }}"
+                                            autocomplete="name" placeholder="Nhập tên..." name="name" autofocus>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Email của bạn<span class="text-danger">*</span></label>
-                                    <input
-                                        class="input_login w-100 border @error('email') border border-danger @enderror"
-                                        style="height: 60px" type="email" placeholder="Nhập email" id="email"
-                                        type="email" value="{{ old('email') }}" autocomplete="email" name="email"
-                                        autofocus>
+                                <div class="col-md-12">
+                                    <div class="form-inner">
+                                        <label>Email của bạn<span class="text-danger">*</span></label>
+                                        <input
+                                            class="input_login w-100 border @error('email') border border-danger @enderror"
+                                            style="height: 60px" type="email" placeholder="Nhập email" id="email"
+                                            type="email" value="{{ old('email') }}" autocomplete="email"
+                                            name="email" autofocus>
+                                    </div>
+                                    @error('email')
+                                        <p class="text-danger fw-bold" style="display:block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </p>
+                                    @enderror
                                 </div>
-                                @error('email')
-                                    <p class="text-danger fw-bold" style="display:block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </p>
-                                @enderror
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Mật khẩu<span class="text-danger">*</span></label>
-                                    <input
-                                        class="input_login w-100 border @error('password') border border-danger @enderror"
-                                        style="height: 60px" id="password3" type="password" placeholder="*** ***"
-                                        name="password">
-                                    <i class="bi bi-eye-slash d-none" id="togglePassword3"></i>
+                                <div class="col-md-12">
+                                    <div class="form-inner">
+                                        <label>Mật khẩu<span class="text-danger">*</span></label>
+                                        <input
+                                            class="input_login w-100 border @error('password') border border-danger @enderror"
+                                            style="height: 60px" id="password3" type="password" placeholder="*** ***"
+                                            name="password">
+                                        <i class="bi bi-eye-slash d-none" id="togglePassword3"></i>
+                                    </div>
+                                    @error('password')
+                                        <p class="text-danger fw-bold" style="display:block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </p>
+                                    @enderror
                                 </div>
-                                @error('password')
-                                    <p class="text-danger fw-bold" style="display:block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </p>
-                                @enderror
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Xác nhận mật khẩu<span class="text-danger">*</span></label>
-                                    <input
-                                        class="input_login mb-3 w-100 border @error('password') border border-danger @enderror"
-                                        style="height: 60px" id="password3" type="password" placeholder="*** ***"
-                                        name="password_confirmation" autocomplete="new-password">
-                                    <i class="bi bi-eye-slash d-none" id="togglePassword3"></i>
+                                <div class="col-md-12">
+                                    <div class="form-inner">
+                                        <label>Xác nhận mật khẩu<span class="text-danger">*</span></label>
+                                        <input
+                                            class="input_login mb-3 w-100 border @error('password') border border-danger @enderror"
+                                            style="height: 60px" id="password3" type="password" placeholder="*** ***"
+                                            name="password_confirmation" autocomplete="new-password">
+                                        <i class="bi bi-eye-slash d-none" id="togglePassword3"></i>
+                                    </div>
+                                    @error('password')
+                                        <p class="text-danger fw-bold" style="display:block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </p>
+                                    @enderror
                                 </div>
-                                @error('password')
-                                    <p class="text-danger fw-bold" style="display:block" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </p>
-                                @enderror
+
+                                <div class="col-md-12">
+                                    <div class="form-inner">
+                                        <button class="primary-btn6 w-100 text-center justify-content-center"
+                                            type="submit"><i class="text-success bi bi-door-open"></i> Đăng ký</button>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <div class="form-inner">
-                                    <button class="primary-btn6 w-100 text-center justify-content-center"
-                                        type="submit"><i class="text-success bi bi-door-open"></i> Đăng ký</button>
-                                </div>
+                            <div class="mt-3 form-box d-flex align-items-center flex-column justify-content-center text-center"
+                                style="height:60px">
+                                Nếu đã có tài khoản? <a style=" color: #46D993; font-weight: 600"
+                                    href="{{ route('login') }}">Đăng nhập</a>
                             </div>
-                        </div>
-
-                        <div class="mt-3 form-box d-flex align-items-center flex-column justify-content-center text-center"
-                            style="height:60px">
-                            Nếu đã có tài khoản? <a style=" color: #46D993; font-weight: 600"
-                                href="{{ route('login') }}">Đăng nhập</a>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

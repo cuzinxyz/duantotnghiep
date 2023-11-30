@@ -31,7 +31,7 @@
 
 .custom-file-container .input-container {
     display: inline-block;
-    height: 40px;
+    height: 60px;
     margin-bottom: 8px;
     position: relative;
     width: 100%;
@@ -51,11 +51,11 @@
 
 .custom-file-container .input-visible {
     background-clip: padding-box;
-    background-color: #fff;
+    background: rgba(0,0,0,.04);
     border-radius: 4px;
     border: 1px solid #c0c0af;
     color: #333;
-    height: 40px;
+    height: 60px;
     left: 0;
     line-height: 1.5;
     overflow: hidden;
@@ -65,6 +65,8 @@
     top: 0;
     user-select: none;
     z-index: 5;
+    text-align: center;
+    line-height: 50px;
 }
 
 .custom-file-container .browse-button {
@@ -80,18 +82,20 @@
     z-index: 6;
 }
 
-.custom-file-container .image-preview {
-    background-color: #edede8;
+/* .custom-file-container .image-preview {
+    background: #D3CCE3;
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     border-radius: 4px;
     min-height: 200px;
     overflow: auto;
     padding: 4px;
     transition: background .2s ease-in-out;
     width: 100%;
-}
+} */
 
 .custom-file-container .image-preview-item {
     background-position: center center;
@@ -138,6 +142,7 @@
 #preview-container {
   display: flex;
   column-gap: 10px;
+  overflow-x: scroll;
 }
 #preview-container img {
   width: 200px;

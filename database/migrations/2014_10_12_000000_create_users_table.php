@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('messenger_color')->nullable();
             $table->integer("total_pushed")->default(0);
             $table->timestamp("expired_date")->nullable()->comment("Ngày hết hạn của dịch vụ đã đăng ký");
+            $table->integer('salon_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); // add

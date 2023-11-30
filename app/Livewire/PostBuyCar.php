@@ -29,6 +29,8 @@ class PostBuyCar extends Component
 
       $result = Demnad::create($validated);
       $this->dispatch('showSuccess', 'Đăng tin thành công! Vui lòng chờ duyệt!');
+
+      $this->reset();
     }
   }
 
@@ -48,7 +50,7 @@ class PostBuyCar extends Component
 
   public function render()
   {
-    $demands = Demnad::where('status', 1)->orderBy('created_at', 'desc')->get();
+    $demands = Demnad::where('status', 1)->orderBy('created_at', 'desc')->paginate(10);
 
     $pending = '';
     if (auth()->check()) {

@@ -23,15 +23,15 @@ class Salon extends Model
         'phone_number',
         'email',
         'expired_date',
+        'user_id',
         'status'
     ];
-
 
     protected $casts = [
         'image_salon' => 'array'
     ];
 
-    public function cars() :hasMany 
+    public function cars() :hasMany
     {
         return $this->hasMany(Car::class);
     }
