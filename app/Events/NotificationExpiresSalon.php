@@ -19,7 +19,7 @@ class NotificationExpiresSalon
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**

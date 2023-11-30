@@ -89,6 +89,8 @@ class DemnadResource extends Resource
                                         ->title('Đã gửi thông báo tới khách hàng')
                                         ->success()
                                         ->send();
+
+                                    
                                     redirect()->route('filament.admin.resources.demnads.index');
                                 }),
                             Action::make('unActivePost')

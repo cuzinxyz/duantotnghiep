@@ -390,6 +390,7 @@
 
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div class="col-lg-5 p-4 bg-shape" wire:ignore>
