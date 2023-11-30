@@ -29,7 +29,9 @@
                                                     src="/storage/{{ $car->car->user->avatar }}" class="rounded-circle">
                                             </small>
                                             <small class="fw-bold"> {{ $car->car->user->name }} </small>
+                                            @if(!empty($car->car->province->name))
                                             <small class="text-muted">{{ $car->car->province->name }}</small>
+                                            @endif
                                             <svg wire:click="remove({{ $car->id }})" wire:confirm="Bạn có chắc muốn xoá không?"
                                                 class="position-absolute bottom-0 end-0 m-4" style="cursor: pointer"
                                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"

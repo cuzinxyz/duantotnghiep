@@ -21,7 +21,7 @@ class SupportsTable extends BaseWidget
     {
         return $table
             ->query(
-                SupportResource::getEloquentQuery()
+                SupportResource::getEloquentQuery()->where('created_at', null)
             )
             ->defaultPaginationPageOption(5)
             ->defaultSort('created_at', 'desc')

@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use App\Models\TransactionsHistory;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
@@ -44,6 +45,10 @@ class WithDrawResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Tên người rút tiền')
+                    // ->state(function (Model $model) {
+                    //     $user = User::where('id', $model->user_id)->withTrashed()->get();
+                    //     return $user[0]->name;
+                    // })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bank_price')
                     ->numeric(
@@ -104,6 +109,11 @@ class WithDrawResource extends Resource
                                 'to_id' => $record->user_id,
                                 'body' => $reason
                             ]);
+
+                            Notification::make()
+                                ->title('Xác nhận chuyển khoản thành công')
+                                ->success()
+                                ->send();
                         })
                         ->icon('heroicon-o-check')
                         ->label('Xác nhận chuyển khoản'),
@@ -120,6 +130,11 @@ class WithDrawResource extends Resource
                             $record->reason = $data['reason'];
                             $record->status = 0;
                             $record->save();
+
+                            Notification::make()
+                                ->title('Đã gửi thông báo tới khách hàng')
+                                ->success()
+                                ->send();
                         }),
                 ])
 

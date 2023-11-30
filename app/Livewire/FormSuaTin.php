@@ -29,7 +29,7 @@ class FormSuaTin extends Component
         'yellow' => 'Vàng',
         'gray' => 'Ghi',
         'blue' => 'Xanh',
-        'multiple_color' => 'Nhiều màu'
+        'different' => 'Khác'
     ];
     public $featureValues = [
         'PremiumWheel' => 'Bánh xe cao cấp',
@@ -139,9 +139,10 @@ class FormSuaTin extends Component
         $this->features = $this->car->car_info['features'];
         $this->phone = $this->car->contact['phone'];
         $this->email = $this->car->contact['email'];
-        $this->city_id = $this->car->contact['city_id'];
-        $this->district_id = $this->car->contact['district_id'];
-        $this->full_address = $this->car->contact['full_address'];
+        $this->city_id = $this->car->city_id;
+        $this->district_id = $this->car->district_id;
+        $this->full_address = $this->car->full_address;
+
     }
 
     public function updateCar()
@@ -167,6 +168,7 @@ class FormSuaTin extends Component
             $videoName = $file;
             $carData['verhicle_videos'] = $videoName;
         }
+        
         $carData['user_id'] = auth()->id();
         $carData['title'] = $this->title;
         $carData['slug'] = Str::slug($carData['title']);
@@ -193,9 +195,6 @@ class FormSuaTin extends Component
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
-            'district_id' => $this->district_id,
-            'city_id' => $this->city_id,
-            'full_address' => $this->full_address,
         );
         $result = Car::findOrFail($this->id)->update($carData);
         if ($result) {

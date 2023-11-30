@@ -18,8 +18,8 @@ return new class extends Migration {
       $table->integer('user_id');
       $table->integer('brand_id');
       $table->integer('model_car_id');
-      $table->string('city_id');
-      $table->string('district_id');
+      $table->string('city_id')->nullable();
+      $table->string('district_id')->nullable();
       $table->string('full_address', 255);
       $table->boolean('recommended')->default(false);
       $table->json('contact');
@@ -30,7 +30,8 @@ return new class extends Migration {
       $table->text('reason')->nullable();
       $table->text('description')->nullable();
       $table->integer('model_id')->nullable();
-      $table->integer('garage_id');
+      $table->integer('garage_id')->nullable();
+      $table->integer('salon_id')->nullable();
       $table->timestamps();
       $table->softDeletes(); // add
     });

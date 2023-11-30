@@ -1,22 +1,25 @@
 <?php
 
-use App\Http\Controllers\SearchCarController;
-use App\Livewire\SearchCar;
+use App\Models\Car;
 use App\Models\News;
 use App\Models\Service;
+use App\Livewire\Showroom;
+use App\Livewire\SearchCar;
 use App\Livewire\CarListingSystem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SalonController;
+use App\Http\Controllers\GarageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
-use App\Http\Controllers\GarageController;
-use App\Livewire\Showroom;
+use App\Http\Controllers\SearchCarController;
 use App\Http\Controllers\SendGuideRequestController;
 
 Route::controller(HomeController::class)->group(function () {
@@ -30,9 +33,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
         Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
-        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');       
+        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
     });
-  
+
     Route::controller(GarageController::class)->group(function(){
         Route::match(['GET','POST'],'/dangki-garage','ownGarage')->name('dangki-garage');
         Route::match(['GET','POST'],'/suathongtinxe/{id}','editCarGarage')->name('editcargarage');
@@ -40,6 +43,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/xoa-xe/{carID}', 'removeCar')->name('hiddenCarGarage');
         Route::get('/garage','garage')->name('garage');
     });
+
+    Route::controller(SalonController::class)->group(function() {
+        Route::prefix('salon')->group(function () {
+            Route::get('/', 'register')->name('salon');
+            Route::post('/register', 'registerSalon')->name('registerSalon');
+            Route::get('/them-xe', 'addCar')->name('salon.addcar');
+            Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
+            Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
+            Route::get('/danh-sach-xe/{salonID}' , 'listCars')->name('salon.listCars');
+        });
+        Route::post('/account-balance', 'getBalance');
+    });
+
     Route::controller(CheckOutController::class)->group(function () {
         # payment
         Route::post('/payment/{idService}', 'checkout')->name('payment-vnpay');
@@ -77,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('homepage');
     });
 
-    Route::controller(SendGuideRequestController::class)->group(function(){
+    Route::controller(SendGuideRequestController::class)->group(function () {
         Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
     });
 });
@@ -127,4 +143,4 @@ Route::controller(CarDetailController::class)->group(function () {
 });
 
 // Showroom
-Route::get('/showroom', Showroom::class);
+Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');

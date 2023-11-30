@@ -71,7 +71,8 @@ class FormDangTin extends Component
     public $verhicle_videos;
     public $features = [];
 
-    public function mount() {
+    public function mount()
+    {
         $this->phone = auth()->user()->phone ? auth()->user()->phone : '';
         $this->email = auth()->user()->email ? auth()->user()->email : '';
     }
@@ -79,6 +80,40 @@ class FormDangTin extends Component
     public function previousStepSubmit()
     {
         return $this->currentStep--;
+    }
+
+
+    protected $validationAttributes = [
+        'brand_select' => 'hãng xe',
+        'model_select' => 'loại xe',
+        'transmission' => 'hộp số',
+        'fuel' => 'nhiên liệu',
+        'number_of_seats' => 'số chỗ ngồi',
+        'color' => 'màu sắc',
+        'version' => 'phiên bản',
+        'engine' => 'động cơ',
+        'year_of_manufacture' => 'năm sản xuất',
+        'mileage' => 'số km',
+        'price' => 'giá tiền',
+        'title' => 'tiêu đề',
+        'description' => 'mô tả',
+        'phone' => 'số điện thoại',
+        'email' => 'email',
+        'city_id' => 'tỉnh, thành phố',
+        'district_id' => 'quận, huyện',
+        'full_address' => 'địa chỉ',
+        'verhicle_image_library' => 'hình ảnh',
+        'verhicle_videos' => 'video'
+    ];
+
+    public function messages()
+    {
+        return [
+            'required' => 'Trường :attribute bắt buộc phải nhập.',
+            'image' => 'Trường :attribute phải là hình ảnh.',
+            'video' => 'Trường :attribute phải là video',
+            'max' => 'Dung lượng file quá lớn'
+        ];
     }
 
     public function secondStepSubmit()
@@ -113,16 +148,21 @@ class FormDangTin extends Component
         return $this->currentStep++;
     }
 
-    public function fourthStepSubmit()
+    // public function fourthStepSubmit()
+    // {
+    //     $this->validate([
+    //         'verhicle_image_library' => 'required|image|max:10024',
+    //         'verhicle_videos' => 'required|video|max:10024',
+    //     ]);
+    // }
+
+    public function saveCar()
     {
         $this->validate([
             'verhicle_image_library' => 'required|image|max:10024',
             'verhicle_videos' => 'required|video|max:10024',
         ]);
-    }
 
-    public function saveCar()
-    {
         $carData = [];
         $photoName = [];
         $images = $this->verhicle_image_library;
@@ -168,9 +208,6 @@ class FormDangTin extends Component
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
-            'district_id' => $this->district_id,
-            'city_id' => $this->city_id,
-            'full_address' => $this->full_address,
         );
         $result = Car::create($carData);
         if ($result) {

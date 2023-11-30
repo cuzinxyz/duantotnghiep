@@ -24,16 +24,18 @@ use App\Filament\Resources\CarResource\Pages;
 use Filament\Forms\Components\MarkdownEditor;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms\Components\Radio;
+use Illuminate\Database\Eloquent\Model;
 
 class CarResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Thương hiệu';
 
     protected static ?string $model = Car::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Xe';
+    protected static ?string $navigationLabel = 'Quản Lý Xe';
 
     public static function form(Form $form): Form
     {
@@ -49,7 +51,7 @@ class CarResource extends Resource
                                     ->label('Tiêu đề')
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                                    ->required(),
+                                    ->rules(['required']),
 
                                 TextInput::make('slug')
                                     ->label('Đường dẫn')
@@ -59,20 +61,20 @@ class CarResource extends Resource
 
                                 TextInput::make('price')
                                     ->label('Giá muốn bán')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->numeric(),
 
                                 Select::make('brand_id')
                                     ->label('Hãng xe')
                                     ->relationship(name: 'brand', titleAttribute: 'brand_name')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->reactive()
                                     ->afterStateUpdated(fn (callable $set) => $set('model_car_id', null))
                                     ->placeholder('Chọn loại xe'),
 
                                 Select::make('model_car_id')
                                     ->label('Model xe')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->options(function (callable $get) {
                                         $modelCar = \App\Models\ModelCar::where('brand_id', $get('brand_id'))->select('id', 'model_name')->get();
 
@@ -89,29 +91,41 @@ class CarResource extends Resource
 
                                 TextInput::make('car_info.mileage')
                                     ->label('Số KM đã đi')
-                                    ->required()
+                                    ->rules(['required'])
+                                    ->numeric(),
+
+                                TextInput::make('car_info.version')
+                                    ->label('Phiên bản')
+                                    ->rules(['required'])
                                     ->numeric(),
 
                                 TextInput::make('car_info.engine')
                                     ->label('Mã lực')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->numeric(),
 
                                 Select::make('car_info.fuelType')
                                     ->label('Loại nhiên liệu')
+                                    ->rules(['required'])
                                     ->options([
-                                        'Petrol' => 'Petrol',
-                                        'Gas' => 'Gas'
+                                        'Xăng' => 'Xăng',
+                                        'Dầu' => 'Dầu',
+                                        'Điện' => 'Điện',
+                                        'Loại khác' => 'Loại khác',
                                     ]),
 
                                 Radio::make('car_info.color')
                                     ->label('Màu sắc')
+                                    ->rules(['required'])
                                     ->options([
-                                        'red' => 'Đỏ',
-                                        'black' => 'Đen',
-                                        'white' => 'Trắng',
-                                        'yellow' => 'Vàng',
-                                        'silver' => 'Bạc'
+                                        'Đỏ' => 'Đỏ',
+                                        'Đen' => 'Đen',
+                                        'Trắng' => 'Trắng',
+                                        'Vàng' => 'Vàng',
+                                        'Bạc' => 'Bạc',
+                                        'Xanh' => 'Xanh',
+                                        'Ghi' => 'Ghi',
+                                        'Khác' => 'Khác',
                                     ])
                                     ->columns([
                                         'default' => 1,
@@ -121,6 +135,7 @@ class CarResource extends Resource
 
                                 Select::make('car_info.number_of_seats')
                                     ->label('Số chỗ ngồi')
+                                    ->rules(['required'])
                                     ->options([
                                         '4' => '4',
                                         '5' => '5',
@@ -132,7 +147,7 @@ class CarResource extends Resource
                                     ]),
 
                                 Radio::make('car_info.transmission')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->label('Hộp số')
                                     ->options([
                                         'sotay' => 'Số tay',
@@ -146,6 +161,7 @@ class CarResource extends Resource
 
                                 Select::make('car_info.year_of_manufacture')
                                     ->label('Năm sản xuất')
+                                    ->rules(['required'])
                                     ->options([
                                         '2010' => '2010',
                                         '2011' => '2011',
@@ -161,6 +177,7 @@ class CarResource extends Resource
                                         '2021' => '2021',
                                         '2022' => '2022',
                                         '2023' => '2023',
+                                        'others' => 'others',
 
 
                                     ]),
@@ -210,20 +227,15 @@ class CarResource extends Resource
                                     ->schema([
                                         CheckboxList::make('car_info.features')
                                             ->label('Tính năng')
-                                            ->required()
                                             ->options([
-                                                'PremiumWheel' => 'Premium Wheel',
-                                                'Moonroof' => 'Moonroof',
-                                                'PremiumAudio' => 'Premium Audio',
-                                                'Navigation' => 'Navigation',
-                                                'FrontHeatedSeats' => 'Front Heated Seats',
-                                                'PremiumSeatMaterial' => 'Premium Seat Material',
-                                                'Bluetooth' => 'Bluetooth',
-                                                'PremiumSeatMaterial' => 'Premium Seat Material',
-                                                'FrontHeatedSeats' => 'Front Heated Seats',
-                                                'RemoteEngineStart' => 'Remote Engine Start',
-                                                'BlindSpotSystem' => 'Blind Spot System',
-                                                'Multi_ZoneClimateControl' => 'Multi-Zone Climate Control'
+                                                'Bánh xe cao cấp' => 'Bánh xe cao cấp',
+                                                'Cửa sổ trời' => 'Cửa sổ trời',
+                                                'Âm thanh cao cấp' => 'Âm thanh cao cấp',
+                                                'Chế độ chỉ đường' => 'Chế độ chỉ đường',
+                                                'Ghế da cao cấp' => 'Ghế da cao cấp',
+                                                'Kết nối blutooth' => 'Kết nối bluetooth',
+                                                'Khởi động từ za' => 'Khởi động từ xa',
+                                                'Điều hòa' => 'Điều hòa'
                                             ])->columns([
                                                 'default' => 1,
                                                 'xl' => 2,
@@ -235,14 +247,14 @@ class CarResource extends Resource
                                     ->schema([
                                         FileUpload::make('verhicle_image_library')
                                             ->label('Hình ảnh')
-                                            ->required()
+                                            ->rules(['required'])
                                             ->multiple()
                                             ->image()
                                             ->directory('car_photos'),
 
                                         FileUpload::make('verhicle_videos')
                                             ->label('video')
-                                            ->required()
+                                            ->rules(['required'])
                                             ->acceptedFileTypes(['video/mp4', 'video/avi', 'video/mov', 'video/wmv', 'video/flv', 'video/mkv', 'video/webm'])
                                             ->directory('video_car')
                                             ->maxSize(551200),
@@ -260,13 +272,13 @@ class CarResource extends Resource
                                 Select::make('user_id')
                                     ->relationship(name: 'user', titleAttribute: 'name')
                                     ->label('Người đăng')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->placeholder('Chọn người đăng'),
 
                                 Select::make('city_id')
                                     ->label('Thành phố')
                                     ->options(\Kjmtrue\VietnamZone\Models\Province::all()->pluck('name', 'id'))
-                                    ->required()
+                                    ->rules(['required'])
                                     ->reactive()
                                     ->afterStateUpdated(fn (callable $set) => $set('district_id', null))
                                     ->placeholder('Chọn thành phố'),
@@ -275,29 +287,32 @@ class CarResource extends Resource
                                     ->label('Quận, Huyện, Thị xã')
 
                                     ->options(function (callable $get) {
-                                        $districts = \Kjmtrue\VietnamZone\Models\District::whereProvinceId($get('city_id'))->get()->pluck('name');
+                                        $districts = \Kjmtrue\VietnamZone\Models\District::where('province_id', $get('city_id'))->select('id', 'name')->get();
 
-                                        if (!$districts) {
-                                            return \Kjmtrue\VietnamZone\Models\District::all()->pluck('name');
+                                        $output = [];
+
+                                        foreach ($districts as $district) {
+                                            $carData = $district->toArray();
+                                            $output[$district['id']] = $district['name'];
                                         }
 
-                                        return $districts;
+                                        return $output;
                                     })
-                                    ->required()
+                                    ->rules(['required'])
                                     ->placeholder('Quận, Huyện, Thị xã'),
 
                                 TextInput::make('full_address')
                                     ->label('Địa chỉ cụ thể')
                                     ->string()
-                                    ->required(),
+                                    ->rules(['required']),
 
                                 TextInput::make('contact.email')
                                     ->email()
-                                    ->required(),
+                                    ->rules(['required']),
 
-                                TextInput::make('contact.phone_number')
+                                TextInput::make('contact.phone')
                                     ->label('Số điện thoại')
-                                    ->required()
+                                    ->rules(['required'])
                                     ->rule('regex:/^(84|0[3|5|7|8|9])+([0-9]{8})$/'),
 
                                 TextInput::make('contact.facebook'),
@@ -335,15 +350,9 @@ class CarResource extends Resource
                     ->label('Tác giả')
                     ->sortable(),
 
-
-                Tables\Columns\TextColumn::make('user.service.service_name')
-                    ->label('Gói tin')
-                    ->sortable(),
-
-
-                Tables\Columns\IconColumn::make('recommended')
-                    ->label('Xu hướng')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('brand.brand_name')
+                    ->label('Hãng sản xuất')
+                    ->searchable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
