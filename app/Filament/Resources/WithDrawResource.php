@@ -45,10 +45,10 @@ class WithDrawResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Tên người rút tiền')
-                    ->state(function (Model $model) {
-                        $user = User::where('id', $model->user_id)->withTrashed()->get();
-                        return $user[0]->name;
-                    })
+                    // ->state(function (Model $model) {
+                    //     $user = User::where('id', $model->user_id)->withTrashed()->get();
+                    //     return $user[0]->name;
+                    // })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bank_price')
                     ->numeric(
@@ -60,10 +60,6 @@ class WithDrawResource extends Resource
                     ->label('Số tiền muốn rút'),
                 Tables\Columns\TextColumn::make('user.account_balence')
                     ->label('Số dư trong tài khoản')
-                    ->state(function (Model $model) {
-                        $user = User::where('id', $model->user_id)->withTrashed()->get();
-                        return $user[0]->account_balence;
-                    })
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',

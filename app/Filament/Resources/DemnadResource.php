@@ -74,10 +74,10 @@ class DemnadResource extends Resource
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $record->user_id)->first();
 
-                                    $reason = 'Chào bạn '.$user->name.',
-                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã được duyệt thành công.
-                                    Để xem bài viết đã đăng của bạn, vui lòng truy cập: '. route('homepage')
-                                    . ' .Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
+                                    $reason = 'Chào bạn ' . $user->name . ',
+                                    Bài viết có tiêu đề: "' . $record->title . '" của bạn đã được duyệt thành công.
+                                    Để xem bài viết đã đăng của bạn, vui lòng truy cập: ' . route('homepage')
+                                        . ' .Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $record->user_id,
@@ -85,9 +85,12 @@ class DemnadResource extends Resource
                                     ]);
 
                                     Mail::to($user)->later(now()->addSeconds(5), new SendMailDemnad($record, $user));
+                                    Notification::make()
+                                        ->title('Đã gửi thông báo tới khách hàng')
+                                        ->success()
+                                        ->send();
                                     redirect()->route('filament.admin.resources.demnads.index');
-                                })
-                                ->successNotificationTitle('Phê duyệt thành công'),
+                                }),
                             Action::make('unActivePost')
                                 ->label('Không duyệt')
                                 ->icon('heroicon-m-x-mark')
@@ -106,9 +109,9 @@ class DemnadResource extends Resource
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $record->user_id)->first();
 
-                                    $reason = 'Chào bạn '.$user->name.',
-                                    Bài viết có tiêu đề: "'.$record->title .'" của bạn đã không được duyệt.
-                                    Vì lý do: '.$data['reason'].', vui lòng điều chỉnh lại bài viết của bạn để chúng tôi có thể hỗ trợ bạn dễ dàng tìm được chiếc xe như mong muốn.';
+                                    $reason = 'Chào bạn ' . $user->name . ',
+                                    Bài viết có tiêu đề: "' . $record->title . '" của bạn đã không được duyệt.
+                                    Vì lý do: ' . $data['reason'] . ', vui lòng điều chỉnh lại bài viết của bạn để chúng tôi có thể hỗ trợ bạn dễ dàng tìm được chiếc xe như mong muốn.';
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $record->user_id,
@@ -117,13 +120,12 @@ class DemnadResource extends Resource
 
                                     $user = User::where('id', $record->user_id)->first();
                                     Mail::to($user)->later(now()->addSeconds(5), new SendMailDemnad($record, $user));
-                                    redirect()->route('filament.admin.resources.demnads.index');
-                                })
-                                ->successNotification(
                                     Notification::make()
+                                        ->title('Đã gửi phản hồi tới khách hàng')
                                         ->success()
-                                        ->title('Đã gửi thông báo tới tác giả'),
-                                ),
+                                        ->send();
+                                    redirect()->route('filament.admin.resources.demnads.index');
+                                }),
                         ])->fullWidth(),
                     ])->columnSpan(1),
                 Section::make('Chi tiết')
