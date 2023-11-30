@@ -16,12 +16,14 @@ use App\Models\TransactionsHistory;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Column;
 use Illuminate\Database\Eloquent\Model;
+use App\Infolists\Components\VideoEntry;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
 use App\Filament\Resources\SalonsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -90,7 +92,7 @@ class SalonsResource extends Resource
                                 'account_balence' => $account_balence
                             ]);
 
-                            $reason = 'Chào bạn ' . $user->name . ', 
+                            $reason = 'Chào bạn ' . $user->name . ',
                                         Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
                                         Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
                                         Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
@@ -123,7 +125,7 @@ class SalonsResource extends Resource
 
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $salon->user_id)->first();
-                            $reason = 'Chào bạn ' . $user->name . ', 
+                            $reason = 'Chào bạn ' . $user->name . ',
                                         Yêu cầu mở cửa hàng của bạn không được chấp nhận,
                                         Vì lý do: ' . $data['reason'] . ' .
                                         Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
@@ -175,6 +177,16 @@ class SalonsResource extends Resource
                         TextEntry::make('address')
                             ->label('Địa chỉ')
                             ->icon('heroicon-o-map-pin'),
+                        Section::make('Hình ảnh')
+                            ->schema([
+                                ImageEntry::make('image_salon')
+                                    ->label('Hình ảnh')
+                                    ->default('https://picsum.photos/200')
+                            ])
+                            ->columnSpan([
+                                'xl' => 2,
+                                '2xl' => 2,
+                            ]),
                     ])
                     ->columns(2)
             ]);

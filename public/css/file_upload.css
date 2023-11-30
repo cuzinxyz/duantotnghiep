@@ -142,6 +142,7 @@
 #preview-container {
   display: flex;
   column-gap: 10px;
+  overflow-x: scroll;
 }
 #preview-container img {
   width: 200px;

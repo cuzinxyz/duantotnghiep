@@ -12,33 +12,25 @@
             </div>
         @else
             <div class="container">
-                <div class="row">
-                    <div class="col-4">
+                <div class="row my-5">
+                    <h2 class="mb-3">Quản lý Salon của bạn. <button class="btn btn-sm btn-primary" onclick="window.location.href='{{ route('salon.addcar') }}'">Thêm xe</button></h2>
+                    @foreach ($salonCars as $car)
+
+                    <div class="col-6">
                         <div class="product-st-card1">
                             <div class="product-img">
                                 <div class="product-price">
-                                    <span>$7,656.00</span>
+                                    <span>{{ $car->price }} đ</span>
                                 </div>
-                                <a href="#" class="fav" tabindex="0">
-                                    <svg width="14" height="13" viewBox="0 0 14 14"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-                                        </path>
-                                    </svg>
-                                </a>
                                 <div class="product-img-slider">
-                                    <img class="img-fluid" src="images/product-st-02.png" alt="image">
+                                    <img class="img-fluid" src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}" alt="image">
                                 </div>
                             </div>
                             <div class="product-content">
-                                <div class="location">
-                                    <a href="#" tabindex="0"><i class="bi bi-geo-alt"></i> Panama City</a>
-                                </div>
-                                <h6><a href="car-deatils.html" tabindex="0">Volkswagen Golf-2023</a></h6>
+                                <h6><a href="{{ route('car-detail', $car->slug) }}" tabindex="0">{{ $car->title }}</a></h6>
 
                                 <div class="content-btm">
-                                    <a class="view-btn2" href="car-deatils.html" tabindex="0">
+                                    <a class="view-btn2" href="{{ route('car-detail', $car->slug) }}" tabindex="0">
                                         <svg width="35" height="21" viewBox="0 0 35 21"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11 20C5.47715 20 1 15.7467 1 10.5C1 5.25329 5.47715 1 11 1"
@@ -56,9 +48,16 @@
                                         Xem xe
                                     </a>
                                 </div>
+
+                                <div class="d-flex pt-3 gap-3">
+                                    <button class="btn btn-sm btn-warning">Sửa tin</button>
+                                    <button class="btn btn-sm btn-danger">Xoá tin</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    @endforeach
                 </div>
             </div>
         @endif
@@ -126,7 +125,8 @@
                         <div class="mb-3 col-12">
                             <label for="storeIntro" class="form-label fw-bold">Giới thiệu cửa hàng</label>
                             <textarea class="form-control form-control-lg" id="storeIntro"
-                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4" required></textarea>
+                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4"
+                                required></textarea>
                         </div>
 
                         <!-- Số điện thoại -->

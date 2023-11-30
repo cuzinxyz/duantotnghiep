@@ -437,7 +437,10 @@
                                             file</span>
                                     </label>
                                     <div id="preview-container-video" class="image-preview" style="">
-                                        <video src="{{ asset('storage/' . $car->verhicle_videos) }}">abc</video>
+                                        <video width="400" controls>
+                                            <source src="{{ asset('storage/' . $car->verhicle_videos) }}" type="video/mp4">
+                                            Your browser does not support HTML video.
+                                          </video>
                                     </div>
                                 </div>
 

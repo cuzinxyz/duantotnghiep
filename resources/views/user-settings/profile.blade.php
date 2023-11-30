@@ -199,6 +199,9 @@
                         <a href="{{ route('paymentHistory') }}">
                             <button class="nav-link" type="button">Lịch sử nạp tiền</button>
                         </a>
+                        @if(\App\Models\Salon::where('user_id', auth()->id())->first())
+                        <a href="{{ route('salon') }}">Salon của tôi</a>
+                        @endif
                     </div>
                     <div class="tab-content tab-content2" id="v-pills-tabContent2">
                         {{-- DISPLAY CAR --}}
@@ -296,7 +299,7 @@
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button onclick="window.location='{{ route('editSellCar', $car->id) }}'">>
+                                                                    <button onclick="window.location='{{ route('editSellCar', $car->id) }}'">
                                                                         <svg stroke-linejoin="round"
                                                                             stroke-linecap="round" stroke-width="2"
                                                                             stroke="currentColor" fill="none"

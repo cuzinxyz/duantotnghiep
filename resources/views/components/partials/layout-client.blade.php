@@ -192,11 +192,43 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <li class="menu-single-item">
+                                <h5>Salon</h5>
+                                <ul>
+                                    @php
+                                        $popularBrands = \App\Models\Car::select('brand_id', \DB::raw('COUNT(*) as car_count'))
+                                            ->groupBy('brand_id')
+                                            ->orderByDesc('car_count')
+                                            ->limit(8)
+                                            ->get();
+                                        $brandIds = $popularBrands->pluck('brand_id');
+                                        $brandsInfo = \App\Models\Brand::whereIn('id', $brandIds)
+                                            ->inRandomOrder()
+                                            ->distinct()
+                                            ->get();
+                                    @endphp
+                                    @foreach ($brandsInfo as $brand)
+                                        <li><a
+                                                href="{{ route('brand.detail', $brand->brand_name) }}">{{ $brand->brand_name }}</a>
+                                        </li>
+                                    @endforeach
+                                    <li class="explore-more-btn">
+                                        <a href="brand-category.html">Tìm hiểu thêm <i
+                                                class="bi bi-arrow-right"></i></a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </li>
                 <li @class(['active' => request()->routeIs('buyCar')])>
-                    <a href="{{ route('buyCar') }}" class="drop-down">Tin cần mua xe</a>
+                    <a href="{{ route('buyCar') }}" class="drop-down">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
+                            <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z"/>
+                            <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
+                          </svg>
+                        Tin cần mua xe</a>
                 </li>
                 {{-- <li @class(['active' => request()->routeIs('service.list')])>
                     <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>

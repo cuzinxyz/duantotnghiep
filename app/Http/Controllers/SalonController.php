@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Salon;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,7 +11,13 @@ class SalonController extends Controller
 {
     public function register()
     {
-        return view('salon.index');
+        $salonCars = Car::where('user_id', auth()->id())
+            ->whereNotNull('salon_id')
+            ->get();
+// dd($salonCars);
+        return view('salon.index', [
+            'salonCars' => $salonCars
+        ]);
     }
 
     public function registerSalon(Request $request)
@@ -45,6 +52,7 @@ class SalonController extends Controller
     {
         return view('salon.edit');
     }
+
     public function getBalance(Request $request)
     {
         $userId = $request->input('user_id');

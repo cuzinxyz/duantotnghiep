@@ -18,8 +18,8 @@ return new class extends Migration {
       $table->integer('user_id');
       $table->integer('brand_id');
       $table->integer('model_car_id');
-      $table->string('city_id');
-      $table->string('district_id');
+      $table->string('city_id')->nullable();
+      $table->string('district_id')->nullable();
       $table->string('full_address', 255);
       $table->boolean('recommended')->default(false);
       $table->json('contact');

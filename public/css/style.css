@@ -8776,7 +8776,7 @@ header.style-5 .main-menu ul>li:hover.position-inherit>a::after {
 
 header.style-5 .main-menu ul>li.active>a {
     color: var(--primary-color1);
-    transform: rotate(5deg);
+    /* transform: rotate(5deg); */
     font-weight: 700;
 }
 
