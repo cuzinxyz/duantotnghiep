@@ -11,6 +11,8 @@
                 kết quả.
             </div>
         @else
+            
+            @include('components.nofication')
             <div class="container">
                 <div class="row my-5">
                     <h2 class="mb-3">Quản lý Salon của bạn. <button class="btn btn-sm btn-primary"
@@ -200,8 +202,7 @@
                         <div class="mb-3 col-12">
                             <label for="storeIntro" class="form-label fw-bold">Giới thiệu cửa hàng</label>
                             <textarea class="form-control form-control-lg" id="storeIntro"
-                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4"
-                                required></textarea>
+                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4" required></textarea>
                         </div>
 
                         <!-- Số điện thoại -->

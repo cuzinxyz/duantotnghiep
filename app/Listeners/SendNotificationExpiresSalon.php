@@ -16,11 +16,8 @@ class SendNotificationExpiresSalon implements ShouldQueue
         //
     }
 
-    /**
-     * Handle the event.
-     */
     public function handle(NotificationExpiresSalon $event): void
     {
-        //
+        
     }
 }

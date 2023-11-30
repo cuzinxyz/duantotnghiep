@@ -65,9 +65,15 @@ class SalonController extends Controller
     {
         return view('salon.add');
     }
-    public function editCar()
+    public function editCar($carId)
     {
-        return view('salon.edit');
+        return view('salon.edit', compact('carId'));
+    }
+
+    public function deleteCar($carId)
+    {
+        $deleteCar = Car::where('id', $carId)->delete();
+        return redirect()->back()->with('success', 'Xóa thành công');
     }
 
     public function getBalance(Request $request)
@@ -88,5 +94,11 @@ class SalonController extends Controller
             $message = "<div class='alert alert-warning'>Số dư của bạn là <strong>" . number_format($balance) . "đ</strong>. <br>Bạn cần nạp thêm tiền tại <a href='/nap-tien'> đây</a>.</div>";
             return response()->json(['balance' => $balance, 'message' => $message]);
         }
+    }
+
+
+    public function listCars($salonID) {
+        $cars = Car::where('salon_id', $salonID)->get();
+        return view('salon.danh-sach-xe', compact('cars'));
     }
 }

@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/register', 'registerSalon')->name('registerSalon');
             Route::get('/them-xe', 'addCar')->name('salon.addcar');
             Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
+            Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
+            Route::get('/danh-sach-xe/{salonID}' , 'listCars')->name('salon.listCars');
         });
         Route::post('/account-balance', 'getBalance');
     });
