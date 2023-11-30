@@ -168,6 +168,7 @@ class FormSuaTin extends Component
             $videoName = $file;
             $carData['verhicle_videos'] = $videoName;
         }
+        
         $carData['user_id'] = auth()->id();
         $carData['title'] = $this->title;
         $carData['slug'] = Str::slug($carData['title']);
