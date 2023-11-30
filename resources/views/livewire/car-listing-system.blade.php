@@ -73,9 +73,9 @@
                         <div class="product-widget mb-20">
                             <div class="check-box-item" wire:ignore>
                                 <h6 class="product-widget-title mb-25">Giá</h6>
-                                <div class="range-wrapper" x-data="{ 
+                                <div class="range-wrapper" x-data="{
                                     max_price: @js(number_format($maxPrice, 0, '', ',')),
-                                    min_price: @js(number_format($minPrice, 0, '', ',')) 
+                                    min_price: @js(number_format($minPrice, 0, '', ','))
                                 }">
                                     <div class="slider-wrapper">
                                         <div id="eg-range-slider" x-on:click="filter_prices"></div>
@@ -127,7 +127,7 @@
                     <div class="row mb-40">
                         <div class="col-lg-12">
                             <div class="show-item-and-filte">
-                                <p>Có <strong>{{ \App\Models\Car::count() }}</strong> tin bán xe ô tô</p>
+                                <p>Có <strong>{{ $carCount }}</strong> tin bán xe ô tô</p>
                                 <div class="filter-view">
                                     <div class="filter-atra">
                                         <h6>Sắp xếp theo:</h6>

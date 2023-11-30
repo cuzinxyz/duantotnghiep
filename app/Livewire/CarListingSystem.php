@@ -13,7 +13,7 @@ use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Kjmtrue\VietnamZone\Models\Province;
 
-class   CarListingSystem extends Component
+class CarListingSystem extends Component
 {
     use WithPagination;
 
@@ -27,7 +27,6 @@ class   CarListingSystem extends Component
     public $sortPrice;
     public $minPrice;
     public $maxPrice;
-
     public $queryMax;
     public $queryMin;
 
@@ -35,11 +34,8 @@ class   CarListingSystem extends Component
     {
         $this->brands = Brand::all();
         $this->locations = Province::all();
-
         $this->maxPrice = Car::max('price');
         $this->minPrice = Car::min('price');
-
-
     }
 
     #[On('filterPrices')]
@@ -47,7 +43,6 @@ class   CarListingSystem extends Component
     {
         $this->queryMin = $min;
         $this->queryMax = $max;
-
     }
 
     #[Layout('components.partials.layout-client')]
@@ -85,9 +80,11 @@ class   CarListingSystem extends Component
             }
         }
 
+        $carCount = $carQuery->count();
 
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->paginate(6)
+            'cars' => $carQuery->paginate(6),
+            'carCount' => $carCount,
         ]);
     }
 }

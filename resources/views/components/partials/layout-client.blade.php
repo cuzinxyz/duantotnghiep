@@ -81,12 +81,7 @@
             </div>
         </div>
         <div class="search-area">
-            <form>
-                <div class="form-inner">
-                    <input type="text" placeholder="Search for cars">
-                    <button type="submit"><i class="bi bi-search"></i></button>
-                </div>
-            </form>
+            <livewire:search />
         </div>
         <div class="topbar-right">
             <ul>
@@ -190,7 +185,8 @@
                 <div class="search-area">
                     <form>
                         <div class="form-inner d-flex">
-                            <input type="text" placeholder="Search for cars" class="border border-dark border-1 rounded px-2 py-1">
+                            <input type="text" placeholder="Search for cars"
+                                class="border border-dark border-1 rounded px-2 py-1">
                             <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
                         </div>
                     </form>
@@ -274,7 +270,8 @@
                                         <div class="w-50 cart-card px-2 py-1 d-flex flex-column gap-1">
                                             <span>Tin hoạt động</span>
                                             <div class="fw-bold">
-                                                {{ \App\Models\Car::where('user_id', auth()->id())->where('status', 1)->count() }} <i class="bi bi-app-indicator"></i>
+                                                {{ \App\Models\Car::where('user_id', auth()->id())->where('status', 1)->count() }}
+                                                <i class="bi bi-app-indicator"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -298,8 +295,8 @@
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
                                         <div class="cart-block-body">
-                                        <div class="cart-block-body_item d-flex align-items-center gap-2"
-                                                onclick="window.location.href='{{ route('dangki-garage')}}'">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('dangki-garage') }}'">
                                                 <i class="bi bi-house"></i> Đăng kí doanh nghiệp
                                             </div>
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
@@ -332,7 +329,7 @@
                                             </div>
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
-                                                onclick="window.location.href='{{route('withdraw')}}'">
+                                                onclick="window.location.href='{{ route('withdraw') }}'">
                                                 <i class="bi bi-cash-stack"></i> Rút tiền
                                             </div>
 
@@ -803,6 +800,11 @@
                 </div>
             </div>
         </footer>
+
+        <button id="backToTopBtn" title="Go to top">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+
         @livewireScripts
 
         <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
@@ -868,6 +870,27 @@
             });
             Livewire.on('showInfo', message => {
                 toastr.info(message);
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                const button = $("#backToTopBtn");
+                // Hiển thị nút khi cuộn xuống một khoảng cụ thể từ đầu trang
+                $(window).scroll(function() {
+                    if ($(this).scrollTop() > 20) {
+                        button.fadeIn();
+                    } else {
+                        button.fadeOut();
+                    }
+                });
+                // Cuộn lên đầu trang khi nhấp vào nút
+                button.click(function() {
+                    $("html, body").animate({
+                        scrollTop: 0
+                    }, 50);
+                    return false;
+                });
             });
         </script>
 
