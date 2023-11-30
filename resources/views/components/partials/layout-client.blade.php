@@ -295,13 +295,9 @@
                                     <div class="cart-block">
                                         <div class="cart-block-header fw-bold">Salon</div>
                                         <div class="cart-block-body">
-                                            <div class="cart-block-body_item d-flex align-items-center gap-2 text-warning"
-                                                onclick="window.location.href='{{ route('dangki-garage') }}'">
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('salon') }}'">
                                                 <i class="bi bi-house"></i> Salon
-                                            </div>
-                                            <div class="cart-block-body_item"
-                                                onclick="window.location.href='{{ route('garage') }}'">
-                                                <i class="bi bi-person-circle"></i> Quản lý garage
                                             </div>
                                         </div>
                                     </div>

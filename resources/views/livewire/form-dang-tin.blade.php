@@ -2,7 +2,6 @@
     @push('styles')
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/simplemde.min.css') }}">
     @endpush
 
     <form enctype="multipart/form-data">

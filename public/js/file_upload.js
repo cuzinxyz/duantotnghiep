@@ -40,11 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
     $('input[wire\\:model="color"]').click(function () {
         var resetColor = document.querySelectorAll('input[wire\\:model="color"]');
         resetColor.forEach(item => {
-            item.nextElementSibling.style.backgroundColor = "transparent";
+            // item.nextElementSibling.style.backgroundColor = "transparent";
+            item.nextElementSibling.style.background = 'transparent';
         });
 
         var getColor = $('input[wire\\:model="color"]:checked').attr("data-color");
-        $('.' + getColor).css('background', getColor);
+        if(getColor == 'different') {
+            $('.' + getColor).css('background', 'linear-gradient(to top, rgb(183 228 255) 0%, rgb(255 255 255) 100%)');
+        } else {
+            $('.' + getColor).css('background', getColor);
+        }
 
         console.log(getColor);
     });

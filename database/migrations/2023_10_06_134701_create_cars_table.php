@@ -30,7 +30,8 @@ return new class extends Migration {
       $table->text('reason')->nullable();
       $table->text('description')->nullable();
       $table->integer('model_id')->nullable();
-      $table->integer('garage_id');
+      $table->integer('garage_id')->nullable();
+      $table->integer('salon_id')->nullable();
       $table->timestamps();
       $table->softDeletes(); // add
     });
