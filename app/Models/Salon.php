@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Salon extends Model
 {
@@ -19,10 +23,21 @@ class Salon extends Model
         'phone_number',
         'email',
         'expired_date',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     protected $casts = [
         'image_salon' => 'array'
     ];
+
+    public function cars() :hasMany
+    {
+        return $this->hasMany(Car::class);
+    }
+
+    public function user(): hasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

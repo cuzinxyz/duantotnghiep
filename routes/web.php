@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Car;
 use App\Models\News;
 use App\Models\Service;
 use App\Livewire\Showroom;
 use App\Livewire\SearchCar;
 use App\Livewire\CarListingSystem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
@@ -89,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('homepage');
     });
 
-    Route::controller(SendGuideRequestController::class)->group(function(){
+    Route::controller(SendGuideRequestController::class)->group(function () {
         Route::get('/send-guide-request', 'SendGuideRequest')->name('guideRequest');
     });
 });
@@ -139,4 +141,4 @@ Route::controller(CarDetailController::class)->group(function () {
 });
 
 // Showroom
-Route::get('/showroom', Showroom::class);
+Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');

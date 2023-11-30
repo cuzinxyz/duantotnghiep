@@ -6,24 +6,7 @@
                 style="visibility: visible; animation-delay: 200ms;">
                 <div class="col-lg-12">
                     <div class="section-title-2">
-                        <h2>All Car</h2>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-20">
-                    <div class="form-inner">
-                        <select class="nice-select beauty-shadow" wire:model.live="brand_select">
-                            <option value="0" hidden>-- Khoảng giá --</option>
-                            <option value="">Dưới 300 Triệu</option>
-                            <option value="">300 Triệu - 500 Triệu</option>
-                            <option value="">500 Triệu - 1 tỉ</option>
-                            <option value="">1 tỉ - 2 tỉ</option>
-                            <option value="">2 tỉ - 3 tỉ</option>
-                            <option value="">3 tỉ - 4 tỉ</option>
-                            <option value="">4 tỉ - 5 tỉ</option>
-                            <option value="">Trên 5 tỉ</option>
-                        </select>
-                    </div>
-                    <div class="text-danger">
+                        <h2>Kết quả tìm kiếm</h2>
                     </div>
                 </div>
             </div>

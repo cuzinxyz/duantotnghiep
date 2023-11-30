@@ -168,9 +168,6 @@ class FormDangTin extends Component
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
-            'district_id' => $this->district_id,
-            'city_id' => $this->city_id,
-            'full_address' => $this->full_address,
         );
         $result = Car::create($carData);
         if ($result) {

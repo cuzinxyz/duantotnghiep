@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('car_id');
             $table->text('content');
             $table->integer('status')->default(0);
+            $table->string('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

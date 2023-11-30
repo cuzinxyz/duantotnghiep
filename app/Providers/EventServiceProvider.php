@@ -2,18 +2,20 @@
 
 namespace App\Providers;
 
-use App\Models\Banner;
-use App\Observers\BannerObserver;
-use App\Models\Admin;
-use App\Models\Partner;
 use App\Models\User;
-use App\Observers\AdminObserver;
-use App\Observers\PartnerObserver;
+use App\Models\Admin;
+use App\Models\Banner;
+use App\Models\Partner;
 use App\Observers\UserObserver;
+use App\Observers\AdminObserver;
+use App\Observers\BannerObserver;
+use App\Observers\PartnerObserver;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Events\NotificationExpiresSalon;
+use App\Listeners\SendNotificationExpiresSalon;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        NotificationExpiresSalon::class => [
+            SendNotificationExpiresSalon::class
+        ]
     ];
 
     /**

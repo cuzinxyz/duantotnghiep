@@ -78,10 +78,9 @@ class UserResource extends Resource
                 ImageColumn::make('avatar')
                     ->label('Ảnh đại diện')
                     ->circular(),
-                Tables\Columns\TextColumn::make('name')->label("Tên")->searchable(),
+                Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('phone_number')->label('Số điện thoại'),
-                // Tables\Columns\TextColumn::make('service.service_name')->label('Dịch vụ'),
                 Tables\Columns\TextColumn::make('account_balence')->label('Số dư tài khoản')
                     ->numeric(
                         decimalPlaces: 0,
