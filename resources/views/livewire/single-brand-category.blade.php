@@ -100,14 +100,10 @@
         <div class="container">
             <div class="row g-4 mb-40">
                 @foreach ($cars as $item)
-                    <div class="col-xl-3 col-lg-4 col-md-6" wire:key="{{ $item->id }}">
+                    <div class="col-lg-4 col-md-6" wire:key="{{ $item->id }}">
                         <div class="product-card">
-                            <div class="product-img"><a href="#" class="fav"><svg width="14" height="13"
-                                        viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
-                                        </path>
-                                    </svg></a>
+                            <div class="product-img">
+                                <livewire:add-to-wish-list carID="{{ $item->id }}" />
                                 <div class="swiper product-img-slider">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide"><img
@@ -150,29 +146,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="pagination-and-next-prev">
-                        <div class="pagination">
-                            <ul>
-                                <li class="active"><a href="#">01</a></li>
-                                <li><a href="#">02</a></li>
-                                <li><a href="#">03</a></li>
-                                <li><a href="#">04</a></li>
-                                <li><a href="#">05</a></li>
-                            </ul>
-                        </div>
-                        <div class="next-prev-btn">
-                            <ul>
-                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="7"
-                                            height="14" viewBox="0 0 7 14">
-                                            <path d="M0 7.00008L7 0L2.54545 7.00008L7 14L0 7.00008Z"></path>
-                                        </svg> Prev</a></li>
-                                <li><a href="#">Next<svg xmlns="http://www.w3.org/2000/svg" width="7"
-                                            height="14" viewBox="0 0 7 14">
-                                            <path d="M7 7.00008L0 0L4.45455 7.00008L0 14L7 7.00008Z"></path>
-                                        </svg></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    {{ $cars->links() }}
                 </div>
             </div>
         </div>

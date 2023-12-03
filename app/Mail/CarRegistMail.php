@@ -2,25 +2,28 @@
 
 namespace App\Mail;
 
+use App\Models\Car;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CarRegistMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    // public $data;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public function __construct(
+        protected Car $car,
+    )
     {
-        $this->data = $data;
+        // $this->data = $data;
     }
 
     /**
@@ -29,7 +32,7 @@ class CarRegistMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thông báo phê duyệt đăng xe',
+            subject: 'Thông báo phê duyệt đăng xe | Drivco',
         );
     }
 
@@ -40,6 +43,9 @@ class CarRegistMail extends Mailable
     {
         return new Content(
             view: 'mail.car-regist',
+            with: [
+                'data' => $this->car
+            ]
         );
     }
 

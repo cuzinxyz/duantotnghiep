@@ -201,10 +201,12 @@
                                                     <div class="price" style="font-size:15px">
                                                         <strong>{{ number_format($car->price) }} ₫</strong>
                                                     </div>
+                                                    @if(!empty($car->province->name))
                                                     <div class="location">
                                                         <a href="#"><i class="bi bi-geo-alt"></i>
                                                             {{ $car->province->name }}</a>
                                                     </div>
+                                                    @endif
                                                 </div>
                                                 <ul class="features">
                                                     <li>
@@ -242,7 +244,7 @@
                                                         Xem xe
                                                     </a>
                                                     <div class="brand">
-                                                        <a href="{{ route('brand.detail') }}">
+                                                        <a href="{{ route('brand.detail', $car->brand->brand_name) }}">
                                                             {{-- <img src="/storage/{{ $car->brand->logo_url }}" alt="image"> --}}
                                                             <img style="width: 30px;height:30px;object-fit:contain"
                                                                 src="{{ asset('storage/' . $car->brand->logo_url) }}"

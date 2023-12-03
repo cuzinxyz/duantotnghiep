@@ -127,7 +127,7 @@ Route::get("/bai-viet/{slug}.html", function ($slug) {
     ]);
 })->name('news.index');
 
-Route::get('/hang-xe/{slug?}', SingleBrandCategory::class)->name('brand.detail');
+Route::get('/hang-xe/{slug}', SingleBrandCategory::class)->name('brand.detail');
 
 Route::get('/xe', CarListingSystem::class)->name('car.list');
 

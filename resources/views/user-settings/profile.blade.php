@@ -209,7 +209,7 @@
                             aria-labelledby="v-pills-home-tab">
                             <div class="reviews-area">
                                 <div class="row g-lg-4 gy-5">
-                                    <div class="col-lg-7">
+                                    <div class="col-md-6 col-sm-12">
 
                                         @if ($cars->isEmpty())
                                             <p class="text-secondary text-uppercase">

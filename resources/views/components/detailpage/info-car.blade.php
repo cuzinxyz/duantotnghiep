@@ -311,7 +311,7 @@
                 </div>
                 <div class="overview-content">
                     <ul>
-                        <li><span>Hãng xe</span> {{ $carDetail->brand->brand_name }}</li>
+                        <li style="cursor: pointer;" onclick="window.location.href='{{ route('brand.detail', $carDetail->brand->brand_name) }}'"><span>Hãng xe</span> {{ $carDetail->brand->brand_name }}</li>
                         <li><span>Dòng xe</span> {{ $carDetail->model->model_name }}</li>
                         <li><span>Năm sản xuất</span> {{ $carDetail->car_info['year_of_manufacture'] }}</li>
                         <li><span>Màu sắc</span> {{ $carDetail->car_info['color'] }}</li>

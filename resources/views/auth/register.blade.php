@@ -53,14 +53,14 @@
             }
         }
     </style>
-    <div class="container mb-5">
+    <div class="container my-5">
         <div class="login__wrap d-flex justify-content-center align-items-center">
-            <div class="banner__login" style="witdh: 400px; height: 605px">
-                <img class="img__login" style="witdh:100%; height:100%;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/800px-Shaqi_jrvej.jpg"
+            <div class="banner__login" style="width: 400px; height: 605px">
+                <img class="img__login" style="width:100%; height:100%;"
+                    src="{{ asset('images/slide-banner.jpg') }}"
                     alt="">
             </div>
-            <div class="modal-dialog">
+            <div class="modal-dialog m-0">
                 <div class="modal-content form__login"
                     style="border-top-right-radius:12px;border-bottom-right-radius:12px;border-top-left-radius:0;border-bottom-left-radius:0">
                     <div class="modal-header">

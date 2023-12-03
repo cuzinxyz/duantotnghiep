@@ -48,9 +48,11 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
+                                    @if(!empty($car->province->name))
                                     <div class="location">
-                                        <a><i class="bi bi-geo-alt"></i> {{ $car->province->name}}</a>
+                                        <a><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
                                     </div>
+                                    @endif
                                     <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
                                     <ul class="features">
                                         <li>

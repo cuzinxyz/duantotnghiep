@@ -51,7 +51,7 @@ class PostCarManagerResource extends Resource
             ->columns([
                 TextColumn::make('title')
                     ->label('Tiêu đề bài đăng')
-                    ->default('Vinfast 2.0')
+                    ->default('x bài đăng lỗi x')
                     ->searchable()
                     ->sortable(),
 
@@ -59,17 +59,11 @@ class PostCarManagerResource extends Resource
                     ->label('Tác giả')
                     ->default('tuấn'),
 
-                TextColumn::make('type')
-                    ->label('Loại tin')
-                    ->default('tin vip'),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Thời gian tạo')
                     ->dateTime()
                     ->sortable()
                     ->since()
-
-
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -143,24 +137,28 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
-                                            $data = [
-                                                'user' => $record->user['name'],
-                                                'title' => $record->title,
-                                                'price'=> $record->price,
-                                                'brand' => $record->brand->brand_name,
-                                                'mileage' => $record->car_info['mileage'],
-                                                'seat' => $record->car_info['number_of_seats'],
-                                                'manufactured' => $record->car_info['year_of_manufacture'],
-                                                'color' => $record->car_info['color'],
-                                                'engine' => $record->car_info['engine'],
-                                                'fuelType' => $record->car_info['fuelType'],
-                                                'features' => $record->car_info['features'],
-                                                'verhicle_image' => $record->verhicle_image_library,
-                                                'verhicle_videos' => $record->verhicle_videos,
-                                                'description' => $record->description,
-                                            ];
+                                            // $data = [
+                                            //     'user' => $record->user['name'],
+                                            //     'title' => $record->title,
+                                            //     'price'=> $record->price,
+                                            //     'brand' => $record->brand->brand_name,
+                                            //     'mileage' => $record->car_info['mileage'],
+                                            //     'seat' => $record->car_info['number_of_seats'],
+                                            //     'manufactured' => $record->car_info['year_of_manufacture'],
+                                            //     'color' => $record->car_info['color'],
+                                            //     'engine' => $record->car_info['engine'],
+                                            //     'fuelType' => $record->car_info['fuelType'],
+                                            //     'features' => $record->car_info['features'],
+                                            //     'verhicle_image' => $record->verhicle_image_library,
+                                            //     'verhicle_videos' => $record->verhicle_videos,
+                                            //     'description' => $record->description,
+                                            // ];
+                                            $data = $record;
+// dd($data);
+                                            // Mail::to($record->contact['email'])->send(new CarRegistMail($data));
+                                            // Mail::to($record->contact['email'])->send(new CarRegistMail($data));
+                                            Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
 
-                                            Mail::to($record->contact['email'])->send(new CarRegistMail($data));
                                             $record->status = 1;
                                             $record->save();
 
@@ -243,12 +241,8 @@ class PostCarManagerResource extends Resource
                                             ->label('Nhiên liệu')
                                             ->default('Điện'),
 
-                                        TextEntry::make('car_info.condition')
-                                            ->label('Tình trạng')
-                                            ->default('Xe cũ'),
-
                                         TextEntry::make('car_info.features')
-                                            ->label('Thông số cơ bản khác')
+                                            ->label('Một số tính năng khác')
                                     ])
                                     // ->collapsed()
                                     ->columns([

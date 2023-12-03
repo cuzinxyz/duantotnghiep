@@ -7,9 +7,11 @@ use App\Models\Brand;
 use Livewire\Component;
 use App\Models\ModelCar;
 use Livewire\Attributes\Layout;
+use Livewire\WithPagination;
 
 class SingleBrandCategory extends Component
 {
+    use WithPagination;
 
     public $brand, $model;
     public $price;
@@ -37,9 +39,9 @@ class SingleBrandCategory extends Component
 
             // dd($brand);
             $brand_id= $brand->id;
-            $cars = Car::where('brand_id', $brand_id)->where('status', 1)->get();
+            $cars = Car::where('brand_id', $brand_id)->where('status', 1)->simplePaginate(9);
         }else {
-            $cars = Car::where('status', 1)->get();
+            $cars = Car::where('status', 1)->simplePaginate(9);
         }
 
 
@@ -51,13 +53,13 @@ class SingleBrandCategory extends Component
                 $number2 = intval(trim($parts[1]));
 
                 $cars = Car::where('price', '>=', $number1)->where('price', '<=', $number2)->where('status', 1)
-                ->get();
+                ->simplePaginate(9);
             }
         }
 
         if($this->brand) {
             $cars = Car::where('brand_id', $this->brand)->where('status', 1)
-            ->get();
+            ->simplePaginate(9);
         }
 
         if($this->price && $this->brand && $this->model ) {
@@ -70,7 +72,7 @@ class SingleBrandCategory extends Component
             ->where('brand_id', $this->brand)
             ->where('model_car_id', $this->model)
             ->where('status', 1)
-            ->get();
+            ->simplePaginate(9);
         }
 
         return $cars;

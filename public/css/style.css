@@ -27698,7 +27698,7 @@ button {
     border-radius: 10px;
     /* padding: 10px 35px 50px; */
 }
-
+/*
 .bg-shape {
     position: relative;
     background-image: url(../images/bg-shape.svg);
@@ -27715,18 +27715,17 @@ button {
     bottom: 0;
     right: 0;
     left: 0;
-    /* background: rgba(255, 255, 255, 0.2); */
     background-color: #fafafa7a;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     z-index: -1;
-}
+} */
 
 @media (max-width: 767px) {
     .contact-page .inquiry-form {
-        padding: 45px 20px 50px
+        /* padding: 45px 20px 50px */
     }
 }
 

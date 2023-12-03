@@ -37,6 +37,7 @@
     <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet"> --}}
 
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
@@ -217,10 +218,12 @@
                         </svg>
                         Tin cần mua xe</a>
                 </li>
-                {{-- <li @class(['active' => request()->routeIs('service.list')])>
-                    <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
+                @if(!empty(auth()->user()->collaborator))
+                <li>
+                    <a href="{{ route('service.list') }}" class="text-danger">CTV</a>
                 </li>
-                <li @class(['active' => request()->routeIs('recharge')])>
+                @endif
+                {{-- <li @class(['active' => request()->routeIs('recharge')])>
                     <a href="{{ route('recharge') }}" class="drop-down">Nạp Tiền</a>
                 </li> --}}
             </ul>
@@ -456,31 +459,10 @@
                     </div>
                 </div>
             @else
-                {{-- <div class="dropdown">
-                    <button class="modal-btn header-account-btn user-dropdown" type="button">
-                        <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
-                        {{ auth()->user()->name }}
-                    </button>
-                    <div class="account-menu">
-                        <div class="account-footer" style="min-width: 230px">
-                            <div class="footer-button">
-                                <div class="d-flex justify-content-between align-items-center gap-3">
-                                    <a class="w-50 primary-btn1 btn-dark1" href="{{ route('settings') }}"><i
-                                            class="bi bi-gear"></i>
-                                        Settings</a>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button class="w-100 primary-btn1" type="submit"><i
-                                                class="bi bi-box-arrow-right"></i> Logout</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 @endif
-                <div class="sidebar-button mobile-menu-btn ">
-                    <span></span>
+                <div class="sidebar-button mobile-menu-btn" style="margin-left: 10px">
+                    {{-- <span></span> --}}
+                    <i class="bi bi-filter-right" style="font-size: 40px"></i>
                 </div>
             </div>
         </header>
@@ -890,7 +872,8 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+        {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
