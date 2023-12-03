@@ -9,66 +9,60 @@ use App\Models\ModelCar;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Validator;
 
 class FormDangTin extends Component
 {
     use WithFileUploads;
     #define requirement
-
-    public $currentStep = 1;
     public $fuels = ["Xăng", "Dầu Diesl", "Điện", "Loại khác"];
-    public $colors = [
-        'red' => 'Đỏ',
-        'silver' => 'Bạc',
-        'black' => 'Đen',
-        'white' => 'Trắng',
-        'yellow' => 'Vàng',
-        'gray' => 'Ghi',
-        'blue' => 'Xanh',
-        'different' => 'Khác'
-    ];
-    public $featureValues = [
-        'PremiumWheel' => 'Bánh xe cao cấp',
-        'Moonroof' => 'Cửa sổ trời',
-        'PremiumAudio' => 'Âm thanh cao cấp',
-        'Navigation' => 'Chế độ chỉ đường',
-        'PremiumSeatMaterial' => 'Ghế da cao cấp',
-        'Bluetooth' => 'Kết nối bluetooth',
-        'RemoteEngineStart' => 'Khởi động từ xa',
-        'Multi_ZoneClimateControl' => 'Điều hòa'
-    ];
-    public $seats = [
-        '4' => '4',
-        '5' => '5',
-        '6' => '6',
-        '7' => '7',
-        '8' => '8',
-    ];
+    public $colors = ['red' => 'Đỏ', 'silver' => 'Bạc', 'black' => 'Đen', 'white' => 'Trắng', 'yellow' => 'Vàng', 'gray' => 'Ghi', 'blue' => 'Xanh', 'different' => 'Khác'];
+    public $featureValues = ['PremiumWheel' => 'Bánh xe cao cấp', 'Moonroof' => 'Cửa sổ trời', 'PremiumAudio' => 'Âm thanh cao cấp', 'Navigation' => 'Chế độ chỉ đường', 'PremiumSeatMaterial' => 'Ghế da cao cấp', 'Bluetooth' => 'Kết nối bluetooth', 'RemoteEngineStart' => 'Khởi động từ xa', 'Multi_ZoneClimateControl' => 'Điều hòa'];
+    public $seats = ['4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8',];
     public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
-    public $verhicle_image_library = [];
-    public $brand_select = '';
-    public $model_select = '';
     public $models = [];
-    public $image_library;
+
+    #[Validate('required', message: 'Bắt buộc phải upload tối thiểu 1 hình.')]
+    public $verhicle_image_library = [];
+    #[Validate('required', message: 'Bắt buộc phải upload video xe.')]
+    public $verhicle_videos;
+    #[Validate('required', message: 'Bắt buộc phải chọn thương hiệu.')]
+    public $brand_select = '';
+    #[Validate('required', message: 'Bắt buộc phải chọn tên xe.')]
+    public $model_select = '';
+    #[Validate('required', message: 'Bắt buộc phải chọn hộp số.')]
     public $transmission;
+    #[Validate('required', message: 'Bắt buộc phải chọn loại nhiên liệu.')]
     public $fuel;
+    #[Validate('required', message: 'Bắt buộc phải chọn số chỗ ngồi.')]
     public $number_of_seats;
+    #[Validate('required', message: 'Bắt buộc phải chọn màu sắc.')]
     public $color;
     public $version;
-    public $condition;
+    #[Validate('required', message: 'Bắt buộc phải nhập số KM.')]
     public $mileage;
+    #[Validate('required', message: 'Bắt buộc phải nhập giá.')]
     public $price;
+    #[Validate('required', message: 'Bắt buộc phải nhập tiêu đề.')]
     public $title;
+    #[Validate('required', message: 'Bắt buộc phải nhập mô tả.')]
     public $description;
+    #[Validate('required', message: 'Bắt buộc phải nhập SĐT.')]
     public $phone;
-    public $name;
+    #[Validate('required', message: 'Bắt buộc phải nhập email.')]
     public $email;
+    #[Validate('required', message: 'Bắt buộc phải chọn quận / huyện.')]
     public $district_id;
+    #[Validate('required', message: 'Bắt buộc phải chọn thành phố.')]
     public $city_id;
+    #[Validate('required', message: 'Bắt buộc phải nhập địa chỉ chi tiết.')]
     public $full_address;
+    #[Validate('required', message: 'Bắt buộc phải nhập năm sản xuất.')]
     public $year_of_manufacture;
+    #[Validate('required', message: 'Bắt buộc phải nhập số mã lực.')]
     public $engine;
-    public $verhicle_videos;
+    #[Validate('required', message: 'Bắt buộc phải chọn một số tính năng khác.')]
     public $features = [];
 
     public function mount()
@@ -77,145 +71,114 @@ class FormDangTin extends Component
         $this->email = auth()->user()->email ? auth()->user()->email : '';
     }
 
-    public function previousStepSubmit()
-    {
-        return $this->currentStep--;
-    }
-
-
-    protected $validationAttributes = [
-        'brand_select' => 'hãng xe',
-        'model_select' => 'loại xe',
-        'transmission' => 'hộp số',
-        'fuel' => 'nhiên liệu',
-        'number_of_seats' => 'số chỗ ngồi',
-        'color' => 'màu sắc',
-        'version' => 'phiên bản',
-        'engine' => 'động cơ',
-        'year_of_manufacture' => 'năm sản xuất',
-        'mileage' => 'số km',
-        'price' => 'giá tiền',
-        'title' => 'tiêu đề',
-        'description' => 'mô tả',
-        'phone' => 'số điện thoại',
-        'email' => 'email',
-        'city_id' => 'tỉnh, thành phố',
-        'district_id' => 'quận, huyện',
-        'full_address' => 'địa chỉ',
-        'verhicle_image_library' => 'hình ảnh',
-        'verhicle_videos' => 'video'
-    ];
-
-    public function messages()
-    {
-        return [
-            'required' => 'Trường :attribute bắt buộc phải nhập.',
-            'image' => 'Trường :attribute phải là hình ảnh.',
-            'video' => 'Trường :attribute phải là video',
-            'max' => 'Dung lượng file quá lớn'
-        ];
-    }
-
-    public function secondStepSubmit()
-    {
-        $this->validate([
-            'brand_select' => 'required',
-            'model_select' => 'required',
-            'transmission' => 'required',
-            'fuel' => 'required',
-            'number_of_seats' => 'required',
-            'color' => 'required',
-            // 'version' => 'required',
-            "engine" => 'required',
-            'year_of_manufacture' => 'required',
-            'mileage' => 'required',
-            'price' => 'required',
-            'title' => 'required',
-            'description' => 'required'
-        ]);
-        return $this->currentStep++;
-    }
-
-    public function thirdStepSubmit()
-    {
-        $this->validate([
-            'phone' => 'required',
-            // 'email' => 'required',
-            'city_id' => 'required',
-            'district_id' => 'required',
-            'full_address' => 'required',
-        ]);
-        return $this->currentStep++;
-    }
-
-    // public function fourthStepSubmit()
-    // {
-    //     $this->validate([
-    //         'verhicle_image_library' => 'required|image|max:10024',
-    //         'verhicle_videos' => 'required|video|max:10024',
-    //     ]);
-    // }
-
     public function saveCar()
     {
-        $checkValidate = $this->validate([
-            'verhicle_image_library' => 'required|image|max:10024',
-            'verhicle_videos' => 'required|mimes:mp4|max:102400',
-        ]);
+        $this->validate();
 
+        // $validated = Validator::make(
+        //     [
+        //         'verhicle_image_library' => $this->verhicle_image_library,
+        //         'verhicle_videos' => $this->verhicle_videos,
+        //         'brand_select' => $this->brand_select,
+        //         'model_select' => $this->model_select,
+        //         'transmission' => $this->transmission,
+        //         'fuel' => $this->fuel,
+        //         'number_of_seats' => $this->number_of_seats,
+        //         'color' => $this->color,
+        //         'version' => $this->version,
+        //         'mileage' => $this->mileage,
+        //         'price' => $this->price,
+        //         'title' => $this->title,
+        //         'description' => $this->description,
+        //         'phone' => $this->phone,
+        //         'email' => $this->email,
+        //         'district_id' => $this->district_id,
+        //         'city_id' => $this->city_id,
+        //         'full_address' => $this->full_address,
+        //         'year_of_manufacture' => $this->year_of_manufacture,
+        //         'engine' => $this->engine,
+        //         'features' => $this->features,
+        //     ],
+        //     [
+        //         'verhicle_image_library' => 'required|array',
+        //         'verhicle_videos' => 'required',
+        //         'brand_select' => 'required',
+        //         'model_select' => 'required',
+        //         'transmission' => 'required',
+        //         'fuel' => 'required',
+        //         'number_of_seats' => 'required',
+        //         'color' => 'required',
+        //         'version' => 'required',
+        //         'mileage' => 'required',
+        //         'price' => 'required',
+        //         'title' => 'required',
+        //         'description' => 'required',
+        //         'phone' => 'required',
+        //         'email' => 'required|email',
+        //         'district_id' => 'required',
+        //         'city_id' => 'required',
+        //         'full_address' => 'required',
+        //         'year_of_manufacture' => 'required',
+        //         'engine' => 'required',
+        //         'features' => 'required|array',
+        //     ],
+        //     [
+        //         'required' => 'The :attribute field is required',
+        //         'email' => 'The :attribute must be a valid email address',
+        //         'array' => 'The :attribute must be an array',
+        //     ]
+        // )->validate();
 
-        if ($checkValidate) {
-            $carData = [];
-            $photoName = [];
-            $images = $this->verhicle_image_library;
-            if (count($images) > 0) {
-                foreach ($images as $photo) {
-                    $fileName = $photo->getFilename();
-                    $dir_name = 'car_photos';
-                    $photo->storeAs('car_photos', $fileName, 'public');
-                    array_push($photoName, $dir_name . '/' . $fileName);
-                }
-            }
-            $videoName = "";
-            if (!empty($this->verhicle_videos)) {
-                $dir_name = 'video_car';
-                $file = uploadFile($dir_name, $this->verhicle_videos);
-                $videoName = $file;
-            }
-            $carData['verhicle_image_library'] = $photoName;
-            $carData['verhicle_videos'] = $videoName;
-            $carData['user_id'] = auth()->id();
-            $carData['title'] = $this->title;
-            $carData['slug'] = Str::slug($carData['title']);
-            $carData['price'] = $this->price;
-            $carData['brand_id'] = $this->brand_select;
-            $carData['model_car_id'] = $this->model_select;
-            $carData['city_id'] = $this->city_id;
-            $carData['district_id'] = $this->district_id;
-            $carData['full_address'] = $this->full_address;
-            $carData['description'] = $this->description;
-            $carData['car_info'] = array(
-                "year_of_manufacture" => $this->year_of_manufacture,
-                'transmission' => $this->transmission,
-                'fuelType' => $this->fuel,
-                'number_of_seats' => $this->number_of_seats,
-                'color' => $this->color,
-                'version' => $this->version,
-                'condition' => $this->condition,
-                'mileage' => $this->mileage,
-                "features" => $this->features,
-                'engine' => $this->engine,
-            );
-            $carData['contact'] = array(
-                'name' => $this->name,
-                'phone' => $this->phone,
-                'email' => $this->email,
-            );
-            $result = Car::create($carData);
-            if ($result) {
-                return redirect()->route('profile')->with('status', 'Thành công!');
+        $carData = array();
+        $photoName = array();
+
+        $images = $this->verhicle_image_library;
+        if (count($images) > 0) {
+            foreach ($images as $photo) {
+                $dir_name_image = 'car_photos';
+                $fileImage = uploadFile($dir_name_image, $photo);
+                array_push($photoName, $fileImage);
             }
         }
+        $videoName = "";
+        if (!empty($this->verhicle_videos)) {
+            $dir_name_video = 'video_car';
+            $fileVideo = uploadFile($dir_name_video, $this->verhicle_videos);
+            $videoName = $fileVideo;
+        }
+        // dd(array($videoName, $photoName));
+        $carData['verhicle_image_library'] = $photoName;
+        $carData['verhicle_videos'] = $videoName;
+        $carData['user_id'] = auth()->id();
+        $carData['title'] = $this->title;
+        $carData['slug'] = Str::slug($carData['title']);
+        $carData['price'] = $this->price;
+        $carData['brand_id'] = $this->brand_select;
+        $carData['model_car_id'] = $this->model_select;
+        $carData['city_id'] = $this->city_id;
+        $carData['district_id'] = $this->district_id;
+        $carData['full_address'] = $this->full_address;
+        $carData['description'] = $this->description;
+        $carData['car_info'] = array(
+            "year_of_manufacture" => $this->year_of_manufacture,
+            'transmission' => $this->transmission,
+            'fuelType' => $this->fuel,
+            'number_of_seats' => $this->number_of_seats,
+            'color' => $this->color,
+            'version' => $this->version,
+            'mileage' => $this->mileage,
+            "features" => $this->features,
+            'engine' => $this->engine,
+        );
+        $carData['contact'] = array(
+            'full_address' => $this->full_address,
+            'phone' => $this->phone,
+            'email' => $this->email,
+        );
+        Car::create($carData);
+        // if ($result) {
+        return redirect()->route('profile')->with('status', 'Đăng tin thành công! Vui lòng chờ duyệt.');
+        // }
     }
 
     #[Computed()]

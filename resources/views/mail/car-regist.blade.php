@@ -517,7 +517,7 @@
                                                                                 <td valign="top"
                                                                                     class="pc-font-alt pc-w620-fontSize-30 pc-w620-lineHeight-40"
                                                                                     style="mso-line-height: exactly;line-height: 128%;letter-spacing: -0.6px;font-family: 'Times New Roman', Helvetica, Arial, sans-serif;font-size: 36px;font-weight: 800;color: #151515;">
-                                                                                    Kính gửi {{$data['user']}}!
+                                                                                    Chào {{$data->user->name}}!
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -534,8 +534,7 @@
                                                                                 <td valign="top"
                                                                                     class="pc-font-alt pc-w620-fontSize-18 pc-w620-lineHeight-28"
                                                                                     style="mso-line-height: exactly;line-height: 150%;letter-spacing: -0.4px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 20px;font-weight: normal;color: #9b9b9b;">
-                                                                                    Dưới đây là thông tin chi tiết xe
-                                                                                    của bạn
+                                                                                    Tin của bạn đã được chúng tôi phê duyệt 🎉🎉🎉
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -623,9 +622,7 @@
                                                                                                                                 <td valign="top"
                                                                                                                                     class="pc-font-alt"
                                                                                                                                     style="mso-line-height: exactly;line-height: 156%;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 18px;font-weight: bold;color: #151515;">
-                                                                                                                                    Tiêu
-                                                                                                                                    đề
-                                                                                                                                </td>
+             Tiêu đề tin                                                                                                                      </td>
                                                                                                                             </tr>
                                                                                                                         </table>
                                                                                                                     </td>
@@ -683,7 +680,7 @@
                                                                                                                     <td valign="top"
                                                                                                                         class="pc-font-alt"
                                                                                                                         style="mso-line-height: exactly;line-height: 156%;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 18px;font-weight: normal;color: #151515;">
-                                                                                                                        {{$data['title']}}</td>
+                                                                                                                        {{$data->title}}</td>
                                                                                                                 </tr>
                                                                                                             </table>
                                                                                                         </td>
@@ -735,8 +732,6 @@
                                                                                                                                     class="pc-font-alt"
                                                                                                                                     style="mso-line-height: exactly;line-height: 156%;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 18px;font-weight: bold;color: #151515;">
                                                                                                                                     Giá
-                                                                                                                                    muốn
-                                                                                                                                    bán
                                                                                                                                 </td>
                                                                                                                             </tr>
                                                                                                                         </table>
@@ -795,7 +790,7 @@
                                                                                                                     <td valign="top"
                                                                                                                         class="pc-font-alt"
                                                                                                                         style="mso-line-height: exactly;line-height: 156%;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 18px;font-weight: normal;color: #151515;">
-                                                                                                                        {{$data['price']}}</td>
+                                                                                                                        {{$data->price}}</td>
                                                                                                                 </tr>
                                                                                                             </table>
                                                                                                         </td>
@@ -895,7 +890,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['brand']}}</td>
+                                                                                                {{$data->brand->brand_name}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -962,7 +957,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['mileage']}}</td>
+                                                                                                {{$data->car_info['mileage']}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -1028,7 +1023,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['seat']}}</td>
+                                                                                                {{$data->car_info['number_of_seats']}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -1094,7 +1089,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['manufactured']}}</td>
+                                                                                                {{$data->car_info['year_of_manufacture']}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -1159,72 +1154,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['color']}}</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="left" valign="top"
-                                                                                    style="padding: 20px 10px 20px 0px;border-bottom: 1px solid #E5E5E5;">
-                                                                                    <table width="100%" border="0"
-                                                                                           cellpadding="0"
-                                                                                           cellspacing="0"
-                                                                                           role="presentation">
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <table width="100%"
-                                                                                                       border="0"
-                                                                                                       cellpadding="0"
-                                                                                                       cellspacing="0"
-                                                                                                       role="presentation">
-                                                                                                    <tr>
-                                                                                                        <td valign="top">
-                                                                                                            <table
-                                                                                                                class=""
-                                                                                                                border="0"
-                                                                                                                cellpadding="0"
-                                                                                                                cellspacing="0"
-                                                                                                                role="presentation">
-                                                                                                                <tr>
-                                                                                                                    <th valign="top"
-                                                                                                                        style="font-weight: normal; text-align: left;">
-                                                                                                                        <table
-                                                                                                                            border="0"
-                                                                                                                            cellpadding="0"
-                                                                                                                            cellspacing="0"
-                                                                                                                            role="presentation">
-                                                                                                                            <tr>
-                                                                                                                                <td valign="top"
-                                                                                                                                    class="pc-font-alt"
-                                                                                                                                    style="mso-line-height: exactly;line-height: 26px;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: 500;color: #151515;">
-                                                                                                                                    Động
-                                                                                                                                    cơ:
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        </table>
-                                                                                                                    </th>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </table>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-                                                                                <td align="left" valign="top"
-                                                                                    style="padding: 20px 0px 20px 0px;border-bottom: 1px solid #E5E5E5;">
-                                                                                    <table border="0" cellpadding="0"
-                                                                                           cellspacing="0"
-                                                                                           role="presentation"
-                                                                                           align="right">
-                                                                                        <tr>
-                                                                                            <td valign="top"
-                                                                                                class="pc-font-alt"
-                                                                                                align="right"
-                                                                                                style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['engine']}}</td>
+                                                                                                {{$data->car_info['color']}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -1289,72 +1219,7 @@
                                                                                                 class="pc-font-alt"
                                                                                                 align="right"
                                                                                                 style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{$data['fuelType']}}</td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td align="left" valign="top"
-                                                                                    style="padding: 20px 10px 20px 0px;border-bottom: 1px solid #E5E5E5;">
-                                                                                    <table width="100%" border="0"
-                                                                                           cellpadding="0"
-                                                                                           cellspacing="0"
-                                                                                           role="presentation">
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <table width="100%"
-                                                                                                       border="0"
-                                                                                                       cellpadding="0"
-                                                                                                       cellspacing="0"
-                                                                                                       role="presentation">
-                                                                                                    <tr>
-                                                                                                        <td valign="top">
-                                                                                                            <table
-                                                                                                                class=""
-                                                                                                                border="0"
-                                                                                                                cellpadding="0"
-                                                                                                                cellspacing="0"
-                                                                                                                role="presentation">
-                                                                                                                <tr>
-                                                                                                                    <th valign="top"
-                                                                                                                        style="font-weight: normal; text-align: left;">
-                                                                                                                        <table
-                                                                                                                            border="0"
-                                                                                                                            cellpadding="0"
-                                                                                                                            cellspacing="0"
-                                                                                                                            role="presentation">
-                                                                                                                            <tr>
-                                                                                                                                <td valign="top"
-                                                                                                                                    class="pc-font-alt"
-                                                                                                                                    style="mso-line-height: exactly;line-height: 26px;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: 500;color: #151515;">
-                                                                                                                                    Tình
-                                                                                                                                    trạng:
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        </table>
-                                                                                                                    </th>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </table>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </table>
-                                                                                </td>
-                                                                                <td align="left" valign="top"
-                                                                                    style="padding: 20px 0px 20px 0px;border-bottom: 1px solid #E5E5E5;">
-                                                                                    <table border="0" cellpadding="0"
-                                                                                           cellspacing="0"
-                                                                                           role="presentation"
-                                                                                           align="right">
-                                                                                        <tr>
-                                                                                            <td valign="top"
-                                                                                                class="pc-font-alt"
-                                                                                                align="right"
-                                                                                                style="mso-line-height: exactly;line-height: 26px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 16px;font-weight: normal;color: #151515;text-align: right;text-align-last: right;">
-                                                                                                {{-- {{$data['condition']}}</td> --}}
+                                                                                                {{$data->car_info['fuelType']}}</td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -1476,7 +1341,7 @@
                                                                                                                     <td valign="top"
                                                                                                                         class="pc-font-alt"
                                                                                                                         style="mso-line-height: exactly;line-height: 156%;letter-spacing: -0.2px;font-family: 'Fira Sans', Helvetica, Arial, sans-serif;font-size: 18px;font-weight: normal;color: #151515;">
-                                                                                                                        {{$data['description']}}</td>
+                                                                                                                        {{$data->description}}</td>
                                                                                                                 </tr>
                                                                                                             </table>
                                                                                                         </td>
@@ -1595,13 +1460,13 @@
                                                                                                                 role="presentation"
                                                                                                                 align="left">
                                                                                                                 <tr>
-                                                                                                                    @foreach($data['verhicle_image'] as $image)
-                                                                                                                        <td>
+                                                                                                                    @foreach($data->verhicle_image_library as $image)
+                                                                                                                        <td style="max-width: 100%;overflow-x:scroll">
 {{--                                                                                                                            <img--}}
 {{--                                                                                                                                src="{{ $message->embed(public_path('public/storage/'. $image))}}"--}}
 {{--                                                                                                                                alt="Vehicle Image"--}}
 {{--                                                                                                                                style="margin-bottom: 5px;">--}}
-                                                                                                                            <img src="{{ $message->embed(public_path('storage/' . str_replace('public/', '', $image))) }}" alt="Vehicle Image" style="margin-bottom: 5px;">
+<img src="{{ $message->embed(public_path('storage/' . str_replace('public/', '', $image))) }}" alt="Vehicle Image" style="margin-bottom: 5px;width:200px;height:200px;object-fit:cover">
                                                                                                                         </td>
                                                                                                                     @endforeach
 
@@ -1723,12 +1588,10 @@
                                                                                                                 role="presentation"
                                                                                                                 align="left">
                                                                                                                 <tr>
-                                                                                                                    <img src="{{ $message->embed(public_path('storage/' . str_replace('public/', '', $data['verhicle_videos']))) }}" alt="Vehicle Image" style="margin-bottom: 5px;">
-                                                                                                                    {{-- @foreach($data['verhicle_videos'] as $video)
-                                                                                                                        <td>
-                                                                                                                        </td>
-                                                                                                                    @endforeach --}}
-
+                                                <video style="width: 100%;height:300px" controls>
+                                                    <source src="{{ $message->embed(public_path('storage/' . str_replace('public/', '', $data->verhicle_videos))) }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                    </video>
                                                                                                                 </tr>
                                                                                                             </table>
                                                                                                         </td>

@@ -37,6 +37,7 @@
     <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet"> --}}
 
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
 
@@ -98,15 +99,9 @@
                 <a href="/"><img src="{{ asset('images/green-logo.svg') }}" alt=""></a>
             </div>
         </div>
-        <livewire:car-search>
-            {{-- <div class="search-area">
-                <form action="/showroom/" wire:submit="render" enctype="multipart/form-data">
-                    <div class="form-inner">
-                        <input wire:model="carSearch" name="carSearch" type="text" placeholder="Search for cars">
-                        <button type="submit"><i class="bi bi-search"></i></button>
-                    </div>
-                </form>
-            </div> --}}
+        <div class="search-area">
+            <livewire:search />
+        </div>
             <div class="topbar-right">
                 <ul>
                     <li>
@@ -223,10 +218,12 @@
                         </svg>
                         Tin cần mua xe</a>
                 </li>
-                {{-- <li @class(['active' => request()->routeIs('service.list')])>
-                    <a href="{{ route('service.list') }}" class="drop-down">Dịch Vụ</a>
+                @if(!empty(auth()->user()->collaborator))
+                <li>
+                    <a href="{{ route('service.list') }}" class="text-danger">CTV</a>
                 </li>
-                <li @class(['active' => request()->routeIs('recharge')])>
+                @endif
+                {{-- <li @class(['active' => request()->routeIs('recharge')])>
                     <a href="{{ route('recharge') }}" class="drop-down">Nạp Tiền</a>
                 </li> --}}
             </ul>
@@ -366,6 +363,10 @@
                                         <div class="cart-block-header fw-bold">Tiện ích</div>
                                         <div class="cart-block-body">
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
+                                                onclick="window.location.href='{{ route('dangki-garage') }}'">
+                                                <i class="bi bi-house"></i> Đăng kí doanh nghiệp
+                                            </div>
+                                            <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('wishlish') }}'">
                                                 <i class="bi bi-megaphone"></i> Đăng tin mua xe
                                             </div>
@@ -458,31 +459,10 @@
                     </div>
                 </div>
             @else
-                {{-- <div class="dropdown">
-                    <button class="modal-btn header-account-btn user-dropdown" type="button">
-                        <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="">
-                        {{ auth()->user()->name }}
-                    </button>
-                    <div class="account-menu">
-                        <div class="account-footer" style="min-width: 230px">
-                            <div class="footer-button">
-                                <div class="d-flex justify-content-between align-items-center gap-3">
-                                    <a class="w-50 primary-btn1 btn-dark1" href="{{ route('settings') }}"><i
-                                            class="bi bi-gear"></i>
-                                        Settings</a>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button class="w-100 primary-btn1" type="submit"><i
-                                                class="bi bi-box-arrow-right"></i> Logout</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 @endif
-                <div class="sidebar-button mobile-menu-btn ">
-                    <span></span>
+                <div class="sidebar-button mobile-menu-btn" style="margin-left: 10px">
+                    {{-- <span></span> --}}
+                    <i class="bi bi-filter-right" style="font-size: 40px"></i>
                 </div>
             </div>
         </header>
@@ -866,6 +846,11 @@
                 </div>
             </div>
         </footer>
+
+        <button id="backToTopBtn" title="Go to top">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+
         @livewireScripts
 
         <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>
@@ -887,7 +872,8 @@
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
-        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
+        {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
@@ -931,6 +917,27 @@
             });
             Livewire.on('showInfo', message => {
                 toastr.info(message);
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                const button = $("#backToTopBtn");
+                // Hiển thị nút khi cuộn xuống một khoảng cụ thể từ đầu trang
+                $(window).scroll(function() {
+                    if ($(this).scrollTop() > 20) {
+                        button.fadeIn();
+                    } else {
+                        button.fadeOut();
+                    }
+                });
+                // Cuộn lên đầu trang khi nhấp vào nút
+                button.click(function() {
+                    $("html, body").animate({
+                        scrollTop: 0
+                    }, 50);
+                    return false;
+                });
             });
         </script>
 

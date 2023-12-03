@@ -90,9 +90,11 @@
                                                         </div>
                                                 </div>
                                                 <div class="product-content">
+                                                    @if(!empty($car->province->name))
                                                     <div class="location">
                                                         <a href="#"><i class="bi bi-geo-alt"></i> {{ $car->province->name}}</a>
                                                     </div>
+                                                    @endif
                                                     <h6><a href="car-deatils.html">{{$car->title}}</a></h6>
                                                     <ul class="features">
                                                         <li>

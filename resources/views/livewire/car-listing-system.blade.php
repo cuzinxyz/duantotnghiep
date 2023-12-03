@@ -73,9 +73,9 @@
                         <div class="product-widget mb-20">
                             <div class="check-box-item" wire:ignore>
                                 <h6 class="product-widget-title mb-25">Giá</h6>
-                                <div class="range-wrapper" x-data="{ 
+                                <div class="range-wrapper" x-data="{
                                     max_price: @js(number_format($maxPrice, 0, '', ',')),
-                                    min_price: @js(number_format($minPrice, 0, '', ',')) 
+                                    min_price: @js(number_format($minPrice, 0, '', ','))
                                 }">
                                     <div class="slider-wrapper">
                                         <div id="eg-range-slider" x-on:click="filter_prices"></div>
@@ -127,7 +127,7 @@
                     <div class="row mb-40">
                         <div class="col-lg-12">
                             <div class="show-item-and-filte">
-                                <p>Có <strong>{{ \App\Models\Car::count() }}</strong> tin bán xe ô tô</p>
+                                <p>Có <strong>{{ $carCount }}</strong> tin bán xe ô tô</p>
                                 <div class="filter-view">
                                     <div class="filter-atra">
                                         <h6>Sắp xếp theo:</h6>
@@ -201,10 +201,12 @@
                                                     <div class="price" style="font-size:15px">
                                                         <strong>{{ number_format($car->price) }} ₫</strong>
                                                     </div>
+                                                    @if(!empty($car->province->name))
                                                     <div class="location">
                                                         <a href="#"><i class="bi bi-geo-alt"></i>
                                                             {{ $car->province->name }}</a>
                                                     </div>
+                                                    @endif
                                                 </div>
                                                 <ul class="features">
                                                     <li>
@@ -242,7 +244,7 @@
                                                         Xem xe
                                                     </a>
                                                     <div class="brand">
-                                                        <a href="{{ route('brand.detail') }}">
+                                                        <a href="{{ route('brand.detail', $car->brand->brand_name) }}">
                                                             {{-- <img src="/storage/{{ $car->brand->logo_url }}" alt="image"> --}}
                                                             <img style="width: 30px;height:30px;object-fit:contain"
                                                                 src="{{ asset('storage/' . $car->brand->logo_url) }}"

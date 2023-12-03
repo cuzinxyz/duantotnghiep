@@ -687,7 +687,7 @@
     $('.menu-close-btn').on("click", function () {
         $('.sidebar-menu').removeClass('show-menu');
     });
-    
+
     // $("#eg-range-slider").slider({
     //     range: true, min: 0, max: 3000, values: [200, 2000], slide: function (event, ui) {
     //         $(".from").val(ui.values[0]);

@@ -7,6 +7,7 @@ use App\Models\Salon;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,4 +65,8 @@ class User extends Authenticatable
         return $this->HasMany(TransactionsHistory::class);
     }
 
+    public function collaborator() : HasOne
+    {
+        return $this->hasOne(Collaborator::class);
+    }
 }
