@@ -26,7 +26,9 @@
         "laravel/ui": "^4.2",
         "leandrocfe/filament-apex-charts": "^3.0",
         "livewire/livewire": "^3.0",
-        "munafio/chatify": "^1.6"
+        "munafio/chatify": "^1.6",
+        "yajra/laravel-datatables": "^10.0",
+        "yajra/laravel-datatables-html": "^10.0"
     },
     "require-dev": {
         "doctrine/dbal": "^3.7",

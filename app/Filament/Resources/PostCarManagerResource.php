@@ -51,17 +51,12 @@ class PostCarManagerResource extends Resource
             ->columns([
                 TextColumn::make('title')
                     ->label('Tiêu đề bài đăng')
-                    ->default('Vinfast 2.0')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('user.name')
                     ->label('Tác giả')
                     ->default('tuấn'),
-
-                TextColumn::make('type')
-                    ->label('Loại tin')
-                    ->default('tin vip'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Thời gian tạo')
@@ -160,14 +155,13 @@ class PostCarManagerResource extends Resource
                                                 'description' => $record->description,
                                             ];
 
-                                            Mail::to($record->contact['email'])->send(new CarRegistMail($data));
+                                            Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
                                             $record->status = 1;
                                             $record->save();
 
                                             redirect()->route('filament.admin.resources.post-car-managers.index');
                                         })
                                         ->successNotificationTitle('Phê duyệt thành công'),
-
 
                                     Action::make('UnActivePost')
                                         ->label('Không duyệt')

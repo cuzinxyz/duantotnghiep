@@ -29,9 +29,19 @@ class Report extends Component
             $this->dispatch('showError', 'Vui lòng đăng nhập để báo cáo');
             return redirect()->route('login');
         }
+
+
         // 
         $user_id_report = Auth::user()->id;
+
+
         $car = Car::with(['user'])->where('slug', $this->slug)->first();
+
+        if($user_id_report == $car->user->id) {
+            $this->dispatch('showError', 'Bạn không thể tố cáo bài viết của mình');
+            return 0;
+        }
+
         $reported = Reported::create([
             'from_user_id' => $user_id_report,
             'to_user_id' => $car->user->id,

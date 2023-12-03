@@ -12,6 +12,7 @@ use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\SalonController;
 use App\Http\Controllers\GarageController;
 use App\Http\Controllers\ServiceController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\SearchCarController;
 use App\Http\Controllers\SendGuideRequestController;
+use App\Http\Controllers\Collaborators\CarsController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -144,3 +146,21 @@ Route::controller(CarDetailController::class)->group(function () {
 
 // Showroom
 Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
+
+
+
+// collaborators
+Route::get('/collaborators', function() {
+    return view('collaborators.dashboard');
+});
+
+Route::controller(CarsController::class)->group(function() {
+    Route::get('/collaborators/cars', 'cars')->name('collaborators.cars');
+    Route::get('user-data', function () {
+        $model = App\Models\Car::query();
+
+        return DataTables::eloquent($model)
+            ->addColumn('intro', 'collaborators.cars')
+            ->toJson();
+    });
+});

@@ -338,18 +338,16 @@
         {{-- share , report btn  --}}
         <div class="single-item mb-50" id="btn-lists">
             <div class="more-options d-flex flex-row-reverse align-items-center gap-3" x-data="{ open: false }">
-                @if (Auth()->user()->id !== $carDetail->user_id)
-                    <button class="bookmarkBtn" @click="open = !open">
-                        <span class="IconContainer">
-                            <i class="text-white bi bi-flag-fill"></i>
-                        </span>
-                        <p class="text mb-0 dialog__trigger">
-                            Báo Cáo
-                        </p>
-                    </button>
+                <button class="bookmarkBtn" @click="open = !open">
+                    <span class="IconContainer">
+                        <i class="text-white bi bi-flag-fill"></i>
+                    </span>
+                    <p class="text mb-0 dialog__trigger">
+                        Báo Cáo
+                    </p>
+                </button>
 
-                    <livewire:report />
-                @endif
+                <livewire:report />
 
                 <livewire:add-to-wish-list carID="{{ $carDetail->id }}" />
             </div>

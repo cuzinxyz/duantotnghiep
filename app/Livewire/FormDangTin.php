@@ -158,60 +158,63 @@ class FormDangTin extends Component
 
     public function saveCar()
     {
-        $this->validate([
+        $checkValidate = $this->validate([
             'verhicle_image_library' => 'required|image|max:10024',
-            'verhicle_videos' => 'required|video|max:10024',
+            'verhicle_videos' => 'required|mimes:mp4|max:102400',
         ]);
 
-        $carData = [];
-        $photoName = [];
-        $images = $this->verhicle_image_library;
-        if (count($images) > 0) {
-            foreach ($images as $photo) {
-                $fileName = $photo->getFilename();
-                $dir_name = 'car_photos';
-                $photo->storeAs('car_photos', $fileName, 'public');
-                array_push($photoName, $dir_name . '/' . $fileName);
+
+        if ($checkValidate) {
+            $carData = [];
+            $photoName = [];
+            $images = $this->verhicle_image_library;
+            if (count($images) > 0) {
+                foreach ($images as $photo) {
+                    $fileName = $photo->getFilename();
+                    $dir_name = 'car_photos';
+                    $photo->storeAs('car_photos', $fileName, 'public');
+                    array_push($photoName, $dir_name . '/' . $fileName);
+                }
             }
-        }
-        $videoName = "";
-        if (!empty($this->verhicle_videos)) {
-            $dir_name = 'video_car';
-            $file = uploadFile($dir_name, $this->verhicle_videos);
-            $videoName = $file;
-        }
-        $carData['verhicle_image_library'] = $photoName;
-        $carData['verhicle_videos'] = $videoName;
-        $carData['user_id'] = auth()->id();
-        $carData['title'] = $this->title;
-        $carData['slug'] = Str::slug($carData['title']);
-        $carData['price'] = $this->price;
-        $carData['brand_id'] = $this->brand_select;
-        $carData['model_car_id'] = $this->model_select;
-        $carData['city_id'] = $this->city_id;
-        $carData['district_id'] = $this->district_id;
-        $carData['full_address'] = $this->full_address;
-        $carData['description'] = $this->description;
-        $carData['car_info'] = array(
-            "year_of_manufacture" => $this->year_of_manufacture,
-            'transmission' => $this->transmission,
-            'fuelType' => $this->fuel,
-            'number_of_seats' => $this->number_of_seats,
-            'color' => $this->color,
-            'version' => $this->version,
-            'condition' => $this->condition,
-            'mileage' => $this->mileage,
-            "features" => $this->features,
-            'engine' => $this->engine,
-        );
-        $carData['contact'] = array(
-            'name' => $this->name,
-            'phone' => $this->phone,
-            'email' => $this->email,
-        );
-        $result = Car::create($carData);
-        if ($result) {
-            return redirect()->route('profile')->with('status', 'Thành công!');
+            $videoName = "";
+            if (!empty($this->verhicle_videos)) {
+                $dir_name = 'video_car';
+                $file = uploadFile($dir_name, $this->verhicle_videos);
+                $videoName = $file;
+            }
+            $carData['verhicle_image_library'] = $photoName;
+            $carData['verhicle_videos'] = $videoName;
+            $carData['user_id'] = auth()->id();
+            $carData['title'] = $this->title;
+            $carData['slug'] = Str::slug($carData['title']);
+            $carData['price'] = $this->price;
+            $carData['brand_id'] = $this->brand_select;
+            $carData['model_car_id'] = $this->model_select;
+            $carData['city_id'] = $this->city_id;
+            $carData['district_id'] = $this->district_id;
+            $carData['full_address'] = $this->full_address;
+            $carData['description'] = $this->description;
+            $carData['car_info'] = array(
+                "year_of_manufacture" => $this->year_of_manufacture,
+                'transmission' => $this->transmission,
+                'fuelType' => $this->fuel,
+                'number_of_seats' => $this->number_of_seats,
+                'color' => $this->color,
+                'version' => $this->version,
+                'condition' => $this->condition,
+                'mileage' => $this->mileage,
+                "features" => $this->features,
+                'engine' => $this->engine,
+            );
+            $carData['contact'] = array(
+                'name' => $this->name,
+                'phone' => $this->phone,
+                'email' => $this->email,
+            );
+            $result = Car::create($carData);
+            if ($result) {
+                return redirect()->route('profile')->with('status', 'Thành công!');
+            }
         }
     }
 
