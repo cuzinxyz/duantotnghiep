@@ -96,7 +96,7 @@ class CarResource extends Resource
 
                                 TextInput::make('car_info.version')
                                     ->label('Phiên bản')
-                                    ->rules(['required'])
+                                    // ->rules(['required'])
                                     ->numeric(),
 
                                 TextInput::make('car_info.engine')

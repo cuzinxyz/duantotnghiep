@@ -68,9 +68,9 @@ class PostCarManagerResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
                 Filter::make('unactive')
-                ->label('Bài đăng chưa duyệt')
-                ->query(fn (Builder $query): Builder => $query->where('status', 0))
-                ->default()
+                    ->label('Bài đăng chưa duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default()
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
@@ -115,6 +115,8 @@ class PostCarManagerResource extends Resource
 
                                 TextEntry::make('created_at')
                                     ->label('Thời gian tạo')
+                                    ->dateTime()
+                                    ->since()
                                     ->icon('heroicon-o-calendar-days'),
 
                                 IconEntry::make('status')
@@ -137,26 +139,8 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
-                                            // $data = [
-                                            //     'user' => $record->user['name'],
-                                            //     'title' => $record->title,
-                                            //     'price'=> $record->price,
-                                            //     'brand' => $record->brand->brand_name,
-                                            //     'mileage' => $record->car_info['mileage'],
-                                            //     'seat' => $record->car_info['number_of_seats'],
-                                            //     'manufactured' => $record->car_info['year_of_manufacture'],
-                                            //     'color' => $record->car_info['color'],
-                                            //     'engine' => $record->car_info['engine'],
-                                            //     'fuelType' => $record->car_info['fuelType'],
-                                            //     'features' => $record->car_info['features'],
-                                            //     'verhicle_image' => $record->verhicle_image_library,
-                                            //     'verhicle_videos' => $record->verhicle_videos,
-                                            //     'description' => $record->description,
-                                            // ];
                                             $data = $record;
-// dd($data);
-                                            // Mail::to($record->contact['email'])->send(new CarRegistMail($data));
-                                            // Mail::to($record->contact['email'])->send(new CarRegistMail($data));
+
                                             Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
 
                                             $record->status = 1;

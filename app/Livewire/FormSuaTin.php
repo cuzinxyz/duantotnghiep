@@ -72,7 +72,8 @@ class FormSuaTin extends Component
     {
         $carData = [];
         $photoName = [];
-        if ($this->verhicle_image_library) {
+        // dd(count($this->verhicle_image_library));
+        if (count($this->verhicle_image_library) > 0) {
             foreach ($this->car->verhicle_image_library as $photo) {
                 Storage::delete($photo);
             }
@@ -81,6 +82,10 @@ class FormSuaTin extends Component
                 $dir_name = 'car_photos';
                 $photo->storeAs('car_photos', $fileName, 'public');
                 array_push($photoName, $dir_name . '/' . $fileName);
+
+                $dir_name_image = 'car_photos';
+                $fileImage = uploadFile($dir_name_image, $photo);
+                array_push($photoName, $fileImage);
             }
             $carData['verhicle_image_library'] = $photoName;
         }
@@ -109,19 +114,19 @@ class FormSuaTin extends Component
             'number_of_seats' => $this->number_of_seats,
             'color' => $this->color,
             'version' => $this->version,
-            'condition' => $this->condition,
             'mileage' => $this->mileage,
             "features" => $this->features,
             'engine' => $this->engine,
         );
         $carData['contact'] = array(
-            'name' => $this->name,
+            'full_address' => $this->full_address,
             'phone' => $this->phone,
             'email' => $this->email,
         );
+        $carData['status'] = 0;
         $result = Car::findOrFail($this->id)->update($carData);
         if ($result) {
-            return redirect()->route('profile')->with('status', 'Cập nhật thành công!');
+            return redirect()->route('profile')->with('status', 'Cập nhật thành công! Bạn cần chờ quản trị viên phê duyệt!');
         }
     }
 
@@ -153,6 +158,11 @@ class FormSuaTin extends Component
     #[Computed()]
     public function render()
     {
+        if (auth()->check()) {
+            if (auth()->id() != $this->car->user_id) {
+                abort(404);
+            }
+        }
         if (!empty($this->brand_select) && $this->brand_select != 0) {
             $this->models = ModelCar::where('brand_id', $this->brand_select)->get();
         }

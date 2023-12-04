@@ -8,6 +8,9 @@
         <div class="row g-4 mb-100">
             <div class="col-lg-12">
                 <div class="">
+                    <div class="alert alert-info" role="alert">
+                        <span class="fs-5"><i class="text-warning bi bi-megaphone-fill"></i></span> Vì quy định kiểm duyệt, khi bạn cập nhật lại thông tin bài đăng cần phải được quản trị viên <strong>phê duyệt lại</strong>, vui lòng cân nhắc trước khi sửa!
+                    </div>
 
                     <div class="row inquiry-form justify-content-evenly mb-20" id="form-sell-3">
                         <h5 class="mb-15">Hình ảnh xe</h5>
@@ -32,7 +35,9 @@
                                         <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
                                             Tải hình mới lên (nhiều hình)</span>
                                     </label>
-                                    <div class="text-center"><div class="upload-loader" wire:loading></div></div>
+                                    <div class="text-center">
+                                        <div class="upload-loader" wire:loading></div>
+                                    </div>
                                     @if ($verhicle_image_library)
                                         <div id="preview-container" class="image-preview img-container" style="">
                                             @foreach ($verhicle_image_library as $image)
@@ -68,7 +73,9 @@
                                         <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
                                             Tải video lên</span>
                                     </label>
-                                    <div class="text-center"><div class="upload-loader" wire:loading></div></div>
+                                    <div class="text-center">
+                                        <div class="upload-loader" wire:loading></div>
+                                    </div>
                                     @if ($verhicle_videos)
                                         <div id="preview-container-video" class="image-preview" style="">
                                             <video width="320" height="240" controls wire:ignore.self>
@@ -460,12 +467,8 @@
                             <div class="form-inner" style="text-align: center">
                                 <button wire:loading.attr="disabled"
                                     class="fs-6 btn-dark1 btn btn-lg justify-content-center align-items-center w-100 primary-btn2 shadow-sm"
-                                    id="formDangTin" style="height: 50px" wire:click.prevent="updateCar">Đăng
+                                    id="formDangTin" style="height: 50px" wire:click.prevent="updateCar">Sửa
                                     tin</button>
-                                <button
-                                    class="mt-2 fs-6 btn btn-lg justify-content-center align-items-center w-100 primary-btn2 shadow-sm"
-                                    wire:click="previousStepSubmit" type="button">Quay
-                                    lại</button>
                             </div>
                         </div>
                     </div>
