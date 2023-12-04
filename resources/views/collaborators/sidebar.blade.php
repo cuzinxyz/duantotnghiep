@@ -11,9 +11,25 @@
     </div>
     <div class="divider"></div>
     <ul class="nav menu">
-        <li class="active"><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Thống kê</a></li>
-        <li>
-            <a href="{{ route('collaborators.cars') }}">
+        <li
+            class="
+                {{ request()->is(trim(route('collaborators.dashboard', [], false), '/') . '/*') ||
+                request()->is(trim(route('collaborators.dashboard', [], false), '/'))
+                    ? 'active'
+                    : false }}">
+            <a href="{{ route('collaborators.dashboard') }}">
+                <em class="fa fa-dashboard">&nbsp;</em>
+                Thống kê
+            </a>
+        </li>
+
+        <li
+            class="
+                {{ request()->is(trim(route('collaborators.salons', [], false), '/') . '/*') ||
+                request()->is(trim(route('collaborators.salons', [], false), '/'))
+                    ? 'active'
+                    : false }}">
+            <a href="{{ route('collaborators.salons') }}">
                 <em class="fa fa-calendar">&nbsp;</em>
                 Duyệt salon xe
             </a>
@@ -27,7 +43,7 @@
                     : false }}">
             <a href="{{ route('collaborators.cars') }}">
                 <em class="fa fa-calendar">&nbsp;</em>
-                Duyệt tin mua xe
+                Duyệt tin bán xe
             </a>
         </li>
         <li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em>Duyệt tin bán xe</a></li>

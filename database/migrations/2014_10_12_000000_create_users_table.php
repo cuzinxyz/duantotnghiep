@@ -26,6 +26,9 @@ return new class extends Migration
             $table->integer("total_pushed")->default(0);
             $table->timestamp("expired_date")->nullable()->comment("Ngày hết hạn của dịch vụ đã đăng ký");
             $table->integer('salon_id')->nullable();
+            $table->boolean('active')->default(false)->comment('Kiểm tra xem tài khoản có đăng nhập không');
+            $table->integer('is_collaborator')->default(0)->comment('0: không phải là nhân viên, 1: là Nhân viên');
+            $table->integer('total_assign')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes(); // add

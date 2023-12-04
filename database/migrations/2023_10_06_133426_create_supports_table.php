@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('response')->nullable();
             $table->string('review', 1)->default(0);
             $table->boolean('status')->default(0);
+            $table->integer('collaborator_id')->nullable();
             $table->timestamps();
             $table->softDeletes(); // add
         });

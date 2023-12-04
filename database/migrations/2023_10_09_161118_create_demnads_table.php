@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('status')->nullable();
             $table->text('content')->nullable();
             $table->string('title')->nullable();
+            $table->integer('collaborator_id')->nullable();
             $table->text('reason')->nullable();
             $table->softDeletes();
             $table->timestamps();
