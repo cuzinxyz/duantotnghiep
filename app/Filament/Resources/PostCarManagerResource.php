@@ -68,9 +68,9 @@ class PostCarManagerResource extends Resource
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
                 Filter::make('unactive')
-                ->label('Bài đăng chưa duyệt')
-                ->query(fn (Builder $query): Builder => $query->where('status', 0))
-                ->default()
+                    ->label('Bài đăng chưa duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default()
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
@@ -115,6 +115,8 @@ class PostCarManagerResource extends Resource
 
                                 TextEntry::make('created_at')
                                     ->label('Thời gian tạo')
+                                    ->dateTime()
+                                    ->since()
                                     ->icon('heroicon-o-calendar-days'),
 
                                 IconEntry::make('status')
@@ -137,8 +139,8 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
-                                            
                                             $data = $record;
+
                                             Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
 
                                             $record->status = 1;

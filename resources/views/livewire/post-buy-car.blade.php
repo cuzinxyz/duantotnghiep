@@ -84,10 +84,13 @@
                                             title="Chat với người bán ngay">
                                             <i class="bi bi-chat-dots"></i>
                                         </button>
-                                        <button class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
-                                            title="Liên hệ: {{ $demand->user->phone_number ? $demand->user->phone_number : $demand->user->email }}">
-                                            <i class="bi bi-telephone"></i>
-                                        </button>
+                                        <a @if (!empty($demand->user->phone_number)) href="tel:{{ $demand->user->phone_number }}" @endif
+                                            @if (!empty($demand->user->email)) href="mailto:{{ $demand->user->email }}" @endif>
+                                            <button class="btn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="Liên hệ: {{ $demand->user->phone_number ? $demand->user->phone_number : $demand->user->email }}">
+                                                <i class="bi bi-telephone"></i>
+                                            </button>
+                                        </a>
 
                                         @if ($demand->user_id == auth()->id())
                                             <button wire:click="remove({{ $demand->id }})"

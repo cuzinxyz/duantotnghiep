@@ -34,7 +34,8 @@ class Car extends Model implements Viewable
         'verhicle_image_library',
         'verhicle_videos',
         'description',
-        'salon_id'
+        'salon_id',
+        'status'
     ];
 
     protected $casts = [

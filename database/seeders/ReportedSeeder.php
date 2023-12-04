@@ -13,6 +13,6 @@ class ReportedSeeder extends Seeder
      */
     public function run(): void
     {
-        Reported::factory()->count(5)->create();
+        // Reported::factory()->count(5)->create();
     }
 }

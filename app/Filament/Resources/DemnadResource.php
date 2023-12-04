@@ -73,10 +73,11 @@ class DemnadResource extends Resource
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $record->user_id)->first();
 
-                                    $reason = 'Chào bạn ' . $user->name . ',
-                                    Bài viết có tiêu đề: "' . $record->title . '" của bạn đã được duyệt thành công.
-                                    Để xem bài viết đã đăng của bạn, vui lòng truy cập: ' . route('homepage')
-                                        . ' .Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
+                                    $reason = 'Chào bạn <b>' . $user->name . '</b>,
+                                    Bài viết của bạn đã được duyệt thành công.
+                                    Để xem bài viết đã đăng của bạn, truy cập link:
+                                    <a href="' . route('buyCar') . '">tại đây</a>
+                                    Cảm ơn bạn đã sử dụng DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $record->user_id,
@@ -142,7 +143,9 @@ class DemnadResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Tác giả'),
-
+                Tables\Columns\TextColumn::make('content')
+                    ->label('Nội dung')
+                    ->limit(20),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Thời gian')
                     ->dateTime()
