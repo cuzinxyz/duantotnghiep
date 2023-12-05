@@ -36,9 +36,9 @@ class PostCarManagerResource extends Resource
 {
     protected static ?string $model = Car::class;
 
-    protected static ?string $navigationGroup = 'Quản lý bài đăng';
+    // protected static ?string $navigationGroup = 'Quản lý bài đăng';
 
-    protected static ?string $navigationLabel = 'Duyệt bài đăng';
+    protected static ?string $navigationLabel = 'Duyệt tin đăng';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -240,6 +240,9 @@ class PostCarManagerResource extends Resource
                                         ImageEntry::make('verhicle_image_library')
                                             ->label('Hình ảnh')
                                             ->default('https://picsum.photos/200')
+                                    ])
+                                    ->extraAttributes([
+                                        'class' => 'overflow-x-auto',
                                     ])
                                     ->columnSpan([
                                         'xl' => 1,

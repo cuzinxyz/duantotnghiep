@@ -26,7 +26,7 @@ use Filament\Infolists\Components\Actions\Action;
 
 class DemnadResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Quản lý nội dung';
+    // protected static ?string $navigationGroup = 'Quản lý nội dung';
 
     protected static ?string $model = Demnad::class;
 
@@ -198,7 +198,7 @@ class DemnadResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('bài đăng mua');
+        return __('Duyệt tin mua');
     }
 
     public static function getNavigationBadge(): ?string

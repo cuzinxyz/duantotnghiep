@@ -32,26 +32,25 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
         Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
-        Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
-        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
+        Route::get('/tin-mua-xe', 'buyCar')->name('buyCar');
     });
 
-    Route::controller(GarageController::class)->group(function(){
-        Route::match(['GET','POST'],'/dangki-garage','ownGarage')->name('dangki-garage');
-        Route::match(['GET','POST'],'/suathongtinxe/{id}','editCarGarage')->name('editcargarage');
+    Route::controller(GarageController::class)->group(function () {
+        Route::match(['GET', 'POST'], '/dangki-garage', 'ownGarage')->name('dangki-garage');
+        Route::match(['GET', 'POST'], '/suathongtinxe/{id}', 'editCarGarage')->name('editcargarage');
         Route::get('/them-xe-garage/{garage_id}', 'addCar')->name('addCar');
         Route::get('/xoa-xe/{carID}', 'removeCar')->name('hiddenCarGarage');
-        Route::get('/garage','garage')->name('garage');
+        Route::get('/garage', 'garage')->name('garage');
     });
 
-    Route::controller(SalonController::class)->group(function() {
+    Route::controller(SalonController::class)->group(function () {
         Route::prefix('salon')->group(function () {
             Route::get('/', 'register')->name('salon');
             Route::post('/register', 'registerSalon')->name('registerSalon');
             Route::get('/them-xe', 'addCar')->name('salon.addcar');
             Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
             Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
-            Route::get('/danh-sach-xe/{salonID}' , 'listCars')->name('salon.listCars');
+            Route::get('/danh-sach-xe/{salonID}', 'listCars')->name('salon.listCars');
         });
         Route::post('/account-balance', 'getBalance');
     });
@@ -104,10 +103,10 @@ Route::controller(ServiceController::class)->group(function () {
 });
 
 # Posts Route
-Route::get("/bai-viet", function() {
+Route::get("/bai-viet", function () {
     $posts = News::all();
 
-    if(!$posts) {
+    if (!$posts) {
         abort(404);
     }
 
@@ -129,7 +128,9 @@ Route::get("/bai-viet/{slug}.html", function ($slug) {
 
 Route::get('/hang-xe/{slug}', SingleBrandCategory::class)->name('brand.detail');
 
-Route::get('/xe', CarListingSystem::class)->name('car.list');
+Route::get('/oto', CarListingSystem::class)->name('car.list');
+
+Route::get('/tin-mua-xe', [CarController::class, 'listSellCar'])->name('buyCar');
 
 Route::controller(SearchCarController::class)->group(function () {
     Route::get('/tim-xe', 'index')->name('searchcar');

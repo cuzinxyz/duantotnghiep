@@ -2,13 +2,16 @@
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
 @endpush
 
+@section('page_title')
+    {{ $serv->service_name ? $serv->service_name . ' - Drivco' : 'Drivco' }}
+@endsection
 <x-partials.layout-client>
     <div class="mb-5">
         <!-- content -->
         <div class="pt-5 pb-3 text-center">
             @if (auth()->user()->service_id != 0 && auth()->user()->expired_date >= \Carbon\Carbon::now())
                 <div class="alert alert-primary" role="alert">
-                    Nếu bạn đăng ký dịch vụ mới, dịch vụ cũ sẽ bị vô hiệu hoá!
+                    Nếu bạn đăng ký dịch vụ mới, dịch vụ cũ sẽ được tính cho đến khi hết hạn!
                 </div>
             @endif
 

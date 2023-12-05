@@ -2,43 +2,67 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CommentsResource\Pages;
-use App\Filament\Resources\CommentsResource\RelationManagers;
-use App\Models\Comments;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Comments;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\CommentsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\CommentsResource\RelationManagers;
+use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Actions\Action;
 
 class CommentsResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Hành động khách hàng';
+    protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Comments::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Bình luận';
 
-    public static function form(Form $form): Form
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $form
+        return $infolist
             ->schema([
-                Forms\Components\TextInput::make('body')
-                    ->required()
-                    ->maxLength(191),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->required(),
-                Forms\Components\Select::make('car_id')
-                    ->relationship('car', 'title')
-                    ->required(),
-                Forms\Components\Select::make('news_id')
-                    ->relationship('news', 'title')
-                    ->required(),
-            ]);
+                Section::make('Chi tiết bình luận')
+                    ->schema([
+                        TextEntry::make('user.name')
+                            ->label('Tác giả')
+                            ->icon('heroicon-o-user-circle'),
+                        TextEntry::make('car.title')
+                            ->label('Tin đăng')
+                            ->icon('heroicon-m-newspaper'),
+                        TextEntry::make('news.title')
+                            ->label('Tin tức')
+                            ->icon('heroicon-o-newspaper'),
+                        TextEntry::make('body')
+                            ->label('Nội dung bình luận')
+                            ->icon('heroicon-o-chat-bubble-bottom-center'),
+                    ])->columns(2),
+                Section::make('Hành động')
+                    ->schema([
+                        Actions::make([
+                            Action::make('deleteComment')
+                                ->label('Xoá bình luận')
+                                ->color('danger')
+                                ->icon('heroicon-m-trash')
+                                ->requiresConfirmation()
+                                ->action(function (Comments $comment) {
+                                    $comment->delete();
+
+                                    redirect()->route('filament.admin.resources.comments.index');
+                                })
+                                ->successNotificationTitle('Xoá thành công'),
+                        ])
+                    ])->columnSpan(1),
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table
@@ -53,7 +77,7 @@ class CommentsResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('car.title')
-                    ->label('Tiêu đề')
+                    ->label('Tin đăng')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('news.title')
@@ -74,7 +98,7 @@ class CommentsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -82,7 +106,7 @@ class CommentsResource extends Resource
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -97,9 +121,7 @@ class CommentsResource extends Resource
     {
         return [
             'index' => Pages\ListComments::route('/'),
-            'create' => Pages\CreateComments::route('/create'),
             'view' => Pages\ViewComments::route('/{record}'),
-            'edit' => Pages\EditComments::route('/{record}/edit'),
         ];
     }
     public static function getModelLabel(): string

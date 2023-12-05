@@ -2,6 +2,9 @@
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
 @endpush
 
+@section('page_title')
+    Yêu cầu rút tiền - Drivco
+@endsection
 <x-partials.layout-client>
     <div class="my-3 contact-page">
         @include('components.nofication')
@@ -23,18 +26,17 @@
                                 <div class="py-2 text-center">Số dư hiện tại: <span
                                         class="fw-bold">{{ number_format(auth()->user()->account_balence) }}</span>
                                 </div>
-                                
+
 
                                 <div class="row" style="margin: 24px 0">
                                     <div class="col-lg-6" style="margin-bottom: 20px">
                                         <div class="form-inner">
                                             <label for="">Ngân hàng *</label>
-                                            <select name="bank_name" class="nice-select" >
+                                            <select name="bank_name" class="nice-select">
                                                 <option value="">Lựa chọn ngân hàng nhận tiền</option>
                                                 @foreach ($dataAPI['data'] as $data)
-                                                    <option value="{{$data['shortName']}}"
-                                                    >
-                                                        {{$data['name']}} ({{$data['shortName']}})
+                                                    <option value="{{ $data['shortName'] }}">
+                                                        {{ $data['name'] }} ({{ $data['shortName'] }})
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -51,26 +53,27 @@
                                     <div class="col-lg-6" style="margin-bottom: 20px">
                                         <div class="form-inner">
                                             <label for="">Số tiền muốn rút *</label>
-                                            <input type="text" name="bank_price"  placeholder="Nhập số tiền muốn rút">
+                                            <input type="text" name="bank_price" placeholder="Nhập số tiền muốn rút">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6" style="margin-bottom: 20px">
                                         <div class="form-inner">
                                             <label for="">Tên chủ tài khoản *</label>
-                                            <input type="text" name="username" oninput="unaccentedString(this)" placeholder="Nhập tên chủ tài khoản">
+                                            <input type="text" name="username" oninput="unaccentedString(this)"
+                                                placeholder="Nhập tên chủ tài khoản">
                                         </div>
                                     </div>
 
                                 </div>
 
-                            <div class="w-100 mb-3">
-                                <button id="recharge-btn"
-                                    class="w-100 primary-btn2 btn-dark1 justify-content-center">Rút tiền
-                                </button>
-                            </div>
+                                <div class="w-100 mb-3">
+                                    <button id="recharge-btn"
+                                        class="w-100 primary-btn2 btn-dark1 justify-content-center">Rút tiền
+                                    </button>
+                                </div>
 
-                        </div>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -81,66 +84,66 @@
     @push('scripts')
         <script>
             function unaccentedString(inputElement) {
-            let chuoiKhongDau = inputElement.value
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '');
+                let chuoiKhongDau = inputElement.value
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '');
 
-            let chuoiInHoa = chuoiKhongDau.toUpperCase();
-            inputElement.value = chuoiInHoa;
-        }
+                let chuoiInHoa = chuoiKhongDau.toUpperCase();
+                inputElement.value = chuoiInHoa;
+            }
 
             $(document).ready(function() {
-            $('#form-recharge').validate({
-                rules: {
-                    bank_name: {
-                        required: true,
+                $('#form-recharge').validate({
+                    rules: {
+                        bank_name: {
+                            required: true,
+                        },
+                        bank_number: {
+                            required: true,
+                            number: true,
+                            minlength: 8,
+                            maxlength: 15
+                        },
+                        bank_price: {
+                            required: true,
+                            number: true
+                        },
+                        bank_username: {
+                            required: true,
+                        },
                     },
-                    bank_number: {
-                        required: true,
-                        number: true,
-                        minlength:8,
-                        maxlength:15
-                    },
-                    bank_price: {
-                        required: true,
-                        number: true
-                    },
-                    bank_username: {
-                        required: true,
-                    },
-                },
-                messages: {
-                    bank_name: {
-                        required: 'Vui lòng chọn ngân hàng',
-                    },
-                    bank_number: {
-                        required: 'Vui lòng nhập số tài khoản',
-                        number: 'Số tài khoản phải là số',
-                        minlength: 'Số tài khoản không hợp lệ',
-                        maxlength: 'Số tài khoản không hợp lệ',
-                    },
-                    bank_price: {
-                        required: 'Vui lòng nhập số tiền muốn rút',
-                        number: 'Số tiền muốn rút phải là số',
-                    },
-                    bank_username: {
-                        required: 'Vui lòng nhập tên chủ tài khoản',
-                    },
+                    messages: {
+                        bank_name: {
+                            required: 'Vui lòng chọn ngân hàng',
+                        },
+                        bank_number: {
+                            required: 'Vui lòng nhập số tài khoản',
+                            number: 'Số tài khoản phải là số',
+                            minlength: 'Số tài khoản không hợp lệ',
+                            maxlength: 'Số tài khoản không hợp lệ',
+                        },
+                        bank_price: {
+                            required: 'Vui lòng nhập số tiền muốn rút',
+                            number: 'Số tiền muốn rút phải là số',
+                        },
+                        bank_username: {
+                            required: 'Vui lòng nhập tên chủ tài khoản',
+                        },
 
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-inner').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function(error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-inner').append(error);
+                    },
+                    highlight: function(element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function(element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    },
+                });
             });
-        });
 
             $(".marquee_service").marquee({
                 direction: "left",

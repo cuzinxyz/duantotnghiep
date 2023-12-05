@@ -1,3 +1,6 @@
+@section('page_title')
+    {{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}
+@endsection
 <x-partials.layout-client>
     <x-detailpage.banner :$carDetail />
 
@@ -44,8 +47,7 @@
                                         @foreach ($ads as $value)
                                             <a href="{{ $value->target_url }}" target="_blank"
                                                 rel="noopener noreferrer">
-                                                <img src="{{ asset('storage/' . $value->image_url) }}"
-                                                    alt="">
+                                                <img src="{{ asset('storage/' . $value->image_url) }}" alt="">
                                             </a>
                                         @endforeach
                                     </div>

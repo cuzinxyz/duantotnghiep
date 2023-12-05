@@ -1,3 +1,6 @@
+@section('page_title')
+    Salon của bạn tại Drivco
+@endsection
 <x-partials.layout-client>
     @php
         $salon = \App\Models\Salon::where('user_id', auth()->id())->first();
@@ -11,12 +14,22 @@
                 kết quả.
             </div>
         @else
-            
             @include('components.nofication')
             <div class="container">
                 <div class="row my-5">
                     <h2 class="mb-3">Quản lý Salon của bạn. <button class="btn btn-sm btn-primary"
                             onclick="window.location.href='{{ route('salon.addcar') }}'">Thêm xe</button></h2>
+
+                    @php
+                        $pendingCar = \App\Models\Car::where('user_id', auth()->id())
+                            ->whereNotNull('salon_id')
+                            ->where('status', 0)
+                            ->count();
+                    @endphp
+                    @if ($pendingCar > 0)
+                        <div class="alert alert-primary">Bạn đang có <strong>{{ $pendingCar }}</strong> tin chờ duyệt.
+                        </div>
+                    @endif
 
                     <div class="row">
                         <div class="col-xl-3 col-sm-6 col-12">
@@ -202,7 +215,8 @@
                         <div class="mb-3 col-12">
                             <label for="storeIntro" class="form-label fw-bold">Giới thiệu cửa hàng</label>
                             <textarea class="form-control form-control-lg" id="storeIntro"
-                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4" required></textarea>
+                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4"
+                                required></textarea>
                         </div>
 
                         <!-- Số điện thoại -->

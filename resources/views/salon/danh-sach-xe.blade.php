@@ -1,3 +1,6 @@
+@section('page_title')
+    @dd('mày cần fix cái này')
+@endsection
 <x-partials.layout-client>
     <div>
         <div class="single-category-page mb-100">

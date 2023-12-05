@@ -2,6 +2,10 @@
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
 @endpush
 
+
+@section('page_title')
+    Nạp tiền - Drivco
+@endsection
 <x-partials.layout-client>
     <div class="my-3">
         @include('components.nofication')

@@ -30,12 +30,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Thương hiệu';
+    protected static ?string $navigationGroup = 'Nội dung chính';
 
     protected static ?string $model = Car::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Quản Lý Xe';
+    protected static ?string $navigationLabel = 'Quản lý xe';
 
     public static function form(Form $form): Form
     {
@@ -403,6 +403,6 @@ class CarResource extends Resource
     }
     public static function getModelLabel(): string
     {
-        return __('Xe  ');
+        return __('Quản lý xe');
     }
 }

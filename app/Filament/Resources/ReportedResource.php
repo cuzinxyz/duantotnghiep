@@ -32,7 +32,7 @@ use Filament\Notifications\Actions\Action as NotificationsAction;
 
 class ReportedResource extends Resource
 {
-    protected static ?string $navigationGroup = 'Hành động khách hàng';
+    protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Reported::class;
 
@@ -86,7 +86,7 @@ class ReportedResource extends Resource
                             $car = Car::find($report->car_id);
                             $user = User::where('id', $report->to_user_id)->first();
 
-                            $reason = 'Chào bạn ' . $user->name . ', 
+                            $reason = 'Chào bạn ' . $user->name . ',
                                         Bài đăng tin mua xe của bạn có tiêu đề:' . $car->title . '
                                         đã bị tố cáo với nội dụng:' . $report->content . '
                                         . Qua xác minh chúng tôi nhận thấy rằng tố cáo này là hoàn toàn đúng sự thật,Vì vậy chúng tôi sẽ xóa bài đăng này và cảnh báo bạn về lỗi vi phạm trên,nếu còn tiếp tục vi phạm chúng tôi sẽ tiến hành khóa tài khoản của bạn.
@@ -113,9 +113,9 @@ class ReportedResource extends Resource
                             $user = User::where('id', $report->to_user_id)->first();
 
                             $reason = 'Chúng tôi đã nhận được rất nhiều tố cáo về những tin đăng xe của bạn.
-                                        Qua xác minh chúng tôi nhận thấy rằng những tố cáo này là hoàn toàn đúng sự thật. 
+                                        Qua xác minh chúng tôi nhận thấy rằng những tố cáo này là hoàn toàn đúng sự thật.
                                         Điều này đã vi phạm đến các quy định của chúng tôi về bài đăng tin,
-                                        vì vậy chúng tôi buộc lòng tiến hành khóa tài khoản 
+                                        vì vậy chúng tôi buộc lòng tiến hành khóa tài khoản
                                         cùng với tất cả bài đăng của bạn.
                                         Nếu có thắc mắc bạn vui lòng liên hệ: 0999999999.
                                         Trân trọng cảm ơn!';

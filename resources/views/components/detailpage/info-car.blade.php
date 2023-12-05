@@ -311,7 +311,10 @@
                 </div>
                 <div class="overview-content">
                     <ul>
-                        <li style="cursor: pointer;" onclick="window.location.href='{{ route('brand.detail', $carDetail->brand->brand_name) }}'"><span>Hãng xe</span> {{ $carDetail->brand->brand_name }}</li>
+                        <li style="cursor: pointer;"
+                            onclick="window.location.href='{{ route('brand.detail', $carDetail->brand->brand_name) }}'">
+                            <span>Hãng xe</span> {{ $carDetail->brand->brand_name }}
+                        </li>
                         <li><span>Dòng xe</span> {{ $carDetail->model->model_name }}</li>
                         <li><span>Năm sản xuất</span> {{ $carDetail->car_info['year_of_manufacture'] }}</li>
                         <li><span>Màu sắc</span> {{ $carDetail->car_info['color'] }}</li>
@@ -321,6 +324,17 @@
                         <li><span>Số KM đã đi</span> {{ $carDetail->car_info['mileage'] }}</li>
                         <li><span>Nhiên liệu</span> {{ $carDetail->car_info['fuelType'] }}</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="single-item mb-50" id="description">
+            <div class="description-area">
+                <div class="title mb-20">
+                    <h5>Địa chỉ chi tiết</h5>
+                </div>
+                <div class="description-car">
+                    {{ $carDetail->full_address }}
                 </div>
             </div>
         </div>
@@ -373,7 +387,7 @@
         <div class="single-item mb-50" id="faqs">
             <div class="faq-area">
                 <div class="title mb-25">
-                    <h5>FAQ’s &amp; Latest Answer</h5>
+                    <h5>Câu hỏi Thường Gặp (FAQs)</h5>
                 </div>
                 <div class="faq-wrap">
                     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -382,15 +396,15 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    How often should I get my car serviced?
+                                    1. Làm thế nào để đăng tin bán xe trên trang web của bạn?
                                 </button>
                             </h5>
                             <div id="flush-collapseOne" class="accordion-collapse collapse show"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">It's always a good idea to research and
-                                    read
-                                    reviews specific to the dealership you're interested in, as
-                                    experiences can vary even within the same dealership chain.</div>
+                                <div class="accordion-body">Để đăng tin bán xe, bạn có thể truy cập trang chính của
+                                    chúng tôi và chọn tùy chọn "Đăng Tin Bán Xe" hoặc "Bán Xe". Bạn sẽ cần điền thông
+                                    tin chi tiết về xe và
+                                    tải lên hình ảnh để thu hút người mua. </div>
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -398,15 +412,14 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                     aria-controls="flush-collapseTwo">
-                                    How often should I change my car's oil?
+                                    2. Làm thế nào để tôi liên hệ với người bán để biết thêm chi tiết về xe?
                                 </button>
                             </h5>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">It's always a good idea to research and
-                                    read
-                                    reviews specific to the dealership you're interested in, as
-                                    experiences can vary even within the same dealership chain.</div>
+                                <div class="accordion-body">Để liên hệ với người bán, bạn có thể nhấp vào nút "Liên hệ
+                                    Người Bán" trên trang thông tin chi tiết về xe. Bạn cũng có thể thử liên lạc qua số
+                                    điện thoại hoặc email mà người bán cung cấp.</div>
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -414,31 +427,16 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseThree" aria-expanded="false"
                                     aria-controls="flush-collapseThree">
-                                    What type of fuel should I use for my car?
+                                    3. Làm thế nào để kiểm tra tính pháp lý của xe đã qua sử dụng?
                                 </button>
                             </h5>
                             <div id="flush-collapseThree" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">It's always a good idea to research and
-                                    read
-                                    reviews specific to the dealership you're interested in, as
-                                    experiences can vary even within the same dealership chain.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h5 class="accordion-header" id="flush-headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseFour" aria-expanded="false"
-                                    aria-controls="flush-collapseFour">
-                                    What is the recommended tire pressure for my car?
-                                </button>
-                            </h5>
-                            <div id="flush-collapseFour" class="accordion-collapse collapse"
-                                aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">It's always a good idea to research and
-                                    read
-                                    reviews specific to the dealership you're interested in, as
-                                    experiences can vary even within the same dealership chain.</div>
+                                <div class="accordion-body">Khi quan tâm đến một chiếc xe cụ thể, bạn nên kiểm tra các
+                                    giấy tờ liên quan như chứng minh xe, hóa đơn mua bán và các tài liệu khác. Nếu có
+                                    bất kỳ vấn đề gì về tính pháp lý, hãy thảo luận với người bán hoặc tìm sự tư vấn
+                                    pháp lý.
+                                </div>
                             </div>
                         </div>
                     </div>

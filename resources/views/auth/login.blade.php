@@ -1,3 +1,6 @@
+@section('page_title')
+    Đăng nhập vào Drivco
+@endsection
 <x-partials.layout-client>
 
     <style>
@@ -61,8 +64,7 @@
     <div class="container my-5">
         <div class="login__wrap d-flex justify-content-center align-items-center">
             <div class="banner__login" style="width: 500px; height: 513px">
-                <img class="img__login" style="width:100%; height:100%;"
-                    src="{{ asset('images/slide-banner.jpg') }}"
+                <img class="img__login" style="width:100%; height:100%;" src="{{ asset('images/slide-banner.jpg') }}"
                     alt="">
             </div>
             <div class="modal-dialog m-0">

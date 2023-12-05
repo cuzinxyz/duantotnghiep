@@ -1,3 +1,6 @@
+@section('page_title')
+    Tin tức từ Drivco
+@endsection
 <x-partials.layout-client>
     <div class="blog-standard-page pt-100 mb-100">
         <div class="container">
