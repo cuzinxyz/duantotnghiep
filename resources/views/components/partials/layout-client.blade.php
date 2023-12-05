@@ -30,13 +30,13 @@
     <meta property="og:site_name" content="Drivco.shop">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Mua bán ô tô cũ, xe hơi cũ giá rẻ toàn quốc">
+    <meta property="og:title" content="@yield('title_seo', 'Mua bán ô tô cũ, xe hơi cũ giá rẻ toàn quốc')">
     <meta property="og:description"
         content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023.">
     <meta property="og:url" content="https://drivco.shop/oto">
     <meta property="article:section" content="Auto, News">
     <meta property="article:tag" content="Ô tô, Xe hơi">
-    <meta property="og:image" content="https://i.imgur.com/UFbnyXU.png">
+    <meta property="og:image" content="@yield('thumb_seo', 'https://i.imgur.com/UFbnyXU.png')">
     <meta property="og:image:type" content="image/jpg">
     <meta property="og:image:width" content="650">
     <meta property="og:image:height" content="350">
