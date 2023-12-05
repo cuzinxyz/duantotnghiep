@@ -26,12 +26,11 @@ class CarCollaboratorListener
 
         $collaborator = User::where([
             'is_collaborator' => 1,
-            'active' => 1
         ])
         ->orderBy('total_assign', 'asc')
         ->first();
 
-        Car::where('id', $event->collaborator->id)->update([
+        Car::where('id', $event->data->id)->update([
             'collaborator_id' => $collaborator->id,
         ]);
 

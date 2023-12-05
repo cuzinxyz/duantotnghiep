@@ -1,20 +1,13 @@
 <?php
 
-use App\Models\Car;
 use App\Models\News;
-use App\Models\User;
-use App\Models\Service;
 use App\Livewire\Showroom;
-use App\Livewire\SearchCar;
 use App\Livewire\CarListingSystem;
-use Illuminate\Support\Facades\DB;
-use App\Events\CarCollaboratorEvent;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
-use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\SalonController;
 use App\Http\Controllers\GarageController;
 use App\Http\Controllers\ServiceController;
@@ -26,6 +19,7 @@ use App\Http\Controllers\SearchCarController;
 use App\Http\Controllers\SendGuideRequestController;
 use App\Http\Controllers\Collaborators\CarsController;
 use App\Http\Controllers\Collaborators\DashboardController;
+use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
 use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 
 Route::controller(HomeController::class)->group(function () {
@@ -154,30 +148,34 @@ Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
 
 
 // collaborators
-Route::get('/collaborators', function () {
-    return view('collaborators.dashboard');
-});
+Route::prefix('/collaborators')
+    ->middleware(['auth', 'is_collaborator'])
+    ->group(function () {
+
+        Route::controller(DashboardController::class)->group(function () {
+            Route::get('/dashboard', 'dashboard')->name('collaborators.dashboard');
+        });
 
 
-Route::prefix('/collaborators')->name('collaborators.')->group(function () {
+        Route::controller(CarsController::class)->group(function () {
+            Route::get('/cars', 'listCars')->name('collaborators.cars');
+            Route::get('/carsData', 'carsData')->name('collaborators.carsData');
+            Route::get('/carDetail/{slug}', 'carDetail')->name('collaborators.carDetail');
+            Route::get('/activeCar/{id}', 'activeCar')->name('collaborators.activeCar');
+            Route::post('/unActiveCar/{id}', 'unActiveCar')->name('collaborators.unActiveCar');
+        });
 
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/dashboard', 'dashboard')->name('dashboard');
+
+        Route::controller(CollaboratorsSalonController::class)->group(function () {
+            Route::get('/salon', 'listSalon')->name('collaborators.salons');
+            Route::get('/salonData', 'salonData')->name('collaborators.salonData');
+            Route::get('/salonDetail/{id}', 'salonDetail')->name('collaborators.salonDetail');
+            Route::get('/activeSalon/{id}', 'activeSalon')->name('collaborators.activeSalon');
+        });
+
+        Route::controller(CollaboratorsByCarController::class)->group(function () {
+            Route::get('/byCar', 'listByCar')->name('collaborators.listByCar');
+            Route::get('/byCarData', 'byCarData')->name('collaborators.byCarData');
+            Route::get('/byCarDetail/{id}', 'byCarDetail')->name('collaborators.byCarDetail');
+        });
     });
-
-
-    Route::controller(CarsController::class)->group(function () {
-        Route::get('/cars', 'listCars')->name('cars');
-        Route::get('/carsData', 'carsData')->name('carsData');
-        Route::get('/carDetail/{slug}', 'carDetail')->name('carDetail');
-    });
-
-
-    Route::controller(CollaboratorsSalonController::class)->group(function () {
-        Route::get('/salon', 'listSalon')->name('salons');
-        Route::get('/salonData', 'salonData')->name('salonData');
-        Route::get('/salonDetail/{id}', 'salonDetail')->name('salonDetail');
-    });
-});
-
-

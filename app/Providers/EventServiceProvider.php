@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ByCarCollaboratorEvent;
 use App\Events\CarCollaboratorEvent;
+use App\Events\SalonCollaboratorEvent;
+use App\Listeners\ByCarCollaboratorListener;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Banner;
@@ -11,9 +14,10 @@ use App\Observers\UserObserver;
 use App\Observers\AdminObserver;
 use App\Observers\BannerObserver;
 use App\Observers\PartnerObserver;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\CarCollaboratorListener;
+use App\Listeners\SalonCollaboratorListener;
+use App\Listeners\UpdateActiceStatusUser;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -29,9 +33,16 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-
         CarCollaboratorEvent::class => [
-            CarCollaboratorListener::class
+            CarCollaboratorListener::class,
+        ],
+        
+        SalonCollaboratorEvent::class => [
+            SalonCollaboratorListener::class,
+        ],
+
+        ByCarCollaboratorEvent::class => [
+            ByCarCollaboratorListener::class
         ]
 
 
@@ -55,4 +66,13 @@ class EventServiceProvider extends ServiceProvider
     {
         return false;
     }
+
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        UpdateActiceStatusUser::class,
+    ];
 }

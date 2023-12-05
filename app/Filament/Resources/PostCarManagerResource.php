@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Events\CarCollaboratorEvent;
 use App\Mail\CarRegistMail;
 use App\Models\Car;
 use Filament\Forms;
@@ -145,7 +146,6 @@ class PostCarManagerResource extends Resource
 
                                             $record->status = 1;
                                             $record->save();
-
                                             redirect()->route('filament.admin.resources.post-car-managers.index');
                                         })
                                         ->successNotificationTitle('Phê duyệt thành công'),

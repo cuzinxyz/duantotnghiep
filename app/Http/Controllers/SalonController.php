@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SalonCollaboratorEvent;
 use App\Models\Car;
 use App\Models\Comments;
 use App\Models\Salon;
@@ -55,6 +56,10 @@ class SalonController extends Controller
             'user_id' => auth()->id()
         );
         $result = Salon::create($salonData);
+
+        if($result) {
+            event(new SalonCollaboratorEvent($result), ['SalonCollaboratorListener']);
+        }
 
         if ($result) {
             return redirect()->route('profile')->with('status', 'Quản trị viên sẽ phê duyệt sớm nhất yêu cầu của bạn!');

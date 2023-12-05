@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Collaborators;
 
+use App\Events\SalonCollaboratorEvent;
 use Carbon\Carbon;
 use App\Models\Salon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class SalonController extends Controller
@@ -15,7 +17,13 @@ class SalonController extends Controller
     }
 
     public function salonData() {
+
+        $collaborator_id = Auth::user()->id;
         $salons = Salon::select(['id', 'salon_name', 'address', 'user_id', 'created_at'])
+        ->where([
+            'collaborator_id' => $collaborator_id,
+            'status' => 0
+        ])
         ->orderBy('created_at', 'desc')
         ->get();
 
@@ -48,4 +56,15 @@ class SalonController extends Controller
 
         return view('collaborators.salons.detail', compact('salon'));
     }
+
+    public function activeSalon($salonID) {
+        $salon = Salon::find($salonID);
+        event(new SalonCollaboratorEvent($salon), ['CarCollaboratorListener']);
+
+        return redirect()->route('collaborators.salons');
+
+    }
+
+
+    public function unActiveSalon($salonID) {}
 }

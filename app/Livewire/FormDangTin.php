@@ -76,61 +76,6 @@ class FormDangTin extends Component
     {
         $this->validate();
 
-        
-        // $validated = Validator::make(
-        //     [
-        //         'verhicle_image_library' => $this->verhicle_image_library,
-        //         'verhicle_videos' => $this->verhicle_videos,
-        //         'brand_select' => $this->brand_select,
-        //         'model_select' => $this->model_select,
-        //         'transmission' => $this->transmission,
-        //         'fuel' => $this->fuel,
-        //         'number_of_seats' => $this->number_of_seats,
-        //         'color' => $this->color,
-        //         'version' => $this->version,
-        //         'mileage' => $this->mileage,
-        //         'price' => $this->price,
-        //         'title' => $this->title,
-        //         'description' => $this->description,
-        //         'phone' => $this->phone,
-        //         'email' => $this->email,
-        //         'district_id' => $this->district_id,
-        //         'city_id' => $this->city_id,
-        //         'full_address' => $this->full_address,
-        //         'year_of_manufacture' => $this->year_of_manufacture,
-        //         'engine' => $this->engine,
-        //         'features' => $this->features,
-        //     ],
-        //     [
-        //         'verhicle_image_library' => 'required|array',
-        //         'verhicle_videos' => 'required',
-        //         'brand_select' => 'required',
-        //         'model_select' => 'required',
-        //         'transmission' => 'required',
-        //         'fuel' => 'required',
-        //         'number_of_seats' => 'required',
-        //         'color' => 'required',
-        //         'version' => 'required',
-        //         'mileage' => 'required',
-        //         'price' => 'required',
-        //         'title' => 'required',
-        //         'description' => 'required',
-        //         'phone' => 'required',
-        //         'email' => 'required|email',
-        //         'district_id' => 'required',
-        //         'city_id' => 'required',
-        //         'full_address' => 'required',
-        //         'year_of_manufacture' => 'required',
-        //         'engine' => 'required',
-        //         'features' => 'required|array',
-        //     ],
-        //     [
-        //         'required' => 'The :attribute field is required',
-        //         'email' => 'The :attribute must be a valid email address',
-        //         'array' => 'The :attribute must be an array',
-        //     ]
-        // )->validate();
-
         $carData = array();
         $photoName = array();
 

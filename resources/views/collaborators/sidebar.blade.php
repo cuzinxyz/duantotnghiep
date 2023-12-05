@@ -1,10 +1,16 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
-            <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+            <img 
+            src="{{
+                Auth::user()->avatar ?
+                asset('storage/'. Auth::user()->avatar) :
+                'http://placehold.it/50/30a5ff/fff'
+            }}" 
+            class="img-responsive" alt="">
         </div>
         <div class="profile-usertitle">
-            <div class="profile-usertitle-name">Username</div>
+            <div class="profile-usertitle-name">{{Auth::user()->name}}</div>
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
         </div>
         <div class="clear"></div>
@@ -46,7 +52,19 @@
                 Duyệt tin bán xe
             </a>
         </li>
-        <li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em>Duyệt tin bán xe</a></li>
+
+        <li
+            class="
+                {{ request()->is(trim(route('collaborators.listByCar', [], false), '/') . '/*') ||
+                request()->is(trim(route('collaborators.listByCar', [], false), '/'))
+                    ? 'active'
+                    : false }}">
+            <a href="{{ route('collaborators.listByCar') }}">
+                <em class="fa fa-calendar">&nbsp;</em>
+                Duyệt tin mua xe
+            </a>
+        </li>
+
         <li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> Rút tiền</a></li>
         <li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> Tố cáo</a></li>
         <li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
@@ -66,6 +84,27 @@
                     </a></li>
             </ul>
         </li> --}}
-        <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Đăng xuất</a></li>
+        <li>
+            <a
+            id="logout_button" 
+            href="">
+                <em class="fa fa-power-off">&nbsp;</em> 
+                Đăng xuất
+            </a>
+        </li>
+
+        <form id="logout_user" action="{{route('logout')}}" method="POST" style="display: none">
+            @csrf
+        </form>
     </ul>
 </div>
+
+@push('scripts')
+    <script>
+        let a = document.querySelector('#logout_button');
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#logout_user').submit();
+        })
+    </script>
+@endpush

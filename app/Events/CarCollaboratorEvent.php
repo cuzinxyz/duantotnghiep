@@ -20,11 +20,11 @@ class CarCollaboratorEvent
 
     
 
-    public $collaborator; 
+    public $data; 
 
-    public function __construct($collaborator)
+    public function __construct($data)
     {
-        $this->collaborator = $collaborator;
+        $this->data = $data;
     }
 
     /**

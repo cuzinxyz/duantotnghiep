@@ -84,7 +84,7 @@
                     <div class="col-lg-6" style="margin-bottom: 20px">
                         <p>Hình ảnh</p>
                         <p class="color-black">
-                            <img src="{{asset('storage/' . $salon->image_salon)}}" alt="Không có ảnh">
+                            <img src="{{asset('storage/' . $salon->image_salon[0])}}" alt="Không có ảnh">
                         </p>
                     </div>
 
