@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\CarCollaboratorEvent;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Banner;
@@ -12,8 +13,7 @@ use App\Observers\BannerObserver;
 use App\Observers\PartnerObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
-use App\Events\NotificationExpiresSalon;
-use App\Listeners\SendNotificationExpiresSalon;
+use App\Listeners\CarCollaboratorListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -29,9 +29,12 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        NotificationExpiresSalon::class => [
-            SendNotificationExpiresSalon::class
+
+        CarCollaboratorEvent::class => [
+            CarCollaboratorListener::class
         ]
+
+
     ];
 
     /**

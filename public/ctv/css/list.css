@@ -1,0 +1,17 @@
+
+.color-black {
+    color: #000;
+} 
+
+
+.display-flex {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* khoảng cách */
+.mb-40px {
+    margin-bottom: 40px;
+}

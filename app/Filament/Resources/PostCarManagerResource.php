@@ -150,7 +150,6 @@ class PostCarManagerResource extends Resource
                                         })
                                         ->successNotificationTitle('Phê duyệt thành công'),
 
-
                                     Action::make('UnActivePost')
                                         ->label('Không duyệt')
                                         ->icon('heroicon-m-x-mark')

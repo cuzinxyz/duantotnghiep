@@ -18,7 +18,6 @@ use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\DemnadResource\Pages;
 use App\Mail\SendMailDemnad;
@@ -90,7 +89,6 @@ class DemnadResource extends Resource
                                         ->title('Đã gửi thông báo tới khách hàng')
                                         ->success()
                                         ->send();
-
 
                                     redirect()->route('filament.admin.resources.demnads.index');
                                 }),

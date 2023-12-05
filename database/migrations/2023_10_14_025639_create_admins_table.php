@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
+            $table->boolean('active')->default(false);
+            $table->integer('is_collaborator')->default(1);
+            $table->integer('total_assign')->default(0);
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes(); // add
+            $table->softDeletes();
         });
     }
 
