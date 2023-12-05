@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('status')->default(0);
             $table->string('reason')->nullable();
+            $table->integer('collaborator_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

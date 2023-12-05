@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\CarCollaboratorEvent;
 use App\Models\Car;
 use App\Models\Brand;
 use Livewire\Component;
@@ -73,10 +74,9 @@ class FormDangTin extends Component
 
     public function saveCar()
     {
-        // dd($this->all());
-
         $this->validate();
 
+        
         // $validated = Validator::make(
         //     [
         //         'verhicle_image_library' => $this->verhicle_image_library,
@@ -177,7 +177,13 @@ class FormDangTin extends Component
             'phone' => $this->phone,
             'email' => $this->email,
         );
-        Car::create($carData);
+        
+
+        $success = Car::create($carData);
+        if($success) {
+            event(new CarCollaboratorEvent($success));
+        }
+
         // if ($result) {
         return redirect()->route('profile')->with('status', 'Đăng tin thành công! Vui lòng chờ duyệt.');
         // }

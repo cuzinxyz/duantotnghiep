@@ -2,16 +2,19 @@
 
 use App\Models\Car;
 use App\Models\News;
+use App\Models\User;
 use App\Models\Service;
 use App\Livewire\Showroom;
 use App\Livewire\SearchCar;
 use App\Livewire\CarListingSystem;
 use Illuminate\Support\Facades\DB;
+use App\Events\CarCollaboratorEvent;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\SalonController;
 use App\Http\Controllers\GarageController;
 use App\Http\Controllers\ServiceController;
@@ -21,6 +24,9 @@ use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\SearchCarController;
 use App\Http\Controllers\SendGuideRequestController;
+use App\Http\Controllers\Collaborators\CarsController;
+use App\Http\Controllers\Collaborators\DashboardController;
+use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -36,22 +42,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
     });
 
-    Route::controller(GarageController::class)->group(function(){
-        Route::match(['GET','POST'],'/dangki-garage','ownGarage')->name('dangki-garage');
-        Route::match(['GET','POST'],'/suathongtinxe/{id}','editCarGarage')->name('editcargarage');
+    Route::controller(GarageController::class)->group(function () {
+        Route::match(['GET', 'POST'], '/dangki-garage', 'ownGarage')->name('dangki-garage');
+        Route::match(['GET', 'POST'], '/suathongtinxe/{id}', 'editCarGarage')->name('editcargarage');
         Route::get('/them-xe-garage/{garage_id}', 'addCar')->name('addCar');
         Route::get('/xoa-xe/{carID}', 'removeCar')->name('hiddenCarGarage');
-        Route::get('/garage','garage')->name('garage');
+        Route::get('/garage', 'garage')->name('garage');
     });
 
-    Route::controller(SalonController::class)->group(function() {
+    Route::controller(SalonController::class)->group(function () {
         Route::prefix('salon')->group(function () {
             Route::get('/', 'register')->name('salon');
             Route::post('/register', 'registerSalon')->name('registerSalon');
             Route::get('/them-xe', 'addCar')->name('salon.addcar');
             Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
             Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
-            Route::get('/danh-sach-xe/{salonID}' , 'listCars')->name('salon.listCars');
+            Route::get('/danh-sach-xe/{salonID}', 'listCars')->name('salon.listCars');
         });
         Route::post('/account-balance', 'getBalance');
     });
@@ -104,10 +110,10 @@ Route::controller(ServiceController::class)->group(function () {
 });
 
 # Posts Route
-Route::get("/bai-viet", function() {
+Route::get("/bai-viet", function () {
     $posts = News::all();
 
-    if(!$posts) {
+    if (!$posts) {
         abort(404);
     }
 
@@ -144,3 +150,34 @@ Route::controller(CarDetailController::class)->group(function () {
 
 // Showroom
 Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
+
+
+
+// collaborators
+Route::get('/collaborators', function () {
+    return view('collaborators.dashboard');
+});
+
+
+Route::prefix('/collaborators')->name('collaborators.')->group(function () {
+
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+    });
+
+
+    Route::controller(CarsController::class)->group(function () {
+        Route::get('/cars', 'listCars')->name('cars');
+        Route::get('/carsData', 'carsData')->name('carsData');
+        Route::get('/carDetail/{slug}', 'carDetail')->name('carDetail');
+    });
+
+
+    Route::controller(CollaboratorsSalonController::class)->group(function () {
+        Route::get('/salon', 'listSalon')->name('salons');
+        Route::get('/salonData', 'salonData')->name('salonData');
+        Route::get('/salonDetail/{id}', 'salonDetail')->name('salonDetail');
+    });
+});
+
+

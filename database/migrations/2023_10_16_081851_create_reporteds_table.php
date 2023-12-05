@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->integer('status')->default(0);
             $table->string('reason')->nullable();
+            $table->integer('collaborator_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

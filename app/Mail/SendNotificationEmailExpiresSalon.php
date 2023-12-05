@@ -30,7 +30,7 @@ class SendNotificationEmailExpiresSalon extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Notification Email Expires Salon',
+            subject: 'Thông báo gia hạn cửa hàng tại DRIVCO',
         );
     }
 
@@ -40,7 +40,7 @@ class SendNotificationEmailExpiresSalon extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'view.mail-expires-salon',
         );
     }
 
