@@ -73,8 +73,13 @@ class SalonController extends Controller
 
     public function deleteCar($carId)
     {
-        $deleteCar = Car::where('id', $carId)->delete();
-        return redirect()->back()->with('success', 'Xóa thành công');
+        if (auth()->check()) {
+            $car = Car::find($carId);
+            if (auth()->id() == $car->user_id) {
+                $deleteCar = Car::where('id', $carId)->delete();
+                return redirect()->back()->with('success', 'Xóa thành công');
+            }
+        }
     }
 
     public function getBalance(Request $request)

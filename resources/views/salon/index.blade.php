@@ -103,7 +103,7 @@
                     </div>
 
                     @foreach ($salonCars as $car)
-                        <div class="col-6">
+                        <div class="col-6 mt-4">
                             <div class="product-st-card1">
                                 <div class="product-img">
                                     <div class="product-price">
@@ -141,8 +141,12 @@
                                     </div>
 
                                     <div class="d-flex pt-3 gap-3">
-                                        <button class="btn btn-sm btn-warning">Sửa tin</button>
-                                        <button class="btn btn-sm btn-danger">Xoá tin</button>
+                                        <button class="btn btn-sm btn-warning"
+                                            onclick="window.location.href='{{ route('salon.editcar', $car->id) }}'">Sửa
+                                            tin</button>
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="window.location.href='{{ route('salon.deletecar', $car->id) }}'">Xoá
+                                            tin</button>
                                     </div>
                                 </div>
                             </div>
