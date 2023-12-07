@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 'name' => 'BOT',
                 'email' => 'bot@gmail.com',
                 'password' => Hash::make('12345678'),
-                'avatar' => 'avatars/users/bot.jpg',
+                'avatar' => 'avatars/bot.jpg',
                 'account_balence' => 0,
                 'service_id' => 0,
                 'phone_number' => NULL

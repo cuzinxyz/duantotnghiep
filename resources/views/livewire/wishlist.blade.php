@@ -14,7 +14,9 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
 
-                                        <h5 class="card-title">{{ $car->car->title }}</h5>
+                                        <h5 class="card-title" style="cursor: pointer"
+                                            onclick="window.location.href='{{ route('car-detail', $car->car->slug) }}'">
+                                            {{ $car->car->title }}</h5>
                                         <p class="card-text">{{ $car->car->car_info['fuelType'] }} -
                                             {{ number_format($car->car->car_info['mileage']) }} km</p>
                                         <p class="card-text text-danger fw-bold fs-5">
@@ -29,10 +31,11 @@
                                                     src="/storage/{{ $car->car->user->avatar }}" class="rounded-circle">
                                             </small>
                                             <small class="fw-bold"> {{ $car->car->user->name }} </small>
-                                            @if(!empty($car->car->province->name))
-                                            <small class="text-muted">{{ $car->car->province->name }}</small>
+                                            @if (!empty($car->car->province->name))
+                                                <small class="text-muted">{{ $car->car->province->name }}</small>
                                             @endif
-                                            <svg wire:click="remove({{ $car->id }})" wire:confirm="Bạn có chắc muốn xoá không?"
+                                            <svg wire:click="remove({{ $car->id }})"
+                                                wire:confirm="Bạn có chắc muốn xoá không?"
                                                 class="position-absolute bottom-0 end-0 m-4" style="cursor: pointer"
                                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

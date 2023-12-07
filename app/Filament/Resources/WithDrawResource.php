@@ -28,8 +28,7 @@ class WithDrawResource extends Resource
 {
     protected static ?string $model = WithDraw::class;
 
-    protected static ?string $navigationGroup = 'Tài khoản';
-
+    // protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
@@ -100,7 +99,7 @@ class WithDrawResource extends Resource
 
                             $bot = User::where('name', 'BOT')->first();
 
-                            $reason = 'Chào bạn ' . $user_balance->name . ', 
+                            $reason = 'Chào bạn ' . $user_balance->name . ',
                                     Yêu cầu rút tiền của bạn đã được duyệt thành công.
                                     Chúng tôi đã hoàn thành chuyển khoản cho bạn.
                                     Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';

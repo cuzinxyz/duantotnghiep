@@ -2,6 +2,9 @@
     <link rel="stylesheet" href="{{ asset('css/payment-history.css') }}">
 @endpush
 
+@section('page_title')
+    Lịch sử hoạt động - Drivco
+@endsection
 <x-partials.layout-client>
 
     <div class="container-xl px-4 mt-4">

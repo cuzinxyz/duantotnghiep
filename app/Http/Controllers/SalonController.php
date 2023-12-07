@@ -16,6 +16,7 @@ class SalonController extends Controller
     {
         $salonCars = Car::where('user_id', auth()->id())
             ->whereNotNull('salon_id')
+            ->where('status', 1)
             ->get();
         // dd($salonCars);
         $totalView = 0;
@@ -77,8 +78,13 @@ class SalonController extends Controller
 
     public function deleteCar($carId)
     {
-        $deleteCar = Car::where('id', $carId)->delete();
-        return redirect()->back()->with('success', 'Xóa thành công');
+        if (auth()->check()) {
+            $car = Car::find($carId);
+            if (auth()->id() == $car->user_id) {
+                $deleteCar = Car::where('id', $carId)->delete();
+                return redirect()->back()->with('success', 'Xóa thành công');
+            }
+        }
     }
 
     public function getBalance(Request $request)
@@ -96,13 +102,14 @@ class SalonController extends Controller
             $message = "<div class='alert alert-info'>Số dư của bạn là <strong>" . number_format($balance) . "đ</strong>. <br>Sau khi được quản trị viên phê duyệt, số dư sẽ tự động được trừ vào tài khoản của bạn.</div>";
             return response()->json(['balance' => $balance, 'message' => $message]);
         } else {
-            $message = "<div class='alert alert-warning'>Số dư của bạn là <strong>" . number_format($balance) . "đ</strong>. <br>Bạn cần nạp thêm tiền tại <a href='/nap-tien'> đây</a>.</div>";
+            $message = "<div class='alert alert-warning'>Số dư của bạn là <strong>" . number_format($balance) . "đ</strong>. <br>Bạn cần nạp thêm tiền tại <a href='/nap-tien'> đây</a>, số dư sẽ được tự động trừ khi quản trị viên phê duyệt yêu cầu của bạn.</div>";
             return response()->json(['balance' => $balance, 'message' => $message]);
         }
     }
 
 
-    public function listCars($salonID) {
+    public function listCars($salonID)
+    {
         $cars = Car::where('salon_id', $salonID)->get();
         return view('salon.danh-sach-xe', compact('cars'));
     }

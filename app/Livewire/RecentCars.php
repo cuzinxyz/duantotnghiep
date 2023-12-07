@@ -26,16 +26,18 @@ class RecentCars extends Component
             ->limit(5)
             ->distinct()
             ->get();
-        $recentCars = Car::inRandomOrder()->limit(8)->get();
+        $recentCars = Car::inRandomOrder()->where('status', 1)->limit(8)->get();
 
         if (!empty($this->brandID)) {
             if ($this->brandID == 'random') {
                 $recentCars = Car::inRandomOrder()
+                    ->where('status', 1)
                     ->limit(8)
                     ->get();
             } else {
                 $recentCars = Car::inRandomOrder()
                     ->where('brand_id', $this->brandID)
+                    ->where('status', 1)
                     ->limit(8)
                     ->get();
             }

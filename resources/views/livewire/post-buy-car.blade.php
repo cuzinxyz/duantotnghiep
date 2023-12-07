@@ -1,20 +1,28 @@
 <div>
     <div class="container mt-3" style="max-width: 600px">
-        <div class="alert alert-primary">
-            Chú ý: Chỉ đăng tin mua xe ở đây. Không đăng tin bán xe hay tin rao vặt khác...nếu vi phạm tài khoản sẽ bị
-            khóa !
-            <br>
-            Nội dung phải nhập bằng Tiếng Việt có dấu
-        </div>
+        @if (auth()->check())
+            <div class="alert alert-primary">
+                Chú ý: Chỉ đăng tin mua xe ở đây. Không đăng tin bán xe hay tin rao vặt khác...nếu vi phạm tài khoản sẽ
+                bị
+                khóa !
+                <br>
+                Nội dung phải nhập bằng Tiếng Việt có dấu
+            </div>
 
-        <div class="messageSender__top">
-            <img class="user__avatar"
-                src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
-                alt="">
-            <form wire:submit.prevent="save">
-                <input class="messageSender__input" wire:model="content" placeholder="Bạn cần mua xe gì?" type="text">
-            </form>
-        </div>
+            <div class="messageSender__top">
+                <img class="user__avatar"
+                    src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                    alt="">
+                <form wire:submit.prevent="save">
+                    <input class="messageSender__input" wire:model="content" placeholder="Bạn cần mua xe gì?"
+                        type="text">
+                </form>
+            </div>
+        @else
+            <div class="alert alert-warning">
+                Bạn cần <strong><a href="{{ route('login') }}">đăng nhập</a> để thực hiện đăng tin mua xe.</strong>
+            </div>
+        @endif
         <div class="text-danger">
             @error('content')
                 {{ $message }}
@@ -23,43 +31,45 @@
 
 
         <div class="mt-5 mb-5">
-            @if ($pending->count() > 0)
-                <div class="container bg-warning rounded-3 shadow px-2 py-3">
-                    @foreach ($pending as $demand)
-                        <div class="card-post">
-                            <div class="card-body">
-                                <span class="badge bg-warning text-dark pb-2">tin chờ duyệt</span>
-                                <p>
-                                    {{ $demand->content }}
-                                </p>
-                                <div class="user w-100">
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="border border-dark border-1"
-                                                src="{{ asset('storage/' . $demand->user->avatar) }}" alt="user" />
-                                            <div class="user-info">
-                                                <h5>{{ $demand->user->name }}</h5>
-                                                <small>{{ $demand->created_at->diffForHumans() }}</small>
+            @if (auth()->check())
+                @if ($pending->count() > 0)
+                    <div class="container bg-warning rounded-3 shadow px-2 py-3">
+                        @foreach ($pending as $demand)
+                            <div class="card-post">
+                                <div class="card-body">
+                                    <span class="badge bg-warning text-dark pb-2">tin chờ duyệt</span>
+                                    <p>
+                                        {{ $demand->content }}
+                                    </p>
+                                    <div class="user w-100">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img class="border border-dark border-1"
+                                                    src="{{ asset('storage/' . $demand->user->avatar) }}"
+                                                    alt="user" />
+                                                <div class="user-info">
+                                                    <h5>{{ $demand->user->name }}</h5>
+                                                    <small>{{ $demand->created_at->diffForHumans() }}</small>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="d-flex gap-2 align-items-center">
-                                            <i class="bi bi-lock-fill"></i>
+                                            <div class="d-flex gap-2 align-items-center">
+                                                <i class="bi bi-lock-fill"></i>
 
-                                            <button wire:click="remove({{ $demand->id }})"
-                                                class="btn btn-danger rounded-circle"
-                                                wire:confirm="Bạn có chắc muốn xoá không?">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </button>
+                                                <button wire:click="remove({{ $demand->id }})"
+                                                    class="btn btn-danger rounded-circle"
+                                                    wire:confirm="Bạn có chắc muốn xoá không?">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             @endif
-
             @if ($demands->count() > 0)
                 @foreach ($demands as $demand)
                     <div class="card-post">

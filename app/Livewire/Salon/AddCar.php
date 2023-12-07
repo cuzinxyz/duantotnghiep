@@ -10,6 +10,7 @@ use App\Models\ModelCar;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Validate;
 
 class AddCar extends Component
 {
@@ -18,76 +19,68 @@ class AddCar extends Component
 
     public $salon;
 
-    public $currentStep = 1;
     public $fuels = ["Xăng", "Dầu Diesl", "Điện", "Loại khác"];
-    public $colors = [
-        'red' => 'Đỏ',
-        'silver' => 'Bạc',
-        'black' => 'Đen',
-        'white' => 'Trắng',
-        'yellow' => 'Vàng',
-        'gray' => 'Ghi',
-        'blue' => 'Xanh',
-        'different' => 'Khác'
-    ];
-    public $featureValues = [
-        'PremiumWheel' => 'Bánh xe cao cấp',
-        'Moonroof' => 'Cửa sổ trời',
-        'PremiumAudio' => 'Âm thanh cao cấp',
-        'Navigation' => 'Chế độ chỉ đường',
-        'PremiumSeatMaterial' => 'Ghế da cao cấp',
-        'Bluetooth' => 'Kết nối bluetooth',
-        'RemoteEngineStart' => 'Khởi động từ xa',
-        'Multi_ZoneClimateControl' => 'Điều hòa'
-    ];
-    public $seats = [
-        '4' => '4',
-        '5' => '5',
-        '6' => '6',
-        '7' => '7',
-        '8' => '8',
-    ];
+    public $colors = ['red' => 'Đỏ', 'silver' => 'Bạc', 'black' => 'Đen', 'white' => 'Trắng', 'yellow' => 'Vàng', 'gray' => 'Ghi', 'blue' => 'Xanh', 'different' => 'Khác'];
+    public $featureValues = ['PremiumWheel' => 'Bánh xe cao cấp', 'Moonroof' => 'Cửa sổ trời', 'PremiumAudio' => 'Âm thanh cao cấp', 'Navigation' => 'Chế độ chỉ đường', 'PremiumSeatMaterial' => 'Ghế da cao cấp', 'Bluetooth' => 'Kết nối bluetooth', 'RemoteEngineStart' => 'Khởi động từ xa', 'Multi_ZoneClimateControl' => 'Điều hòa'];
+    public $seats = ['4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8',];
     public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
-    public $verhicle_image_library = [];
-    public $brand_select = '';
-    public $model_select = '';
     public $models = [];
-    public $image_library;
+
+    #[Validate('required', message: 'Bắt buộc phải upload tối thiểu 1 hình.')]
+    public $verhicle_image_library = [];
+    #[Validate('required', message: 'Bắt buộc phải upload video xe.')]
+    public $verhicle_videos;
+    #[Validate('required', message: 'Bắt buộc phải chọn thương hiệu.')]
+    public $brand_select = '';
+    #[Validate('required', message: 'Bắt buộc phải chọn tên xe.')]
+    public $model_select = '';
+    #[Validate('required', message: 'Bắt buộc phải chọn hộp số.')]
     public $transmission;
+    #[Validate('required', message: 'Bắt buộc phải chọn loại nhiên liệu.')]
     public $fuel;
+    #[Validate('required', message: 'Bắt buộc phải chọn số chỗ ngồi.')]
     public $number_of_seats;
+    #[Validate('required', message: 'Bắt buộc phải chọn màu sắc.')]
     public $color;
     public $version;
-    public $condition;
+    #[Validate('required', message: 'Bắt buộc phải nhập số KM.')]
     public $mileage;
+    #[Validate('required', message: 'Bắt buộc phải nhập giá.')]
     public $price;
+    #[Validate('required', message: 'Bắt buộc phải nhập tiêu đề.')]
     public $title;
+    #[Validate('required', message: 'Bắt buộc phải nhập mô tả.')]
     public $description;
-    public $full_address;
+    #[Validate('required', message: 'Bắt buộc phải nhập năm sản xuất.')]
     public $year_of_manufacture;
+    #[Validate('required', message: 'Bắt buộc phải nhập số mã lực.')]
     public $engine;
-    public $verhicle_videos;
+    #[Validate('required', message: 'Bắt buộc phải chọn một số tính năng khác.')]
     public $features = [];
 
     public function saveCar()
     {
-        $carData = [];
-        $photoName = [];
+
+        $this->validate();
+
+        $carData = array();
+        $photoName = array();
+
         $images = $this->verhicle_image_library;
         if (count($images) > 0) {
             foreach ($images as $photo) {
-                $fileName = $photo->getFilename();
-                $dir_name = 'car_photos';
-                $photo->storeAs('car_photos', $fileName, 'public');
-                array_push($photoName, $dir_name . '/' . $fileName);
+                $dir_name_image = 'car_photos';
+                $fileImage = uploadFile($dir_name_image, $photo);
+                array_push($photoName, $fileImage);
             }
         }
         $videoName = "";
         if (!empty($this->verhicle_videos)) {
-            $dir_name = 'video_car';
-            $file = uploadFile($dir_name, $this->verhicle_videos);
-            $videoName = $file;
+            $dir_name_video = 'video_car';
+            $fileVideo = uploadFile($dir_name_video, $this->verhicle_videos);
+            $videoName = $fileVideo;
         }
+        // dd(array($videoName, $photoName));
         $carData['verhicle_image_library'] = $photoName;
         $carData['verhicle_videos'] = $videoName;
         $carData['user_id'] = auth()->id();
@@ -105,7 +98,6 @@ class AddCar extends Component
             'number_of_seats' => $this->number_of_seats,
             'color' => $this->color,
             'version' => $this->version,
-            'condition' => $this->condition,
             'mileage' => $this->mileage,
             "features" => $this->features,
             'engine' => $this->engine,
@@ -116,12 +108,11 @@ class AddCar extends Component
             'email' => $this->salon->email,
         );
         $carData['salon_id'] = $this->salon->id;
-        $carData['status'] = 1;
+        $carData['status'] = 0;
 
-        $result = Car::create($carData);
-        if ($result) {
-            return redirect()->route('profile')->with('status', 'Thành công!');
-        }
+        Car::create($carData);
+        // if ($result) {
+        return redirect()->route('salon')->with('status', 'Đăng tin thành công! Vui lòng chờ duyệt.');
     }
 
     #[Computed()]
@@ -129,7 +120,7 @@ class AddCar extends Component
     {
         $salonInfo = Salon::where('user_id', auth()->id())->first();
 
-        if($salonInfo) {
+        if ($salonInfo) {
             $this->salon = $salonInfo;
         }
 

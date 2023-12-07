@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ModelCarResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Thương hiệu';
+    protected static ?string $navigationGroup = 'Nội dung chính';
 
     protected static ?string $model = ModelCar::class;
 
@@ -95,6 +95,6 @@ class ModelCarResource extends Resource
     }
     public static function getModelLabel(): string
     {
-        return __('Dòng xe');
+        return __('Tên xe');
     }
 }

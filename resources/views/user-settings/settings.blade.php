@@ -2,6 +2,9 @@
     <link rel="stylesheet" href="{{ asset('css/settings-page.css') }}">
 @endpush
 
+@section('page_title')
+    Cài đặt - Drivco
+@endsection
 <x-partials.layout-client>
     <div class="container mt-5">
         <form action="{{ route('settings') }}" method="POST" enctype="multipart/form-data" style="display: inline">
@@ -20,13 +23,14 @@
                         <div class="author-card-profile">
                             <div for="avatar" class="author-card-avatar">
                                 <label for="avatar" class="avatar__label">
-                                    <img src="{{ file_exists(Storage::url(auth()->user()->avatar)) ? Storage::url($user->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                    <img src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                         alt="Daniel Adams" id="avatar__img">
                                 </label>
                                 <input type="file" name="avatar" hidden id="avatar">
                             </div>
                             <div class="author-card-details">
-                                <h5 class="author-card-name text-lg">{{ $user->name }} <i class="text-success ms-1 bi bi-check-circle-fill"></i></h5><span
+                                <h5 class="author-card-name text-lg">{{ $user->name }} <i
+                                        class="text-success ms-1 bi bi-check-circle-fill"></i></h5><span
                                     class="author-card-position">Joined {{ $user->created_at }}</span>
                             </div>
                         </div>

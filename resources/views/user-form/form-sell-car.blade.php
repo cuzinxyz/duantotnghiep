@@ -1,3 +1,6 @@
+@section('page_title')
+    Bán xe tại Drivco
+@endsection
 <x-partials.layout-client>
     <div>
         <div class="pt-50 mb-50">

@@ -35,8 +35,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dang-tin-ban-xe', 'sellCar')->name('sellCar');
         Route::get('/sua-tin-ban-xe/{carID}', 'editSellCar')->name('editSellCar');
         Route::get('/an-xe/{carID}', 'removeCar')->name('hiddenCar');
-        Route::get('/dang-tin-mua-xe', 'buyCar')->name('buyCar');
-        Route::get('/danh-sach-tin-mua', 'listSellCar')->name('searchPost');
+        Route::get('/tin-mua-xe', 'buyCar')->name('buyCar');
     });
 
     Route::controller(GarageController::class)->group(function () {
@@ -132,7 +131,9 @@ Route::get("/bai-viet/{slug}.html", function ($slug) {
 
 Route::get('/hang-xe/{slug}', SingleBrandCategory::class)->name('brand.detail');
 
-Route::get('/xe', CarListingSystem::class)->name('car.list');
+Route::get('/oto', CarListingSystem::class)->name('car.list');
+
+Route::get('/tin-mua-xe', [CarController::class, 'listSellCar'])->name('buyCar');
 
 Route::controller(SearchCarController::class)->group(function () {
     Route::get('/tim-xe', 'index')->name('searchcar');

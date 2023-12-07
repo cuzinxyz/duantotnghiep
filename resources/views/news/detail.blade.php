@@ -1,3 +1,6 @@
+@section('page_title')
+    {{ $post->title ? $post->title . ' - Drivco' : 'Drivco' }}
+@endsection
 <x-partials.layout-client>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/comment.css') }}">
@@ -7,7 +10,8 @@
             <div class="row g-lg-4 gy-5">
                 <div class="col-12">
                     <div class="post-thumb">
-                        <img src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}" alt="">
+                        <img src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
+                            alt="">
                     </div>
                     <h3 class="post-title">{{ $post->title }}</h3>
                     <div class="mb-2">

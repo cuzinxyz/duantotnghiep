@@ -83,7 +83,7 @@ class CarListingSystem extends Component
         $carCount = $carQuery->count();
 
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->paginate(6),
+            'cars' => $carQuery->paginate(10),
             'carCount' => $carCount,
         ]);
     }

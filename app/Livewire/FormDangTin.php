@@ -123,7 +123,7 @@ class FormDangTin extends Component
             'phone' => $this->phone,
             'email' => $this->email,
         );
-        
+
 
         $success = Car::create($carData);
         if($success) {

@@ -1,28 +1,40 @@
 <div>
     <style>
-        .card {
+        .search-index {
+            max-height: 280px;
+            padding: 10px;
+            z-index: 123123;
+            background: #fff;
+            border: 1px solid #f1f1f1;
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        }
+
+        .search-index .card {
             background-color: #fff;
             border: none
         }
 
-        .list {
-            padding-top: 20px;
-            padding-bottom: 10px;
+        .search-index .list {
+            /* padding-bottom: 10px; */
             display: flex;
             align-items: center
         }
 
-        .list small {
+        .search-index .list small {
             color: #46D993
         }
 
-        .search-index {
+        .search-index .search-index {
             z-index: 1999;
             overflow: hidden;
         }
 
-        .card:hover {
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        .search-index .card a {
+            margin-bottom: 15px;
+        }
+
+        .search-index .card a:hover {
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
         }
 
         .search-index .card {
@@ -36,17 +48,16 @@
             <input type="text" wire:model.live="search" placeholder="Tìm kiếm xe theo tên hoặc thương hiệu">
             <button type="button"><i class="bi bi-search"></i></button>
         </div>
-        <div class="d-flex justify-content-center position-absolute start-0 end-0 search-index"
-            style="max-height: 280px">
-            <div class="col-md-12">
-                <div class="card">
-                    @if (strlen($search) >= 2)
+        @if (strlen($search) >= 2)
+            <div class="justify-content-center position-absolute start-0 end-0 search-index" style="display:flex">
+                <div class="col-md-12">
+                    <div class="card">
                         @if ($cars->isEmpty())
                             <h5 class="text-danger text-center m-2">Không có kết quả nào được tìm thấy.</h5>
                         @else
                             @foreach ($cars as $car)
                                 <a href="{{ route('car-detail', $car->slug) }}">
-                                    <div class="list border-bottom"> <img
+                                    <div class="list"> <img
                                             src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
                                             style="width: 100px; height: 50px;">
                                         <div class="d-flex flex-column ml-3"
@@ -58,9 +69,9 @@
                                 </a>
                             @endforeach
                         @endif
-                    @endif
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     </form>
 </div>

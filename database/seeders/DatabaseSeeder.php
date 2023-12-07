@@ -15,19 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      $this->call([
-        AdminSeeder::class,
-        UserSeeder::class,
-        BrandSeeder::class,
-        RatingSeeder::class,
-        ReportedSeeder::class,
-        ModelCar::class,
-        PartnerSeeder::class,
-        SupportSeeder::class,
-        ServiceSeeder::class,
-        NewsSeeder::class,
-        CarsSeeder::class,
-        SavedCarSeeder::class,
-      ]);
+        $this->call([
+            AdminSeeder::class,
+            UserSeeder::class,
+            BrandSeeder::class,
+            RatingSeeder::class,
+            ReportedSeeder::class,
+            ModelCar::class,
+            PartnerSeeder::class,
+            // SupportSeeder::class,
+            ServiceSeeder::class,
+            NewsSeeder::class,
+            CarsSeeder::class,
+            SavedCarSeeder::class,
+        ]);
     }
 }

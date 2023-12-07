@@ -5,7 +5,7 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
+                <a href="/"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Trang Chủ</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>
@@ -22,29 +22,29 @@
         </div>
         {{-- tabs and lists --}}
         <div class="m-body contacts-container">
-           {{-- Lists [Users/Group] --}}
-           {{-- ---------------- [ User Tab ] ---------------- --}}
-           <div class="show messenger-tab users-tab app-scroll" data-view="users">
-               {{-- Favorites --}}
-               <div class="favorites-section">
-                <p class="messenger-title"><span>Favorites</span></p>
-                <div class="messenger-favorites app-scroll-hidden"></div>
-               </div>
-               {{-- Saved Messages --}}
-               <p class="messenger-title"><span>Your Space</span></p>
-               {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
-               {{-- Contact --}}
-               <p class="messenger-title"><span>All Messages</span></p>
-               <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
-           </div>
-             {{-- ---------------- [ Search Tab ] ---------------- --}}
-           <div class="messenger-tab search-tab app-scroll" data-view="search">
-                {{-- items --}}
-                <p class="messenger-title"><span>Search</span></p>
-                <div class="search-records">
-                    <p class="message-hint center-el"><span>Type to search..</span></p>
+            {{-- Lists [Users/Group] --}}
+            {{-- ---------------- [ User Tab ] ---------------- --}}
+            <div class="show messenger-tab users-tab app-scroll" data-view="users">
+                {{-- Favorites --}}
+                <div class="favorites-section">
+                    <p class="messenger-title"><span>Yêu thích</span></p>
+                    <div class="messenger-favorites app-scroll-hidden"></div>
                 </div>
-             </div>
+                {{-- Saved Messages --}}
+                <p class="messenger-title"><span>Tin nhắn của bạn</span></p>
+                {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
+                {{-- Contact --}}
+                <p class="messenger-title"><span>Tất cả tin nhắn</span></p>
+                <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
+            </div>
+            {{-- ---------------- [ Search Tab ] ---------------- --}}
+            <div class="messenger-tab search-tab app-scroll" data-view="search">
+                {{-- items --}}
+                <p class="messenger-title"><span>Tìm kiếm</span></p>
+                <div class="search-records">
+                    <p class="message-hint center-el"><span>Tìm kiếm người dùng..</span></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -56,7 +56,8 @@
                 {{-- header back button, avatar and user name --}}
                 <div class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
                     <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
-                    <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
+                    <div class="avatar av-s header-avatar"
+                        style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
                     <a href="#" class="user-name">{{ config('chatify.name') }}</a>
                 </div>
@@ -69,16 +70,20 @@
             </nav>
             {{-- Internet connection --}}
             <div class="internet-connection">
-                <span class="ic-connected">Connected</span>
-                <span class="ic-connecting">Connecting...</span>
-                <span class="ic-noInternet">No internet access</span>
+                <span class="ic-connected">Đã kết nối 🎉</span>
+                <span class="ic-connecting">Đang kết nối... 👀👀</span>
+                <span class="ic-noInternet">Không có kết nối Internet😢</span>
             </div>
         </div>
 
         {{-- Messaging area --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el" style="display: flex;flex-direction:column">
+                    <i data-visualcompletion="css-img" class=""
+                        style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/rT65reXCYoG.png&quot;); background-position: 0px 0px; background-size: 248px 390px; width: 244px; height: 180px; background-repeat: no-repeat; display: inline-block;"></i>
+                    <span style="background: unset;font-weight:bold">Chưa chọn đoạn chat nào</span>
+                </p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">
@@ -101,7 +106,7 @@
     <div class="messenger-infoView app-scroll">
         {{-- nav actions --}}
         <nav>
-            <p>User Details</p>
+            <p>Thông tin</p>
             <a href="#"><i class="fas fa-times"></i></a>
         </nav>
         {!! view('Chatify::layouts.info')->render() !!}

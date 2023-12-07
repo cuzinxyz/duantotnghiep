@@ -1,3 +1,12 @@
+@section('page_title')
+    {{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}
+@endsection
+@section('title_seo')
+    {{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}
+@endsection
+@section('thumb_seo')
+    {{ $carDetail->verhicle_image_library ? asset('storage/' . $carDetail->verhicle_image_library[0]) : '' }}
+@endsection
 <x-partials.layout-client>
     <x-detailpage.banner :$carDetail />
 
@@ -44,8 +53,7 @@
                                         @foreach ($ads as $value)
                                             <a href="{{ $value->target_url }}" target="_blank"
                                                 rel="noopener noreferrer">
-                                                <img src="{{ asset('storage/' . $value->image_url) }}"
-                                                    alt="">
+                                                <img src="{{ asset('storage/' . $value->image_url) }}" alt="">
                                             </a>
                                         @endforeach
                                     </div>
@@ -71,7 +79,8 @@
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a>
+                                            <h6><a
+                                                    href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a>
                                             </h6>
                                             <ul class="features">
                                                 <li>

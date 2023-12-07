@@ -14,6 +14,43 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon-16x16.png') }}">
 
+    <!-- Seo Meta -->
+    <title>@yield('page_title', 'Drivco')</title>
+    {{-- <base href="https://drivco.shop/"> --}}
+    <meta content="oto cu, mua ban oto cu, xe oto cu" name="keywords">
+    <meta
+        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023."
+        name="description">
+    <link rel="canonical" href="https://drivco.shop/oto">
+    <link rel="next" href="https://drivco.shop/oto">
+    <meta http-equiv="content-language" content="vi">
+    <meta name="language" content="Vietnamese,vn">
+    <meta name="geo.region" content="VN">
+    <meta name="robots" content="index,follow,noodp">
+    <meta property="og:site_name" content="Drivco.shop">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="@yield('title_seo', 'Mua bán ô tô cũ, xe hơi cũ giá rẻ toàn quốc')">
+    <meta property="og:description"
+        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023.">
+    <meta property="og:url" content="https://drivco.shop/oto">
+    <meta property="article:section" content="Auto, News">
+    <meta property="article:tag" content="Ô tô, Xe hơi">
+    <meta property="og:image" content="@yield('thumb_seo', 'https://i.imgur.com/UFbnyXU.png')">
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="650">
+    <meta property="og:image:height" content="350">
+
+    <link rel="preconnect" href="https://connect.facebook.net">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://ssl.google-analytics.com">
+    <link rel="preconnect" href="https://googleads4.g.doubleclick.net">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://www.googleadservices.com">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net">
+    <!-- Seo Meta -->
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
 
@@ -75,15 +112,15 @@
 
         <div class="loader">
             <svg class="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
-                <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="evenodd" stroke-linecap="round"
-                    stroke-linejoin="round">
+                <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="evenodd"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <path class="car__body"
                         d="M47.293 2.375C52.927.792 54.017.805 54.017.805c2.613-.445 6.838-.337 9.42.237l8.381 1.863c2.59.576 6.164 2.606 7.98 4.531l6.348 6.732 6.245 1.877c3.098.508 5.609 3.431 5.609 6.507v4.206c0 .29-2.536 4.189-5.687 4.189H36.808c-2.655 0-4.34-2.1-3.688-4.67 0 0 3.71-19.944 14.173-23.902zM36.5 15.5h54.01"
                         stroke-width="3" />
-                    <ellipse class="car__wheel--left" stroke-width="3.2" fill="#FFF" cx="83.493" cy="30.25"
-                        rx="6.922" ry="6.808" />
-                    <ellipse class="car__wheel--right" stroke-width="3.2" fill="#FFF" cx="46.511" cy="30.25"
-                        rx="6.922" ry="6.808" />
+                    <ellipse class="car__wheel--left" stroke-width="3.2" fill="#FFF" cx="83.493"
+                        cy="30.25" rx="6.922" ry="6.808" />
+                    <ellipse class="car__wheel--right" stroke-width="3.2" fill="#FFF" cx="46.511"
+                        cy="30.25" rx="6.922" ry="6.808" />
                     <path class="car__line car__line--top" d="M22.5 16.5H2.475" stroke-width="3" />
                     <path class="car__line car__line--middle" d="M20.5 23.5H.4755" stroke-width="3" />
                     <path class="car__line car__line--bottom" d="M25.5 9.5h-19" stroke-width="3" />
@@ -149,7 +186,8 @@
         <div class="main-menu">
             <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
                 <div class="mobile-logo-wrap">
-                    <a href="/"><img alt="image" src="{{ asset('images/green-logo.svg') }}"></a>
+                    <a href="{{ route('homepage') }}"><img alt="image"
+                            src="{{ asset('images/green-logo.svg') }}"></a>
                 </div>
             </div>
             <ul class="menu-list">
@@ -182,7 +220,7 @@
                                         </li>
                                     @endforeach
                                     <li class="explore-more-btn">
-                                        <a href="brand-category.html">Tìm hiểu thêm <i
+                                        <a href="{{ route('car.list') }}">Tìm hiểu thêm <i
                                                 class="bi bi-arrow-right"></i></a>
                                     </li>
                                 </ul>
@@ -389,7 +427,7 @@
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
                                                 onclick="window.location.href='{{ route('paymentHistory') }}'">
-                                                <i class="bi bi-clock-history"></i> Lịch sử nạp tiền
+                                                <i class="bi bi-clock-history"></i> Lịch sử hoạt động
                                             </div>
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2">
@@ -929,6 +967,7 @@
         </script>
 
         @stack('scripts')
+
 
     </body>
 

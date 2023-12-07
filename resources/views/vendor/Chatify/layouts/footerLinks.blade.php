@@ -15,3 +15,7 @@
 </script>
 <script src="{{ asset('js/chatify/utils.js') }}"></script>
 <script src="{{ asset('js/chatify/code.js') }}"></script>
+
+</body>
+
+</html>

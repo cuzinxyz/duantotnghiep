@@ -1,3 +1,7 @@
+@section('page_title')
+    {{ auth()->check() ? auth()->user()->name . ' - Drivco' : 'Drivco' }}
+@endsection
+
 <x-partials.layout-client>
     @include('components.nofication')
     <style>
@@ -197,10 +201,10 @@
                             type="button" role="tab" aria-controls="v-pills-7" aria-selected="true">Đã ẩn
                             ({{ $hiddenCars->count() }})</button>
                         <a href="{{ route('paymentHistory') }}">
-                            <button class="nav-link" type="button">Lịch sử nạp tiền</button>
+                            <button class="nav-link" type="button">Lịch sử hoạt động</button>
                         </a>
-                        @if(\App\Models\Salon::where('user_id', auth()->id())->first())
-                        <a href="{{ route('salon') }}">Salon của tôi</a>
+                        @if (\App\Models\Salon::where('user_id', auth()->id())->first())
+                            <a href="{{ route('salon') }}">Salon của tôi</a>
                         @endif
                     </div>
                     <div class="tab-content tab-content2" id="v-pills-tabContent2">
@@ -230,7 +234,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">
-                                                        <h6><a href="{{ route('car-detail',$car->slug) }}">{{ $car->title }}</a></h6>
+                                                        <h6><a
+                                                                href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a>
+                                                        </h6>
                                                         <ul class="features">
                                                             <li>
                                                                 {{-- @dd($car) --}}
@@ -299,7 +305,8 @@
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button onclick="window.location='{{ route('editSellCar', $car->id) }}'">
+                                                                    <button
+                                                                        onclick="window.location='{{ route('editSellCar', $car->id) }}'">
                                                                         <svg stroke-linejoin="round"
                                                                             stroke-linecap="round" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
@@ -494,7 +501,7 @@
                                                         <div class="car-img">
                                                             <img class="img-fluid w-100"
                                                                 style="object-fit:cover;max-height: 121px"
-                                                                src="{{ asset('storage/' .$car->verhicle_image_library[0]) }}"
+                                                                src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
                                                                 alt="image">
                                                         </div>
                                                     </div>
