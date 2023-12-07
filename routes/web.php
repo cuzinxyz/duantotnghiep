@@ -20,7 +20,10 @@ use App\Http\Controllers\SendGuideRequestController;
 use App\Http\Controllers\Collaborators\CarsController;
 use App\Http\Controllers\Collaborators\DashboardController;
 use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
+use App\Http\Controllers\Collaborators\ReportController;
+use App\Http\Controllers\Collaborators\ReviewController;
 use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
+use App\Http\Controllers\Collaborators\WithDrawController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -171,11 +174,57 @@ Route::prefix('/collaborators')
             Route::get('/salonData', 'salonData')->name('collaborators.salonData');
             Route::get('/salonDetail/{id}', 'salonDetail')->name('collaborators.salonDetail');
             Route::get('/activeSalon/{id}', 'activeSalon')->name('collaborators.activeSalon');
+            Route::post('/unActiveSalon/{id}', 'unActiveSalon')->name('collaborators.unActiveSalon');
         });
+
+        Route::controller(ReportController::class)->group(function () {
+            Route::get('/reports', 'listReport')->name('collaborators.listReport');
+            Route::get('/reportData', 'reportData')->name('collaborators.reportData');
+            Route::get('/reportDetail/{id}', 'reportDetail')->name('collaborators.reportDetail');
+            Route::get('/warningUser/{id}', 'warningUser')->name('collaborators.warningUser');
+            Route::get('/deleteUserReported/{id}', 'deleteUserReported')->name('collaborators.deleteUserReported');
+            Route::get('/deleteReported/{id}', 'deleteReported')->name('collaborators.deleteReported');
+        });
+
 
         Route::controller(CollaboratorsByCarController::class)->group(function () {
             Route::get('/byCar', 'listByCar')->name('collaborators.listByCar');
             Route::get('/byCarData', 'byCarData')->name('collaborators.byCarData');
             Route::get('/byCarDetail/{id}', 'byCarDetail')->name('collaborators.byCarDetail');
+            Route::get('/activeByCar/{id}', 'activeByCar')->name('collaborators.activeByCar');
+            Route::post('/unActiveByCar/{id}', 'unActiveByCar')->name('collaborators.unActiveByCar');
+        });
+
+        Route::controller(WithDrawController::class)->group(function () {
+            Route::get('/withDraw', 'listWithDraw')->name('collaborators.listWithDraw');
+            Route::get('/withDrawData', 'withDrawData')->name('collaborators.withDrawData');
+            Route::get('/withDrawDetail/{id}', 'withDrawDetail')->name('collaborators.withDrawDetail');
+            Route::get('/activeWithDraw/{id}', 'activeWithDraw')->name('collaborators.activeWithDraw');
+            Route::post('/unActiveWithDraw/{id}', 'unActiveWithDraw')->name('collaborators.unActiveWithDraw');
+        });
+
+        Route::controller(ReviewController::class)->group(function () {
+            Route::get('/reviewCar', 'listReviewCar')->name('collaborators.listReviewCar');
+            Route::get('/reviewDataCar', 'reviewDataCar')->name('collaborators.reviewDataCar');
+
+            Route::get('/reviewDetailCar/{id}', 'reviewDetailCar')->name('collaborators.reviewDetailCar');
+            Route::get('/reviewDetailCarData/{id}', 'reviewDetailCarData')->name('collaborators.reviewDetailCarData');
+            Route::get('/deleteComment/{id}', 'deleteComment')->name('collaborators.deleteComment');
+
+            Route::get('/viewReplyComment/{id}', 'viewReplyComment')->name('collaborators.viewReplyComment');
+            Route::get('/viewReplyCommentData/{id}', 'viewReplyCommentData')->name('collaborators.viewReplyCommentData');
+            Route::get('/deleteReplyComment/{id}', 'deleteReplyComment')->name('collaborators.deleteReplyComment');
+
+
+            Route::get('/reviewNew', 'listReviewNew')->name('collaborators.listReviewNew');
+            Route::get('/reviewDataNew', 'reviewDataNew')->name('collaborators.reviewDataNew');
+
+            Route::get('/reviewDetailNew/{id}', 'reviewDetailNew')->name('collaborators.reviewDetailNew');
+            Route::get('/reviewDetailNewData/{id}', 'reviewDetailNewData')->name('collaborators.reviewDetailNewData');
+            Route::get('/deleteNewComment/{id}', 'deleteNewComment')->name('collaborators.deleteNewComment');
+
+            Route::get('/viewReplyCommentNew/{id}', 'viewReplyCommentNew')->name('collaborators.viewReplyCommentNew');
+            Route::get('/viewReplyCommentDataNew/{id}', 'viewReplyCommentDataNew')->name('collaborators.viewReplyCommentDataNew');
+            Route::get('/deleteReplyCommentNew/{id}', 'deleteReplyCommentNew')->name('collaborators.deleteReplyCommentNew');
         });
     });

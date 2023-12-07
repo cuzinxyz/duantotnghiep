@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\SalonCollaboratorEvent;
+use App\Events\WorkCollaboratorEvent;
 use App\Models\Car;
 use App\Models\Comments;
 use App\Models\Salon;
@@ -58,7 +58,7 @@ class SalonController extends Controller
         $result = Salon::create($salonData);
 
         if($result) {
-            event(new SalonCollaboratorEvent($result), ['SalonCollaboratorListener']);
+            event(new WorkCollaboratorEvent($result));
         }
 
         if ($result) {

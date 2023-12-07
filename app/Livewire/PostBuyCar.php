@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Events\ByCarCollaboratorEvent;
+use App\Events\WorkCollaboratorEvent;
 use App\Models\Comments;
 use App\Models\Demnad;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +31,7 @@ class PostBuyCar extends Component
       $result = Demnad::create($validated);
 
       if ($result) {
-        event(new ByCarCollaboratorEvent($result), ['ByCarCollaboratorListener']);
+        event(new WorkCollaboratorEvent($result));
       }
 
       $this->dispatch('showSuccess', 'Đăng tin thành công! Vui lòng chờ duyệt!');

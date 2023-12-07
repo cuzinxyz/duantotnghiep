@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Auth;
+use App\Events\WorkCollaboratorWhenOnline;
 
 class UpdateActiceStatusUser
 {
@@ -18,6 +19,8 @@ class UpdateActiceStatusUser
         User::where('id', $event->user->id)->update([
             'active' => 1,
         ]);
+
+        event(new WorkCollaboratorWhenOnline());
     }
 
     /**

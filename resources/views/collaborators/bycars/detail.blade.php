@@ -15,10 +15,10 @@
             </div>
             <div class="col-lg-6">
                 <div class="" style="text-align: end">
-                    <a id="activeCar" href="{{ route('collaborators.activeCar', $demnad->id) }}"
+                    <a id="activeCar" href="{{ route('collaborators.activeByCar', $demnad->id) }}"
                         class="btn btn-success">Duyệt bài
                         đăng</a>
-                    <a href="{{ route('collaborators.unActiveCar', $demnad->id) }}" class="btn btn-danger">Không duyệt</a>
+                    <a href="#" class="btn btn-danger rename">Không duyệt</a>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                         <p>Số điện thoại</p>
                         <p class="color-black">
                             <strong>
-                                {{ $car->contact['phone'] }}
+                                {{ $demnad->user->phone_number ? $demnad->user->phone_number : 'Không có số điện thoại' }}
                             </strong>
                         </p>
                     </div>
@@ -66,10 +66,10 @@
                     <h4 class="mb-40px">Nội dung bài đăng</h4>
 
                     <div class="col-lg-12">
-                        <p>Tiêu đề</p>
+                        <p>Nội dung</p>
                         <p class="color-black">
                             <strong>
-                                {{ $demnal->content }}
+                                {{ $demnad->content }}
                             </strong>
                         </p>
                     </div>
@@ -78,6 +78,38 @@
         </div>
 
     </div><!--/.row-->
+
+    <div class="container">
+        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Vui lòng điền lý do</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form >
+                            @csrf
+                            <input type="text" id="reason"
+                                style="
+                            width: 100%;
+                            height: 50px;
+                            border: 1px solid #ccc;
+                            border-radius: 10px;
+                            outline: none;
+                            font-size: 16px;">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        <button type="button" id="submit_reason" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @push('scripts')
         <script>
@@ -101,6 +133,32 @@
                     });
                 });
             });
+        </script>
+
+        <script>
+            $(".rename").click(function(e) {
+                e.preventDefault();
+                let $this = $(this);
+                let fileName = $(this).data("file");
+                $("#basicModal").data("fileName", fileName).modal("toggle", $this);
+            });
+
+
+            $("#submit_reason").click(function() {
+                $.ajax({
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('collaborators.unActiveByCar', $demnad->id) }}",
+                    data: {
+                        reason: $('#reason').val()
+                    },
+                    success: function(data) {
+                        location.href = "{{route('collaborators.listByCar')}}";
+                    }
+                })
+            })
         </script>
     @endpush
 </x-collaborators.layout>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\WorkCollaboratorEvent;
 use App\Models\Car;
 use Livewire\Component;
 use App\Models\Reported;
@@ -49,6 +50,7 @@ class Report extends Component
             'content' => implode(', ', $this->content)
         ]);
         if ($reported) {
+            event(new WorkCollaboratorEvent($reported));
             $this->dispatch('showSuccess', 'Báo cáo thành công');
             // return redirect()->route('/');
         }

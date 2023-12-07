@@ -219,9 +219,9 @@
                 </svg>
                 Tin cần mua xe</a>
         </li>
-        @if (!empty(auth()->user()->collaborator))
+        @if (!empty(auth()->user()->is_collaborator))
             <li>
-                <a href="{{ route('service.list') }}" class="text-danger">CTV</a>
+                <a href="{{ route('collaborators.dashboard') }}" class="text-danger">CTV</a>
             </li>
         @endif
         {{-- <li @class(['active' => request()->routeIs('recharge')])>

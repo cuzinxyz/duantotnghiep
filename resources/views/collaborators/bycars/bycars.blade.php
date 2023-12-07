@@ -50,7 +50,7 @@
                     ajax: "{{ route('collaborators.byCarData') }}",
                     columns: [
                         {
-                            data: 'title',
+                            data: 'content',
                         },
                         {
                             data: 'username',

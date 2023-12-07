@@ -103,7 +103,7 @@
             <div class="col-xs-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
-                        <h4>Tin bán xe</h4>
+                        <h4>Cửa hàng</h4>
                         <div class="easypiechart" id="easypiechart-blue" data-percent="{{$efficiencyDay['percentCar']}}"><span
                                 class="percent">{{$efficiencyDay['percentCar']}}%</span></div>
                     </div>
@@ -112,27 +112,27 @@
             <div class="col-xs-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
-                        <h4>Comments</h4>
-                        <div class="easypiechart" id="easypiechart-orange" data-percent="65"><span
-                                class="percent">65%</span></div>
+                        <h4>Tin bán xe</h4>
+                        <div class="easypiechart" id="easypiechart-orange" data-percent="{{$efficiencyDay['percentCar']}}"><span
+                                class="percent">{{$efficiencyDay['percentCar']}}%</span></div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
-                        <h4>New Users</h4>
-                        <div class="easypiechart" id="easypiechart-teal" data-percent="56"><span
-                                class="percent">56%</span></div>
+                        <h4>Tin mua xe</h4>
+                        <div class="easypiechart" id="easypiechart-teal" data-percent="{{$efficiencyDay['percentByCar']}}"><span
+                                class="percent">{{$efficiencyDay['percentByCar']}}%</span></div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body easypiechart-panel">
-                        <h4>Visitors</h4>
-                        <div class="easypiechart" id="easypiechart-red" data-percent="27"><span
-                                class="percent">27%</span></div>
+                        <h4>Tố cáo</h4>
+                        <div class="easypiechart" id="easypiechart-red" data-percent="{{$efficiencyDay['percentReport']}}"><span
+                                class="percent">{{$efficiencyDay['percentReport']}}%</span></div>
                     </div>
                 </div>
             </div>

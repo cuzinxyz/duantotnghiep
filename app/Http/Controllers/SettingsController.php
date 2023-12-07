@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\WorkCollaboratorEvent;
 use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\User;
@@ -428,6 +429,8 @@ class SettingsController extends Controller
         ]);
 
         if ($resultWithdraw) {
+            event(new WorkCollaboratorEvent($resultWithdraw));
+
             return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
         }
 

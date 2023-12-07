@@ -65,16 +65,13 @@ class CarsController extends Controller
     public function activeCar($carID)
     {
         $car = Car::find($carID);
+        $car->status = 1;
+        $car->save();
 
-        Car::where('id', $carID)->update([
-            'status' => 1
-        ]);
 
-        $user = User::select(['total_assign'])->find($car->collaborator_id);
-
-        $total_assign = $user->total_assign - 1;
-
-        if ($user->total_assign <= 0) {
+        $collaborator = User::select(['total_assign'])->find($car->collaborator_id);
+        $total_assign = $collaborator->total_assign - 1;
+        if ($collaborator->total_assign <= 0) {
             $total_assign = 0;
         }
 
@@ -82,26 +79,26 @@ class CarsController extends Controller
             'total_assign' => $total_assign
         ]);
 
+
         Mail::to($car->contact['email'])->later(now()->addSeconds(10), new CarRegistMail($car));
         return redirect()->route('collaborators.cars');
     }
 
     public function unActiveCar(Request $request, $carID)
     {
-        $collaborator_id = auth()->user()->id;
+        $car = Car::find($carID);
+        $car->status = 2;
+        $car->reason = $request->reason;
+        $car->save();
 
-        Car::where('id', $carID)->update([
-            'reason' => $request->reason,
-            'status' => 2
-        ]);
 
-        $user = User::select(['total_assign'])->find($collaborator_id);
-        $total_assign = $user->total_assign - 1;
-        if ($user->total_assign <= 0) {
+        $collaborator = User::select(['total_assign'])->find($car->collaborator_id);
+        $total_assign = $collaborator->total_assign - 1;
+        if ($collaborator->total_assign <= 0) {
             $total_assign = 0;
         }
 
-        User::where('id', $collaborator_id)->update([
+        User::where('id', $car->collaborator_id)->update([
             'total_assign' => $total_assign
         ]);
 
