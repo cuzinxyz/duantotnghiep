@@ -65,6 +65,10 @@
                     ]
                 });
             })
+
+            setInterval(function() {
+                $('#datatable').DataTable().ajax.reload();
+            }, 30000);
         </script>
 
         <script>

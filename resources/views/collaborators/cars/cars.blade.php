@@ -48,8 +48,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('collaborators.carsData') }}",
-                    columns: [
-                        {
+                    columns: [{
                             data: 'title',
                         },
                         {
@@ -64,6 +63,10 @@
                     ]
                 });
             })
+
+            setInterval(function() {
+                $('#datatable').DataTable().ajax.reload();
+            }, 30000);
         </script>
     @endpush
 </x-collaborators.layout>
