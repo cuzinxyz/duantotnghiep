@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Events\CarCollaboratorEvent;
+use App\Events\WorkCollaboratorEvent;
 use App\Models\Car;
 use App\Models\Brand;
 use Livewire\Component;
@@ -125,8 +126,9 @@ class FormDangTin extends Component
 
 
         $success = Car::create($carData);
-        if ($success) {
-            event(new CarCollaboratorEvent($success));
+        
+        if($success) {
+            event(new WorkCollaboratorEvent($success));
         }
 
         // if ($result) {

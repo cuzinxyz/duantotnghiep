@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Events\SalonCollaboratorEvent;
 use Carbon\Carbon;
 use Filament\Forms;
 use App\Models\User;
@@ -13,11 +14,8 @@ use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use App\Models\TransactionsHistory;
-// use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\Column;
-use Filament\Tables\Columns\IconColumn;
 use Illuminate\Database\Eloquent\Model;
-use App\Infolists\Components\VideoEntry;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\ActionGroup;
@@ -29,7 +27,6 @@ use Filament\Infolists\Components\ImageEntry;
 use App\Filament\Resources\SalonsResource\Pages;
 use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Resources\RelationManagers\RelationManager;
 use App\Filament\Resources\SalonsResource\RelationManagers;
 
 class SalonsResource extends Resource
@@ -60,21 +57,41 @@ class SalonsResource extends Resource
                     ->state(function (Model $record, Column $column) {
                         if ($record->status == 0) return 'Chờ xác nhận';
                         if ($record->status == 1) return 'Đã xác nhận';
-                        if ($record->status == 2) return 'Tài khoản đã bị khóa';
+                        if ($record->status == 2) return 'Cửa hàng đã bị khóa';
                     })
-                    ->sortable()
+                    ->sortable(),
 
+                Tables\Columns\TextColumn::make('collaborator.name')
+                    ->label('Người kiểm duyệt')
+                    ->default(function (Model $model) {
+                        if (
+                            $model->collaborator_id == null
+                            && $model->status == 1
+                            || $model->status == 2
+                        )
+                            return 'Quản trị viên';
+
+                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                    }),
 
             ])
-            ->filters([
-                // Tables\Filters\TrashedFilter::make(),
-            ])
+            ->filters([])
             ->actions([
                 ActionGroup::make([
                     \Filament\Tables\Actions\Action::make('active')
                         ->label('Xác nhận')
                         ->action(function (Model $salon) {
                             if ($salon->status == 1) return true;
+
+                            $collaborator = User::find($salon->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+                            User::where('id', $salon->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
 
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $salon->user_id)->first();
@@ -101,8 +118,8 @@ class SalonsResource extends Resource
 
                                 return false;
                             }
-
                             $salon->status = 1;
+                            $salon->collaborator_id = null;
                             $salon->expired_date = Carbon::now()->addDays(30);
                             $salon->save();
 
@@ -118,19 +135,18 @@ class SalonsResource extends Resource
                             ]);
 
                             $reason = 'Chào bạn ' . $user->name . ',
-                                        Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
-                                        Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
-                                        Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
-                                        Trân trọng cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi.';
+                                Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
+                                Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
+                                Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
+                                Trân trọng cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi.';
 
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $salon->user_id,
                                 'body' => $reason
                             ]);
-
                             Notification::make()
-                                ->title('Đã gửi thông báo tới khách hàng')
+                                ->title('Đã xác nhận thành công')
                                 ->success()
                                 ->send();
                         })
@@ -147,6 +163,20 @@ class SalonsResource extends Resource
                                 ->required(),
                         ])
                         ->action(function (array $data, Model $salon) {
+                            $collaborator = User::find($salon->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+                            User::where('id', $salon->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
+                            $salon->status = 2;
+                            $salon->collaborator_id = null;
+                            $salon->reason = $data['reason'];
+                            $salon->save();
+
 
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $salon->user_id)->first();

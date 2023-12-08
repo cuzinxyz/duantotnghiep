@@ -30,4 +30,13 @@ class News extends Model implements Viewable
     {
         return $this->belongsTo(User::class);
     }
+
+    public function comments() {
+        return $this->hasMany(Comments::class);
+    }
+
+    public function news(): BelongsTo
+    {
+        return $this->belongsTo(News::class);
+    }
 }

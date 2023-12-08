@@ -84,4 +84,8 @@ class Car extends Model implements Viewable
     {
         return Comments::where('car_id', $carID)->count();
     }
+
+    public function comments() {
+        return $this->hasMany(Comments::class);
+    }
 }

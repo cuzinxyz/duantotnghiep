@@ -111,10 +111,9 @@ class UserResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
+        return parent::getEloquentQuery()->where('is_collaborator', 0)
+        ->where('name', '!=', 'BOT')
+        ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public static function getRelations(): array

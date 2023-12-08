@@ -25,7 +25,8 @@ class Salon extends Model
         'email',
         'expired_date',
         'user_id',
-        'status'
+        'status',
+        'reason',
     ];
 
     protected $casts = [
@@ -40,5 +41,10 @@ class Salon extends Model
     public function user(): hasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function collaborator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'collaborator_id', 'id');
     }
 }

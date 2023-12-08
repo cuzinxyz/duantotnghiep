@@ -13,12 +13,30 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 class RevenueDaysChart extends ApexChartWidget
 {
 
+    /**
+     * Chart Id
+     *
+     * @var string
+     */
+    protected static string $chartId = 'revenueDaysChart';
+
+    /**
+     * Widget Title
+     *
+     * @var string|null
+     */
+    protected static ?string $heading = 'Doanh thu theo ngày';
+
     protected static ?string $pollingInterval = null;
+    // protected static ?string $pollingInterval = '1000s';
+    protected static ?int $sort = 1;
+
 
 
     protected function getOptions(): array
     {
-        $data = Trend::query(TransactionsHistory::where('transaction_type', "LIKE",  '%mua gói%'))
+        $data = Trend::query(TransactionsHistory::where('transaction_type', "LIKE",  '%mua gói%')
+                ->orWhere('transaction_type', "LIKE", '%dịch vụ%'))
             ->between(
                 start: Carbon::parse($this->filterFormData['date_start']),
                 end: Carbon::parse($this->filterFormData['date_end']),
@@ -38,7 +56,7 @@ class RevenueDaysChart extends ApexChartWidget
                 ],
             ],
             'xaxis' => [
-                'categories' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d-m')),
+                'categories' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d')),
                 'labels' => [
                     'style' => [
                         'colors' => '#9ca3af',

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Collaborators;
 
-use App\Http\Controllers\Controller;
-use App\Models\Car;
 use Carbon\Carbon;
+use App\Models\Car;
+use App\Models\User;
+use App\Mail\CarRegistMail;
 use Illuminate\Http\Request;
+use App\Events\CarCollaboratorEvent;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 
 class CarsController extends Controller
@@ -18,20 +22,25 @@ class CarsController extends Controller
 
     public  function carsData()
     {
+        $collaborator_id = auth()->user()->id;
         $cars = Car::select(['id', 'slug', 'title', 'user_id', 'created_at'])
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->where([
+                'status' => 0,
+                'collaborator_id' => $collaborator_id
+            ])
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return DataTables::of($cars)
             ->addColumn(
                 'view',
-                function($car) {
+                function ($car) {
                     return '<a href="' . route('collaborators.carDetail', $car->slug) . '" class="btn btn-warning">Xem chi tiết</a>';
                 }
             )
             ->editColumn(
                 'created_at',
-                function($car) {
+                function ($car) {
                     return Carbon::parse($car->created_at)->diffForHumans();
                 }
             )
@@ -45,10 +54,56 @@ class CarsController extends Controller
             ->toJson();
     }
 
-    public function carDetail($slug) {
+    public function carDetail($slug)
+    {
 
         $car = Car::where('slug', $slug)->first();
 
         return view('collaborators.cars.detail', compact('car'));
     }
+
+    public function activeCar($carID)
+    {
+        $car = Car::find($carID);
+        $car->status = 1;
+        $car->save();
+
+
+        $collaborator = User::select(['total_assign'])->find($car->collaborator_id);
+        $total_assign = $collaborator->total_assign - 1;
+        if ($collaborator->total_assign <= 0) {
+            $total_assign = 0;
+        }
+
+        User::where('id', $car->collaborator_id)->update([
+            'total_assign' => $total_assign
+        ]);
+
+
+        Mail::to($car->contact['email'])->later(now()->addSeconds(10), new CarRegistMail($car));
+        return redirect()->route('collaborators.cars');
+    }
+
+    public function unActiveCar(Request $request, $carID)
+    {
+        $car = Car::find($carID);
+        $car->status = 2;
+        $car->reason = $request->reason;
+        $car->save();
+
+
+        $collaborator = User::select(['total_assign'])->find($car->collaborator_id);
+        $total_assign = $collaborator->total_assign - 1;
+        if ($collaborator->total_assign <= 0) {
+            $total_assign = 0;
+        }
+
+        User::where('id', $car->collaborator_id)->update([
+            'total_assign' => $total_assign
+        ]);
+
+        return redirect()->route('collaborators.cars');
+    }
+
+
 }

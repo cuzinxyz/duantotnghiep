@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8bf55f4b6ff3414583d3b4a2e07d230",
+    "content-hash": "1b8a3e6e975b1a273e21c441f117de43",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2721,6 +2721,58 @@
                 "source": "https://github.com/Laralabs/toaster/tree/5.0.0"
             },
             "time": "2023-05-01T17:41:11+00:00"
+        },
+        {
+            "name": "larasocket/larasocket-driver",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/larasocket/larasocket-driver.git",
+                "reference": "5dae5bf8b9932885d6773932024e6a8218178973"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/larasocket/larasocket-driver/zipball/5dae5bf8b9932885d6773932024e6a8218178973",
+                "reference": "5dae5bf8b9932885d6773932024e6a8218178973",
+                "shasum": ""
+            },
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Larasocket\\LarasocketServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Larasocket\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zach Vander Velden",
+                    "email": "zachvv11@gmail.com"
+                }
+            ],
+            "description": "Pay as you go broadcast driver for Laravel.",
+            "homepage": "https://larasocket.com",
+            "keywords": [
+                "Broadcast",
+                "driver",
+                "larasocket",
+                "laravel",
+                "websocket"
+            ],
+            "support": {
+                "issues": "https://github.com/larasocket/larasocket-driver/issues",
+                "source": "https://github.com/larasocket/larasocket-driver/tree/1.0.4"
+            },
+            "time": "2021-05-11T03:13:21+00:00"
         },
         {
             "name": "laravel/framework",

@@ -235,12 +235,9 @@
                 </svg>
                 Tin cần mua xe</a>
         </li>
-        <li @class(['active' => request()->routeIs('news.list')])>
-            <a href="{{ route('news.list') }}" class="drop-down">Tin tức</a>
-        </li>
-        @if (!empty(auth()->user()->collaborator))
+        @if (!empty(auth()->user()->is_collaborator))
             <li>
-                <a href="{{ route('service.list') }}" class="text-danger">CTV</a>
+                <a href="{{ route('collaborators.dashboard') }}" class="text-danger">CTV</a>
             </li>
         @endif
         {{-- <li @class(['active' => request()->routeIs('recharge')])>

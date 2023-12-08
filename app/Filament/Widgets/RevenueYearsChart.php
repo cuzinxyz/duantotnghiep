@@ -13,13 +13,29 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class RevenueYearsChart extends ApexChartWidget
 {
+    /**
+     * Chart Id
+     *
+     * @var string
+     */
+    protected static string $chartId = 'revenueYearsChart';
+
+    /**
+     * Widget Title
+     *
+     * @var string|null
+     */
+    protected static ?string $heading = 'Doanh thu theo năm';
 
     protected int | string | array $columnSpan = 'full';
+
+    protected static ?int $sort = 3;
 
 
     protected function getOptions(): array
     {
-        $data = Trend::query(TransactionsHistory::where('transaction_type', "LIKE",  '%mua gói%'))
+        $data = Trend::query(TransactionsHistory::where('transaction_type', "LIKE",  '%mua gói%')
+            ->orWhere('transaction_type', "LIKE", '%dịch vụ%'))
             ->between(
                 start: Carbon::parse($this->filterFormData['date_start']),
                 end: Carbon::parse($this->filterFormData['date_end']),

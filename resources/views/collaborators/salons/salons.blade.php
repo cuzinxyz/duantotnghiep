@@ -71,6 +71,9 @@
                     ]
                 });
             })
+            setInterval(function() {
+                $('#datatable').DataTable().ajax.reload();
+            }, 30000);
         </script>
     @endpush
 </x-collaborators.layout>
