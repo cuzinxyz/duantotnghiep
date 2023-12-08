@@ -198,7 +198,7 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Số KM đã đi*</label>
-                                            <input wire:model="mileage" type="number" placeholder="100 KM"
+                                            <input wire:model="mileage" min="0" type="number" placeholder="100 KM"
                                                 wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
@@ -211,7 +211,7 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Giá muốn bán*</label>
-                                            <input wire:model="price" class="myInput" type="number"
+                                            <input min="0" wire:model="price" class="myInput" type="number"
                                                 placeholder="1.000.000.000 VND" wire:ignore.self>
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
@@ -224,7 +224,7 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Mã lực*</label>
-                                            <input wire:model="engine" type="number" placeholder="ex: 300"
+                                            <input wire:model="engine" min="0" type="number" placeholder="ex: 300"
                                                 wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">

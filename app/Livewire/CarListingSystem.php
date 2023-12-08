@@ -48,7 +48,7 @@ class CarListingSystem extends Component
     #[Layout('components.partials.layout-client')]
     public function render()
     {
-        $carQuery = Car::query();
+        $carQuery = Car::query()->where('status', 1);
 
         if (!empty($this->make)) {
             $carQuery->where('title', 'LIKE', '%' . $this->make . '%');

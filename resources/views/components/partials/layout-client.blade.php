@@ -2,31 +2,28 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    @livewireStyles
+    <meta name="description" content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023.">
+    <meta name="keywords" content="oto cũ, mua bán ô tô, xe oto cũ, ô tô đã qua sử dụng, drivco.shop">
+    <meta name="author" content="Drivco Việt Nam">
+    <!-- Seo Meta -->
+    <title>@yield('page_title', 'Drivco.shop: Mua bán ô tô cũ và mới, oto đã qua sử dụng')</title>
+    <meta http-equiv="content-language" content="vi">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="Vietnamese">
+    <meta name="revisit-after" content="1 days">
     <!-- Favicon -->
+    <link rel="canonical" href="https://drivco.shop/oto">
+    <link rel="next" href="https://drivco.shop/oto">
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon-16x16.png') }}">
 
-    <!-- Seo Meta -->
-    <title>@yield('page_title', 'Drivco')</title>
-    {{-- <base href="https://drivco.shop/"> --}}
-    <meta content="oto cu, mua ban oto cu, xe oto cu" name="keywords">
-    <meta
-        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023."
-        name="description">
-    <link rel="canonical" href="https://drivco.shop/oto">
-    <link rel="next" href="https://drivco.shop/oto">
-    <meta http-equiv="content-language" content="vi">
-    <meta name="language" content="Vietnamese,vn">
-    <meta name="geo.region" content="VN">
-    <meta name="robots" content="index,follow,noodp">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Social SEO meta -->
     <meta property="og:site_name" content="Drivco.shop">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:type" content="article">
@@ -40,7 +37,8 @@
     <meta property="og:image:type" content="image/jpg">
     <meta property="og:image:width" content="650">
     <meta property="og:image:height" content="350">
-
+    <meta name="theme-color" content="#46D993">
+    {{-- DNS --}}
     <link rel="preconnect" href="https://connect.facebook.net">
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://ssl.google-analytics.com">
@@ -49,57 +47,39 @@
     <link rel="preconnect" href="https://www.googleadservices.com">
     <link rel="preconnect" href="https://tpc.googlesyndication.com">
     <link rel="preconnect" href="https://googleads.g.doubleclick.net">
-    <!-- Seo Meta -->
-
+    {{-- Stylesheets --}}
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/jquery.fancybox.min.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
-
     <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
-
     <link href="{{ asset('css/boxicons.min.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/nice-select.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet"> --}}
-
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-
     <script src="//unpkg.com/alpinejs" defer></script>
 
+    @livewireStyles
     @stack('styles')
     <style>
         ::-webkit-scrollbar {
             width: 10px;
         }
-
         ::-webkit-scrollbar-track {
             background: #f3f3f3;
         }
-
         ::-webkit-scrollbar-thumb {
             background: #0000000d;
-
             border-radius: 5px
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
@@ -109,7 +89,6 @@
 <body class="tt-magic-cursor home-5">
 
     <div class="pre-loader">
-
         <div class="loader">
             <svg class="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
                 <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="evenodd"
@@ -226,19 +205,18 @@
                                 </ul>
                             </li>
 
-                            <li class="menu-single-item">
+                            <li class="menu-single-item" style="flex-basis: unset">
                                 <h5>Salon</h5>
                                 <ul>
-                                    <li class="">
-                                        @php
-                                            $salons = \App\Models\Salon::all();
-                                        @endphp
+                                    @php
+                                        $salons = \App\Models\Salon::all();
+                                    @endphp
 
-                                        @foreach ($salons as $salon)
-                                    <li>
-                                        <a
-                                            href="{{ route('salon.listCars', $salon->id) }}">{{ $salon->salon_name }}</a>
-                                    </li>
+                                    @foreach ($salons as $salon)
+                                        <li>
+                                            <a
+                                                href="{{ route('salon.listCars', $salon->id) }}">{{ $salon->salon_name }}</a>
+                                        </li>
                                     @endforeach
                             </li>
                         </ul>
@@ -256,6 +234,9 @@
                         d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z" />
                 </svg>
                 Tin cần mua xe</a>
+        </li>
+        <li @class(['active' => request()->routeIs('news.list')])>
+            <a href="{{ route('news.list') }}" class="drop-down">Tin tức</a>
         </li>
         @if (!empty(auth()->user()->collaborator))
             <li>
@@ -392,7 +373,7 @@
                                             </div>
 
                                             <div class="cart-block-body_item d-flex align-items-center gap-2"
-                                                onclick="window.location.href='{{ route('wishlish') }}'">
+                                                onclick="window.location.href='{{ route('buyCar') }}'">
                                                 <i class="bi bi-megaphone"></i> Đăng tin mua xe
                                             </div>
 

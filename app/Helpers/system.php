@@ -5,5 +5,3 @@ function uploadFile($nameFolder, $file){
     return $file->storeAs($nameFolder, $fileName, 'public');
 }
 
-
-

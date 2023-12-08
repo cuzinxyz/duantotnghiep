@@ -214,8 +214,8 @@
             <div class="row mb-60 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
                     <div class="section-title-2">
-                        <h2>Tư vấn xe mới nhất</h2>
-                        <p>Dưới đây là một số xe nổi bật ở các hạng mục khác nhau </p>
+                        <h2>Tin tức mới nhất</h2>
+                        <p>Thông tin mới liên tục cập nhật từ Drivco </p>
                     </div>
                 </div>
             </div>

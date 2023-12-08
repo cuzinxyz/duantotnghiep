@@ -88,7 +88,7 @@
                                         <label>Email của bạn<span class="text-danger">*</span></label>
                                         <input
                                             class="input_login w-100 border @error('email') border border-danger @enderror"
-                                            style="height: 60px" type="email" placeholder="Example@gmail.com"
+                                            style="height: 60px" type="email" placeholder="example@gmail.com"
                                             id="email" type="email" value="{{ old('email') }}"
                                             autocomplete="email" name="email" autofocus>
                                     </div>
@@ -120,7 +120,7 @@
                                                 {{ old('remember') ? 'checked' : '' }}>
                                             <label for="html">Lưu đăng nhập</label>
                                         </div>
-                                        <a style="color: #46D993" href="#" class="forgot-pass">Quên mật khẩu?</a>
+                                        <a style="color: #46D993" href="/password/reset" class="forgot-pass">Quên mật khẩu?</a>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

@@ -15,6 +15,7 @@ class Salon extends Model
 
     protected $fillable = [
         'salon_name',
+        'slug',
         'address',
         'image_salon',
         'city_id',

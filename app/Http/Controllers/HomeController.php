@@ -65,6 +65,7 @@ class HomeController extends Controller
         }
         # news data
         $posts = News::where('isPublished', 1)
+            ->limit(3)
             ->get();
         $brands = Brand::all();
 
@@ -78,5 +79,5 @@ class HomeController extends Controller
 
         return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners', 'adsPartners'));
     }
-    
+
 }

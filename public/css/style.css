@@ -27698,6 +27698,7 @@ button {
     border-radius: 10px;
     /* padding: 10px 35px 50px; */
 }
+
 /*
 .bg-shape {
     position: relative;
@@ -28944,7 +28945,7 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     height: 40px;
     bottom: 40px;
     right: 40px;
-    box-shadow: 0 0 15px 1px rgba(69,65,78,.2);
+    box-shadow: 0 0 15px 1px rgba(69, 65, 78, .2);
     opacity: .3;
     background-color: #46D993;
     color: white;
@@ -28957,6 +28958,37 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     background-color: #46D993;
     opacity: 3;
 }
+
 .different-border {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset !important;
+}
+
+/* Tablet and larger screens */
+@media only screen and (min-width: 768px) {
+    .product-card2 .product-img img {
+        height: 283px;
+        object-fit: cover;
+    }
+}
+
+/* PC screens */
+@media only screen and (min-width: 1024px) {
+    .product-card2 .product-img img {
+        height: 283px;
+        object-fit: cover;
+    }
+    .product-st-card1.two .product-img img {
+        height: 140px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+}
+.line-clamp-1 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    vertical-align: middle;
 }

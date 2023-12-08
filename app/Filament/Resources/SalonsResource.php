@@ -237,12 +237,24 @@ class SalonsResource extends Resource
 
                                     $account_balence = intval($user->account_balence) - intval(300000);
                                     if ($account_balence < 0) {
+                                        $reason = 'Chào bạn ' . $user->name . ',
+                                        Yêu cầu mở cửa hàng của bạn không được phê duyệt,
+                                        Lý do được đưa ra là số dư tài khoản của bạn không đủ.
+                                        Kinh phí bạn cần thanh toán hàng tháng là 300.000đ,
+                                        vui lòng nạp thêm tiền để được phê duyệt.';
+
+                                        ChMessage::create([
+                                            'from_id' => $bot->id,
+                                            'to_id' => $salon->user_id,
+                                            'body' => $reason
+                                        ]);
+
                                         Notification::make()
-                                            ->title('Số dư tài khoản của khách hàng không đủ.')
-                                            ->danger()
+                                            ->title('Số dư của khách hàng không đủ. Đã thông báo tới khách hàng!')
+                                            ->success()
                                             ->send();
+
                                         return false;
-                                        // die();
                                     }
 
                                     $salon->status = 1;

@@ -170,7 +170,7 @@ return [
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,  
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ])->toArray(),
 
     /*

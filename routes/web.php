@@ -56,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/them-xe', 'addCar')->name('salon.addcar');
             Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
             Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
-            Route::get('/danh-sach-xe/{salonID}', 'listCars')->name('salon.listCars');
         });
         Route::post('/account-balance', 'getBalance');
     });
@@ -119,7 +118,7 @@ Route::get("/bai-viet", function () {
     return view('news.list', [
         'posts' => $posts
     ]);
-});
+})->name('news.list');
 
 Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
@@ -146,13 +145,13 @@ Auth::routes();
 
 // Trang chi tiết xe
 Route::controller(CarDetailController::class)->group(function () {
-    Route::get('/xe/{slug}', 'index')->name('car-detail');
+    Route::get('/oto/{slug}', 'index')->name('car-detail');
 });
 
 // Showroom
 Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
-
-
+# salon list
+Route::get('/salon/{salonID}', [SalonController::class, 'listCars'])->name('salon.listCars');
 
 // collaborators
 Route::get('/collaborators', function () {
