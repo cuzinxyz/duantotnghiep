@@ -8,10 +8,21 @@
 
     @if ($salon)
         @if ($salon->status == 0)
-            <div class="my-5 py-3 fs-4 text-center alert alert-warning">
-                <i class="bi bi-car-front-fill"></i> Đơn đăng ký salon của bạn đang được quản trị viên xem xét phê duyệt,
-                <br> vui lòng chờ thông báo qua <strong>tin nhắn</strong> hoặc <strong>email</strong> của bạn để nhận
-                kết quả.
+            <div class="container">
+                <div class="my-5 py-3 alert alert-warning">
+                    <i class="bi bi-car-front-fill"></i> Đơn đăng ký salon của bạn đang được quản trị viên xem xét phê
+                    duyệt,
+                    <br> vui lòng chờ thông báo qua <strong>tin nhắn</strong> hoặc <strong>email</strong> của bạn để
+                    nhận
+                    kết quả.
+                </div>
+            </div>
+        @elseif($salon->status == 2)
+            <div class="container">
+                <div class=" alert alert-danger">
+                    <p>Yêu cầu tạo salon của bạn không được phê duyệt, kiểm tra tin nhắn để biết lý do!</p>
+                    <button class="btn btn-primary" id="xem_xet">Yêu cầu xem xét lại</button>
+                </div>
             </div>
         @else
             @include('components.nofication')
@@ -253,8 +264,7 @@
                                 Bạn cần thanh toán <strong>300,000 VND / tháng</strong> từ số dư tài khoản của mình để
                                 đăng
                                 ký cửa hàng. <br>
-                                Bạn cần gia hạn trước khi hết hạn vào ngày (
-                                <strong>{{ \Carbon\Carbon::now()->addDays(30) }}</strong> )
+                                Bạn cần gia hạn trước khi hết hạn sau (<strong>30</strong>) kể từ khi được phê duyệt
                             </p>
                             <br>
                             <h6>Xác nhận lại thông tin</h6>
@@ -541,4 +551,28 @@
         @endpush
 
     @endif
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $("#xem_xet").on('click', function() {
+                    $.ajax({
+                        url: '/xem-xet',
+                        type: 'POST',
+                        dataType: 'json',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            salonID: "{{ \App\Models\Salon::where('user_id', auth()->id())->pluck('id')[0] }}",
+                        },
+                        success: function(data) {
+                            alert(data);
+                            window.location.href = '/';
+                        }
+                    })
+                })
+            })
+        </script>
+    @endpush
 </x-partials.layout-client>

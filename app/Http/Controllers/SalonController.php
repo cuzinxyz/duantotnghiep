@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Events\WorkCollaboratorEvent;
 use App\Models\Car;
-use App\Models\Comments;
-use App\Models\Salon;
 use App\Models\User;
+use App\Models\Salon;
+use App\Models\Comments;
 use App\Models\Wishlist;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class SalonController extends Controller
@@ -49,6 +50,7 @@ class SalonController extends Controller
 
         $salonData = array(
             'salon_name' => $request->storeName,
+            'slug' => Str::slug($request->storeName),
             'address' => $request->storeAddress,
             'description' => $request->storeIntro,
             'phone_number' => $request->phoneNumber,
@@ -110,7 +112,13 @@ class SalonController extends Controller
 
     public function listCars($salonID)
     {
+        $salonInfo = Salon::find($salonID);
+
+        if(!$salonInfo) {
+            abort(404);
+        }
         $cars = Car::where('salon_id', $salonID)->get();
-        return view('salon.danh-sach-xe', compact('cars'));
+
+        return view('salon.danh-sach-xe', compact('cars', 'salonInfo'));
     }
 }

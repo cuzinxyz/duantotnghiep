@@ -36,9 +36,9 @@ class ServiceSeeder extends Seeder
           [
             'service_name' => 'Gói Chuyên Nghiệp',
             'price' => 500000,
-            'description' => '15 lượt đẩy tin',
+            'description' => '10 lượt đẩy tin',
             'expiration_date' => 30,
-            'number_of_pushes' => 15,
+            'number_of_pushes' => 10,
             'title' => 'Giải pháp tốt nhất dành cho doanh nghiệp / Garage',
           ],
           [

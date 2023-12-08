@@ -6,8 +6,9 @@ use App\Models\Car;
 use App\Models\Brand;
 use Livewire\Component;
 use App\Models\ModelCar;
-use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 
 class SingleBrandCategory extends Component
 {
@@ -44,7 +45,6 @@ class SingleBrandCategory extends Component
             $cars = Car::where('status', 1)->simplePaginate(9);
         }
 
-
         if ($this->price) {
             $parts = explode("-", $this->price);
 
@@ -62,17 +62,24 @@ class SingleBrandCategory extends Component
             ->simplePaginate(9);
         }
 
+        if($this->brand && $this->model) {
+            $cars = Car::where('brand_id', $this->brand)
+                ->where('model_car_id', $this->model)
+                ->where('status', 1)
+                ->simplePaginate(9);
+        }
+
         if($this->price && $this->brand && $this->model ) {
             $parts = explode("-", $this->price);
             $number1 = intval(trim($parts[0]));
             $number2 = intval(trim($parts[1]));
 
             $cars = Car::where('price', '>=', $number1)
-            ->where('price', '<=', $number2)
-            ->where('brand_id', $this->brand)
-            ->where('model_car_id', $this->model)
-            ->where('status', 1)
-            ->simplePaginate(9);
+                ->where('price', '<=', $number2)
+                ->where('brand_id', $this->brand)
+                ->where('model_car_id', $this->model)
+                ->where('status', 1)
+                ->simplePaginate(9);
         }
 
         return $cars;

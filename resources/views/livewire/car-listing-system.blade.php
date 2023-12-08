@@ -161,7 +161,7 @@
                                 @foreach ($cars as $car)
                                     <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item"
                                         data-wow-delay="{{ $wowDelay + 100 }}ms">
-                                        <div class="product-card">
+                                        {{-- <div class="product-card">
                                             <div class="product-img">
                                                 <div class="number-of-img">
                                                     <img src="{{ asset('fonts/gallery-icon-1.svg') }}"
@@ -249,13 +249,36 @@
                                                     <div class="brand">
                                                         <a
                                                             href="{{ route('brand.detail', $car->brand->brand_name) }}">
-                                                            {{-- <img src="/storage/{{ $car->brand->logo_url }}" alt="image"> --}}
                                                             <img style="width: 30px;height:30px;object-fit:contain"
                                                                 src="{{ asset('storage/' . $car->brand->logo_url) }}"
                                                                 alt="{{ $car->title }}">
                                                         </a>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div> --}}
+
+                                        <div class="product-card2">
+                                            <div class="product-img">
+                                                <div class="date">
+                                                    <button type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#alartModal01">
+                                                        {{ $car->created_at->format("d M, Y") }} <i class="bi bi-exclamation-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <livewire:add-to-wish-list carID="{{ $car->id }}" />
+                                                <img src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="product-content">
+                                                <div class="details-btn">
+                                                    <a href="{{ route('car-detail', $car->slug) }}"><i
+                                                            class="bi bi-arrow-right-short"></i></a>
+                                                </div>
+                                                <div class="price">
+                                                    <strong class="line-clamp-1">{{ number_format($car->price) }} đ</strong>
+                                                </div>
+                                                <h6><a href="{{ route('car-detail', $car->slug) }}" class="line-clamp-1">{{ $car->title }}</a></h6>
                                             </div>
                                         </div>
                                     </div>

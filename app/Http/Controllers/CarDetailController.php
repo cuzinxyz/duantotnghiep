@@ -13,8 +13,11 @@ class CarDetailController extends Controller
         $carDetail = [];
         if ($slug) {
             $carDetail = Car::where('slug', $slug)->first();
-        }
 
+            if(!$carDetail) {
+                abort(404);
+            }
+        }
 
         # save view
         views($carDetail)->record();

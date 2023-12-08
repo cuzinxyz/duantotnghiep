@@ -24,6 +24,8 @@ use App\Http\Controllers\Collaborators\ReportController;
 use App\Http\Controllers\Collaborators\ReviewController;
 use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 use App\Http\Controllers\Collaborators\WithDrawController;
+use App\Models\Salon;
+use Illuminate\Http\Request;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -53,7 +55,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/them-xe', 'addCar')->name('salon.addcar');
             Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
             Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
-            Route::get('/danh-sach-xe/{salonID}', 'listCars')->name('salon.listCars');
         });
         Route::post('/account-balance', 'getBalance');
     });
@@ -116,7 +117,7 @@ Route::get("/bai-viet", function () {
     return view('news.list', [
         'posts' => $posts
     ]);
-});
+})->name('news.list');
 
 Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
@@ -143,13 +144,13 @@ Auth::routes();
 
 // Trang chi tiết xe
 Route::controller(CarDetailController::class)->group(function () {
-    Route::get('/xe/{slug}', 'index')->name('car-detail');
+    Route::get('/oto/{slug}', 'index')->name('car-detail');
 });
 
 // Showroom
 Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
-
-
+# salon list
+Route::get('/salon/{salonID}', [SalonController::class, 'listCars'])->name('salon.listCars');
 
 // collaborators
 Route::prefix('/collaborators')
@@ -227,4 +228,13 @@ Route::prefix('/collaborators')
             Route::get('/viewReplyCommentDataNew/{id}', 'viewReplyCommentDataNew')->name('collaborators.viewReplyCommentDataNew');
             Route::get('/deleteReplyCommentNew/{id}', 'deleteReplyCommentNew')->name('collaborators.deleteReplyCommentNew');
         });
+    });
+
+
+    Route::post('/xem-xet', function(Request $request) {
+        Salon::where('id', $request->input("salonID"))->update([
+            'status' => 0
+        ]);
+
+        return response()->json('Đã gửi yêu cầu xem xét');
     });

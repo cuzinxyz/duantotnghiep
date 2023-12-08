@@ -39,7 +39,8 @@
 .messenger-messagingView {
     border-top: 1px solid var(--secondary-bg-color);
     border-bottom: 1px solid var(--secondary-bg-color);
-    background: var(--messagingView-bg-color);
+    /* background: var(--messagingView-bg-color); */
+    max-height: 100vh;
 }
 .m-header-messaging {
     background: var(--primary-bg-color);
@@ -55,8 +56,8 @@
     border-top: 1px solid var(--border-color);
 }
 .messenger-sendCard {
-    background: var(--primary-bg-color);
-    border-top: 1px solid var(--border-color);
+    /* background: var(--primary-bg-color); */
+    /* border-top: 1px solid var(--border-color); */
 }
 .attachment-preview > p {
     color: #333;
@@ -65,8 +66,9 @@
     color: #333;
 }
 .message-card .message {
-    background: var(--message-card-color);
-    color: #656b75;
+    background: #f0f0f0;
+    color: #050505;
+    font-family: "Segoe UI Historic", "Segoe UI", "Helvetica", "Arial", sans-serif;
     box-shadow: 0px 6px 11px rgba(18, 67, 105, 0.03);
 }
 .m-li-divider {

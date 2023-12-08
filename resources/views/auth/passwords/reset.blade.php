@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@section('page_title')
+    Quên mật khẩu tài khoản - Drivco
+@endsection
+<x-partials.layout-client>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,4 +64,5 @@
         </div>
     </div>
 </div>
-@endsection
+
+</x-partials.layout-client>
