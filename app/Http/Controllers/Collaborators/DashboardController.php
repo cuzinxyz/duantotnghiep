@@ -27,10 +27,7 @@ class DashboardController extends Controller
         $byCar_count = Demnad::where('collaborator_id', $collaborator_id)
         ->where('status', '!=', 0)  ->count();
 
-
         $efficiencyDay = $this->efficiencyDay();
-
-        // dd($efficiencyDay['percentCar']);
 
         return view('collaborators.dashboard', compact(
             'salon_count',
@@ -45,39 +42,35 @@ class DashboardController extends Controller
         $collaborator_id = Auth::user()->id;
 
         // Tin bán xe
-        $activeCar = Car::where([
+        $unActiveCar = Car::where([
             'collaborator_id' => $collaborator_id,
-            'status' => 1
+            'status' => 0
         ])->count();
-
-        $totalCar = Car::where('collaborator_id', $collaborator_id)->count();
-
-        $percentCar = round(($activeCar / $totalCar) * 100);
 
         // Tin mua xe
-        $activeByCar = Demnad::where([
+        $unActiveByCar = Demnad::where([
             'collaborator_id' => $collaborator_id,
-            'status' => 1
+            'status' => 0
         ])->count();
-        
-        $totalByCar = Demnad::where('collaborator_id', $collaborator_id)->count();
-        $percentByCar = round(($activeByCar / $totalByCar) * 100);
 
         // Tố cáo
-        $activeReport = Reported::where([
+        $unActiveReport = Reported::where([
             'collaborator_id' => $collaborator_id,
-            'status' => 1
+            'status' => 0
         ])->count();
 
-        $totalReport = Demnad::where('collaborator_id', $collaborator_id)->count();
-        $percentReport = round(($activeReport / $totalReport) * 100);
 
+        $unActiveSalon = Salon::where([
+            'collaborator_id' => $collaborator_id,
+            'status' => 0
+        ])->count();
 
 
         return [
-            'percentCar' => $percentCar,
-            'percentByCar' => $percentByCar,
-            'percentReport' => $percentReport
+            'unActiveCar' => $unActiveCar,
+            'unActiveByCar' => $unActiveByCar,
+            'unActiveReport' => $unActiveReport,
+            'unActiveSalon' => $unActiveSalon,
         ];
         
     }

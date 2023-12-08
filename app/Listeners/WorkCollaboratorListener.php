@@ -65,6 +65,7 @@ class WorkCollaboratorListener
         if($event->data instanceof WithDraw) {
             $this->taskAllocation(WithDraw::class, $event->data, $collaborator);
         }
+
     }
 
     public function taskAllocation($model, $data, $collaborator) {

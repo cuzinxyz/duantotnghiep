@@ -43,7 +43,7 @@ class ReportController extends Controller
             )->addColumn(
                 'viewCar',
                 function ($report) {
-                    return '<a  href="' . route('car-detail', $report->cars->slug).'"
+                    return '<a target="_blank"  href="' . route('car-detail', $report->cars->slug).'"
                         class="btn btn-primary">Xem bài đăng </a>';
                 }
             )

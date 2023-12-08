@@ -22,6 +22,8 @@
 
     @stack('styles')
 
+
+    @vite(['resources/js/app.js'])
 </head>
 
 <body>
@@ -44,20 +46,10 @@
     {{ $slot }}
     <!--/.main-->
 
-    <script>
-        window.addEventListener('beforeunload', (event) => {
-            event.preventDefault();
-            event.returnValue = '';
-        });
-    </script>
-
     <script src="{{ asset('ctv/js/jquery-1.11.1.min.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script src="{{ asset('ctv/js/bootstrap.min.js') }}"></script>
-
-    <script src="{{ asset('ctv/js/custom.js') }}"></script>
-
     @stack('scripts')
 </body>
 

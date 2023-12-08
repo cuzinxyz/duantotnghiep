@@ -29,7 +29,9 @@ class User extends Authenticatable
         'avatar',
         'account_balence',
         'phone_number',
-        'total_assign'
+        'total_assign',
+        'active',
+        'is_collaborator',
     ];
 
     /**

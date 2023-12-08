@@ -7,28 +7,26 @@ use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Collaborators;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\UserResource\Pages\ViewUser;
+use App\Filament\Resources\CollaboratorsResource\Pages;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Filament\Resources\UserResource\RelationManagers\TransactionsHistoriesRelationManager;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers;
 
-class UserResource extends Resource
+class CollaboratorsResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Tài khoản';
 
-    protected static ?string $navigationLabel = 'Người dùng';
-
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationLabel = 'Nhân viên';
 
     public static function form(Form $form): Form
     {
@@ -37,18 +35,21 @@ class UserResource extends Resource
                 Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->required(),
+                        ->label('Họ tên')
+                        ->rules(['required']),
                         Forms\Components\TextInput::make('email')
-                            ->email()
-                            ->required(),
+                        ->label('Email')
+                        ->email()
+                            ->rules(['required']),
                         Forms\Components\TextInput::make('phone_number')
-                            ->tel()
+                        ->label('Số điện thoại')
+                        ->tel()
                             ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
-                            ->required(),
+                            ->rules(['required']),
                         Forms\Components\TextInput::make('password')
-                            ->password()
+                        ->password()
                             ->visible(fn ($livewire) => $livewire instanceof CreateUser)
-                            ->required(),
+                            ->rules(['required']),
                     ])->columnSpan([
                         'md' => 1,
                         'xl' => 2
@@ -56,7 +57,7 @@ class UserResource extends Resource
                 Section::make()
                     ->schema([
                         FileUpload::make('avatar')
-                            ->imageEditor()
+                        ->imageEditor()
                             ->disk('public')
                             ->required()
                             ->directory('avatars/users'),
@@ -76,18 +77,17 @@ class UserResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('avatar')
-                    ->label('Ảnh đại diện')
-                    ->circular(),
-                Tables\Columns\TextColumn::make('name')->searchable(),
+                ->label('Ảnh đại diện')
+                ->circular(),
+                Tables\Columns\TextColumn::make('name')
+                ->label('Họ tên')
+                ->searchable(),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('phone_number')->label('Số điện thoại'),
-                Tables\Columns\TextColumn::make('account_balence')->label('Số dư tài khoản')
-                    ->numeric(
-                        decimalPlaces: 0,
-                        decimalSeparator: '.',
-                        thousandsSeparator: ',',
-                    )
-                    ->money('VND'),
+                Tables\Columns\TextColumn::make('phone_number')
+                ->default('Không có số điện thoại')
+                ->label('Số điện thoại'),
+
+
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -95,13 +95,15 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
@@ -109,32 +111,22 @@ class UserResource extends Resource
             ]);
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('is_collaborator', 0)
-        ->where('name', '!=', 'BOT')
-        ->withoutGlobalScope(SoftDeletingScope::class);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            TransactionsHistoriesRelationManager::class
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'view' => ViewUser::route('/{record}'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListCollaborators::route('/'),
+            'create' => Pages\CreateCollaborators::route('/create'),
+            'edit' => Pages\EditCollaborators::route('/{record}/edit'),
         ];
+    } 
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('is_collaborator', 1)->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public static function getModelLabel(): string
     {
-        return __('Người dùng');
+        return __('cộng tác viên');
     }
 }

@@ -126,6 +126,7 @@ class FormDangTin extends Component
 
 
         $success = Car::create($carData);
+        
         if($success) {
             event(new WorkCollaboratorEvent($success));
         }

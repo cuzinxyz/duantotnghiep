@@ -163,6 +163,7 @@ class PostCarManagerResource extends Resource
                                         ->action(function (array $data, Car $record) {
                                             $record->reason = $data['reason'];
                                             $record->status = 2;
+                                            $record->collaborator_id = null;
                                             $record->save();
 
                                             redirect()->route('filament.admin.resources.post-car-managers.index');

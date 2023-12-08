@@ -56,6 +56,20 @@ class DemnadResource extends Resource
                                 if ($record->status == 1) return 'Đã được duyệt';
                             })
                             ->label('Trạng thái'),
+
+                        TextEntry::make('collaborator.name')
+                            ->label('Người kiểm duyệt')
+                            ->default(function (Model $model) {
+                                if (
+                                    $model->collaborator_id == null
+                                    && $model->status == 1
+                                    || $model->status == 2
+                                )
+                                    return 'Quản trị viên';
+
+                                if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                            })
+                            ->icon('heroicon-o-user-circle')
                     ])->columns(2)
                     ->columnSpan(1),
                 Section::make('Hành động')
@@ -67,6 +81,7 @@ class DemnadResource extends Resource
                                 ->requiresConfirmation()
                                 ->action(function (Demnad $record) {
                                     $record->status = 1;
+                                    $record->collaborator_id = null;
                                     $record->save();
 
 
@@ -104,7 +119,8 @@ class DemnadResource extends Resource
                                 ])
                                 ->action(function (array $data, Demnad $record) {
                                     $record->reason = $data['reason'];
-                                    $record->status = 0;
+                                    $record->status = 2;
+                                    $record->collaborator_id = null;
                                     $record->save();
 
                                     $bot = User::where('name', 'BOT')->first();
@@ -151,12 +167,25 @@ class DemnadResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->since(),
-                IconColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label('Phê duyệt')
-                    ->icon(fn (string $state): string => match ($state) {
-                        '0' => 'heroicon-o-x-circle',
-                        '1' => 'heroicon-o-check-circle',
-                    })
+                    ->state(function (Model $model) {
+                        if ($model->status == 0) return 'Chưa duyệt';
+                        if ($model->status == 1) return 'Duyệt thành công';
+                        if ($model->status == 2) return 'Không duyệt';
+                    }),
+                Tables\Columns\TextColumn::make('collaborator.name')
+                    ->label('Người kiểm duyệt')
+                    ->default(function (Model $model) {
+                        if (
+                            $model->collaborator_id == null
+                            && $model->status == 1
+                            || $model->status == 2
+                        )
+                            return 'Quản trị viên';
+
+                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                    }),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

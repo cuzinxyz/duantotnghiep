@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('status')
                 ->comment("0: đang chờ duyệt, 1: đã duyệt, 2: đã hết hạn")
                 ->default(0);
+            $table->string('reason')->nullable();
             $table->integer('user_id');
             $table->integer('collaborator_id')->nullable();
             $table->timestamps();

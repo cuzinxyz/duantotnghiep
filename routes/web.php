@@ -187,7 +187,6 @@ Route::prefix('/collaborators')
             Route::get('/deleteReported/{id}', 'deleteReported')->name('collaborators.deleteReported');
         });
 
-
         Route::controller(CollaboratorsByCarController::class)->group(function () {
             Route::get('/byCar', 'listByCar')->name('collaborators.listByCar');
             Route::get('/byCarData', 'byCarData')->name('collaborators.byCarData');
