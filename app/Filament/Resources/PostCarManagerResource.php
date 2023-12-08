@@ -2,36 +2,35 @@
 
 namespace App\Filament\Resources;
 
-use App\Events\CarCollaboratorEvent;
-use App\Mail\CarRegistMail;
 use App\Models\Car;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
+use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
+use App\Models\ChMessage;
 use Filament\Tables\Table;
+use App\Mail\CarRegistMail;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables\Filters\Filter;
+use App\Events\CarCollaboratorEvent;
+use Illuminate\Support\Facades\Mail;
 use Filament\Infolists\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use App\Infolists\Components\VideoEntry;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Tables\Columns\Layout\Split;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ColorEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
-use App\Filament\Resources\PostCarManagerResource\RelationManagers;
-use Illuminate\Support\Facades\Mail;
 
 class PostCarManagerResource extends Resource
 {
@@ -57,14 +56,36 @@ class PostCarManagerResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('user.name')
-                    ->label('Tác giả')
-                    ->default('tuấn'),
+                    ->label('Tác giả'),
+
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Trạng thái')
+                    ->badge()
+                    ->state(function (Model $record) {
+                        if ($record->status == 0) return 'Chờ xác nhận';
+                        if ($record->status == 1) return 'Đã xác nhận';
+                        if ($record->status == 2) return 'Xe này đã bị xóa';
+                    })
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Thời gian tạo')
                     ->dateTime()
                     ->sortable()
-                    ->since()
+                    ->since(),
+
+                Tables\Columns\TextColumn::make('collaborator.name')
+                    ->label('Người kiểm duyệt')
+                    ->default(function (Model $model) {
+                        if (
+                            $model->collaborator_id == null
+                            && $model->status == 1
+                            || $model->status == 2
+                        )
+                            return 'Quản trị viên';
+
+                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                    }),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -140,15 +161,40 @@ class PostCarManagerResource extends Resource
                                         ->icon('heroicon-m-check')
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
-                                            $data = $record;
+                                            $collaborator = User::find($record->collaborator_id);
+                                            $total_assign = $collaborator->total_assign - 1;
+                                            if ($collaborator->total_assign <= 0) {
+                                                $total_assign = 0;
+                                            }
 
+                                            User::where('id', $record->collaborator_id)->update([
+                                                'total_assign' => $total_assign
+                                            ]);
+
+                                            $bot = User::where('name', 'BOT')->first();
+                                            $reason = 'Chào bạn ' . $record->user->name . ',
+                                                Tin đăng bán xe của bạn có tiêu đề: ' . $record->title . ' được phê duyệt thành công.
+                                                Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
+
+                                            ChMessage::create([
+                                                'from_id' => $bot->id,
+                                                'to_id' => $record->user_id,
+                                                'body' => $reason
+                                            ]);
+                                            $data = $record;
                                             Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
 
                                             $record->status = 1;
+                                            $record->collaborator_id = null;
                                             $record->save();
+
+
+                                            Notification::make()
+                                            ->title('Đã duyệt tin thành công')
+                                            ->success()
+                                                ->send();
                                             redirect()->route('filament.admin.resources.post-car-managers.index');
-                                        })
-                                        ->successNotificationTitle('Phê duyệt thành công'),
+                                        }),
 
                                     Action::make('UnActivePost')
                                         ->label('Không duyệt')
@@ -161,19 +207,42 @@ class PostCarManagerResource extends Resource
                                                 ->required(),
                                         ])
                                         ->action(function (array $data, Car $record) {
+                                            $collaborator = User::find($record->collaborator_id);
+                                            $total_assign = $collaborator->total_assign - 1;
+                                            if ($collaborator->total_assign <= 0) {
+                                                $total_assign = 0;
+                                            }
+
+                                            User::where('id', $record->collaborator_id)->update([
+                                                'total_assign' => $total_assign
+                                            ]);
+
+                                            $bot = User::where('name', 'BOT')->first();
+                                            $reason = 'Chào bạn ' . $record->user->name . ',
+                                                Tin đăng bán xe có tiêu đề: '. $record->title .'của bạn không được phê duyệt,
+                                                vì lý do: "'.$data['reason'].'"
+                                                Bạn vui điều chỉnh lại bài đăng của mình để được phê duyệt
+                                                Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
+
+                                            ChMessage::create([
+                                                'from_id' => $bot->id,
+                                                'to_id' => $record->user_id,
+                                                'body' => $reason
+                                            ]);
+
+
                                             $record->reason = $data['reason'];
                                             $record->status = 2;
                                             $record->collaborator_id = null;
                                             $record->save();
 
-                                            redirect()->route('filament.admin.resources.post-car-managers.index');
-                                        })
-                                        ->successNotification(
                                             Notification::make()
                                                 ->success()
-                                                ->title('Đã gửi thông báo tới khách hàng'),
-                                        ),
+                                                ->title('Đã gửi thông báo tới khách hàng')
+                                                ->send();
 
+                                            redirect()->route('filament.admin.resources.post-car-managers.index');
+                                        })
                                 ]),
                             ])->columnSpan([
                                 'xl' => 1,

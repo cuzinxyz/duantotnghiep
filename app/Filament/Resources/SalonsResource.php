@@ -54,7 +54,7 @@ class SalonsResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->label('Trạng thái')
                     ->badge()
-                    ->state(function (Model $record, Column $column) {
+                    ->state(function (Model $record) {
                         if ($record->status == 0) return 'Chờ xác nhận';
                         if ($record->status == 1) return 'Đã xác nhận';
                         if ($record->status == 2) return 'Cửa hàng đã bị khóa';
@@ -385,5 +385,11 @@ class SalonsResource extends Resource
     public static function getModelLabel(): string
     {
         return __('Salon');
+    }
+
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::where('status', 0)->count();
     }
 }
