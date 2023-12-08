@@ -116,7 +116,8 @@ class ReportController extends Controller
     public function deleteUserReported($reportID)
     {
         $report = Reported::find($reportID);
-        $bot = User::where('name', 'BOT')->first();
+        $report->status = 1;
+        $report->save();
 
         $user = User::where('id', $report->to_user_id)->first();
 
@@ -149,10 +150,14 @@ class ReportController extends Controller
         Comments::where('user_id', $report->to_user_id)->delete();
         WithDraw::where('user_id', $report->to_user_id)->delete();
         Support::where('user_id', $report->to_user_id)->delete();
+
+        return redirect()->route('collaborators.reports.reports');
     }
 
     public function deleteReported($reportID) {
         $report = Reported::find($reportID);
+        $report->status = 1;
+        $report->save();
 
         $collaborator = User::select(['total_assign'])->find($report->collaborator_id);
         $total_assign = $collaborator->total_assign - 1;

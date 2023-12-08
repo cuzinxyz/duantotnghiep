@@ -6,13 +6,17 @@ use App\Models\Car;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
+use App\Models\Support;
+use App\Models\Comments;
 use App\Models\Reported;
+use App\Models\WithDraw;
 use Filament\Forms\Form;
 use App\Models\ChMessage;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use App\Mail\AccountDeleteNotice;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Mail;
 use Filament\Infolists\Components\Grid;
 use Illuminate\Database\Eloquent\Model;
@@ -23,9 +27,6 @@ use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\ReplicateAction;
 use App\Filament\Resources\ReportedResource\Pages;
-use App\Models\Comments;
-use App\Models\Support;
-use App\Models\WithDraw;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\Action as ActionsAction;
 use Filament\Notifications\Actions\Action as NotificationsAction;
@@ -64,10 +65,35 @@ class ReportedResource extends Resource
                     ->label('Thời gian')
                     ->dateTime()
                     ->sortable()
-                    ->since()
+                    ->since(),
+
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Trạng thái')
+                    ->badge()
+                    ->state(function (Model $record) {
+                        if ($record->status == 0) return 'Chờ xử lý';
+                        if ($record->status == 1) return 'Đã xử lý';
+                    })
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('collaborator.name')
+                    ->label('Người kiểm duyệt')
+                    ->default(function (Model $model) {
+                        if (
+                            $model->collaborator_id == null
+                            && $model->status == 1
+                        )
+                            return 'Quản trị viên';
+
+                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                    }),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                    ->label('Tố cáo cần xử')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default()
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -82,12 +108,25 @@ class ReportedResource extends Resource
                     ActionsAction::make('waring')
                         ->label('Cảnh cáo người bị tố cáo')
                         ->action(function (Model $report) {
+
+                            $collaborator = User::find($report->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+                            User::where('id', $report->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
+
+                            $report->status = 1;
+                            $report->collaborator_id = null;
+                            $report->save();
                             $bot = User::where('name', 'BOT')->first();
-                            $car = Car::find($report->car_id);
                             $user = User::where('id', $report->to_user_id)->first();
 
                             $reason = 'Chào bạn ' . $user->name . ',
-                                        Bài đăng tin mua xe của bạn có tiêu đề:' . $car->title . '
+                                        Bài đăng tin mua xe của bạn có tiêu đề:' . $report->cars->title . '
                                         đã bị tố cáo với nội dụng:' . $report->content . '
                                         . Qua xác minh chúng tôi nhận thấy rằng tố cáo này là hoàn toàn đúng sự thật,Vì vậy chúng tôi sẽ xóa bài đăng này và cảnh báo bạn về lỗi vi phạm trên,nếu còn tiếp tục vi phạm chúng tôi sẽ tiến hành khóa tài khoản của bạn.
                                         Trân trọng cảm ơn!';
@@ -97,7 +136,7 @@ class ReportedResource extends Resource
                                 'to_id' => $report->to_user_id,
                                 'body' => $reason
                             ]);
-
+                            Car::where('id', $report->car_id)->delete();
                             Notification::make()
                                 ->title('Cảnh báo thành công')
                                 ->success()
@@ -108,6 +147,22 @@ class ReportedResource extends Resource
                     ActionsAction::make('delete_user')
                         ->label('Xóa tài khoản bị tố cáo')
                         ->action(function (Model $report) {
+
+                            $collaborator = User::find($report->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+
+                            User::where('id', $report->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
+
+                            $report->status = 1;
+                            $report->collaborator_id = null;
+                            $report->save();
+
                             $bot = User::where('name', 'BOT')->first();
 
                             $user = User::where('id', $report->to_user_id)->first();
@@ -139,6 +194,22 @@ class ReportedResource extends Resource
                         })
                         ->icon('heroicon-o-user-minus'),
                     Tables\Actions\DeleteAction::make()
+                        ->action(function (Model $report) {
+                            $collaborator = User::find($report->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+
+                            User::where('id', $report->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
+
+                            $report->status = 1;
+                            $report->collaborator_id = null;
+                            $report->save();
+                        })
                         ->label('Xóa tố cáo'),
                 ])
                     ->button()
@@ -152,7 +223,8 @@ class ReportedResource extends Resource
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
-            ->emptyStateActions([]);
+            ->emptyStateActions([])
+            ->emptyStateHeading('Không có tố cáo xử lý');
     }
 
     public static function infolist(Infolist $infolist): Infolist
