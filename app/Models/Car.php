@@ -88,4 +88,9 @@ class Car extends Model implements Viewable
     public function comments() {
         return $this->hasMany(Comments::class);
     }
+
+    public function collaborator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'collaborator_id', 'id');
+    }
 }

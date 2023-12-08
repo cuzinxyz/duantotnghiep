@@ -24,7 +24,7 @@ class AdminResource extends Resource
 
     protected static ?string $navigationLabel = 'Quản trị viên';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {

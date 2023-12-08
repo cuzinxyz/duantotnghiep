@@ -32,22 +32,12 @@ class WithDrawResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([]);
-    }
-
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Tên người rút tiền')
-                    // ->state(function (Model $model) {
-                    //     $user = User::where('id', $model->user_id)->withTrashed()->get();
-                    //     return $user[0]->name;
-                    // })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bank_price')
                     ->numeric(
@@ -65,6 +55,29 @@ class WithDrawResource extends Resource
                         thousandsSeparator: ',',
                     )
                     ->money('VND'),
+
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Trạng thái')
+                    ->badge()
+                    ->state(function (Model $record) {
+                        if ($record->status == 0) return 'Chờ xác nhận';
+                        if ($record->status == 1) return 'Đã xác nhận';
+                        if ($record->status == 2) return 'Đã hủy yêu cầu';
+                    })
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('collaborator.name')
+                    ->label('Người kiểm duyệt')
+                    ->default(function (Model $model) {
+                        if (
+                            $model->collaborator_id == null
+                            && $model->status == 1
+                            || $model->status == 2
+                        )
+                            return 'Quản trị viên';
+
+                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                    }),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -78,9 +91,19 @@ class WithDrawResource extends Resource
                 ActionGroup::make([
                     Action::make('active')
                         ->action(function (WithDraw $record) {
+                            $collaborator = User::find($record->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+                            User::where('id', $record->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
+
                             $record->status = 1;
-                            $record->reason = '';
                             $record->save();
+
 
                             $user_balance = User::find($record->user_id);
 
@@ -126,9 +149,32 @@ class WithDrawResource extends Resource
                                 ->required(),
                         ])
                         ->action(function (array $data, WithDraw $record) {
+                            $collaborator = User::find($record->collaborator_id);
+                            $total_assign = $collaborator->total_assign - 1;
+                            if ($collaborator->total_assign <= 0) {
+                                $total_assign = 0;
+                            }
+
+                            User::where('id', $record->collaborator_id)->update([
+                                'total_assign' => $total_assign
+                            ]);
+
                             $record->reason = $data['reason'];
-                            $record->status = 0;
+                            $record->status = 2;
                             $record->save();
+
+                            $bot = User::where('name', 'BOT')->first();
+
+                            $reason = 'Chào bạn ' . $record->user->name . ',
+                                    Yêu cầu rút tiền của bạn đã không được duyệt thành công.
+                                    Vì lý do: ' . $data['reason'] . '.
+                                    Bạn vui lòng kiểm tra lại và có thể gửi lại yêu cần rút tiền với chúng tôi
+                                    Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
+                            ChMessage::create([
+                                'from_id' => $bot->id,
+                                'to_id' => $record->user_id,
+                                'body' => $reason
+                            ]);
 
                             Notification::make()
                                 ->title('Đã gửi thông báo tới khách hàng')

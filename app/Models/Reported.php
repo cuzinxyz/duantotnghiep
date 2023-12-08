@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reported extends Model
 {
@@ -23,5 +24,10 @@ class Reported extends Model
     public function cars()
     {
         return $this->belongsTo(Car::class, 'car_id', 'id');
+    }
+
+    public function collaborator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'collaborator_id', 'id');
     }
 }
