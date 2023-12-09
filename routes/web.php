@@ -1,7 +1,11 @@
 <?php
 
 use App\Models\News;
+use App\Models\Salon;
 use App\Livewire\Showroom;
+use Spatie\Sitemap\Sitemap;
+use Illuminate\Http\Request;
+use Spatie\Sitemap\Tags\Url;
 use App\Livewire\CarListingSystem;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\SingleBrandCategory;
@@ -18,15 +22,15 @@ use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\SearchCarController;
 use App\Http\Controllers\SendGuideRequestController;
 use App\Http\Controllers\Collaborators\CarsController;
-use App\Http\Controllers\Collaborators\DashboardController;
-use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
 use App\Http\Controllers\Collaborators\ReportController;
 use App\Http\Controllers\Collaborators\ReviewController;
 use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 use App\Http\Controllers\Collaborators\SupportController;
 use App\Http\Controllers\Collaborators\WithDrawController;
-use App\Models\Salon;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Collaborators\DashboardController;
+use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
+use App\Models\Brand;
+use App\Models\Car;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -244,5 +248,31 @@ Route::post('/xem-xet', function (Request $request) {
         'status' => 0
     ]);
 
-    return response()->json('Đã gửi yêu cầu xem xét');
+        return response()->json('Đã gửi yêu cầu xem xét');
+});
+
+Route::get('/sitemap', function() {
+    $sitemap = Sitemap::create()
+        ->add(Url::create('/'))
+        ->add(Url::create('/oto'))
+        ->add(Url::create('/tin-mua-xe'))
+        ->add(Url::create('/login'))
+        ->add(Url::create('/register'))
+        ->add(Url::create('/password/reset'));
+    Car::all()->each(function (Car $item) use ($sitemap) {
+        $sitemap->add(Url::create("/oto/{$item->slug}"));
+    });
+    Brand::all()->each(function (Brand $item) use ($sitemap) {
+        $sitemap->add(Url::create("/hang-xe/{$item->brand_name}"));
+    });
+    Salon::all()->each(function (Salon $item) use ($sitemap) {
+        $sitemap->add(Url::create("/salon/{$item->slug}"));
+    });
+    News::all()->each(function (News $item) use ($sitemap) {
+        $sitemap->add(Url::create("/bai-viet/$item->slug"));
+    });
+
+    $sitemap->writeToFile(public_path('sitemap.xml'));
+
+    return "Generate sitemap successfully!";
 });
