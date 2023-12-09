@@ -83,8 +83,6 @@ class SalonsResource extends Resource
                         ->action(function (Model $salon) {
                             if ($salon->status == 1) return true;
 
-                            if ($salon->status == 1) return true;
-
                             $collaborator = User::find($salon->collaborator_id);
                             if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;
@@ -95,10 +93,6 @@ class SalonsResource extends Resource
                                     'total_assign' => $total_assign
                                 ]);
                             }
-
-                            User::where('id', $salon->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
 
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $salon->user_id)->first();

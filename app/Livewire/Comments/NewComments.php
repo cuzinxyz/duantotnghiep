@@ -2,25 +2,21 @@
 
 namespace App\Livewire\Comments;
 
-use App\Models\Car;
-use App\Models\News;
 use Livewire\Component;
+use App\Models\Comments;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use App\Models\ReplyComments;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Locked;
-use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Models\Comments as CommentsModel;
 
-class Comment extends Component
+class NewComments extends Component
 {
     use WithPagination;
 
     #[Locked]
-    public $carID;
+    public $newID;
 
     #[Rule('required|min:3|max:200')]
     public $comment;
@@ -28,9 +24,9 @@ class Comment extends Component
     #[Rule('required|min:3|max:200')]
     public $reply;
 
-    public function mount($carID = null)
+    public function mount($newID = null)
     {
-        $this->carID = $carID;
+        $this->newID = $newID;
     }
 
     public function placeholder()
@@ -52,55 +48,56 @@ class Comment extends Component
 
         $this->validateOnly('comment');
 
-        CommentsModel::create([
+        Comments::create([
             'body' => $this->comment,
             'user_id' => auth()->id(),
-            'car_id' => $this->carID,
-            'news_id' => 0
+            'car_id' => 0,
+            'news_id' => $this->newID
         ]);
 
         $this->reset('comment');
-        $this->dispatch('commentCarSucceeded');
+        $this->dispatch('commentNewSucceeded');
     }
 
-    public function replyComment($commentID)
+    public function replyComment($newID)
     {
         $this->validateOnly('reply');
 
         ReplyComments::create([
             'body' => htmlspecialchars($this->reply),
-            'comment_id' => $commentID,
+            'comment_id' => $newID,
             'user_id' => Auth::user()->id,
-            'car_id' => $this->carID,
-            'news_id' => 0
+            'car_id' => 0,
+            'news_id' => $this->newID
         ]);
 
 
         $this->reset('reply');
-        $this->dispatch('renderReCommentCar');
+        $this->dispatch('renderReCommentNew');
     }
 
-    public function deleteComment($commentID) {
-        $result = CommentsModel::where('id', $commentID)->delete();   
-        if($result) {
-            $this->dispatch('showSuccess', 'Xóa bình luận thành công');   
-        }
-    }
-
-    public function deleteReplyComment($commentID)
+    public function deleteComment($newID)
     {
-        $result = ReplyComments::where('id', $commentID)->delete();
+        $result = Comments::where('id', $newID)->delete();
         if ($result) {
             $this->dispatch('showSuccess', 'Xóa bình luận thành công');
         }
     }
 
-    #[On('commentCarSucceeded')]
-    #[On('renderReCommentCar')]
+    public function deleteReplyComment($newID)
+    {
+        $result = ReplyComments::where('id', $newID)->delete();
+        if ($result) {
+            $this->dispatch('showSuccess', 'Xóa bình luận thành công');
+        }
+    }
+
+    #[On('commentNewSucceeded')]
+    #[On('renderReCommentNew')]
     public function render()
     {
-        return view('livewire.comments.comment', [
-            'listComments' => CommentsModel::with('reply')->where('car_id', $this->carID)->orderBy('created_at', 'desc')->simplePaginate(6)
+        return view('livewire.comments.new-comment', [
+            'listComments' => Comments::with('reply')->where('news_id', $this->newID)->orderBy('created_at', 'desc')->simplePaginate(6)
         ]);
     }
 }
