@@ -19,7 +19,7 @@ class Comment extends Component
 
     public $comment;
 
-    public function mount($oop)
+    public function mount($oop = null)
     {
         $this->oop = $oop;
     }

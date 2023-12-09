@@ -21,7 +21,7 @@ class ListComment extends Component
     public $oop;
     public $reply;
 
-    public function mount($oop)
+    public function mount($oop = null)
     {
         $this->oop = $oop;
     }
