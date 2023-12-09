@@ -22,15 +22,15 @@ class ReplyComments extends Model
     protected $table = "reply_comments";
 
     public function comment(): BelongsTo{
-      return $this->belongsTo(Comments::class);
+      return $this->belongsTo(Comments::class)->orderBy('created_at', 'desc');
     }
     public function user(): BelongsTo{
-      return $this->belongsTo(User::class);
+      return $this->belongsTo(User::class)->orderBy('created_at', 'desc');
     }
     public function car(): BelongsTo{
-      return $this->belongsTo(Car::class);
+      return $this->belongsTo(Car::class)->orderBy('created_at', 'desc');
     }
     public function news(): BelongsTo{
-      return $this->belongsTo(News::class);
+      return $this->belongsTo(News::class)->orderBy('created_at', 'desc');
     }
 }

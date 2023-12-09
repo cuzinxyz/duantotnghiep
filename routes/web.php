@@ -24,10 +24,11 @@ use App\Http\Controllers\SendGuideRequestController;
 use App\Http\Controllers\Collaborators\CarsController;
 use App\Http\Controllers\Collaborators\ReportController;
 use App\Http\Controllers\Collaborators\ReviewController;
+use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
+use App\Http\Controllers\Collaborators\SupportController;
 use App\Http\Controllers\Collaborators\WithDrawController;
 use App\Http\Controllers\Collaborators\DashboardController;
 use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
-use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 use App\Models\Brand;
 use App\Models\Car;
 
@@ -232,16 +233,23 @@ Route::prefix('/collaborators')
             Route::get('/viewReplyCommentDataNew/{id}', 'viewReplyCommentDataNew')->name('collaborators.viewReplyCommentDataNew');
             Route::get('/deleteReplyCommentNew/{id}', 'deleteReplyCommentNew')->name('collaborators.deleteReplyCommentNew');
         });
+
+        Route::controller(SupportController::class)->group(function () {
+            Route::get('/support', 'listSupport')->name('collaborators.listSupport');
+            Route::get('/supportData', 'supportData')->name('collaborators.supportData');
+            Route::get('/supportDetail/{id}', 'supportDetail')->name('collaborators.supportDetail');
+            Route::post('/activeSupport/{id}', 'activeSupport')->name('collaborators.activeSupport');
+        });
     });
 
 
-    Route::post('/xem-xet', function(Request $request) {
-        Salon::where('id', $request->input("salonID"))->update([
-            'status' => 0
-        ]);
+Route::post('/xem-xet', function (Request $request) {
+    Salon::where('id', $request->input("salonID"))->update([
+        'status' => 0
+    ]);
 
         return response()->json('Đã gửi yêu cầu xem xét');
-    });
+});
 
 Route::get('/sitemap', function() {
     $sitemap = Sitemap::create()

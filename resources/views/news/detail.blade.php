@@ -40,10 +40,9 @@
                     <div class="title">
                         <h5>Đặt câu hỏi cho tác giả</h5>
                     </div>
-                </div>
-                <livewire:comments.comment />
+                    <livewire:comments.new-comments :newID="$post->id" />
 
-                <livewire:comments.list-comment />
+                </div>
             </div>
         </div>
     </div>

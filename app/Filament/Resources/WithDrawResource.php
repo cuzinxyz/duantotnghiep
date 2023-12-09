@@ -92,14 +92,18 @@ class WithDrawResource extends Resource
                     Action::make('active')
                         ->action(function (WithDraw $record) {
                             $collaborator = User::find($record->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
+                            if ($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+
+
+                                User::where('id', $record->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
                             }
 
-                            User::where('id', $record->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
 
                             $record->status = 1;
                             $record->save();
@@ -150,15 +154,18 @@ class WithDrawResource extends Resource
                         ])
                         ->action(function (array $data, WithDraw $record) {
                             $collaborator = User::find($record->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
+                            if ($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+
+
+                                User::where('id', $record->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
                             }
-
-                            User::where('id', $record->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
-
+                            
                             $record->reason = $data['reason'];
                             $record->status = 2;
                             $record->save();

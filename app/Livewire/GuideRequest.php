@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\WorkCollaboratorEvent;
 use App\Models\ChMessage;
 use App\Models\Support;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class GuideRequest extends Component
         ]);
 
         if($result){
+            event(new WorkCollaboratorEvent($result));
             return redirect()->route('profile')->with('status', 'Gửi yêu cầu hỗ trợ thành công!');
         }
 

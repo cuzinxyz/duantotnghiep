@@ -162,14 +162,17 @@ class PostCarManagerResource extends Resource
                                         ->requiresConfirmation()
                                         ->action(function (Car $record) {
                                             $collaborator = User::find($record->collaborator_id);
-                                            $total_assign = $collaborator->total_assign - 1;
-                                            if ($collaborator->total_assign <= 0) {
-                                                $total_assign = 0;
-                                            }
+                                            if ($collaborator) {
+                                                $total_assign = $collaborator->total_assign - 1;
+                                                if ($collaborator->total_assign <= 0) {
+                                                    $total_assign = 0;
+                                                }
 
-                                            User::where('id', $record->collaborator_id)->update([
-                                                'total_assign' => $total_assign
-                                            ]);
+
+                                                User::where('id', $record->collaborator_id)->update([
+                                                    'total_assign' => $total_assign
+                                                ]);
+                                            }
 
                                             $bot = User::where('name', 'BOT')->first();
                                             $reason = 'Chào bạn ' . $record->user->name . ',
@@ -190,8 +193,8 @@ class PostCarManagerResource extends Resource
 
 
                                             Notification::make()
-                                            ->title('Đã duyệt tin thành công')
-                                            ->success()
+                                                ->title('Đã duyệt tin thành công')
+                                                ->success()
                                                 ->send();
                                             redirect()->route('filament.admin.resources.post-car-managers.index');
                                         }),
@@ -208,19 +211,22 @@ class PostCarManagerResource extends Resource
                                         ])
                                         ->action(function (array $data, Car $record) {
                                             $collaborator = User::find($record->collaborator_id);
-                                            $total_assign = $collaborator->total_assign - 1;
-                                            if ($collaborator->total_assign <= 0) {
-                                                $total_assign = 0;
-                                            }
+                                            if ($collaborator) {
+                                                $total_assign = $collaborator->total_assign - 1;
+                                                if ($collaborator->total_assign <= 0) {
+                                                    $total_assign = 0;
+                                                }
 
-                                            User::where('id', $record->collaborator_id)->update([
-                                                'total_assign' => $total_assign
-                                            ]);
+
+                                                User::where('id', $record->collaborator_id)->update([
+                                                    'total_assign' => $total_assign
+                                                ]);
+                                            }
 
                                             $bot = User::where('name', 'BOT')->first();
                                             $reason = 'Chào bạn ' . $record->user->name . ',
-                                                Tin đăng bán xe có tiêu đề: '. $record->title .'của bạn không được phê duyệt,
-                                                vì lý do: "'.$data['reason'].'"
+                                                Tin đăng bán xe có tiêu đề: ' . $record->title . 'của bạn không được phê duyệt,
+                                                vì lý do: "' . $data['reason'] . '"
                                                 Bạn vui điều chỉnh lại bài đăng của mình để được phê duyệt
                                                 Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
 

@@ -13,7 +13,7 @@
                     <div class="car-details-sidebar">
                         <div class="contact-info mb-50 px-3 py-4">
                             <div class="d-flex align-items-center gap-2">
-                                <img src="{{ $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}" class="img-fluid profile-image rounded-circle border border-danger border-2" style="width: 60px;height:60px;object-fit:cover" />
+                                <img src="{{ $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover" />
                                 <div class="ml-3">
                                     <h6 class="name">{{ $carDetail->user->name }}</h6>
                                     <small>Tham gia vào {{ $carDetail->created_at->diffForHumans() }}</small>

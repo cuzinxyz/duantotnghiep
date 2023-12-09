@@ -80,6 +80,19 @@ class DemnadResource extends Resource
                                 ->icon('heroicon-m-check')
                                 ->requiresConfirmation()
                                 ->action(function (Demnad $record) {
+                                    $collaborator = User::find($record->collaborator_id);
+                                    if ($collaborator) {
+                                        $total_assign = $collaborator->total_assign - 1;
+                                        if ($collaborator->total_assign <= 0) {
+                                            $total_assign = 0;
+                                        }
+
+
+                                        User::where('id', $record->collaborator_id)->update([
+                                            'total_assign' => $total_assign
+                                        ]);
+                                    }
+
                                     $record->status = 1;
                                     $record->collaborator_id = null;
                                     $record->save();
@@ -118,6 +131,20 @@ class DemnadResource extends Resource
                                         ->required(),
                                 ])
                                 ->action(function (array $data, Demnad $record) {
+
+                                    $collaborator = User::find($record->collaborator_id);
+                                    if ($collaborator) {
+                                        $total_assign = $collaborator->total_assign - 1;
+                                        if ($collaborator->total_assign <= 0) {
+                                            $total_assign = 0;
+                                        }
+
+
+                                        User::where('id', $record->collaborator_id)->update([
+                                            'total_assign' => $total_assign
+                                        ]);
+                                    }
+
                                     $record->reason = $data['reason'];
                                     $record->status = 2;
                                     $record->collaborator_id = null;

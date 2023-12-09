@@ -9,6 +9,7 @@ use App\Events\WorkCollaboratorEvent;
 use App\Models\Demnad;
 use App\Models\Reported;
 use App\Models\Salon;
+use App\Models\Support;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -64,6 +65,10 @@ class WorkCollaboratorListener
 
         if($event->data instanceof WithDraw) {
             $this->taskAllocation(WithDraw::class, $event->data, $collaborator);
+        }
+
+        if ($event->data instanceof Support) {
+            $this->taskAllocation(Support::class, $event->data, $collaborator);
         }
 
     }
