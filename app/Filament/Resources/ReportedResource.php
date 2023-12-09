@@ -149,15 +149,18 @@ class ReportedResource extends Resource
                         ->action(function (Model $report) {
 
                             $collaborator = User::find($report->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
+
+                            if ($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+
+
+                                User::where('id', $report->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
                             }
-
-
-                            User::where('id', $report->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
 
                             $report->status = 1;
                             $report->collaborator_id = null;
@@ -196,15 +199,17 @@ class ReportedResource extends Resource
                     Tables\Actions\DeleteAction::make()
                         ->action(function (Model $report) {
                             $collaborator = User::find($report->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
+                            if ($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+
+
+                                User::where('id', $report->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
                             }
-
-
-                            User::where('id', $report->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
 
                             $report->status = 1;
                             $report->collaborator_id = null;

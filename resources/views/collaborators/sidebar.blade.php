@@ -64,6 +64,18 @@
 
         <li
             class="
+                {{ request()->is(trim(route('collaborators.listSupport', [], false), '/') . '/*') ||
+                request()->is(trim(route('collaborators.listSupport', [], false), '/'))
+                    ? 'active'
+                    : false }}">
+            <a href="{{ route('collaborators.listSupport') }}">
+                <em class="fa fa-question">&nbsp;</em>
+                Hỗ trợ
+            </a>
+        </li>
+
+        <li
+            class="
                 {{ request()->is(trim(route('collaborators.listReport', [], false), '/') . '/*') ||
                 request()->is(trim(route('collaborators.listReport', [], false), '/'))
                     ? 'active'

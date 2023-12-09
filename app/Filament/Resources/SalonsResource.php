@@ -83,10 +83,17 @@ class SalonsResource extends Resource
                         ->action(function (Model $salon) {
                             if ($salon->status == 1) return true;
 
+                            if ($salon->status == 1) return true;
+
                             $collaborator = User::find($salon->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
+                            if ($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+                                User::where('id', $salon->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
                             }
 
                             User::where('id', $salon->collaborator_id)->update([
@@ -164,14 +171,18 @@ class SalonsResource extends Resource
                         ])
                         ->action(function (array $data, Model $salon) {
                             $collaborator = User::find($salon->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
-                            }
+                            if ($salon->status == 1) return true;
 
-                            User::where('id', $salon->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
+                            $collaborator = User::find($salon->collaborator_id);
+                            if ($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+                                User::where('id', $salon->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
+                            }
                             $salon->status = 2;
                             $salon->collaborator_id = null;
                             $salon->reason = $data['reason'];
