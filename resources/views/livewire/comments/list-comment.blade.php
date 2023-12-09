@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="group" x-show="open" x-trap="open">
-                                <form action="" wire:submit.prevent="replyComment({{ $item->id }})">
+                                <form action="" wire:submit.prevent="replyComment({{ $item }})">
                                     <input type="text" class="input" wire:model="reply" placeholder="Nhập phản hồi">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>

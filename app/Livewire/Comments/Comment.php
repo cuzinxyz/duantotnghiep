@@ -14,79 +14,56 @@ class Comment extends Component
 {
     #[Locked]
     public $id;
+    #[Locked]
+    public $oop;
 
     public $comment;
 
-    public $slug;
-
-    public $page;
-
-
-    public function mount($id = null)
+    public function mount($oop = null)
     {
-        $this->id = $id;
-
-        $url_page = request()->url();
-
-        $this->slug = last(explode('/', $url_page));
-
-        $this->page = Route::currentRouteName();
+        $this->oop = $oop;
     }
 
     public function saveComment()
     {
-        // $this->validateOnly('comment');
-        $this->validate([
-            'comment' => 'required|min:3',
-        ]);
-
-        if (!Auth::check()) {
-            $this->dispatch('showError', 'Vui lòng đăng nhập để bình luận');
-            return redirect()->route('login');
-        }
-
-        $user_id = Auth::user()->id;
-
-        if ($this->page == 'car-detail') {
-            $carComment = Car::where('slug', $this->slug)->first();
-
+        // dd(123123);
+        if ($this->oop instanceof News) {
+            if (!Auth::check()) {
+                $this->dispatch('showError', 'Vui lòng đăng nhập để bình luận');
+                return redirect()->route('login');
+            }
+            $this->validate([
+                'comment' => 'required|min:3'
+            ]);
             CommentsModel::create([
                 'body' => htmlspecialchars($this->comment),
-                'user_id' => $user_id,
-                'car_id' => $carComment->id,
+                'user_id' => auth()->id(),
+                'car_id' => 0,
+                'news_id' => $this->oop->id
+            ]);
+            $this->oop = null;
+            $this->dispatch('comment-created');
+            $this->comment = '';
+
+            if (empty($this->comment)) {
+                dd('empty!');
+            }
+        } elseif($this->oop instanceof Car) {
+            CommentsModel::create([
+                'body' => htmlspecialchars($this->comment),
+                'user_id' => auth()->id(),
+                'car_id' => $this->oop->id,
                 'news_id' => 0
             ]);
-        }
+            $this->oop = null;
+            $this->dispatch('comment-created');
+            $this->comment = '';
 
-        if($this->page == 'news.index') {
-            $slug = str_replace('.html', '', $this->slug);
-            $newComment = News::where('slug', $slug)->first();
-
-            if(strlen($this->comment) > 0) {
-                CommentsModel::create([
-                    'body' => htmlspecialchars($this->comment),
-                    'user_id' => $user_id,
-                    'car_id' => 0,
-                    'news_id' => $newComment->id
-                ]);
+            if (empty($this->comment)) {
+                dd('empty!');
             }
-
         }
-
-        $this->resetComment();
-
-        $this->dispatch('renderComments');
     }
-
-
-    public function resetComment() {
-        $this->comment = null;
-        $this->reset();
-
-        // dd(123123123);
-    }
-
-
 
     public function render()
     {

@@ -374,10 +374,16 @@
                         <h5>Đặt câu hỏi cho người bán</h5>
                     </div>
                 </div>
-                <livewire:comments.comment :id="$carDetail->id" />
+                {{-- <livewire:comments.comment :id="$carDetail->id" /> --}}
+                <livewire:comments.comment :oop="$carDetail" />
 
                 <div wire:loading.remove>
-                    <livewire:comments.list-comment />
+                    {{-- <livewire:comments.list-comment /> --}}
+                    <livewire:comments.list-comment :oop="$carDetail" />
+                </div>
+
+                <div class="w-100 text-center" wire:loading>
+                    <img src="{{ asset('images/load.gif') }}" alt="">
                 </div>
             </div>
         </div>
