@@ -23,6 +23,8 @@ use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\WithDrawResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\WithDrawResource\RelationManagers;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
 
 class WithDrawResource extends Resource
 {
@@ -165,7 +167,7 @@ class WithDrawResource extends Resource
                                     'total_assign' => $total_assign
                                 ]);
                             }
-                            
+
                             $record->reason = $data['reason'];
                             $record->status = 2;
                             $record->save();
@@ -203,27 +205,56 @@ class WithDrawResource extends Resource
     {
         return $infolist
             ->schema([
-                TextEntry::make('bank_name')
-                    ->label('Tên ngân hàng')
-                    ->copyable(),
+                Section::make()
+                    ->schema([
+                        TextEntry::make('bank_name')
+                            ->label('Tên ngân hàng')
+                            ->copyable(),
 
-                TextEntry::make('bank_number')
-                    ->label('Số tài khoản nhận tiền')
-                    ->copyable(),
+                        TextEntry::make('bank_number')
+                            ->label('Số tài khoản nhận tiền')
+                            ->copyable(),
 
-                TextEntry::make('username')
-                    ->label('Tên người nhận')
-                    ->copyable(),
+                        TextEntry::make('username')
+                            ->label('Tên người nhận')
+                            ->copyable(),
 
-                TextEntry::make('bank_price')
-                    ->label('Số tiền muốn rút')
-                    ->numeric(
-                        decimalPlaces: 0,
-                        decimalSeparator: '.',
-                        thousandsSeparator: ',',
-                    )
-                    ->money('VND')
-                    ->copyable(),
+                        TextEntry::make('bank_price')
+                            ->label('Số tiền muốn rút')
+                            ->numeric(
+                                decimalPlaces: 0,
+                                decimalSeparator: '.',
+                                thousandsSeparator: ',',
+                            )
+                            ->money('VND')
+                            ->copyable(),
+                    ])
+                    ->columnSpan([
+                        'default' => 1,
+                        'lg' => 1,
+                    ]),
+
+                Section::make()
+                    ->schema([
+                        ImageEntry::make('image')
+                            ->label('Mã chuyển khoản')
+                            ->defaultImageUrl(function (Model $model) {
+                                $urlBank = "https://img.vietqr.io/image/$model->bank_name-$model->bank_number-compact2.png?amount=$model->bank_price&addInfo=DRIVCO chuyen tien&accountName=$model->username";
+                                return url($urlBank);
+                            })
+                            ->width('100%')
+                            ->height('auto')
+                            ->columnSpanFull()
+                    ])
+                    ->columnSpan([
+                        'default' => 1,
+                        'lg' => 1,
+                    ])
+
+            ])
+            ->columns([
+                'default' => 1,
+                'lg' => 2,
             ]);
     }
 

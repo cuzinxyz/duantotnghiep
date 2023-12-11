@@ -65,6 +65,11 @@ class Comment extends Component
 
     public function replyComment($commentID)
     {
+        if (!Auth::check()) {
+            $this->dispatch('showError', 'Vui lòng đăng nhập để bình luận');
+            return redirect()->route('login');
+        }
+        
         $this->validateOnly('reply');
 
         ReplyComments::create([

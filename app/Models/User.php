@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Salon;
+use App\Models\Demnad;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -62,6 +63,36 @@ class User extends Authenticatable
     public function car(): HasMany
     {
         return $this->hasMany(Car::class);
+    }
+
+    public function carCollaborator(): HasMany
+    {
+        return $this->hasMany(Car::class, 'collaborator_id', 'id');
+    }
+
+    public function demnadCollaborator(): HasMany
+    {
+        return $this->hasMany(Demnad::class, 'collaborator_id', 'id');
+    }
+
+    public function supportCollaborator(): HasMany
+    {
+        return $this->hasMany(Support::class, 'collaborator_id', 'id');
+    }
+
+    public function salonCollaborator(): HasMany
+    {
+        return $this->hasMany(Salon::class, 'collaborator_id', 'id');
+    }
+
+    public function withDrawCollaborator(): HasMany
+    {
+        return $this->hasMany(WithDraw::class, 'collaborator_id', 'id');
+    }
+
+    public function reportCollaborator(): HasMany
+    {
+        return $this->hasMany(Reported::class, 'collaborator_id', 'id');
     }
 
     public function transactions_histories() {

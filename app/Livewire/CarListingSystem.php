@@ -34,8 +34,11 @@ class CarListingSystem extends Component
     {
         $this->brands = Brand::all();
         $this->locations = Province::all();
-        $this->maxPrice = Car::max('price');
-        $this->minPrice = Car::min('price');
+        $this->maxPrice = Car::where('status', 1)->max('price');
+        $this->minPrice = Car::where('status', 1)->min('price');
+
+        // dd($this->minPrice);
+        
     }
 
     #[On('filterPrices')]
@@ -82,6 +85,7 @@ class CarListingSystem extends Component
 
         $carCount = $carQuery->count();
 
+        
         return view('livewire.car-listing-system', [
             'cars' => $carQuery->paginate(10),
             'carCount' => $carCount,

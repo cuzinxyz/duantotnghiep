@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -10,6 +11,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // ...
         \App\Console\Commands\GenerateSitemap::class,
+        \App\Console\Commands\ReassignTask::class
     ];
 
     /**
@@ -18,6 +20,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('generate:sitemap')->dailyAt('15:00');
+        $schedule->command('generate:reassign-task')->everyMinute();
     }
 
     /**

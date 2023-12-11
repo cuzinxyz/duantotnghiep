@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use App\Models\News;
 use App\Models\Salon;
 use App\Livewire\Showroom;
@@ -275,4 +276,9 @@ Route::get('/sitemap', function() {
     $sitemap->writeToFile(public_path('sitemap.xml'));
 
     return "Generate sitemap successfully!";
+});
+
+
+Route::get('/test', function() {
+    event(new reassignUnfinishedTasksAfterDayEvent());
 });
