@@ -20576,7 +20576,8 @@ footer.style-3 .footer-btm .social-area ul li a:hover {
 }
 
 .product-st-card1.two .product-img img {
-    border-radius: 5px 0 0 5px
+    border-radius: 5px 0 0 5px;
+    object-fit: cover;
 }
 
 @media (max-width: 767px) {
@@ -23109,7 +23110,8 @@ button {
     font-family: var(--font-montserrat);
     font-size: 15px;
     font-weight: 600;
-    padding: 15px 55px 15px 25px
+    padding: 15px 55px 15px 25px;
+    word-wrap: wrap;
 }
 
 @media (max-width: 576px) {
@@ -28952,6 +28954,7 @@ header.style-5 .nav-right .dropdown .account-menu.active {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 123123;
 }
 
 #backToTopBtn:hover {
@@ -28969,6 +28972,10 @@ header.style-5 .nav-right .dropdown .account-menu.active {
         height: 283px;
         object-fit: cover;
     }
+    .product-st-card1.two .product-img img {
+        width: 140px;
+        height: 130px;
+    }
 }
 
 /* PC screens */
@@ -28978,11 +28985,10 @@ header.style-5 .nav-right .dropdown .account-menu.active {
         object-fit: cover;
     }
     .product-st-card1.two .product-img img {
-        height: 140px;
-        object-fit: cover;
-        border-radius: 6px;
+        width:180px;height:150px;
     }
 }
+
 .line-clamp-1 {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;

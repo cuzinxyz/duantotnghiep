@@ -27,7 +27,7 @@ class FormDangTin extends Component
 
     #[Validate('required', message: 'Bắt buộc phải upload tối thiểu 1 hình.')]
     public $verhicle_image_library = [];
-    #[Validate('required', message: 'Bắt buộc phải upload video xe.')]
+
     public $verhicle_videos;
     #[Validate('required', message: 'Bắt buộc phải chọn thương hiệu.')]
     public $brand_select = '';

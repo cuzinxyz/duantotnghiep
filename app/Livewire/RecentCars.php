@@ -17,6 +17,8 @@ class RecentCars extends Component
 
     public function render()
     {
+        // get featured car 
+        $featured_cars_id = session()->get('featured_cars_id');
         // Recent Cars
         $topBrands = DB::table('cars')
             ->join('brands', 'cars.brand_id', '=', 'brands.id')
@@ -26,7 +28,7 @@ class RecentCars extends Component
             ->limit(5)
             ->distinct()
             ->get();
-        $recentCars = Car::inRandomOrder()->where('status', 1)->limit(8)->get();
+        $recentCars = Car::inRandomOrder()->where('status', 1)->whereNotIn('id', $featured_cars_id)->limit(8)->get();
 
         if (!empty($this->brandID)) {
             if ($this->brandID == 'random') {

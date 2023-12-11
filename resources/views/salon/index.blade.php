@@ -24,6 +24,30 @@
                     <button class="btn btn-primary" id="xem_xet">Yêu cầu xem xét lại</button>
                 </div>
             </div>
+            
+            @push('scripts')
+                <script>
+                    $(document).ready(function() {
+                        $("#xem_xet").on('click', function() {
+                            $.ajax({
+                                url: '/xem-xet',
+                                type: 'POST',
+                                dataType: 'json',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                data: {
+                                    salonID: "{{ \App\Models\Salon::where('user_id', auth()->id())->pluck('id')[0] }}",
+                                },
+                                success: function(data) {
+                                    alert(data);
+                                    window.location.href = '/';
+                                }
+                            })
+                        })
+                    })
+                </script>
+            @endpush
         @else
             @include('components.nofication')
             <div class="container">
@@ -552,27 +576,4 @@
 
     @endif
 
-    @push('scripts')
-        <script>
-            $(document).ready(function() {
-                $("#xem_xet").on('click', function() {
-                    $.ajax({
-                        url: '/xem-xet',
-                        type: 'POST',
-                        dataType: 'json',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            salonID: "{{ \App\Models\Salon::where('user_id', auth()->id())->pluck('id')[0] }}",
-                        },
-                        success: function(data) {
-                            alert(data);
-                            window.location.href = '/';
-                        }
-                    })
-                })
-            })
-        </script>
-    @endpush
 </x-partials.layout-client>

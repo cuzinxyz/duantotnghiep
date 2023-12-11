@@ -4,20 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('page_title', 'Drivco.shop: Mua bán ô tô đã qua sử dụng')</title>
     <meta name="description"
-        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023.">
+        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất.">
     <meta name="keywords" content="oto cũ, mua bán ô tô, xe oto cũ, ô tô đã qua sử dụng, drivco.shop">
     <meta name="author" content="Drivco Việt Nam">
     <!-- Seo Meta -->
-    <title>@yield('page_title', 'Drivco.shop: Mua bán ô tô cũ và mới, oto đã qua sử dụng')</title>
     <meta http-equiv="content-language" content="vi">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
     <meta name="language" content="Vietnamese">
     <meta name="revisit-after" content="1 days">
     <!-- Favicon -->
-    <link rel="canonical" href="https://drivco.shop/oto">
-    <link rel="next" href="https://drivco.shop/oto">
+    <link rel="canonical" href="https://drivco.shop/">
+    <link rel="next" href="https://drivco.shop/">
     <link rel="icon" href="{{ asset('images/favicon/favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
@@ -28,10 +28,10 @@
     <meta property="og:site_name" content="Drivco.shop">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="@yield('title_seo', 'Mua bán ô tô cũ, xe hơi cũ giá rẻ toàn quốc')">
+    <meta property="og:title" content="@yield('page_title', 'Drivco.shop: Mua bán ô tô đã qua sử dụng')">
     <meta property="og:description"
-        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất. Kênh thông tin mua bán ô tô uy tín nhất tại Việt Nam từ năm 2023.">
-    <meta property="og:url" content="https://drivco.shop/oto">
+        content="Ô tô cũ xe hơi cũ giá rẻ đang được rao bán tại Drivco, bạn dễ dàng tìm mua cho mình được chiếc xe oto cũ hoặc mới giá tốt ưng ý nhất.">
+    <meta property="og:url" content="https://drivco.shop/">
     <meta property="article:section" content="Auto, News">
     <meta property="article:tag" content="Ô tô, Xe hơi">
     <meta property="og:image" content="@yield('thumb_seo', 'https://i.imgur.com/UFbnyXU.png')">
@@ -549,7 +549,7 @@
                                 <div class="menu-container">
                                     <ul>
                                         @foreach ($salons as $salon)
-                                            <li><a href="{{ route('salon.listCars', $salon->salon_name) }}">{{ $salon->salon_name }}
+                                            <li><a href="{{ route('salon.listCars', $salon->slug) }}">{{ $salon->salon_name }}
                                                     <svg width="10" height="10" viewBox="0 0 10 10"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -634,7 +634,7 @@
                     <div class="footer-btm-menu">
                         <ul>
                             <li><a href="mailto:cuzin2k3@gmail.com">Quảng cáo với chúng tôi</a></li>
-                            <li><a href="#">
+                            <li><a href="/sitemap.xml">
                                     Sơ đồ trang web của chúng tôi</a></li>
                         </ul>
                     </div>
@@ -677,9 +677,6 @@
         <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
 
         <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
-
-        {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
-        {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 

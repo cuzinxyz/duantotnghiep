@@ -549,6 +549,19 @@ class ModelCar extends Seeder
         ['brand_id' => 12, 'model_name' => 'Viloran'],
         ['brand_id' => 12, 'model_name' => 'Khác'],
         # volkswagen model
+        
+        
+        # LandRover model 
+        ['brand_id' => 19, 'model_name' => 'Range Rover'],
+        ['brand_id' => 19, 'model_name' => 'Range Rover Evoque'],
+        ['brand_id' => 19, 'model_name' => 'Range Rover Sport'],
+        ['brand_id' => 19, 'model_name' => 'Range Rover Velar'],
+        ['brand_id' => 19, 'model_name' => 'Defender'],
+        ['brand_id' => 19, 'model_name' => 'Discovery Sport'],
+        ['brand_id' => 19, 'model_name' => 'Discovery'],
+        ['brand_id' => 19, 'model_name' => 'Freelander'],
+        ['brand_id' => 19, 'model_name' => 'Khác'],
+        # LandRover model 
     ]);
   }
 }

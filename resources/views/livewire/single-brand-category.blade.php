@@ -95,7 +95,7 @@
                                     alt="{{ $item->title }}">
                             </div>
                             <div class="product-content">
-                                <div class="company-logo">
+                                <div class="company-logo" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                     <a href="{{ route('brand.detail', $item->brand->brand_name) }}"><img
                                             style="max-width: 40px;max-height:40px;object-fit:contain"
                                             src="{{ asset('storage/' . $item->brand->logo_url) }}" alt></a>

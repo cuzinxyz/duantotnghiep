@@ -95,9 +95,8 @@ class CarResource extends Resource
                                     ->numeric(),
 
                                 TextInput::make('car_info.version')
-                                    ->label('Phiên bản')
+                                    ->label('Phiên bản'),
                                     // ->rules(['required'])
-                                    ->numeric(),
 
                                 TextInput::make('car_info.engine')
                                     ->label('Mã lực')
@@ -214,14 +213,14 @@ class CarResource extends Resource
 
                         Grid::make('')
                             ->schema([
-                                Section::make()
-                                    ->schema([
-                                        Toggle::make('recommended')
-                                            ->label('Xu hướng')
-                                            ->inline(false)
-                                            ->onColor('success')
-                                            ->offColor('danger'),
-                                    ]),
+                                // Section::make()
+                                //     ->schema([
+                                //         Toggle::make('recommended')
+                                //             ->label('Xu hướng')
+                                //             ->inline(false)
+                                //             ->onColor('success')
+                                //             ->offColor('danger'),
+                                //     ]),
 
                                 Section::make('')
                                     ->schema([
