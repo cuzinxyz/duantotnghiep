@@ -35,6 +35,7 @@ class SupportResource extends Resource
     protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Support::class;
+    
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Hỗ trợ';
@@ -56,11 +57,6 @@ class SupportResource extends Resource
                     ->fontFamily(FontFamily::Mono)
                     ->searchable()
                     ->label('Chuyên mục')
-                    ->words(5),
-                Tables\Columns\TextColumn::make('body')
-                    ->fontFamily(FontFamily::Mono)
-                    ->searchable()
-                    ->label('Body')
                     ->words(5),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Phê duyệt')

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Banner;
@@ -14,6 +15,7 @@ use App\Events\WorkCollaboratorEvent;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\UpdateActiceStatusUser;
 use App\Events\WorkCollaboratorWhenOnline;
+use App\Listeners\reassignUnfinishedTasksAfterDayListen;
 use App\Listeners\WorkCollaboratorListener;
 use App\Listeners\WorkCollaboratorWhenOnlineListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -37,6 +39,10 @@ class EventServiceProvider extends ServiceProvider
 
         WorkCollaboratorWhenOnline::class => [
             WorkCollaboratorWhenOnlineListener::class
+        ],
+
+        reassignUnfinishedTasksAfterDayEvent::class => [
+            reassignUnfinishedTasksAfterDayListen::class
         ]
     ];
 

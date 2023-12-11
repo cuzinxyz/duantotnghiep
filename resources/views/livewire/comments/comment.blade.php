@@ -70,8 +70,8 @@
 
                                 <div class="group" x-show="open">
                                     <form action="" wire:submit.prevent="replyComment({{ $item->id }})">
-                                        <input type="text" class="input" wire:model="reply"
-                                            placeholder="Nhập phản hồi" id="replyComment">
+                                        <input type="text" class="input replyComment" wire:model="reply"
+                                            placeholder="Nhập phản hồi" >
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <div
@@ -97,8 +97,9 @@
                                                 background-color: #46D993;
                                                 font-weight: 600;
                                             "
-                                                @click="open = false"
-                                                x-on:click="document.getElementById('replyComment').value = '' ">
+                                                x-on:click="function(e) {
+                                                    console.log(e.target);
+                                                }">
                                                 Phản hồi
                                             </button>
                                         </div>

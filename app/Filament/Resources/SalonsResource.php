@@ -51,6 +51,11 @@ class SalonsResource extends Resource
                     ->dateTime('d-m-Y')
                     ->since(),
 
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Thời gian tạo')
+                    ->dateTime('d-m-Y')
+                    ->since(),
+
                 Tables\Columns\TextColumn::make('status')
                     ->label('Trạng thái')
                     ->badge()

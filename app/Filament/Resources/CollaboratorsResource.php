@@ -17,6 +17,13 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollaboratorsResource\Pages;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\CollaboratorsResource\RelationManagers;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers\CarRelationManager;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers\DemnadRelationManager;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers\ReportCollaboratorRelationManager;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers\SalonCollaboratorRelationManager;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers\SupportCollaboratorRelationManager;
+use App\Filament\Resources\CollaboratorsResource\RelationManagers\WithDrawCollaboratorRelationManager;
+use App\Filament\Resources\CollaboratorsResource\Widgets\CollaboratorsOverview;
 
 class CollaboratorsResource extends Resource
 {
@@ -128,5 +135,25 @@ class CollaboratorsResource extends Resource
     public static function getModelLabel(): string
     {
         return __('cộng tác viên');
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            CarRelationManager::class,
+            DemnadRelationManager::class,
+            SalonCollaboratorRelationManager::class,
+            WithDrawCollaboratorRelationManager::class,
+            ReportCollaboratorRelationManager::class,
+            SupportCollaboratorRelationManager::class  
+
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            CollaboratorsOverview::class
+        ];
     }
 }

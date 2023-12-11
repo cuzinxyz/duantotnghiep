@@ -23,6 +23,7 @@ class CommentsResource extends Resource
     protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Comments::class;
+    
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Bình luận';

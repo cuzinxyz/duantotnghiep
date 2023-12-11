@@ -37,6 +37,8 @@ class ReportedResource extends Resource
 
     protected static ?string $model = Reported::class;
 
+    
+
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
     public static function form(Form $form): Form
@@ -98,26 +100,29 @@ class ReportedResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 ActionGroup::make([
-                    ReplicateAction::make()
+                    ActionsAction::make('viewCar')
                         ->label('Xem bài đăng')
-                        ->successRedirectUrl(fn (Model $report): string => route('car-detail', [
+                        ->url(fn (Model $report): string => route('car-detail', [
                             'slug' => $report->cars->slug,
                         ]))
-                        ->openUrlInNewTab(),
+                        ->openUrlInNewTab()
+                        ->icon('heroicon-o-eye'),
 
                     ActionsAction::make('waring')
                         ->label('Cảnh cáo người bị tố cáo')
                         ->action(function (Model $report) {
 
                             $collaborator = User::find($report->collaborator_id);
-                            $total_assign = $collaborator->total_assign - 1;
-                            if ($collaborator->total_assign <= 0) {
-                                $total_assign = 0;
+                            if($collaborator) {
+                                $total_assign = $collaborator->total_assign - 1;
+                                if ($collaborator->total_assign <= 0) {
+                                    $total_assign = 0;
+                                }
+    
+                                User::where('id', $report->collaborator_id)->update([
+                                    'total_assign' => $total_assign
+                                ]);
                             }
-
-                            User::where('id', $report->collaborator_id)->update([
-                                'total_assign' => $total_assign
-                            ]);
 
                             $report->status = 1;
                             $report->collaborator_id = null;
@@ -211,7 +216,7 @@ class ReportedResource extends Resource
                                 ]);
                             }
 
-                            $report->status = 1;
+                            Reported::where('id', $report->id)->delete();
                             $report->collaborator_id = null;
                             $report->save();
                         })
@@ -312,6 +317,11 @@ class ReportedResource extends Resource
     public static function getModelLabel(): string
     {
         return __('Report');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::where('status', 0)->count();
     }
 
     public function redirectToFrontend()
