@@ -14,7 +14,8 @@ class TransactionsHistoriesRelationManager extends RelationManager
 {
     protected static string $relationship = 'transactions_histories';
 
-
+    protected static ?string $title = 'Lịch sử giao dịch';
+    protected static ?string $label = 'Lịch sử giao dịch';
 
     public function table(Table $table): Table
     {

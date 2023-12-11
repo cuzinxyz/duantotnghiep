@@ -247,3 +247,15 @@ Route::post('/xem-xet', function (Request $request) {
 
     return response()->json('Đã gửi yêu cầu xem xét');
 });
+
+Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('google.login');
+
+Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+
+Route::get('login/facebook', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('facebook.login');
+
+Route::get('login/facebook/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback'])->name('handleFacebookCallback');
+
+Route::get('/chinh-sach-quyen-rieng-tu', function() {
+   return view('chinhsachbaomat'); 
+});

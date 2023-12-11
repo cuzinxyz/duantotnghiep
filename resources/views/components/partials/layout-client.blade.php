@@ -23,6 +23,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon-16x16.png') }}">
 
+    <meta name="google-adsense-account" content="ca-pub-1932736467628395">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Social SEO meta -->
     <meta property="og:site_name" content="Drivco.shop">
@@ -67,6 +68,15 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5B2YRXX4TD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-5B2YRXX4TD');
+    </script>
 
     @livewireStyles
     @stack('styles')

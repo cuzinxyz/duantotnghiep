@@ -55,21 +55,21 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="account-fn">Name</label>
+                            <label for="account-fn">Họ tên</label>
                             <input class="form-control" type="text" id="account-fn" value="{{ $user->name }}"
                                 required="" name="name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="account-email">E-mail Address</label>
+                            <label for="account-email">E-mail</label>
                             <input class="form-control" type="email" id="account-email" value="{{ $user->email }}"
                                 disabled="" name="email">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="account-phone">Phone Number</label>
+                            <label for="account-phone">Số điện thoại</label>
                             <input class="form-control" type="number" id="account-phone"
                                 value="{{ $user->phone_number ? $user->phone_number : '' }}" required=""
                                 name="phone_number">
@@ -77,13 +77,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="account-pass">New Password</label>
+                            <label for="account-pass">Mật khẩu mới</label>
                             <input class="form-control" type="password" id="account-pass" name="password">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="account-confirm-pass">Confirm Password <span class="text-danger"
+                            <label for="account-confirm-pass">Xác nhận mật khẩu <span class="text-danger"
                                     style="font-size: 14px">{{ $err ? $err : '' }}</span></label>
                             <input class="form-control" type="password" id="account-confirm-pass" name="confirm">
                         </div>

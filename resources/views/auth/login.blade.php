@@ -139,6 +139,20 @@
                                     ngay?</a>
                             </div>
                         </form>
+                        
+                            <div class="social-login row mt-3">
+                                <div class="col-6">
+                                    <a href="{{route('facebook.login')}}">
+                                        <button class="btn btn-block btn-primary">Đăng nhập bằng Facebook</button>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="{{route('google.login')}}">
+                                        <button class="btn btn-block btn-danger">Đăng nhập bằng Google</button>
+                                    </a>
+                                </div>
+                            </div>
+                                
                     </div>
                 </div>
             </div>
