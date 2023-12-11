@@ -93,4 +93,9 @@ class Car extends Model implements Viewable
     {
         return $this->belongsTo(User::class, 'collaborator_id', 'id');
     }
+    
+    public function salon(): BelongsTo
+    {
+        return $this->BelongsTo(Salon::class, 'salon_id', 'id');
+    }
 }

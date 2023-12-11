@@ -36,6 +36,13 @@ class HomeController extends Controller
             ->inRandomOrder()
             ->limit(12)
             ->get();
+        #thêm 1 cột đánh dấu tin vip 
+        $featured_cars = $featured_cars->map(function ($car) {
+            $car['is_vip'] = true;
+        
+            return $car;
+        });
+        // dd($featured_cars);
         // Kiểm tra nếu số lượng kết quả ít hơn 12
         if ($featured_cars->count() < 12) {
             // Số lượng còn thiếu để đạt đến 12
@@ -50,6 +57,9 @@ class HomeController extends Controller
             $featured_cars = $featured_cars->merge($additional_cars);
         }
         // dd($featured_cars);
+        $id = $featured_cars->pluck('id');
+        session(['featured_cars_id' => $id]);
+        
         $mark = false;
         $banners = Banner::all();
         if ($banners->isEmpty()) {

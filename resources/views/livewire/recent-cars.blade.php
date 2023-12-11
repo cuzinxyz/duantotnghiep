@@ -3,7 +3,7 @@
             <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12">
                     <div class="section-title-2 text-left">
-                        <h2>Xe Gần Đây</h2>
+                        <h3>Xe Gần Đây</h3>
                         <p>Có hơn {{ \DB::table('brands')->get()->count() }}+ thương hiệu xe được đề xuất.</p>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                 @php
                                     $wowDelayRecommend = 100;
                                 @endphp
-                                @foreach ($recentCars as $car)
+                                @forelse ($recentCars as $car)
                                     <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" wire:loading.remove
                                         data-wow-delay="{{ $wowDelayRecommend + 100 }}ms">
                                         <div class="product-card2 two">
@@ -59,13 +59,15 @@
                                                 <div class="price">
                                                     <strong>{{ number_format($car->price) . ' đ' }}</strong>
                                                 </div>
-                                                <h6><a
+                                                <h6><a class="line-clamp-1"
                                                         href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a>
                                                 </h6>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="text-center">Không có xe nào cả!</div>
+                                @endforelse
                             </div>
                         </div>
                     </div>

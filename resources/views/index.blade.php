@@ -1,5 +1,4 @@
 <x-partials.layout-client>
-
     <x-homepage.banner :$banners :$mark />
 
     <x-homepage.featured-cars :cars="$featured_cars" />
@@ -20,9 +19,9 @@
                 <div class="row wow fadeInUp" data-wow-delay="700ms" style="visibility: visible; animation-delay: 700ms;">
                     <div class="col-lg-12">
                         <div class="inner-banner-content section-title-2">
-                            <h2>Cảm thấy bối rối, Chiếc xe nào là tốt nhất?</h2>
-                            <p>Bảo dưỡng ô tô là việc bảo dưỡng, kiểm tra định kỳ một chiếc xe để đảm bảo xe hoạt động an toàn và hiệu quả. </p>
-                            <button onclick="window.location.href='{{ route('sellCar') }}'" class="primary-btn3" type="button" data-bs-toggle="modal" data-bs-target="#sellUsModal01">
+                            <h3 class="text-white">Drivco: Đăng tin trực tuyến - Kết nối trực tiếp</h3>
+                            <!--<p>Bảo dưỡng ô tô là việc bảo dưỡng, kiểm tra định kỳ một chiếc xe để đảm bảo xe hoạt động an toàn và hiệu quả. </p>-->
+                            <button onclick="window.location.href='{{ route('sellCar') }}'" class="btn btn-sm px-5 primary-btn3" type="button" data-bs-toggle="modal" data-bs-target="#sellUsModal01">
                                 <svg width="24" height="15" viewBox="0 0 24 15" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M3.25985 0C3.15704 0 3.05844 0.0413135 2.98574 0.114852C2.91304 0.18839 2.87219 0.28813 2.87219 0.392129C2.87219 0.496128 2.91304 0.595867 2.98574 0.669405C3.05844 0.742944 3.15704 0.784257 3.25985 0.784257H4.8105C4.91332 0.784257 5.01192 0.742944 5.08462 0.669405C5.15732 0.595867 5.19816 0.496128 5.19816 0.392129C5.19816 0.28813 5.15732 0.18839 5.08462 0.114852C5.01192 0.0413135 4.91332 0 4.8105 0H3.25985ZM5.77966 0C5.67684 0 5.57824 0.0413135 5.50554 0.114852C5.43284 0.18839 5.39199 0.28813 5.39199 0.392129C5.39199 0.496128 5.43284 0.595867 5.50554 0.669405C5.57824 0.742944 5.67684 0.784257 5.77966 0.784257H10.3347C10.4375 0.784257 10.5361 0.742944 10.6088 0.669405C10.6815 0.595867 10.7223 0.496128 10.7223 0.392129C10.7223 0.28813 10.6815 0.18839 10.6088 0.114852C10.5361 0.0413135 10.4375 0 10.3347 0H5.77966Z">
@@ -34,7 +33,7 @@
                                         d="M0 5.09873C0 4.99473 0.0408428 4.89499 0.113543 4.82146C0.186244 4.74792 0.284847 4.7066 0.387662 4.7066H4.74886C4.85167 4.7066 4.95027 4.74792 5.02297 4.82146C5.09567 4.89499 5.13652 4.99473 5.13652 5.09873C5.13652 5.20273 5.09567 5.30247 5.02297 5.37601C4.95027 5.44955 4.85167 5.49086 4.74886 5.49086H0.387662C0.284847 5.49086 0.186244 5.44955 0.113543 5.37601C0.0408428 5.30247 0 5.20273 0 5.09873ZM15.6836 5.60575C15.7563 5.67929 15.7971 5.77901 15.7971 5.88299C15.7971 5.98697 15.7563 6.08669 15.6836 6.16022L15.6532 6.19101C15.2897 6.55865 14.7968 6.76522 14.2828 6.76528H8.14089C8.03808 6.76528 7.93948 6.72397 7.86678 6.65043C7.79408 6.57689 7.75323 6.47715 7.75323 6.37315C7.75323 6.26915 7.79408 6.16941 7.86678 6.09587C7.93948 6.02234 8.03808 5.98102 8.14089 5.98102H14.2826C14.4354 5.98104 14.5866 5.95063 14.7277 5.89152C14.8688 5.83241 14.997 5.74577 15.105 5.63654L15.1355 5.60575C15.2082 5.53224 15.3068 5.49094 15.4096 5.49094C15.5123 5.49094 15.6109 5.53224 15.6836 5.60575ZM8.52856 14.6079C8.52856 14.5039 8.5694 14.4041 8.6421 14.3306C8.7148 14.257 8.8134 14.2157 8.91622 14.2157H10.5638C10.6666 14.2157 10.7652 14.257 10.8379 14.3306C10.9106 14.4041 10.9514 14.5039 10.9514 14.6079C10.9514 14.7118 10.9106 14.8116 10.8379 14.8851C10.7652 14.9587 10.6666 15 10.5638 15H8.91622C8.8134 15 8.7148 14.9587 8.6421 14.8851C8.5694 14.8116 8.52856 14.7118 8.52856 14.6079ZM11.2422 14.6079C11.2422 14.5039 11.283 14.4041 11.3557 14.3306C11.4284 14.257 11.527 14.2157 11.6298 14.2157H15.991C16.0939 14.2157 16.1925 14.257 16.2652 14.3306C16.3379 14.4041 16.3787 14.5039 16.3787 14.6079C16.3787 14.7118 16.3379 14.8116 16.2652 14.8851C16.1925 14.9587 16.0939 15 15.991 15H11.6298C11.527 15 11.4284 14.9587 11.3557 14.8851C11.283 14.8116 11.2422 14.7118 11.2422 14.6079Z">
                                     </path>
                                 </svg>
-                                Bán xe
+                                Bán xe ngay
                             </button>
                         </div>
                     </div>
@@ -47,60 +46,6 @@
         <livewire:brand-list />
     </div>
 
-    <div class="home5-why-drivco-area pt-90 pb-90 mb-100">
-        <div class="container">
-            <div class="row g-lg-4 gy-5">
-                <div class="col-lg-6 d-flex align-items-center">
-                    <div class="drivco-content">
-                        <div class="section-title-2 mb-60 wow fadeInUp" data-wow-delay="200ms">
-                            <h2>Tại sao là Drivco?</h2>
-                            <p>Để có được thông tin chính xác và cập nhật nhất.</p>
-                        </div>
-                        <div class="drivco-featute">
-                            <ul>
-                                <li class="single-feature wow fadeInUp" data-wow-delay="300ms">
-                                    <div class="feature-icon">
-                                        <img src="images/safe.svg" alt="icon">
-                                    </div>
-                                    <div class="feature-content">
-                                        <h5>Mua hàng an toàn</h5>
-                                        <p>Các sản phẩm mua hàng an toàn thường được biết đến với chất lượng và độ tin
-                                            cậy cao.</p>
-                                    </div>
-                                </li>
-                                <li class="single-feature wow fadeInUp" data-wow-delay="400ms">
-                                    <div class="feature-icon">
-                                        <img src="images/warranty.svg" alt="icon">
-                                    </div>
-                                    <div class="feature-content">
-                                        <h5>Đa Dạng Xe Ô Tô Cũ</h5>
-                                        <p>Duyệt qua danh sách đa dạng với nhiều thương hiệu và mẫu xe ô tô cũ đảm bảo
-                                            chất lượng và độ tin cậy.</p>
-                                    </div>
-                                </li>
-                                <li class="single-feature wow fadeInUp" data-wow-delay="500ms">
-                                    <div class="feature-icon">
-                                        <img src="images/hassle.svg" alt="icon">
-                                    </div>
-                                    <div class="feature-content">
-                                        <h5>Chăm Sóc Khách Hàng 24/7</h5>
-                                        <p>Đội ngũ chăm sóc khách hàng chuyên nghiệp sẵn sàng hỗ trợ bạn mọi lúc, mọi
-                                            nơi.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
-                    <div class="drivco-img wow zoomIn" data-wow-delay="400ms">
-                        <img src="images/why-drivco.png" alt="img">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- Recent Product  --}}
     <livewire:recent-cars />
 
@@ -109,8 +54,7 @@
             <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12 d-flex align-items-end justify-content-between gap-3 flex-wrap">
                     <div class="section-title-2">
-                        <h2>Drivco hoạt động như thế nào?</h2>
-                        {{-- <p>Quy trình mua bán của chú</p> --}}
+                        <h3>Drivco hoạt động như thế nào?</h3>
                     </div>
                     <div class="video-btn">
                         <a class="" href="{{ route('sellCar') }}"><i class="bi bi-play-circle"></i> Bán xe
@@ -193,7 +137,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="sub-title wow fadeInUp" data-wow-delay="200ms">
-                        <h5>Đối Tác Tin Cậy</h5>
+                        <h3>Đối Tác Tin Cậy</h3>
                         <div class="dash"></div>
                     </div>
                     <div class="partner-slider wow fadeInUp" data-wow-delay="300ms">
@@ -214,9 +158,11 @@
             <div class="row mb-60 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12 d-flex align-items-end justify-content-between flex-wrap gap-4">
                     <div class="section-title-2">
-                        <h2>Tin tức mới nhất</h2>
+                        <h3 class="w-100">Tin tức mới nhất</h3>
                         <p>Thông tin mới liên tục cập nhật từ Drivco </p>
                     </div>
+                    
+                    <a href="{{ route('news.list') }}">Xem tất cả</a>
                 </div>
             </div>
             <div class="row g-4 justify-content-center">
@@ -235,7 +181,7 @@
                             </div>
                             <div class="content">
                                 <h6>
-                                    <a href="{{ route('news.index', $post->slug) }}">{{ $post->title }}</a>
+                                    <a class="line-clamp-2" href="{{ route('news.index', $post->slug) }}">{{ $post->title }}</a>
                                 </h6>
                                 <p class="line-clamp-2">
                                     {{ $post->summary }}

@@ -31,7 +31,7 @@
                                     </div>
                                     <ul style="overflow: auto; max-height: 200px">
                                         @foreach ($brands as $brand)
-                                            <li>
+                                            <li wire:key="brand-{{$brand->id}}">
                                                 <label class="containerss">
                                                     <input type="checkbox" value="{{ $brand->id }}"
                                                         wire:model.live="updateBrands">
@@ -110,7 +110,7 @@
                                     </div> --}}
                                     <ul style="overflow: auto; max-height: 200px">
                                         @foreach ($locations as $location)
-                                            <li>
+                                            <li wire:key="location-{{$location->id}}">
                                                 <label class="containerss">
                                                     <input type="checkbox" value="{{ $location->id }}"
                                                         wire:model.live="updateLocations">
@@ -159,7 +159,7 @@
                                     $wowDelay = 100;
                                 @endphp
                                 @foreach ($cars as $car)
-                                    <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item"
+                                    <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp item" wire:key="car-{{$car->id}}"
                                         data-wow-delay="{{ $wowDelay + 100 }}ms">
                                         {{-- <div class="product-card">
                                             <div class="product-img">
@@ -266,7 +266,7 @@
                                                         {{ $car->created_at->format("d M, Y") }} <i class="bi bi-exclamation-circle"></i>
                                                     </button>
                                                 </div>
-                                                <livewire:add-to-wish-list carID="{{ $car->id }}" />
+                                                <livewire:add-to-wish-list wire:key="wish-list-{{$car->id}}" carID="{{ $car->id }}" />
                                                 <img src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}"
                                                     alt="">
                                             </div>

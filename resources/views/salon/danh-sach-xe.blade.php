@@ -17,7 +17,7 @@
                         <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                aria-selected="true">{{ $salonInfo ? $salonInfo->salon_name : '' }}</button>
+                                aria-selected="true"><i class="bi bi-shop fs-5"></i> {{ $salonInfo ? $salonInfo->salon_name : '' }}</button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">Giới thiệu về salon</button>
@@ -46,7 +46,7 @@
                                                             class="bi bi-arrow-right-short"></i></a>
                                                 </div>
                                                 <div class="price">
-                                                    <strong>{{ $item->price }} đ</strong>
+                                                    <strong>{{ number_format($item->price) }} đ</strong>
                                                 </div>
                                                 <h6><a href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a></h6>
                                             </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div class="card mt-3" style="width: 100%;">
-                                <div class="card-header">
+                                <div class="card-header bg-dark text-white">
                                     {{ $salonInfo ? $salonInfo->salon_name : '' }}
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -68,7 +68,7 @@
                                 </ul>
 
                                 <div class="mt-3 card">
-                                    <div class="card-header">
+                                    <div class="card-header bg-dark text-white">
                                         Một số hình ảnh về Salon {{ $salonInfo ? $salonInfo->salon_name : '' }}
                                     </div>
 

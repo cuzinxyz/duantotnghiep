@@ -126,7 +126,7 @@
                                             </div>
 
                                             @if (auth()->check())
-                                                @if (auth()->user()->is_collaborator || auth()->user()->id == $item->user_id)
+                                                @if (auth()->user()->is_collaborator || auth()->user()->id == $reply->user_id)
                                                     <div class="delete-btn" style="cursor: pointer"
                                                         wire:click="deleteReplyComment({{ $reply->id }})"
                                                         wire:confirm="Xóa bình luận này ?">

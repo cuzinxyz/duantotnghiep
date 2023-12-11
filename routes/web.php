@@ -152,16 +152,13 @@ Route::controller(CarDetailController::class)->group(function () {
     Route::get('/oto/{slug}', 'index')->name('car-detail');
 });
 
-// Showroom
-Route::get('/showroom/{slug}', Showroom::class)->name('carSearch');
 # salon list
-Route::get('/salon/{salonID}', [SalonController::class, 'listCars'])->name('salon.listCars');
+Route::get('/salon/{salonSlug}', [SalonController::class, 'listCars'])->name('salon.listCars');
 
 // collaborators
 Route::prefix('/collaborators')
     ->middleware(['auth', 'is_collaborator'])
     ->group(function () {
-
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboard', 'dashboard')->name('collaborators.dashboard');
         });
@@ -248,31 +245,5 @@ Route::post('/xem-xet', function (Request $request) {
         'status' => 0
     ]);
 
-        return response()->json('Đã gửi yêu cầu xem xét');
-});
-
-Route::get('/sitemap', function() {
-    $sitemap = Sitemap::create()
-        ->add(Url::create('/'))
-        ->add(Url::create('/oto'))
-        ->add(Url::create('/tin-mua-xe'))
-        ->add(Url::create('/login'))
-        ->add(Url::create('/register'))
-        ->add(Url::create('/password/reset'));
-    Car::all()->each(function (Car $item) use ($sitemap) {
-        $sitemap->add(Url::create("/oto/{$item->slug}"));
-    });
-    Brand::all()->each(function (Brand $item) use ($sitemap) {
-        $sitemap->add(Url::create("/hang-xe/{$item->brand_name}"));
-    });
-    Salon::all()->each(function (Salon $item) use ($sitemap) {
-        $sitemap->add(Url::create("/salon/{$item->slug}"));
-    });
-    News::all()->each(function (News $item) use ($sitemap) {
-        $sitemap->add(Url::create("/bai-viet/$item->slug"));
-    });
-
-    $sitemap->writeToFile(public_path('sitemap.xml'));
-
-    return "Generate sitemap successfully!";
+    return response()->json('Đã gửi yêu cầu xem xét');
 });

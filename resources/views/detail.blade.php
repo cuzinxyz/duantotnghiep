@@ -1,6 +1,26 @@
 @section('page_title'){{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}@endsection
 @section('title_seo'){{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}@endsection
 @section('thumb_seo'){{ $carDetail->verhicle_image_library ? asset('storage/' . $carDetail->verhicle_image_library[0]) : '' }}@endsection
+@push('styles')
+<style>
+@media only screen and (max-width: 988px)
+{
+    .contact-fixed {
+        left: 0;
+        padding: 10px 0 !important;
+        width: 100%;
+        position: fixed !important;
+        bottom: 0;
+        background: #fff;
+        z-index: 123;
+        margin: 0;
+        border-top: 6px solid !important;
+        border-image-slice: 1 !important;
+        border-image-source: linear-gradient(to right bottom, #6a5af9, #f62682) !important;
+    }
+}
+</style>
+@endpush
 <x-partials.layout-client>
     <x-detailpage.banner :$carDetail />
 
@@ -11,7 +31,7 @@
 
                 <div class="col-lg-4">
                     <div class="car-details-sidebar">
-                        <div class="contact-info mb-50 px-3 py-4">
+                        <div class="contact-info mb-50 px-3 py-4 contact-fixed">
                             <div class="d-flex align-items-center gap-2">
                                 <img src="{{ $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover" />
                                 <div class="ml-3">
@@ -29,16 +49,25 @@
                                         </button>
                                     </div>
                                 </form>
-                                <a href="tel:{{ $carDetail->user->phone_number }}">
-                                    <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
-                                        <i class="bx bx-phone-call"></i> {{ $carDetail->user->phone_number }}
-                                    </button>
-                                </a>
                                 <a href="mailto:{{ $carDetail->user->email }}">
                                     <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
                                         <i class="bx bx-at"></i> {{ $carDetail->user->email }}
                                     </button>
                                 </a>
+                                <a href="tel:{{ $carDetail->user->phone_number }}">
+                                    <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                        <i class="bx bx-phone-call"></i> {{ $carDetail->user->phone_number }}
+                                    </button>
+                                </a>
+                                
+                                @if(!empty($carDetail->salon_id))
+                                    <a href="{{ route('salon.listCars', $carDetail->salon->slug) }}">
+                                        <button class="btn p-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                            <i class="bi bi-shop"></i>
+                                            Xem salon
+                                        </button>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         @if ($ads->count() > 0)
@@ -67,11 +96,11 @@
                                     <div class="product-st-card1 two mb-30">
                                         <div class="product-img">
                                             <div class="product-price">
-                                                <span>{{ $car->price }}</span>
+                                                <span>{{ number_format($car->price) }}</span>
                                             </div>
                                             <livewire:add-to-wish-list carID="{{ $car->id }}" />
                                             <div class="car-img">
-                                                <img class="img-fluid" style="height"
+                                                <img class="img-fluid recent-car-thumb"
                                                     src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
                                                     alt="image">
                                             </div>

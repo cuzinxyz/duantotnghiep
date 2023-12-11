@@ -5,7 +5,7 @@
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
             <div class="col-lg-12 d-flex align-items-end justify-content-between gap-3 flex-wrap">
                 <div class="section-title-2">
-                    <h2>Xe Được Đề Xuất</h2>
+                    <h3>Xe Được Đề Xuất</h3>
                     <p>Xe được đề xuất bởi Drivco.</p>
                 </div>
             </div>
@@ -13,14 +13,21 @@
         <div class="row wow fadeInUp" data-wow-delay="300ms">
             <div class="col-lg-12">
                 <div class="row gy-3">
-                    @foreach ($cars as $car)
-                        <div class="col-md-6 col-lg-3 col-sm-12 col-12">
-                            <div class="product-card5">
+                    @forelse ($cars as $car)
+                        <div class="col-md-6 col-lg-4 col-sm-12 col-12">
+                            <div class="product-card">
+                                @if(!empty($car->is_vip))
+                                <span class="new">
+                                    <i class="bi bi-check-circle-fill fs-5 text-white"></i>
+                                </span>
+                                @endif
+                                
                                 <div class="product-img">
-                                    <div class="product-price">
-                                        <span>{{ number_format($car->price) }} đ</span>
+                                    <div class="number-of-img">
+                                        <img src="{{ asset('images/gallery-icon-1.svg') }}" alt="">
+                                        {{ count($car->verhicle_image_library) }}
                                     </div>
-
+                                    
                                     <livewire:add-to-wish-list carID="{{ $car->id }}" />
 
                                     <div class="slider-btn-group">
@@ -48,12 +55,17 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
+                                    <h5><a class="line-clamp-1" href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h5>
                                     @if(!empty($car->province->name))
-                                    <div class="location">
-                                        <a><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
+                                    <div class="price-location">
+                                        <div class="price">
+                                            <strong>{{number_format($car->price)}}</strong>
+                                        </div>
+                                        <div class="location">
+                                            <a><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
+                                        </div>
                                     </div>
                                     @endif
-                                    <h6><a href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h6>
                                     <ul class="features">
                                         <li>
                                             <img src="{{ asset('images/miles.svg') }}" alt="">
@@ -86,11 +98,19 @@
                                             </svg>
                                             Xem xe
                                         </a>
+                                        
+                                        <div class="brand">
+                                            <a href="{{ route('brand.detail', $car->brand->brand_name) }}">
+                                                <img width="32" height="32" src="{{ asset('storage/'.$car->brand->logo_url) }}" alt="{{ $car->brand->brand_name }}">
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="text-center">Chưa có tin nào.</div>
+                    @endforelse
                 </div>
             </div>
         </div>

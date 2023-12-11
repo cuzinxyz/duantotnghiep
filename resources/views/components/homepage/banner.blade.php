@@ -23,8 +23,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="banner-content">
-                    <h1>Bạn muốn mua ô tô cũ?</h1>
-                    <p> Drivco là sự lựa chọn hàng đầu dành cho bạn với đa dạng các mẫu xe đến từ khắp nơi trên cả nước, uy tín, bảo mật, chất lượng. </p>
+                    <h2 class="text-white fw-bold">Drivco.shop</h2>
+                    <p> Địa chỉ mua bán xe ô tô cũ uy tín và chất lượng tại Việt Nam. </p>
                     <div class="banner-content-bottom">
                         <a href="{{ route('car.list') }}" class="primary-btn3">
                             <svg width="24" height="15" viewBox="0 0 24 15" xmlns="http://www.w3.org/2000/svg">

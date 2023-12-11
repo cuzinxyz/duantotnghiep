@@ -82,6 +82,7 @@
 }
 .messenger-list-item td p {
     color: #3c3c3c;
+    margin-top: 0;
 }
 .messenger-list-item td span {
     color: #929292;
