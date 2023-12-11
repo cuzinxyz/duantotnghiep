@@ -37,6 +37,7 @@ class User extends Authenticatable
         'total_assign',
         'active',
         'is_collaborator',
+        'social_id'
     ];
 
     /**
