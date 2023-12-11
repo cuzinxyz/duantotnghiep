@@ -71,7 +71,7 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Giao diện')
                     ->collapsed(),
             ])
-
+            ->profile()
             ->brandName('DrivcoADMIN')
             ->favicon(asset('images/favicon/favicon.ico'));
     }

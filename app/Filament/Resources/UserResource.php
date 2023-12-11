@@ -17,8 +17,12 @@ use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\Pages\ViewUser;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\ByCarRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\CarRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\ReportRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\SupportRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\TransactionsHistoriesRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\WithDrawRelationManager;
 
 class UserResource extends Resource
 {
@@ -120,7 +124,12 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TransactionsHistoriesRelationManager::class
+            TransactionsHistoriesRelationManager::class,
+            CarRelationManager::class,
+            ByCarRelationManager::class,
+            SupportRelationManager::class,
+            WithDrawRelationManager::class,
+            ReportRelationManager::class
         ];
     }
 
