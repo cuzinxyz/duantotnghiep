@@ -2,17 +2,18 @@
 
 namespace App\Listeners;
 
+use Carbon\Carbon;
+use App\Models\Car;
 use App\Models\User;
+use App\Models\Salon;
+use App\Models\Demnad;
+use App\Models\Support;
+use App\Models\Reported;
+use App\Models\WithDraw;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Events\WorkCollaboratorWhenOnline;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Events\reassignUnfinishedTasksAfterDayEvent;
-use App\Models\Car;
-use App\Models\Demnad;
-use App\Models\Reported;
-use App\Models\Salon;
-use App\Models\Support;
-use App\Models\WithDraw;
-use Carbon\Carbon;
 
 class reassignUnfinishedTasksAfterDayListen
 {
@@ -29,37 +30,16 @@ class reassignUnfinishedTasksAfterDayListen
      */
     public function handle(reassignUnfinishedTasksAfterDayEvent $event): void
     {
-        $this->taskCars();  
-        $this->taskByCars();
-        $this->taskSalons();
-        $this->taskReported();
-        $this->taskSupport();
-        $this->taskWithDraw(); 
-    }
+        $collaborator = User::find($event->collaboratorID);
+        
+        $this->taskCars($collaborator);
+        $this->taskByCars($collaborator);
+        $this->taskSalons($collaborator);
+        $this->taskReported($collaborator);
+        $this->taskSupport($collaborator);
+        $this->taskWithDraw($collaborator);
 
-    public function collaborator($collaborator_id = null)
-    {
-        $collaborator = null;
-
-        $collaborator_online = User::where([
-            'is_collaborator' => 1,
-            'active' => 1
-        ])->where('id', '!=', $collaborator_id)
-            ->select(['id', 'total_assign'])
-            ->orderBy('total_assign', 'desc')
-            ->first();
-
-        if($collaborator_online) {
-            $collaborator = $collaborator_online;
-        } else {
-            $collaborator = User::where('is_collaborator', 1)
-            ->where('id', '!=', $collaborator_id)
-            ->select(['id', 'total_assign'])
-            ->orderBy('total_assign', 'desc')
-            ->first();
-        }
-
-        return $collaborator;
+        event(new WorkCollaboratorWhenOnline());
     }
 
     public function deleteOldTask($id = null)
@@ -68,132 +48,105 @@ class reassignUnfinishedTasksAfterDayListen
         if ($collaborator) {
             $total_assign = $collaborator->total_assign - 1;
 
+            if($total_assign <= 0) {
+                $total_assign = 0;
+            }
+
             User::where('id', $id)->update([
                 'total_assign' => $total_assign
             ]);
         }
     }
 
-    public function taskAllocation($model, $data, $collaborator)
-    {
-        if ($collaborator) {
-            $ctv = User::where('id', $collaborator->id)->first();
-            $total_assign = $ctv->total_assign + 1;
-            User::where('id', $collaborator->id)->update([
-                'total_assign' => $total_assign
-            ]);
-
-            $model::where('id', $data->id)->update([
-                'collaborator_id' => $collaborator->id,
-            ]);
-        }
-    }
-
-    public function taskCars()
+    public function taskCars($collaborator)
     {
         $cars = Car::where([
-            'status' => 0
+            'status' => 0,
+            'collaborator_id' => $collaborator->id
         ])
-        ->select('id', 'collaborator_id','created_at')
         ->get();
 
-        $now = Carbon::now();
         foreach ($cars as $item) {
-            if ($item->created_at->diffInHours($now) > 8) {
-                $collaborator = $this->collaborator($item->collaborator_id);
-                $this->taskAllocation(Car::class, $item, $collaborator);
-                $this->deleteOldTask($item->collaborator_id);
-            }
+            Car::where('collaborator_id', $collaborator->id)->update([
+                'collaborator_id' => null
+            ]);
+            $this->deleteOldTask($collaborator->id);
         }
     }
 
-    public function taskByCars()
+    public function taskByCars($collaborator)
     {
         $byCars = Demnad::where([
-            'status' => 0
+            'status' => 0,
+            'collaborator_id' => $collaborator->id
         ])
-            ->select('id', 'collaborator_id', 'created_at')
-            ->get();
-
-        $now = Carbon::now();
+        ->get();
         foreach ($byCars as $item) {
-            if ($item->created_at->diffInHours($now) > 8) {
-                $collaborator = $this->collaborator($item->collaborator_id);
-                $this->taskAllocation(Demnad::class, $item, $collaborator);
-                $this->deleteOldTask($item->collaborator_id);
-            }
+            Demnad::where('collaborator_id', $collaborator->id)->update([
+                'collaborator_id' => null
+            ]);
+            $this->deleteOldTask($collaborator->id);
         }
     }
 
-    public function taskSalons()
+    public function taskSalons($collaborator)
     {
-        $byCars = Salon::where([
-            'status' => 0
+        $salons = Salon::where([
+            'status' => 0,
+            'collaborator_id' => $collaborator->id
         ])
-            ->select('id', 'collaborator_id', 'created_at')
-            ->get();
-
-        $now = Carbon::now();
-        foreach ($byCars as $item) {
-            if ($item->created_at->diffInHours($now) > 8) {
-                $collaborator = $this->collaborator($item->collaborator_id);
-                $this->taskAllocation(Salon::class, $item, $collaborator);
-                $this->deleteOldTask($item->collaborator_id);
-            }
+        ->get();
+        foreach ($salons as $item) {
+            Salon::where('collaborator_id', $collaborator->id)->update([
+                'collaborator_id' => null
+            ]);
+            $this->deleteOldTask($collaborator->id);
         }
     }
 
-    public function taskReported()
+    public function taskReported($collaborator)
     {
-        $reportes = Reported::where([
-            'status' => 0
+        $reports = Reported::where([
+            'status' => 0,
+            'collaborator_id' => $collaborator->id
         ])
-            ->select('id', 'collaborator_id', 'created_at')
-            ->get();
-
-        $now = Carbon::now();
-        foreach ($reportes as $item) {
-            if ($item->created_at->diffInHours($now) > 8) {
-                $collaborator = $this->collaborator($item->collaborator_id);
-                $this->taskAllocation(Reported::class, $item, $collaborator);
-                $this->deleteOldTask($item->collaborator_id);
-            }
+        ->get();
+        foreach ($reports as $item) {
+            Reported::where('collaborator_id', $collaborator->id)->update([
+                'collaborator_id' => null
+            ]);
+            $this->deleteOldTask($collaborator->id);
         }
     }
 
-    public function taskWithDraw()
+    public function taskWithDraw($collaborator)
     {
         $draws = WithDraw::where([
-            'status' => 0
+            'status' => 0,
+            'collaborator_id' => $collaborator->id
         ])
-            ->select('id', 'collaborator_id', 'created_at')
-            ->get();
-
-        $now = Carbon::now();
+        ->get();
         foreach ($draws as $item) {
-            if ($item->created_at->diffInHours($now) > 8) {
-                $collaborator = $this->collaborator($item->collaborator_id);
-                $this->taskAllocation(WithDraw::class, $item, $collaborator);
-                $this->deleteOldTask($item->collaborator_id);
-            }
+            WithDraw::where('collaborator_id', $collaborator->id)->update([
+                'collaborator_id' => null
+            ]);
+            $this->deleteOldTask($collaborator->id);
         }
     }
 
-    public function taskSupport()
+    public function taskSupport($collaborator)
     {
-        $support = Support::where([
-            'status' => 0
+        $supports = Support::where([
+            'status' => 0,
+            'collaborator_id' => $collaborator->id
         ])
-            ->select('id', 'collaborator_id', 'created_at')
-            ->get();
-
-        $now = Carbon::now();
-        foreach ($support as $item) {
-            if ($item->created_at->diffInHours($now) > 8) {
-                $collaborator = $this->collaborator($item->collaborator_id);
-                $this->taskAllocation(Support::class, $item, $collaborator);
-                $this->deleteOldTask($item->collaborator_id);
-            }
+        ->get();
+        foreach ($supports as $item) {
+            Support::where('collaborator_id', $collaborator->id)
+            ->update([
+                'collaborator_id' => null
+            ]);
+            $this->deleteOldTask($collaborator->id);
         }
     }
 }
