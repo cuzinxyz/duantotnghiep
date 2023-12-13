@@ -14,6 +14,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 class WithDrawCollaboratorRelationManager extends RelationManager
 {
     protected static string $relationship = 'withDrawCollaborator';
+    protected static ?string $title = 'Rút tiền';
+    protected static ?string $label = 'Rút tiền';
 
     public function table(Table $table): Table
     {

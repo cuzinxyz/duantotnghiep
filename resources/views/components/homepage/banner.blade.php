@@ -7,11 +7,11 @@
             @foreach ($banners as $banner)
             <div class="swiper-slide">
                 @if(!$mark)
-                <div class="banner-bg"
+                <div class="banner-bg rounded-0"
                     style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url({{ asset('storage/'.$banner->image_url) }});">
                 </div>
                 @else
-                <div class="banner-bg"
+                <div class="banner-bg rounded-0"
                     style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url({{ asset($banner->image_url) }});">
                 </div>
                 @endif

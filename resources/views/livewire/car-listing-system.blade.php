@@ -52,7 +52,7 @@
                                         <div class="col-6">
                                             <div class="form-inner">
                                                 <select class="nice-select" wire:model.live="minYear">
-                                                    <option>Min Year</option>
+                                                    <option>Từ</option>
                                                     @for ($year = $startYear; $year <= $currentYear; $year++)
                                                         <option value="{{ $year }}">{{ $year }}</option>
                                                     @endfor
@@ -62,7 +62,7 @@
                                         <div class="col-6">
                                             <div class="form-inner">
                                                 <select class="nice-select" wire:model.live="maxYear" id="maxYear">
-                                                    <option>Max Year</option>
+                                                    <option>Đến</option>
                                                     @for ($year = $startYear; $year <= $currentYear; $year++)
                                                         <option value="{{ $year }}">{{ $year }}</option>
                                                     @endfor

@@ -22,7 +22,7 @@ class CarDetailController extends Controller
         # save view
         views($carDetail)->record();
 
-        $recentCars = Car::inRandomOrder()->limit(4)->get();
+        $recentCars = Car::inRandomOrder()->where('status', 1)->limit(4)->get();
 
         $ads = Ads::where('priority', 2)
             ->inRandomOrder()

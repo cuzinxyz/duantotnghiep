@@ -14,6 +14,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 class DemnadRelationManager extends RelationManager
 {
     protected static string $relationship = 'demnadCollaborator';
+    protected static ?string $title = 'Tin bán xe';
+    protected static ?string $label = 'Tin bán xe';
 
     public function table(Table $table): Table
     {

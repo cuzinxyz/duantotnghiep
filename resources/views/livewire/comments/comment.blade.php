@@ -98,7 +98,7 @@
                                                 font-weight: 600;
                                             "
                                                 x-on:click="function(e) {
-                                                    console.log(e.target);
+                                                    e.target.form.querySelector('.replyComment').value = '';
                                                 }">
                                                 Phản hồi
                                             </button>

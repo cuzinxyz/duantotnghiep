@@ -260,3 +260,7 @@ Route::get('login/facebook/callback', [\App\Http\Controllers\Auth\LoginControlle
 Route::get('/chinh-sach-quyen-rieng-tu', function() {
    return view('chinhsachbaomat'); 
 });
+
+Route::get('/account', function() {
+    return view('account');
+})->name('account');
