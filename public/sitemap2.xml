@@ -101,6 +101,11 @@
         <priority>0.8</priority>
             </url>
     <url>
+        <loc>https://drivco.shop/oto/xexexexexexe</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
         <loc>https://drivco.shop/hang-xe/Mercedes</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -216,12 +221,7 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/bai-viet/eaque-et-quas-qui-rerum-odit-ut-aspernatur</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>https://drivco.shop/bai-viet/quidem-laudantium-corrupti-maiores-amet-modi-id</loc>
+        <loc>https://drivco.shop/bai-viet/cach-tinh-gia-xe-o-to-cu-chinh-xac-va-nhanh-chong</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

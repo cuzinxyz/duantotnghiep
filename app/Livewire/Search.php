@@ -13,7 +13,8 @@ class Search extends Component
     {
         $cars = [];
         if (strlen($this->search) >= 2) {
-            $cars = Car::where('title', 'like', '%' . $this->search . '%')
+            $cars = Car::where('status', 1)
+                ->where('title', 'like', '%' . $this->search . '%')
                 ->orWhereHas('brand', function($subquery) {
                     $subquery->where('brand_name', 'like', '%' . $this->search . '%');
                 })

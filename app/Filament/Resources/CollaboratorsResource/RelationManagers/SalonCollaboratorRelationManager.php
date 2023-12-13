@@ -14,7 +14,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 class SalonCollaboratorRelationManager extends RelationManager
 {
     protected static string $relationship = 'salonCollaborator';
-
+    protected static ?string $title = 'Cửa hàng';
+    protected static ?string $label = 'Cửa hàng';
 
     public function table(Table $table): Table
     {

@@ -229,7 +229,7 @@
                                     @foreach ($salons as $salon)
                                         <li>
                                             <a
-                                                href="{{ route('salon.listCars', $salon->id) }}">{{ $salon->salon_name }}</a>
+                                                href="{{ route('salon.listCars', $salon->slug) }}">{{ $salon->salon_name }}</a>
                                         </li>
                                     @endforeach
                             </li>
@@ -459,22 +459,26 @@
                 </div>
             @endauth
             @guest
-                <div class="dropdown">
-                    <button class="modal-btn header-account-btn" type="button">
-                        <i class="bi bi-file-person-fill"></i> Tài khoản
-                    </button>
-                    <div class="account-menu">
-                        <div class="account-footer" style="min-width: 230px">
-                            <div class="footer-button">
-                                <div class="d-flex justify-content-between align-items-center gap-3">
-                                    <a class="w-50 primary-btn1 visible d-block" href="/login">Đăng nhập</a>
-                                    <span class="fs-6">|</span>
-                                    <a class="w-50 primary-btn1 visible d-block btn-dark1" href="/register">Đăng ký</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div onclick="window.location.href='{{route('account')}}'" class="fw-bold" style="cursor:pointer;font-size:13px">
+                    <i class="bi bi-person-rolodex"></i>
+                    TÀI KHOẢN
                 </div>
+                <!--<div class="dropdown">-->
+                <!--    <button class="modal-btn header-account-btn" onclick="" type="button">-->
+                <!--        <i class="bi bi-file-person-fill"></i> Tài khoản-->
+                <!--    </button>-->
+                    <!--<div class="account-menu">-->
+                    <!--    <div class="account-footer" style="min-width: 230px">-->
+                    <!--        <div class="footer-button">-->
+                    <!--            <div class="d-flex justify-content-between align-items-center gap-3">-->
+                    <!--                <a class="w-50 primary-btn1 visible d-block" href="/login">Đăng nhập</a>-->
+                    <!--                <span class="fs-6">|</span>-->
+                    <!--                <a class="w-50 primary-btn1 visible d-block btn-dark1" href="/register">Đăng ký</a>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
+                <!--</div>-->
             @else
                 @endif
                 <div class="sidebar-button mobile-menu-btn" style="margin-left: 10px">
@@ -656,7 +660,7 @@
                     <div class="social-area">
                         <h6>Follow Drivco:</h6>
                         <ul>
-                            <li><a href="https://www.facebook.com/drivco/"><i class="bx bxl-facebook"></i></a></li>
+                            <li><a target="_blank" href="https://www.facebook.com/drivco/"><i class="bx bxl-facebook"></i></a></li>
                         </ul>
                     </div>
                 </div>

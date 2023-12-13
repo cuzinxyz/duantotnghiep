@@ -16,6 +16,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 class CarRelationManager extends RelationManager
 {
     protected static string $relationship = 'carCollaborator';
+    protected static ?string $title = 'Tin mua xe';
+    protected static ?string $label = 'Tin mua xe';
 
     public function table(Table $table): Table
     {

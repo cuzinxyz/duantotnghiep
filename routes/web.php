@@ -261,7 +261,6 @@ Route::get('/chinh-sach-quyen-rieng-tu', function() {
    return view('chinhsachbaomat'); 
 });
 
-
-Route::get('/test', function() {
-    event(new reassignUnfinishedTasksAfterDayEvent(5));
-});
+Route::get('/account', function() {
+    return view('account');
+})->name('account');
