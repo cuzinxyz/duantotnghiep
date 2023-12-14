@@ -33,7 +33,19 @@
                     <div class="car-details-sidebar">
                         <div class="contact-info mb-50 px-3 py-4 contact-fixed">
                             <div class="d-flex align-items-center gap-2">
-                                <img src="{{ $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover" />
+                                @if (strpos($carDetail->user->avatar, "http") === 0)
+                                    <img style="width: 50px;height:50px;object-fit:cover" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover"
+                                        src="{{$carDetail->user->avatar}}"
+                                        alt="">
+                                @elseif (Storage::url($carDetail->user->avatar))
+                                    <img style="width: 50px;height:50px;object-fit:cover" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover"
+                                        src="{{asset('storage/'. $carDetail->user->avatar)}}"
+                                        alt="">
+                                @else
+                                    <img style="width: 50px;height:50px;object-fit:cover" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover"
+                                        src="{{'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}"
+                                        alt="">
+                                @endif
                                 <div class="ml-3">
                                     <h6 class="name">{{ $carDetail->user->name }}</h6>
                                     <small>Tham gia vào {{ $carDetail->created_at->diffForHumans() }}</small>
@@ -44,8 +56,22 @@
                                 <form action="/chatify/{{ $carDetail->user_id }}">
                                     <div class="form-inner d-flex align-items-center gap-1">
                                         <button class="btn py-2 px-2 fw-bold" type="submit" style="font-size:12px;background:#f1f1f1;border-radius:24px">
-                                            <img style="width: 30px;height:30px;border-radius:12px" src="{{  $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name  }}" class="" alt="">
-                                            Nhắn tin
+                                            @if (strpos($carDetail->user->avatar, "http") === 0)
+                                                <img style="width: 30px;height:30px;border-radius:12px" style="width: 60px;height:60px;object-fit:cover"
+                                                    src="{{$carDetail->user->avatar}}"
+                                                    alt="">
+                                                    Nhắn tin
+                                            @elseif (Storage::url($carDetail->user->avatar))
+                                                <img style="width: 30px;height:30px;border-radius:12px" style="width: 60px;height:60px;object-fit:cover"
+                                                    src="{{asset('storage/'. $carDetail->user->avatar)}}"
+                                                    alt="">
+                                                    Nhắn tin
+                                            @else
+                                                <img style="width: 30px;height:30px;border-radius:12px" style="width: 60px;height:60px;object-fit:cover"
+                                                    src="{{'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}"
+                                                    alt="">
+                                                    Nhắn tin
+                                            @endif
                                         </button>
                                     </div>
                                 </form>

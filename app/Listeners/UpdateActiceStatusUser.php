@@ -28,7 +28,8 @@ class UpdateActiceStatusUser
      */
     public function handleUserLogout(Logout $event): void
     {
-        User::where('id', $event->user->id)->update([
+        // dd($event->user->id);
+        User::where('id', auth()->id())->update([
             'active' => 0,
         ]);
     }

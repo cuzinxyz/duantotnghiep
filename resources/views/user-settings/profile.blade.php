@@ -158,10 +158,19 @@
                                 <div class="section-title-2 d-flex align-items-center gap-2">
                                     <div class="d-flex align-items-center">
 
-                                        <img src="
-                                        {{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
-                                            class="rounded-circle object-fit-cover shadow"
-                                            style="width: 50px;height:50px" alt="avatar">
+                                        @if (strpos(auth()->user()->avatar, "http") === 0)
+                                            <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                src="{{auth()->user()->avatar}}"
+                                                alt="">
+                                        @elseif (Storage::url(auth()->user()->avatar))
+                                            <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                src="{{'storage/'. auth()->user()->avatar}}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                src="{{'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                                alt="">
+                                        @endif
 
                                         <p class="fw-bolder ms-2 text-capitalize">{{ auth()->user()->name }}</p>
 
@@ -227,10 +236,19 @@
                                                             <span>{{ number_format($car->price) }}</span>
                                                         </div>
                                                         <div class="car-img">
-                                                            <img class="img-fluid w-100"
-                                                                style="object-fit:cover;max-height: 121px"
-                                                                src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
-                                                                alt="image">
+                                                            @if (strpos($car->user->avatar, "http") === 0)
+                                                                <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                                    src="{{$car->user->avatar}}"
+                                                                    alt="">
+                                                            @elseif (Storage::url($car->user->avatar))
+                                                                <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                                    src="{{asset('storage/'. $car->user->avatar)}}"
+                                                                    alt="">
+                                                            @else
+                                                                <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                                    src="{{'https://ui-avatars.com/api/?name=' . $item->user->name }}"
+                                                                    alt="">
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">

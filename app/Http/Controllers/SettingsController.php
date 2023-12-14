@@ -20,16 +20,26 @@ class SettingsController extends Controller
 {
     public function profile()
     {
-        $cars = Car::where('user_id', auth()->id())
-            ->where('status', 1)
+         $cars = Car::where('user_id', auth()->id())
+            ->where([
+            'status' => 1,
+            'salon_id' => null
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
         $pendingCars = Car::where('user_id', auth()->id())
-            ->where('status', 0)
+            ->where([
+                'status' => 0,
+                'salon_id' => null
+            ])
             ->orderBy('created_at', 'desc')
+            
             ->get();
         $deniedCars = Car::where('user_id', auth()->id())
-            ->where('status', 2)
+            ->where([
+                'status' => 2,
+                'salon_id' => null
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
         $hiddenCars = Car::onlyTrashed()
@@ -41,7 +51,10 @@ class SettingsController extends Controller
             ->pluck('service_id');
         $billHistories = Service::whereIn('id', $serviceId)
             ->get();
-        $carPushed = Car::where('user_id', Auth::id())
+        $carPushed = Car::where([
+            'user_id' => Auth::id(),
+            'salon_id' => null
+        ])
             ->get();
         // dd($billHistories);
         return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'carPushed'));

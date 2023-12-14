@@ -33,6 +33,14 @@ class LoginController extends Controller
      *
      * @var string
      */
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email không được để trống.',
+            'email.email' => 'Email không hợp lệ.',
+        ];
+    }
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     public function redirectToGoogle() 

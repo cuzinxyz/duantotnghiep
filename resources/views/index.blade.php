@@ -54,7 +54,7 @@
             <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12 d-flex align-items-end justify-content-between gap-3 flex-wrap">
                     <div class="section-title-2">
-                        <h3>Drivco hoạt động như thế nào?</h3>
+                        <h3>Bán xe ở Drivco như thế nào?</h3>
                     </div>
                     <div class="video-btn">
                         <a class="" href="{{ route('sellCar') }}"><i class="bi bi-play-circle"></i> Bán xe
@@ -143,8 +143,10 @@
                     <div class="partner-slider wow fadeInUp" data-wow-delay="300ms">
                         <div class="marquee_text2">
                             @foreach ($partners as $partner)
-                                <img src="{{ asset('storage/' . $partner->logo_url) }}" alt="{{ $partner->name }}"
-                                    style="min-height: 60px;width:auto;">
+                                <img src="{{ asset('storage/' . $partner->logo_url) }}" height="60" 
+                                alt="{{ $partner->name }}"
+                                loading="lazy"
+                                >
                             @endforeach
                         </div>
                     </div>
@@ -175,8 +177,10 @@
                         <div class="news-card style-2 d-flex flex-column h-100">
                             <div class="news-img" style="flex:1">
                                 <a href="{{ route('news.index', $post->slug) }}">
-                                    <img src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
-                                        alt="">
+                                    <img 
+                                        src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
+                                        alt="{{ $post->title }}"
+                                        loading="lazy">
                                 </a>
                             </div>
                             <div class="content">

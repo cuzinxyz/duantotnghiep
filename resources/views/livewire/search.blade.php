@@ -52,7 +52,7 @@
             <div class="justify-content-center position-absolute start-0 end-0 search-index" style="display:flex">
                 <div class="col-md-12">
                     <div class="card">
-                        @if ($cars->isEmpty())
+                        @if (count($cars) == 0)
                             <h5 class="text-danger text-center m-2">Không có kết quả nào được tìm thấy.</h5>
                         @else
                             @foreach ($cars as $car)

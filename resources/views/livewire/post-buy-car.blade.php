@@ -10,9 +10,19 @@
             </div>
 
             <div class="messageSender__top">
-                <img class="user__avatar"
-                    src="{{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
-                    alt="">
+                @if (strpos(auth()->user()->avatar, "http") === 0)
+                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                        src="{{auth()->user()->avatar}}"
+                        alt="">
+                @elseif (Storage::url(auth()->user()->avatar))
+                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                        src="{{'storage/'. auth()->user()->avatar}}"
+                        alt="">
+                @else
+                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                        src="{{'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                        alt="">
+                @endif
                 <form wire:submit.prevent="save">
                     <input class="messageSender__input" wire:model="content" placeholder="Bạn cần mua xe gì?"
                         type="text">
@@ -44,9 +54,19 @@
                                     <div class="user w-100">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img class="border border-dark border-1"
-                                                    src="{{ asset('storage/' . $demand->user->avatar) }}"
-                                                    alt="user" />
+                                                @if (strpos(auth()->user()->avatar, "http") === 0)
+                                                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                        src="{{auth()->user()->avatar}}"
+                                                        alt="">
+                                                @elseif (Storage::url(auth()->user()->avatar))
+                                                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                        src="{{'storage/'. auth()->user()->avatar}}"
+                                                        alt="">
+                                                @else
+                                                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                        src="{{'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                                        alt="">
+                                                @endif
                                                 <div class="user-info">
                                                     <h5>{{ $demand->user->name }}</h5>
                                                     <small>{{ $demand->created_at->diffForHumans() }}</small>
