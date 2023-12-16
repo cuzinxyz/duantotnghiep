@@ -54,7 +54,7 @@
                                                     <a href="{{ route('brand.detail', $car->brand->brand_name) }}"><img
                                                             style="max-width: 40px;max-height:40px;object-fit:contain"
                                                             src="{{ asset('storage/' . $car->brand->logo_url) }}"
-                                                            alt></a>
+                                                            alt="{{$car->brand->brand_name}}" loading="lazy"></a>
                                                 </div>
                                                 <div class="price">
                                                     <strong>{{ number_format($car->price) . ' đ' }}</strong>

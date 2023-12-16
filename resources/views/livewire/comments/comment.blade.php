@@ -2,8 +2,8 @@
     <div class="car-details-area">
         <div class="text-input-area mb-40">
             <form wire:submit="saveComment">
-                <div class="form-inner" >
-                    <textarea wire:model="comment" id="comment" placeholder="Nội dung bình luận..." style="resize: none"></textarea>
+                <div class="form-inner">
+                    <textarea wire:model="comment" placeholder="Nội dung bình luận..." style="resize: none"></textarea>
                     <button type="submit" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
                             <path
@@ -32,7 +32,19 @@
                     <li wire:key="{{ $item->id }}">
                         <div class="single-comment-area" x-data="{ open: false }">
                             <div class="author-img">
-                                <img src="{{ asset('images/comment-author-01.png') }}" alt="">
+                                @if (strpos($item->user->avatar, "http") === 0)
+                                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                        src="{{$item->user->avatar}}"
+                                        alt="">
+                                @elseif (Storage::url($item->user->avatar))
+                                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                        src="{{asset('storage/'. $item->user->avatar)}}"
+                                        alt="">
+                                @else
+                                    <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                        src="{{'https://ui-avatars.com/api/?name=' . $item->user->name }}"
+                                        alt="">
+                                @endif
                             </div>
                             <div class="comment-content" style="width:100%">
                                 <div class="author-name-deg d-flex justify-content-between align-items-center">
@@ -112,8 +124,19 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="single-comment-area ">
                                                 <div class="author-img">
-                                                    <img src="{{ asset('images/comment-author-01.png') }}"
-                                                        alt="">
+                                                   @if (strpos($item->user->avatar, "http") === 0)
+                                                        <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                            src="{{$item->user->avatar}}"
+                                                            alt="">
+                                                    @elseif (Storage::url($item->user->avatar))
+                                                        <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                            src="{{asset('storage/'. $item->user->avatar)}}"
+                                                            alt="">
+                                                    @else
+                                                        <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                            src="{{'https://ui-avatars.com/api/?name=' . $item->user->name }}"
+                                                            alt="">
+                                                    @endif
                                                 </div>
                                                 <div class="comment-content" style="width:100%">
                                                     <div class="author-name-deg">

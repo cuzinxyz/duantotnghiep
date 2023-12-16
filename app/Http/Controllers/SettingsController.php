@@ -22,10 +22,10 @@ class SettingsController extends Controller
 {
     public function profile()
     {
-        $cars = Car::where('user_id', auth()->id())
+         $cars = Car::where('user_id', auth()->id())
             ->where([
-                'status' => 1,
-                'salon_id' => null
+            'status' => 1,
+            'salon_id' => null
             ])
             ->orderBy('created_at', 'desc')
             ->get();
@@ -35,7 +35,6 @@ class SettingsController extends Controller
                 'salon_id' => null
             ])
             ->orderBy('created_at', 'desc')
-
             ->get();
 
         $deniedCars = Car::where('user_id', auth()->id())

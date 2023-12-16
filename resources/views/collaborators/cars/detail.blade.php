@@ -205,7 +205,7 @@
                         <p>Hình ảnh</p>
                         <p class="color-black">
                             @foreach ($car->verhicle_image_library as $image)
-                                <img src="{{ asset('storage/' . $image) }}" alt="" style="margin-bottom: 20px">
+                                <img src="{{ asset('storage/' . $image) }}" alt="" style="width:100%;margin-bottom: 20px">
                             @endforeach
                         </p>
                     </div>

@@ -48,7 +48,7 @@
                                         <div class="swiper-wrapper">
                                             @foreach ($car->verhicle_image_library as $carImage)
                                                 <div class="swiper-slide">
-                                                    <img src="/storage/{{ $carImage }}" alt="image">
+                                                    <img src="/storage/{{ $carImage }}" loading="lazy" alt={{$car->title}}>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -59,7 +59,7 @@
                                     @if(!empty($car->province->name))
                                     <div class="price-location">
                                         <div class="price">
-                                            <strong>{{number_format($car->price)}}</strong>
+                                            <strong>{{number_format($car->price)}} đ</strong>
                                         </div>
                                         <div class="location">
                                             <a><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>

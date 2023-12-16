@@ -29,12 +29,13 @@
             background: rgba(0, 0, 0, .4);
             inset: 0;
             backdrop-filter: blur(11.5px);
+            -webkit-backdrop-filter: blur(11.5px);
             position: absolute;
         }
 
         .wrapper-login_closeBtn {
             align-items: center;
-            background: rgba(22, 24, 35, .03);
+            background: #fff;
             border-radius: 50%;
             color: #333;
             cursor: pointer;
@@ -47,6 +48,8 @@
             right: 16px;
             top: 16px;
             width: 40px;
+            z-index: 12;
+            border: 2px solid #f1f1f1;
         }
 
         .wrapper-login_closeBtn span {
@@ -85,7 +88,7 @@
             }
 
             .wrapper-login_content {
-                min-height: 577px;
+                min-height: 100%;
             }
 
             .Login_acceptTerm {
@@ -144,7 +147,8 @@
             padding-left: 16px;
             position: relative;
             text-align: center;
-            width: 320px;
+            max-width: 320px;
+            width: 100%;
             margin-top: 14px;
             transition: all .2s linear;
         }
@@ -281,7 +285,7 @@
     <div class="wrapper-login">
         <div class="wrapper-login_overlay"></div>
         <div class="wrapper-login_form">
-            <button class="wrapper-login_closeBtn">
+            <button class="wrapper-login_closeBtn" onclick="window.location.href='{{route('homepage')}}'">
                 <span>x</span>
             </button>
 
@@ -303,7 +307,7 @@
                                     <path
                                         d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z" />
                                 </svg>
-                                <span>Sử dụng email</span>
+                                <span>Sử dụng email đăng nhập</span>
                             </div>
                             <div class="signInButton" onclick="window.location.href='{{route('google.login')}}'">
                                 <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
@@ -329,7 +333,7 @@
 
                         <div class="Login_acceptTerm">
                             Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với <a
-                                href="https://fullstack.edu.vn/terms" target="_top">điều khoản sử dụng</a> của chúng
+                                href="javascript:void(0)" target="_top">điều khoản sử dụng</a> của chúng
                             tôi.
                         </div>
 
@@ -389,7 +393,7 @@
                         </div>
                         <div class="Login_acceptTerm">
                             Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với <a
-                                href="https://fullstack.edu.vn/terms" target="_top">điều khoản sử dụng</a> của chúng
+                                href="javascript:void(0)" target="_top">điều khoản sử dụng</a> của chúng
                             tôi.
                         </div>
                     </div>
@@ -451,7 +455,7 @@
                         </div>
                         <div class="Login_acceptTerm">
                             Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với <a
-                                href="https://fullstack.edu.vn/terms" target="_top">điều khoản sử dụng</a> của chúng
+                                href="javascript:void(0)" target="_top">điều khoản sử dụng</a> của chúng
                             tôi.
                         </div>
                     </div>
@@ -462,25 +466,21 @@
 
     @push('scripts')
         <script>
-
             const debounce = (fn, delay = 500) => {
                 let timeoutId;
                 return (...args) => {
-                    // cancel the previous timer
                     if (timeoutId) {
                         clearTimeout(timeoutId);
                     }
-                    // setup a new timer
                     timeoutId = setTimeout(() => {
                         fn.apply(null, args)
                     }, delay);
                 };
             };
 
-            // form login validate
             const lgEmail = document.querySelector("#lgEmail");
             const lgPassword = document.querySelector("#lgPassword");
-            const lgForm = document.querySelector("#lgForm")
+            const lgForm = document.querySelector("#lgForm");
 
             const checkLgEmail = () => {
                 let validLg = false;
@@ -488,7 +488,7 @@
                 if (!isRequired(email)) {
                     showError(lgEmail, 'Email không được bỏ trống.');
                 } else if (!isEmailValid(email)) {
-                    showError(lgEmail, 'Email không hợp lệ.')
+                    showError(lgEmail, 'Email không hợp lệ.');
                 } else {
                     showSuccess(lgEmail);
                     validLg = true;
@@ -511,13 +511,10 @@
             };
 
             lgForm.addEventListener('submit', function(e) {
-                // prevent the form from submitting
                 e.preventDefault();
-                // validate fields
                 let isEmailValidLg = checkLgEmail();
                 let isPasswordValidLg = checkLgPassword();
                 let isFormValidLg = isEmailValidLg && isPasswordValidLg;
-                // submit to the server if the form is valid
                 if (isFormValidLg) {
                     e.target.submit();
                 }
@@ -532,9 +529,7 @@
                         break;
                 }
             }));
-            // login validate end
 
-            // register validate
             const usernameEl = document.querySelector('#username');
             const emailEl = document.querySelector('#email');
             const passwordEl = document.querySelector('#password');
@@ -555,7 +550,7 @@
                 if (!isRequired(username)) {
                     showError(usernameEl, 'Tên không được bỏ trống.');
                 } else if (!isBetween(username.length, min, max)) {
-                    showError(usernameEl, `Tên người dùng phải từ ${min} đến ${max} ký tự.`)
+                    showError(usernameEl, `Tên người dùng phải từ ${min} đến ${max} ký tự.`);
                 } else {
                     showSuccess(usernameEl);
                     valid = true;
@@ -570,7 +565,7 @@
                 if (!isRequired(email)) {
                     showError(emailEl, 'Email không được bỏ trống.');
                 } else if (!isEmailValid(email)) {
-                    showError(emailEl, 'Email không hợp lệ.')
+                    showError(emailEl, 'Email không hợp lệ.');
                 } else {
                     showSuccess(emailEl);
                     valid = true;
@@ -600,7 +595,6 @@
 
             const checkConfirmPassword = () => {
                 let valid = false;
-                // check confirm password
                 const confirmPassword = confirmPasswordEl.value.trim();
                 const password = passwordEl.value.trim();
 
@@ -632,36 +626,28 @@
 
 
             const showError = (input, message) => {
-                // get the form-field element
-                const formField = input.parentElement; // default
-                const inputField = input; // custom
-                // add the error class
+                const formField = input.parentElement;
+                const inputField = input;
                 inputField.classList.remove('border-success');
                 inputField.classList.add('border-danger');
 
-                // show the error message
                 const error = formField.querySelector('small');
                 error.textContent = message;
             };
 
             const showSuccess = (input) => {
-                // get the form-field element
-                const formField = input.parentElement; // default
-                const inputField = input; // custom
-                // remove the error class
+                const formField = input.parentElement; 
+                const inputField = input; 
                 inputField.classList.remove('border-danger');
                 inputField.classList.add('border-success');
 
-                // hide the error message
                 const error = formField.querySelector('small');
                 error.textContent = '';
-            }
+            };
 
             form.addEventListener('submit', function(e) {
-                // prevent the form from submitting
                 e.preventDefault();
 
-                // validate fields
                 let isUsernameValid = checkUsername(),
                     isEmailValid = checkEmail(),
                     isPasswordValid = checkPassword(),
@@ -672,7 +658,6 @@
                     isPasswordValid &&
                     isConfirmPasswordValid;
 
-                // submit to the server if the form is valid
                 if (isFormValid) {
                     e.target.submit();
                 }

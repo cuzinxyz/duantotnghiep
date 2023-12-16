@@ -60,7 +60,7 @@
         <div class="panel panel-container p-6" style="padding:20px">
 
             <div class="row">
-                <div class="col-lg-12 row">
+                <div class="col-md-6 row">
                     <h4 class="mb-40px">Thông tin chuyển tiền</h4>
 
                     <div class="col-lg-6">
@@ -98,6 +98,9 @@
                             </strong>
                         </p>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <img class="w-100" src='https://img.vietqr.io/image/{{$draw->bank_name}}-{{$draw->bank_number}}-compact2.png?amount={{$draw->bank_price}}&addInfo=DRIVCO chuyen tien&accountName={{$draw->username}}' /> 
                 </div>
             </div>
         </div>

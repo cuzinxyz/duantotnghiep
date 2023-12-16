@@ -1,6 +1,7 @@
 @section('page_title')
     {{ $post->title ? $post->title . ' - Drivco' : 'Drivco' }}
 @endsection
+@section('thumb_seo'){{ $post->thumbnailImage ? asset('storage/' . $post->thumbnailImage) : '' }}@endsection
 <x-partials.layout-client>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/comment.css') }}">

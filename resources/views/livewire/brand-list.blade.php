@@ -29,24 +29,28 @@
                     <div class="swiper home5-brand-category-slider">
                         <div class="swiper-wrapper">
                             @foreach ($brands as $brand)
-                                <div class="swiper-slide">
-                                    <div class="single-category5">
-                                        <div class="category-icon">
-                                            <img src="{{ asset('storage/' . $brand->logo_url) }}"
-                                                style="max-width:40px;max-height:40px;object-fit:contain"
-                                                alt="{{ $brand->brand_name }}">
-                                        </div>
-                                        <div class="category-content">
-                                            <h5><a href="single-brand-category.html">{{ $brand->brand_name }}</a>
-                                            </h5>
-                                            {{-- <span>(23,533) +</span> --}}
-                                        </div>
-                                        <div class="explore-btn5">
-                                            <a href="{{ route('brand.detail', $brand->brand_name) }}"><span>Xem</span> <i
-                                                    class="bi bi-arrow-right-short"></i></a>
+                                @if($brand->car->status = 1 && $brand->car->count() > 0)
+                                    <div class="swiper-slide">
+                                        <div class="single-category5">
+                                            <div class="category-icon">
+                                                <img src="{{ asset('storage/' . $brand->logo_url) }}"
+                                                    width="40"
+                                                    height="40"
+                                                    style="object-fit:contain"
+                                                    alt="{{ $brand->brand_name }}" 
+                                                    loading="lazy">
+                                            </div>
+                                            <div class="category-content">
+                                                <h5><a href="{{ route('brand.detail', $brand->brand_name) }}">{{ $brand->brand_name }}</a>
+                                                </h5>
+                                            </div>
+                                            <div class="explore-btn5">
+                                                <a href="{{ route('brand.detail', $brand->brand_name) }}"><span>Xem</span> <i
+                                                        class="bi bi-arrow-right-short"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>

@@ -33,7 +33,7 @@ class Comment extends Component
         $this->carID = $carID;
     }
 
-    public function placeholder()
+    /*public function placeholder()
     {
         return <<<'HTML'
         <div>
@@ -41,7 +41,7 @@ class Comment extends Component
             <svg>...</svg>
         </div>
         HTML;
-    }
+    }*/
 
     public function saveComment()
     {

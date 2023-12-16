@@ -1,10 +1,7 @@
 <?php
 
-use App\Events\NotificationExtendServices;
-use App\Models\Ads;
-use App\Models\Car;
+use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use App\Models\News;
-use App\Models\Brand;
 use App\Models\Salon;
 use App\Livewire\Showroom;
 use Spatie\Sitemap\Sitemap;
@@ -24,16 +21,19 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\SearchCarController;
-use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use App\Http\Controllers\SendGuideRequestController;
 use App\Http\Controllers\Collaborators\CarsController;
 use App\Http\Controllers\Collaborators\ReportController;
 use App\Http\Controllers\Collaborators\ReviewController;
+use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 use App\Http\Controllers\Collaborators\SupportController;
 use App\Http\Controllers\Collaborators\WithDrawController;
 use App\Http\Controllers\Collaborators\DashboardController;
 use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
-use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
+use App\Models\Brand;
+use App\Models\Car;
+
+// Route::middleware(['HtmlMinifier'])->group(function () {
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -131,17 +131,11 @@ Route::get("/bai-viet", function () {
 Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
 
-    $ads = Ads::where('priority', 2)
-        ->inRandomOrder()
-        ->limit(1)
-        ->get();
-        
     if (!$post) {
         abort(404);
     }
     return view('news.detail', [
-        'post' => $post,
-        'ads' => $ads
+        'post' => $post
     ]);
 })->name('news.index');
 
@@ -274,7 +268,11 @@ Route::get('/account', function () {
     return view('account');
 })->name('account');
 
+Route::get('login', function () {
+    return redirect()->route('account');
+})->name('login');
 
-Route::get('/test', function() {
-    event(new NotificationExtendServices());
-});
+Route::get('register', function () {
+    return redirect()->route('account');
+})->name('register');
+// });

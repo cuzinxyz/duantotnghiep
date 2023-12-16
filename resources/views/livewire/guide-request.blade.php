@@ -19,7 +19,7 @@
 
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Tiêu đề</label>
-            <input wire:model="title" name="title" class="form-control" id="exampleFormControlTextarea1" rows="3">
+            <input wire:model="title" name="title" class="form-control">
         </div>
         <div class="text-danger">
             @error('title')
