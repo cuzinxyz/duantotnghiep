@@ -73,6 +73,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->profile()
             ->brandName('DrivcoADMIN')
+            // ->brandLogo(asset('images/green-logo.svg'))
             ->favicon(asset('images/favicon/favicon.ico'));
     }
 }

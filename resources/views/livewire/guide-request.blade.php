@@ -28,8 +28,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Nội dung cần hỗ trợ</label>
-            <textarea wire:model="body" name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="exampleFormControlTextarea2" class="form-label">Nội dung cần hỗ trợ</label>
+            <textarea wire:model="body" name="body" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
         </div>
         <div class="text-danger">
             @error('body')

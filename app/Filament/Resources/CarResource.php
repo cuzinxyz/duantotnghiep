@@ -117,14 +117,18 @@ class CarResource extends Resource
                                     ->label('Màu sắc')
                                     ->rules(['required'])
                                     ->options([
-                                        'Đỏ' => 'Đỏ',
                                         'Đen' => 'Đen',
                                         'Trắng' => 'Trắng',
-                                        'Vàng' => 'Vàng',
                                         'Bạc' => 'Bạc',
-                                        'Xanh' => 'Xanh',
                                         'Ghi' => 'Ghi',
-                                        'Khác' => 'Khác',
+                                        'Đỏ' => 'Đỏ',
+                                        'Xanh' => 'Xanh',
+                                        'Be' => 'Be',
+                                        'Xanh lá' => 'Xanh lá',
+                                        'Vàng' => 'Vàng',
+                                        'Tím' => 'Tím',
+                                        'Nâu' => 'Nâu',
+                                        'Khác' => 'Khác'
                                     ])
                                     ->columns([
                                         'default' => 1,
@@ -230,11 +234,15 @@ class CarResource extends Resource
                                                 'Bánh xe cao cấp' => 'Bánh xe cao cấp',
                                                 'Cửa sổ trời' => 'Cửa sổ trời',
                                                 'Âm thanh cao cấp' => 'Âm thanh cao cấp',
-                                                'Chế độ chỉ đường' => 'Chế độ chỉ đường',
                                                 'Ghế da cao cấp' => 'Ghế da cao cấp',
-                                                'Kết nối blutooth' => 'Kết nối bluetooth',
-                                                'Khởi động từ za' => 'Khởi động từ xa',
-                                                'Điều hòa' => 'Điều hòa'
+                                                'Kết nối bluetooth' => 'Kết nối bluetooth',
+                                                'Khởi động từ xa' => 'Khởi động từ xa',
+                                                'Chế độ chỉ đường' => 'Chế độ chỉ đường',
+                                                'Camera đỗ xe' => 'Camera đỗ xe',
+                                                'Cảm biến' => 'Cảm biến',
+                                                'Lái xe tự động' => 'Lái xe tự động',
+                                                'Hỗ trợ điểm mù' => 'Hỗ trợ điểm mù',
+                                                'Hỗ trợ làn đường' => 'Hỗ trợ làn đường'
                                             ])->columns([
                                                 'default' => 1,
                                                 'xl' => 2,

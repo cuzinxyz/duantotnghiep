@@ -29,7 +29,7 @@
                     <div class="swiper home5-brand-category-slider">
                         <div class="swiper-wrapper">
                             @foreach ($brands as $brand)
-                                @if($brand->car->status = 1 && $brand->car->count() > 0)
+                                @if($brand->brandCar->count() > 0)
                                     <div class="swiper-slide">
                                         <div class="single-category5">
                                             <div class="category-icon">

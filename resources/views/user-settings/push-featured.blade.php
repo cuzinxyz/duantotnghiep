@@ -27,7 +27,7 @@
                                     <a href="{{ route('car-detail', $carInfo->slug) }}"><i class="bi bi-arrow-right-short"></i></a>
                                 </div>
                                 <div class="price">
-                                    <strong>${{ number_format($carInfo->price) }}</strong>
+                                    <strong>{{ number_format($carInfo->price) }} đ</strong>
                                 </div>
                                 <h6><a href="{{ route('car-detail', $carInfo->slug) }}">{{ $carInfo->title }}</a></h6>
                             </div>
@@ -39,7 +39,6 @@
                             <li>Tiếp cận nhiều khách hàng hơn.</li>
                             <li>Chuyên nghiệp hơn.</li>
                             <li>Nhanh chóng tìm được khách hàng phù hợp.</li>
-                            {{-- <li>Coming soon... </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -129,7 +128,7 @@
                                         <a href="car-deatils.html"><i class="bi bi-arrow-right-short"></i></a>
                                     </div>
                                     <div class="price">
-                                        <strong>${{ number_format($carInfo->price) }}</strong>
+                                        <strong>{{ number_format($carInfo->price) }} đ</strong>
                                     </div>
                                     <h6><a href="car-deatils.html">{{ $carInfo->title }}</a></h6>
                                 </div>
@@ -155,7 +154,7 @@
                                     </svg>
                                     Đẩy tin
                                 </button>
-                                <a href="#" class="primary-btn3 btn-dark1">Trở lại</a>
+                                <a href="{{route('profile')}}" class="primary-btn3 btn-dark1">Trở lại</a>
                             </form>
                         </div>
                     </div>

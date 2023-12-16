@@ -97,7 +97,9 @@
                     <div class="tab-pane fade" id="video-clip" role="tabpanel" aria-labelledby="video-clip-tab">
                         <div class="video-area">
                             <video autoplay="" loop="loop" muted="" preload="auto" controls="">
+                                @if($carDetail->verhicle_videos)
                                 <source src="{{ asset('/storage/' . $carDetail->verhicle_videos) }}" type="video/mp4">
+                                @endif
                             </video>
                         </div>
                     </div>

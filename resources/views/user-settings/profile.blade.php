@@ -236,19 +236,10 @@
                                                             <span>{{ number_format($car->price) }}</span>
                                                         </div>
                                                         <div class="car-img">
-                                                            @if (strpos($car->user->avatar, "http") === 0)
-                                                                <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                                    src="{{$car->user->avatar}}"
-                                                                    alt="">
-                                                            @elseif (Storage::url($car->user->avatar))
-                                                                <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                                    src="{{asset('storage/'. $car->user->avatar)}}"
-                                                                    alt="">
-                                                            @else
-                                                                <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                                    src="{{'https://ui-avatars.com/api/?name=' . $item->user->name }}"
-                                                                    alt="">
-                                                            @endif
+                                                            <img class="img-fluid w-100"
+                                                                style="object-fit:cover;max-height: 121px"
+                                                                src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
+                                                                alt="image">
                                                         </div>
                                                     </div>
                                                     <div class="product-content" style="flex: 1 1 auto">
