@@ -35,7 +35,7 @@ class ServicesDaysChart extends ApexChartWidget
 
         $servicePerDay = [];
 
-        $days = collect(range(1, $now->endOfMonth()->day))->map(function ($day) use ($now, &$servicePerDay) {
+        $days = collect(range(1, $now->day))->map(function ($day) use ($now, &$servicePerDay) {
             $count =
             DB::table('services')
             ->leftJoin('purchased_service', function ($join) use ($now, $day) {
@@ -52,7 +52,7 @@ class ServicesDaysChart extends ApexChartWidget
 
             $servicePerDay[] = $count;
 
-            return $now->day($day)->format('m-d');
+            return $now->day($day)->format('d-m');
         })->toArray();
 
         foreach($servicePerDay as $serviceDay) {
@@ -68,12 +68,14 @@ class ServicesDaysChart extends ApexChartWidget
             }
         }
 
-        $data = [];
-        foreach($results as $key => $result) {
-            $data[] = [
-                'name' => $key,
-                'data' => $result
-            ];
+        if(!empty($results)) {
+            $data = [];
+            foreach ($results as $key => $result) {
+                $data[] = [
+                    'name' => $key,
+                    'data' => $result
+                ];
+            }
         }
         
         return [

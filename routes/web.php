@@ -1,7 +1,10 @@
 <?php
 
-use App\Events\reassignUnfinishedTasksAfterDayEvent;
+use App\Events\NotificationExtendServices;
+use App\Models\Ads;
+use App\Models\Car;
 use App\Models\News;
+use App\Models\Brand;
 use App\Models\Salon;
 use App\Livewire\Showroom;
 use Spatie\Sitemap\Sitemap;
@@ -21,17 +24,16 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WishlishController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\SearchCarController;
+use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use App\Http\Controllers\SendGuideRequestController;
 use App\Http\Controllers\Collaborators\CarsController;
 use App\Http\Controllers\Collaborators\ReportController;
 use App\Http\Controllers\Collaborators\ReviewController;
-use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 use App\Http\Controllers\Collaborators\SupportController;
 use App\Http\Controllers\Collaborators\WithDrawController;
 use App\Http\Controllers\Collaborators\DashboardController;
 use App\Http\Controllers\Collaborators\CollaboratorsByCarController;
-use App\Models\Brand;
-use App\Models\Car;
+use App\Http\Controllers\Collaborators\SalonController as CollaboratorsSalonController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
@@ -61,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/them-xe', 'addCar')->name('salon.addcar');
             Route::get('/sua-xe/{carID}', 'editCar')->name('salon.editcar');
             Route::get('/xoa-xe/{carID}', 'deleteCar')->name('salon.deletecar');
+            Route::get('/gia-han/{salonID}', 'expiredSalon')->name('salon.expired_date');
         });
         Route::post('/account-balance', 'getBalance');
     });
@@ -128,11 +131,17 @@ Route::get("/bai-viet", function () {
 Route::get("/bai-viet/{slug}.html", function ($slug) {
     $post = News::where('slug', $slug)->first();
 
+    $ads = Ads::where('priority', 2)
+        ->inRandomOrder()
+        ->limit(1)
+        ->get();
+        
     if (!$post) {
         abort(404);
     }
     return view('news.detail', [
-        'post' => $post
+        'post' => $post,
+        'ads' => $ads
     ]);
 })->name('news.index');
 
@@ -257,10 +266,15 @@ Route::get('login/facebook', [\App\Http\Controllers\Auth\LoginController::class,
 
 Route::get('login/facebook/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback'])->name('handleFacebookCallback');
 
-Route::get('/chinh-sach-quyen-rieng-tu', function() {
-   return view('chinhsachbaomat'); 
+Route::get('/chinh-sach-quyen-rieng-tu', function () {
+    return view('chinhsachbaomat');
 });
 
-Route::get('/account', function() {
+Route::get('/account', function () {
     return view('account');
 })->name('account');
+
+
+Route::get('/test', function() {
+    event(new NotificationExtendServices());
+});

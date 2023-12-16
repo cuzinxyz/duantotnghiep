@@ -7,7 +7,9 @@ use App\Models\Car;
 use App\Models\User;
 use App\Models\Salon;
 use App\Models\Comments;
+use App\Models\TransactionsHistory;
 use App\Models\Wishlist;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -120,5 +122,33 @@ class SalonController extends Controller
         $cars = Car::where('salon_id', $salonInfo->id)->get();
 
         return view('salon.danh-sach-xe', compact('cars', 'salonInfo'));
+    }
+
+    public function expiredSalon($salonID) {
+        $salon = Salon::find($salonID);
+
+        $user = User::find($salon->user_id);
+        if($user->account_balence < 300000) {
+            return redirect()->back()->with('error', 'Tài khoản của bạn không đủ. Vui lòng nạp thêm tiền vào tài khoản');
+        }
+
+
+        $account_balence = intval($user->account_balence) - intval(300000);
+        
+        User::where('id', $salon->user_id)->update([
+            'account_balence' => $account_balence
+        ]);
+
+        $transaction_history = TransactionsHistory::create([
+            'user_id' => $salon->user_id,
+            'transaction_type' => 'dịch vụ: Gia hạn của hàng',
+            'amount' => intval(300000),
+            'balance_after_transaction' => $account_balence
+        ]);
+
+        $salon->expired_date = Carbon::parse($salon->expires_date)->addDays(30);
+        $salon->save();
+
+        return redirect()->back()->with('success', 'Gia hạn salon thành công');
     }
 }

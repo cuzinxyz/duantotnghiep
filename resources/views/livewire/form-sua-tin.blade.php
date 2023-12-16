@@ -252,7 +252,7 @@
                                                 wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
-                                            @error('title')
+                                            @error('engine')
                                                 {{ $message }}
                                             @enderror
                                         </div>

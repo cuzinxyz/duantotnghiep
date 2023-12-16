@@ -12,6 +12,7 @@ use Kjmtrue\VietnamZone\Models\District;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Car extends Model implements Viewable
 {
@@ -97,5 +98,9 @@ class Car extends Model implements Viewable
     public function salon(): BelongsTo
     {
         return $this->BelongsTo(Salon::class, 'salon_id', 'id');
+    }
+
+    public function services(): BelongsToMany {
+        return $this->belongsToMany(Service::class, 'purchased_service', 'car_id', 'service_id')->withPivot('expired_date');
     }
 }

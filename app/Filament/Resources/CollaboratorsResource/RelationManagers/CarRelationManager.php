@@ -2,14 +2,13 @@
 
 namespace App\Filament\Resources\CollaboratorsResource\RelationManagers;
 
-use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -51,7 +50,12 @@ class CarRelationManager extends RelationManager
             ->filters([
                 Tables\Filters\TrashedFilter::make()
             ])
-            ->actions([])
+            ->actions([
+                Action::make('url_car')
+                ->label('Xem chi tiết')
+                ->url(fn (Action $action) => '/admin/post-car-managers/'. $action->getRecord()->id)
+                ->openUrlInNewTab(),
+            ])
             ->bulkActions([])
             ->emptyStateActions([])
             ->modifyQueryUsing(fn (Builder $query) => $query->withoutGlobalScopes([

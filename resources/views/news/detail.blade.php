@@ -8,7 +8,7 @@
     <div class="blog-details-page pt-50 mb-100">
         <div class="container">
             <div class="row g-lg-4 gy-5">
-                <div class="col-12">
+                <div class="col-md-8">
                     <div class="post-thumb">
                         <img src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
                             alt="">
@@ -20,6 +20,22 @@
 
                     <div id="content">
                         {!! $post->content !!}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-st-card1 two mb-30">
+                        @if ($ads->count() == 0)
+                            <a href="https://secure-ds.serving-sys.com/resources/PROD/asset/1073745238/IMAGE/20230113/Carmudi%20Banner%20[300x600]_76522578997430414.jpg"
+                                target="_blank">
+                                <img loading="lazy" src="https://secure-ds.serving-sys.com/resources/PROD/asset/1073745238/IMAGE/20230113/Carmudi%20Banner%20[300x600]_76522578997430414.jpg"
+                                    alt=""></a>
+                        @else
+                            @foreach ($ads as $value)
+                                <a href="{{ $value->target_url }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset('storage/' . $value->image_url) }}" alt="">
+                                </a>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

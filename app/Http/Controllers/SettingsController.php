@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\WorkCollaboratorEvent;
 use Carbon\Carbon;
 use App\Models\Car;
+use App\Models\PurchasedService;
 use App\Models\User;
 use GuzzleHttp\Client;
 use App\Models\Service;
@@ -16,35 +17,66 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+
 class SettingsController extends Controller
 {
     public function profile()
     {
         $cars = Car::where('user_id', auth()->id())
-            ->where('status', 1)
+            ->where([
+                'status' => 1,
+                'salon_id' => null
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
         $pendingCars = Car::where('user_id', auth()->id())
-            ->where('status', 0)
+            ->where([
+                'status' => 0,
+                'salon_id' => null
+            ])
             ->orderBy('created_at', 'desc')
+
             ->get();
+
         $deniedCars = Car::where('user_id', auth()->id())
-            ->where('status', 2)
+            ->where([
+                'status' => 2,
+                'salon_id' => null
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
+
         $hiddenCars = Car::onlyTrashed()
             ->where('user_id', auth()->id())
             ->get();
+
         $serviceId = DB::table('purchased_service')
             ->where('user_id', Auth::id())
             ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
             ->pluck('service_id');
+
         $billHistories = Service::whereIn('id', $serviceId)
             ->get();
-        $carPushed = Car::where('user_id', Auth::id())
-            ->get();
-        // dd($billHistories);
-        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'carPushed'));
+
+
+        $purchased_service = PurchasedService::where('user_id', auth()->id())
+        ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
+        ->get();
+        // $carPushed = [];
+        // foreach($purchased_service as $item) {
+        //     $carID = explode(',', $item->car_id);
+        //     $carPushed[] = Car::with('services')->whereIn('id', $carID)->get();
+        // }
+
+        
+        // Car::with('services')->where([
+        //     'user_id' => Auth::id(),
+        //     'status' => 1,
+        //     'salon_id' => null
+        // ])
+        //     ->get();
+
+        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'purchased_service'));
     }
 
     public function pushFeature($carID)
@@ -54,9 +86,9 @@ class SettingsController extends Controller
         $purchased_service = DB::table("purchased_service")
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', Carbon::now())
+            ->orderBy('expired_date', 'desc')
             ->get();
 
-        // ->orderBy('expired_date', 'desc')
         // ->first();
 
         // $carids = collect($purchased_service)->unique();
@@ -180,6 +212,8 @@ class SettingsController extends Controller
                             $update_pur_service = DB::table("purchased_service")
                                 ->where('user_id', auth()->id())
                                 ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                ->where('service_id', $pur_service->service_id)
+                                ->orderBy('expired_date', 'desc')
                                 ->update([
                                     'car_id' => $pur_service->car_id . ',' . $carID,
                                     'remaining_push' => $pur_service->remaining_push - 1,
@@ -189,6 +223,7 @@ class SettingsController extends Controller
                             $update_pur_service = DB::table("purchased_service")
                                 ->where('user_id', auth()->id())
                                 ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                ->where('service_id', $pur_service->service_id)
                                 ->orderBy('expired_date', 'desc')
                                 ->update([
                                     'car_id' => $carID,
@@ -343,7 +378,7 @@ class SettingsController extends Controller
             ->where('transaction_type', 'LIKE', 'nạp tiền')
             ->pluck('amount', 'id')
             ->sum();
-        
+
 
         // lịch sử thanh toán dịch vụ
         $serviceId = DB::table('purchased_service')
@@ -359,11 +394,11 @@ class SettingsController extends Controller
             ->get();
 
         $withDrawHistory = DB::table('transactions_histories')
-        ->select('id', 'amount', 'created_at')
-        ->where('user_id', auth()->id())
+            ->select('id', 'amount', 'created_at')
+            ->where('user_id', auth()->id())
             ->where('transaction_type', 'LIKE', '%rút tiền%')
             ->get();
-        
+
         return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory', 'withDrawHistory'));
     }
 
@@ -401,7 +436,8 @@ class SettingsController extends Controller
         return view('user-settings.settings', compact('user', 'err'));
     }
 
-    public function withdraw() {
+    public function withdraw()
+    {
         $client = new Client();
 
         // Thay đổi URL thành URL thực tế của API bạn muốn truy cập
@@ -411,12 +447,13 @@ class SettingsController extends Controller
         return view('user-settings.withdraw', compact('dataAPI'));
     }
 
-    public function withdrawMoney(Request $request) {
+    public function withdrawMoney(Request $request)
+    {
         // dd($request->all());
         $user_id = Auth::user()->id;
         $user_balance = User::find($user_id);
-    
-        if(intval($request->bank_price) > intval($user_balance->account_balence)) {  
+
+        if (intval($request->bank_price) > intval($user_balance->account_balence)) {
             return redirect()->back()->with('error', 'Số tiền bạn muốn rút quá lớn');
         }
 
@@ -433,6 +470,5 @@ class SettingsController extends Controller
 
             return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
         }
-
     }
 }

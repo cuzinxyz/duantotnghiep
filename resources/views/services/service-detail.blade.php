@@ -11,7 +11,7 @@
         <div class="pt-5 pb-3 text-center">
             @if (auth()->user()->service_id != 0 && auth()->user()->expired_date >= \Carbon\Carbon::now())
                 <div class="alert alert-primary" role="alert">
-                    Nếu bạn đăng ký dịch vụ mới, dịch vụ cũ sẽ được tính cho đến khi hết hạn!
+                    Nếu bạn đăng ký dịch vụ mới, dịch vụ cũ sẽ được duy trì nhưng số lượt đẩy tin còn lại sẽ không được tính!
                 </div>
             @endif
 

@@ -1,25 +1,30 @@
-@section('page_title'){{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}@endsection
-@section('title_seo'){{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}@endsection
-@section('thumb_seo'){{ $carDetail->verhicle_image_library ? asset('storage/' . $carDetail->verhicle_image_library[0]) : '' }}@endsection
+@section('page_title')
+    {{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}
+@endsection
+@section('title_seo')
+    {{ $carDetail->title ? $carDetail->title . ' - Drivco' : 'Drivco' }}
+@endsection
+@section('thumb_seo')
+    {{ $carDetail->verhicle_image_library ? asset('storage/' . $carDetail->verhicle_image_library[0]) : '' }}
+@endsection
 @push('styles')
-<style>
-@media only screen and (max-width: 988px)
-{
-    .contact-fixed {
-        left: 0;
-        padding: 10px 0 !important;
-        width: 100%;
-        position: fixed !important;
-        bottom: 0;
-        background: #fff;
-        z-index: 123;
-        margin: 0;
-        border-top: 6px solid !important;
-        border-image-slice: 1 !important;
-        border-image-source: linear-gradient(to right bottom, #6a5af9, #f62682) !important;
-    }
-}
-</style>
+    <style>
+        @media only screen and (max-width: 988px) {
+            .contact-fixed {
+                left: 0;
+                padding: 10px 0 !important;
+                width: 100%;
+                position: fixed !important;
+                bottom: 0;
+                background: #fff;
+                z-index: 123;
+                margin: 0;
+                border-top: 6px solid !important;
+                border-image-slice: 1 !important;
+                border-image-source: linear-gradient(to right bottom, #6a5af9, #f62682) !important;
+            }
+        }
+    </style>
 @endpush
 <x-partials.layout-client>
     <x-detailpage.banner :$carDetail />
@@ -33,36 +38,43 @@
                     <div class="car-details-sidebar">
                         <div class="contact-info mb-50 px-3 py-4 contact-fixed">
                             <div class="d-flex align-items-center gap-2">
-                                <img src="{{ $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}" class="img-fluid profile-image rounded-circle border-danger border-2" style="width: 60px;height:60px;object-fit:cover" />
+
                                 <div class="ml-3">
                                     <h6 class="name">{{ $carDetail->user->name }}</h6>
                                     <small>Tham gia vào {{ $carDetail->created_at->diffForHumans() }}</small>
                                 </div>
                             </div>
 
-                            <div class="px-2 pt-3 d-flex align-items-center flex-wrap overflow-hidden" style="row-gap:10px;column-gap:10px">
+                            <div class="px-2 pt-3 d-flex align-items-center flex-wrap overflow-hidden"
+                                style="row-gap:10px;column-gap:10px">
                                 <form action="/chatify/{{ $carDetail->user_id }}">
                                     <div class="form-inner d-flex align-items-center gap-1">
-                                        <button class="btn py-2 px-2 fw-bold" type="submit" style="font-size:12px;background:#f1f1f1;border-radius:24px">
-                                            <img style="width: 30px;height:30px;border-radius:12px" src="{{  $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name  }}" class="" alt="">
+                                        <button class="btn py-2 px-2 fw-bold" type="submit"
+                                            style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                            <img style="width: 30px;height:30px;border-radius:12px"
+                                                src="{{ $carDetail->user->avatar ? Storage::url($carDetail->user->avatar) : 'https://ui-avatars.com/api/?name=' . $carDetail->user->name }}"
+                                                class="" alt="">
                                             Nhắn tin
                                         </button>
                                     </div>
                                 </form>
                                 <a href="mailto:{{ $carDetail->user->email }}">
-                                    <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                    <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold"
+                                        style="font-size:12px;background:#f1f1f1;border-radius:24px">
                                         <i class="bx bx-at"></i> {{ $carDetail->user->email }}
                                     </button>
                                 </a>
                                 <a href="tel:{{ $carDetail->user->phone_number }}">
-                                    <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                    <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold"
+                                        style="font-size:12px;background:#f1f1f1;border-radius:24px">
                                         <i class="bx bx-phone-call"></i> {{ $carDetail->user->phone_number }}
                                     </button>
                                 </a>
-                                
-                                @if(!empty($carDetail->salon_id))
+
+                                @if (!empty($carDetail->salon_id))
                                     <a href="{{ route('salon.listCars', $carDetail->salon->slug) }}">
-                                        <button class="btn p-2 d-flex align-items-center gap-1 fw-bold" style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                        <button class="btn p-2 d-flex align-items-center gap-1 fw-bold"
+                                            style="font-size:12px;background:#f1f1f1;border-radius:24px">
                                             <i class="bi bi-shop"></i>
                                             Xem salon
                                         </button>
@@ -76,13 +88,22 @@
                                     <h5>Ads</h5>
                                 </div>
                                 <div class="tab-content mb-30">
+
                                     <div class="product-st-card1 two mb-30">
-                                        @foreach ($ads as $value)
-                                            <a href="{{ $value->target_url }}" target="_blank"
-                                                rel="noopener noreferrer">
-                                                <img src="{{ asset('storage/' . $value->image_url) }}" alt="">
-                                            </a>
-                                        @endforeach
+                                        @if ($ads->count() == 0)
+                                            <a href="https://secure-ds.serving-sys.com/resources/PROD/asset/1073745238/IMAGE/20230113/Carmudi%20Banner%20[300x600]_76522578997430414.jpg"
+                                                target="_blank">
+                                                <img src="https://secure-ds.serving-sys.com/resources/PROD/asset/1073745238/IMAGE/20230113/Carmudi%20Banner%20[300x600]_76522578997430414.jpg"
+                                                    alt=""></a>
+                                        @else
+                                            @foreach ($ads as $value)
+                                                <a href="{{ $value->target_url }}" target="_blank"
+                                                    rel="noopener noreferrer">
+                                                    <img src="{{ asset('storage/' . $value->image_url) }}"
+                                                        alt="">
+                                                </a>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

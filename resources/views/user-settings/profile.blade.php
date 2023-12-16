@@ -374,9 +374,9 @@
                                                         @endphp
                                                     </p>
                                                     <div class="icon-link fw-bolder text-secondary">
-                                                        <span>Số lượt đẩy tin còn lại:&nbsp;</span>
+                                                        <span>Số lượt mua gói tin :&nbsp;</span>
                                                         <span>
-                                                            {{ $item->purchased_services($item->id) }}
+                                                            {{ count($item->purchased_services($item->id)) }}
                                                         </span>
                                                         <svg class="bi" width="1em" height="1em">
                                                             <use xlink:href="#chevron-up"></use>
@@ -387,50 +387,93 @@
                                         </div>
                                     </div>
 
-                                    <div class="b-example-divider"></div>
 
-                                    <div class="container px-4 py-1" id="custom-cards">
-                                        <h2 class="pb-2 border-bottom">Tin đã đẩy&nbsp;({{ $carPushed->count() }})
-                                        </h2>
-                                        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-                                            @foreach ($carPushed as $item)
-                                                <div class="col">
-                                                    <div class="overlay-product card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-                                                        style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
-                                                        <div
-                                                            class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                                                            <h2 class="pt-5 mt-5 mb-4 fs-6 lh-1 fw-bold text-white">
-                                                                {{ $item->title }}</h2>
-                                                            <ul class="d-flex list-unstyled mt-auto">
-                                                                <li class="me-auto">
-                                                                    {{ $item->countComments($item->id) }}
-                                                                    <svg class="bi me-2" width="1em"
-                                                                        height="1em">
-                                                                        <use xlink:href="#chat-quote-fill"></use>
-                                                                    </svg>
-                                                                    {{-- <img src="2918581" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white"> --}}
-                                                                </li>
-                                                                <li class="d-flex align-items-center me-3">
-                                                                    <svg class="bi me-2" width="1em"
-                                                                        height="1em">
-                                                                        <use xlink:href="#heart"></use>
-                                                                    </svg>
-                                                                    <small>{{ $item->countWishlish($item->id) }}</small>
-                                                                </li>
-                                                                <li class="d-flex align-items-center">
-                                                                    <svg class="bi me-2" width="1em"
-                                                                        height="1em">
-                                                                        <use xlink:href="#eye"></use>
-                                                                    </svg>
-                                                                    <small>{{ views($item)->count() }}</small>
-                                                                </li>
-                                                            </ul>
+                                    @if (count($purchased_service) > 0)
+                                        @php
+                                            $serviceCars = [];
+
+                                            foreach ($purchased_service as $purchasedService) {
+                                                $serviceId = $purchasedService->service_id;
+                                                $carIds = explode(',', $purchasedService->car_id);
+
+                                                if (!isset($serviceCars[$serviceId])) {
+                                                    $serviceCars[$serviceId] = [];
+                                                }
+
+                                                foreach ($carIds as $carId) {
+                                                    $serviceCars[$serviceId][] = $carId;
+                                                }
+                                            }
+
+                                            $cars = [];
+                                        @endphp
+                                        {{-- 
+                                        foreach ($serviceCars as $serviceId => $carIds) {
+                                                $cars[] = \App\Models\
+                                                echo "SERVICE {$serviceId}: ";
+                                                echo implode(', ', $carIds) . "\n";
+                                                echo "----\n";
+                                            } --}}
+                                        @foreach ($serviceCars as $serviceId => $carIds)
+                                            <div class="b-example-divider"></div>
+                                            @php
+                                                $service = \App\Models\Service::where('id', $serviceId)->select('service_name')->get();
+                                            @endphp
+                                            <div class="container px-4 py-1" id="custom-cards">
+                                                <h2 class="pb-2 border-bottom">
+                                                    {{ $service[0]->service_name }}   
+                                                </h2>
+                                                @foreach (App\Models\Car::with('services')->whereIn('id', $carIds)->get() as $item)
+
+                                                    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+                                                        <div class="col">
+                                                            <div class="overlay-product card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                                                                style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
+                                                                <div
+                                                                    class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                                                    <h2
+                                                                        class="pt-5 mt-5 mb-4 fs-6 lh-1 fw-bold text-white">
+                                                                        {{ $item->title }}</h2>
+                                                                    <ul class="d-flex list-unstyled mt-auto">
+                                                                        <li class="me-auto">
+                                                                            {{ $item->countComments($item->id) }}
+                                                                            <svg class="bi me-2" width="1em"
+                                                                                height="1em">
+                                                                                <use xlink:href="#chat-quote-fill">
+                                                                                </use>
+                                                                            </svg>
+                                                                            {{-- <img src="2918581" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white"> --}}
+                                                                        </li>
+                                                                        <li class="d-flex align-items-center me-3">
+                                                                            <svg class="bi me-2" width="1em"
+                                                                                height="1em">
+                                                                                <use xlink:href="#heart"></use>
+                                                                            </svg>
+                                                                            <small>{{ $item->countWishlish($item->id) }}</small>
+                                                                        </li>
+                                                                        <li class="d-flex align-items-center">
+                                                                            <svg class="bi me-2" width="1em"
+                                                                                height="1em">
+                                                                                <use xlink:href="#eye"></use>
+                                                                            </svg>
+                                                                            <small>{{ views($item)->count() }}</small>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>Ngày hết hạn:
+                                                                        {{ 
+                                                                            \Carbon\Carbon::parse(\App\Models\PurchasedService::where('service_id', $serviceId)
+                                                                            ->where('user_id', auth()->id())
+                                                                            ->pluck('expired_date')[0])->format('d-m-Y')
+                                                                        }}
+                                                                        </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         @endif

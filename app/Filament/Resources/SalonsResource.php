@@ -86,8 +86,13 @@ class SalonsResource extends Resource
                     \Filament\Tables\Actions\Action::make('active')
                         ->label('Xác nhận')
                         ->action(function (Model $salon) {
-                            if ($salon->status == 1) return true;
-
+                            if ($salon->status == 2) {
+                                Notification::make()
+                                    ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
+                                    ->success()
+                                    ->send();
+                                return true;
+                            }
                             $collaborator = User::find($salon->collaborator_id);
                             if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;
@@ -170,8 +175,13 @@ class SalonsResource extends Resource
                         ])
                         ->action(function (array $data, Model $salon) {
                             $collaborator = User::find($salon->collaborator_id);
-                            if ($salon->status == 1) return true;
-
+                            if ($salon->status == 1) {
+                                Notification::make()
+                                    ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
+                                    ->success()
+                                    ->send();
+                                return true;
+                            }
                             $collaborator = User::find($salon->collaborator_id);
                             if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;

@@ -34,6 +34,8 @@ use App\Filament\Resources\PostCarManagerResource\Pages;
 
 class PostCarManagerResource extends Resource
 {
+    protected static ?string $pollingInterval = '10s';
+
     protected static ?string $model = Car::class;
 
     // protected static ?string $navigationGroup = 'Quản lý bài đăng';
@@ -92,7 +94,13 @@ class PostCarManagerResource extends Resource
                 Filter::make('unactive')
                     ->label('Bài đăng chưa duyệt')
                     ->query(fn (Builder $query): Builder => $query->where('status', 0))
-                    ->default()
+                    ->default(),
+                Filter::make('active')
+                    ->label('Bài đăng đã duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 1)),
+                Filter::make('locked')
+                    ->label('Bài đăng không duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
@@ -104,7 +112,8 @@ class PostCarManagerResource extends Resource
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->deferLoading();
     }
 
     public static function infolist(Infolist $infolist): Infolist
@@ -154,103 +163,108 @@ class PostCarManagerResource extends Resource
                                 '2xl' => 3,
                             ]),
                         Section::make('Hành động')
-                            ->schema([
-                                Actions::make([
-                                    Action::make('ActivePost')
-                                        ->label('Duyệt bài')
-                                        ->icon('heroicon-m-check')
-                                        ->requiresConfirmation()
-                                        ->action(function (Car $record) {
-                                            $collaborator = User::find($record->collaborator_id);
-                                            if ($collaborator) {
-                                                $total_assign = $collaborator->total_assign - 1;
-                                                if ($collaborator->total_assign <= 0) {
-                                                    $total_assign = 0;
-                                                }
+                            ->schema(function (Model $model) {
+                                if ($model->status == 1 || $model->status == 2) {
+                                    return [];
+                                } else {
+                                    return [
+                                        Actions::make([
+                                            Action::make('ActivePost')
+                                                ->label('Duyệt bài')
+                                                ->icon('heroicon-m-check')
+                                                ->requiresConfirmation()
+                                                ->action(function (Car $record) {
+                                                    $collaborator = User::find($record->collaborator_id);
+                                                    if ($collaborator) {
+                                                        $total_assign = $collaborator->total_assign - 1;
+                                                        if ($collaborator->total_assign <= 0) {
+                                                            $total_assign = 0;
+                                                        }
 
 
-                                                User::where('id', $record->collaborator_id)->update([
-                                                    'total_assign' => $total_assign
-                                                ]);
-                                            }
+                                                        User::where('id', $record->collaborator_id)->update([
+                                                            'total_assign' => $total_assign
+                                                        ]);
+                                                    }
 
-                                            $bot = User::where('name', 'BOT')->first();
-                                            $reason = 'Chào bạn ' . $record->user->name . ',
+                                                    $bot = User::where('name', 'BOT')->first();
+                                                    $reason = 'Chào bạn ' . $record->user->name . ',
                                                 Tin đăng bán xe của bạn có tiêu đề: ' . $record->title . ' được phê duyệt thành công.
                                                 Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
 
-                                            ChMessage::create([
-                                                'from_id' => $bot->id,
-                                                'to_id' => $record->user_id,
-                                                'body' => $reason
-                                            ]);
-                                            $data = $record;
-                                            Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
+                                                    ChMessage::create([
+                                                        'from_id' => $bot->id,
+                                                        'to_id' => $record->user_id,
+                                                        'body' => $reason
+                                                    ]);
+                                                    $data = $record;
+                                                    Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
 
-                                            $record->status = 1;
-                                            $record->collaborator_id = null;
-                                            $record->save();
-
-
-                                            Notification::make()
-                                                ->title('Đã duyệt tin thành công')
-                                                ->success()
-                                                ->send();
-                                            redirect()->route('filament.admin.resources.post-car-managers.index');
-                                        }),
-
-                                    Action::make('UnActivePost')
-                                        ->label('Không duyệt')
-                                        ->icon('heroicon-m-x-mark')
-                                        ->color('danger')
-                                        ->requiresConfirmation()
-                                        ->form([
-                                            TextInput::make('reason')
-                                                ->label('Vui lòng điền lý do ?')
-                                                ->required(),
-                                        ])
-                                        ->action(function (array $data, Car $record) {
-                                            $collaborator = User::find($record->collaborator_id);
-                                            if ($collaborator) {
-                                                $total_assign = $collaborator->total_assign - 1;
-                                                if ($collaborator->total_assign <= 0) {
-                                                    $total_assign = 0;
-                                                }
+                                                    $record->status = 1;
+                                                    $record->collaborator_id = null;
+                                                    $record->save();
 
 
-                                                User::where('id', $record->collaborator_id)->update([
-                                                    'total_assign' => $total_assign
-                                                ]);
-                                            }
+                                                    Notification::make()
+                                                        ->title('Đã duyệt tin thành công')
+                                                        ->success()
+                                                        ->send();
+                                                    redirect()->route('filament.admin.resources.post-car-managers.index');
+                                                }),
 
-                                            $bot = User::where('name', 'BOT')->first();
-                                            $reason = 'Chào bạn ' . $record->user->name . ',
-                                                Tin đăng bán xe có tiêu đề: ' . $record->title . 'của bạn không được phê duyệt,
-                                                vì lý do: "' . $data['reason'] . '"
-                                                Bạn vui điều chỉnh lại bài đăng của mình để được phê duyệt
-                                                Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
+                                            Action::make('UnActivePost')
+                                                ->label('Không duyệt')
+                                                ->icon('heroicon-m-x-mark')
+                                                ->color('danger')
+                                                ->requiresConfirmation()
+                                                ->form([
+                                                    TextInput::make('reason')
+                                                        ->label('Vui lòng điền lý do ?')
+                                                        ->required(),
+                                                ])
+                                                ->action(function (array $data, Car $record) {
+                                                    $collaborator = User::find($record->collaborator_id);
+                                                    if ($collaborator) {
+                                                        $total_assign = $collaborator->total_assign - 1;
+                                                        if ($collaborator->total_assign <= 0) {
+                                                            $total_assign = 0;
+                                                        }
 
-                                            ChMessage::create([
-                                                'from_id' => $bot->id,
-                                                'to_id' => $record->user_id,
-                                                'body' => $reason
-                                            ]);
+
+                                                        User::where('id', $record->collaborator_id)->update([
+                                                            'total_assign' => $total_assign
+                                                        ]);
+                                                    }
+
+                                                    $bot = User::where('name', 'BOT')->first();
+                                                    $reason = 'Chào bạn ' . $record->user->name . ',
+                                                    Tin đăng bán xe có tiêu đề: ' . $record->title . ' của bạn không được phê duyệt, vì lý do: "' . $data['reason'] . '"
+                                                    Bạn vui đăng lại tin của mình và sửa lại những lỗi nêu trên
+                                                    Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
+
+                                                    ChMessage::create([
+                                                        'from_id' => $bot->id,
+                                                        'to_id' => $record->user_id,
+                                                        'body' => $reason
+                                                    ]);
 
 
-                                            $record->reason = $data['reason'];
-                                            $record->status = 2;
-                                            $record->collaborator_id = null;
-                                            $record->save();
+                                                    $record->reason = $data['reason'];
+                                                    $record->status = 2;
+                                                    $record->collaborator_id = null;
+                                                    $record->save();
 
-                                            Notification::make()
-                                                ->success()
-                                                ->title('Đã gửi thông báo tới khách hàng')
-                                                ->send();
+                                                    Notification::make()
+                                                        ->success()
+                                                        ->title('Đã gửi thông báo tới khách hàng')
+                                                        ->send();
 
-                                            redirect()->route('filament.admin.resources.post-car-managers.index');
-                                        })
-                                ]),
-                            ])->columnSpan([
+                                                    redirect()->route('filament.admin.resources.post-car-managers.index');
+                                                })
+                                        ]),
+                                    ];
+                                }
+                            })->columnSpan([
                                 'xl' => 1,
                                 '2xl' => 2,
                             ]),
