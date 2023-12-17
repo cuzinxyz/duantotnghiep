@@ -407,7 +407,6 @@ class SalonsResource extends Resource
         return __('Salon');
     }
 
-
     public static function getNavigationBadge(): ?string
     {
         return static::$model::where('status', 0)->count();

@@ -27,7 +27,7 @@
                                     <a href="{{ route('car-detail', $carInfo->slug) }}"><i class="bi bi-arrow-right-short"></i></a>
                                 </div>
                                 <div class="price">
-                                    <strong>${{ number_format($carInfo->price) }}</strong>
+                                    <strong>{{ number_format($carInfo->price) }} đ</strong>
                                 </div>
                                 <h6><a href="{{ route('car-detail', $carInfo->slug) }}">{{ $carInfo->title }}</a></h6>
                             </div>

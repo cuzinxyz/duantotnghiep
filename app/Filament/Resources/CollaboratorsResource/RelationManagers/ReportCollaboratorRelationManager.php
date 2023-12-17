@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -50,6 +51,13 @@ class ReportCollaboratorRelationManager extends RelationManager
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make()
+            ])
+
+            ->actions([
+                Action::make('url_report')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/reporteds/' . $action->getRecord()->id)
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
             ])

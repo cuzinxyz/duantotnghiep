@@ -33,7 +33,7 @@ class CollaboratorsResource extends Resource
 
     protected static ?string $navigationGroup = 'Tài khoản';
 
-    protected static ?string $navigationLabel = 'Nhân viên';
+    protected static ?string $navigationLabel = 'Cộng tác viên';
 
     public static function form(Form $form): Form
     {

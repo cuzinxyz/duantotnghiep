@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -44,7 +45,12 @@ class DemnadRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make()
             ])
             ->headerActions([])
-            ->actions([])
+            ->actions([
+                Action::make('url_demand')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => 'admin/demnads/' . $action->getRecord()->id)
+                    ->openUrlInNewTab(),
+            ])
             ->bulkActions([])
             ->emptyStateActions([])
             ->modifyQueryUsing(fn (Builder $query) => $query->withoutGlobalScopes([

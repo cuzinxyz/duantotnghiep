@@ -2,6 +2,8 @@
     @push('styles')
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @endpush
 
     <form enctype="multipart/form-data">
@@ -25,7 +27,9 @@
                                         <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
                                             Tải hình lên (nhiều hình)</span>
                                     </label>
-                                    <div class="text-center"><div class="upload-loader" wire:loading></div></div>
+                                    <div class="text-center">
+                                        <div class="upload-loader" wire:loading></div>
+                                    </div>
                                     @if ($verhicle_image_library)
                                         <div id="preview-container" class="image-preview img-container" style="">
                                             @foreach ($verhicle_image_library as $image)
@@ -52,7 +56,9 @@
                                         <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
                                             Tải video lên</span>
                                     </label>
-                                    <div class="text-center"><div class="upload-loader" wire:loading></div></div>
+                                    <div class="text-center">
+                                        <div class="upload-loader" wire:loading></div>
+                                    </div>
                                     @if ($verhicle_videos)
                                         <div id="preview-container-video" class="image-preview" style="">
                                             <video width="320" height="240" controls>
@@ -84,26 +90,17 @@
                         <div class="row d-flex justify-content-between mb-20" style="border-left: 5px solid #ff4820">
                             <div class="col-md-8 col-sm-12 mb-20 inquiry-form py-4 px-4 bg-shape">
                                 <div class="row">
-                                    <div class="col-md-6 mb-20">
-                                        <div class="form-inner">
-                                            <label class="">Hãng chế tạo</label>
-                                            <select class=" form-control bg-white nice-select beauty-shadow"
-                                                wire:ignore.self wire:model.live="brand_select">
-                                                <option value="">-- chọn hãng xe --</option>
-                                                @foreach ($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="text-danger fw-bold" style="font-size:12px">
-                                            @error('brand_select')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
+                                    <div class="col-md-12 row">
+                                        <livewire:select-option nameID="brand" :options="$brands" columnName="brand_name"
+                                        label="Hãng chế tạo" wire:model.live="brand_select" wire:key="brand_select" />
+    
+                                        @if (!empty($brand_select))
+                                            <livewire:select-option nameID="model" :options="$models" columnName="model_name"
+                                                label="Tên xe" wire:model.live="model_select" wire:key="model_select" />
+                                        @endif
                                     </div>
 
-                                    <div class="col-md-6 mb-20">
+                                    {{-- <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Tên xe</label>
                                             <select
@@ -121,7 +118,7 @@
                                                 {{ $message }}
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- Tên xe thuộc hãng --}}
 
@@ -198,8 +195,8 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Số KM đã đi*</label>
-                                            <input wire:model="mileage" min="0" type="number" placeholder="100 KM"
-                                                wire:ignore.self class="myInput">
+                                            <input wire:model="mileage" min="0" type="number"
+                                                placeholder="100 KM" wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
                                             @error('mileage')
@@ -224,8 +221,8 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Mã lực*</label>
-                                            <input wire:model="engine" min="0" type="number" placeholder="ex: 300"
-                                                wire:ignore.self class="myInput">
+                                            <input wire:model="engine" min="0" type="number"
+                                                placeholder="ex: 300" wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
                                             @error('engine')

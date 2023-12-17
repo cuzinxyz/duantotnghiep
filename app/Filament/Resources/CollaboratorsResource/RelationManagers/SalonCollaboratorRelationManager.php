@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -45,6 +46,12 @@ class SalonCollaboratorRelationManager extends RelationManager
             ])
             ->filters([
                 // Tables\Filters\TrashedFilter::make()
+            ])
+            ->actions([
+                Action::make('url_salon')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/salons/' . $action->getRecord()->id)
+                    ->openUrlInNewTab(),
             ])
             ->emptyStateActions([
                 // Tables\Actions\CreateAction::make(),

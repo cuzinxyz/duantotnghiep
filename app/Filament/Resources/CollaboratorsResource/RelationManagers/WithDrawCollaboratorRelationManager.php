@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -55,7 +56,12 @@ class WithDrawCollaboratorRelationManager extends RelationManager
             ->filters([
                 Tables\Filters\TrashedFilter::make()
             ])
-            ->actions([])
+            ->actions([
+                Action::make('url_car')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/demnads/' . $action->getRecord()->id)
+                    ->openUrlInNewTab(),
+            ])
             ->bulkActions([])
             ->emptyStateActions([
                 // Tables\Actions\CreateAction::make(),

@@ -142,6 +142,7 @@ class FormDangTin extends Component
         if (!empty($this->brand_select) && $this->brand_select != 0) {
             $this->models = ModelCar::where('brand_id', $this->brand_select)->get();
         }
+
         $brands = Brand::all();
         return view('livewire.form-dang-tin', [
             'brands' => $brands,

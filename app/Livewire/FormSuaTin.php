@@ -26,9 +26,7 @@ class FormSuaTin extends Component
     public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
     public $models = [];
 
-    #[Validate('required', message: 'Bắt buộc phải upload tối thiểu 1 hình.')]
     public $verhicle_image_library = [];
-    #[Validate('required', message: 'Bắt buộc phải upload video xe.')]
     public $verhicle_videos;
     #[Validate('required', message: 'Bắt buộc phải chọn thương hiệu.')]
     public $brand_select = '';
@@ -70,6 +68,7 @@ class FormSuaTin extends Component
 
     public function updateCar()
     {
+        $this->validate();
         $carData = [];
         $photoName = [];
         // dd(count($this->verhicle_image_library));

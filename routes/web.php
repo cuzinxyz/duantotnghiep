@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NotificationExtendServices;
 use App\Events\reassignUnfinishedTasksAfterDayEvent;
 use App\Models\News;
 use App\Models\Salon;
@@ -94,6 +95,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/lich-su-nap-tien', 'paymentHistory')->name('paymentHistory');
 
         Route::match(['get', 'post'], '/cai-dat', 'settings')->name('settings');
+
+        Route::get('/gia-han-tin/{id}', 'serviceExpired')->name('service.expired_date');
     });
 
     Route::controller(WishlishController::class)->group(function () {

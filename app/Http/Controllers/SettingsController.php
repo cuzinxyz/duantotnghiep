@@ -22,10 +22,10 @@ class SettingsController extends Controller
 {
     public function profile()
     {
-         $cars = Car::where('user_id', auth()->id())
+        $cars = Car::where('user_id', auth()->id())
             ->where([
-            'status' => 1,
-            'salon_id' => null
+                'status' => 1,
+                'salon_id' => null
             ])
             ->orderBy('created_at', 'desc')
             ->get();
@@ -59,15 +59,15 @@ class SettingsController extends Controller
 
 
         $purchased_service = PurchasedService::where('user_id', auth()->id())
-        ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
-        ->get();
+            ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
+            ->get();
         // $carPushed = [];
         // foreach($purchased_service as $item) {
         //     $carID = explode(',', $item->car_id);
         //     $carPushed[] = Car::with('services')->whereIn('id', $carID)->get();
         // }
 
-        
+
         // Car::with('services')->where([
         //     'user_id' => Auth::id(),
         //     'status' => 1,
@@ -469,5 +469,37 @@ class SettingsController extends Controller
 
             return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
         }
+    }
+
+    public function serviceExpired($id)
+    {
+        $expired_date = PurchasedService::where([
+            'service_id' => $id,
+            'user_id' => auth()->id(),
+        ])
+            ->orderBy('created_at', 'asc')
+            ->first();
+
+
+        $service = Service::find($id);
+        $user = User::find($expired_date->user_id);
+        if ($user->account_balence < $service->price) {
+            return redirect()->back()->with('error', 'Tài khoản của bạn không đủ. Vui lòng nạp thêm tiền vào tài khoản');
+        }
+        $account_balence = intval($user->account_balence) - intval($service->price);
+
+        User::where('id', $expired_date->user_id)->update([
+            'account_balence' => $account_balence
+        ]);
+        $transaction_history = TransactionsHistory::create([
+            'user_id' => $expired_date->user_id,
+            'transaction_type' => 'dịch vụ: Gia hạn '. $service->service_name,
+            'amount' => intval($service->price),
+            'balance_after_transaction' => $account_balence
+        ]);
+
+        $expired_date->expired_date = Carbon::parse($expired_date->expires_date)->addDays($service->expiration_date);
+        $expired_date->save();
+        return redirect()->back()->with('success', 'Gia hạn gói tin thành công');
     }
 }

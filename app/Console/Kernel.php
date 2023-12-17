@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // ...
         \App\Console\Commands\GenerateSitemap::class,
+        \App\Console\Commands\SendEmailWhenExpired::class,
     ];
 
     /**
@@ -18,6 +19,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('generate:sitemap')->everyMinute();
+        $schedule->command('generate:send-email-when-expired')->dailyAt('00:00');
     }
 
     /**
