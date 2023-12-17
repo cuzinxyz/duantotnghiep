@@ -19,11 +19,64 @@ class AddCar extends Component
 
     public $salon;
 
-    public $fuels = ["Xăng", "Dầu Diesl", "Điện", "Loại khác"];
-    public $colors = ['red' => 'Đỏ', 'silver' => 'Bạc', 'black' => 'Đen', 'white' => 'Trắng', 'yellow' => 'Vàng', 'gray' => 'Ghi', 'blue' => 'Xanh', 'different' => 'Khác'];
-    public $featureValues = ['PremiumWheel' => 'Bánh xe cao cấp', 'Moonroof' => 'Cửa sổ trời', 'PremiumAudio' => 'Âm thanh cao cấp', 'Navigation' => 'Chế độ chỉ đường', 'PremiumSeatMaterial' => 'Ghế da cao cấp', 'Bluetooth' => 'Kết nối bluetooth', 'RemoteEngineStart' => 'Khởi động từ xa', 'Multi_ZoneClimateControl' => 'Điều hòa'];
-    public $seats = ['4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8',];
-    public $years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 'others'];
+    public $fuels = [
+        "Xăng",
+        "Dầu Diesl",
+        "Điện",
+        "Loại khác"
+    ];
+    public $colors = [
+        'black' => 'Đen',
+        'white' => 'Trắng',
+        'silver' => 'Bạc',
+        'gray' => 'Ghi',
+        'red' => 'Đỏ',
+        'blue' => 'Xanh',
+        'beige' => 'Be',
+        'green' => 'Xanh lá',
+        'yellow' => 'Vàng',
+        'purple' => 'Tím',
+        'brown' => 'Nâu',
+        'different' => 'Khác'
+    ];
+    public $featureValues = [
+        'PremiumWheel' => 'Bánh xe cao cấp',
+        'Moonroof' => 'Cửa sổ trời',
+        'PremiumAudio' => 'Âm thanh cao cấp',
+        'PremiumSeatMaterial' => 'Ghế da cao cấp',
+        'Bluetooth' => 'Kết nối bluetooth',
+        'RemoteEngineStart' => 'Khởi động từ xa',
+        'Navigation' => 'Chế độ chỉ đường',
+        'ParkingCamera' => 'Camera đỗ xe',
+        'ParkingSensors' => 'Cảm biến',
+        'AutonomousDriving' => 'Lái xe tự động',
+        'BlindSpotAssist' => 'Hỗ trợ điểm mù',
+        'LaneAssist' => 'Hỗ trợ làn đường',
+    ];
+    public $seats = [
+        '4' => '4',
+        '5' => '5',
+        '6' => '6',
+        '7' => '7',
+        '8' => '8',
+    ];
+    public $years = [
+        2023,
+        2022,
+        2021,
+        2020,
+        2019,
+        2018,
+        2017,
+        2016,
+        2015,
+        2014,
+        2013,
+        2012,
+        2011,
+        2010,
+        'others'
+    ];
     public $models = [];
 
     #[Validate('required', message: 'Bắt buộc phải upload tối thiểu 1 hình.')]

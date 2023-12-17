@@ -56,16 +56,6 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/ford-tao-lao</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>https://drivco.shop/oto/xe-test-bug</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
         <loc>https://drivco.shop/oto/xe-tuan-peo</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -96,21 +86,6 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/xe-bmw-5-series</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>https://drivco.shop/oto/xexexexexexe</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>https://drivco.shop/oto/xe-nay-sin-xin</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
         <loc>https://drivco.shop/oto/lexus-is-300-2017</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -132,6 +107,56 @@
             </url>
     <url>
         <loc>https://drivco.shop/oto/audi-a4-40-tdi</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-v-300d-extra-long-avantgarde</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/audi-q3-15-tfsi-s-tronic</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/hyundai-i20-blue-10-t-gdi</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/audi-a3-30-tdi-s-line</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-c-300</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/audi-rs6-40-tfsi</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-glc-300</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/tuan-nv</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-320i-2022</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/xe-vinfast-lux-2a</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -232,6 +257,16 @@
             </url>
     <url>
         <loc>https://drivco.shop/salon/demo-salon</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/nhat-auto</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/chi-auto</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

@@ -13,6 +13,10 @@
         <div class="row wow fadeInUp" data-wow-delay="300ms">
             <div class="col-lg-12">
                 <div class="row gy-3">
+                    
+                        <livewire:recommend-car />
+                    
+                    {{--
                     @forelse ($cars as $car)
                         <div class="col-md-6 col-lg-4 col-sm-12 col-12">
                             <div class="product-card">
@@ -111,6 +115,7 @@
                     @empty
                         <div class="text-center">Chưa có tin nào.</div>
                     @endforelse
+                    --}}
                 </div>
             </div>
         </div>

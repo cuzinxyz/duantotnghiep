@@ -24,7 +24,7 @@ class CarListingSystem extends Component
     public $updateLocations = [];
     public $minYear;
     public $maxYear;
-    public $sortPrice;
+    public $sortPrice = "time";
     public $minPrice;
     public $maxPrice;
     public $queryMax;
@@ -79,7 +79,7 @@ class CarListingSystem extends Component
             } elseif ($this->sortPrice == 2) {
                 $carQuery->orderBy('price', 'desc');
             } else {
-                $carQuery;
+                $carQuery->orderBy('created_at', 'desc');
             }
         }
 
