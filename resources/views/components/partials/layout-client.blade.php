@@ -337,7 +337,8 @@
                                                 src="{{ auth()->user()->avatar }}" alt="">
                                         @elseif (Storage::url(auth()->user()->avatar))
                                             <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                src="{{ 'storage/' . auth()->user()->avatar }}" alt="">
+                                                src="{{ asset('storage/'.auth()->user()->avatar) }}"
+                                                alt="">
                                         @else
                                             <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
                                                 src="{{ 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"

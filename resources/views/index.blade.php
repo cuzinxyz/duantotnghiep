@@ -1,8 +1,8 @@
 <x-partials.layout-client>
     <x-homepage.banner :$banners :$mark />
 
-    <x-homepage.featured-cars :cars="$featured_cars" />
-
+    <x-homepage.featured-cars />
+    
     @if ($adsPartners->count() > 0)
         <div class="mb-100">
             @foreach ($adsPartners as $value)

@@ -294,15 +294,15 @@
                                     id="changeColor">
                                     <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
                                     <div class="color-select row gy-2" wire:ignore>
-                                        @foreach ($colors as $key => $color)
+                                        @foreach ($colors as $key => $item)
                                             <div class="col-4 my-2">
-                                                <input {{ $key == 'black' ? 'checked' : '' }} hidden type="radio"
+                                                <input {{ $item == $color ? 'checked' : '' }} hidden type="radio"
                                                     wire:model="color" data-color="{{ $key }}"
-                                                    value="{{ $color }}" id="{{ $key }}"
+                                                    value="{{ $item }}" id="{{ $key }}"
                                                     name="colorpicker">
                                                 <label for="{{ $key }}"
                                                     class="shadow-sm {{ $key }} text-center rounded-2"
-                                                    style="padding: 4px 10px">{{ $color }}</label>
+                                                    style="padding: 4px 10px">{{ $item }}</label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -319,7 +319,7 @@
                                     <div class="d-flex justify-content-between items-center">
                                         <div class="radio-tile-group">
                                             <div class="input-container">
-                                                <input id="walk" wire:model="transmission" value="sotay"
+                                                <input id="walk" wire:model="transmission" value="Số sàn"
                                                     class="radio-button" type="radio" name="radio">
                                                 <div class="radio-tile">
                                                     <div class="icon walk-icon">
@@ -330,7 +330,7 @@
                                             </div>
 
                                             <div class="input-container">
-                                                <input id="bike" wire:model="transmission" value="sotudong"
+                                                <input id="bike" wire:model="transmission" value="Số tự động"
                                                     class="radio-button" type="radio" name="radio">
                                                 <div class="radio-tile">
                                                     <div class="icon bike-icon">

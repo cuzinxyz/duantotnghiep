@@ -308,7 +308,7 @@
                                     <div class="d-flex justify-content-between items-center">
                                         <div class="radio-tile-group">
                                             <div class="input-container">
-                                                <input id="walk" wire:model="transmission" value="sotay"
+                                                <input id="walk" wire:model="transmission" value="Số sàn"
                                                     class="radio-button" type="radio" name="radio">
                                                 <div class="radio-tile">
                                                     <div class="icon walk-icon">
@@ -319,7 +319,7 @@
                                             </div>
 
                                             <div class="input-container">
-                                                <input id="bike" wire:model="transmission" value="sotudong"
+                                                <input id="bike" wire:model="transmission" value="Số tự động"
                                                     class="radio-button" type="radio" name="radio">
                                                 <div class="radio-tile">
                                                     <div class="icon bike-icon">

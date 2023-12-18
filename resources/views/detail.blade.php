@@ -57,11 +57,10 @@
                                 </div>
                             </div>
 
-                            <div class="px-2 pt-3 d-flex align-items-center flex-wrap overflow-hidden"
-                                style="row-gap:10px;column-gap:10px">
-                                <form action="/chatify/{{ $carDetail->user_id }}">
+                            <div class="px-2 pt-3 d-flex align-items-center flex-wrap overflow-hidden" style="row-gap:10px;column-gap:10px">
+                                <!--<form action="/chatify/{{ $carDetail->user_id }}?fromID={{$carDetail->id}}">-->
                                     <div class="form-inner d-flex align-items-center gap-1">
-                                        <button class="btn py-2 px-2 fw-bold" type="submit" style="font-size:12px;background:#f1f1f1;border-radius:24px">
+                                        <button class="btn py-2 px-2 fw-bold" type="button" onclick="window.location.href='/chatify/{{ $carDetail->user_id }}?fromID={{$carDetail->id}}'" style="font-size:12px;background:#f1f1f1;border-radius:24px">
                                             @if (strpos($carDetail->user->avatar, "http") === 0)
                                                 <img style="width: 30px;height:30px;border-radius:12px" style="width: 60px;height:60px;object-fit:cover"
                                                     src="{{$carDetail->user->avatar}}"
@@ -80,7 +79,7 @@
                                             @endif
                                         </button>
                                     </div>
-                                </form>
+                                <!--</form>-->
                                 <a href="mailto:{{ $carDetail->user->email }}">
                                     <button class="btn py-2 px-2 d-flex align-items-center gap-1 fw-bold"
                                         style="font-size:12px;background:#f1f1f1;border-radius:24px">

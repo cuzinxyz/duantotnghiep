@@ -30,11 +30,10 @@ class HomeController extends Controller
             ->unique()
             ->values()
             ->toArray();
-        // Lấy 12 phần tử ngẫu nhiên trùng với các ID đã đẩy tin
+        // Lấy tất cả phần tử ngẫu nhiên trùng với các ID đã đẩy tin
         $featured_cars = Car::whereIn('id', $carIds)
             ->where('status', 1)
             ->inRandomOrder()
-            ->limit(12)
             ->get();
         #thêm 1 cột đánh dấu tin vip 
         $featured_cars = $featured_cars->map(function ($car) {
