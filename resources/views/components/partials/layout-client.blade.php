@@ -44,7 +44,7 @@
     <meta property="og:image:width" content="650">
     <meta property="og:image:height" content="350">
     <meta name="theme-color" content="#46D993">
-            
+
     <!-- GENERAL GOOGLE SEARCH META -->
     <script type="application/ld+json">
         {
@@ -82,7 +82,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
+
       gtag('config', 'G-5B2YRXX4TD');
     </script>
 
@@ -231,7 +231,7 @@
                                 <h5>Salon</h5>
                                 <ul>
                                     @php
-                                        $salons = \App\Models\Salon::limit(8)->get();
+                                        $salons = \App\Models\Salon::limit(8)->where('status', 1)->get();
                                     @endphp
 
                                     @foreach ($salons as $salon)
@@ -507,7 +507,7 @@
         </header>
 
         {{ $slot }}
-        
+
         @include('modals.guide-modal')
 
         <footer class="style-2">
