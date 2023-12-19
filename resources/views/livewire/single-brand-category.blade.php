@@ -86,7 +86,7 @@
             </div>
 
             <div class="row g-4 mb-40">
-                @foreach ($cars as $item)
+                @forelse ($cars as $item)
                     <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" wire:loading.remove
                         data-wow-delay="100ms">
                         <div class="product-card2 two position-relative">
@@ -113,7 +113,10 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+
+                @empty
+                    <h6 class="text-center">Không có xe nào cả</h6>
+                @endforelse
             </div>
             <div class="row">
                 <div class="col-lg-12">

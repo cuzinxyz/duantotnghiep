@@ -33,7 +33,7 @@ class SettingsController extends Controller
                 'salon_id' => null
             ])
             ->orderBy('created_at', 'desc')
-            
+
             ->get();
         $deniedCars = Car::where('user_id', auth()->id())
             ->where([
@@ -136,7 +136,11 @@ class SettingsController extends Controller
             ->get();
 
         // dd($valid);
-        if (($valid->count() == 0) || ($valid[0]->remaining_push == 0)) {
+        if (($valid->count() == 0)) {
+            # TH đã mua gói trước đó & còn hạn
+            // if(!empty($valid) && $valid[0]->remaining_push == 0) {
+            //     redirect('')
+            // }
             # TH: CHưa đăng kí gói tin nào
             # tin lẻ
             $service = Service::findOrFail($request->service_id);
@@ -175,15 +179,9 @@ class SettingsController extends Controller
             }
         } else {
             # TH: Đã mua gói tin
-
             foreach ($valid as $pur_service) :
                 # kiểm tra xem còn lượt đẩy tin hay không
                 if ($pur_service->remaining_push > 0) {
-                    // $purchased_service = DB::table("purchased_service")
-                    //     ->where('user_id', auth()->id())
-                    //     ->where('expired_date', '>=', \Carbon\Carbon::now())
-                    //     ->get();
-
                     # kiểm tra xem tin hiện tại được đẩy chưa/
                     if (str_contains($pur_service->car_id, $carID)) {
                         return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này!');
@@ -212,7 +210,7 @@ class SettingsController extends Controller
                     }
                 } else {
                     // dd('here');
-                    return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua dịch vụ VIP!');
+                    return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua lại sau!');
                 }
             endforeach;
         }
@@ -356,7 +354,7 @@ class SettingsController extends Controller
             ->where('transaction_type', 'LIKE', 'nạp tiền')
             ->pluck('amount', 'id')
             ->sum();
-        
+
 
         // lịch sử thanh toán dịch vụ
         $serviceId = DB::table('purchased_service')
@@ -376,7 +374,7 @@ class SettingsController extends Controller
         ->where('user_id', auth()->id())
             ->where('transaction_type', 'LIKE', '%rút tiền%')
             ->get();
-        
+
         return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory', 'withDrawHistory'));
     }
 
@@ -428,8 +426,8 @@ class SettingsController extends Controller
         // dd($request->all());
         $user_id = Auth::user()->id;
         $user_balance = User::find($user_id);
-    
-        if(intval($request->bank_price) > intval($user_balance->account_balence)) {  
+
+        if(intval($request->bank_price) > intval($user_balance->account_balence)) {
             return redirect()->back()->with('error', 'Số tiền bạn muốn rút quá lớn');
         }
 
