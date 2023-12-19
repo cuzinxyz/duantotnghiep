@@ -259,7 +259,7 @@ use App\Models\Car;
     
     Route::get('login/facebook/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback'])->name('handleFacebookCallback');
     
-    Route::get('/chinh-sach-quyen-rieng-tu', function() {
+    Route::get('/privacy', function() {
        return view('chinhsachbaomat'); 
     });
     

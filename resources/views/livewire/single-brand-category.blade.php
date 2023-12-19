@@ -89,7 +89,12 @@
                 @foreach ($cars as $item)
                     <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" wire:loading.remove
                         data-wow-delay="100ms">
-                        <div class="product-card2 two">
+                        <div class="product-card2 two position-relative">
+                            @if(!empty($item->is_vip))
+                                <span class="bg-success new p-2 rounded position-absolute" style="top:2px;left:2px;z-index:123">
+                                    <i class="bi bi-check-circle-fill fs-5 text-white"></i>
+                                </span>
+                            @endif
                             <div class="product-img" onclick="window.location='{{ route('car-detail', $item->slug) }}'">
                                 <img src="{{ asset('storage/' . $item->verhicle_image_library[0]) }}"
                                     alt="{{ $item->title }}">
@@ -103,7 +108,7 @@
                                 <div class="price">
                                     <strong>{{ number_format($item->price) . ' đ' }}</strong>
                                 </div>
-                                <h6><a href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a>
+                                <h6><a class="line-clamp-1" href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a>
                                 </h6>
                             </div>
                         </div>
@@ -112,7 +117,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    {{ $cars->links() }}
+                    {{-- $cars->links()  --}}
                 </div>
             </div>
         </div>

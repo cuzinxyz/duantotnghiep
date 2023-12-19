@@ -48,10 +48,8 @@
                             <div class="card-post">
                                 <div class="card-body">
                                     <span class="badge bg-warning text-dark pb-2">tin chờ duyệt</span>
-                                    <p>
-                                        {{ $demand->content }}
-                                    </p>
-                                    <div class="user w-100">
+                                    
+                                    <div class="user w-100 my-2">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 @if (strpos(auth()->user()->avatar, "http") === 0)
@@ -84,6 +82,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <p class="mb-0">
+                                        {{ $demand->content }}
+                                    </p>
                                 </div>
                             </div>
                         @endforeach
@@ -94,14 +95,23 @@
                 @foreach ($demands as $demand)
                     <div class="card-post">
                         <div class="card-body">
-                            <p>
-                                {{ $demand->content }}
-                            </p>
-                            <div class="user w-100">
+                            
+                            <div class="user w-100 my-2">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <img class="border border-dark border-1"
-                                            src="{{ asset('storage/' . $demand->user->avatar) }}" alt="user" />
+                                        @if (strpos($demand->user->avatar, "http") === 0)
+                                            <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                src="{{$demand->user->avatar}}"
+                                                alt="">
+                                        @elseif (Storage::url($demand->user->avatar))
+                                            <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                src="{{'storage/'. $demand->user->avatar}}"
+                                                alt="">
+                                        @else
+                                            <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
+                                                src="{{'https://ui-avatars.com/api/?name=' . $demand->user->name }}"
+                                                alt="">
+                                        @endif
                                         <div class="user-info">
                                             <h5>{{ $demand->user->name }}</h5>
                                             <small>{{ $demand->created_at->diffForHumans() }}</small>
@@ -134,6 +144,9 @@
 
 
                             </div>
+                            <p class="mb-0">
+                                {{ $demand->content }}
+                            </p>
                         </div>
                     </div>
                 @endforeach
