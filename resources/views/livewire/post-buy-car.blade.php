@@ -4,7 +4,7 @@
             <div class="col-lg-3">
                 <div class="product-st-card1 two mb-30">
                     @if ($ads->count() == 0)
-                        <a href="https://secure-ds.serving-sys.com/resources/PROD/asset/1073745238/IMAGE/20230113/Carmudi%20Banner%20[300x600]_76522578997430414.jpg"
+                        <a href="https://www.khuyenmaicastrol.com/"
                             target="_blank" style="width:100%">
                             <img loading="lazy"
                                 src="https://secure-ds.serving-sys.com/resources/PROD/asset/1073745238/IMAGE/20230113/Carmudi%20Banner%20[300x600]_76522578997430414.jpg"

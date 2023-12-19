@@ -235,7 +235,7 @@
                                 <h5>Salon</h5>
                                 <ul>
                                     @php
-                                        $salons = \App\Models\Salon::limit(8)->get();
+                                        $salons = \App\Models\Salon::where('status', 1)->limit(8)->inRandomOrder()->get();
                                     @endphp
 
                                     @foreach ($salons as $salon)
