@@ -10,11 +10,11 @@ use Carbon\Carbon;
 
 class RecommendCar extends Component
 {
-    public $amount = 16;
+    public $amount = 6;
     
     public function load()
     {
-        $this->amount = $this->amount + 4;
+        $this->amount = $this->amount + 6;
     }
     
     public function render()
@@ -32,22 +32,24 @@ class RecommendCar extends Component
             ->unique()
             ->values()
             ->toArray();
-        $featured_cars = Car::take($this->amount)
-            ->whereIn('id', $carIds)
+            // var_dump($carIds);
+        $recommendCars = Car::whereIn('id', $carIds)
+            ->take($this->amount)
             ->where('status', 1)
-            ->inRandomOrder()
             ->get();
-        $featured_cars = $featured_cars->map(function ($car) {
+        // dd($recommendCars);
+        
+        $recommendCars = $recommendCars->map(function ($car) {
             $car['is_vip'] = true;
         
             return $car;
         });
 
-        $id = $featured_cars->pluck('id');
+        $id = $recommendCars->pluck('id');
         session(['featured_cars_id' => $id]);
         
         return view('livewire.recommend-car', [
-            'recommendCars' => $featured_cars
+            'recommendCars' => $recommendCars
         ]);
     }
 }

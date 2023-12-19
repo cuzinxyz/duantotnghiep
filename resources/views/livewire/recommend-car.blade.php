@@ -1,11 +1,6 @@
 <div class="container row">
-    @push('styles')
-    <!-- Alpine Plugins -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
-    @endpush
-    
     @forelse($recommendCars as $key => $car)
-    <div class="col-md-6 col-lg-4 col-sm-12 col-12" wire:key="recommend-car-{{$key}}">
+    <div class="col-md-6 col-lg-4 col-sm-12 col-12" wire:key="recommend-car-{{$car->id}}">
         <div class="product-card">
             @if(!empty($car->is_vip))
             <span class="new">
@@ -19,7 +14,7 @@
                     {{ count($car->verhicle_image_library) }}
                 </div>
                 
-                <livewire:add-to-wish-list wire:key="wishlist-{{ $car->id }}" carID="{{ $car->id }}" />
+                <livewire:add-to-wish-list wire:key="wishlist-rcm-{{ $car->id }}" carID="{{ $car->id }}" />
 
                 <div class="slider-btn-group">
                     <div class="product-stand-next swiper-arrow">
@@ -100,8 +95,12 @@
         </div>
     </div>
     @empty
-        <h6>no cars</h6>
+        <h6>không có tin nào cả!</h6>
     @endforelse
     
-    <div x-intersect.full="$wire.load()"></div>
+    <div x-intersect="$wire.load()"></div>
+    
+@push('styles')
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+@endpush
 </div>

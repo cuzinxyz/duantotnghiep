@@ -17,9 +17,7 @@ class reassignUnfinishedTasksAfterDayEvent
     /**
      * Create a new event instance.
      */
-
     public $collaboratorID;
-    
     public function __construct($collaboratorID)
     {
         $this->collaboratorID = $collaboratorID;

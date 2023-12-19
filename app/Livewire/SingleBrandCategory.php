@@ -9,6 +9,8 @@ use App\Models\ModelCar;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SingleBrandCategory extends Component
 {
@@ -40,7 +42,57 @@ class SingleBrandCategory extends Component
 
             // dd($brand);
             $brand_id= $brand->id;
-            $cars = Car::where('brand_id', $brand_id)->where('status', 1)->simplePaginate(9);
+            
+            $carIds = DB::table('purchased_service')
+                ->where('expired_date', '>=', Carbon::now())
+                ->whereNotNull('car_id')
+                ->select('car_id')
+                ->get()
+                ->pluck('car_id')
+                ->flatMap(function ($carId) {
+                    return explode(',', $carId);
+                })
+                ->filter()
+                ->unique()
+                ->values()
+                ->toArray();
+            // var_dump($carIds);
+            $recommendCars = Car::whereIn('id', $carIds)
+                ->where('brand_id', $brand_id)
+                ->where('status', 1)
+                ->get();
+            // dd($recommendCars);
+            
+            $recommendCars = $recommendCars->map(function ($car) {
+                $car['is_vip'] = true;
+            
+                return $car;
+            });
+    
+            $id = $recommendCars->pluck('id');
+
+            $normalCars = Car::where('brand_id', $brand_id)
+                ->whereNotIn('id', $id)
+                ->where('status', 1)
+                ->orderBy('created_at', 'desc')
+                ->get();
+            
+            $cars = new \Illuminate\Database\Eloquent\Collection;
+            $cars = $cars->merge($recommendCars);
+            $cars = $cars->merge($normalCars);
+            
+            // $cars = $cars->sortByDesc('is_vip');
+            $cars = $cars->sort(function ($a, $b) {
+                // Nếu cả hai đều có is_vip là true, sắp xếp theo created_at
+                if ($a['is_vip'] && $b['is_vip']) {
+                    return $b['created_at'] <=> $a['created_at'];
+                }
+                
+                // Nếu chỉ có một trong hai có is_vip là true, đặt is_vip là true lên đầu
+                return $b['is_vip'] <=> $a['is_vip'];
+            });
+
+            // dd($cars);
         }else {
             $cars = Car::where('status', 1)->simplePaginate(9);
         }
