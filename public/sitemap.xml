@@ -56,11 +56,6 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/xe-tuan-peo</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
         <loc>https://drivco.shop/oto/volkswagen-tiguan-15-tsi-evo-110-kw-dsg-2020</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -146,17 +141,32 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/tuan-nv</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
         <loc>https://drivco.shop/oto/bmw-320i-2022</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/xe-vinfast-lux-2a</loc>
+        <loc>https://drivco.shop/oto/audi-q5</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/toyota-c-hr</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-340i-xdrive</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-cla-180-2019</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-gle-400-d-4matic-2020</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -256,17 +266,7 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/salon/demo-salon</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
         <loc>https://drivco.shop/salon/nhat-auto</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>https://drivco.shop/salon/chi-auto</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

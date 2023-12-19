@@ -67,7 +67,10 @@ class reassignUnfinishedTasksAfterDayListen
         ->get();
 
         foreach ($cars as $item) {
-            Car::where('collaborator_id', $collaborator->id)->update([
+            Car::where([
+                'collaborator_id' => $collaborator->id,
+                'status' => 0
+                ])->update([
                 'collaborator_id' => null
             ]);
             $this->deleteOldTask($collaborator->id);
@@ -82,7 +85,10 @@ class reassignUnfinishedTasksAfterDayListen
         ])
         ->get();
         foreach ($byCars as $item) {
-            Demnad::where('collaborator_id', $collaborator->id)->update([
+            Demnad::where([
+                'collaborator_id' => $collaborator->id,
+                'status' => 0
+                ])->update([
                 'collaborator_id' => null
             ]);
             $this->deleteOldTask($collaborator->id);
@@ -97,7 +103,10 @@ class reassignUnfinishedTasksAfterDayListen
         ])
         ->get();
         foreach ($salons as $item) {
-            Salon::where('collaborator_id', $collaborator->id)->update([
+            Salon::where([
+                'collaborator_id' => $collaborator->id,
+                'status' => 0
+                ])->update([
                 'collaborator_id' => null
             ]);
             $this->deleteOldTask($collaborator->id);
@@ -112,7 +121,10 @@ class reassignUnfinishedTasksAfterDayListen
         ])
         ->get();
         foreach ($reports as $item) {
-            Reported::where('collaborator_id', $collaborator->id)->update([
+            Reported::where([
+                'collaborator_id' => $collaborator->id,
+                'status' => 0
+                ])->update([
                 'collaborator_id' => null
             ]);
             $this->deleteOldTask($collaborator->id);
@@ -127,7 +139,10 @@ class reassignUnfinishedTasksAfterDayListen
         ])
         ->get();
         foreach ($draws as $item) {
-            WithDraw::where('collaborator_id', $collaborator->id)->update([
+            WithDraw::where([
+                'collaborator_id' => $collaborator->id,
+                'status' => 0
+                ])->update([
                 'collaborator_id' => null
             ]);
             $this->deleteOldTask($collaborator->id);
@@ -142,7 +157,10 @@ class reassignUnfinishedTasksAfterDayListen
         ])
         ->get();
         foreach ($supports as $item) {
-            Support::where('collaborator_id', $collaborator->id)
+            Support::where([
+                'collaborator_id' => $collaborator->id,
+                'status' => 0
+                ])
             ->update([
                 'collaborator_id' => null
             ]);

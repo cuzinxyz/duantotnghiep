@@ -1,7 +1,10 @@
+@section('page_title') Chính sách bảo mật Drivco @endsection
+@section('title_seo') Chính sách bảo mật Drivco @endsection
+
 <x-partials.layout-client>
     <div class="container">
         
-<h1>Chính Sách Quyền Riêng Tư</h1>
+<h1>Chính Sách Bảo Mật</h1>
 
 <p>Chúng tôi hiểu rằng quyền riêng tư là điều quan trọng với người dùng của chúng tôi. Chính sách này nêu rõ thông tin chúng tôi thu thập, cách sử dụng thông tin đó và các bước chúng tôi thực hiện để đảm bảo an ninh.</p>
 
