@@ -44,11 +44,21 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
                     <div class="panel panel-orange panel-widget border-right">
                         <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
                             <div class="large">{{ $report_count }}</div>
                             <div class="text-muted">Tổng số tin tố cáo đã xử lý</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+                    <div class="panel panel-blue panel-widget border-right">
+                        <div class="row no-padding"><em class="fa fa-question-circle color-orange"></em>
+                            <div class="large">{{ $support_count }}</div>
+                            <div class="text-muted">Tổng số yêu cầu hỗ trợ đã xử lý</div>
                         </div>
                     </div>
                 </div>
@@ -97,6 +107,17 @@
                         <div class="easypiechart" id="easypiechart-red"
                             data-percent="{{ $efficiencyDay['unActiveReport'] }}"><span
                                 class="percent">{{ $efficiencyDay['unActiveReport'] }}</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Hỗ trợ</h4>
+                        <div class="easypiechart" id="easypiechart-green"
+                            data-percent="{{ $efficiencyDay['unActiveSupport'] }}"><span
+                                class="percent">{{ $efficiencyDay['unActiveSupport'] }}</span></div>
                     </div>
                 </div>
             </div>

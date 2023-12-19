@@ -13,7 +13,6 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class CollaboratorsOverview extends BaseWidget
 {
-    protected static ?string $pollingInterval = '10s';
     protected function getStats(): array
     {
        $url = request()->session()->all()['_previous']['url'];

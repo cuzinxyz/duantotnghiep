@@ -31,7 +31,10 @@ class EditCollaborators extends EditRecord
                     ->success()
                     ->send();
             }),
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()
+            ->action(function() {
+                
+            }),
             Actions\ForceDeleteAction::make(),
             Actions\RestoreAction::make(),
         ];

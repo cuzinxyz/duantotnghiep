@@ -6,6 +6,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -48,13 +49,22 @@ class CarRelationManager extends RelationManager
                     ->since(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                    ->label('Bài đăng chưa duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default(),
+                Filter::make('active')
+                    ->label('Bài đăng đã duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 1)),
+                Filter::make('locked')
+                    ->label('Bài đăng không duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
             ])
             ->actions([
                 Action::make('url_car')
-                ->label('Xem chi tiết')
-                ->url(fn (Action $action) => '/admin/post-car-managers/'. $action->getRecord()->id)
-                ->openUrlInNewTab(),
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/post-car-managers/' . $action->getRecord()->id),
             ])
             ->bulkActions([])
             ->emptyStateActions([])

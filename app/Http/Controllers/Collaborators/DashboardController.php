@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Demnad;
 use App\Models\Reported;
 use App\Models\Salon;
+use App\Models\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,10 @@ class DashboardController extends Controller
         $byCar_count = Demnad::where('collaborator_id', $collaborator_id)
         ->where('status', '!=', 0)  ->count();
 
+        $support_count = Support::where('collaborator_id', $collaborator_id)
+        ->where('status', '!=', 0)->count();
+
+
         $efficiencyDay = $this->efficiencyDay();
 
         return view('collaborators.dashboard', compact(
@@ -34,6 +39,7 @@ class DashboardController extends Controller
             'car_count',
             'report_count',
             'byCar_count',
+            'support_count',
             'efficiencyDay'
         ));
     }
@@ -65,12 +71,17 @@ class DashboardController extends Controller
             'status' => 0
         ])->count();
 
+        $unActiveSupport = Support::where([
+            'collaborator_id' => $collaborator_id,
+            'status' => 0
+        ])->count();
 
         return [
             'unActiveCar' => $unActiveCar,
             'unActiveByCar' => $unActiveByCar,
             'unActiveReport' => $unActiveReport,
             'unActiveSalon' => $unActiveSalon,
+            'unActiveSupport' => $unActiveSupport,
         ];
         
     }

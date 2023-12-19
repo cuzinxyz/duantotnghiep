@@ -78,12 +78,16 @@
                     </div>
 
                     <div class="" id="form-sell-1">
-                        <div class="mb-15 d-flex justify-content-between align-items-center">
-                            <h4 class="">Bạn đang bán xe gì?</h4>
+                        <div class="mb-15 row ">
+                            <div class="col-md-8">
+                                <h4 class="">Bạn đang bán xe gì?</h4>
+                            </div>
+
+                            <div class="col-md-4" style="text-align: end">
+                                <button class="primary-btn2" id="fakeData" type="button">Thêm gợi ý</button>
+                            </div>
 
                             {{-- <div class="form-inner" style="text-align: end">
-                                <button class="primary-btn2" wire:click="secondStepSubmit" type="button">Tiếp
-                                    tục</button>
                             </div> --}}
                         </div>
 
@@ -92,11 +96,13 @@
                                 <div class="row">
                                     <div class="col-md-12 row">
                                         <livewire:select-option nameID="brand" :options="$brands" columnName="brand_name"
-                                        label="Hãng chế tạo" wire:model.live="brand_select" wire:key="brand_select" />
-    
+                                            label="Hãng chế tạo" wire:model.live="brand_select"
+                                            wire:key="brand_select" />
+
                                         @if (!empty($brand_select))
-                                            <livewire:select-option nameID="model" :options="$models" columnName="model_name"
-                                                label="Tên xe" wire:model.live="model_select" wire:key="model_select" />
+                                            <livewire:select-option nameID="model" :options="$models"
+                                                columnName="model_name" label="Tên xe" wire:model.live="model_select"
+                                                wire:key="model_select" />
                                         @endif
                                     </div>
 
@@ -125,7 +131,7 @@
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
                                             <label class="">Nhiên liệu</label>
-                                            <select
+                                            <select id="fakeFuel"
                                                 class=" form-control bg-white nice-select beauty-shadow form-control-lg"
                                                 wire:model="fuel" wire:ignore.self>
                                                 <option value="">-- loại nhiên liệu --</option>
@@ -449,6 +455,26 @@
             </div>
     </form>
 
+    @script
+        <script>
+            $(document).ready(function() {
+                $('#fakeData').on('click', function() {
+                    $wire.$set('fuel', '{{ $fuels[0] }}');
+                    $wire.$set('number_of_seats', '{{ $seats[4] }}');
+                    $wire.$set('year_of_manufacture', '{{ $years[0] }}');
+                    $wire.$set('mileage', '1000');
+                    $wire.$set('price', '1000000000');
+                    $wire.$set('engine', '2500');
+                    $wire.$set('color', "{{ $colors['black'] }}");
+                    $wire.$set('transmission', 'Số sàn');
+                    $wire.$set('title', 'Mercedes-Benz V 250d Long Edition 1 4Matic 140 kW');
+                    $wire.$set('description', 'Xe hạng sang nhập khẩu từ Đức');
+                    $wire.$set('features', ['{{$featureValues["PremiumWheel"]}}', '{{$featureValues["Moonroof"]}}']);
+                })
+            })
+            
+        </script>
+    @endscript
     @push('scripts')
         <script src="{{ asset('js/file_upload.js') }}"></script>
         <script>
@@ -467,4 +493,5 @@
             });
         </script>
     @endpush
+
 </div>
