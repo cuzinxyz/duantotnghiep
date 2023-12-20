@@ -124,17 +124,17 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="single-comment-area ">
                                                 <div class="author-img">
-                                                   @if (strpos($item->user->avatar, "http") === 0)
+                                                    @if (strpos($reply->user->avatar, "http") === 0)
                                                         <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                            src="{{$item->user->avatar}}"
+                                                            src="{{$reply->user->avatar}}"
                                                             alt="">
-                                                    @elseif (Storage::url($item->user->avatar))
+                                                    @elseif (Storage::url($reply->user->avatar))
                                                         <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                            src="{{asset('storage/'. $item->user->avatar)}}"
+                                                            src="{{asset('storage/'. $reply->user->avatar)}}"
                                                             alt="">
                                                     @else
                                                         <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                            src="{{'https://ui-avatars.com/api/?name=' . $item->user->name }}"
+                                                            src="{{'https://ui-avatars.com/api/?name=' . $reply->user->name }}"
                                                             alt="">
                                                     @endif
                                                 </div>
