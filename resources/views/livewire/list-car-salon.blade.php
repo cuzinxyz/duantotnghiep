@@ -8,7 +8,7 @@
             <div class="search">
                 <form>
                     <input type="text" name="searchCar" wire:model.live="searchCar" class="search__input"
-                        placeholder="Tìm kiếm xe">
+                        placeholder="Tìm kiếm xe" style="width: 10em">
                     <button class="search__button" id="search" type="submit">
                         <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
                             <g>
@@ -21,7 +21,7 @@
                 </form>
             </div>
             <div class="filter-view">
-                <div class="filter-atra">
+                <div class="filter-atra" style="gap: 5px; padding: 5px;">
                     <h6>Hãng xe:</h6>
                     <div class="form-inner">
                         <select id="brandListSalon" wire:model.live="brandCar">
@@ -52,7 +52,7 @@
                             <div class="product-img">
                                 <livewire:add-to-wish-list carID="{{ $item->id }}"
                                     wire:key="wish-list-{{ $item->id }}" />
-                                <img src="{{ asset('/storage/' . $item->verhicle_image_library[0]) }}" alt="">
+                                <img class="w-100" src="{{ asset('/storage/' . $item->verhicle_image_library[0]) }}" alt="">
                             </div>
                             <div class="product-content">
                                 <div class="details-btn">

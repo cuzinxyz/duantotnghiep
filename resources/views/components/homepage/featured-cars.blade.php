@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h5><a class="line-clamp-1" href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h5>
+                                    <h5><a class="line-clamp-1" href="{{ route('car-detail', $car->slug) }}">{{ $car->title }></h5>
                                     @if(!empty($car->province->name))
                                     <div class="price-location">
                                         <div class="price">

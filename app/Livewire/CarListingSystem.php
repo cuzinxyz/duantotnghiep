@@ -31,11 +31,11 @@ class CarListingSystem extends Component
     public $queryMax;
     public $queryMin;
 
-    public $amount = 4;
+    public $amount = 6;
 
     public function load()
     {
-        $this->amount = $this->amount + 4;
+        $this->amount = $this->amount + 6;
     }
     public function mount()
     {

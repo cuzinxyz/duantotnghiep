@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="section-title-2 text-left">
                     <h3>Salon Ô tô</h3>
-                    <p>Có hơn {{ \DB::table('cars')->whereNotNull('salon_id')->get()->count() }}+ xe được đăng bán.</p>
+                    <p>Có hơn {{ \DB::table('cars')->where('status', 1)->whereNotNull('salon_id')->get()->count() }}+ xe được đăng bán.</p>
                 </div>
             </div>
         </div>
