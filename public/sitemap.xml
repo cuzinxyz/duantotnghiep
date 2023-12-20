@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-        <loc>https://drivco.shop</loc>
+        <loc>http://127.0.0.1:8000</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto</loc>
+        <loc>http://127.0.0.1:8000/oto</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/tin-mua-xe</loc>
+        <loc>http://127.0.0.1:8000/tin-mua-xe</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/login</loc>
+        <loc>http://127.0.0.1:8000/login</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/register</loc>
+        <loc>http://127.0.0.1:8000/register</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/password/reset</loc>
+        <loc>http://127.0.0.1:8000/password/reset</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/land-rover-discovery-sport-phev-s-150-kw-2022</loc>
+        <loc>http://127.0.0.1:8000/oto/152361615</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/land-rover-defender-110-50-v8-386-kw-2023</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Mercedes</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/honda-cr-v-82-kw-2017</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/BMW</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/kia-sportage-110-kw-2023</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Audi</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/toyota-hilux-28-d-4d-4x4-150-kw-2023</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Jeep</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -61,22 +61,22 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/mazda-cx-5-194-automatic-2023</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Suzuki</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/mazda-3-fastback-20-2022</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Tesla</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/toyota-camry-25q</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Toyota</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/toyota-c-hr-2017</loc>
+        <loc>http://127.0.0.1:8000/hang-xe/Volkswagen</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -86,7 +86,7 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/lexus-lx-570-2019</loc>
+        <loc>http://127.0.0.1:8000/bai-viet/ut-atque-non-accusantium-sed-consequatur-ut</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

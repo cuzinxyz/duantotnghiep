@@ -33,7 +33,7 @@ class CollaboratorsResource extends Resource
 
     protected static ?string $navigationGroup = 'Tài khoản';
 
-    protected static ?string $navigationLabel = 'Nhân viên';
+    protected static ?string $navigationLabel = 'Cộng tác viên';
 
     public static function form(Form $form): Form
     {
@@ -42,19 +42,19 @@ class CollaboratorsResource extends Resource
                 Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                        ->label('Họ tên')
-                        ->rules(['required']),
-                        Forms\Components\TextInput::make('email')
-                        ->label('Email')
-                        ->email()
+                            ->label('Họ tên')
                             ->rules(['required']),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email')
+                            ->rules(['required','email'])
+                            ->unique(),
                         Forms\Components\TextInput::make('phone_number')
-                        ->label('Số điện thoại')
-                        ->tel()
+                            ->label('Số điện thoại')
+                            ->tel()
                             ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
                             ->rules(['required']),
                         Forms\Components\TextInput::make('password')
-                        ->password()
+                            ->password()
                             ->visible(fn ($livewire) => $livewire instanceof CreateUser)
                             ->rules(['required']),
                     ])->columnSpan([
@@ -64,9 +64,10 @@ class CollaboratorsResource extends Resource
                 Section::make()
                     ->schema([
                         FileUpload::make('avatar')
-                        ->imageEditor()
+                            ->imageEditor()
                             ->disk('public')
                             ->required()
+                            ->rules(['required'])
                             ->directory('avatars/users'),
                     ])->columnSpan([
                         'md' => 1,
@@ -84,15 +85,15 @@ class CollaboratorsResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('avatar')
-                ->label('Ảnh đại diện')
-                ->circular(),
+                    ->label('Ảnh đại diện')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('name')
-                ->label('Họ tên')
-                ->searchable(),
+                    ->label('Họ tên')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('phone_number')
-                ->default('Không có số điện thoại')
-                ->label('Số điện thoại'),
+                    ->default('Không có số điện thoại')
+                    ->label('Số điện thoại'),
 
 
             ])
@@ -125,7 +126,7 @@ class CollaboratorsResource extends Resource
             'create' => Pages\CreateCollaborators::route('/create'),
             'edit' => Pages\EditCollaborators::route('/{record}/edit'),
         ];
-    } 
+    }
 
     public static function getEloquentQuery(): Builder
     {
@@ -145,7 +146,7 @@ class CollaboratorsResource extends Resource
             SalonCollaboratorRelationManager::class,
             WithDrawCollaboratorRelationManager::class,
             ReportCollaboratorRelationManager::class,
-            SupportCollaboratorRelationManager::class  
+            SupportCollaboratorRelationManager::class
 
         ];
     }

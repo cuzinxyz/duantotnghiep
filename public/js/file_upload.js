@@ -38,6 +38,11 @@
 // );
 
 document.addEventListener("DOMContentLoaded", function () {
+    let colorChecked =  $('input[wire\\:model="color"]:checked').attr("data-color");    
+    if(colorChecked) {
+        $("." + colorChecked).css("background", colorChecked);   
+    }
+
     $('input[wire\\:model="color"]').click(function () {
         var resetColor = document.querySelectorAll('input[wire\\:model="color"]');
         resetColor.forEach(item => {
@@ -60,6 +65,5 @@ document.addEventListener("DOMContentLoaded", function () {
             $('.' + getColor).css('background', getColor);
         }
 
-        console.log(getColor);
     });
 });

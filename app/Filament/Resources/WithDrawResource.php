@@ -86,13 +86,26 @@ class WithDrawResource extends Resource
                 Filter::make('unactive')
                     ->label('Yêu cầu rút tiền chưa được duyệt')
                     ->query(fn (Builder $query): Builder => $query->where('status', 0))
-                    ->default()
+                    ->default(),
+                Filter::make('active')
+                    ->label('Yêu cầu rút tiền đã được duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 1)),
+                Filter::make('locked')
+                    ->label('Yêu cầu rút tiền không được duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 ActionGroup::make([
                     Action::make('active')
                         ->action(function (WithDraw $record) {
+                            if ($record->status == 1 || $record->status == 2) {
+                                Notification::make()
+                                    ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
+                                    ->success()
+                                    ->send();
+                                return 0;
+                            }
                             $collaborator = User::find($record->collaborator_id);
                             if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;
@@ -155,6 +168,13 @@ class WithDrawResource extends Resource
                                 ->required(),
                         ])
                         ->action(function (array $data, WithDraw $record) {
+                            if ($record->status == 1 || $record->status == 2) {
+                                Notification::make()
+                                    ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
+                                    ->success()
+                                    ->send();
+                                return 0;
+                            }
                             $collaborator = User::find($record->collaborator_id);
                             if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;

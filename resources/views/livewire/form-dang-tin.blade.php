@@ -2,6 +2,8 @@
     @push('styles')
         <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/file_upload.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @endpush
 
     <form enctype="multipart/form-data">
@@ -16,7 +18,7 @@
                             <div class="col-6 p-2">
                                 <div class="custom-file-container" data-upload-id="mySecondImage">
                                     <div class="label-container">
-                                        <label class="fw-bold" style="font-size: 13px">Upload hình (*)</label>
+                                        <label class="fw-bold" style="font-size: 13px">Upload hình <span class="text-danger fw-bold">(*)</span></label>
                                     </div>
                                     <label class="input-container">
                                         <input accept="image/*" aria-label="Choose File" class="myInput input-hidden"
@@ -25,7 +27,9 @@
                                         <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
                                             Tải hình lên (nhiều hình)</span>
                                     </label>
-                                    <div class="text-center"><div class="upload-loader" wire:loading></div></div>
+                                    <div class="text-center">
+                                        <div class="upload-loader" wire:loading></div>
+                                    </div>
                                     @if ($verhicle_image_library)
                                         <div id="preview-container" class="image-preview img-container" style="">
                                             @foreach ($verhicle_image_library as $image)
@@ -44,7 +48,7 @@
                             <div class="col-6 p-2">
                                 <div class="custom-file-container" data-upload-id="mySecondImage">
                                     <div class="label-container">
-                                        <label class="fw-bold" style="font-size: 13px">Upload video (*)</label>
+                                        <label class="fw-bold" style="font-size: 13px">Upload video</label>
                                     </div>
                                     <label class="input-container">
                                         <input accept="video/*" aria-label="Choose File" class="myInput input-hidden"
@@ -52,7 +56,9 @@
                                         <span class="input-visible"><i class="bi bi-cloud-arrow-up text-success"></i>
                                             Tải video lên</span>
                                     </label>
-                                    <div class="text-center"><div class="upload-loader" wire:loading></div></div>
+                                    <div class="text-center">
+                                        <div class="upload-loader" wire:loading></div>
+                                    </div>
                                     @if ($verhicle_videos)
                                         <div id="preview-container-video" class="image-preview" style="">
                                             <video width="320" height="240" controls>
@@ -72,44 +78,41 @@
                     </div>
 
                     <div class="" id="form-sell-1">
-                        <div class="mb-15 d-flex justify-content-between align-items-center">
-                            <h4 class="">Bạn đang bán xe gì?</h4>
+                        <div class="mb-15 row ">
+                            <div class="col-md-8">
+                                <h4 class="">Bạn đang bán xe gì?</h4>
+                            </div>
+
+                            <div class="col-md-4" style="text-align: end">
+                                <button class="primary-btn2" id="fakeData" type="button">Thêm gợi ý</button>
+                            </div>
 
                             {{-- <div class="form-inner" style="text-align: end">
-                                <button class="primary-btn2" wire:click="secondStepSubmit" type="button">Tiếp
-                                    tục</button>
                             </div> --}}
                         </div>
 
                         <div class="row d-flex justify-content-between mb-20" style="border-left: 5px solid #ff4820">
                             <div class="col-md-8 col-sm-12 mb-20 inquiry-form py-4 px-4 bg-shape">
                                 <div class="row">
-                                    <div class="col-md-6 mb-20">
-                                        <div class="form-inner">
-                                            <label class="">Hãng chế tạo</label>
-                                            <select class=" form-control bg-white nice-select beauty-shadow"
-                                                wire:ignore.self wire:model.live="brand_select">
-                                                <option value="">-- chọn hãng xe --</option>
-                                                @foreach ($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="text-danger fw-bold" style="font-size:12px">
-                                            @error('brand_select')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
+                                    <div class="col-md-12 row">
+                                        <livewire:select-option nameID="brand" :options="$brands" columnName="brand_name"
+                                            label="Hãng chế tạo" wire:model.live="brand_select"
+                                            wire:key="brand_select" />
+
+                                        @if (!empty($brand_select))
+                                            <livewire:select-option nameID="model" :options="$models"
+                                                columnName="model_name" label="Tên xe" wire:model.live="model_select"
+                                                wire:key="model_select" />
+                                        @endif
                                     </div>
 
-                                    <div class="col-md-6 mb-20">
+                                    {{-- <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Tên xe</label>
+                                            <label class="">Dòng xe <span class="text-danger fw-bold">(*)</span></label>
                                             <select
                                                 class=" form-control bg-white nice-select beauty-shadow form-control-lg"
                                                 wire:ignore.self wire:model="model_select">
-                                                <option value="">-- chọn model --</option>
+                                                <option value="">-- dòng xe --</option>
                                                 @foreach ($models as $model)
                                                     <option value="{{ $model->id }}">{{ $model->model_name }}
                                                     </option>
@@ -121,17 +124,17 @@
                                                 {{ $message }}
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- Tên xe thuộc hãng --}}
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Nhiên liệu</label>
+                                            <label class="">Nhiên liệu <span class="text-danger fw-bold">(*)</span></label>
                                             <select
                                                 class=" form-control bg-white nice-select beauty-shadow form-control-lg"
                                                 wire:model="fuel" wire:ignore.self>
-                                                <option value="">-- loại nhiên liệu --</option>
+                                                <option value="">-- nhiên liệu --</option>
                                                 @foreach ($fuels as $fuel)
                                                     <option>{{ $fuel }}</option>
                                                 @endforeach
@@ -146,11 +149,11 @@
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Số chỗ ngồi</label>
+                                            <label class="">Số chỗ ngồi <span class="text-danger fw-bold">(*)</span></label>
                                             <select
                                                 class=" form-control bg-white nice-select beauty-shadow form-control-lg"
                                                 wire:model="number_of_seats" wire:ignore.self>
-                                                <option value="">-- số chỗ ngồi--</option>
+                                                <option value="">-- chỗ ngồi--</option>
                                                 @foreach ($seats as $seat)
                                                     <option value="{{ $seat }}">{{ $seat }}</option>
                                                 @endforeach
@@ -178,11 +181,11 @@
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Năm sản xuất</label>
+                                            <label class="">Năm sản xuất <span class="text-danger fw-bold">(*)</span></label>
                                             <select
                                                 class=" form-control bg-white nice-select beauty-shadow form-control-lg"
                                                 wire:model="year_of_manufacture" wire:ignore.self>
-                                                <option value="">-- chọn năm sản xuất --</option>
+                                                <option value="">-- năm sản xuất --</option>
                                                 @foreach ($years as $year)
                                                     <option value="{{ $year }}">{{ $year }}</option>
                                                 @endforeach
@@ -197,8 +200,8 @@
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Số KM đã đi*</label>
-                                            <input wire:model="mileage" min="0" type="number" placeholder="100 KM"
+                                            <label class="">Số KM đã đi <span class="text-danger fw-bold">(*)</span></label>
+                                            <input wire:model="mileage" min="0" type="number" placeholder="x00 KM"
                                                 wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
@@ -210,9 +213,9 @@
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Giá muốn bán*</label>
+                                            <label class="">Giá muốn bán <span class="text-danger fw-bold">(*)</span></label>
                                             <input min="0" wire:model="price" class="myInput" type="number"
-                                                placeholder="1.000.000.000 VND" wire:ignore.self>
+                                                placeholder="x 000 000 000" wire:ignore.self>
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
                                             @error('price')
@@ -223,12 +226,12 @@
 
                                     <div class="col-md-6 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Mã lực*</label>
-                                            <input wire:model="engine" min="0" type="number" placeholder="ex: 300"
+                                            <label class="">Mã lực <span class="text-danger fw-bold">(*)</span></label>
+                                            <input wire:model="engine" min="0" type="number" placeholder="1xx"
                                                 wire:ignore.self class="myInput">
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
-                                            @error('title')
+                                            @error('engine')
                                                 {{ $message }}
                                             @enderror
                                         </div>
@@ -236,9 +239,9 @@
 
                                     <div class="col-md-12 mb-20">
                                         <div class="form-inner">
-                                            <label class="">Tiêu đề*</label>
+                                            <label class="">Tiêu đề <span class="text-danger fw-bold">(*)</span></label>
                                             <input wire:model="title" type="text" class="myInput"
-                                                placeholder="Xe Vinfast VF7" wire:ignore.self>
+                                                placeholder="Tiêu đề tin đăng" wire:ignore.self>
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
                                             @error('title')
@@ -249,9 +252,9 @@
 
                                     <div class="col-md-12">
                                         <div class="form-inner">
-                                            <label class="">Mô tả*</label>
+                                            <label class="">Mô tả <span class="text-danger fw-bold">(*)</span></label>
                                             <textarea id="description_car" class="myInput" wire:ignore.self wire:model="description" id="tiny"
-                                                placeholder="Xe sản xuất trong nước, còn rất mới, màn hình android..."></textarea>
+                                                placeholder="Thông tin thêm về xe: cấu hình, nguồn gốc, xe chính chủ v.v..."></textarea>
                                         </div>
                                         <div class="text-danger fw-bold" style="font-size:12px">
                                             @error('description')
@@ -265,7 +268,7 @@
                             <div class="col-md-4 col-sm-12 mb-20">
                                 <div class="form-inner form-inner-padding mb-20 blurBG bg-shape" style=""
                                     id="changeColor">
-                                    <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc</label>
+                                    <label style="background: #fff;display:inline" class="rounded p-1">Màu sắc <span class="text-danger fw-bold">(*)</span></label>
                                     <div class="color-select row gy-2" wire:ignore>
                                         @foreach ($colors as $key => $color)
                                             <div class="col-4 my-2">
@@ -288,11 +291,11 @@
                                 </div>
 
                                 <div class="form-inner form-inner-padding mb-20 bg-shape">
-                                    <label for="">Hộp số</label>
+                                    <label for="">Hộp số <span class="text-danger fw-bold">(*)</span></label>
                                     <div class="d-flex justify-content-between items-center">
                                         <div class="radio-tile-group">
                                             <div class="input-container">
-                                                <input id="walk" wire:model="transmission" value="sotay"
+                                                <input id="walk" wire:model="transmission" value="Số sàn"
                                                     class="radio-button" type="radio" name="radio">
                                                 <div class="radio-tile">
                                                     <div class="icon walk-icon">
@@ -303,7 +306,7 @@
                                             </div>
 
                                             <div class="input-container">
-                                                <input id="bike" wire:model="transmission" value="sotudong"
+                                                <input id="bike" wire:model="transmission" value="Số tự động"
                                                     class="radio-button" type="radio" name="radio">
                                                 <div class="radio-tile">
                                                     <div class="icon bike-icon">
@@ -324,7 +327,7 @@
                                 </div>
 
                                 <div class="form-inner form-inner-padding mb-20 bg-shape">
-                                    <label for="" class="">Một số tính năng khác</label>
+                                    <label for="" class="">Một số tính năng khác <span class="text-danger fw-bold">(*)</span></label>
 
                                     <div class="row" style="padding: 0px 4px">
                                         @foreach ($featureValues as $key => $item)
@@ -356,9 +359,9 @@
                         <div class="row bg-shape p-2 mb-20" style="border-left: 5px solid #198754;">
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
-                                    <label class="">Số điện thoại*</label>
+                                    <label class="">Số điện thoại <span class="text-danger fw-bold">(*)</span></label>
                                     <input wire:model="phone" class="myInput" type="text"
-                                        placeholder="0968 872 826" wire:ignore.self>
+                                        placeholder="09xx xxx xxx" wire:ignore.self>
                                 </div>
                                 <div class="text-danger fw-bold" style="font-size:12px">
                                     @error('phone')
@@ -370,7 +373,7 @@
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
                                     <label class="">Email (tuỳ chọn)</label>
-                                    <input wire:model="email" type="text" placeholder="ex: example@gmail.com">
+                                    <input wire:model="email" type="text" placeholder="xxxxx@gmail.com">
                                 </div>
                                 <div class="text-danger fw-bold" style="font-size:12px">
                                     @error('email')
@@ -381,10 +384,10 @@
 
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
-                                    <label class="">Thành phố</label>
+                                    <label class="">Thành phố <span class="text-danger fw-bold">(*)</span></label>
                                     <select class="form-control bg-white nice-select beauty-shadow form-control-lg"
                                         wire:model.live="city_id" wire:ignore.self>
-                                        <option value="" selected>-- chọn tỉnh thành phố --</option>
+                                        <option value="" selected>-- tỉnh thành phố --</option>
                                         @foreach (\Kjmtrue\VietnamZone\Models\Province::all() as $key => $item)
                                             <option value="{{ $item->id }}" wire.key={{ $item->id }}>
                                                 {{ $item->name }}</option>
@@ -400,10 +403,10 @@
 
                             <div class="col-md-6 mb-20">
                                 <div class="form-inner">
-                                    <label class="">Quận, huyện</label>
+                                    <label class="">Quận, huyện <span class="text-danger fw-bold">(*)</span></label>
                                     <select class="form-control bg-white nice-select beauty-shadow form-control-lg"
                                         wire:model="district_id" wire:ignore.self>
-                                        <option value="" selected>-- chọn quận huyện --</option>
+                                        <option value="" selected>-- quận huyện --</option>
                                         @if (isset($city_id))
                                             @foreach (\Kjmtrue\VietnamZone\Models\District::whereProvinceId($this->city_id)->get() as $key => $item)
                                                 <option value="{{ $item->id }}" wire.key={{ $item->id }}>
@@ -421,9 +424,9 @@
 
                             <div class="col-md-12 mb-20">
                                 <div class="form-inner">
-                                    <label class="">Địa chỉ cụ thể*</label>
+                                    <label class="">Địa chỉ cụ thể <span class="text-danger fw-bold">(*)</span></label>
                                     <input wire:model="full_address" class="myInput" type="text"
-                                        placeholder="ex: Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội"
+                                        placeholder="Số nhà, Ngõ, Xã | Phường | Thị Trấn"
                                         wire:ignore.self>
                                 </div>
                                 <div class="text-danger fw-bold" style="font-size:12px">
@@ -452,6 +455,26 @@
             </div>
     </form>
 
+    @script
+        <script>
+            $(document).ready(function() {
+                $('#fakeData').on('click', function() {
+                    $wire.$set('fuel', '{{ $fuels[0] }}');
+                    $wire.$set('number_of_seats', '{{ $seats[4] }}');
+                    $wire.$set('year_of_manufacture', '{{ $years[0] }}');
+                    $wire.$set('mileage', '1000');
+                    $wire.$set('price', '1000000000');
+                    $wire.$set('engine', '2500');
+                    $wire.$set('color', "{{ $colors['black'] }}");
+                    $wire.$set('transmission', 'Số sàn');
+                    $wire.$set('title', 'Mercedes-Benz V 250d Long Edition 1 4Matic 140 kW');
+                    $wire.$set('description', 'Xe hạng sang nhập khẩu từ Đức');
+                    $wire.$set('features', ['{{$featureValues["PremiumWheel"]}}', '{{$featureValues["Moonroof"]}}']);
+                })
+            })
+            
+        </script>
+    @endscript
     @push('scripts')
         <script src="{{ asset('js/file_upload.js') }}"></script>
         <script>
@@ -470,4 +493,5 @@
             });
         </script>
     @endpush
+
 </div>

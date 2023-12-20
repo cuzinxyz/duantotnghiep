@@ -23,7 +23,7 @@ class EditCar extends Component
     public $carId;
     public $brands;
     public $car;
-   public $fuels = [
+    public $fuels = [
         "Xăng",
         "Dầu Diesl",
         "Điện",
@@ -83,9 +83,7 @@ class EditCar extends Component
     ];
     public $models = [];
 
-    #[Validate('required', message: 'Bắt buộc phải upload tối thiểu 1 hình.')]
     public $verhicle_image_library = [];
-    #[Validate('required', message: 'Bắt buộc phải upload video xe.')]
     public $verhicle_videos;
     #[Validate('required', message: 'Bắt buộc phải chọn thương hiệu.')]
     public $brand_select = '';

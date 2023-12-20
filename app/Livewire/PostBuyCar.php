@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Events\WorkCollaboratorEvent;
-use App\Models\Comments;
+use App\Models\Ads;
 use App\Models\Demnad;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\Comments;
 use Livewire\Attributes\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Events\WorkCollaboratorEvent;
 
 class PostBuyCar extends Component
 {
@@ -74,9 +75,15 @@ class PostBuyCar extends Component
       $pending = Demnad::where('status', 0)->where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
     }
 
+    $ads = Ads::where('priority', 2)
+      ->inRandomOrder()
+      ->limit(1)
+      ->get();
+
     return view('livewire.post-buy-car', [
       'demands' => $demands,
-      'pending' => $pending
+      'pending' => $pending,
+      'ads' => $ads
     ]);
   }
 }

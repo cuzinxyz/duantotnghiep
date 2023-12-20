@@ -10,6 +10,7 @@ use App\Models\Wishlist;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Kjmtrue\VietnamZone\Models\Province;
 
@@ -30,15 +31,18 @@ class CarListingSystem extends Component
     public $queryMax;
     public $queryMin;
 
+    public $amount = 4;
+
+    public function load()
+    {
+        $this->amount = $this->amount + 4;
+    }
     public function mount()
     {
         $this->brands = Brand::all();
         $this->locations = Province::all();
         $this->maxPrice = Car::where('status', 1)->max('price');
         $this->minPrice = Car::where('status', 1)->min('price');
-
-        // dd($this->minPrice);
-        
     }
 
     #[On('filterPrices')]
@@ -48,10 +52,11 @@ class CarListingSystem extends Component
         $this->queryMax = $max;
     }
 
-    #[Layout('components.partials.layout-client')]
-    public function render()
-    {
-        $carQuery = Car::query()->where('status', 1);
+
+    public function filterCar() {
+        $carQuery = Car::query()
+            ->whereNull('salon_id')
+            ->where('status', 1);
 
         if (!empty($this->make)) {
             $carQuery->where('title', 'LIKE', '%' . $this->make . '%');
@@ -83,11 +88,81 @@ class CarListingSystem extends Component
             }
         }
 
-        $carCount = $carQuery->count();
+        return $carQuery->get();
+    }
+
+    #[Layout('components.partials.layout-client')]
+    public function render()
+    {
+        ########################################################################
+        $carIds = DB::table('purchased_service')
+            ->where('expired_date', '>=', Carbon::now())
+            ->whereNotNull('car_id')
+            ->select('car_id')
+            ->get()
+            ->pluck('car_id')
+            ->flatMap(function ($carId) {
+                return explode(',', $carId);
+            })
+            ->filter()
+            ->unique()
+            ->values()
+            ->toArray();
+
+        $recommendCars = Car::whereIn('id', $carIds)
+            ->where('status', 1)
+            ->whereNull('salon_id')
+            ->get();
+        // dd($recommendCars);
+
+        $recommendCars = $recommendCars->map(function ($car) {
+            $car['is_vip'] = true;
+
+            return $car;
+        });
+
+        $id = $recommendCars->pluck('id');
+
+        $normalCars = Car::whereNotIn('id', $id)
+            ->whereNull('salon_id')
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $carsVip = new \Illuminate\Database\Eloquent\Collection;
+        $carsVip = $carsVip->merge($recommendCars);
+        $carsVip = $carsVip->merge($normalCars);
+
+        $carsVip = $carsVip->sort(function ($a, $b) {
+            if ($a['is_vip'] && $b['is_vip']) {
+                return $b['created_at'] <=> $a['created_at'];
+            }
+
+            return $b['is_vip'] <=> $a['is_vip'];
+        });
+        ################################################################
+        # lấy ra dsach xe ok roài, nhưng k chạy đc filter
 
         
+        $cars = $carsVip;
+        if(
+            $this->make || 
+            $this->updateBrands || 
+            $this->updateLocations ||
+            $this->minYear ||
+            $this->maxYear ||
+            $this->queryMin ||
+            $this->queryMax ||
+            $this->sortPrice != 'time'
+        ) {
+            $cars = $this->filterCar();
+        }
+
+        $carCount = $cars->count();
+
+
         return view('livewire.car-listing-system', [
-            'cars' => $carQuery->paginate(10),
+            'cars' => $cars->take($this->amount),
             'carCount' => $carCount,
         ]);
     }

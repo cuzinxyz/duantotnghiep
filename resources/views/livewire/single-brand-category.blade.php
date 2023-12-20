@@ -1,7 +1,21 @@
 @section('page_title')
-    {{ $brandDetail->brand_name ? $brandDetail->brand_name . ' - Drivco' : 'Drivco' }}
+    {{ $brandDetail->brand_name ? 'Mua xe ' . $brandDetail->brand_name . ' tại Drivco' : 'Drivco' }}
 @endsection
 <div>
+    <style>
+        .input-search {
+            width: 100%;
+            border-radius: 5px;
+            background: #fff;
+            color: #5E5E5E;
+            font-family: "Open Sans", sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            height: 50px;
+            padding: 10px 20px;
+            border: 1px solid #46d993;
+        }
+    </style>
     <div class="inner-page-banner">
         <div class="banner-wrapper">
             <div class="container-fluid">
@@ -31,6 +45,10 @@
         <div class="container">
             <form>
                 <div class="row row-cols-xl-3 row-cols-md-3 row-cols-sm-2 row-cols-2 g-3 justify-content-center">
+                    <div class="form-inner mb-20">
+                        <label>Tìm kiếm xe</label>
+                        <input class="input-search" wire:model.live="search" type="search" placeholder="Tìm kiếm xe theo Từ khóa">
+                    </div>
                     <div class="mb-20">
                         <div class="form-inner">
                             <label>Thương hiệu xe</label>
@@ -86,16 +104,17 @@
             </div>
 
             <div class="row g-4 mb-40">
-                @foreach ($cars as $item)
-                    <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" wire:loading.remove
-                        data-wow-delay="100ms">
+                @forelse ($cars as $item)
+                    <div class="col-xl-3 col-md-4 col-sm-6 wow fadeInUp" wire:loading.remove data-wow-delay="100ms">
                         <div class="product-card2 two position-relative">
-                            @if(!empty($item->is_vip))
-                                <span class="bg-success new p-2 rounded position-absolute" style="top:2px;left:2px;z-index:123">
+                            @if (!empty($item->is_vip))
+                                <span class="bg-success new p-2 rounded position-absolute"
+                                    style="top:2px;left:2px;z-index:123">
                                     <i class="bi bi-check-circle-fill fs-5 text-white"></i>
                                 </span>
                             @endif
-                            <div class="product-img" onclick="window.location='{{ route('car-detail', $item->slug) }}'">
+                            <div class="product-img"
+                                onclick="window.location='{{ route('car-detail', $item->slug) }}'">
                                 <img src="{{ asset('storage/' . $item->verhicle_image_library[0]) }}"
                                     alt="{{ $item->title }}">
                             </div>
@@ -108,12 +127,16 @@
                                 <div class="price">
                                     <strong>{{ number_format($item->price) . ' đ' }}</strong>
                                 </div>
-                                <h6><a class="line-clamp-1" href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a>
+                                <h6><a class="line-clamp-1"
+                                        href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a>
                                 </h6>
                             </div>
                         </div>
                     </div>
-                @endforeach
+
+                @empty
+                    <h6 class="text-center">Không có xe nào cả</h6>
+                @endforelse
             </div>
             <div class="row">
                 <div class="col-lg-12">
