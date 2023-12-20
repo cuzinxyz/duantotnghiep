@@ -47,7 +47,7 @@ class SalonsResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('expired_date')
-                    ->label('ngày hết hạn')
+                    ->label('Ngày hết hạn')
                     ->dateTime('d-m-Y')
                     ->since(),
 
@@ -218,8 +218,58 @@ class SalonsResource extends Resource
                                 ->send();
                         })
                         ->icon('heroicon-m-x-mark'),
+                    \Filament\Tables\Actions\Action::make('cancel')
+                        ->label('Huỷ kích hoạt')
+                        ->icon('heroicon-m-x-mark')
+                        ->color('danger')
+                        ->requiresConfirmation()
+                        ->form([
+                            TextInput::make('reason')
+                                ->label('Vui lòng điền lý do ?')
+                                ->required(),
+                        ])
+                        ->action(function (array $data, Model $salon) {
+                            $collaborator = User::find($salon->collaborator_id);
+                            if ($salon->status == 1) {
+                                $collaborator = User::find($salon->collaborator_id);
+                                if ($collaborator) {
+                                    $total_assign = $collaborator->total_assign - 1;
+                                    if ($collaborator->total_assign <= 0) {
+                                        $total_assign = 0;
+                                    }
+                                    User::where('id', $salon->collaborator_id)->update([
+                                        'total_assign' => $total_assign
+                                    ]);
+                                }
+                                $salon->status = 3;
+                                $salon->collaborator_id = null;
+                                $salon->reason = $data['reason'];
+                                $salon->save();
 
 
+                                $bot = User::where('name', 'BOT')->first();
+                                $user = User::where('id', $salon->user_id)->first();
+                                $reason = 'Chào bạn ' . $user->name . ',
+                                            Salon trực tuyến của bạn đã bị huỷ,
+                                            Vì lý do: ' . $data['reason'] . ' .
+                                            Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
+                                            Trân trọng cảm ơn.';
+
+                                ChMessage::create([
+                                    'from_id' => $bot->id,
+                                    'to_id' => $salon->user_id,
+                                    'body' => $reason
+                                ]);
+
+                                Notification::make()
+                                    ->title('Đã gửi phản hồi tới khách hàng')
+                                    ->success()
+                                    ->send();
+
+                            }
+
+                        })
+                        ->icon('heroicon-m-x-mark'),
 
                 ])
             ])

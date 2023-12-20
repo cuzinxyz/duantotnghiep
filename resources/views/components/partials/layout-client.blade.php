@@ -79,14 +79,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5B2YRXX4TD"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-5B2YRXX4TD');
+      gtag('config', 'G-5B2YRXX4TD');
     </script>
     
 
@@ -235,7 +232,7 @@
                                 <h5>Salon</h5>
                                 <ul>
                                     @php
-                                        $salons = \App\Models\Salon::where('status', 1)->limit(8)->inRandomOrder()->get();
+                                        $salons = \App\Models\Salon::limit(8)->where('status', 1)->get();
                                     @endphp
 
                                     @foreach ($salons as $salon)
@@ -725,7 +722,9 @@
 
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
+        {{-- <script src="{{asset('js/jquery.nice-select.min.js')}}"></script> --}}
         <script src="{{ asset('js/custom.js') }}"></script>
+
 
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 

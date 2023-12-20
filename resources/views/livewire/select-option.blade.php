@@ -19,7 +19,9 @@
     @script
         <script>
             $(document).ready(function() {
-                $('#{{$nameID}}').select2();
+                $('#{{$nameID}}').select2({
+                    maximumSelectionLength: 2
+                });
             });
 
             $('#{{$nameID}}').on('change', function(event) {

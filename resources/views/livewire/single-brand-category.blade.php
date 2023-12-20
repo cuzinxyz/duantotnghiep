@@ -1,5 +1,5 @@
 @section('page_title')
-    {{ $brandDetail->brand_name ? $brandDetail->brand_name . ' - Drivco' : 'Drivco' }}
+    {{ $brandDetail->brand_name ? 'Mua xe ' . $brandDetail->brand_name . ' tại Drivco' : 'Drivco' }}
 @endsection
 <div>
     <div class="inner-page-banner">

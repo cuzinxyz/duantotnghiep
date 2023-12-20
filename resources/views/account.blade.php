@@ -348,7 +348,7 @@
                         @endif
                     </div>
 
-                    <div class="wrapper-login_content" x-show="isLogin">
+                    <div class="wrapper-login_content" x-show="isLogin" x-trap="isLogin">
                         <div class="Login_backBtn__Ua2VX" @click="isLogin = false;isOption = true;isRegister = false">
                             <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas"
                                 data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10 " role="img"
@@ -372,7 +372,7 @@
                                     Đăng nhập với email
                                 </div>
                                 <div class="formInput inputWrap">
-                                    <input class="login" type="email" id="lgEmail" @error('email') border border-danger @enderror
+                                    <input autofocus class="login" type="email" id="lgEmail" @error('email') border border-danger @enderror
                                         name="email" placeholder="Địa chỉ email">
                                     <small class="text-danger fw-bold ml-2" style="font-size:13px"></small>
                                 </div>
@@ -398,7 +398,7 @@
                         </div>
                     </div>
 
-                    <div class="wrapper-register_content" x-show="isRegister">
+                    <div class="wrapper-register_content" x-show="isRegister" x-trap="isRegister">
                         <div class="Login_backBtn__Ua2VX" @click="isLogin = false;isOption = true;isRegister = false">
                             <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas"
                                 data-icon="chevron-left" class="svg-inline--fa fa-chevron-left fa-w-10 " role="img"
@@ -636,8 +636,8 @@
             };
 
             const showSuccess = (input) => {
-                const formField = input.parentElement; 
-                const inputField = input; 
+                const formField = input.parentElement;
+                const inputField = input;
                 inputField.classList.remove('border-danger');
                 inputField.classList.add('border-success');
 

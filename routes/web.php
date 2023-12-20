@@ -390,6 +390,7 @@ Route::controller(CarDetailController::class)->group(function () {
 # salon list
 Route::get('/salon/{salonSlug}', [SalonController::class, 'listCars'])->name('salon.listCars');
 
+
 // collaborators
 Route::prefix('/collaborators')
     ->middleware(['auth', 'is_collaborator'])
@@ -475,13 +476,13 @@ Route::prefix('/collaborators')
     });
 
 
-Route::post('/xem-xet', function (Request $request) {
-    Salon::where('id', $request->input("salonID"))->update([
-        'status' => 0
-    ]);
+// Route::post('/xem-xet', function (Request $request) {
+//     Salon::where('id', $request->input("salonID"))->update([
+//         'status' => 0
+//     ]);
 
-    return response()->json('Đã gửi yêu cầu xem xét');
-});
+//     return response()->json('Đã gửi yêu cầu xem xét');
+// });
 
 Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('google.login');
 

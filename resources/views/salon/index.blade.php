@@ -24,11 +24,12 @@
                     kết quả.
                 </div>
             </div>
-        @elseif($salon->status == 2)
+        @elseif($salon->status == 2 || $salon->status == 3)
             <div class="container">
                 <div class=" alert alert-danger">
-                    <p>Yêu cầu tạo salon của bạn không được phê duyệt, kiểm tra tin nhắn để biết lý do!</p>
-                    <button class="btn btn-primary" id="xem_xet">Yêu cầu xem xét lại</button>
+                    <p>Salon của bạn bị khoá, kiểm tra tin nhắn để biết lý do!</p>
+                    <button class="btn btn-dark" onclick="window.location.href='/chatify'">Xem tin nhắn</button>
+                    <button class="btn btn-danger" id="xem_xet">Yêu cầu xem xét lại</button>
                 </div>
             </div>
 
@@ -190,7 +191,7 @@
                             <div class="product-st-card1">
                                 <div class="product-img">
                                     <div class="product-price">
-                                        <span>{{ $car->price }} đ</span>
+                                        <span>{{ number_format($car->price) }} đ</span>
                                     </div>
                                     <div class="product-img-slider">
                                         <img class="img-fluid"
@@ -202,7 +203,7 @@
                                     <h6><a href="{{ route('car-detail', $car->slug) }}"
                                             tabindex="0">{{ $car->title }}</a></h6>
 
-                                    <div class="content-btm">
+                                    <div class="content-btm d-flex align-items-center justify-content-between">
                                         <a class="view-btn2" href="{{ route('car-detail', $car->slug) }}"
                                             tabindex="0">
                                             <svg width="35" height="21" viewBox="0 0 35 21"
@@ -221,15 +222,15 @@
                                             </svg>
                                             Xem xe
                                         </a>
-                                    </div>
 
-                                    <div class="d-flex pt-3 gap-3">
-                                        <button class="btn btn-sm btn-warning"
-                                            onclick="window.location.href='{{ route('salon.editcar', $car->id) }}'">Sửa
-                                            tin</button>
-                                        <button class="btn btn-sm btn-danger"
-                                            onclick="window.location.href='{{ route('salon.deletecar', $car->id) }}'">Xoá
-                                            tin</button>
+                                        <div class="d-flex gap-1">
+                                            <button class="btn btn-sm btn-warning"
+                                                onclick="window.location.href='{{ route('salon.editcar', $car->id) }}'"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="window.location.href='{{ route('salon.deletecar', $car->id) }}'"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +248,7 @@
             </style>
         @endpush
         <div class="container my-5">
-            <h2 class="text-left mb-4">Đăng ký salon</h2>
+            <h3 class="text-left mb-4">Đăng ký salon trực tuyến!</h3>
 
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <strong>🚗 Tạo Salon Riêng Của Bạn - Lợi Ích Không Thể Bỏ Qua! 🚗</strong>
@@ -276,48 +277,52 @@
                     <div class="row">
                         <!-- Hình ảnh -->
                         <div class="mb-3 col-12">
-                            <label for="imageUpload" class="form-label fw-bold">Hình ảnh cửa hàng</label>
+                            <label for="imageUpload" class="form-label fw-bold">Hình ảnh cửa hàng <span
+                                    class="text-danger fw-bold">(*)</span></label>
 
                             <input type="file" class="form-control" id="imageUpload" name="images[]" multiple
-                                accept="image/*" style="height: 100px;line-height:100px">
+                                accept="image/*">
                             <div class="image-preview-salon mt-2"></div>
                         </div>
 
                         <!-- Tên cửa hàng -->
                         <div class="mb-3 col-6">
-                            <label for="storeName" class="form-label fw-bold">Tên cửa hàng</label>
-                            <input type="text" class="form-control form-control-lg" id="storeName"
-                                placeholder="vd: Son Tung Auto" name="storeName" required>
+                            <label for="storeName" class="form-label fw-bold">Tên cửa hàng <span
+                                    class="text-danger fw-bold">(*)</span></label>
+                            <input type="text" class="form-control " id="storeName" placeholder="Tên salon"
+                                name="storeName" required>
                         </div>
 
                         <!-- Địa chỉ -->
                         <div class="mb-3 col-6">
-                            <label for="storeAddress" class="form-label fw-bold">Địa chỉ cửa hàng</label>
-                            <input type="text" class="form-control form-control-lg" id="storeAddress"
-                                placeholder="vd: 2 Tôn Thất Thuyết, Mỹ Đình, Từ Liêm, Hà Nội" name="storeAddress"
-                                required>
+                            <label for="storeAddress" class="form-label fw-bold">Địa chỉ cửa hàng <span
+                                    class="text-danger fw-bold">(*)</span></label>
+                            <input type="text" class="form-control " id="storeAddress"
+                                placeholder="Địa chỉ salon" name="storeAddress" required>
                         </div>
 
                         <!-- Giới thiệu cửa hàng -->
                         <div class="mb-3 col-12">
-                            <label for="storeIntro" class="form-label fw-bold">Giới thiệu cửa hàng</label>
-                            <textarea class="form-control form-control-lg" id="storeIntro"
-                                placeholder="vd: Sơn Tùng Auto Phân phối các dòng xe nhập khẩu cao cấp" name="storeIntro" rows="4"
+                            <label for="storeIntro" class="form-label fw-bold">Giới thiệu cửa hàng <span
+                                    class="text-danger fw-bold">(*)</span></label>
+                            <textarea class="form-control " id="storeIntro" placeholder="Giới thiệu về salon" name="storeIntro" rows="4"
                                 required></textarea>
                         </div>
 
                         <!-- Số điện thoại -->
                         <div class="mb-3 col-6">
-                            <label for="phoneNumber" class="form-label fw-bold">Số điện thoại</label>
-                            <input type="tel" class="form-control form-control-lg" id="phoneNumber"
-                                placeholder="vd: 0909899898" name="phoneNumber" required>
+                            <label for="phoneNumber" class="form-label fw-bold">Số điện thoại <span
+                                    class="text-danger fw-bold">(*)</span></label>
+                            <input type="tel" class="form-control " id="phoneNumber"
+                                placeholder="Số điện thoại của salon" name="phoneNumber" required>
                         </div>
 
                         <!-- Email -->
                         <div class="mb-3 col-6">
-                            <label for="email" class="form-label fw-bold">Email</label>
-                            <input type="email" class="form-control form-control-lg" id="email"
-                                placeholder="vd: example@gmail.com" name="email" required>
+                            <label for="email" class="form-label fw-bold">Email <span
+                                    class="text-danger fw-bold">(*)</span></label>
+                            <input type="email" class="form-control " id="email" placeholder="Email của salon"
+                                name="email" required>
                         </div>
 
                         <!-- Thông báo thanh toán phí hàng tháng -->
@@ -336,10 +341,11 @@
                                 Bạn cần thanh toán <strong>300,000 VND / tháng</strong> từ số dư tài khoản của mình để
                                 đăng
                                 ký cửa hàng. <br>
-                                Bạn cần gia hạn trước khi hết hạn sau (<strong>30</strong>) kể từ khi được phê duyệt
+                                Bạn cần gia hạn trước khi hết hạn sau (<strong>30 ngày</strong>) kể từ khi được phê
+                                duyệt
                             </p>
                             <br>
-                            <h6>Xác nhận lại thông tin</h6>
+                            <h5>Xác nhận lại thông tin <span class="text-danger fw-bold">(*)</span></h5>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item storeName">Tên cửa hàng: </li>
                                 <li class="list-group-item storeAddress">Địa chỉ cửa hàng: </li>

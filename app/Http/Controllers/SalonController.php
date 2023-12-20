@@ -115,13 +115,11 @@ class SalonController extends Controller
     public function listCars($salonSlug)
     {
         $salonInfo = Salon::where('slug', $salonSlug)->first();
-
         if(!$salonInfo) {
             abort(404);
         }
-        $cars = Car::where('salon_id', $salonInfo->id)->get();
 
-        return view('salon.danh-sach-xe', compact('cars', 'salonInfo'));
+        return view('salon.danh-sach-xe', compact('salonInfo'));
     }
 
     public function expiredSalon($salonID) {
