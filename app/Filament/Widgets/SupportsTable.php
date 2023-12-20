@@ -43,7 +43,7 @@ class SupportsTable extends BaseWidget
             ])
             ->actions([
                 Action::make('toReport')
-                ->make('Xem chi tiết')
+                ->label('Xem chi tiết')
                 ->url(fn (Action $action) => ' admin/supports/' . $action->getRecord()->id.'/edit')
             ]);
     }

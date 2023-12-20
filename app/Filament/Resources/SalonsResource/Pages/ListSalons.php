@@ -23,16 +23,22 @@ class ListSalons extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make('Tất cả')
+            'all' => Tab::make()
+            ->label('Tất cả')
             ->badge(Salon::count()),
-            'ordered' => Tab::make('Chờ duyệt')
+
+            'ordered' => Tab::make()
+            ->label('Chờ duyệt')
             ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 0))
                 ->badge(Salon::query()->where('status', 0)->count()),
                 
-            'approved' => Tab::make('Đã Duyệt')
+            'approved' => Tab::make()
+            ->label('Đã Duyệt')
             ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 1))
                 ->badge(Salon::query()->where('status', 1)->count()),
-            'deleted' => Tab::make('Đã khóa')
+
+            'deleted' => Tab::make()
+            ->label('Đã khóa')
             ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 3))
                 ->badge(Salon::query()->where('status', 3)->count()),
         ];
@@ -40,6 +46,6 @@ class ListSalons extends ListRecords
 
     public function getDefaultActiveTab(): string | int | null
     {
-        return 'approved';
+        return 'ordered';
     }
 }

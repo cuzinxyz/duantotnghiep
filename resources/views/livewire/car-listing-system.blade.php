@@ -6,18 +6,17 @@
     Mua bán ô tô cũ, xe hơi cũ giá rẻ toàn quốc - Drivco
 @endsection
 <div>
-
     <div class="row m-0" x-data="{ showHeading: false }">
-        <livewire:brand-list />
+        <livewire:brand-list wire:key="brand-list" />
     </div>
 
     <div class="product-page pt-100 mb-100">
         <div class="container">
             <div class="row g-xl-4 gy-5">
-                <div class="col-xl-3 order-xl-1 order-2">
+                <div class="col-xl-3 order-xl-1 order-1">
                     <div class="filter-area mb-40">
                         <div class="title-and-close-btn mb-20">
-                            <h6>Bộ Lọc Tìm Kiếm</h6>
+                            <h5>Bộ Lọc Tìm Kiếm</h5>
                         </div>
                     </div>
                     <div class="product-sidebar">
@@ -31,7 +30,7 @@
                                     </div>
                                     <ul style="overflow: auto; max-height: 200px">
                                         @foreach ($brands as $brand)
-                                            <li wire:key="brand-{{$brand->id}}">
+                                            <li wire:key="brand-{{ $brand->id }}">
                                                 <label class="containerss">
                                                     <input type="checkbox" value="{{ $brand->id }}"
                                                         wire:model.live="updateBrands">
@@ -110,7 +109,7 @@
                                     </div> --}}
                                     <ul style="overflow: auto; max-height: 200px">
                                         @foreach ($locations as $location)
-                                            <li wire:key="location-{{$location->id}}">
+                                            <li wire:key="location-{{ $location->id }}">
                                                 <label class="containerss">
                                                     <input type="checkbox" value="{{ $location->id }}"
                                                         wire:model.live="updateLocations">
@@ -126,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-9 order-xl-2 order-1">
+                <div class="col-xl-9 order-xl-2 order-2">
                     <div class="row mb-40">
                         <div class="col-lg-12">
                             <div class="show-item-and-filte">
@@ -158,22 +157,29 @@
                                 @php
                                     $wowDelay = 100;
                                 @endphp
-                                @foreach ($cars as $car)
-                                    <div class="col-lg-4 col-md-6 col-sm-6 wow fadeInUp item" wire:key="car-{{$car->id}}"
-                                        data-wow-delay="{{ $wowDelay + 100 }}ms">
+                                @forelse ($cars as $car)
+                                    <div class="col-lg-4 col-md-6 col-sm-6 wow fadeInUp item"
+                                        wire:key="car-{{ $car->id }}" data-wow-delay="{{ $wowDelay + 100 }}ms">
                                         <div class="product-card2">
+                                            @if (!empty($item->is_vip))
+                                                <span class="bg-success new p-2 rounded position-absolute"
+                                                    style="top:2px;left:2px;z-index:123">
+                                                    <i class="bi bi-check-circle-fill fs-5 text-white"></i>
+                                                </span>
+                                            @endif
                                             <div class="product-img">
                                                 <div class="date">
                                                     <button type="button" data-bs-toggle="modal"
                                                         data-bs-target="#alartModal01">
-                                                        {{ $car->created_at->format("d M, Y") }} <i class="bi bi-exclamation-circle"></i>
+                                                        {{ $car->created_at->format('d M, Y') }} <i
+                                                            class="bi bi-exclamation-circle"></i>
                                                     </button>
                                                 </div>
-                                                <livewire:add-to-wish-list wire:key="wish-list-{{$car->id}}" carID="{{ $car->id }}" />
-                                                <img 
-                                                    loading="lazy"
-                                                    src="{{ asset('storage/'.$car->verhicle_image_library[0]) }}"
-                                                    alt="{{$car->title}}">
+                                                <livewire:add-to-wish-list wire:key="wish-list-{{ $car->id }}"
+                                                    carID="{{ $car->id }}" />
+                                                <img loading="lazy"
+                                                    src="{{ asset('storage/' . $car->verhicle_image_library[0]) }}"
+                                                    alt="{{ $car->title }}">
                                             </div>
                                             <div class="product-content">
                                                 <div class="details-btn">
@@ -181,22 +187,17 @@
                                                             class="bi bi-arrow-right-short"></i></a>
                                                 </div>
                                                 <div class="price">
-                                                    <strong class="line-clamp-1">{{ number_format($car->price) }} đ</strong>
+                                                    <strong class="line-clamp-1">{{ number_format($car->price) }}
+                                                        đ</strong>
                                                 </div>
-                                                <h6><a href="{{ route('car-detail', $car->slug) }}" class="line-clamp-1">{{ $car->title }}</a></h6>
+                                                <h6><a href="{{ route('car-detail', $car->slug) }}"
+                                                        class="line-clamp-1">{{ $car->title }}</a></h6>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="pagination-and-next-prev">
-                                        <div class="pagination">
-                                            {{ $cars->links('vendor.livewire.bootstrap') }}
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                    <h6>Không có xe nào cả</h6>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -204,6 +205,8 @@
             </div>
         </div>
     </div>
+
+    <div x-intersect="$wire.load()"></div>
 
     @push('scripts')
         <script>
@@ -254,5 +257,7 @@
 
             })
         </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     @endpush
+
 </div>

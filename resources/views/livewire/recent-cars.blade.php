@@ -3,7 +3,7 @@
             <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
                 <div class="col-lg-12">
                     <div class="section-title-2 text-left">
-                        <h3>Xe Gần Đây</h3>
+                        <h3>Xe gần đây</h3>
                         <p>Có hơn {{ \DB::table('brands')->get()->count() }}+ thương hiệu xe được đề xuất.</p>
                     </div>
                 </div>

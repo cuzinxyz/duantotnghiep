@@ -56,7 +56,7 @@ class RevenueDaysChart extends ApexChartWidget
                 ],
             ],
             'xaxis' => [
-                'categories' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d')),
+                'categories' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('d-m')),
                 'labels' => [
                     'style' => [
                         'colors' => '#9ca3af',

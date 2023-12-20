@@ -2,14 +2,12 @@
     <x-homepage.banner :$banners :$mark />
 
     <x-homepage.featured-cars />
-    
+
     @if ($adsPartners->count() > 0)
         <div class="mb-100">
             @foreach ($adsPartners as $value)
-                <a href="{{ $value->target_url }}" target="_blank"
-                    rel="noopener noreferrer">
-                    <img src="{{ asset('storage/' . $value->image_url) }}"
-                        alt="">
+                <a href="{{ $value->target_url }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ asset('storage/' . $value->image_url) }}" alt="">
                 </a>
             @endforeach
         </div>
@@ -21,8 +19,11 @@
                         <div class="inner-banner-content section-title-2">
                             <h3 class="text-white">Drivco: Đăng tin trực tuyến - Kết nối trực tiếp</h3>
                             <!--<p>Bảo dưỡng ô tô là việc bảo dưỡng, kiểm tra định kỳ một chiếc xe để đảm bảo xe hoạt động an toàn và hiệu quả. </p>-->
-                            <button onclick="window.location.href='{{ route('sellCar') }}'" class="btn btn-sm px-5 primary-btn3" type="button" data-bs-toggle="modal" data-bs-target="#sellUsModal01">
-                                <svg width="24" height="15" viewBox="0 0 24 15" xmlns="http://www.w3.org/2000/svg">
+                            <button onclick="window.location.href='{{ route('sellCar') }}'"
+                                class="btn btn-sm px-5 primary-btn3" type="button" data-bs-toggle="modal"
+                                data-bs-target="#sellUsModal01">
+                                <svg width="24" height="15" viewBox="0 0 24 15"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M3.25985 0C3.15704 0 3.05844 0.0413135 2.98574 0.114852C2.91304 0.18839 2.87219 0.28813 2.87219 0.392129C2.87219 0.496128 2.91304 0.595867 2.98574 0.669405C3.05844 0.742944 3.15704 0.784257 3.25985 0.784257H4.8105C4.91332 0.784257 5.01192 0.742944 5.08462 0.669405C5.15732 0.595867 5.19816 0.496128 5.19816 0.392129C5.19816 0.28813 5.15732 0.18839 5.08462 0.114852C5.01192 0.0413135 4.91332 0 4.8105 0H3.25985ZM5.77966 0C5.67684 0 5.57824 0.0413135 5.50554 0.114852C5.43284 0.18839 5.39199 0.28813 5.39199 0.392129C5.39199 0.496128 5.43284 0.595867 5.50554 0.669405C5.57824 0.742944 5.67684 0.784257 5.77966 0.784257H10.3347C10.4375 0.784257 10.5361 0.742944 10.6088 0.669405C10.6815 0.595867 10.7223 0.496128 10.7223 0.392129C10.7223 0.28813 10.6815 0.18839 10.6088 0.114852C10.5361 0.0413135 10.4375 0 10.3347 0H5.77966Z">
                                     </path>
@@ -48,6 +49,8 @@
 
     {{-- Recent Product  --}}
     <livewire:recent-cars />
+
+    <livewire:recent-salon />
 
     <div class="how-it-work-section style-2 mb-100">
         <div class="container">
@@ -143,10 +146,8 @@
                     <div class="partner-slider wow fadeInUp" data-wow-delay="300ms">
                         <div class="marquee_text2">
                             @foreach ($partners as $partner)
-                                <img src="{{ asset('storage/' . $partner->logo_url) }}" height="60" 
-                                alt="{{ $partner->name }}"
-                                loading="lazy"
-                                >
+                                <img src="{{ asset('storage/' . $partner->logo_url) }}" height="60"
+                                    alt="{{ $partner->name }}" loading="lazy">
                             @endforeach
                         </div>
                     </div>
@@ -163,7 +164,7 @@
                         <h3 class="w-100">Tin tức mới nhất</h3>
                         <p>Thông tin mới liên tục cập nhật từ Drivco </p>
                     </div>
-                    
+
                     <a href="{{ route('news.list') }}">Xem tất cả</a>
                 </div>
             </div>
@@ -177,15 +178,14 @@
                         <div class="news-card style-2 d-flex flex-column h-100">
                             <div class="news-img" style="flex:1">
                                 <a href="{{ route('news.index', $post->slug) }}">
-                                    <img 
-                                        src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
-                                        alt="{{ $post->title }}"
-                                        loading="lazy">
+                                    <img src="{{ str_contains($post->thumbnailImage, 'http') ? $post->thumbnailImage : asset('storage/' . $post->thumbnailImage) }}"
+                                        alt="{{ $post->title }}" loading="lazy">
                                 </a>
                             </div>
                             <div class="content">
                                 <h6>
-                                    <a class="line-clamp-2" href="{{ route('news.index', $post->slug) }}">{{ $post->title }}</a>
+                                    <a class="line-clamp-2"
+                                        href="{{ route('news.index', $post->slug) }}">{{ $post->title }}</a>
                                 </h6>
                                 <p class="line-clamp-2">
                                     {{ $post->summary }}

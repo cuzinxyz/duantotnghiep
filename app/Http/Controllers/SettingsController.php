@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\WorkCollaboratorEvent;
 use Carbon\Carbon;
 use App\Models\Car;
+use App\Models\PurchasedService;
 use App\Models\User;
 use GuzzleHttp\Client;
 use App\Models\Service;
@@ -16,14 +17,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+
 class SettingsController extends Controller
 {
     public function profile()
     {
-         $cars = Car::where('user_id', auth()->id())
+        $cars = Car::where('user_id', auth()->id())
             ->where([
-            'status' => 1,
-            'salon_id' => null
+                'status' => 1,
+                'salon_id' => null
             ])
             ->orderBy('created_at', 'desc')
             ->get();
@@ -33,8 +35,8 @@ class SettingsController extends Controller
                 'salon_id' => null
             ])
             ->orderBy('created_at', 'desc')
-            
             ->get();
+
         $deniedCars = Car::where('user_id', auth()->id())
             ->where([
                 'status' => 2,
@@ -42,22 +44,38 @@ class SettingsController extends Controller
             ])
             ->orderBy('created_at', 'desc')
             ->get();
+
         $hiddenCars = Car::onlyTrashed()
             ->where('user_id', auth()->id())
             ->get();
+
         $serviceId = DB::table('purchased_service')
             ->where('user_id', Auth::id())
             ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
             ->pluck('service_id');
+
         $billHistories = Service::whereIn('id', $serviceId)
             ->get();
-        $carPushed = Car::where([
-            'user_id' => Auth::id(),
-            'salon_id' => null
-        ])
+
+
+        $purchased_service = PurchasedService::where('user_id', auth()->id())
+            ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
             ->get();
-        // dd($billHistories);
-        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'carPushed'));
+        // $carPushed = [];
+        // foreach($purchased_service as $item) {
+        //     $carID = explode(',', $item->car_id);
+        //     $carPushed[] = Car::with('services')->whereIn('id', $carID)->get();
+        // }
+
+
+        // Car::with('services')->where([
+        //     'user_id' => Auth::id(),
+        //     'status' => 1,
+        //     'salon_id' => null
+        // ])
+        //     ->get();
+
+        return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'purchased_service'));
     }
 
     public function pushFeature($carID)
@@ -67,9 +85,9 @@ class SettingsController extends Controller
         $purchased_service = DB::table("purchased_service")
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', Carbon::now())
+            ->orderBy('expired_date', 'desc')
             ->get();
 
-        // ->orderBy('expired_date', 'desc')
         // ->first();
 
         // $carids = collect($purchased_service)->unique();
@@ -136,7 +154,11 @@ class SettingsController extends Controller
             ->get();
 
         // dd($valid);
-        if (($valid->count() == 0) || ($valid[0]->remaining_push == 0)) {
+        if (($valid->count() == 0)) {
+            # TH đã mua gói trước đó & còn hạn
+            // if(!empty($valid) && $valid[0]->remaining_push == 0) {
+            //     redirect('')
+            // }
             # TH: CHưa đăng kí gói tin nào
             # tin lẻ
             $service = Service::findOrFail($request->service_id);
@@ -175,15 +197,9 @@ class SettingsController extends Controller
             }
         } else {
             # TH: Đã mua gói tin
-
             foreach ($valid as $pur_service) :
                 # kiểm tra xem còn lượt đẩy tin hay không
                 if ($pur_service->remaining_push > 0) {
-                    // $purchased_service = DB::table("purchased_service")
-                    //     ->where('user_id', auth()->id())
-                    //     ->where('expired_date', '>=', \Carbon\Carbon::now())
-                    //     ->get();
-
                     # kiểm tra xem tin hiện tại được đẩy chưa/
                     if (str_contains($pur_service->car_id, $carID)) {
                         return redirect()->route('profile')->with('status', 'Bạn đã đẩy tin này!');
@@ -193,6 +209,8 @@ class SettingsController extends Controller
                             $update_pur_service = DB::table("purchased_service")
                                 ->where('user_id', auth()->id())
                                 ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                ->where('service_id', $pur_service->service_id)
+                                ->orderBy('expired_date', 'desc')
                                 ->update([
                                     'car_id' => $pur_service->car_id . ',' . $carID,
                                     'remaining_push' => $pur_service->remaining_push - 1,
@@ -202,6 +220,7 @@ class SettingsController extends Controller
                             $update_pur_service = DB::table("purchased_service")
                                 ->where('user_id', auth()->id())
                                 ->where('expired_date', '>=', \Carbon\Carbon::now())
+                                ->where('service_id', $pur_service->service_id)
                                 ->orderBy('expired_date', 'desc')
                                 ->update([
                                     'car_id' => $carID,
@@ -212,7 +231,7 @@ class SettingsController extends Controller
                     }
                 } else {
                     // dd('here');
-                    return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua dịch vụ VIP!');
+                    return redirect()->route('service.list')->with('status', 'Bạn đã hết lượt đẩy tin, vui lòng mua lại sau!');
                 }
             endforeach;
         }
@@ -356,7 +375,7 @@ class SettingsController extends Controller
             ->where('transaction_type', 'LIKE', 'nạp tiền')
             ->pluck('amount', 'id')
             ->sum();
-        
+
 
         // lịch sử thanh toán dịch vụ
         $serviceId = DB::table('purchased_service')
@@ -372,11 +391,11 @@ class SettingsController extends Controller
             ->get();
 
         $withDrawHistory = DB::table('transactions_histories')
-        ->select('id', 'amount', 'created_at')
-        ->where('user_id', auth()->id())
+            ->select('id', 'amount', 'created_at')
+            ->where('user_id', auth()->id())
             ->where('transaction_type', 'LIKE', '%rút tiền%')
             ->get();
-        
+
         return view('user-settings.payment-history', compact('currentBalance', 'moneySpending', 'totalAmount', 'billHistories', 'depositHistory', 'withDrawHistory'));
     }
 
@@ -414,7 +433,8 @@ class SettingsController extends Controller
         return view('user-settings.settings', compact('user', 'err'));
     }
 
-    public function withdraw() {
+    public function withdraw()
+    {
         $client = new Client();
 
         // Thay đổi URL thành URL thực tế của API bạn muốn truy cập
@@ -424,12 +444,13 @@ class SettingsController extends Controller
         return view('user-settings.withdraw', compact('dataAPI'));
     }
 
-    public function withdrawMoney(Request $request) {
+    public function withdrawMoney(Request $request)
+    {
         // dd($request->all());
         $user_id = Auth::user()->id;
         $user_balance = User::find($user_id);
-    
-        if(intval($request->bank_price) > intval($user_balance->account_balence)) {  
+
+        if(intval($request->bank_price) > intval($user_balance->account_balence)) {
             return redirect()->back()->with('error', 'Số tiền bạn muốn rút quá lớn');
         }
 
@@ -446,6 +467,37 @@ class SettingsController extends Controller
 
             return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
         }
+    }
 
+    public function serviceExpired($id)
+    {
+        $expired_date = PurchasedService::where([
+            'service_id' => $id,
+            'user_id' => auth()->id(),
+        ])
+            ->orderBy('created_at', 'asc')
+            ->first();
+
+
+        $service = Service::find($id);
+        $user = User::find($expired_date->user_id);
+        if ($user->account_balence < $service->price) {
+            return redirect()->back()->with('error', 'Tài khoản của bạn không đủ. Vui lòng nạp thêm tiền vào tài khoản');
+        }
+        $account_balence = intval($user->account_balence) - intval($service->price);
+
+        User::where('id', $expired_date->user_id)->update([
+            'account_balence' => $account_balence
+        ]);
+        $transaction_history = TransactionsHistory::create([
+            'user_id' => $expired_date->user_id,
+            'transaction_type' => 'dịch vụ: Gia hạn '. $service->service_name,
+            'amount' => intval($service->price),
+            'balance_after_transaction' => $account_balence
+        ]);
+
+        $expired_date->expired_date = Carbon::parse($expired_date->expires_date)->addDays($service->expiration_date);
+        $expired_date->save();
+        return redirect()->back()->with('success', 'Gia hạn gói tin thành công');
     }
 }

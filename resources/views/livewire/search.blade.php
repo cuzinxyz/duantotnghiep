@@ -43,7 +43,7 @@
             overflow-y: scroll;
         }
     </style>
-    <form class="position-relative">
+    <form class="position-relative" >
         <div class="form-inner">
             <input type="text" wire:model.live="search" placeholder="Tìm kiếm xe theo tên hoặc thương hiệu">
             <button type="button"><i class="bi bi-search"></i></button>
@@ -53,7 +53,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         @if (count($cars) == 0)
-                            <h5 class="text-danger text-center m-2">Không có kết quả nào được tìm thấy.</h5>
+                            <h6 class="text-danger text-center m-2">Không có kết quả nào được tìm thấy.</h6>
                         @else
                             @foreach ($cars as $car)
                                 <a href="{{ route('car-detail', $car->slug) }}">
