@@ -1,4 +1,7 @@
 @push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
 @endpush
 
@@ -9,7 +12,7 @@
     <div class="my-3 contact-page">
         @include('components.nofication')
         <!-- content -->
-        <div class="payment container d-flex flex-column gap-2 inquiry-form">
+        <div class="payment container d-flex flex-column gap-2 inquiry-form my-4">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-8 col-sm-12 d-flex justify-content-center">
                     <form action="{{ route('withdraw.submit') }}" method="POST" id="form-recharge" class="w-100">
@@ -32,7 +35,7 @@
                                     <div class="col-lg-6" style="margin-bottom: 20px">
                                         <div class="form-inner">
                                             <label for="">Ngân hàng *</label>
-                                            <select name="bank_name" class="nice-select">
+                                            <select name="bank_name" class="form-select select2">
                                                 <option value="">Lựa chọn ngân hàng nhận tiền</option>
                                                 @foreach ($dataAPI['data'] as $data)
                                                     <option value="{{ $data['shortName'] }}">
@@ -82,6 +85,8 @@
     </div>
 
     @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
         <script>
             function unaccentedString(inputElement) {
                 let chuoiKhongDau = inputElement.value
@@ -93,6 +98,13 @@
             }
 
             $(document).ready(function() {
+                $('.select2').select2({
+                    theme: "bootstrap-5",
+                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
+                        'style',
+                    placeholder: $(this).data('placeholder'),
+                });
+
                 $('#form-recharge').validate({
                     rules: {
                         bank_name: {

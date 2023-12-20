@@ -40,12 +40,14 @@ class RecentCars extends Component
             if ($this->brandID == 'random') {
                 $recentCars = Car::inRandomOrder()
                     ->where('status', 1)
+                    ->whereNull('salon_id')
                     ->limit(8)
                     ->get();
             } else {
                 $recentCars = Car::inRandomOrder()
                     ->where('brand_id', $this->brandID)
                     ->where('status', 1)
+                    ->whereNull('salon_id')
                     ->limit(8)
                     ->get();
             }
