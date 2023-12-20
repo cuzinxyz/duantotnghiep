@@ -14,6 +14,8 @@ class PostBuyCar extends Component
   #[Rule('required', message: 'Vui lòng cung cấp nội dung bài viết')]
   #[Rule('min:10', message: 'Nội dung này quá ngắn')]
   public $content;
+  
+  public $search = '';
 
   public function save()
   {
@@ -56,7 +58,16 @@ class PostBuyCar extends Component
 
   public function render()
   {
-    $demands = Demnad::where('status', 1)->orderBy('created_at', 'desc')->paginate(10);
+    if (empty($this->search)) {
+      $demands = Demnad::where('status', 1)
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+    } else {
+      $demands = Demnad::where('status', 1)
+        ->where('content', 'like', '%' . $this->search . '%')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+    }
 
     $pending = '';
     if (auth()->check()) {

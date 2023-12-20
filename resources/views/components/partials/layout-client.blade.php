@@ -44,7 +44,8 @@
     <meta property="og:image:width" content="650">
     <meta property="og:image:height" content="350">
     <meta name="theme-color" content="#46D993">
-            
+    <meta name="google-adsense-account" content="ca-pub-1932736467628395">
+
     <!-- GENERAL GOOGLE SEARCH META -->
     <script type="application/ld+json">
         {
@@ -106,6 +107,10 @@
             background: #555;
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1932736467628395"
+     crossorigin="anonymous"></script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-1932736467628395?ers=1" nonce="FT5iMs8YGMyNJMe6Na5mDQ"></script>
+    <script nonce="FT5iMs8YGMyNJMe6Na5mDQ">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
 </head>
 
 <body class="tt-magic-cursor home-5">
@@ -690,6 +695,38 @@
             <i class="fa fa-arrow-up"></i>
         </button>
 
+        <!-- Messenger Plugin chat Code -->
+        <div id="fb-root"></div>
+
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "170265699509568");
+            chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+
+        <!-- Your SDK code -->
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    xfbml: true,
+                    version: 'v18.0'
+                });
+            };
+
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
         @livewireScripts
 
         <script data-cfasync="false" src="{{ asset('js/email-decode.min.js') }}"></script>

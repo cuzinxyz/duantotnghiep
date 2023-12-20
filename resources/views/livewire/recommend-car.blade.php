@@ -1,4 +1,4 @@
-<div class="container row">
+<div class="container row gy-3">
     @forelse($recommendCars as $key => $car)
     <div class="col-md-6 col-lg-4 col-sm-12 col-12" wire:key="recommend-car-{{$car->id}}">
         <div class="product-card">

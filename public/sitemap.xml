@@ -171,6 +171,46 @@
         <priority>0.8</priority>
             </url>
     <url>
+        <loc>https://drivco.shop/oto/xe-cua-vinh</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/342342432</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-v-250d</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/toyota-c-hr-20-hybrid</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/audi-a4-50-tdi-quattro-avant</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-520d</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-x3-m40i</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/porsche-991-40</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
         <loc>https://drivco.shop/hang-xe/Mercedes</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -262,6 +302,11 @@
             </url>
     <url>
         <loc>https://drivco.shop/hang-xe/LandRover</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/hang-xe/Porsche</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

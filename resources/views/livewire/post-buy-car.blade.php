@@ -1,5 +1,10 @@
 <div>
     <div class="container mt-3" style="max-width: 600px">
+        <div class="messageSender__top">
+            <form style="max-height: 40px">
+                <input class="messageSender__input" wire:model.live="search" placeholder="Tìm kiếm tin mua?" type="text">
+            </form>
+        </div>
         @if (auth()->check())
             <div class="alert alert-primary">
                 Chú ý: Chỉ đăng tin mua xe ở đây. Không đăng tin bán xe hay tin rao vặt khác...nếu vi phạm tài khoản sẽ
@@ -24,7 +29,7 @@
                         alt="">
                 @endif
                 <form wire:submit.prevent="save">
-                    <input class="messageSender__input" wire:model="content" placeholder="Bạn cần mua xe gì?"
+                    <input class="messageSender__input" wire:model.live="content" placeholder="Bạn cần mua xe gì?"
                         type="text">
                 </form>
             </div>

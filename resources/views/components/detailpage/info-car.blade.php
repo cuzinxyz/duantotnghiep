@@ -391,7 +391,7 @@
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h5 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed text-wrap" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
                                     1. Làm thế nào để đăng tin bán xe trên trang web của bạn?
@@ -407,7 +407,7 @@
                         </div>
                         <div class="accordion-item">
                             <h5 class="accordion-header" id="flush-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed text-wrap" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                     aria-controls="flush-collapseTwo">
                                     2. Làm thế nào để tôi liên hệ với người bán để biết thêm chi tiết về xe?
@@ -422,7 +422,7 @@
                         </div>
                         <div class="accordion-item">
                             <h5 class="accordion-header" id="flush-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed text-wrap" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseThree" aria-expanded="false"
                                     aria-controls="flush-collapseThree">
                                     3. Làm thế nào để kiểm tra tính pháp lý của xe đã qua sử dụng?
