@@ -53,12 +53,13 @@
         }
 
         .contact-info {
-            border: 1px dashed #000;
             border-radius: 8px
         }
 
         .img-salon {
+            width: 100%;
             max-height: 400px;
+            object-fit: cover;
         }
 
         .search {
@@ -141,7 +142,7 @@
                     </div>
                     
                     <div class="col-md-4 salon-info">
-                        <div class="contact-info mb-50 px-3 py-4 contact-fixed shadow">
+                        <div class="contact-info mb-50 px-3 py-4 contact-fixed shadow-sm">
                             <div class="d-flex align-items-center gap-2">
 
                                 @if (strpos($salonInfo->user->avatar, 'http') === 0)
@@ -308,37 +309,12 @@
     @push('scripts')
         <script>
             $('.autoplay').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
+                slidesToShow: 1,
                 autoplay: true,
                 autoplaySpeed: 2000,
                 arrows: false,
                 infinite: true,
                 lazyLoad: 'ondemand',
-                responsive: [{
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 3,
-                            infinite: true,
-                            dots: true
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
             });
         </script>
     @endpush

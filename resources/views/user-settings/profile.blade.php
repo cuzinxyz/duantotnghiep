@@ -193,7 +193,7 @@
                         <button class="nav-link active" id="v-pills-1-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-1" type="button" role="tab" aria-controls="v-pills-1"
                             aria-selected="false">Đang Hiển Thị ({{ $cars->count() }})</button>
-                        @if ($billHistories->count() > 0)
+                        @if (!empty($billHistories))
                             <button class="nav-link" id="v-pills-2-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-2" type="button" role="tab" aria-controls="v-pills-2"
                                 aria-selected="true">Thống kê</button>
@@ -357,39 +357,40 @@
                             </div>
                         </div>
                         {{-- DASHBOARD --}}
-                        @if ($billHistories->count() > 0)
+                        @if (!empty($billHistories))
                             <div class="tab-pane fade" id="v-pills-2" role="tabpanel"
                                 aria-labelledby="v-pills-common-tab">
                                 <div class="reviews-area">
-                                    <div class="container px-4 py-1" id="featured-3">
-                                        <h2 class="pb-2 border-bottom">Gói đăng ký</h2>
-                                        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                                            <div class="feature col">
+                                    <div class="container px-4 py-2" id="featured-3">
+                                        <div class="row g-4 row-cols-1 row-cols-lg-3">
+                                            <div class="feature col d-flex" style="column-gap:20px">
                                                 <div class="feature-icon bg-drivco bg-gradient">
                                                     <svg class="bi" width="1em" height="1em">
                                                         <use xlink:href="#collection"></use>
                                                     </svg>
                                                 </div>
-                                                <h4>{{ $billHistories->service_name }}</h4>
-                                                <p class="text-success fw-bolder">
-                                                    @php
-                                                        $string = $billHistories->description;
-                                                        $newString = str_replace(' \n', ', ', $string);
-                                                        echo $newString;
-                                                    @endphp
-                                                </p>
+                                                <div>
+                                                    <h6>{{ $billHistories->service_name }}</h6>
+                                                    <p class="text-success">
+                                                        <i class="bi bi-check2-circle"></i>
+                                                        @php
+                                                            $string = $billHistories->description;
+                                                            $newString = str_replace(' \n', ', ', $string);
+                                                            echo $newString;
+                                                        @endphp
+                                                    </p>
+                                                    <p class="text-small">
+                                                        Bạn còn {{ $purchased_service->remaining_push }} lượt đẩy tin
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
+    
+                                    <hr>
 
                                     @if (!empty($purchased_service))
-                                        <div class="b-example-divider"></div>
-                                        
                                         <div class="container px-4 py-1" id="custom-cards">
-                                            <h2 class="pb-2 border-bottom">
-                                                {{ $purchased_service->service->service_name }}
-                                            </h2>
                                             @if (Carbon\Carbon::now()->between(
                                                     \Carbon\Carbon::parse($purchased_service->expired_date)->subDays(2),
                                                     \Carbon\Carbon::parse($purchased_service->expired_date)))
@@ -398,7 +399,7 @@
                                                     {{ \Carbon\Carbon::parse($purchased_service->expired_date)->format('d-m-Y') }}
                                                     .Vui lòng
                                                     <button class="btn btn-sm btn-warning"
-                                                        onclick="window.location.href='{{ route('service.expired_date', $serviceId) }}'">
+                                                        onclick="window.location.href='{{ route('service.expired_date', $purchased_service->service_id) }}'">
                                                         Gia hạn
                                                     </button>
                                                     để tiếp tục duy trì tin gói tin.

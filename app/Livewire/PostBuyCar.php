@@ -18,7 +18,6 @@ class PostBuyCar extends Component
   
   public $search = '';
 
-
   public function save()
   {
     if (!auth()->check()) {

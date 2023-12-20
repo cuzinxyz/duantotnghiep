@@ -149,11 +149,7 @@
                     </div>
                     <div class="list-grid-main">
                         <div class="list-grid-product-wrap grid-group-wrapper">
-                            <div class="w-100 text-center" wire:loading>
-                                <img src="{{ asset('images/load.gif') }}" alt="">
-                            </div>
-
-                            <div class="row g-4 justify-content-start mb-40" wire:loading.remove>
+                            <div class="row g-4 justify-content-start mb-40">
                                 @php
                                     $wowDelay = 100;
                                 @endphp
@@ -198,6 +194,10 @@
                                 @empty
                                     <h6>Không có xe nào cả</h6>
                                 @endforelse
+                                <div x-intersect="$wire.load()"></div>
+                            </div>
+                            <div class="w-100 text-center" wire:loading>
+                                <img src="{{ asset('images/load.gif') }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -206,8 +206,11 @@
         </div>
     </div>
 
-    <div x-intersect="$wire.load()"></div>
-
+    
+    @push('styles')
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    @endpush
+    
     @push('scripts')
         <script>
             function filter_prices() {
@@ -257,7 +260,7 @@
 
             })
         </script>
-        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+        
     @endpush
 
 </div>

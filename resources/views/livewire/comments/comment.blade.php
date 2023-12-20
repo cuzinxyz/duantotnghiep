@@ -49,7 +49,7 @@
                             <div class="comment-content" style="width:100%">
                                 <div class="author-name-deg d-flex justify-content-between align-items-center">
                                     <div class="d-flex gap-2 align-items-center">
-                                        <h6>{{ $item->user->name }},</h6>
+                                        <h6 style="cursor:pointer" onclick="window.location.href='/chatify/{{$item->user->id}}'" title="{{$item->user->title}}">{{ $item->user->name }},</h6>
                                         <span style="font-size: 12px;">{{ $item->created_at->diffForHumans() }}</span>
                                     </div>
                                     @if (auth()->check())

@@ -71,14 +71,16 @@
             @include('components.nofication')
             <div class="container">
                 <div class="row my-5">
-                    <h2 class="mb-3 d-flex justify-content-between">Quản lý Salon của bạn.
+                    <div class="mb-3 d-flex align-items-center gap-2 justify-content-between">
                         <div class="d-flex align-items-center gap-2">
-                            <button class="btn btn-sm btn-primary"
+                            <h5 class="m-0">Quản lý Salon của bạn.</h5>
+                            <button class="btn btn-sm btn-success px-3"
                                 onclick="window.location.href='{{ route('salon.addcar') }}'">
-                                Thêm xe
+                                Đăng tin bán xe ngay
                             </button>
                         </div>
-                    </h2>
+                        <button class="btn btn-sm btn-warning">Chỉnh sửa salon</button>
+                    </div>
 
                     {{-- @php
                         $expired_date = \App\Models\Salon::where('user_id', auth()->id())
@@ -125,7 +127,7 @@
                                                 <i class="icon-pencil primary font-large-2 float-left"></i>
                                             </div>
                                             <div class="media-body text-right">
-                                                <h3>{{ $salonCars->count() }}</h3>
+                                                <h3>{{ $salonCars->count() }} <i class="bi bi-activity"></i></h3>
                                                 <span>tổng xe</span>
                                             </div>
                                         </div>
@@ -142,7 +144,7 @@
                                                 <i class="icon-speech warning font-large-2 float-left"></i>
                                             </div>
                                             <div class="media-body text-right">
-                                                <h3>{{ $totalView }}</h3>
+                                                <h3>{{ $totalView }} <i class="bi bi-eye"></i></h3>
                                                 <span>lượt tiếp cận</span>
                                             </div>
                                         </div>
@@ -159,7 +161,7 @@
                                                 <i class="icon-graph success font-large-2 float-left"></i>
                                             </div>
                                             <div class="media-body text-right">
-                                                <h3>{{ $totalComment }}</h3>
+                                                <h3>{{ $totalComment }} <i class="bi bi-chat-dots"></i></h3>
                                                 <span>Lượt bình luận</span>
                                             </div>
                                         </div>
@@ -176,7 +178,7 @@
                                                 <i class="icon-pointer danger font-large-2 float-left"></i>
                                             </div>
                                             <div class="media-body text-right">
-                                                <h3>{{ $totalSavedCar }}</h3>
+                                                <h3>{{ $totalSavedCar }} <i class="bi bi-bookmark-fill"></i></h3>
                                                 <span>người lưu tin</span>
                                             </div>
                                         </div>

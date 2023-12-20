@@ -44,7 +44,7 @@
                 <h5><a class="line-clamp-1" href="{{ route('car-detail', $car->slug) }}">{{ $car->title }}</a></h5>
                 @if(!empty($car->province->name))
                 <div class="price-location">
-                    <div class="price">
+                    <div class="price text-nowrap">
                         <strong>{{number_format($car->price)}} đ</strong>
                     </div>
                     <div class="location">
@@ -54,15 +54,15 @@
                 @endif
                 <ul class="features">
                     <li>
-                        <img src="{{ asset('images/miles.svg') }}" alt="">
+                        <img src="{{ asset('images/miles.svg') }}" alt="" style="width: 20px">
                         {{ $car ? number_format($car->car_info['mileage']) : '' }}
                     </li>
                     <li>
-                        <img src="{{ asset('images/menual.svg') }}" alt="">
+                        <img src="{{ asset('images/menual.svg') }}" alt="" style="width: 20px">
                         {{ $car ? ($car->car_info['transmission'] == 'sotudong' ? 'Số tự động' : 'Số tay') : '' }}
                     </li>
                     <li>
-                        <img src="{{ asset('images/fuel.svg') }}" alt="">
+                        <img src="{{ asset('images/fuel.svg') }}" alt="" style="width: 20px">
                         {{ $car ? $car->car_info['fuelType'] : '' }}
                     </li>
                 </ul>

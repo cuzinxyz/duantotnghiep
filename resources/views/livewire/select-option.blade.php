@@ -1,26 +1,23 @@
-<div class="col-md-6 mb-20" wire:ignore>
-
+<div class="col-md-6" wire:ignore>
     <div class="form-inner">
-        <label class="">{{$label}}</label>
+        <label class="">{{$label}} <span class="text-danger fw-bold">(*)</span></label>
         <select id="{{$nameID}}" class=" form-control bg-white nice-select beauty-shadow">
-            <option value="">-- chọn hãng xe --</option>
+            <option>-- {{$label}} --</option>
             @foreach ($options as $option)
                 <option wire:key="option-{{$option->id}}" value="{{ $option->id }}">{{ $option->$columnName }}
                 </option>
             @endforeach
         </select>
     </div>
-    <div class="text-danger fw-bold" style="font-size:12px">
-        @error($value)
-            {{ $message }}
-        @enderror
-    </div>
 
     @script
         <script>
             $(document).ready(function() {
                 $('#{{$nameID}}').select2({
-                    maximumSelectionLength: 2
+                    theme: "bootstrap-5",
+                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
+                        'style',
+                    placeholder: $(this).data('placeholder'),
                 });
             });
 
@@ -29,4 +26,9 @@
             })
         </script>
     @endscript
+
+    @push('styles')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    @endpush
 </div>

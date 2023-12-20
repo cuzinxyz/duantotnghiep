@@ -56,10 +56,13 @@ class SettingsController extends Controller
             ->select('service_id')
             ->first();
 
-        $billHistories = Service::where('id', $serviceId->service_id)
-            ->orderBy('created_at', 'desc')
-            ->first();
-
+        $billHistories = null;
+        if(!empty($serviceId)) {
+            $billHistories = Service::where('id', $serviceId->service_id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+        }
+        
         $purchased_service = PurchasedService::where('user_id', auth()->id())
             ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
             ->orderBy('created_at', 'desc')

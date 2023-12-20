@@ -95,15 +95,27 @@
                             <div class="col-md-8 col-sm-12 mb-20 inquiry-form py-4 px-4 bg-shape">
                                 <div class="row">
                                     <div class="col-md-12 row">
-                                        <livewire:select-option nameID="brand" :options="$brands" columnName="brand_name"
+                                        <livewire:select-option nameID="brand" :options="$brands" error="brand_select" columnName="brand_name"
                                             label="Hãng chế tạo" wire:model.live="brand_select"
                                             wire:key="brand_select" />
-
+                                        
                                         @if (!empty($brand_select))
-                                            <livewire:select-option nameID="model" :options="$models"
+                                            <livewire:select-option nameID="model" :options="$models" error="model_select"
                                                 columnName="model_name" label="Tên xe" wire:model.live="model_select"
                                                 wire:key="model_select" />
                                         @endif
+                                        
+                                        <div class="col-md-6 text-danger fw-bold mb-20" style="font-size:12px">
+                                            @error('brand_select')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                        
+                                        <div class="col-md-6 text-danger fw-bold mb-20" style="font-size:12px">
+                                            @error('model_select')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
                                     </div>
 
                                     {{-- <div class="col-md-6 mb-20">
@@ -462,14 +474,15 @@
                     $wire.$set('fuel', '{{ $fuels[0] }}');
                     $wire.$set('number_of_seats', '{{ $seats[4] }}');
                     $wire.$set('year_of_manufacture', '{{ $years[0] }}');
-                    $wire.$set('mileage', '1000');
-                    $wire.$set('price', '1000000000');
+                    $wire.$set('mileage', '300');
+                    $wire.$set('price', '2000000000');
                     $wire.$set('engine', '2500');
-                    $wire.$set('color', "{{ $colors['black'] }}");
                     $wire.$set('transmission', 'Số sàn');
-                    $wire.$set('title', 'Mercedes-Benz V 250d Long Edition 1 4Matic 140 kW');
-                    $wire.$set('description', 'Xe hạng sang nhập khẩu từ Đức');
+                    $wire.$set('title', 'BMW 530d 210 kW');
+                    $wire.$set('description', 'Xe hạng sang nhập khẩu từ Đức, còn rất mới.');
                     $wire.$set('features', ['{{$featureValues["PremiumWheel"]}}', '{{$featureValues["Moonroof"]}}']);
+                    $wire.$set('phone', '0909090909');
+                    $wire.$set('full_address', 'Lam Điền, Chương Mỹ, Hà Nội');
                 })
             })
             

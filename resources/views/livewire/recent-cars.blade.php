@@ -13,7 +13,7 @@
                     <div class="browse-car-filter-area">
                         <ul class="nav nav-tabs" id="myTab3" role="tablist" wire:ignore>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" wire:click="filterCar('random')">Popular</button>
+                                <button class="nav-link active" wire:click="filterCar('random')">Phổ biến</button>
                             </li>
                             @if ($topBrands)
                                 @foreach ($topBrands as $brand)
