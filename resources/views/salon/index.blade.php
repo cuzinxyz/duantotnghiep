@@ -6,6 +6,13 @@
         $salon = \App\Models\Salon::where('user_id', auth()->id())->first();
     @endphp
 
+    @php
+        $expired_date = \App\Models\Salon::where('user_id', auth()->id())
+            ->where('status', 1)
+            ->select(['id', 'expired_date'])
+            ->first();
+    @endphp
+
     @if ($salon)
         @if ($salon->status == 0)
             <div class="container">
@@ -49,12 +56,53 @@
                     })
                 </script>
             @endpush
+            @elseif(\Carbon\Carbon::parse($expired_date->expired_date)->isPast())
+            @include('components.nofication')
+            <div class="container">
+                <div class=" alert alert-danger d-flex align-items-center justify-content-center gap-4">
+                    <span>Salon của bạn đã hết hạn. Vui lòng gia hạn để tiếp tục sử dụng!</span>
+                    <button class="btn btn-sm btn-warning"
+                        onclick="window.location.href='{{ route('salon.expired_date', $expired_date->id) }}'">
+                        Gia hạn
+                    </button>
+                </div>
+            </div>
         @else
             @include('components.nofication')
             <div class="container">
                 <div class="row my-5">
-                    <h2 class="mb-3">Quản lý Salon của bạn. <button class="btn btn-sm btn-success"
-                            onclick="window.location.href='{{ route('salon.addcar') }}'">Đăng tin bán xe</button></h2>
+                    <h2 class="mb-3 d-flex justify-content-between">Quản lý Salon của bạn.
+                        <div class="d-flex align-items-center gap-2">
+                            <button class="btn btn-sm btn-primary"
+                                onclick="window.location.href='{{ route('salon.addcar') }}'">
+                                Thêm xe
+                            </button>
+                        </div>
+                    </h2>
+
+                    {{-- @php
+                        $expired_date = \App\Models\Salon::where('user_id', auth()->id())
+                            ->where('status', 1)
+                            ->select(['id', 'expired_date'])
+                            ->first();
+                        dd($expired_date);
+                    @endphp --}}
+
+                    @if (
+                        \Carbon\Carbon::now()->between(
+                            \Carbon\Carbon::parse($expired_date->expired_date)->subDays(2),
+                            \Carbon\Carbon::parse($expired_date->expired_date)))
+                        <div class="alert alert-warning">
+                            Salon của bạn sẽ hết hạn vào ngày
+                            {{ \Carbon\Carbon::parse($expired_date->expired_date)->format('d-m-Y') }}
+                            .Vui lòng
+                            <button class="btn btn-sm btn-warning"
+                                onclick="window.location.href='{{ route('salon.expired_date', $expired_date->id) }}'">
+                                Gia hạn
+                            </button>
+                            để tiếp tục duy trì salon
+                        </div>
+                    @endif
 
                     @php
                         $pendingCar = \App\Models\Car::where('user_id', auth()->id())

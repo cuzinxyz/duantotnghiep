@@ -7,13 +7,13 @@
 @endsection
 <div>
     <div class="row m-0" x-data="{ showHeading: false }">
-        <livewire:brand-list />
+        <livewire:brand-list wire:key="brand-list" />
     </div>
 
     <div class="product-page pt-100 mb-100">
         <div class="container">
             <div class="row g-xl-4 gy-5">
-                <div class="col-xl-3 order-xl-1 order-2">
+                <div class="col-xl-3 order-xl-1 order-1">
                     <div class="filter-area mb-40">
                         <div class="title-and-close-btn mb-20">
                             <h5>Bộ Lọc Tìm Kiếm</h5>
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-9 order-xl-2 order-1">
+                <div class="col-xl-9 order-xl-2 order-2">
                     <div class="row mb-40">
                         <div class="col-lg-12">
                             <div class="show-item-and-filte">
@@ -199,22 +199,14 @@
                                     <h6>Không có xe nào cả</h6>
                                 @endforelse
                             </div>
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="pagination-and-next-prev">
-                                        <div class="pagination">
-                                            {{ $cars->links('vendor.livewire.bootstrap') }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div x-intersect="$wire.load()"></div>
 
     @push('scripts')
         <script>
@@ -265,5 +257,7 @@
 
             })
         </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     @endpush
+
 </div>

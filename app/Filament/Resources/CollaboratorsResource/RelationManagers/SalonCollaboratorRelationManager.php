@@ -6,8 +6,13 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 
@@ -45,6 +50,21 @@ class SalonCollaboratorRelationManager extends RelationManager
             ])
             ->filters([
                 // Tables\Filters\TrashedFilter::make()
+                Filter::make('unactive')
+                    ->label('Cửa hàng chưa duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default(),
+                Filter::make('active')
+                    ->label('Cửa hàng đã duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 1)),
+                Filter::make('locked')
+                    ->label('Cửa hàng không duyệt')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
+            ])
+            ->actions([
+                Action::make('url_salon')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/salons/' . $action->getRecord()->id),
             ])
             ->emptyStateActions([
                 // Tables\Actions\CreateAction::make(),

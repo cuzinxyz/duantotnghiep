@@ -121,6 +121,7 @@ class FormSuaTin extends Component
 
     public function updateCar()
     {
+        $this->validate();
         $carData = [];
         $photoName = [];
         // dd(count($this->verhicle_image_library));

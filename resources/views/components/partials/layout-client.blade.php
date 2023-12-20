@@ -88,6 +88,7 @@
 
         gtag('config', 'G-5B2YRXX4TD');
     </script>
+    
 
     @livewireStyles
     @stack('styles')
@@ -511,7 +512,6 @@
         </header>
 
         {{ $slot }}
-
         @include('modals.guide-modal')
 
         <footer class="style-2">
@@ -758,7 +758,9 @@
 
         <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
+        {{-- <script src="{{asset('js/jquery.nice-select.min.js')}}"></script> --}}
         <script src="{{ asset('js/custom.js') }}"></script>
+
 
         <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 

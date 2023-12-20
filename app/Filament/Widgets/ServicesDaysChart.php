@@ -32,15 +32,16 @@ class ServicesDaysChart extends ApexChartWidget
     protected function getOptions(): array
     {
         $now = Carbon::now();
-
+        $date_start = Carbon::parse($this->filterFormData['date_start']);
+        $date_end = Carbon::parse($this->filterFormData['date_end']);
         $servicePerDay = [];
 
-        $days = collect(range(1, $now->endOfMonth()->day))->map(function ($day) use ($now, &$servicePerDay) {
+        $days = collect(range($date_start->day, $date_end->day))->map(function ($day) use ($date_end, &$servicePerDay) {
             $count =
             DB::table('services')
-            ->leftJoin('purchased_service', function ($join) use ($now, $day) {
+            ->leftJoin('purchased_service', function ($join) use ($date_end, $day) {
                 $join->on('services.id', '=', 'purchased_service.service_id')
-                ->whereDate('purchased_service.created_at', '=', $now->day($day)->format('Y-m-d'));
+                ->whereDate('purchased_service.created_at', '=', $date_end->day($day)->format('Y-m-d'));
             })
                 ->select(
                     DB::raw("DATE_FORMAT(purchased_service.created_at, '%Y-%m-%d') AS date"),
@@ -52,7 +53,7 @@ class ServicesDaysChart extends ApexChartWidget
 
             $servicePerDay[] = $count;
 
-            return $now->day($day)->format('m-d');
+            return $date_end->day($day)->format('d-m');
         })->toArray();
 
         foreach($servicePerDay as $serviceDay) {
@@ -68,12 +69,14 @@ class ServicesDaysChart extends ApexChartWidget
             }
         }
 
-        $data = [];
-        foreach($results as $key => $result) {
-            $data[] = [
-                'name' => $key,
-                'data' => $result
-            ];
+        if(!empty($results)) {
+            $data = [];
+            foreach ($results as $key => $result) {
+                $data[] = [
+                    'name' => $key,
+                    'data' => $result
+                ];
+            }
         }
         
         return [
@@ -101,6 +104,26 @@ class ServicesDaysChart extends ApexChartWidget
             'stroke' => [
                 'curve' => 'smooth',
             ],
+        ];
+    }
+
+    protected function getFormSchema(): array
+    {
+        return [
+            DatePicker::make('date_start')
+            ->label('Ngày bắt đầu')
+            ->default(now()->startOfMonth())
+                ->reactive()
+                ->afterStateUpdated(function () {
+                    $this->updateOptions();
+                }),
+            DatePicker::make('date_end')
+            ->label('Ngày kết thúc')
+            ->default(now())
+                ->reactive()
+                ->afterStateUpdated(function () {
+                    $this->updateOptions();
+                }),
         ];
     }
 }

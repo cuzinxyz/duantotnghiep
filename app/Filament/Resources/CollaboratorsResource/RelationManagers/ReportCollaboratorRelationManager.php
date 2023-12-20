@@ -6,6 +6,8 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -49,10 +51,25 @@ class ReportCollaboratorRelationManager extends RelationManager
 
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                    ->label('Tố cáo chưa xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default(),
+                Filter::make('active')
+                    ->label('Tố cáo đã xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 1)),
+                Filter::make('locked')
+                    ->label('Tố cáo không xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
             ])
-            ->bulkActions([
+
+            ->actions([
+                Action::make('url_report')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/reporteds/' . $action->getRecord()->id),
             ])
+            ->bulkActions([])
             ->emptyStateActions([
                 // Tables\Actions\CreateAction::make(),
             ])

@@ -18,4 +18,16 @@ class PurchasedService extends Model
         'remaining_push',
         'expired_date'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
+    }
+
+    
 }

@@ -6,6 +6,8 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
 use Filament\Support\Enums\FontFamily;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,14 +47,25 @@ class SupportCollaboratorRelationManager extends RelationManager
                     }),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
+                Filter::make('unactive')
+                    ->label('Yêu cầu chưa xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default(),
+                Filter::make('active')
+                    ->label('Yêu cầu đã xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 1)),
+                Filter::make('locked')
+                    ->label('Yêu cầu không xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
             ])
             ->actions([
+                Action::make('url_support')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => '/admin/supports/' . $action->getRecord()->id),
             ])
-            ->bulkActions([
-            ])
-            ->emptyStateActions([
-            ])
+            ->bulkActions([])
+            ->emptyStateActions([])
             ->modifyQueryUsing(fn (Builder $query) => $query->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]));

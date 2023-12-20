@@ -7,9 +7,11 @@
             position: sticky;
             top: 70px;
         }
+
         .salon-info-mobile {
-                display: none
-            }
+            display: none
+        }
+
         @media only screen and (max-width: 988px) {
             .contact-fixed {
                 left: 0;
@@ -28,6 +30,7 @@
             .salon-info {
                 display: none;
             }
+
             .salon-info-mobile {
                 display: block
             }
@@ -35,6 +38,7 @@
             .list-system {
                 width: 100%;
             }
+
             .show-btn {
                 height: 50px;
                 position: fixed;
@@ -55,6 +59,61 @@
 
         .img-salon {
             max-height: 400px;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .search__input {
+            font-family: inherit;
+            font-size: 16px;
+            background-color: #f4f2f2;
+            border: none;
+            color: #646464;
+            padding: 0.5rem 1rem;
+            border-radius: 18px;
+            width: 15em;
+            transition: all ease-in-out .5s;
+            margin-right: -2rem;
+        }
+
+        .search__input:hover,
+        .search__input:focus {
+            box-shadow: 0 0 1em #00000013;
+        }
+
+        .search__input:focus {
+            outline: none;
+            background-color: #f0eeee;
+        }
+
+        .search__input::-webkit-input-placeholder {
+            font-weight: 100;
+            color: #ccc;
+        }
+
+        .search__input:focus+.search__button {
+            background-color: #f0eeee;
+        }
+
+        .search__button {
+            border: none;
+            background-color: #f4f2f2;
+            margin-top: .1em;
+        }
+
+        .search__button:hover {
+            cursor: pointer;
+        }
+
+        .search__icon {
+            height: 1.3em;
+            width: 1.3em;
+            fill: #b4b4b4;
         }
     </style>
 @endpush
@@ -77,41 +136,10 @@
 
             <div class="container mt-3">
                 <div class="row">
-
-                    <div class="col-md-8 list-system">
-                        @if ($cars->count() == 0)
-                            <div class="text-center">
-                                Salon chưa đăng tin nào cả!
-                            </div>
-                        @else
-                            <div class="row g-4 mb-40">
-                                @foreach ($cars as $item)
-                                    <div class="col-md-6 col-12" wire:key="{{ $item->id }}">
-                                        <div class="product-card2">
-                                            <div class="product-img">
-                                                <livewire:add-to-wish-list carID="{{ $item->id }}" />
-                                                <img src="{{ asset('/storage/' . $item->verhicle_image_library[0]) }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="details-btn">
-                                                    <a href="{{ route('car-detail', $item->slug) }}"><i
-                                                            class="bi bi-arrow-right-short"></i></a>
-                                                </div>
-                                                <div class="price">
-                                                    <strong>{{ number_format($item->price) }} đ</strong>
-                                                </div>
-                                                <h6><a
-                                                        href="{{ route('car-detail', $item->slug) }}">{{ $item->title }}</a>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
+                    <div class="col-md-8 list-system product-page">
+                        <livewire:list-car-salon :salonSlug="$salonInfo->slug" wire:key="list-car-salon" />
                     </div>
-
+                    
                     <div class="col-md-4 salon-info">
                         <div class="contact-info mb-50 px-3 py-4 contact-fixed shadow">
                             <div class="d-flex align-items-center gap-2">
@@ -192,7 +220,7 @@
                     </div>
 
                     <div class="col-md-4 salon-info-mobile" x-data="{ showContact: false }">
-                        <button @click="showContact = !showContact" class="show-btn" >
+                        <button @click="showContact = !showContact" class="show-btn">
                             Xem thông tin
                         </button>
                         <div class="contact-info mb-50 px-3 py-4 contact-fixed shadow" x-show="showContact">
