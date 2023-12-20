@@ -11,7 +11,7 @@
         <div class="pt-5 pb-3 text-center">
             @if (auth()->user()->service_id != 0 && auth()->user()->expired_date >= \Carbon\Carbon::now())
                 <div class="alert alert-primary" role="alert">
-                    Nếu bạn đăng ký dịch vụ mới, dịch vụ cũ sẽ được duy trì nhưng số lượt đẩy tin còn lại sẽ không được tính!
+                    Chỉ được phép mua 1 gói tin, nếu đã mua gói trước đó, bạn cần phải chờ hết hạn của dịch vụ trước đó.
                 </div>
             @endif
 
@@ -25,13 +25,13 @@
                     : 'Bạn chưa đăng ký dịch vụ' !!}
             </span>
         </div>
-        <form action="{{ route('payment-vnpay', $serv->id) }}" method="POST">
-            <div class="row mx-auto payment container d-flex justify-content-center">
-                <div class="col-md-7 col-sm-12 box-1 bg-light user">
+        <form action="{{ route('payment-vnpay', $serv->id) }}" method="POST" id="paymentService" novalidate>
+            <div class="row mx-auto payment container d-flex justify-content-center gap-3">
+                <div class="col-md-6 col-sm-12 box-1 bg-light user">
                     <div class="box-inner-1 pb-3 mb-3 ">
                         <div class="d-flex justify-content-between my-3 userdetails">
                             <span class="fw-bold">Mua gói: {{ $serv->service_name }}</span>
-                            <span class="fw-lighter fs-4">{{ number_format($serv->price) }} đ</span>
+                            <span class="fw-bold fs-6">{{ number_format($serv->price) }} đ</span>
                         </div>
                         <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel"
                             data-bs-interval="2000">
@@ -78,38 +78,64 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 col-sm-12 box-2">
+                <div class="col-md-6 col-sm-12 box-2">
                     <div class="box-inner-2">
                         <div>
                             <div>
-                                <p class="fw-bold fs-4 font-monospace">{{ $serv->service_name }}</p>
+                                <p class="fw-bold fs-4">{{ $serv->service_name }}</p>
                                 @php
                                     $descArr = preg_split("/\r\n|\n|\r/", $serv->description);
                                 @endphp
-                                <p class="dis mb-3">
-                                    @foreach ($descArr as $desc)
+                                @foreach ($descArr as $desc)
+                                    <p class="dis mb-3">
                                         <i class="bi bi-patch-check"></i> {{ $desc }} <br>
-                                    @endforeach
-                                </p>
+                                    </p>
+                                    <p>
+                                        <i class="bi bi-patch-check"></i> <strong>Báo cáo</strong> hiệu quả tin đăng
+                                        giúp tối ưu vượt bậc chi phí
+                                    </p>
+                                @endforeach
                             </div>
 
-                            <div>
+                            <div class="mt-4">
                                 <p class="dis">
                                     <span class="fw-bold">Thành tiền:</span>
-                                    <span class="fw-bolder fs-4">{{ number_format($serv->price) }} đ</span>
+                                    <span class="fs-5">{{ number_format($serv->price) }} đ</span>
                                 </p>
                             </div>
                         </div>
 
                         <div>
                             @csrf
-                            <button type="submit" class="btn btn-primary mt-2">Thanh toán ngay
+                            <button type="submit" id="payNow" class="w-100 btn btn-primary mt-2">Thanh toán ngay
                             </button>
                         </div>
+
+                        <div class="text-danger validate mt-3 fw-bold fs-6"></div>
                     </div>
                 </div>
             </div>
         </form>
         <!-- content end -->
     </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $("#paymentService").on("submit", function(e) {
+                    e.preventDefault();
+
+                    var selectedPaymentMethod = $("input[name=payment-method]:checked").val();
+
+                    if (!selectedPaymentMethod) {
+                        $(".validate").text("Vui lòng chọn phương thức thanh toán");
+                    } else {
+                        $(".validate").text("");
+                        console.log('success');
+                        // $("#paymentService").submit();
+                        e.target.submit()
+                    }
+                });
+            });
+        </script>
+    @endpush
 </x-partials.layout-client>

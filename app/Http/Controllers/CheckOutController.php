@@ -15,6 +15,21 @@ class CheckOutController extends Controller
 {
     public function checkout(Request $request, $serviceID)
     {
+        $purchased_sev = DB::table("purchased_service")
+            ->where('user_id', auth()->id())
+            ->where('expired_date', '>=', \Carbon\Carbon::now())
+            ->orderBy('expired_date', 'desc')
+            ->first();
+
+        // dd($purchased_sev);
+
+        if($purchased_sev) {
+            return redirect()
+                ->route('profile')
+                ->with('status', 'Bạn đã đăng ký 1 gói dịch vụ trước đó, khi hết hạn gói cũ bạn có thể mua gói mới.');
+        }
+
+
         $service = Service::findOrFail($serviceID);
         # thanh toán bằng số dư tài khoản
         if ($request->input('payment-method') == 'balance') {

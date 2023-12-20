@@ -11,13 +11,14 @@
 
                 <div class="row" style="row-gap: 20px">
                     @if(isset($service))
+                    <div class="alert alert-danger m-0">Bạn đã đăng ký gói dịch vụ trước đó, khi gói này hết hạn bạn mới có thể mua gói khác.</div>
                     <div class="text-black">
                         <p class="mb-1">Bạn đang đăng ký gói dịch vụ: <strong>
                                 {{ auth()->user()->service->service_name }} </strong></p>
                         <p>Bạn còn: <strong> {{ $service->remaining_push }} </strong> lượt đẩy tin.</p>
                     </div>
                     @endif
-                    <div class="col-lg-4 col-md-5 col-sm-6">
+                    <div class="col-lg-4 col-md-5 col-sm-12">
                         <div class="product-card2">
                             <div class="product-img">
                                 <img class="w-100" style="height: 300px;object-fit:cover" src="{{ asset('storage/' . $carInfo->verhicle_image_library[0]) }}" alt="">
@@ -33,8 +34,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-7 col-sm-6">
-                        <h3>Đẩy tin để làm gì?</h3>
+                    <div class="col-lg-8 col-md-7 col-sm-12">
+                        <h4>Đẩy tin để làm gì?</h4>
                         <ul>
                             <li>Tiếp cận nhiều khách hàng hơn.</li>
                             <li>Chuyên nghiệp hơn.</li>
@@ -45,14 +46,17 @@
                 <hr class="border-2">
 
                 <div class="row my-3" style="row-gap: 20px">
-                    <div class="col-md-4 col-sm-3">
+                    <div class="col-md-4 col-sm-12">
                         <img src="{{ asset('images/bump.gif') }}" alt="">
                     </div>
 
-                    <div class="col-md-8 col-sm-9 d-flex flex-column">
+                    <div class="col-md-8 col-sm-12 d-flex flex-column">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-megaphone-fill text-danger fw-bold"></i> Nếu bạn chỉ cần đẩy 1 tin hãy mua gói này, trong trường hợp đẩy nhiều tin bạn cần mua <a class="fw-bold" href="{{ route('service.list') }}">gói vip</a> để có thể đẩy nhiều tin hơn.
+                        </div>
                         <form action="{{ route('confirmPush', $carInfo->id) }}" method="POST" class="mb-3">
                             @csrf
-                            <label class="fw-bold font-monospace" for="">Chọn loại tin lẻ:</label>
+                            <label class="fw-bold" for="">Chọn loại tin lẻ:</label>
                             <div class="radio-inputs options-push w-100">
                                 @foreach (\App\Models\Service::where('service_name', 'LIKE', '%tin lẻ%')->get() as $service)
                                     <label class="radio">
@@ -80,8 +84,8 @@
 
                             <div class="text-center mt-auto d-flex justify-content-center">
                                 {{-- <input type="number" name="service_id" hidden value="{{ $service }}"> --}}
-                                <button id="payment" type="submit" class="primary-btn1 btn-dark1">THANH TOÁN</button>
-                                <button onclick="window.location='{{ route('profile') }}'" class="btn btn-light">QUAY LẠI</button>
+                                <button id="payment" type="submit" class="primary-btn1 btn-dark1">MUA GÓI</button>
+                                <button onclick="window.location.href='{{ route('profile') }}'" class="btn btn-light">QUAY LẠI</button>
                             </div>
                         </form>
 
@@ -108,8 +112,8 @@
                         <p>Bạn còn: <strong> {{ $service->remaining_push }} </strong> lượt đẩy tin.</p>
                     </div>
 
-                    <div class="card-confirm row">
-                        <div class="col-lg-4 col-md-5 col-sm-6">
+                    <div class="card-confirm row gap-3">
+                        <div class="col-md-6 col-sm-12">
                             <div class="product-card2">
                                 <div class="product-img">
                                     <a href="#" class="fav">
@@ -125,21 +129,20 @@
                                 </div>
                                 <div class="product-content">
                                     <div class="details-btn">
-                                        <a href="car-deatils.html"><i class="bi bi-arrow-right-short"></i></a>
+                                        <a href="{{ route('car-detail', $carInfo->slug) }}"><i class="bi bi-arrow-right-short"></i></a>
                                     </div>
                                     <div class="price">
                                         <strong>{{ number_format($carInfo->price) }} đ</strong>
                                     </div>
-                                    <h6><a href="car-deatils.html">{{ $carInfo->title }}</a></h6>
+                                    <h6><a href="{{ route('car-detail', $carInfo->slug) }}">{{ $carInfo->title }}</a></h6>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-lg-8 col-md-7 col-sm-6">
-                            <h1>Bạn có chắc muốn đẩy tin này?</h1>
+                        <div class="col-md-6 col-sm-12">
+                            <h5>Bạn có chắc muốn đẩy tin này?</h5>
                             <form method="POST" action="{{ route('confirmPush', $carInfo->id) }}">
                                 @csrf
-                                <button type="submit" class="primary-btn3">
+                                <button type="submit" class="primary-btn3 btn btn-sm">
                                     <svg width="24" height="15" viewBox="0 0 24 15"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -152,9 +155,9 @@
                                             d="M0 5.09873C0 4.99473 0.0408428 4.89499 0.113543 4.82146C0.186244 4.74792 0.284847 4.7066 0.387662 4.7066H4.74886C4.85167 4.7066 4.95027 4.74792 5.02297 4.82146C5.09567 4.89499 5.13652 4.99473 5.13652 5.09873C5.13652 5.20273 5.09567 5.30247 5.02297 5.37601C4.95027 5.44955 4.85167 5.49086 4.74886 5.49086H0.387662C0.284847 5.49086 0.186244 5.44955 0.113543 5.37601C0.0408428 5.30247 0 5.20273 0 5.09873ZM15.6836 5.60575C15.7563 5.67929 15.7971 5.77901 15.7971 5.88299C15.7971 5.98697 15.7563 6.08669 15.6836 6.16022L15.6532 6.19101C15.2897 6.55865 14.7968 6.76522 14.2828 6.76528H8.14089C8.03808 6.76528 7.93948 6.72397 7.86678 6.65043C7.79408 6.57689 7.75323 6.47715 7.75323 6.37315C7.75323 6.26915 7.79408 6.16941 7.86678 6.09587C7.93948 6.02234 8.03808 5.98102 8.14089 5.98102H14.2826C14.4354 5.98104 14.5866 5.95063 14.7277 5.89152C14.8688 5.83241 14.997 5.74577 15.105 5.63654L15.1355 5.60575C15.2082 5.53224 15.3068 5.49094 15.4096 5.49094C15.5123 5.49094 15.6109 5.53224 15.6836 5.60575ZM8.52856 14.6079C8.52856 14.5039 8.5694 14.4041 8.6421 14.3306C8.7148 14.257 8.8134 14.2157 8.91622 14.2157H10.5638C10.6666 14.2157 10.7652 14.257 10.8379 14.3306C10.9106 14.4041 10.9514 14.5039 10.9514 14.6079C10.9514 14.7118 10.9106 14.8116 10.8379 14.8851C10.7652 14.9587 10.6666 15 10.5638 15H8.91622C8.8134 15 8.7148 14.9587 8.6421 14.8851C8.5694 14.8116 8.52856 14.7118 8.52856 14.6079ZM11.2422 14.6079C11.2422 14.5039 11.283 14.4041 11.3557 14.3306C11.4284 14.257 11.527 14.2157 11.6298 14.2157H15.991C16.0939 14.2157 16.1925 14.257 16.2652 14.3306C16.3379 14.4041 16.3787 14.5039 16.3787 14.6079C16.3787 14.7118 16.3379 14.8116 16.2652 14.8851C16.1925 14.9587 16.0939 15 15.991 15H11.6298C11.527 15 11.4284 14.9587 11.3557 14.8851C11.283 14.8116 11.2422 14.7118 11.2422 14.6079Z">
                                         </path>
                                     </svg>
-                                    Đẩy tin
+                                    Đẩy tin ngay
                                 </button>
-                                <a href="{{route('profile')}}" class="primary-btn3 btn-dark1">Trở lại</a>
+                                <a href="{{route('profile')}}" class="primary-btn3 btn-dark1 btn btn-sm">Trở lại</a>
                             </form>
                         </div>
                     </div>
