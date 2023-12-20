@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\News;
 use App\Models\Partner;
+use App\Models\Salon;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,10 +36,10 @@ class HomeController extends Controller
             ->where('status', 1)
             ->inRandomOrder()
             ->get();
-        #thêm 1 cột đánh dấu tin vip 
+        #thêm 1 cột đánh dấu tin vip
         $featured_cars = $featured_cars->map(function ($car) {
             $car['is_vip'] = true;
-        
+
             return $car;
         });
         // dd($featured_cars);
@@ -58,7 +59,7 @@ class HomeController extends Controller
         // dd($featured_cars);
         $id = $featured_cars->pluck('id');
         session(['featured_cars_id' => $id]);
-        
+
         $mark = false;
         $banners = Banner::all();
         if ($banners->isEmpty()) {
@@ -86,7 +87,9 @@ class HomeController extends Controller
             ->limit(1)
             ->get();
 
-        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners', 'adsPartners'));
+        $salonList = Salon::where('status', 1)->get();
+
+        return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners', 'adsPartners', 'salonList'));
     }
 
 }

@@ -16,7 +16,7 @@
                 <div class="col-xl-3 order-xl-1 order-2">
                     <div class="filter-area mb-40">
                         <div class="title-and-close-btn mb-20">
-                            <h6>Bộ Lọc Tìm Kiếm</h6>
+                            <h5>Bộ Lọc Tìm Kiếm</h5>
                         </div>
                     </div>
                     <div class="product-sidebar">

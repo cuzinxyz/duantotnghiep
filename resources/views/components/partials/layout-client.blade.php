@@ -75,15 +75,18 @@
     <link href="{{ asset('css/sell-car.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <!--<script src="//unpkg.com/alpinejs" defer ></script>-->
+    <!--<script src="//unpkg.com/alpinejs" defer></script>-->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5B2YRXX4TD"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'G-5B2YRXX4TD');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-5B2YRXX4TD');
     </script>
 
     @livewireStyles
@@ -231,7 +234,9 @@
                                 <h5>Salon</h5>
                                 <ul>
                                     @php
-                                        $salons = \App\Models\Salon::limit(8)->where('status', 1)->get();
+                                        $salons = \App\Models\Salon::limit(8)
+                                            ->where('status', 1)
+                                            ->get();
                                     @endphp
 
                                     @foreach ($salons as $salon)
@@ -270,7 +275,7 @@
             <div class="search-area">
                 <form>
                     <div class="form-inner d-flex">
-                        <input type="text" placeholder="Search for cars"
+                        <input type="text" placeholder="Tìm kiếm xe" style="float: left;width:calc(100% - 50px)"
                             class="border border-dark border-1 rounded px-2 py-1">
                         <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
                     </div>
@@ -301,7 +306,7 @@
                                     d="M7.00012 2.40453L6.37273 1.75966C4.90006 0.245917 2.19972 0.76829 1.22495 2.67141C0.767306 3.56653 0.664053 4.8589 1.4997 6.50827C2.30473 8.09639 3.97953 9.99864 7.00012 12.0706C10.0207 9.99864 11.6946 8.09639 12.5005 6.50827C13.3362 4.85803 13.2338 3.56653 12.7753 2.67141C11.8005 0.76829 9.10019 0.245042 7.62752 1.75879L7.00012 2.40453ZM7.00012 13.125C-6.41666 4.25953 2.86912 -2.65995 6.84612 1.00016C6.89862 1.04829 6.95024 1.09816 7.00012 1.14979C7.04949 1.09821 7.10087 1.04859 7.15413 1.00104C11.1302 -2.6617 20.4169 4.25865 7.00012 13.125Z">
                                 </path>
                             </svg>
-                            Đã Lưu
+                            Tin đã lưu
                         </a>
                     </li>
                 </ul>
@@ -328,17 +333,15 @@
                             <ul>
                                 <li class="pd-cart">
                                     <div class="d-flex align-items-start gap-3">
-                                        @if (strpos(auth()->user()->avatar, "http") === 0)
+                                        @if (strpos(auth()->user()->avatar, 'http') === 0)
                                             <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                src="{{auth()->user()->avatar}}"
-                                                alt="">
+                                                src="{{ auth()->user()->avatar }}" alt="">
                                         @elseif (Storage::url(auth()->user()->avatar))
                                             <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                src="{{ asset('storage/'.auth()->user()->avatar) }}"
-                                                alt="">
+                                                src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="">
                                         @else
                                             <img style="width: 50px;height:50px;object-fit:cover" class="rounded-circle"
-                                                src="{{'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
+                                                src="{{ 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}"
                                                 alt="">
                                         @endif
 
@@ -477,7 +480,8 @@
                 </div>
             @endauth
             @guest
-                <div onclick="window.location.href='{{route('account')}}'" class="fw-bold" style="cursor:pointer;font-size:13px">
+                <div onclick="window.location.href='{{ route('account') }}'" class="fw-bold"
+                    style="cursor:pointer;font-size:13px">
                     <i class="bi bi-person-rolodex"></i>
                     TÀI KHOẢN
                 </div>
@@ -485,17 +489,17 @@
                 <!--    <button class="modal-btn header-account-btn" onclick="" type="button">-->
                 <!--        <i class="bi bi-file-person-fill"></i> Tài khoản-->
                 <!--    </button>-->
-                    <!--<div class="account-menu">-->
-                    <!--    <div class="account-footer" style="min-width: 230px">-->
-                    <!--        <div class="footer-button">-->
-                    <!--            <div class="d-flex justify-content-between align-items-center gap-3">-->
-                    <!--                <a class="w-50 primary-btn1 visible d-block" href="/login">Đăng nhập</a>-->
-                    <!--                <span class="fs-6">|</span>-->
-                    <!--                <a class="w-50 primary-btn1 visible d-block btn-dark1" href="/register">Đăng ký</a>-->
-                    <!--            </div>-->
-                    <!--        </div>-->
-                    <!--    </div>-->
-                    <!--</div>-->
+                <!--<div class="account-menu">-->
+                <!--    <div class="account-footer" style="min-width: 230px">-->
+                <!--        <div class="footer-button">-->
+                <!--            <div class="d-flex justify-content-between align-items-center gap-3">-->
+                <!--                <a class="w-50 primary-btn1 visible d-block" href="/login">Đăng nhập</a>-->
+                <!--                <span class="fs-6">|</span>-->
+                <!--                <a class="w-50 primary-btn1 visible d-block btn-dark1" href="/register">Đăng ký</a>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
                 <!--</div>-->
             @else
                 @endif
@@ -679,7 +683,8 @@
                     <div class="social-area">
                         <h6>Follow Drivco:</h6>
                         <ul>
-                            <li><a target="_blank" href="https://www.facebook.com/drivco/"><i class="bx bxl-facebook"></i></a></li>
+                            <li><a target="_blank" href="https://www.facebook.com/drivco/"><i
+                                        class="bx bxl-facebook"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -689,6 +694,38 @@
         <button id="backToTopBtn" title="Go to top">
             <i class="fa fa-arrow-up"></i>
         </button>
+
+        <!-- Messenger Plugin chat Code -->
+        <div id="fb-root"></div>
+
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "170265699509568");
+            chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+
+        <!-- Your SDK code -->
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    xfbml: true,
+                    version: 'v18.0'
+                });
+            };
+
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 
         @livewireScripts
 
