@@ -31,6 +31,7 @@ use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Actions\Action;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
+use App\Mail\SendMailCar;
 
 class PostCarManagerResource extends Resource
 {
@@ -189,8 +190,8 @@ class PostCarManagerResource extends Resource
 
                                                     $bot = User::where('name', 'BOT')->first();
                                                     $reason = 'Chào bạn ' . $record->user->name . ',
-                                                Tin đăng bán xe của bạn có tiêu đề: ' . $record->title . ' được phê duyệt thành công.
-                                                Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
+                                                    Tin đăng bán xe của bạn có tiêu đề: ' . $record->title . ' được phê duyệt thành công.
+                                                    Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
 
                                                     ChMessage::create([
                                                         'from_id' => $bot->id,
@@ -247,6 +248,8 @@ class PostCarManagerResource extends Resource
                                                         'to_id' => $record->user_id,
                                                         'body' => $reason
                                                     ]);
+
+                                                    Mail::to($record->user->email)->later(now()->addSeconds(5), new SendMailCar($record));
 
 
                                                     $record->reason = $data['reason'];

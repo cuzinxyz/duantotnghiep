@@ -362,132 +362,92 @@
                                 aria-labelledby="v-pills-common-tab">
                                 <div class="reviews-area">
                                     <div class="container px-4 py-1" id="featured-3">
-                                        <h2 class="pb-2 border-bottom">Gói đăng
-                                            ký&nbsp;({{ $billHistories->count() }})</h2>
+                                        <h2 class="pb-2 border-bottom">Gói đăng ký</h2>
                                         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                                            @foreach ($billHistories as $item)
-                                                <div class="feature col">
-                                                    <div class="feature-icon bg-drivco bg-gradient">
-                                                        <svg class="bi" width="1em" height="1em">
-                                                            <use xlink:href="#collection"></use>
-                                                        </svg>
-                                                    </div>
-                                                    <h4>{{ $item->service_name }}</h4>
-                                                    <p class="text-success fw-bolder">
-                                                        @php
-                                                            $string = $item->description;
-                                                            $newString = str_replace(' \n', ', ', $string);
-                                                            echo $newString;
-                                                        @endphp
-                                                    </p>
+                                            <div class="feature col">
+                                                <div class="feature-icon bg-drivco bg-gradient">
+                                                    <svg class="bi" width="1em" height="1em">
+                                                        <use xlink:href="#collection"></use>
+                                                    </svg>
                                                 </div>
-                                            @endforeach
+                                                <h4>{{ $billHistories->service_name }}</h4>
+                                                <p class="text-success fw-bolder">
+                                                    @php
+                                                        $string = $billHistories->description;
+                                                        $newString = str_replace(' \n', ', ', $string);
+                                                        echo $newString;
+                                                    @endphp
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
 
 
-                                    @if (count($purchased_service) > 0)
-                                        @php
-                                            $serviceCars = [];
-
-                                            foreach ($purchased_service as $purchasedService) {
-                                                $serviceId = $purchasedService->service_id;
-                                                $carIds = explode(',', $purchasedService->car_id);
-
-                                                if (!isset($serviceCars[$serviceId])) {
-                                                    $serviceCars[$serviceId] = [];
-                                                }
-
-                                                foreach ($carIds as $carId) {
-                                                    $serviceCars[$serviceId][] = $carId;
-                                                }
-                                            }
-
-                                            $cars = [];
-                                        @endphp
-                                        @foreach ($serviceCars as $serviceId => $carIds)
-                                            <div class="b-example-divider"></div>
-                                            @php
-                                                $service = \App\Models\Service::where('id', $serviceId)
-                                                    ->select('service_name')
-                                                    ->get();
-
-                                                $expired_date = \App\Models\PurchasedService::where([
-                                                    'service_id' => $serviceId,
-                                                    'user_id' => auth()->id(),
-                                                ])
-                                                    ->select('expired_date')
-                                                    ->orderBy('created_at', 'asc')
-                                                    ->first();
-                                                
-                        
-                                            @endphp
-                                            <div class="container px-4 py-1" id="custom-cards">
-                                                <h2 class="pb-2 border-bottom">
-                                                    {{ $service[0]->service_name }}
-                                                </h2>
-                                                @if (Carbon\Carbon::now()->between(
-                                                        \Carbon\Carbon::parse($expired_date->expired_date)->subDays(2),
-                                                        \Carbon\Carbon::parse($expired_date->expired_date)))
-                                                        <div class="alert alert-warning">
-                                                            Tin này của bạn sẽ hết hạn vào ngày
-                                                            {{ \Carbon\Carbon::parse($expired_date->expired_date)->format('d-m-Y') }}
-                                                            .Vui lòng
-                                                            <button class="btn btn-sm btn-warning"
-                                                                onclick="window.location.href='{{ route('service.expired_date', $serviceId) }}'">
-                                                                Gia hạn
-                                                            </button>
-                                                            để tiếp tục duy trì tin gói tin.
-                                                        </div>
-                                                @endif
-                                                @foreach (App\Models\Car::with('services')->whereIn('id', $carIds)->get() as $item)
-                                                    <div
-                                                        class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-                                                        <div class="col">
-                                                            <div class="overlay-product card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-                                                                style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
-                                                                <div
-                                                                    class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                                                                    <h2
-                                                                        class="pt-5 mt-5 mb-4 fs-6 lh-1 fw-bold text-white">
-                                                                        {{ $item->title }}</h2>
-                                                                    <ul class="d-flex list-unstyled mt-auto">
-                                                                        <li class="me-auto">
-                                                                            {{ $item->countComments($item->id) }}
-                                                                            <svg class="bi me-2" width="1em"
-                                                                                height="1em">
-                                                                                <use xlink:href="#chat-quote-fill">
-                                                                                </use>
-                                                                            </svg>
-                                                                            {{-- <img src="2918581" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white"> --}}
-                                                                        </li>
-                                                                        <li class="d-flex align-items-center me-3">
-                                                                            <svg class="bi me-2" width="1em"
-                                                                                height="1em">
-                                                                                <use xlink:href="#heart"></use>
-                                                                            </svg>
-                                                                            <small>{{ $item->countWishlish($item->id) }}</small>
-                                                                        </li>
-                                                                        <li class="d-flex align-items-center">
-                                                                            <svg class="bi me-2" width="1em"
-                                                                                height="1em">
-                                                                                <use xlink:href="#eye"></use>
-                                                                            </svg>
-                                                                            <small>{{ views($item)->count() }}</small>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <span>Ngày hết hạn:
-                                                                        {{ \Carbon\Carbon::parse(
-                                                                            \App\Models\PurchasedService::where('service_id', $serviceId)->where('user_id', auth()->id())->pluck('expired_date')[0],
-                                                                        )->format('d-m-Y') }}
-                                                                    </span>
-                                                                </div>
+                                    @if (!empty($purchased_service))
+                                        <div class="b-example-divider"></div>
+                                        
+                                        <div class="container px-4 py-1" id="custom-cards">
+                                            <h2 class="pb-2 border-bottom">
+                                                {{ $purchased_service->service->service_name }}
+                                            </h2>
+                                            @if (Carbon\Carbon::now()->between(
+                                                    \Carbon\Carbon::parse($purchased_service->expired_date)->subDays(2),
+                                                    \Carbon\Carbon::parse($purchased_service->expired_date)))
+                                                <div class="alert alert-warning">
+                                                    Tin này của bạn sẽ hết hạn vào ngày
+                                                    {{ \Carbon\Carbon::parse($purchased_service->expired_date)->format('d-m-Y') }}
+                                                    .Vui lòng
+                                                    <button class="btn btn-sm btn-warning"
+                                                        onclick="window.location.href='{{ route('service.expired_date', $serviceId) }}'">
+                                                        Gia hạn
+                                                    </button>
+                                                    để tiếp tục duy trì tin gói tin.
+                                                </div>
+                                            @endif
+                                            @foreach (App\Models\Car::with('services')->where('id', $purchased_service->car_id)->get() as $item)
+                                                <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+                                                    <div class="col">
+                                                        <div class="overlay-product card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                                                            style="background-image: url('/storage/{{ $item->verhicle_image_library[0] }}');">
+                                                            <div
+                                                                class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                                                <h2
+                                                                    class="pt-5 mt-5 mb-4 fs-6 lh-1 fw-bold text-white">
+                                                                    {{ $item->title }}</h2>
+                                                                <ul class="d-flex list-unstyled mt-auto">
+                                                                    <li class="me-auto">
+                                                                        {{ $item->countComments($item->id) }}
+                                                                        <svg class="bi me-2" width="1em"
+                                                                            height="1em">
+                                                                            <use xlink:href="#chat-quote-fill">
+                                                                            </use>
+                                                                        </svg>
+                                                                        {{-- <img src="2918581" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white"> --}}
+                                                                    </li>
+                                                                    <li class="d-flex align-items-center me-3">
+                                                                        <svg class="bi me-2" width="1em"
+                                                                            height="1em">
+                                                                            <use xlink:href="#heart"></use>
+                                                                        </svg>
+                                                                        <small>{{ $item->countWishlish($item->id) }}</small>
+                                                                    </li>
+                                                                    <li class="d-flex align-items-center">
+                                                                        <svg class="bi me-2" width="1em"
+                                                                            height="1em">
+                                                                            <use xlink:href="#eye"></use>
+                                                                        </svg>
+                                                                        <small>{{ views($item)->count() }}</small>
+                                                                    </li>
+                                                                </ul>
+                                                                <span>Ngày hết hạn:
+                                                                    {{ \Carbon\Carbon::parse($purchased_service->expired_date)->format('d-m-Y') }}
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
-                                            </div>
-                                        @endforeach
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     @endif
                                 </div>
                             </div>

@@ -52,28 +52,18 @@ class SettingsController extends Controller
         $serviceId = DB::table('purchased_service')
             ->where('user_id', Auth::id())
             ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
-            ->pluck('service_id');
+            ->orderBy('created_at', 'desc')
+            ->select('service_id')
+            ->first();
 
-        $billHistories = Service::whereIn('id', $serviceId)
-            ->get();
-
+        $billHistories = Service::where('id', $serviceId->service_id)
+            ->orderBy('created_at', 'desc')
+            ->first();
 
         $purchased_service = PurchasedService::where('user_id', auth()->id())
             ->whereDate('expired_date', '>=', \Carbon\Carbon::now())
-            ->get();
-        // $carPushed = [];
-        // foreach($purchased_service as $item) {
-        //     $carID = explode(',', $item->car_id);
-        //     $carPushed[] = Car::with('services')->whereIn('id', $carID)->get();
-        // }
-
-
-        // Car::with('services')->where([
-        //     'user_id' => Auth::id(),
-        //     'status' => 1,
-        //     'salon_id' => null
-        // ])
-        //     ->get();
+            ->orderBy('created_at', 'desc')
+            ->first();
 
         return view('user-settings.profile', compact('cars', 'pendingCars', 'deniedCars', 'hiddenCars', 'billHistories', 'purchased_service'));
     }
@@ -464,7 +454,6 @@ class SettingsController extends Controller
 
         if ($resultWithdraw) {
             event(new WorkCollaboratorEvent($resultWithdraw));
-
             return redirect()->route('profile')->with('status', 'Đã gửi yêu cầu rút tiền, vui lòng chờ phản hồi~!');
         }
     }
@@ -477,7 +466,6 @@ class SettingsController extends Controller
         ])
             ->orderBy('created_at', 'asc')
             ->first();
-
 
         $service = Service::find($id);
         $user = User::find($expired_date->user_id);

@@ -27,8 +27,8 @@
                         <select id="brandListSalon" wire:model.live="brandCar">
                             <option wire:key="brand-null" value="">Hãng xe</option>
                             @foreach ($brands as $item)
-                                <option wire:key="brand-{{ $item->brand->id }}" value="{{ $item->brand->id }}">
-                                    {{ $item->brand->brand_name }}</option>
+                                <option wire:key="brand-{{ $item->id }}" value="{{ $item->id }}">
+                                    {{ $item->brand_name }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -47,7 +47,8 @@ class NotificationExtendServicesListen
                     'body' => $message
                 ]);
                 $user = User::find($item->user_id);
-                Mail::to($user->email)->later(now()->addSeconds(5), new SendMailExtendService($message));
+                $subject = 'Thông báo gia hạn gói tin';
+                Mail::to($user->email)->later(now()->addSeconds(5), new SendMailExtendService($subject, $message));
 
             }
         }
@@ -72,7 +73,8 @@ class NotificationExtendServicesListen
                     'body' => $message
                 ]);
 
-                Mail::to($item->email)->later(now()->addSeconds(5), new SendMailExtendService($message));
+                $subject = 'Thông báo gia hạn gói tin';
+                Mail::to($item->email)->later(now()->addSeconds(5), new SendMailExtendService($subject, $message));
             }
         }
     }

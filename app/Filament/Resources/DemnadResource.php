@@ -167,8 +167,8 @@ class DemnadResource extends Resource
                                             $user = User::where('id', $record->user_id)->first();
 
                                             $reason = 'Chào bạn ' . $user->name . ',
-                                    Bài viết có tiêu đề: "' . $record->content . '" của bạn đã không được duyệt.
-                                    Vì lý do: ' . $data['reason'] . ', vui lòng điều chỉnh lại bài viết của bạn để chúng tôi có thể hỗ trợ bạn dễ dàng tìm được chiếc xe như mong muốn.';
+                                            Bài viết có tiêu đề: "' . $record->content . '" của bạn đã không được duyệt.
+                                            Vì lý do: ' . $data['reason'] . ', vui lòng điều chỉnh lại bài viết của bạn để chúng tôi có thể hỗ trợ bạn dễ dàng tìm được chiếc xe như mong muốn.';
                                             ChMessage::create([
                                                 'from_id' => $bot->id,
                                                 'to_id' => $record->user_id,

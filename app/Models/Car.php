@@ -103,4 +103,6 @@ class Car extends Model implements Viewable
     public function services(): BelongsToMany {
         return $this->belongsToMany(Service::class, 'purchased_service', 'car_id', 'service_id')->withPivot('expired_date');
     }
+
+    
 }

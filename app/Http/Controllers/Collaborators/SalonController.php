@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Salon;
 use App\Models\ChMessage;
+use App\Mail\SendMailSalon;
 use Illuminate\Http\Request;
 use App\Models\TransactionsHistory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Events\SalonCollaboratorEvent;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -90,6 +92,7 @@ class SalonController extends Controller
                 'body' => $reason
             ]);
 
+
             return 0;
         }
 
@@ -122,16 +125,16 @@ class SalonController extends Controller
             'body' => $reason
         ]);
 
-
+        Mail::to($salon->user->email)->later(now()->addSeconds(5), new SendMailSalon($salon));
         return redirect()->route('collaborators.salons');
 
     }
 
 
     public function unActiveSalon(Request $request, $salonID) {
-        
         // Cập nhật trạng thái cửa hàng
         $salon =  Salon::find($salonID);
+        $salon->reason = $request->reason;
         $salon->status = 2;
         $salon->save();
 
@@ -158,8 +161,10 @@ class SalonController extends Controller
         ChMessage::create([
             'from_id' => $bot->id,
             'to_id' => $salon->user_id,
-            'body' => $request->reason
+            'body' => $reason
         ]);
+
+        Mail::to($salon->user->email)->later(now()->addSeconds(5), new SendMailSalon($salon));
 
         return redirect()->route('collaborators.cars');
     }

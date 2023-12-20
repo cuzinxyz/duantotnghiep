@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Collaborators;
 use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\User;
+use App\Mail\SendMailCar;
 use App\Models\ChMessage;
 use App\Mail\CarRegistMail;
 use Illuminate\Http\Request;
+use App\Mail\SendMailExtendService;
 use App\Events\CarCollaboratorEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -96,6 +98,7 @@ class CarsController extends Controller
             'to_id' => $car->user_id,
             'body' => $reason
         ]);
+        
         return redirect()->route('collaborators.cars');
     }
 
@@ -121,13 +124,15 @@ class CarsController extends Controller
         $reason = 'Chào bạn ' . $car->user->name . ',
             Tin đăng bán xe có tiêu đề: ' . $car->title . ' của bạn không được phê duyệt, vì lý do: "' . $request->reason . '"
             Bạn vui đăng lại tin của mình và sửa lại những lỗi nêu trên
-            Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
+            .Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
 
         ChMessage::create([
             'from_id' => $bot->id,
             'to_id' => $car->user_id,
             'body' => $reason
         ]);
+
+        Mail::to($car->user->email)->later(now()->addSeconds(5), new SendMailCar($car));
 
         return redirect()->route('collaborators.cars');
     }

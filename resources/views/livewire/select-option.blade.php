@@ -11,7 +11,7 @@
         </select>
     </div>
     <div class="text-danger fw-bold" style="font-size:12px">
-        @error('value')
+        @error($value)
             {{ $message }}
         @enderror
     </div>

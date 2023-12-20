@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Events\SalonCollaboratorEvent;
 use Carbon\Carbon;
 use Filament\Forms;
 use App\Models\User;
@@ -11,10 +10,13 @@ use App\Models\Salon;
 use Filament\Forms\Form;
 use App\Models\ChMessage;
 use Filament\Tables\Table;
+use App\Mail\SendMailSalon;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use App\Models\TransactionsHistory;
 use Filament\Tables\Columns\Column;
+use Illuminate\Support\Facades\Mail;
+use App\Events\SalonCollaboratorEvent;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -121,7 +123,6 @@ class SalonsResource extends Resource
                                     'to_id' => $salon->user_id,
                                     'body' => $reason
                                 ]);
-
                                 Notification::make()
                                     ->title('Số dư của khách hàng không đủ. Đã thông báo tới khách hàng!')
                                     ->success()
@@ -156,6 +157,8 @@ class SalonsResource extends Resource
                                 'to_id' => $salon->user_id,
                                 'body' => $reason
                             ]);
+                            Mail::to($salon->user->email)->later(now()->addSeconds(5), new SendMailSalon($salon));
+                            
                             Notification::make()
                                 ->title('Đã xác nhận thành công')
                                 ->success()
@@ -212,6 +215,8 @@ class SalonsResource extends Resource
                                 'body' => $reason
                             ]);
 
+                            Mail::to($salon->user->email)->later(now()->addSeconds(5), new SendMailSalon($salon));
+
                             Notification::make()
                                 ->title('Đã gửi phản hồi tới khách hàng')
                                 ->success()
@@ -260,6 +265,7 @@ class SalonsResource extends Resource
                                     'to_id' => $salon->user_id,
                                     'body' => $reason
                                 ]);
+                                
 
                                 Notification::make()
                                     ->title('Đã gửi phản hồi tới khách hàng')

@@ -30,8 +30,11 @@ class ListCarSalon extends Component
 
         $cars = Car::query()->where('salon_id', $salonInfo->id)->where('status', 1);
 
-        $brands = Car::where('salon_id', $salonInfo->id)->where('status', 1)->get();
-
+        $brands = Brand::join('cars', 'brands.id', '=', 'cars.brand_id')
+            ->where('cars.salon_id', $salonInfo->id)
+            ->select('brands.id', 'brands.brand_name')
+            ->distinct()
+            ->get();
         if ($this->searchCar) {
             $cars->where('title', 'like', '%' . $this->searchCar . '%');
         }
