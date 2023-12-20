@@ -1,13 +1,5 @@
 @props(['cars'])
-<style>
-/* CSS */
-@media (min-width: 768px) {
-    .font-size-md-15 {
-        font-size: 10px;
-    }
-}
 
-</style>
 <div class="home5-featured-cars-section pt-100 mb-100">
     <div class="container">
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
@@ -73,7 +65,7 @@
                                         <div class="price">
                                             <strong>{{number_format($car->price)}} đ</strong>
                                         </div>
-                                        <div class="location font-size-md-15">
+                                        <div class="location">
                                             <a><i class="bi bi-geo-alt"></i> {{ $car->province->name }}</a>
                                         </div>
                                     </div>
