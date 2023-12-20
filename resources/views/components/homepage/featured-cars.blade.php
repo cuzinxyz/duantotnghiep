@@ -1,5 +1,13 @@
 @props(['cars'])
+<style>
+/* CSS */
+@media (min-width: 768px) {
+    .font-size-md-15 {
+        font-size: 10px;
+    }
+}
 
+</style>
 <div class="home5-featured-cars-section pt-100 mb-100">
     <div class="container">
         <div class="row mb-50 wow fadeInUp" data-wow-delay="200ms">
@@ -13,9 +21,7 @@
         <div class="row wow fadeInUp" data-wow-delay="300ms">
             <div class="col-lg-12">
                 <div class="row gy-3">
-
                     <livewire:recommend-car />
-
                 </div>
             </div>
         </div>

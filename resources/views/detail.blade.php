@@ -139,7 +139,7 @@
                                     <div class="product-st-card1 two mb-30">
                                         <div class="product-img">
                                             <div class="product-price">
-                                                <span>{{ number_format($car->price) }}</span>
+                                                <span>{{ number_format($car->price) }} đ</span>
                                             </div>
                                             <livewire:add-to-wish-list carID="{{ $car->id }}" />
                                             <div class="car-img">
@@ -171,7 +171,7 @@
                                     </div>
                                 @endforeach
                                 <div class="view-all-btn">
-                                    <a style="margin-right: -10px;margin-left:-10px;"
+                                    <a style=""
                                         class="btn btn-sm primary-btn3 two" href="{{ route('car.list') }}">
                                         <svg width="35" height="21" viewBox="0 0 35 21"
                                             xmlns="http://www.w3.org/2000/svg">
