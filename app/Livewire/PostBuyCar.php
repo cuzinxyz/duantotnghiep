@@ -47,7 +47,7 @@ class PostBuyCar extends Component
   {
     if (auth()->check()) {
       $demand = Demnad::find($id);
-      if ($demand->user_id == auth()->id()) {
+      if ($demand->user_id == auth()->id() || auth()->user()->is_collaborator == 1) {
         $demand->delete();
 
         $this->dispatch('showSuccess', 'Xoá tin thành công');

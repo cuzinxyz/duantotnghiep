@@ -383,6 +383,9 @@
                                                         Bạn còn {{ $purchased_service->remaining_push }} lượt đẩy tin
                                                     </p>
                                                 </div>
+                                                <div>
+                                                    <a href="{{route('deleteService', $purchased_service->service_id)}}" onclick="return confirm('Bạn có chắc muốn hủy gói tin này ?')" class="btn btn-danger">Hủy gói tin</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

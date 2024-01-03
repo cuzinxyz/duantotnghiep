@@ -65,6 +65,7 @@ class SalonsResource extends Resource
                         if ($record->status == 0) return 'Chờ xác nhận';
                         if ($record->status == 1) return 'Đã xác nhận';
                         if ($record->status == 2) return 'Cửa hàng đã bị khóa';
+                        if ($record->status == 4) return 'Cửa hàng đang chờ duyệt lại';
                     })
                     ->sortable(),
 
@@ -75,6 +76,7 @@ class SalonsResource extends Resource
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
+                            || $model->status == 4
                         )
                             return 'Quản trị viên';
 
@@ -95,6 +97,17 @@ class SalonsResource extends Resource
                                     ->send();
                                 return true;
                             }
+                            
+                            if ($salon->status == 4) {
+                                $salon->status = 1;
+                                $salon->save();
+                                Notification::make()
+                                    ->title('Đã xác nhận lại thành công')
+                                    ->success()
+                                    ->send();
+                                return true;
+                            }
+                            
                             $collaborator = User::find($salon->collaborator_id);
                             if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;
@@ -308,13 +321,6 @@ class SalonsResource extends Resource
                         TextEntry::make('address')
                             ->label('Địa chỉ cửa hàng')
                             ->icon('heroicon-o-map-pin'),
-                        TextEntry::make('status')
-                            ->label('Phê duyệt')
-                            ->icon(fn (string $state): string => match ($state) {
-                                '0' => 'heroicon-o-x-circle',
-                                '1' => 'heroicon-o-check-circle',
-                                '2' => 'heroicon-o-lock-closed',
-                            }),
                         Section::make('Hình ảnh của cửa hàng')
                             ->schema([
                                 ImageEntry::make('image_salon')
@@ -331,107 +337,117 @@ class SalonsResource extends Resource
                     ])
                     ->columns(2),
                 Section::make('Kiểm duyệt')
-                    ->schema([
-                        Actions::make([
-                            Action::make('active')
-                                ->label('Xác nhận')
-                                ->action(function (Model $salon) {
-                                    if ($salon->status == 1) return true;
+                    ->schema(
+                        function (Model $model) {
+                            if ($model->status == 1 || $model->status == 2) {
+                                return [];
+                            } else {
+                                return [
+                                    Actions::make([
+                                        Action::make('active')
+                                            ->label('Xác nhận')
+                                            ->action(function (Model $salon) {
+                                                if ($salon->status == 1) return true;
 
-                                    $bot = User::where('name', 'BOT')->first();
-                                    $user = User::where('id', $salon->user_id)->first();
+                                                $bot = User::where('name', 'BOT')->first();
+                                                $user = User::where('id', $salon->user_id)->first();
 
-                                    $account_balence = intval($user->account_balence) - intval(300000);
-                                    if ($account_balence < 0) {
-                                        $reason = 'Chào bạn ' . $user->name . ',
-                                        Yêu cầu mở cửa hàng của bạn không được phê duyệt,
-                                        Lý do được đưa ra là số dư tài khoản của bạn không đủ.
-                                        Kinh phí bạn cần thanh toán hàng tháng là 300.000đ,
-                                        vui lòng nạp thêm tiền để được phê duyệt.';
+                                                $account_balence = intval($user->account_balence) - intval(300000);
+                                                if ($account_balence < 0) {
+                                                    $reason = 'Chào bạn ' . $user->name . ',
+                                                    Yêu cầu mở cửa hàng của bạn không được phê duyệt,
+                                                    Lý do được đưa ra là số dư tài khoản của bạn không đủ.
+                                                    Kinh phí bạn cần thanh toán hàng tháng là 300.000đ,
+                                                    vui lòng nạp thêm tiền để được phê duyệt.';
 
-                                        ChMessage::create([
-                                            'from_id' => $bot->id,
-                                            'to_id' => $salon->user_id,
-                                            'body' => $reason
-                                        ]);
+                                                    ChMessage::create([
+                                                        'from_id' => $bot->id,
+                                                        'to_id' => $salon->user_id,
+                                                        'body' => $reason
+                                                    ]);
 
-                                        Notification::make()
-                                            ->title('Số dư của khách hàng không đủ. Đã thông báo tới khách hàng!')
-                                            ->success()
-                                            ->send();
+                                                    Notification::make()
+                                                        ->title('Số dư của khách hàng không đủ. Đã thông báo tới khách hàng!')
+                                                        ->success()
+                                                        ->send();
 
-                                        return false;
-                                    }
+                                                    return false;
+                                                }
 
-                                    $salon->status = 1;
-                                    $salon->expired_date = Carbon::now()->addDays(30);
-                                    $salon->save();
+                                                $salon->status = 1;
+                                                $salon->expired_date = Carbon::now()->addDays(30);
+                                                $salon->save();
 
 
-                                    $resultWithdraw = TransactionsHistory::create([
-                                        'user_id' => $salon->user_id,
-                                        'transaction_type' => 'dịch vụ: Mở của hàng',
-                                        'amount' => intval(300000),
-                                        'balance_after_transaction' => $account_balence
-                                    ]);
+                                                $resultWithdraw = TransactionsHistory::create([
+                                                    'user_id' => $salon->user_id,
+                                                    'transaction_type' => 'dịch vụ: Mở của hàng',
+                                                    'amount' => intval(300000),
+                                                    'balance_after_transaction' => $account_balence
+                                                ]);
 
-                                    User::where('id', $salon->user_id)->update([
-                                        'account_balence' => $account_balence
-                                    ]);
+                                                User::where('id', $salon->user_id)->update([
+                                                    'account_balence' => $account_balence
+                                                ]);
 
-                                    $reason = 'Chào bạn ' . $user->name . ',
-                                                Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
-                                                Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
-                                                Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
-                                                Trân trọng cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi.';
+                                                $reason = 'Chào bạn ' . $user->name . ',
+                                                            Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
+                                                            Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
+                                                            Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
+                                                            Trân trọng cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi.';
 
-                                    ChMessage::create([
-                                        'from_id' => $bot->id,
-                                        'to_id' => $salon->user_id,
-                                        'body' => $reason
-                                    ]);
+                                                ChMessage::create([
+                                                    'from_id' => $bot->id,
+                                                    'to_id' => $salon->user_id,
+                                                    'body' => $reason
+                                                ]);
 
-                                    Notification::make()
-                                        ->title('Đã gửi thông báo tới khách hàng')
-                                        ->success()
-                                        ->send();
-                                })
-                                ->icon('heroicon-o-check-circle'),
+                                                Notification::make()
+                                                    ->title('Đã gửi thông báo tới khách hàng')
+                                                    ->success()
+                                                    ->send();
+                                            })
+                                            ->icon('heroicon-o-check-circle'),
 
-                            Action::make('unactive')
-                                ->label('Không xác nhận')
-                                ->icon('heroicon-m-x-mark')
-                                ->color('danger')
-                                ->requiresConfirmation()
-                                ->form([
-                                    TextInput::make('reason')
-                                        ->label('Vui lòng điền lý do ?')
-                                        ->required(),
-                                ])
-                                ->action(function (array $data, Model $salon) {
+                                        Action::make('unactive')
+                                            ->label('Không xác nhận')
+                                            ->icon('heroicon-m-x-mark')
+                                            ->color('danger')
+                                            ->requiresConfirmation()
+                                            ->form([
+                                                TextInput::make('reason')
+                                                    ->label('Vui lòng điền lý do ?')
+                                                    ->required(),
+                                            ])
+                                            ->action(function (array $data, Model $salon) {
 
-                                    $bot = User::where('name', 'BOT')->first();
-                                    $user = User::where('id', $salon->user_id)->first();
-                                    $reason = 'Chào bạn ' . $user->name . ',
-                                                Yêu cầu mở cửa hàng của bạn không được chấp nhận,
-                                                Vì lý do: ' . $data['reason'] . ' .
-                                                Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
-                                                Trân trọng cảm ơn.';
+                                                $bot = User::where('name', 'BOT')->first();
+                                                $user = User::where('id', $salon->user_id)->first();
+                                                $reason = 'Chào bạn ' . $user->name . ',
+                                                            Yêu cầu mở cửa hàng của bạn không được chấp nhận,
+                                                            Vì lý do: ' . $data['reason'] . ' .
+                                                            Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
+                                                            Trân trọng cảm ơn.';
 
-                                    ChMessage::create([
-                                        'from_id' => $bot->id,
-                                        'to_id' => $salon->user_id,
-                                        'body' => $reason
-                                    ]);
+                                                ChMessage::create([
+                                                    'from_id' => $bot->id,
+                                                    'to_id' => $salon->user_id,
+                                                    'body' => $reason
+                                                ]);
 
-                                    Notification::make()
-                                        ->title('Đã gửi phản hồi tới khách hàng')
-                                        ->success()
-                                        ->send();
-                                })
-                                ->icon('heroicon-m-x-mark'),
-                        ])
-                    ])
+                                                Notification::make()
+                                                    ->title('Đã gửi phản hồi tới khách hàng')
+                                                    ->success()
+                                                    ->send();
+                                            })
+                                            ->icon('heroicon-m-x-mark'),
+                                    ])
+                                ];
+                            }
+                        }
+                    )
+
+
             ]);
     }
 

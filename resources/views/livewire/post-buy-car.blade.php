@@ -19,9 +19,10 @@
         <div class="col-lg-6">
             <div class="container mt-3" style="max-width: 600px">
                 <div class="messageSender__top">
-                    <form style="max-height: 40px" wire:submit.prevent="">
+                    <form style="max-height: 40px" wire:submit.prevent="" class="d-flex align-items-center">
+                        <i class="bi bi-search fw-bold"></i>
                         <input class="messageSender__input" wire:model.live="search" placeholder="Tìm kiếm tin mua?"
-                            type="text">
+                            type="text" style="height:40px">
                     </form>
                 </div>
                 @if (auth()->check())
@@ -159,7 +160,7 @@
                                                     </button>
                                                 </a>
 
-                                                @if ($demand->user_id == auth()->id())
+                                                @if ($demand->user_id == auth()->id() || auth()->user()->is_collaborator == 1)
                                                     <button wire:click="remove({{ $demand->id }})"
                                                         class="btn btn-danger rounded-circle"
                                                         wire:confirm="Bạn có chắc muốn xoá không?">

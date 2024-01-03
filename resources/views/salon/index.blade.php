@@ -14,10 +14,10 @@
     @endphp
 
     @if ($salon)
-        @if ($salon->status == 0)
+        @if ($salon->status == 0 || $salon->status == 4)
             <div class="container">
                 <div class="my-5 py-3 alert alert-warning">
-                    <i class="bi bi-car-front-fill"></i> Đơn đăng ký salon của bạn đang được quản trị viên xem xét phê
+                    <i class="bi bi-car-front-fill"></i> Yêu cầu phê duyệt salon của bạn đang được quản trị viên xem xét phê
                     duyệt,
                     <br> vui lòng chờ thông báo qua <strong>tin nhắn</strong> hoặc <strong>email</strong> của bạn để
                     nhận
@@ -56,7 +56,7 @@
                     })
                 </script>
             @endpush
-            @elseif(\Carbon\Carbon::parse($expired_date->expired_date)->isPast())
+        @elseif(\Carbon\Carbon::parse($expired_date->expired_date)->isPast())
             @include('components.nofication')
             <div class="container">
                 <div class=" alert alert-danger d-flex align-items-center justify-content-center gap-4">
@@ -79,16 +79,8 @@
                                 Đăng tin bán xe ngay
                             </button>
                         </div>
-                        <button class="btn btn-sm btn-warning">Chỉnh sửa salon</button>
+                        <button onclick="window.location.href='{{route('salon.settings')}}'" class="btn btn-sm btn-warning">Chỉnh sửa salon</button>
                     </div>
-
-                    {{-- @php
-                        $expired_date = \App\Models\Salon::where('user_id', auth()->id())
-                            ->where('status', 1)
-                            ->select(['id', 'expired_date'])
-                            ->first();
-                        dd($expired_date);
-                    @endphp --}}
 
                     @if (
                         \Carbon\Carbon::now()->between(

@@ -184,8 +184,15 @@ class FormDangTin extends Component
             event(new WorkCollaboratorEvent($success));
         }
 
-        // if ($result) {
+        // session()->flash('status', 'Đăng tin thành công! Vui lòng chờ duyệt.');
+        
+        
+        
+        $this->dispatch('showSuccess', 'Đăng tin thành công! Vui lòng chờ duyệt!');
+
         return redirect()->route('profile')->with('status', 'Đăng tin thành công! Vui lòng chờ duyệt.');
+        // if ($result) {
+        // return redirect()->route('profile')->with('status', 'Đăng tin thành công! Vui lòng chờ duyệt.');
         // }
     }
 

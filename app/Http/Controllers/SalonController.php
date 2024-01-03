@@ -71,6 +71,11 @@ class SalonController extends Controller
         }
     }
 
+    public function changeInfo()
+    {
+        return view('salon.settings');
+    }
+    
     public function addCar()
     {
         return view('salon.add');

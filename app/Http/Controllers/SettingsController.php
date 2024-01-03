@@ -491,4 +491,21 @@ class SettingsController extends Controller
         $expired_date->save();
         return redirect()->back()->with('success', 'Gia hạn gói tin thành công');
     }
+    
+    public function deleteService($serviceId) {
+        $purchased_service = PurchasedService::where('user_id', auth()->id())
+        ->where('service_id', $serviceId)
+        ->whereDate('expired_date', '>=', Carbon::now())
+        ->orderBy('created_at', 'DESC')
+        ->first();
+        
+        if(!$purchased_service) {
+            return redirect()->back()->with('error', 'Hủy gói tin thất bại');
+        }
+
+        $purchased_service->expired_date = Carbon::yesterday();
+        $purchased_service->save();
+
+        return redirect()->back()->with('success', 'Hủy gói tin thành công');
+    }
 }

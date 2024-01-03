@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-        <loc>http://127.0.0.1:8000</loc>
+        <loc>https://drivco.shop</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/oto</loc>
+        <loc>https://drivco.shop/oto</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/tin-mua-xe</loc>
+        <loc>https://drivco.shop/tin-mua-xe</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/login</loc>
+        <loc>https://drivco.shop/login</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/register</loc>
+        <loc>https://drivco.shop/register</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/password/reset</loc>
+        <loc>https://drivco.shop/password/reset</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/oto/152361615</loc>
+        <loc>https://drivco.shop/oto/land-rover-discovery-sport-phev-s-150-kw-2022</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Mercedes</loc>
+        <loc>https://drivco.shop/oto/land-rover-defender-110-50-v8-386-kw-2023</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/BMW</loc>
+        <loc>https://drivco.shop/oto/honda-cr-v-82-kw-2017</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Audi</loc>
+        <loc>https://drivco.shop/oto/kia-sportage-110-kw-2023</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Jeep</loc>
+        <loc>https://drivco.shop/oto/toyota-hilux-28-d-4d-4x4-150-kw-2023</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -61,22 +61,17 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Suzuki</loc>
+        <loc>https://drivco.shop/oto/mazda-cx-5-194-automatic-2023</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Tesla</loc>
+        <loc>https://drivco.shop/oto/mazda-3-fastback-20-2022</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Toyota</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>http://127.0.0.1:8000/hang-xe/Volkswagen</loc>
+        <loc>https://drivco.shop/oto/toyota-c-hr-2017</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -86,7 +81,7 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://127.0.0.1:8000/bai-viet/ut-atque-non-accusantium-sed-consequatur-ut</loc>
+        <loc>https://drivco.shop/oto/lexus-lx-570-2019</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -171,16 +166,6 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/oto/xe-cua-vinh</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>https://drivco.shop/oto/342342432</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
         <loc>https://drivco.shop/oto/mercedes-benz-v-250d</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -207,6 +192,126 @@
             </url>
     <url>
         <loc>https://drivco.shop/oto/porsche-991-40</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mazda-cx-5-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-c-63-amg-s-7g-mct-2017</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/audi-a5-40-tdi-s-tronic-sport-2019</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/kia-sorento-22-awd-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/hyundai-tucson-16-2wd-2019</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/hyundai-santafe-4wd-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/hyundai-kona-10-2019</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/hyundai-santafe-2021</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/hyundai-elantra-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-s-450-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-glc-220-4matic-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-530i-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-520i-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mercedes-benz-c-63-amg-s-cabrio-7g-mct-375-kw</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-x2-xdrive-131-kw</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/mazda-3-132-kw</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/land-rover-range-rover-evoque-awd-150-kw</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/ford-mustang-fastback-50-ti-vct-v8-gt-2019</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/ford-mustang-fastback-50-ti-vct-v8-2019</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/toyota-land-cruiser-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/lexus-lc-500-2023</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/audi-a8-42-tdi-quattro-258-kw</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/bmw-530d-210-kw</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/oto/ban-xe-bmw-330i-2019</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -311,7 +416,32 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>https://drivco.shop/salon/nhat-auto</loc>
+        <loc>https://drivco.shop/hang-xe/Hyundai</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/need-for-speed</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/son-hoa-auto</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/duong-garage</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/son-tung-auto</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>https://drivco.shop/salon/chi-auto</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
