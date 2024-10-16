@@ -10,7 +10,8 @@ class Rating extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function fromUsers() {
+    public function fromUsers()
+    {
         return $this->belongsTo(User::class, 'from_user_id', 'id');
     }
 

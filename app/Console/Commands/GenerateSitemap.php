@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\News;
-use App\Models\Brand;
 use App\Models\Salon;
+use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
-use Illuminate\Console\Command;
 
 class GenerateSitemap extends Command
 {
@@ -18,8 +18,8 @@ class GenerateSitemap extends Command
      * @var string
      */
     protected $signature = 'generate:sitemap';
-    protected $description = 'Generate sitemap for the website';
 
+    protected $description = 'Generate sitemap for the website';
 
     /**
      * Execute the console command.

@@ -16,7 +16,7 @@ class IsCollaborators
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->is_collaborator) {
+        if (Auth::check() && Auth::user()->is_collaborator) {
             return $next($request);
         }
 

@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ads;
-use App\Models\Car;
 use App\Models\Banner;
 use App\Models\Brand;
+use App\Models\Car;
 use App\Models\News;
 use App\Models\Partner;
 use App\Models\Salon;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
@@ -36,7 +34,7 @@ class HomeController extends Controller
             ->where('status', 1)
             ->inRandomOrder()
             ->get();
-        #thêm 1 cột đánh dấu tin vip
+        //thêm 1 cột đánh dấu tin vip
         $featured_cars = $featured_cars->map(function ($car) {
             $car['is_vip'] = true;
 
@@ -73,13 +71,13 @@ class HomeController extends Controller
             }, $banners);
             $mark = true;
         }
-        # news data
+        // news data
         $posts = News::where('isPublished', 1)
             ->limit(3)
             ->get();
         $brands = Brand::all();
 
-        # partners
+        // partners
         $partners = Partner::all();
 
         $adsPartners = Ads::where('priority', 1)
@@ -91,5 +89,4 @@ class HomeController extends Controller
 
         return view('index', compact('banners', 'mark', 'featured_cars', 'posts', 'brands', 'partners', 'adsPartners', 'salonList'));
     }
-
 }

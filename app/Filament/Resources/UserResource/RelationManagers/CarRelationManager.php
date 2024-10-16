@@ -2,20 +2,18 @@
 
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class CarRelationManager extends RelationManager
 {
     protected static string $relationship = 'car';
+
     protected static ?string $title = 'Tin đăng xe';
+
     protected static ?string $label = 'Tin đăng xe';
 
     public function table(Table $table): Table
@@ -33,9 +31,15 @@ class CarRelationManager extends RelationManager
                     ->label('Trạng thái')
                     ->badge()
                     ->state(function (Model $record) {
-                        if ($record->status == 0) return 'Chờ xác nhận';
-                        if ($record->status == 1) return 'Đã xác nhận';
-                        if ($record->status == 2) return 'Xe này đã bị xóa';
+                        if ($record->status == 0) {
+                            return 'Chờ xác nhận';
+                        }
+                        if ($record->status == 1) {
+                            return 'Đã xác nhận';
+                        }
+                        if ($record->status == 2) {
+                            return 'Xe này đã bị xóa';
+                        }
                     })
                     ->sortable(),
 
@@ -52,10 +56,13 @@ class CarRelationManager extends RelationManager
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
             ])
             ->filters([

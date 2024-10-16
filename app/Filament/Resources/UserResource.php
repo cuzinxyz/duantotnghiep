@@ -2,27 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\UserResource\Pages\ViewUser;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Filament\Resources\UserResource\Pages\ViewUser;
 use App\Filament\Resources\UserResource\RelationManagers\ByCarRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\CarRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\ReportRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\SupportRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\TransactionsHistoriesRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\WithDrawRelationManager;
+use App\Models\User;
+use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
@@ -33,7 +32,6 @@ class UserResource extends Resource
     protected static ?string $navigationLabel = 'Người dùng';
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-
 
     public static function form(Form $form): Form
     {
@@ -56,7 +54,7 @@ class UserResource extends Resource
                             ->required(),
                     ])->columnSpan([
                         'md' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ]),
                 Section::make()
                     ->schema([
@@ -67,12 +65,12 @@ class UserResource extends Resource
                             ->directory('avatars/users'),
                     ])->columnSpan([
                         'md' => 1,
-                        'xl' => 1
+                        'xl' => 1,
                     ]),
 
             ])->columns([
                 'md' => 2,
-                'xl' => 3
+                'xl' => 3,
             ]);
     }
 
@@ -117,8 +115,8 @@ class UserResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('is_collaborator', 0)
-        ->where('name', '!=', 'BOT')
-        ->withoutGlobalScope(SoftDeletingScope::class);
+            ->where('name', '!=', 'BOT')
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public static function getRelations(): array
@@ -129,7 +127,7 @@ class UserResource extends Resource
             ByCarRelationManager::class,
             SupportRelationManager::class,
             WithDrawRelationManager::class,
-            ReportRelationManager::class
+            ReportRelationManager::class,
         ];
     }
 

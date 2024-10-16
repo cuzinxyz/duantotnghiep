@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Carbon\Carbon;
-use App\Models\Car;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
@@ -22,9 +21,7 @@ class SettingsController extends Controller
         return view('user-settings.push-item');
     }
 
-    public function managerPostingsBuyCar()
-    {
-    }
+    public function managerPostingsBuyCar() {}
 
     public function profile()
     {
@@ -37,12 +34,12 @@ class SettingsController extends Controller
     {
         $carInfo = auth()->user()->car->find($carID);
 
-        $check_expired_date = DB::table("purchased_service")
+        $check_expired_date = DB::table('purchased_service')
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', Carbon::now())
             ->first();
 
-        if (!$check_expired_date) {
+        if (! $check_expired_date) {
             $buyVIP = true;
 
             return view('user-settings.push-featured', compact('carInfo', 'buyVIP'));
@@ -50,8 +47,9 @@ class SettingsController extends Controller
             $buyVIP = false;
 
             $service = $check_expired_date;
+
             // dd($check_expired_date);
-            # nếu đã đăng ký 1 dịch vụ nào đó khác, và vẫn còn thời hạn sử dụng.
+            // nếu đã đăng ký 1 dịch vụ nào đó khác, và vẫn còn thời hạn sử dụng.
             return view('user-settings.push-featured', compact('carInfo', 'buyVIP', 'service'));
         }
 
@@ -60,11 +58,11 @@ class SettingsController extends Controller
 
     public function confirmPush($carID)
     {
-        $purchased_service = DB::table("purchased_service")
+        $purchased_service = DB::table('purchased_service')
             ->where('user_id', auth()->id())
             ->where('expired_date', '>=', Carbon::now())
             ->update([
-                'car_id' => $carID
+                'car_id' => $carID,
             ]);
 
         if ($purchased_service) {
@@ -120,9 +118,11 @@ class SettingsController extends Controller
             if (empty($err)) {
                 // dd($data);
                 $result = User::where('id', $id)->update($data);
+
                 return redirect('cai-dat');
             }
         }
+
         return view('user-settings.settings', compact('user', 'err'));
     }
 

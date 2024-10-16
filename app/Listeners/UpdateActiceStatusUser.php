@@ -2,12 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Events\WorkCollaboratorWhenOnline;
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Events\Dispatcher;
 use Illuminate\Auth\Events\Logout;
-use Illuminate\Support\Facades\Auth;
-use App\Events\WorkCollaboratorWhenOnline;
+use Illuminate\Events\Dispatcher;
 
 class UpdateActiceStatusUser
 {
@@ -20,7 +19,7 @@ class UpdateActiceStatusUser
             'active' => 1,
         ]);
 
-        event(new WorkCollaboratorWhenOnline());
+        event(new WorkCollaboratorWhenOnline);
     }
 
     /**
@@ -29,7 +28,7 @@ class UpdateActiceStatusUser
     public function handleUserLogout(Logout $event): void
     {
         // dd($event->user->id);
-        if(auth()->check()) {
+        if (auth()->check()) {
             User::where('id', auth()->id())->update([
                 'active' => 0,
             ]);

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,27 +23,27 @@ class PartnerSeeder extends Seeder
             ],
             [
                 'name' => 'Car Toys',
-                'logo_url' => 'partners/company-logo-01.png'
+                'logo_url' => 'partners/company-logo-01.png',
             ],
             [
                 'name' => 'Be Car Care Aware',
-                'logo_url' => 'partners/company-logo-02.png'
+                'logo_url' => 'partners/company-logo-02.png',
             ],
             [
                 'name' => 'IR Club Car',
-                'logo_url' => 'partners/company-logo-03.png'
+                'logo_url' => 'partners/company-logo-03.png',
             ],
             [
                 'name' => 'WACKERLIN CAR',
-                'logo_url' => 'partners/company-logo-04.png'
+                'logo_url' => 'partners/company-logo-04.png',
             ],
             [
                 'name' => 'Enter Prise',
-                'logo_url' => 'partners/company-logo-05.png'
+                'logo_url' => 'partners/company-logo-05.png',
             ],
             [
                 'name' => 'Underfine',
-                'logo_url' => 'partners/company-logo-06.png'
+                'logo_url' => 'partners/company-logo-06.png',
             ],
         ]);
     }

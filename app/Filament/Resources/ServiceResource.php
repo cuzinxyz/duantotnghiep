@@ -3,21 +3,20 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
-use App\Filament\Resources\ServiceResource\RelationManagers;
 use App\Models\Service;
 use Filament\Forms;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Section;
 
 class ServiceResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Quản lý nội dung';
 
     protected static ?string $model = Service::class;
 
@@ -61,10 +60,10 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('service_name')
-                ->label('Gói')
+                    ->label('Gói')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                ->label('Giá')
+                    ->label('Giá')
                     ->numeric(
                         decimalPlaces: 0,
                         decimalSeparator: '.',
@@ -72,10 +71,10 @@ class ServiceResource extends Resource
                     )
                     ->money('VND'),
                 Tables\Columns\TextColumn::make('description')
-                ->label('Mô tả')
-                ->limit(50),
+                    ->label('Mô tả')
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('expiration_date')
-                ->label('Ngày hết hạn')
+                    ->label('Ngày hết hạn'),
 
             ])
             ->filters([

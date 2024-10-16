@@ -23,8 +23,8 @@ return new class extends Migration
             $table->boolean('active_status')->default(0);
             $table->boolean('dark_mode')->default(0);
             $table->string('messenger_color')->nullable();
-            $table->integer("total_pushed")->default(0);
-            $table->timestamp("expired_date")->nullable()->comment("Ngày hết hạn của dịch vụ đã đăng ký");
+            $table->integer('total_pushed')->default(0);
+            $table->timestamp('expired_date')->nullable()->comment('Ngày hết hạn của dịch vụ đã đăng ký');
             $table->integer('salon_id')->nullable();
             $table->boolean('active')->default(false)->comment('Kiểm tra xem tài khoản có đăng nhập không');
             $table->integer('is_collaborator')->default(0)->comment('0: không phải là nhân viên, 1: là Nhân viên');

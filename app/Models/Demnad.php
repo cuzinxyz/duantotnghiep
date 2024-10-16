@@ -12,20 +12,20 @@ class Demnad extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-      'user_id',
-      'status',
-      'title',
-      'content',
-      'reason',
+        'user_id',
+        'status',
+        'title',
+        'content',
+        'reason',
     ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
-      return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function collaborator():BelongsTo
+    public function collaborator(): BelongsTo
     {
-      return $this->belongsTo(User::class, 'collaborator_id', 'id');
+        return $this->belongsTo(User::class, 'collaborator_id', 'id');
     }
 }

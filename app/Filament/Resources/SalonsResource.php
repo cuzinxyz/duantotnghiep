@@ -2,32 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Events\SalonCollaboratorEvent;
-use Carbon\Carbon;
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use App\Models\Salon;
-use Filament\Forms\Form;
+use App\Filament\Resources\SalonsResource\Pages;
+use App\Filament\Resources\SalonsResource\RelationManagers;
 use App\Models\ChMessage;
-use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
+use App\Models\Salon;
 use App\Models\TransactionsHistory;
-use Filament\Tables\Columns\Column;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use Carbon\Carbon;
 use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Tables\Actions\ActionGroup;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Actions\Action;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
-use App\Filament\Resources\SalonsResource\Pages;
-use Filament\Infolists\Components\Actions\Action;
+use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\SalonsResource\RelationManagers;
 
 class SalonsResource extends Resource
 {
@@ -60,9 +56,15 @@ class SalonsResource extends Resource
                     ->label('Trạng thái')
                     ->badge()
                     ->state(function (Model $record) {
-                        if ($record->status == 0) return 'Chờ xác nhận';
-                        if ($record->status == 1) return 'Đã xác nhận';
-                        if ($record->status == 2) return 'Cửa hàng đã bị khóa';
+                        if ($record->status == 0) {
+                            return 'Chờ xác nhận';
+                        }
+                        if ($record->status == 1) {
+                            return 'Đã xác nhận';
+                        }
+                        if ($record->status == 2) {
+                            return 'Cửa hàng đã bị khóa';
+                        }
                     })
                     ->sortable(),
 
@@ -73,10 +75,13 @@ class SalonsResource extends Resource
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
 
             ])
@@ -91,6 +96,7 @@ class SalonsResource extends Resource
                                     ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
                                     ->success()
                                     ->send();
+
                                 return true;
                             }
                             $collaborator = User::find($salon->collaborator_id);
@@ -100,7 +106,7 @@ class SalonsResource extends Resource
                                     $total_assign = 0;
                                 }
                                 User::where('id', $salon->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
@@ -110,7 +116,7 @@ class SalonsResource extends Resource
                             $account_balence = intval($user->account_balence) - intval(300000);
 
                             if ($account_balence < 0) {
-                                $reason = 'Chào bạn ' . $user->name . ',
+                                $reason = 'Chào bạn '.$user->name.',
                                         Yêu cầu mở cửa hàng của bạn không được phê duyệt,
                                         Lý do được đưa ra là số dư tài khoản của bạn không đủ.
                                         Kinh phí bạn cần thanh toán hàng tháng là 300.000đ,
@@ -119,7 +125,7 @@ class SalonsResource extends Resource
                                 ChMessage::create([
                                     'from_id' => $bot->id,
                                     'to_id' => $salon->user_id,
-                                    'body' => $reason
+                                    'body' => $reason,
                                 ]);
 
                                 Notification::make()
@@ -138,14 +144,14 @@ class SalonsResource extends Resource
                                 'user_id' => $salon->user_id,
                                 'transaction_type' => 'dịch vụ: Mở của hàng',
                                 'amount' => intval(300000),
-                                'balance_after_transaction' => $account_balence
+                                'balance_after_transaction' => $account_balence,
                             ]);
 
                             User::where('id', $salon->user_id)->update([
-                                'account_balence' => $account_balence
+                                'account_balence' => $account_balence,
                             ]);
 
-                            $reason = 'Chào bạn ' . $user->name . ',
+                            $reason = 'Chào bạn '.$user->name.',
                                 Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
                                 Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
                                 Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
@@ -154,7 +160,7 @@ class SalonsResource extends Resource
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $salon->user_id,
-                                'body' => $reason
+                                'body' => $reason,
                             ]);
                             Notification::make()
                                 ->title('Đã xác nhận thành công')
@@ -180,6 +186,7 @@ class SalonsResource extends Resource
                                     ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
                                     ->success()
                                     ->send();
+
                                 return true;
                             }
                             $collaborator = User::find($salon->collaborator_id);
@@ -189,7 +196,7 @@ class SalonsResource extends Resource
                                     $total_assign = 0;
                                 }
                                 User::where('id', $salon->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
                             $salon->status = 2;
@@ -197,19 +204,18 @@ class SalonsResource extends Resource
                             $salon->reason = $data['reason'];
                             $salon->save();
 
-
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $salon->user_id)->first();
-                            $reason = 'Chào bạn ' . $user->name . ',
+                            $reason = 'Chào bạn '.$user->name.',
                                         Yêu cầu mở cửa hàng của bạn không được chấp nhận,
-                                        Vì lý do: ' . $data['reason'] . ' .
+                                        Vì lý do: '.$data['reason'].' .
                                         Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
                                         Trân trọng cảm ơn.';
 
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $salon->user_id,
-                                'body' => $reason
+                                'body' => $reason,
                             ]);
 
                             Notification::make()
@@ -238,7 +244,7 @@ class SalonsResource extends Resource
                                         $total_assign = 0;
                                     }
                                     User::where('id', $salon->collaborator_id)->update([
-                                        'total_assign' => $total_assign
+                                        'total_assign' => $total_assign,
                                     ]);
                                 }
                                 $salon->status = 3;
@@ -246,19 +252,18 @@ class SalonsResource extends Resource
                                 $salon->reason = $data['reason'];
                                 $salon->save();
 
-
                                 $bot = User::where('name', 'BOT')->first();
                                 $user = User::where('id', $salon->user_id)->first();
-                                $reason = 'Chào bạn ' . $user->name . ',
+                                $reason = 'Chào bạn '.$user->name.',
                                             Salon trực tuyến của bạn đã bị huỷ,
-                                            Vì lý do: ' . $data['reason'] . ' .
+                                            Vì lý do: '.$data['reason'].' .
                                             Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
                                             Trân trọng cảm ơn.';
 
                                 ChMessage::create([
                                     'from_id' => $bot->id,
                                     'to_id' => $salon->user_id,
-                                    'body' => $reason
+                                    'body' => $reason,
                                 ]);
 
                                 Notification::make()
@@ -271,7 +276,7 @@ class SalonsResource extends Resource
                         })
                         ->icon('heroicon-m-x-mark'),
 
-                ])
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -282,7 +287,6 @@ class SalonsResource extends Resource
             ])
             ->emptyStateActions([]);
     }
-
 
     public static function infolist(Infolist $infolist): infolist
     {
@@ -313,7 +317,7 @@ class SalonsResource extends Resource
                             ->schema([
                                 ImageEntry::make('image_salon')
                                     ->label('Hình ảnh của cửa hàng')
-                                    ->default('https://picsum.photos/200')
+                                    ->default('https://picsum.photos/200'),
                             ])
                             ->extraAttributes([
                                 'class' => 'overflow-x-auto',
@@ -330,14 +334,16 @@ class SalonsResource extends Resource
                             Action::make('active')
                                 ->label('Xác nhận')
                                 ->action(function (Model $salon) {
-                                    if ($salon->status == 1) return true;
+                                    if ($salon->status == 1) {
+                                        return true;
+                                    }
 
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $salon->user_id)->first();
 
                                     $account_balence = intval($user->account_balence) - intval(300000);
                                     if ($account_balence < 0) {
-                                        $reason = 'Chào bạn ' . $user->name . ',
+                                        $reason = 'Chào bạn '.$user->name.',
                                         Yêu cầu mở cửa hàng của bạn không được phê duyệt,
                                         Lý do được đưa ra là số dư tài khoản của bạn không đủ.
                                         Kinh phí bạn cần thanh toán hàng tháng là 300.000đ,
@@ -346,7 +352,7 @@ class SalonsResource extends Resource
                                         ChMessage::create([
                                             'from_id' => $bot->id,
                                             'to_id' => $salon->user_id,
-                                            'body' => $reason
+                                            'body' => $reason,
                                         ]);
 
                                         Notification::make()
@@ -361,19 +367,18 @@ class SalonsResource extends Resource
                                     $salon->expired_date = Carbon::now()->addDays(30);
                                     $salon->save();
 
-
                                     $resultWithdraw = TransactionsHistory::create([
                                         'user_id' => $salon->user_id,
                                         'transaction_type' => 'dịch vụ: Mở của hàng',
                                         'amount' => intval(300000),
-                                        'balance_after_transaction' => $account_balence
+                                        'balance_after_transaction' => $account_balence,
                                     ]);
 
                                     User::where('id', $salon->user_id)->update([
-                                        'account_balence' => $account_balence
+                                        'account_balence' => $account_balence,
                                     ]);
 
-                                    $reason = 'Chào bạn ' . $user->name . ',
+                                    $reason = 'Chào bạn '.$user->name.',
                                                 Yêu cầu mở cửa hàng của bạn đã được chấp nhận,
                                                 Phí duy trì của hàng mỗi tháng của bạn là 300.000 VNĐ
                                                 Hiện tại bạn có thể vào cửa hàng của mình để sử dụng dịch vụ của chúng tôi.
@@ -382,7 +387,7 @@ class SalonsResource extends Resource
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $salon->user_id,
-                                        'body' => $reason
+                                        'body' => $reason,
                                     ]);
 
                                     Notification::make()
@@ -406,16 +411,16 @@ class SalonsResource extends Resource
 
                                     $bot = User::where('name', 'BOT')->first();
                                     $user = User::where('id', $salon->user_id)->first();
-                                    $reason = 'Chào bạn ' . $user->name . ',
+                                    $reason = 'Chào bạn '.$user->name.',
                                                 Yêu cầu mở cửa hàng của bạn không được chấp nhận,
-                                                Vì lý do: ' . $data['reason'] . ' .
+                                                Vì lý do: '.$data['reason'].' .
                                                 Nếu có thắc mắc vui lòng liên hệ với chúng tôi.
                                                 Trân trọng cảm ơn.';
 
                                     ChMessage::create([
                                         'from_id' => $bot->id,
                                         'to_id' => $salon->user_id,
-                                        'body' => $reason
+                                        'body' => $reason,
                                     ]);
 
                                     Notification::make()
@@ -424,15 +429,15 @@ class SalonsResource extends Resource
                                         ->send();
                                 })
                                 ->icon('heroicon-m-x-mark'),
-                        ])
-                    ])
+                        ]),
+                    ]),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\CarsRelationManager::class
+            RelationManagers\CarsRelationManager::class,
         ];
     }
 

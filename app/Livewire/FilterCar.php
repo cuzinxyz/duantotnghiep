@@ -9,8 +9,19 @@ use Livewire\Component;
 
 class FilterCar extends Component
 {
-    public $cars, $brandCars, $modelCars, $engineCars;
-    public $brand, $model, $engine;
+    public $cars;
+
+    public $brandCars;
+
+    public $modelCars;
+
+    public $engineCars;
+
+    public $brand;
+
+    public $model;
+
+    public $engine;
 
     public function mount()
     {
@@ -42,14 +53,16 @@ class FilterCar extends Component
                     $this->cars = Car::with(['brand'])
                         ->whereBrandId($this->brand)
                         ->whereModelCarId($this->model)
-                        ->where(function ($query) use ($engine){
+                        ->where(function ($query) use ($engine) {
                             $query->orWhereJsonContains('car_info->engine', $engine);
                         })
                         ->get();
-                }else $this->cars = Car::with(['brand'])
-                    ->whereBrandId($this->brand)
-                    ->whereModelCarId($this->model)
-                    ->get();
+                } else {
+                    $this->cars = Car::with(['brand'])
+                        ->whereBrandId($this->brand)
+                        ->whereModelCarId($this->model)
+                        ->get();
+                }
             } else {
                 $this->cars = Car::with(['brand'])
                     ->whereBrandId($this->brand)
@@ -61,8 +74,10 @@ class FilterCar extends Component
             $this->modelCars = [];
             $this->engineCars = [];
         }
+
         return $this->cars;
     }
+
     public function render()
     {
         return view('livewire.filter-car');

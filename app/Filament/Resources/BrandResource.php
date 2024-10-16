@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BrandResource\Pages;
-use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Brand;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -20,13 +19,14 @@ class BrandResource extends Resource
     protected static ?string $model = Brand::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationLabel = 'Thương hiệu';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make("Biểu tượng của nhà sản xuất")
+                Forms\Components\Section::make('Biểu tượng của nhà sản xuất')
                     ->schema([
                         Forms\Components\TextInput::make('brand_name')
                             ->required()
@@ -41,7 +41,7 @@ class BrandResource extends Resource
                             ->openable()
                             ->directory('brand_image')
                             ->required(),
-                    ])
+                    ]),
 
             ]);
     }
@@ -99,6 +99,7 @@ class BrandResource extends Resource
             'edit' => Pages\EditBrand::route('/{record}/edit'),
         ];
     }
+
     public static function getModelLabel(): string
     {
         return __('Thương hiệu ');

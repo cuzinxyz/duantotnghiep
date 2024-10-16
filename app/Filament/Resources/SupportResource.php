@@ -2,42 +2,32 @@
 
 namespace App\Filament\Resources;
 
-use Carbon\Carbon;
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use App\Models\Support;
-use Filament\Forms\Form;
+use App\Filament\Resources\SupportResource\Pages;
+use App\Mail\SendSupportEmail;
 use App\Models\ChMessage;
-use Filament\Tables\Table;
-use PhpParser\Node\Stmt\Label;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
-use App\Models\TransactionsHistory;
-use Illuminate\Support\Facades\Mail;
-use Filament\Support\Enums\FontFamily;
-use Filament\Tables\Columns\IconColumn;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Tables\Actions\ActionGroup;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Support;
+use App\Models\User;
+use Filament\Forms\Components\Textarea;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use App\Filament\Resources\SupportResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\SupportResource\RelationManagers;
-use App\Mail\SendSupportEmail;
-use Filament\Forms\Components\Textarea;
+use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Support\Enums\FontFamily;
+use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class SupportResource extends Resource
 {
     protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Support::class;
-    
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationLabel = 'Hỗ trợ';
 
     public static function table(Table $table): Table
@@ -61,9 +51,15 @@ class SupportResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->label('Phê duyệt')
                     ->state(function (Model $model) {
-                        if ($model->status == 0) return 'Chưa phản hồi';
-                        if ($model->status == 1) return 'Đã phản hồi';
-                        if ($model->status == 2) return 'Đã xóa';
+                        if ($model->status == 0) {
+                            return 'Chưa phản hồi';
+                        }
+                        if ($model->status == 1) {
+                            return 'Đã phản hồi';
+                        }
+                        if ($model->status == 2) {
+                            return 'Đã xóa';
+                        }
                     }),
                 Tables\Columns\TextColumn::make('collaborator.name')
                     ->label('Người kiểm duyệt')
@@ -72,10 +68,13 @@ class SupportResource extends Resource
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
             ])
             ->filters([
@@ -92,7 +91,9 @@ class SupportResource extends Resource
                                 ->required(),
                         ])
                         ->action(function (array $data, Model $support) {
-                            if ($support->status == 1) return true;
+                            if ($support->status == 1) {
+                                return true;
+                            }
 
                             $collaborator = User::find($support->collaborator_id);
                             if ($collaborator) {
@@ -101,22 +102,22 @@ class SupportResource extends Resource
                                     $total_assign = 0;
                                 }
                                 User::where('id', $support->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $support->user_id)->first();
 
-                            $reason = 'Chào bạn ' . $user->name . ',
-                                    Giải đáp thắc mắc của bạn về vấn đề: ' . $support->title . '
-                                    Về vấn đề này chúng tôi phản hồi với bạn rằng: ' . $data['response'] . '
+                            $reason = 'Chào bạn '.$user->name.',
+                                    Giải đáp thắc mắc của bạn về vấn đề: '.$support->title.'
+                                    Về vấn đề này chúng tôi phản hồi với bạn rằng: '.$data['response'].'
                                     Cảm ơn bạn đã đóng góp ý kiến với chúng tôi, góp phần giúp chúng tôi phục vụ khách hàng một cách tốt nhất';
 
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $support->user_id,
-                                'body' => $reason
+                                'body' => $reason,
                             ]);
 
                             Mail::to($user)->later(now()->addSeconds(10), new SendSupportEmail($support, $user));
@@ -132,7 +133,9 @@ class SupportResource extends Resource
                         ->icon('heroicon-o-check-circle'),
                     Tables\Actions\DeleteAction::make()
                         ->action(function (Model $support) {
-                            if ($support->status == 1) return true;
+                            if ($support->status == 1) {
+                                return true;
+                            }
 
                             $collaborator = User::find($support->collaborator_id);
                             if ($collaborator) {
@@ -141,12 +144,12 @@ class SupportResource extends Resource
                                     $total_assign = 0;
                                 }
                                 User::where('id', $support->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
                             User::where('id', $support->collaborator_id)->update([
-                                'total_assign' => $total_assign
+                                'total_assign' => $total_assign,
                             ]);
 
                             Notification::make()
@@ -197,8 +200,8 @@ class SupportResource extends Resource
                     ->columns([
                         'default' => 0,
                         'lg' => 2,
-                        'xl' => 2
-                    ])
+                        'xl' => 2,
+                    ]),
             ]);
     }
 
@@ -213,6 +216,7 @@ class SupportResource extends Resource
             'index' => Pages\ListSupports::route('/'),
         ];
     }
+
     public static function getModelLabel(): string
     {
         return __('Hỗ trợ');

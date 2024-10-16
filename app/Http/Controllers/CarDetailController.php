@@ -14,12 +14,12 @@ class CarDetailController extends Controller
         if ($slug) {
             $carDetail = Car::where('slug', $slug)->first();
 
-            if(!$carDetail) {
+            if (! $carDetail) {
                 abort(404);
             }
         }
 
-        # save view
+        // save view
         views($carDetail)->record();
 
         $recentCars = Car::inRandomOrder()->where('status', 1)->limit(4)->get();

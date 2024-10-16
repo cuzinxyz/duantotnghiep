@@ -2,29 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
+use App\Filament\Resources\NewsResource\Pages;
 use App\Models\News;
-use Filament\Tables;
-use Filament\Forms\Set;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Forms\Set;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Columns\CheckboxColumn;
-use Filament\Forms\Components\DateTimePicker;
-use App\Filament\Resources\NewsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class NewsResource extends Resource
 {
@@ -54,7 +50,7 @@ class NewsResource extends Resource
                             ->dehydrated(),
                         RichEditor::make('content')
                             ->required()
-                            ->fileAttachmentsDirectory('news/images')->columnSpanFull()
+                            ->fileAttachmentsDirectory('news/images')->columnSpanFull(),
                     ]
                 )->columns(2),
                 Section::make('Meta')->schema(
@@ -122,6 +118,7 @@ class NewsResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
     public static function getModelLabel(): string
     {
         return __('Tin tức');

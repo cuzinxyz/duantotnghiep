@@ -6,9 +6,8 @@ use App\Models\Car;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 
 class CarRegistMail extends Mailable
 {
@@ -21,8 +20,7 @@ class CarRegistMail extends Mailable
      */
     public function __construct(
         protected Car $car,
-    )
-    {
+    ) {
         // $this->data = $data;
     }
 
@@ -44,7 +42,7 @@ class CarRegistMail extends Mailable
         return new Content(
             view: 'mail.car-regist',
             with: [
-                'data' => $this->car
+                'data' => $this->car,
             ]
         );
     }

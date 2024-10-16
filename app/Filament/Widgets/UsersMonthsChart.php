@@ -3,49 +3,38 @@
 namespace App\Filament\Widgets;
 
 use App\Models\User;
-use Flowframe\Trend\Trend;
-use Illuminate\Support\Carbon;
-use Flowframe\Trend\TrendValue;
 use Filament\Forms\Components\DatePicker;
+use Flowframe\Trend\Trend;
+use Flowframe\Trend\TrendValue;
+use Illuminate\Support\Carbon;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class UsersMonthsChart extends ApexChartWidget
 {
     /**
      * Chart Id
-     *
-     * @var string
      */
     protected static string $chartId = 'usersMonthsChart';
 
     /**
      * Widget Title
-     *
-     * @var string|null
      */
     protected static ?string $heading = 'Số lượng tài khoản đăng ký trong tháng';
 
-
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected static ?int $sort = 9;
 
-
-    /**
-     * @return array
-     */
     protected function getOptions(): array
     {
 
         $data = Trend::model(User::class)
-        ->between(
-            start: Carbon::parse($this->filterFormData['date_start']),
-            end: Carbon::parse($this->filterFormData['date_end']),
-        )
+            ->between(
+                start: Carbon::parse($this->filterFormData['date_start']),
+                end: Carbon::parse($this->filterFormData['date_end']),
+            )
             ->perDay()
             ->count();
-
-        
 
         return [
             'chart' => [
@@ -87,15 +76,15 @@ class UsersMonthsChart extends ApexChartWidget
     {
         return [
             DatePicker::make('date_start')
-            ->label('Ngày bắt đầu')
-            ->default(now()->startOfMonth())
+                ->label('Ngày bắt đầu')
+                ->default(now()->startOfMonth())
                 ->reactive()
                 ->afterStateUpdated(function () {
                     $this->updateOptions();
                 }),
             DatePicker::make('date_end')
-            ->label('Ngày kết thúc')
-            ->default(now()->endOfMonth())
+                ->label('Ngày kết thúc')
+                ->default(now()->endOfMonth())
                 ->reactive()
                 ->afterStateUpdated(function () {
                     $this->updateOptions();

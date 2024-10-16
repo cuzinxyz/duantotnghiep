@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image_url');
             $table->string('video_url')->nullable();
             $table->string('target_url');
-            $table->integer('priority')->comment('1: quảng cáo trang chủ, 2: quảng cáo các trang khác',);;
+            $table->integer('priority')->comment('1: quảng cáo trang chủ, 2: quảng cáo các trang khác');
             $table->timestamps();
             $table->softDeletes(); // add
         });

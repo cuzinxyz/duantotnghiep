@@ -23,19 +23,19 @@ class GarageRequest extends FormRequest
     {
         $rules = [];
         $method = $this->route()->getActionMethod();
-        switch ($this->method()){
+        switch ($this->method()) {
             case 'POST':
-                switch ($method){
+                switch ($method) {
                     case 'ownGarage': // hàm nào gọi đến
                         $rules = [
                             'name' => 'required',
-                            'address'=> 'required',
-                            'phone'=>'required',
-                            'email'=>'required',
-                            'image' => 'required'
+                            'address' => 'required',
+                            'phone' => 'required',
+                            'email' => 'required',
+                            'image' => 'required',
                         ];
                         break;
-                    
+
                     default:
                         break;
                 }
@@ -47,7 +47,4 @@ class GarageRequest extends FormRequest
 
         return $rules;
     }
-        
-
-    
 }

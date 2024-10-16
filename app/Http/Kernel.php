@@ -65,6 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'is_collaborator' => \App\Http\Middleware\IsCollaborators::class,
-        'HtmlMinifier' => \App\Http\Middleware\HtmlMinifier::class
+        'HtmlMinifier' => \App\Http\Middleware\HtmlMinifier::class,
     ];
 }

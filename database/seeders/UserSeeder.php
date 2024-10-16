@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +30,7 @@ class UserSeeder extends Seeder
                 'avatar' => 'avatars/users/pDE8TRKeH0OH3t6Tn3Bqevue5ESKfq-metaS0guanBn-.jpg',
                 'account_balence' => '234000',
                 'service_id' => 2,
-                'phone_number' => '0988123457'
+                'phone_number' => '0988123457',
             ],
             [
                 'name' => 'BOT',
@@ -41,8 +39,8 @@ class UserSeeder extends Seeder
                 'avatar' => 'avatars/bot.jpg',
                 'account_balence' => 0,
                 'service_id' => 0,
-                'phone_number' => NULL
-            ]
+                'phone_number' => null,
+            ],
         ]);
     }
 }

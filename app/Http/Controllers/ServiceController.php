@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -18,7 +17,7 @@ class ServiceController extends Controller
     public function detail($id)
     {
         $serv = Service::findOrFail($id);
-        if(!auth()->check()) {
+        if (! auth()->check()) {
             $this->dispatch('showError', 'Bạn cần đăng nhập để thực hiện chức năng này');
         }
 

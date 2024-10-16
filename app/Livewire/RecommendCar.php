@@ -2,21 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Car;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cookie;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 
 class RecommendCar extends Component
 {
     public $amount = 6;
-    
+
     public function load()
     {
         $this->amount = $this->amount + 6;
     }
-    
+
     public function render()
     {
         $carIds = DB::table('purchased_service')
@@ -32,24 +31,24 @@ class RecommendCar extends Component
             ->unique()
             ->values()
             ->toArray();
-            // var_dump($carIds);
+        // var_dump($carIds);
         $recommendCars = Car::whereIn('id', $carIds)
             ->take($this->amount)
             ->where('status', 1)
             ->get();
         // dd($recommendCars);
-        
+
         $recommendCars = $recommendCars->map(function ($car) {
             $car['is_vip'] = true;
-        
+
             return $car;
         });
 
         $id = $recommendCars->pluck('id');
         session(['featured_cars_id' => $id]);
-        
+
         return view('livewire.recommend-car', [
-            'recommendCars' => $recommendCars
+            'recommendCars' => $recommendCars,
         ]);
     }
 }

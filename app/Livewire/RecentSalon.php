@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Car;
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 
 class RecentSalon extends Component
 {
@@ -27,14 +27,14 @@ class RecentSalon extends Component
             ->limit(5)
             ->distinct()
             ->get();
-            // dd($topSalons);
+        // dd($topSalons);
         $recentCarsSalon = Car::inRandomOrder()
             ->where('status', 1)
             ->whereNotNull('salon_id')
             ->limit(8)
             ->get();
 
-        if (!empty($this->salonID)) {
+        if (! empty($this->salonID)) {
             if ($this->salonID == 'random') {
                 $recentCarsSalon = Car::inRandomOrder()
                     ->where('status', 1)
@@ -50,6 +50,7 @@ class RecentSalon extends Component
                     ->get();
             }
         }
+
         return view('livewire.recent-salon', [
             'topSalons' => $topSalons,
             'recentCarsSalon' => $recentCarsSalon,

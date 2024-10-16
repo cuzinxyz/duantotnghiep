@@ -2,42 +2,37 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ReportedResource\Pages;
+use App\Mail\AccountDeleteNotice;
 use App\Models\Car;
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use App\Models\Support;
+use App\Models\ChMessage;
 use App\Models\Comments;
 use App\Models\Reported;
+use App\Models\Support;
+use App\Models\User;
 use App\Models\WithDraw;
 use Filament\Forms\Form;
-use App\Models\ChMessage;
-use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
-use App\Mail\AccountDeleteNotice;
-use Filament\Tables\Filters\Filter;
-use Illuminate\Support\Facades\Mail;
 use Filament\Infolists\Components\Grid;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Notifications\Notification;
-use Filament\Tables\Actions\ActionGroup;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Tables\Actions\ReplicateAction;
-use App\Filament\Resources\ReportedResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Actions\Action as ActionsAction;
-use Filament\Notifications\Actions\Action as NotificationsAction;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
 
 class ReportedResource extends Resource
 {
     protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Reported::class;
-
-    
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
@@ -73,8 +68,12 @@ class ReportedResource extends Resource
                     ->label('Trạng thái')
                     ->badge()
                     ->state(function (Model $record) {
-                        if ($record->status == 0) return 'Chờ xử lý';
-                        if ($record->status == 1) return 'Đã xử lý';
+                        if ($record->status == 0) {
+                            return 'Chờ xử lý';
+                        }
+                        if ($record->status == 1) {
+                            return 'Đã xử lý';
+                        }
                     })
                     ->sortable(),
 
@@ -84,10 +83,13 @@ class ReportedResource extends Resource
                         if (
                             $model->collaborator_id == null
                             && $model->status == 1
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
             ])
             ->filters([
@@ -95,7 +97,7 @@ class ReportedResource extends Resource
                 Filter::make('unactive')
                     ->label('Tố cáo cần xử')
                     ->query(fn (Builder $query): Builder => $query->where('status', 0))
-                    ->default()
+                    ->default(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -113,14 +115,14 @@ class ReportedResource extends Resource
                         ->action(function (Model $report) {
 
                             $collaborator = User::find($report->collaborator_id);
-                            if($collaborator) {
+                            if ($collaborator) {
                                 $total_assign = $collaborator->total_assign - 1;
                                 if ($collaborator->total_assign <= 0) {
                                     $total_assign = 0;
                                 }
-    
+
                                 User::where('id', $report->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
@@ -130,16 +132,16 @@ class ReportedResource extends Resource
                             $bot = User::where('name', 'BOT')->first();
                             $user = User::where('id', $report->to_user_id)->first();
 
-                            $reason = 'Chào bạn ' . $user->name . ',
-                                        Bài đăng tin mua xe của bạn có tiêu đề:' . $report->cars->title . '
-                                        đã bị tố cáo với nội dụng:' . $report->content . '
+                            $reason = 'Chào bạn '.$user->name.',
+                                        Bài đăng tin mua xe của bạn có tiêu đề:'.$report->cars->title.'
+                                        đã bị tố cáo với nội dụng:'.$report->content.'
                                         . Qua xác minh chúng tôi nhận thấy rằng tố cáo này là hoàn toàn đúng sự thật,Vì vậy chúng tôi sẽ xóa bài đăng này và cảnh báo bạn về lỗi vi phạm trên,nếu còn tiếp tục vi phạm chúng tôi sẽ tiến hành khóa tài khoản của bạn.
                                         Trân trọng cảm ơn!';
 
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $report->to_user_id,
-                                'body' => $reason
+                                'body' => $reason,
                             ]);
                             Car::where('id', $report->car_id)->delete();
                             Notification::make()
@@ -161,9 +163,8 @@ class ReportedResource extends Resource
                                     $total_assign = 0;
                                 }
 
-
                                 User::where('id', $report->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
@@ -190,7 +191,6 @@ class ReportedResource extends Resource
                             Reported::where('from_user_id', $report->to_user_id)->delete();
                             Car::where('user_id', $report->to_user_id)->delete();
 
-
                             Comments::where('user_id', $report->to_user_id)->delete();
                             WithDraw::where('user_id', $report->to_user_id)->delete();
                             Support::where('user_id', $report->to_user_id)->delete();
@@ -210,9 +210,8 @@ class ReportedResource extends Resource
                                     $total_assign = 0;
                                 }
 
-
                                 User::where('id', $report->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
@@ -223,7 +222,7 @@ class ReportedResource extends Resource
                         ->label('Xóa tố cáo'),
                 ])
                     ->button()
-                    ->label('Hành động')
+                    ->label('Hành động'),
             ])
 
             ->bulkActions([

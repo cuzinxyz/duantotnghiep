@@ -2,29 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use App\Models\WithDraw;
-use Filament\Forms\Form;
-use App\Models\ChMessage;
-use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
-use App\Models\TransactionsHistory;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Filters\Filter;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Tables\Actions\ActionGroup;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\WithDrawResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\WithDrawResource\RelationManagers;
+use App\Models\ChMessage;
+use App\Models\TransactionsHistory;
+use App\Models\User;
+use App\Models\WithDraw;
+use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class WithDrawResource extends Resource
 {
@@ -62,9 +58,15 @@ class WithDrawResource extends Resource
                     ->label('Trạng thái')
                     ->badge()
                     ->state(function (Model $record) {
-                        if ($record->status == 0) return 'Chờ xác nhận';
-                        if ($record->status == 1) return 'Đã xác nhận';
-                        if ($record->status == 2) return 'Đã hủy yêu cầu';
+                        if ($record->status == 0) {
+                            return 'Chờ xác nhận';
+                        }
+                        if ($record->status == 1) {
+                            return 'Đã xác nhận';
+                        }
+                        if ($record->status == 2) {
+                            return 'Đã hủy yêu cầu';
+                        }
                     })
                     ->sortable(),
 
@@ -75,10 +77,13 @@ class WithDrawResource extends Resource
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
             ])
             ->filters([
@@ -92,7 +97,7 @@ class WithDrawResource extends Resource
                     ->query(fn (Builder $query): Builder => $query->where('status', 1)),
                 Filter::make('locked')
                     ->label('Yêu cầu rút tiền không được duyệt')
-                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2)),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -104,6 +109,7 @@ class WithDrawResource extends Resource
                                     ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
                                     ->success()
                                     ->send();
+
                                 return 0;
                             }
                             $collaborator = User::find($record->collaborator_id);
@@ -113,16 +119,13 @@ class WithDrawResource extends Resource
                                     $total_assign = 0;
                                 }
 
-
                                 User::where('id', $record->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
-
                             $record->status = 1;
                             $record->save();
-
 
                             $user_balance = User::find($record->user_id);
 
@@ -132,23 +135,23 @@ class WithDrawResource extends Resource
                                 'user_id' => $record->user_id,
                                 'transaction_type' => 'rút tiền',
                                 'amount' => intval($record->bank_price),
-                                'balance_after_transaction' => $account_balence
+                                'balance_after_transaction' => $account_balence,
                             ]);
 
                             User::where('id', $record->user_id)->update([
-                                'account_balence' => $account_balence
+                                'account_balence' => $account_balence,
                             ]);
 
                             $bot = User::where('name', 'BOT')->first();
 
-                            $reason = 'Chào bạn ' . $user_balance->name . ',
+                            $reason = 'Chào bạn '.$user_balance->name.',
                                     Yêu cầu rút tiền của bạn đã được duyệt thành công.
                                     Chúng tôi đã hoàn thành chuyển khoản cho bạn.
                                     Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $record->user_id,
-                                'body' => $reason
+                                'body' => $reason,
                             ]);
 
                             Notification::make()
@@ -173,6 +176,7 @@ class WithDrawResource extends Resource
                                     ->title('Yêu cầu này đã được xử lý. Không thể xử lý lại')
                                     ->success()
                                     ->send();
+
                                 return 0;
                             }
                             $collaborator = User::find($record->collaborator_id);
@@ -182,9 +186,8 @@ class WithDrawResource extends Resource
                                     $total_assign = 0;
                                 }
 
-
                                 User::where('id', $record->collaborator_id)->update([
-                                    'total_assign' => $total_assign
+                                    'total_assign' => $total_assign,
                                 ]);
                             }
 
@@ -194,15 +197,15 @@ class WithDrawResource extends Resource
 
                             $bot = User::where('name', 'BOT')->first();
 
-                            $reason = 'Chào bạn ' . $record->user->name . ',
+                            $reason = 'Chào bạn '.$record->user->name.',
                                     Yêu cầu rút tiền của bạn đã không được duyệt thành công.
-                                    Vì lý do: ' . $data['reason'] . '.
+                                    Vì lý do: '.$data['reason'].'.
                                     Bạn vui lòng kiểm tra lại và có thể gửi lại yêu cần rút tiền với chúng tôi
                                     Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, mong rằng chúng tôi có thể đem lại sự trải nhiệm tuyệt vời dành cho bạn.';
                             ChMessage::create([
                                 'from_id' => $bot->id,
                                 'to_id' => $record->user_id,
-                                'body' => $reason
+                                'body' => $reason,
                             ]);
 
                             Notification::make()
@@ -210,7 +213,7 @@ class WithDrawResource extends Resource
                                 ->success()
                                 ->send();
                         }),
-                ])
+                ]),
 
             ])
             ->bulkActions([
@@ -260,16 +263,17 @@ class WithDrawResource extends Resource
                             ->label('Mã chuyển khoản')
                             ->defaultImageUrl(function (Model $model) {
                                 $urlBank = "https://img.vietqr.io/image/$model->bank_name-$model->bank_number-compact2.png?amount=$model->bank_price&addInfo=DRIVCO chuyen tien&accountName=$model->username";
+
                                 return url($urlBank);
                             })
                             ->width('100%')
                             ->height('auto')
-                            ->columnSpanFull()
+                            ->columnSpanFull(),
                     ])
                     ->columnSpan([
                         'default' => 1,
                         'lg' => 1,
-                    ])
+                    ]),
 
             ])
             ->columns([

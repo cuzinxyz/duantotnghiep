@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Brand;
-use App\Models\ModelCar;
-use Illuminate\Database\Eloquent\Model;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
-use Kjmtrue\VietnamZone\Models\Province;
-use Kjmtrue\VietnamZone\Models\District;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Kjmtrue\VietnamZone\Models\District;
+use Kjmtrue\VietnamZone\Models\Province;
 
 class Car extends Model implements Viewable
 {
@@ -36,7 +34,7 @@ class Car extends Model implements Viewable
         'verhicle_videos',
         'description',
         'salon_id',
-        'status'
+        'status',
     ];
 
     protected $casts = [
@@ -86,7 +84,8 @@ class Car extends Model implements Viewable
         return Comments::where('car_id', $carID)->count();
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comments::class);
     }
 
@@ -94,13 +93,14 @@ class Car extends Model implements Viewable
     {
         return $this->belongsTo(User::class, 'collaborator_id', 'id');
     }
-    
+
     public function salon(): BelongsTo
     {
         return $this->BelongsTo(Salon::class, 'salon_id', 'id');
     }
 
-    public function services(): BelongsToMany {
+    public function services(): BelongsToMany
+    {
         return $this->belongsToMany(Service::class, 'purchased_service', 'car_id', 'service_id')->withPivot('expired_date');
     }
 }

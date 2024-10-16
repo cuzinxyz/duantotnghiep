@@ -13,10 +13,11 @@ class Search extends Component
     {
         $cars = [];
         if (strlen($this->search) >= 2) {
-            $cars = Car::where('title', 'like', '%' . $this->search . '%')
-                    ->where('status', 1)
-                    ->get();
+            $cars = Car::where('title', 'like', '%'.$this->search.'%')
+                ->where('status', 1)
+                ->get();
         }
+
         return view('livewire.search', compact('cars'));
     }
 }

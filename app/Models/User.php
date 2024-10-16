@@ -3,20 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Car;
-use App\Models\Salon;
-use App\Models\Demnad;
-use App\Models\Support;
-use App\Models\Reported;
-use App\Models\WithDraw;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -37,7 +31,7 @@ class User extends Authenticatable
         'total_assign',
         'active',
         'is_collaborator',
-        'social_id'
+        'social_id',
     ];
 
     /**
@@ -75,19 +69,23 @@ class User extends Authenticatable
         return $this->hasMany(Demnad::class);
     }
 
-    public function salon(): HasMany {
+    public function salon(): HasMany
+    {
         return $this->hasMany(Salon::class);
     }
 
-    public function support(): HasMany {
+    public function support(): HasMany
+    {
         return $this->hasMany(Support::class);
     }
 
-    public function report(): HasMany {
-        return $this->hasMany(Reported::class,'from_user_id', 'id');
+    public function report(): HasMany
+    {
+        return $this->hasMany(Reported::class, 'from_user_id', 'id');
     }
 
-    public function withDraw(): HasMany {
+    public function withDraw(): HasMany
+    {
         return $this->hasMany(withDraw::class);
     }
 
@@ -121,11 +119,12 @@ class User extends Authenticatable
         return $this->hasMany(Reported::class, 'collaborator_id', 'id');
     }
 
-    public function transactions_histories() {
+    public function transactions_histories()
+    {
         return $this->HasMany(TransactionsHistory::class);
     }
 
-    public function collaborator() : HasOne
+    public function collaborator(): HasOne
     {
         return $this->hasOne(Collaborator::class);
     }

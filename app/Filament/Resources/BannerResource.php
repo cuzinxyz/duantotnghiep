@@ -2,23 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Banner;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Section;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\BannerResource\Pages;
+use App\Models\Banner;
+use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\BannerResource\RelationManagers;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Illuminate\Http\Request;
 
 class BannerResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Giao diện';
+    protected static ?string $navigationGroup = 'Giao diện';
 
     protected static ?string $model = Banner::class;
 
@@ -40,7 +37,7 @@ class BannerResource extends Resource
                             ->columnSpanFull()
                             ->imageEditorViewportWidth('1920')
                             ->imageEditorViewportHeight('1080'),
-                    ])
+                    ]),
             ]);
     }
 
@@ -49,7 +46,7 @@ class BannerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image_url')
-                ->label('Hình ảnh'),
+                    ->label('Hình ảnh'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Ngày tạo')
                     ->dateTime()
@@ -59,7 +56,7 @@ class BannerResource extends Resource
                     ->label('Ngày cập nhật')
                     ->dateTime()
                     ->since()
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -72,9 +69,9 @@ class BannerResource extends Resource
 
             ])
             ->bulkActions([
-                    Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make()
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([

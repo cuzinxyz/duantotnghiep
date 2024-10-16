@@ -21,7 +21,7 @@ class ReportedFactory extends Factory
             'from_user_id' => User::inRandomOrder()->first(),
             'to_user_id' => User::inRandomOrder()->first(),
             'car_id' => $this->faker->numberBetween(1, 10),
-            'content' => $this->faker->title()
+            'content' => $this->faker->title(),
         ];
     }
 }

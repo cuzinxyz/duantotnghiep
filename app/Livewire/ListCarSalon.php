@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Salon;
 use Livewire\Component;
@@ -15,16 +14,18 @@ class ListCarSalon extends Component
     public $salonSlug;
 
     public $searchCar;
+
     public $brandCar;
 
-    public function mount($salonSlug=null) {
-        $this->salonSlug = $salonSlug; 
+    public function mount($salonSlug = null)
+    {
+        $this->salonSlug = $salonSlug;
     }
 
     public function render()
     {
         $salonInfo = Salon::where('slug', $this->salonSlug)->first();
-        if (!$salonInfo) {
+        if (! $salonInfo) {
             abort(404);
         }
 
@@ -33,7 +34,7 @@ class ListCarSalon extends Component
         $brands = Car::where('salon_id', $salonInfo->id)->where('status', 1)->get();
 
         if ($this->searchCar) {
-            $cars->where('title', 'like', '%' . $this->searchCar . '%');
+            $cars->where('title', 'like', '%'.$this->searchCar.'%');
         }
 
         if ($this->brandCar) {
@@ -41,13 +42,13 @@ class ListCarSalon extends Component
         }
 
         if ($this->searchCar && $this->brandCar) {
-            $cars->where('title', 'like', '%' . $this->searchCar . '%')
+            $cars->where('title', 'like', '%'.$this->searchCar.'%')
                 ->where('brand_id', $this->brandCar);
         }
 
         return view('livewire.list-car-salon', [
             'cars' => $cars->paginate(4),
-            'brands' => $brands
+            'brands' => $brands,
         ]);
     }
 }

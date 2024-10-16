@@ -2,20 +2,19 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\SupportResource;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\Filter;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\SupportResource;
+use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Database\Eloquent\Builder;
 
 class SupportsTable extends BaseWidget
 {
     protected static ?int $sort = 8;
 
     protected static ?string $heading = 'Hỗ trợ đang chờ xử lý';
-
 
     public function table(Table $table): Table
     {
@@ -37,14 +36,14 @@ class SupportsTable extends BaseWidget
             ])
             ->filters([
                 Filter::make('unactive')
-                ->label('Yêu cầu hỗ trợ chưa được xử lý')
-                ->query(fn (Builder $query): Builder => $query->where('status', 0))
-                ->default()
+                    ->label('Yêu cầu hỗ trợ chưa được xử lý')
+                    ->query(fn (Builder $query): Builder => $query->where('status', 0))
+                    ->default(),
             ])
             ->actions([
                 Action::make('toReport')
-                ->label('Xem chi tiết')
-                ->url(fn (Action $action) => ' admin/supports/' . $action->getRecord()->id.'/edit')
+                    ->label('Xem chi tiết')
+                    ->url(fn (Action $action) => ' admin/supports/'.$action->getRecord()->id.'/edit'),
             ]);
     }
 }

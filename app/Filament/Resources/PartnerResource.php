@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PartnerResource\Pages;
-use App\Filament\Resources\PartnerResource\RelationManagers;
 use App\Models\Partner;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -17,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PartnerResource extends Resource
 {
-  protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Quản lý nội dung';
 
     protected static ?string $model = Partner::class;
 
@@ -42,10 +41,10 @@ class PartnerResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('logo_url')
-                ->label('Logo')
+                    ->label('Logo')
                     ->square(),
                 Tables\Columns\TextColumn::make('name')
-                ->label('Tên công ty')
+                    ->label('Tên công ty')
                     ->searchable(),
             ])
             ->filters([

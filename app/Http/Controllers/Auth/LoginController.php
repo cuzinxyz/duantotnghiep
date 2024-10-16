@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FormUserRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -43,49 +40,49 @@ class LoginController extends Controller
 
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    public function redirectToGoogle() 
+    public function redirectToGoogle()
     {
-       return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->redirect();
     }
-    
-    public function handleGoogleCallback() 
+
+    public function handleGoogleCallback()
     {
-       $user = Socialite::driver('google')->user();
-    
-       $this->_registerOrLoginUser($user);
-    
-       return redirect()->route('homepage');
+        $user = Socialite::driver('google')->user();
+
+        $this->_registerOrLoginUser($user);
+
+        return redirect()->route('homepage');
     }
-    
-    public function redirectToFacebook() 
+
+    public function redirectToFacebook()
     {
-       return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
-    
-    public function handleFacebookCallback() 
+
+    public function handleFacebookCallback()
     {
-       $user = Socialite::driver('facebook')->user();
-    
-       $this->_registerOrLoginUser($user);
-    
-       return redirect()->route('homepage');
+        $user = Socialite::driver('facebook')->user();
+
+        $this->_registerOrLoginUser($user);
+
+        return redirect()->route('homepage');
     }
-    
+
     public function _registerOrLoginUser($data)
     {
-       $user = User::where('email', '=', $data->email)->first();
-    
-       if(!$user) {
-          $user = new User();
-    
-          $user->name = $data->name;
-          $user->email = $data->email;
-          $user->password = Str::random(10);
-          $user->social_id = $data->id;
-          $user->avatar = $data->avatar;
-          $user->save();
-       }
-    
-       Auth::login($user);
+        $user = User::where('email', '=', $data->email)->first();
+
+        if (! $user) {
+            $user = new User;
+
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->password = Str::random(10);
+            $user->social_id = $data->id;
+            $user->avatar = $data->avatar;
+            $user->save();
+        }
+
+        Auth::login($user);
     }
 }

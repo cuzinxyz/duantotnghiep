@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdsResource\Pages;
 use App\Models\Ads;
-use App\Models\Partner;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -48,7 +47,7 @@ class AdsResource extends Resource
                     ->options([
                         '1' => 'Trang chủ',
                         '2' => 'Các trang khác',
-                    ])
+                    ]),
             ]);
     }
 
@@ -62,7 +61,6 @@ class AdsResource extends Resource
                     ->label('Đường dẫn ảnh'),
                 TextColumn::make('target_url')
                     ->label('Đường dẫn đích'),
-
 
             ])
             ->filters([

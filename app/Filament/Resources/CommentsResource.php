@@ -2,30 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Comments;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\CommentsResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\CommentsResource\RelationManagers;
+use App\Models\Comments;
 use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\Actions\Action;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
 
 class CommentsResource extends Resource
 {
     protected static ?string $navigationGroup = 'Tương tác';
 
     protected static ?string $model = Comments::class;
-    
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationLabel = 'Bình luận';
 
     public static function infolist(Infolist $infolist): Infolist
@@ -61,7 +56,7 @@ class CommentsResource extends Resource
                                     redirect()->route('filament.admin.resources.comments.index');
                                 })
                                 ->successNotificationTitle('Xoá thành công'),
-                        ])
+                        ]),
                     ])->columnSpan(1),
             ])->columns(2);
     }
@@ -125,6 +120,7 @@ class CommentsResource extends Resource
             'view' => Pages\ViewComments::route('/{record}'),
         ];
     }
+
     public static function getModelLabel(): string
     {
         return __('Bình luận');

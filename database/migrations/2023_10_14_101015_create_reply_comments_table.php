@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('reply_comments', function (Blueprint $table) {
             $table->id();
             $table->string('body');
-            $table->foreignIdFor(\App\Models\Comments::class,'comment_id');
-            $table->foreignIdFor(\App\Models\User::class,'user_id');
-            $table->foreignIdFor(\App\Models\Car::class,'car_id');
-            $table->foreignIdFor(\App\Models\News::class,'news_id');
+            $table->foreignIdFor(\App\Models\Comments::class, 'comment_id');
+            $table->foreignIdFor(\App\Models\User::class, 'user_id');
+            $table->foreignIdFor(\App\Models\Car::class, 'car_id');
+            $table->foreignIdFor(\App\Models\News::class, 'news_id');
             $table->timestamps();
             $table->softDeletes();
         });

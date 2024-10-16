@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ModelCarResource\Pages;
-use App\Filament\Resources\ModelCarResource\RelationManagers;
 use App\Models\ModelCar;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ModelCarResource extends Resource
 {
@@ -20,6 +17,7 @@ class ModelCarResource extends Resource
     protected static ?string $model = ModelCar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationLabel = 'Dòng xe';
 
     public static function form(Form $form): Form
@@ -93,6 +91,7 @@ class ModelCarResource extends Resource
             'edit' => Pages\EditModelCar::route('/{record}/edit'),
         ];
     }
+
     public static function getModelLabel(): string
     {
         return __('Tên xe');

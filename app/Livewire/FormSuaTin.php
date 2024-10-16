@@ -2,29 +2,34 @@
 
 namespace App\Livewire;
 
-use App\Models\Car;
 use App\Models\Brand;
-use Livewire\Component;
+use App\Models\Car;
 use App\Models\ModelCar;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class FormSuaTin extends Component
 {
     use WithFileUploads;
-    #define requirement
+
+    //define requirement
     public $id;
+
     public $brands;
+
     public $car;
+
     public $fuels = [
-        "Xăng",
-        "Dầu Diesl",
-        "Điện",
-        "Loại khác"
+        'Xăng',
+        'Dầu Diesl',
+        'Điện',
+        'Loại khác',
     ];
+
     public $colors = [
         'black' => 'Đen',
         'white' => 'Trắng',
@@ -37,8 +42,9 @@ class FormSuaTin extends Component
         'yellow' => 'Vàng',
         'purple' => 'Tím',
         'brown' => 'Nâu',
-        'different' => 'Khác'
+        'different' => 'Khác',
     ];
+
     public $featureValues = [
         'PremiumWheel' => 'Bánh xe cao cấp',
         'Moonroof' => 'Cửa sổ trời',
@@ -53,6 +59,7 @@ class FormSuaTin extends Component
         'BlindSpotAssist' => 'Hỗ trợ điểm mù',
         'LaneAssist' => 'Hỗ trợ làn đường',
     ];
+
     public $seats = [
         '4' => '4',
         '5' => '5',
@@ -60,6 +67,7 @@ class FormSuaTin extends Component
         '7' => '7',
         '8' => '8',
     ];
+
     public $years = [
         2023,
         2022,
@@ -75,47 +83,68 @@ class FormSuaTin extends Component
         2012,
         2011,
         2010,
-        'others'
+        'others',
     ];
+
     public $models = [];
 
     public $verhicle_image_library = [];
+
     public $verhicle_videos;
+
     #[Validate('required', message: 'Bắt buộc phải chọn thương hiệu.')]
     public $brand_select = '';
+
     #[Validate('required', message: 'Bắt buộc phải chọn tên xe.')]
     public $model_select = '';
+
     #[Validate('required', message: 'Bắt buộc phải chọn hộp số.')]
     public $transmission;
+
     #[Validate('required', message: 'Bắt buộc phải chọn loại nhiên liệu.')]
     public $fuel;
+
     #[Validate('required', message: 'Bắt buộc phải chọn số chỗ ngồi.')]
     public $number_of_seats;
+
     #[Validate('required', message: 'Bắt buộc phải chọn màu sắc.')]
     public $color;
+
     public $version;
+
     #[Validate('required', message: 'Bắt buộc phải nhập số KM.')]
     public $mileage;
+
     #[Validate('required', message: 'Bắt buộc phải nhập giá.')]
     public $price;
+
     #[Validate('required', message: 'Bắt buộc phải nhập tiêu đề.')]
     public $title;
+
     #[Validate('required', message: 'Bắt buộc phải nhập mô tả.')]
     public $description;
+
     #[Validate('required', message: 'Bắt buộc phải nhập SĐT.')]
     public $phone;
+
     #[Validate('required', message: 'Bắt buộc phải nhập email.')]
     public $email;
+
     #[Validate('required', message: 'Bắt buộc phải chọn quận / huyện.')]
     public $district_id;
+
     #[Validate('required', message: 'Bắt buộc phải chọn thành phố.')]
     public $city_id;
+
     #[Validate('required', message: 'Bắt buộc phải nhập địa chỉ chi tiết.')]
     public $full_address;
+
     #[Validate('required', message: 'Bắt buộc phải nhập năm sản xuất.')]
     public $year_of_manufacture;
+
     #[Validate('required', message: 'Bắt buộc phải nhập số mã lực.')]
     public $engine;
+
     #[Validate('required', message: 'Bắt buộc phải chọn một số tính năng khác.')]
     public $features = [];
 
@@ -133,7 +162,7 @@ class FormSuaTin extends Component
                 $fileName = $photo->getFilename();
                 $dir_name = 'car_photos';
                 $photo->storeAs('car_photos', $fileName, 'public');
-                array_push($photoName, $dir_name . '/' . $fileName);
+                array_push($photoName, $dir_name.'/'.$fileName);
 
                 $dir_name_image = 'car_photos';
                 $fileImage = uploadFile($dir_name_image, $photo);
@@ -142,7 +171,7 @@ class FormSuaTin extends Component
             $carData['verhicle_image_library'] = $photoName;
         }
         if ($this->verhicle_videos) {
-            Storage::delete('/public/' . $this->car->verhicle_videos);
+            Storage::delete('/public/'.$this->car->verhicle_videos);
             $dir_name = 'video_car';
             $file = uploadFile($dir_name, $this->verhicle_videos);
             $videoName = $file;
@@ -159,22 +188,22 @@ class FormSuaTin extends Component
         $carData['district_id'] = $this->district_id;
         $carData['full_address'] = $this->full_address;
         $carData['description'] = $this->description;
-        $carData['car_info'] = array(
-            "year_of_manufacture" => $this->year_of_manufacture,
+        $carData['car_info'] = [
+            'year_of_manufacture' => $this->year_of_manufacture,
             'transmission' => $this->transmission,
             'fuelType' => $this->fuel,
             'number_of_seats' => $this->number_of_seats,
             'color' => $this->color,
             'version' => $this->version,
             'mileage' => $this->mileage,
-            "features" => $this->features,
+            'features' => $this->features,
             'engine' => $this->engine,
-        );
-        $carData['contact'] = array(
+        ];
+        $carData['contact'] = [
             'full_address' => $this->full_address,
             'phone' => $this->phone,
             'email' => $this->email,
-        );
+        ];
         $carData['status'] = 0;
         $result = Car::findOrFail($this->id)->update($carData);
         if ($result) {
@@ -215,9 +244,10 @@ class FormSuaTin extends Component
                 abort(404);
             }
         }
-        if (!empty($this->brand_select) && $this->brand_select != 0) {
+        if (! empty($this->brand_select) && $this->brand_select != 0) {
             $this->models = ModelCar::where('brand_id', $this->brand_select)->get();
         }
+
         return view('livewire.form-sua-tin');
     }
 }

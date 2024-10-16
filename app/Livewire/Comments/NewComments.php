@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Comments;
 
-use Livewire\Component;
 use App\Models\Comments;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
 use App\Models\ReplyComments;
-use Livewire\Attributes\Rule;
-use Livewire\Attributes\Locked;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Rule;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class NewComments extends Component
 {
@@ -41,8 +41,9 @@ class NewComments extends Component
 
     public function saveComment()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             $this->dispatch('showError', 'Vui lòng đăng nhập để bình luận');
+
             return redirect()->route('login');
         }
 
@@ -52,7 +53,7 @@ class NewComments extends Component
             'body' => $this->comment,
             'user_id' => auth()->id(),
             'car_id' => 0,
-            'news_id' => $this->newID
+            'news_id' => $this->newID,
         ]);
 
         $this->reset('comment');
@@ -68,9 +69,8 @@ class NewComments extends Component
             'comment_id' => $newID,
             'user_id' => Auth::user()->id,
             'car_id' => 0,
-            'news_id' => $this->newID
+            'news_id' => $this->newID,
         ]);
-
 
         $this->reset('reply');
         $this->dispatch('renderReCommentNew');
@@ -97,7 +97,7 @@ class NewComments extends Component
     public function render()
     {
         return view('livewire.comments.new-comment', [
-            'listComments' => Comments::with('reply')->where('news_id', $this->newID)->orderBy('created_at', 'desc')->simplePaginate(6)
+            'listComments' => Comments::with('reply')->where('news_id', $this->newID)->orderBy('created_at', 'desc')->simplePaginate(6),
         ]);
     }
 }

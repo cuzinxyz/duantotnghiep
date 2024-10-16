@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('service_id');
             $table->string('car_id')
                 ->nullable()
-                ->comment("Cột này để lưu các xe đã được đẩy tin");
+                ->comment('Cột này để lưu các xe đã được đẩy tin');
             $table->integer('remaining_push');
             $table->timestamp('expired_date');
             $table->timestamps();

@@ -4,22 +4,22 @@ namespace App\Providers;
 
 use App\Events\NotificationExtendServices;
 use App\Events\reassignUnfinishedTasksAfterDayEvent;
-use App\Models\User;
-use App\Models\Admin;
-use App\Models\Banner;
-use App\Models\Partner;
-use App\Observers\UserObserver;
-use App\Observers\AdminObserver;
-use App\Observers\BannerObserver;
-use App\Observers\PartnerObserver;
 use App\Events\WorkCollaboratorEvent;
-use Illuminate\Auth\Events\Registered;
-use App\Listeners\UpdateActiceStatusUser;
 use App\Events\WorkCollaboratorWhenOnline;
 use App\Listeners\NotificationExtendServicesListen;
 use App\Listeners\reassignUnfinishedTasksAfterDayListen;
+use App\Listeners\UpdateActiceStatusUser;
 use App\Listeners\WorkCollaboratorListener;
 use App\Listeners\WorkCollaboratorWhenOnlineListener;
+use App\Models\Admin;
+use App\Models\Banner;
+use App\Models\Partner;
+use App\Models\User;
+use App\Observers\AdminObserver;
+use App\Observers\BannerObserver;
+use App\Observers\PartnerObserver;
+use App\Observers\UserObserver;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -36,21 +36,21 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         WorkCollaboratorEvent::class => [
-            WorkCollaboratorListener::class
+            WorkCollaboratorListener::class,
         ],
 
         WorkCollaboratorWhenOnline::class => [
-            WorkCollaboratorWhenOnlineListener::class
+            WorkCollaboratorWhenOnlineListener::class,
         ],
 
         reassignUnfinishedTasksAfterDayEvent::class => [
-            reassignUnfinishedTasksAfterDayListen::class
-        ],  
+            reassignUnfinishedTasksAfterDayListen::class,
+        ],
 
         NotificationExtendServices::class => [
-            NotificationExtendServicesListen::class
+            NotificationExtendServicesListen::class,
         ],
-        
+
     ];
 
     /**

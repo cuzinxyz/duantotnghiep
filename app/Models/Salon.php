@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Salon extends Model
 {
@@ -30,10 +29,10 @@ class Salon extends Model
     ];
 
     protected $casts = [
-        'image_salon' => 'array'
+        'image_salon' => 'array',
     ];
 
-    public function cars() :hasMany
+    public function cars(): hasMany
     {
         return $this->hasMany(Car::class);
     }

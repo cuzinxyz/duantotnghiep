@@ -2,21 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use App\Models\Collaborators;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollaboratorsResource\Pages;
-use App\Filament\Resources\UserResource\Pages\CreateUser;
-use App\Filament\Resources\CollaboratorsResource\RelationManagers;
 use App\Filament\Resources\CollaboratorsResource\RelationManagers\CarRelationManager;
 use App\Filament\Resources\CollaboratorsResource\RelationManagers\DemnadRelationManager;
 use App\Filament\Resources\CollaboratorsResource\RelationManagers\ReportCollaboratorRelationManager;
@@ -24,6 +10,18 @@ use App\Filament\Resources\CollaboratorsResource\RelationManagers\SalonCollabora
 use App\Filament\Resources\CollaboratorsResource\RelationManagers\SupportCollaboratorRelationManager;
 use App\Filament\Resources\CollaboratorsResource\RelationManagers\WithDrawCollaboratorRelationManager;
 use App\Filament\Resources\CollaboratorsResource\Widgets\CollaboratorsOverview;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Models\User;
+use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CollaboratorsResource extends Resource
 {
@@ -46,7 +44,7 @@ class CollaboratorsResource extends Resource
                             ->rules(['required']),
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
-                            ->rules(['required','email'])
+                            ->rules(['required', 'email'])
                             ->unique(),
                         Forms\Components\TextInput::make('phone_number')
                             ->label('Số điện thoại')
@@ -59,7 +57,7 @@ class CollaboratorsResource extends Resource
                             ->rules(['required']),
                     ])->columnSpan([
                         'md' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ]),
                 Section::make()
                     ->schema([
@@ -71,12 +69,12 @@ class CollaboratorsResource extends Resource
                             ->directory('avatars/users'),
                     ])->columnSpan([
                         'md' => 1,
-                        'xl' => 1
+                        'xl' => 1,
                     ]),
 
             ])->columns([
                 'md' => 2,
-                'xl' => 3
+                'xl' => 3,
             ]);
     }
 
@@ -94,7 +92,6 @@ class CollaboratorsResource extends Resource
                 Tables\Columns\TextColumn::make('phone_number')
                     ->default('Không có số điện thoại')
                     ->label('Số điện thoại'),
-
 
             ])
             ->filters([
@@ -146,7 +143,7 @@ class CollaboratorsResource extends Resource
             SalonCollaboratorRelationManager::class,
             WithDrawCollaboratorRelationManager::class,
             ReportCollaboratorRelationManager::class,
-            SupportCollaboratorRelationManager::class
+            SupportCollaboratorRelationManager::class,
 
         ];
     }
@@ -154,7 +151,7 @@ class CollaboratorsResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            CollaboratorsOverview::class
+            CollaboratorsOverview::class,
         ];
     }
 }

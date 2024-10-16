@@ -17,15 +17,14 @@ class UserStatus extends Component
         ];
     }
 
-    public function joining($data) {
+    public function joining($data)
+    {
         User::where('id', $data['id'])->update([
             'active' => 1,
         ]);
 
         dd(123);
     }
-
-    
 
     public function leaving($data)
     {
@@ -37,7 +36,7 @@ class UserStatus extends Component
     }
 
     public function render()
-    {    
+    {
         return view('livewire.user-status');
     }
 }

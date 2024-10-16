@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\Computed;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist as ModelsWishlist;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
 
 class Wishlist extends Component
 {
@@ -24,7 +24,7 @@ class Wishlist extends Component
         $cars = ModelsWishlist::where('user_id', Auth::id())->latest()->get();
 
         return view('livewire.wishlist', [
-            'cars' => $cars
+            'cars' => $cars,
         ]);
     }
 }

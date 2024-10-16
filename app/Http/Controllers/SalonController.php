@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Events\WorkCollaboratorEvent;
 use App\Models\Car;
-use App\Models\User;
-use App\Models\Salon;
 use App\Models\Comments;
+use App\Models\Salon;
 use App\Models\TransactionsHistory;
+use App\Models\User;
 use App\Models\Wishlist;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SalonController extends Controller
 {
@@ -38,7 +38,7 @@ class SalonController extends Controller
             'salonCars' => $salonCars,
             'totalView' => $totalView,
             'totalComment' => $totalComment,
-            'totalSavedCar' => $totalSavedCar
+            'totalSavedCar' => $totalSavedCar,
         ]);
     }
 
@@ -50,7 +50,7 @@ class SalonController extends Controller
             }
         }
 
-        $salonData = array(
+        $salonData = [
             'salon_name' => $request->storeName,
             'slug' => Str::slug($request->storeName),
             'address' => $request->storeAddress,
@@ -58,11 +58,11 @@ class SalonController extends Controller
             'phone_number' => $request->phoneNumber,
             'email' => $request->email,
             'image_salon' => $images,
-            'user_id' => auth()->id()
-        );
+            'user_id' => auth()->id(),
+        ];
         $result = Salon::create($salonData);
 
-        if($result) {
+        if ($result) {
             event(new WorkCollaboratorEvent($result));
         }
 
@@ -75,6 +75,7 @@ class SalonController extends Controller
     {
         return view('salon.add');
     }
+
     public function editCar($carId)
     {
         return view('salon.edit', compact('carId'));
@@ -86,6 +87,7 @@ class SalonController extends Controller
             $car = Car::find($carId);
             if (auth()->id() == $car->user_id) {
                 $deleteCar = Car::where('id', $carId)->delete();
+
                 return redirect()->back()->with('success', 'Xóa thành công');
             }
         }
@@ -96,52 +98,53 @@ class SalonController extends Controller
         $userId = $request->input('user_id');
         $user = User::find($userId);
 
-        if (!$user) {
+        if (! $user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
         $balance = $user->account_balence;
 
         if ($balance >= 300000) {
-            $message = "<div class='alert alert-info'>Số dư của bạn là <strong>" . number_format($balance) . "đ</strong>. <br>Sau khi được quản trị viên phê duyệt, số dư sẽ tự động được trừ vào tài khoản của bạn.</div>";
+            $message = "<div class='alert alert-info'>Số dư của bạn là <strong>".number_format($balance).'đ</strong>. <br>Sau khi được quản trị viên phê duyệt, số dư sẽ tự động được trừ vào tài khoản của bạn.</div>';
+
             return response()->json(['balance' => $balance, 'message' => $message]);
         } else {
-            $message = "<div class='alert alert-warning'>Số dư của bạn là <strong>" . number_format($balance) . "đ</strong>. <br>Bạn cần nạp thêm tiền tại <a href='/nap-tien'> đây</a>, số dư sẽ được tự động trừ khi quản trị viên phê duyệt yêu cầu của bạn.</div>";
+            $message = "<div class='alert alert-warning'>Số dư của bạn là <strong>".number_format($balance)."đ</strong>. <br>Bạn cần nạp thêm tiền tại <a href='/nap-tien'> đây</a>, số dư sẽ được tự động trừ khi quản trị viên phê duyệt yêu cầu của bạn.</div>";
+
             return response()->json(['balance' => $balance, 'message' => $message]);
         }
     }
 
-
     public function listCars($salonSlug)
     {
         $salonInfo = Salon::where('slug', $salonSlug)->first();
-        if(!$salonInfo) {
+        if (! $salonInfo) {
             abort(404);
         }
 
         return view('salon.danh-sach-xe', compact('salonInfo'));
     }
 
-    public function expiredSalon($salonID) {
+    public function expiredSalon($salonID)
+    {
         $salon = Salon::find($salonID);
 
         $user = User::find($salon->user_id);
-        if($user->account_balence < 300000) {
+        if ($user->account_balence < 300000) {
             return redirect()->back()->with('error', 'Tài khoản của bạn không đủ. Vui lòng nạp thêm tiền vào tài khoản');
         }
 
-
         $account_balence = intval($user->account_balence) - intval(300000);
-        
+
         User::where('id', $salon->user_id)->update([
-            'account_balence' => $account_balence
+            'account_balence' => $account_balence,
         ]);
 
         $transaction_history = TransactionsHistory::create([
             'user_id' => $salon->user_id,
             'transaction_type' => 'dịch vụ: Gia hạn của hàng',
             'amount' => intval(300000),
-            'balance_after_transaction' => $account_balence
+            'balance_after_transaction' => $account_balence,
         ]);
 
         $salon->expired_date = Carbon::parse($salon->expires_date)->addDays(30);

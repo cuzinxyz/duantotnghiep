@@ -2,28 +2,37 @@
 
 namespace App\Livewire;
 
-use App\Models\Car;
 use App\Models\Brand;
-use Livewire\Component;
+use App\Models\Car;
 use App\Models\ModelCar;
-use Livewire\WithPagination;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Computed;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class SingleBrandCategory extends Component
 {
     use WithPagination;
 
-    public $brand, $model;
+    public $brand;
+
+    public $model;
+
     public $price;
+
     public $search;
 
     public $modelCars;
+
     public $brands;
+
     public $slug;
-    public $max_price, $min_price;
+
+    public $max_price;
+
+    public $min_price;
+
     public $brandDetail;
 
     public function mount($slug = null)
@@ -35,7 +44,6 @@ class SingleBrandCategory extends Component
 
         $this->brandDetail = Brand::where('brand_name', $slug)->first();
     }
-
 
     public function filterCategory()
     {
@@ -103,7 +111,7 @@ class SingleBrandCategory extends Component
                 ->simplePaginate(9);
 
             if ($this->price) {
-                $parts = explode("-", $this->price);
+                $parts = explode('-', $this->price);
 
                 if (count($parts) == 2) {
                     $number1 = intval(trim($parts[0]));
@@ -122,12 +130,11 @@ class SingleBrandCategory extends Component
             }
 
             if ($this->search) {
-                $cars = Car::where('title', 'like', '%' . $this->search . '%')
+                $cars = Car::where('title', 'like', '%'.$this->search.'%')
                     ->whereNull('salon_id')
                     ->where('status', 1)
                     ->simplePaginate(9);
             }
-
 
             if ($this->brand && $this->model) {
                 $cars = Car::where('brand_id', $this->brand)
@@ -140,14 +147,14 @@ class SingleBrandCategory extends Component
             if ($this->brand && $this->search) {
                 $cars = Car::where('brand_id', $this->brand)
                     ->whereNull('salon_id')
-                    ->where('title', 'like', '%' . $this->search . '%')
+                    ->where('title', 'like', '%'.$this->search.'%')
                     ->where('status', 1)
                     ->simplePaginate(9);
             }
 
             if ($this->brand && $this->model && $this->search) {
                 $cars = Car::where('brand_id', $this->brand)
-                    ->where('title', 'like', '%' . $this->search . '%')
+                    ->where('title', 'like', '%'.$this->search.'%')
                     ->whereNull('salon_id')
                     ->where('model_car_id', $this->model)
                     ->where('status', 1)
@@ -155,12 +162,12 @@ class SingleBrandCategory extends Component
             }
 
             if ($this->brand && $this->price && $this->search) {
-                $parts = explode("-", $this->price);
+                $parts = explode('-', $this->price);
                 $number1 = intval(trim($parts[0]));
                 $number2 = intval(trim($parts[1]));
 
                 $cars = Car::where('brand_id', $this->brand)
-                    ->where('title', 'like', '%' . $this->search . '%')
+                    ->where('title', 'like', '%'.$this->search.'%')
                     ->whereNull('salon_id')
                     ->where('price', '>=', $number1)
                     ->where('price', '<=', $number2)
@@ -169,11 +176,11 @@ class SingleBrandCategory extends Component
             }
 
             if ($this->price && $this->search) {
-                $parts = explode("-", $this->price);
+                $parts = explode('-', $this->price);
                 $number1 = intval(trim($parts[0]));
                 $number2 = intval(trim($parts[1]));
 
-                $cars = Car::where('title', 'like', '%' . $this->search . '%')
+                $cars = Car::where('title', 'like', '%'.$this->search.'%')
                     ->whereNull('salon_id')
                     ->where('price', '>=', $number1)
                     ->where('price', '<=', $number2)
@@ -181,9 +188,8 @@ class SingleBrandCategory extends Component
                     ->simplePaginate(9);
             }
 
-
             if ($this->price && $this->brand) {
-                $parts = explode("-", $this->price);
+                $parts = explode('-', $this->price);
                 $number1 = intval(trim($parts[0]));
                 $number2 = intval(trim($parts[1]));
 
@@ -196,7 +202,7 @@ class SingleBrandCategory extends Component
             }
 
             if ($this->price && $this->brand && $this->model) {
-                $parts = explode("-", $this->price);
+                $parts = explode('-', $this->price);
                 $number1 = intval(trim($parts[0]));
                 $number2 = intval(trim($parts[1]));
 
@@ -210,7 +216,7 @@ class SingleBrandCategory extends Component
             }
 
             if ($this->search && $this->brand && $this->model) {
-                $cars = Car::where('title', 'like', '%' . $this->search . '%')
+                $cars = Car::where('title', 'like', '%'.$this->search.'%')
                     ->whereNull('salon_id')
                     ->where('brand_id', $this->brand)
                     ->where('model_car_id', $this->model)
@@ -219,11 +225,11 @@ class SingleBrandCategory extends Component
             }
 
             if ($this->price && $this->brand && $this->model && $this->search) {
-                $parts = explode("-", $this->price);
+                $parts = explode('-', $this->price);
                 $number1 = intval(trim($parts[0]));
                 $number2 = intval(trim($parts[1]));
 
-                $cars = Car::where('title', 'like', '%' . $this->search . '%')
+                $cars = Car::where('title', 'like', '%'.$this->search.'%')
                     ->where('price', '>=', $number1)
                     ->whereNull('salon_id')
                     ->where('price', '<=', $number2)
@@ -234,14 +240,13 @@ class SingleBrandCategory extends Component
             }
         }
 
-
         return $cars;
     }
 
     #[Layout('components.partials.layout-client')]
     public function render()
     {
-        if (!empty($this->brand) && $this->brand != 0) {
+        if (! empty($this->brand) && $this->brand != 0) {
             $this->modelCars = ModelCar::where('brand_id', $this->brand)
                 ->get();
         }
@@ -251,7 +256,7 @@ class SingleBrandCategory extends Component
         return view('livewire.single-brand-category', [
             'ModelCars' => $this->modelCars,
             'brands' => $this->brands,
-            'cars' => $this->filterCategory()
+            'cars' => $this->filterCategory(),
         ]);
     }
 }

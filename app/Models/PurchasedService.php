@@ -16,7 +16,7 @@ class PurchasedService extends Model
         'service_id',
         'car_id',
         'remaining_push',
-        'expired_date'
+        'expired_date',
     ];
 
     public function service()
@@ -28,6 +28,4 @@ class PurchasedService extends Model
     {
         return $this->belongsTo(Car::class);
     }
-
-    
 }

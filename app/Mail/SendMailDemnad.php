@@ -6,7 +6,6 @@ use App\Models\Car;
 use App\Models\Demnad;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -19,13 +18,10 @@ class SendMailDemnad extends Mailable
     /**
      * Create a new message instance.
      */
-
-
     public function __construct(
         public Demnad $demnad,
         public User $user
-    )
-    {
+    ) {
         //
     }
 
@@ -34,7 +30,6 @@ class SendMailDemnad extends Mailable
      */
     public function envelope(): Envelope
     {
-
 
         return new Envelope(
             subject: 'Thông báo về bài đăng tin cần mua xe của bạn',
@@ -47,10 +42,11 @@ class SendMailDemnad extends Mailable
     public function content(): Content
     {
         $cars = Car::inRandomOrder()->limit(2)->get();
+
         return new Content(
             view: 'mail.mail-demnad',
             with: [
-                'cars' => $cars
+                'cars' => $cars,
             ]
 
         );

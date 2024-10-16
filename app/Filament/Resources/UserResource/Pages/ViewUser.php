@@ -10,13 +10,10 @@ class ViewUser extends ViewRecord
 {
     protected static string $resource = UserResource::class;
 
-
     protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),
         ];
     }
-
-    
 }

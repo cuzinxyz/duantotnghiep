@@ -2,28 +2,25 @@
 
 namespace App\Livewire;
 
-use App\Models\Car;
 use App\Models\Brand;
+use App\Models\Car;
 use App\Models\Garage;
-use Livewire\Component;
 use App\Models\ModelCar;
-use Illuminate\Support\Str;
-use Livewire\Attributes\On;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\Rule;
-use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
-use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AddCarGarage extends Component
 {
     use WithFileUploads;
-    #define requirement
+    //define requirement
 
     public $currentStep = 1;
 
-    public $fuels = ["Xăng", "Dầu Diesl", "Điện", "Loại khác"];
+    public $fuels = ['Xăng', 'Dầu Diesl', 'Điện', 'Loại khác'];
+
     public $colors = [
         'red' => 'Đỏ',
         'silver' => 'Bạc',
@@ -32,7 +29,7 @@ class AddCarGarage extends Component
         'yellow' => 'Vàng',
         'gray' => 'Ghi',
         'blue' => 'Xanh',
-        'multiple_color' => 'Nhiều màu'
+        'multiple_color' => 'Nhiều màu',
     ];
 
     public $featureValues = [
@@ -43,7 +40,7 @@ class AddCarGarage extends Component
         'PremiumSeatMaterial' => 'Ghế da cao cấp',
         'Bluetooth' => 'Kết nối bluetooth',
         'RemoteEngineStart' => 'Khởi động từ xa',
-        'Multi_ZoneClimateControl' => 'Điều hòa'
+        'Multi_ZoneClimateControl' => 'Điều hòa',
     ];
 
     public $seats = [
@@ -59,32 +56,52 @@ class AddCarGarage extends Component
     public $verhicle_image_library = [];
 
     public $brand_select = '';
+
     public $model_select = '';
+
     public $models = [];
+
     public $image_library;
+
     public $transmission;
+
     public $fuel;
+
     public $number_of_seats;
+
     public $color;
+
     public $version;
+
     public $condition;
+
     public $mileage;
+
     public $price;
+
     public $title;
+
     public $description;
+
     public $phone;
+
     public $name;
+
     public $email;
+
     public $district_id;
+
     public $city_id;
+
     public $full_address;
+
     public $year_of_manufacture;
+
     public $engine;
 
     public $verhicle_videos;
 
     public $features = [];
-
 
     public function previousStepSubmit()
     {
@@ -101,13 +118,14 @@ class AddCarGarage extends Component
             'number_of_seats' => 'required',
             'color' => 'required',
             // 'version' => 'required',
-            "engine" => 'required',
+            'engine' => 'required',
             'year_of_manufacture' => 'required',
             'mileage' => 'required',
             'price' => 'required',
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
         ]);
+
         return $this->currentStep++;
     }
 
@@ -144,12 +162,12 @@ class AddCarGarage extends Component
                 $dir_name = 'car_photos';
                 $photo->storeAs('car_photos', $fileName, 'public');
 
-                array_push($photoName, $dir_name . '/' . $fileName);
+                array_push($photoName, $dir_name.'/'.$fileName);
             }
         }
 
-        $videoName = "";
-        if (!empty($this->verhicle_videos)) {
+        $videoName = '';
+        if (! empty($this->verhicle_videos)) {
             $dir_name = 'video_car';
             $file = uploadFile($dir_name, $this->verhicle_videos);
             $videoName = $file;
@@ -168,8 +186,8 @@ class AddCarGarage extends Component
         $carData['full_address'] = $this->full_address;
         $carData['description'] = $this->description;
 
-        $carData['car_info'] = array(
-            "year_of_manufacture" => $this->year_of_manufacture,
+        $carData['car_info'] = [
+            'year_of_manufacture' => $this->year_of_manufacture,
             'transmission' => $this->transmission,
             'fuelType' => $this->fuel,
             'number_of_seats' => $this->number_of_seats,
@@ -177,19 +195,18 @@ class AddCarGarage extends Component
             'version' => $this->version,
             'condition' => $this->condition,
             'mileage' => $this->mileage,
-            "features" => $this->features,
+            'features' => $this->features,
             'engine' => $this->engine,
-        );
+        ];
 
-        $carData['contact'] = array(
+        $carData['contact'] = [
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
             'district_id' => $this->district_id,
             'city_id' => $this->city_id,
             'full_address' => $this->full_address,
-        );
-
+        ];
 
         $result = Car::create($carData);
         if ($result) {
@@ -200,22 +217,26 @@ class AddCarGarage extends Component
     }
 
     public $idGarage;
+
     public $GarageDetail;
-    public function GarageDetail($idGarage){
+
+    public function GarageDetail($idGarage)
+    {
         $this->idGarage = $idGarage;
     }
+
     #[Computed()]
     public function render()
     {
-        if (!empty($this->brand_select) && $this->brand_select != 0) {
+        if (! empty($this->brand_select) && $this->brand_select != 0) {
             $this->models = ModelCar::where('brand_id', $this->brand_select)->get();
         }
-        $GarageDetail = Garage::all()->where('id',1);
+        $GarageDetail = Garage::all()->where('id', 1);
         $brands = Brand::all();
+
         return view('livewire.add-car-garage', [
             'brands' => $brands,
-            
-        ],compact('GarageDetail'));
+
+        ], compact('GarageDetail'));
     }
 }
-

@@ -21,7 +21,7 @@ class RatingFactory extends Factory
             'from_user_id' => User::inRandomOrder()->first(),
             'to_user_id' => User::inRandomOrder()->first(),
             'start' => $this->faker->numberBetween(1, 5),
-            'content' => $this->faker->title()
+            'content' => $this->faker->title(),
         ];
     }
 }

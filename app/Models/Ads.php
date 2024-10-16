@@ -16,7 +16,7 @@ class Ads extends Model
         'image_url',
         'video_url',
         'target_url',
-        'priority'
+        'priority',
     ];
 
     public function partner(): BelongsTo

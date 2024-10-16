@@ -10,6 +10,7 @@ use Kjmtrue\VietnamZone\Models\Province;
 class Wishlist extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
     public function car(): BelongsTo

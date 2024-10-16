@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class SendMessage extends Model
 {
     use HasFactory;
+
     protected $table = 'send_message';
+
     protected $fillable = [
-      'user_name',
-      'email',
-      'phone_number',
-      'message'
+        'user_name',
+        'email',
+        'phone_number',
+        'message',
     ];
 }

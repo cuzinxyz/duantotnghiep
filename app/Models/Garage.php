@@ -10,9 +10,11 @@ class Garage extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'garage';
+
     protected $fillable = [
-        'id','name','address','phone','email','describe','image'
+        'id', 'name', 'address', 'phone', 'email', 'describe', 'image',
 
     ];
 }

@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use Carbon\Carbon;
-use Livewire\Component;
 use App\Models\Wishlist;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class AddToWishList extends Component
 {
@@ -15,7 +15,7 @@ class AddToWishList extends Component
     {
         if (Auth::check()) {
             $exists = Wishlist::where('user_id', Auth::id())->where('car_id', $car_id)->first();
-            if (!$exists) {
+            if (! $exists) {
                 Wishlist::insert([
                     'user_id' => Auth::id(),
                     'car_id' => $car_id,
@@ -30,7 +30,6 @@ class AddToWishList extends Component
         }
     }
 
-    
     public function render()
     {
         return view('livewire.add-to-wish-list');

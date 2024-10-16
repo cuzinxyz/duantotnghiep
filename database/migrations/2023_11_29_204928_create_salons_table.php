@@ -23,7 +23,7 @@ return new class extends Migration
                 ->comment('Lưu ngày hết hạn của Garage, cần gia hạn để tiếp tục sử dụng')
                 ->nullable();
             $table->integer('status')
-                ->comment("0: đang chờ duyệt, 1: đã duyệt, 2: đã hết hạn")
+                ->comment('0: đang chờ duyệt, 1: đã duyệt, 2: đã hết hạn')
                 ->default(0);
             $table->string('reason')->nullable();
             $table->integer('user_id');

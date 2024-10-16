@@ -2,35 +2,31 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Car;
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use Filament\Forms\Form;
-use App\Models\ChMessage;
-use Filament\Tables\Table;
-use App\Mail\CarRegistMail;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
-use Filament\Tables\Filters\Filter;
-use App\Events\CarCollaboratorEvent;
-use Illuminate\Support\Facades\Mail;
-use Filament\Infolists\Components\Grid;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use App\Infolists\Components\VideoEntry;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Infolists\Components\Actions;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Components\Actions\Action;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostCarManagerResource\Pages;
+use App\Infolists\Components\VideoEntry;
+use App\Mail\CarRegistMail;
+use App\Models\Car;
+use App\Models\ChMessage;
+use App\Models\User;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\Actions;
+use Filament\Infolists\Components\Actions\Action;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
 
 class PostCarManagerResource extends Resource
 {
@@ -45,7 +41,6 @@ class PostCarManagerResource extends Resource
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-
 
     public static function table(Table $table): Table
     {
@@ -64,9 +59,15 @@ class PostCarManagerResource extends Resource
                     ->label('Trạng thái')
                     ->badge()
                     ->state(function (Model $record) {
-                        if ($record->status == 0) return 'Chờ xác nhận';
-                        if ($record->status == 1) return 'Đã xác nhận';
-                        if ($record->status == 2) return 'Xe này đã bị xóa';
+                        if ($record->status == 0) {
+                            return 'Chờ xác nhận';
+                        }
+                        if ($record->status == 1) {
+                            return 'Đã xác nhận';
+                        }
+                        if ($record->status == 2) {
+                            return 'Xe này đã bị xóa';
+                        }
                     })
                     ->sortable(),
 
@@ -83,10 +84,13 @@ class PostCarManagerResource extends Resource
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
             ])
             ->filters([
@@ -100,7 +104,7 @@ class PostCarManagerResource extends Resource
                     ->query(fn (Builder $query): Builder => $query->where('status', 1)),
                 Filter::make('locked')
                     ->label('Bài đăng không duyệt')
-                    ->query(fn (Builder $query): Builder => $query->where('status', 2))
+                    ->query(fn (Builder $query): Builder => $query->where('status', 2)),
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
@@ -181,21 +185,20 @@ class PostCarManagerResource extends Resource
                                                             $total_assign = 0;
                                                         }
 
-
                                                         User::where('id', $record->collaborator_id)->update([
-                                                            'total_assign' => $total_assign
+                                                            'total_assign' => $total_assign,
                                                         ]);
                                                     }
 
                                                     $bot = User::where('name', 'BOT')->first();
-                                                    $reason = 'Chào bạn ' . $record->user->name . ',
-                                                Tin đăng bán xe của bạn có tiêu đề: ' . $record->title . ' được phê duyệt thành công.
+                                                    $reason = 'Chào bạn '.$record->user->name.',
+                                                Tin đăng bán xe của bạn có tiêu đề: '.$record->title.' được phê duyệt thành công.
                                                 Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
 
                                                     ChMessage::create([
                                                         'from_id' => $bot->id,
                                                         'to_id' => $record->user_id,
-                                                        'body' => $reason
+                                                        'body' => $reason,
                                                     ]);
                                                     $data = $record;
                                                     Mail::to($record->contact['email'])->later(now()->addSeconds(5), new CarRegistMail($data));
@@ -203,7 +206,6 @@ class PostCarManagerResource extends Resource
                                                     $record->status = 1;
                                                     $record->collaborator_id = null;
                                                     $record->save();
-
 
                                                     Notification::make()
                                                         ->title('Đã duyệt tin thành công')
@@ -230,24 +232,22 @@ class PostCarManagerResource extends Resource
                                                             $total_assign = 0;
                                                         }
 
-
                                                         User::where('id', $record->collaborator_id)->update([
-                                                            'total_assign' => $total_assign
+                                                            'total_assign' => $total_assign,
                                                         ]);
                                                     }
 
                                                     $bot = User::where('name', 'BOT')->first();
-                                                    $reason = 'Chào bạn ' . $record->user->name . ',
-                                                    Tin đăng bán xe có tiêu đề: ' . $record->title . ' của bạn không được phê duyệt, vì lý do: "' . $data['reason'] . '"
+                                                    $reason = 'Chào bạn '.$record->user->name.',
+                                                    Tin đăng bán xe có tiêu đề: '.$record->title.' của bạn không được phê duyệt, vì lý do: "'.$data['reason'].'"
                                                     Bạn vui đăng lại tin của mình và sửa lại những lỗi nêu trên
                                                     Cảm ơn bạn đã tin dùng DRIVCO của chúng tôi!';
 
                                                     ChMessage::create([
                                                         'from_id' => $bot->id,
                                                         'to_id' => $record->user_id,
-                                                        'body' => $reason
+                                                        'body' => $reason,
                                                     ]);
-
 
                                                     $record->reason = $data['reason'];
                                                     $record->status = 2;
@@ -260,7 +260,7 @@ class PostCarManagerResource extends Resource
                                                         ->send();
 
                                                     redirect()->route('filament.admin.resources.post-car-managers.index');
-                                                })
+                                                }),
                                         ]),
                                     ];
                                 }
@@ -315,7 +315,7 @@ class PostCarManagerResource extends Resource
                                             ->default('Điện'),
 
                                         TextEntry::make('car_info.features')
-                                            ->label('Một số tính năng khác')
+                                            ->label('Một số tính năng khác'),
                                     ])
                                     // ->collapsed()
                                     ->columns([
@@ -328,7 +328,7 @@ class PostCarManagerResource extends Resource
                                     ->schema([
                                         ImageEntry::make('verhicle_image_library')
                                             ->label('Hình ảnh')
-                                            ->default('https://picsum.photos/200')
+                                            ->default('https://picsum.photos/200'),
                                     ])
                                     ->extraAttributes([
                                         'class' => 'overflow-x-auto',
@@ -341,7 +341,7 @@ class PostCarManagerResource extends Resource
                                 Section::make('Video')
                                     ->schema([
                                         VideoEntry::make('verhicle_videos')
-                                            ->label('Video')
+                                            ->label('Video'),
                                     ])
                                     ->columnSpan([
                                         'xl' => 1,
@@ -361,7 +361,7 @@ class PostCarManagerResource extends Resource
                                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                                             Excepteur sint occaecat cupidatat non proident,
-                                            sunt in culpa qui officia deserunt mollit anim id est laborum.')
+                                            sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 
                                     ])
                                     ->collapsed(),

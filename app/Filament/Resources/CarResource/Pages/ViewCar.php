@@ -18,5 +18,4 @@ class ViewCar extends ViewRecord
             Actions\EditAction::make(),
         ];
     }
-
 }

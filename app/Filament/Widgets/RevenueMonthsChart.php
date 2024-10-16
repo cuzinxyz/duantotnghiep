@@ -2,26 +2,22 @@
 
 namespace App\Filament\Widgets;
 
-use Flowframe\Trend\Trend;
-use Illuminate\Support\Carbon;
-use Flowframe\Trend\TrendValue;
 use App\Models\TransactionsHistory;
 use Filament\Forms\Components\DatePicker;
+use Flowframe\Trend\Trend;
+use Flowframe\Trend\TrendValue;
+use Illuminate\Support\Carbon;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class RevenueMonthsChart extends ApexChartWidget
 {
     /**
      * Chart Id
-     *
-     * @var string
      */
     protected static string $chartId = 'revenueMonthsChart';
 
     /**
      * Widget Title
-     *
-     * @var string|null
      */
     protected static ?string $heading = 'Doanh thu theo tháng';
 
@@ -30,20 +26,17 @@ class RevenueMonthsChart extends ApexChartWidget
     /**
      * Chart options (series, labels, types, size, animations...)
      * https://apexcharts.com/docs/options
-     *
-     * @return array
      */
     protected function getOptions(): array
     {
-        $data = Trend::query(TransactionsHistory::where('transaction_type', "LIKE",  '%mua gói%')
-            ->orWhere('transaction_type', "LIKE", '%dịch vụ%'))
-        ->between(
-            start: Carbon::parse($this->filterFormData['date_start']),
-            end: Carbon::parse($this->filterFormData['date_end']),
-        )
+        $data = Trend::query(TransactionsHistory::where('transaction_type', 'LIKE', '%mua gói%')
+            ->orWhere('transaction_type', 'LIKE', '%dịch vụ%'))
+            ->between(
+                start: Carbon::parse($this->filterFormData['date_start']),
+                end: Carbon::parse($this->filterFormData['date_end']),
+            )
             ->perMonth()
             ->sum('amount');
-
 
         return [
             'chart' => [
@@ -74,18 +67,18 @@ class RevenueMonthsChart extends ApexChartWidget
                 ],
             ],
 
-            'plotOptions' =>  [
+            'plotOptions' => [
                 'bar' => [
                     'dataLabels' => [
-                        'position' => 'top'
-                    ]
+                        'position' => 'top',
+                    ],
                 ],
                 'dataLabels' => [
                     'enabled' => true,
                     'style' => [
-                        'colors' => '#333'
+                        'colors' => '#333',
                     ],
-                    'offsetX' => 30
+                    'offsetX' => 30,
                 ],
             ],
 
@@ -100,11 +93,11 @@ class RevenueMonthsChart extends ApexChartWidget
     {
         return [
             DatePicker::make('date_start')
-            ->label('Ngày bắt đầu')
-            ->default(now()->startOfYear()),
+                ->label('Ngày bắt đầu')
+                ->default(now()->startOfYear()),
             DatePicker::make('date_end')
-            ->label('Ngày kết thúc')
-            ->default(now()->endOfYear()),
+                ->label('Ngày kết thúc')
+                ->default(now()->endOfYear()),
         ];
     }
 

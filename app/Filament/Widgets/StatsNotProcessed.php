@@ -8,8 +8,8 @@ use App\Models\Reported;
 use App\Models\Salon;
 use App\Models\Support;
 use App\Models\WithDraw;
-use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsNotProcessed extends BaseWidget
 {
@@ -22,7 +22,7 @@ class StatsNotProcessed extends BaseWidget
                 ->color('warning')
                 ->url('/admin/post-car-managers')
                 ->openUrlInNewTab(),
-            
+
             Stat::make('Tin mua xe chưa được xử lý', Demnad::where('status', 0)->count())
                 ->color('warning')
                 ->url('/admin/demnads')

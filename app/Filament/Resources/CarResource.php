@@ -2,31 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Car;
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Set;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\ViewColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\CarResource\Pages;
+use App\Models\Car;
+use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MarkdownEditor;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\CarResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms\Components\Radio;
-use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Form;
+use Filament\Forms\Set;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class CarResource extends Resource
 {
@@ -35,6 +29,7 @@ class CarResource extends Resource
     protected static ?string $model = Car::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationLabel = 'Quản lý xe';
 
     public static function form(Form $form): Form
@@ -96,7 +91,7 @@ class CarResource extends Resource
 
                                 TextInput::make('car_info.version')
                                     ->label('Phiên bản'),
-                                    // ->rules(['required'])
+                                // ->rules(['required'])
 
                                 TextInput::make('car_info.engine')
                                     ->label('Mã lực')
@@ -128,12 +123,12 @@ class CarResource extends Resource
                                         'Vàng' => 'Vàng',
                                         'Tím' => 'Tím',
                                         'Nâu' => 'Nâu',
-                                        'Khác' => 'Khác'
+                                        'Khác' => 'Khác',
                                     ])
                                     ->columns([
                                         'default' => 1,
                                         'xl' => 2,
-                                        '2xl' => 2
+                                        '2xl' => 2,
                                     ]),
 
                                 Select::make('car_info.number_of_seats')
@@ -146,7 +141,6 @@ class CarResource extends Resource
                                         '7' => '7',
                                         '8' => '8',
 
-
                                     ]),
 
                                 Radio::make('car_info.transmission')
@@ -154,12 +148,12 @@ class CarResource extends Resource
                                     ->label('Hộp số')
                                     ->options([
                                         'sotay' => 'Số tay',
-                                        'sotudong' => 'Tự động'
+                                        'sotudong' => 'Tự động',
                                     ])
                                     ->columns([
                                         'default' => 1,
                                         'xl' => 2,
-                                        '2xl' => 2
+                                        '2xl' => 2,
                                     ]),
 
                                 Select::make('car_info.year_of_manufacture')
@@ -182,7 +176,6 @@ class CarResource extends Resource
                                         '2023' => '2023',
                                         'others' => 'others',
 
-
                                     ]),
 
                                 MarkdownEditor::make('description')
@@ -201,18 +194,18 @@ class CarResource extends Resource
                                         'table',
                                         'undo',
                                     ])
-                                    ->columnSpanFull()
+                                    ->columnSpanFull(),
 
                             ])
                             ->columns([
                                 'default' => 1,
                                 'xl' => 2,
-                                '2xl' => 2
+                                '2xl' => 2,
                             ])
                             ->columnSpan([
                                 'default' => 1,
                                 'xl' => 4,
-                                '2xl' => 5
+                                '2xl' => 5,
                             ]),
 
                         Grid::make('')
@@ -242,11 +235,11 @@ class CarResource extends Resource
                                                 'Cảm biến' => 'Cảm biến',
                                                 'Lái xe tự động' => 'Lái xe tự động',
                                                 'Hỗ trợ điểm mù' => 'Hỗ trợ điểm mù',
-                                                'Hỗ trợ làn đường' => 'Hỗ trợ làn đường'
+                                                'Hỗ trợ làn đường' => 'Hỗ trợ làn đường',
                                             ])->columns([
                                                 'default' => 1,
                                                 'xl' => 2,
-                                                '2xl' => 2
+                                                '2xl' => 2,
                                             ]),
                                     ]),
 
@@ -265,14 +258,13 @@ class CarResource extends Resource
                                             ->acceptedFileTypes(['video/mp4', 'video/avi', 'video/mov', 'video/wmv', 'video/flv', 'video/mkv', 'video/webm'])
                                             ->directory('video_car')
                                             ->maxSize(551200),
-                                    ])
+                                    ]),
 
                             ])->columnSpan([
                                 'default' => 1,
                                 'xl' => 2,
-                                '2xl' => 3
+                                '2xl' => 3,
                             ]),
-
 
                         Section::make('Thông tin liên hệ')
                             ->schema([
@@ -330,18 +322,18 @@ class CarResource extends Resource
                             ->columns([
                                 'default' => 1,
                                 'xl' => 2,
-                                '2xl' => 2
+                                '2xl' => 2,
                             ])
                             ->columnSpan([
                                 'default' => 1,
                                 'xl' => 4,
-                                '2xl' => 5
+                                '2xl' => 5,
                             ]),
                     ])
                     ->columns([
                         'default' => 1,
                         'xl' => 6,
-                        '2xl' => 8
+                        '2xl' => 8,
                     ]),
             ]);
     }
@@ -408,6 +400,7 @@ class CarResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
     public static function getModelLabel(): string
     {
         return __('Quản lý xe');

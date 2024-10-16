@@ -7,6 +7,7 @@ use Livewire\Component;
 class CarSearch extends Component
 {
     public $carSearch;
+
     // public function mount()
     // {
     //     $this->slug = last(explode('/', $url_page));
@@ -15,6 +16,7 @@ class CarSearch extends Component
     {
         return view('livewire.car-search');
     }
+
     public function search()
     {
         // dd($this->carSearch);

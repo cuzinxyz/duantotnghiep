@@ -18,18 +18,12 @@ class BannerObserver
     /**
      * Handle the Banner "updated" event.
      */
-    public function updated(Banner $banner): void
-    {
-        
-    }
+    public function updated(Banner $banner): void {}
 
     /**
      * Handle the Banner "deleted" event.
      */
-    public function deleted(Banner $banner): void
-    {
-        
-    }
+    public function deleted(Banner $banner): void {}
 
     /**
      * Handle the Banner "restored" event.
@@ -44,7 +38,7 @@ class BannerObserver
      */
     public function forceDeleted(Banner $banner): void
     {
-        if (!is_null($banner->image_url)) {
+        if (! is_null($banner->image_url)) {
             Storage::disk('public')->delete($banner->image_url);
         }
     }

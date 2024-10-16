@@ -2,14 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Models\Car;
-use App\Models\User;
 use App\Events\WorkCollaboratorEvent;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Events\WorkCollaboratorWhenOnline;
+use App\Models\Car;
 use App\Models\Demnad;
 use App\Models\Reported;
 use App\Models\Salon;
+use App\Models\User;
 use App\Models\WithDraw;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -47,22 +46,23 @@ class WorkCollaboratorWhenOnlineListener implements ShouldQueue
 
     }
 
-
-    public function taskAllocation($data) {
-        if (!empty($data) && $data->count() > 0) {
+    public function taskAllocation($data)
+    {
+        if (! empty($data) && $data->count() > 0) {
             foreach ($data as $item) {
                 event(new WorkCollaboratorEvent($item));
             }
         }
     }
 
-    public function checkUnActiveCar() {
+    public function checkUnActiveCar()
+    {
         $cars = Car::where([
             'status' => 0,
-            'collaborator_id' => null
+            'collaborator_id' => null,
         ])->get();
 
-        if($cars->count() > 0) {
+        if ($cars->count() > 0) {
             $this->taskAllocation($cars);
         }
     }
@@ -71,7 +71,7 @@ class WorkCollaboratorWhenOnlineListener implements ShouldQueue
     {
         $salons = Salon::where([
             'status' => 0,
-            'collaborator_id' => null
+            'collaborator_id' => null,
         ])->get();
 
         if ($salons->count() > 0) {
@@ -83,7 +83,7 @@ class WorkCollaboratorWhenOnlineListener implements ShouldQueue
     {
         $demnads = Demnad::where([
             'status' => 0,
-            'collaborator_id' => null
+            'collaborator_id' => null,
         ])->get();
 
         if ($demnads->count() > 0) {
@@ -95,7 +95,7 @@ class WorkCollaboratorWhenOnlineListener implements ShouldQueue
     {
         $reports = Reported::where([
             'status' => 0,
-            'collaborator_id' => null
+            'collaborator_id' => null,
         ])->get();
 
         if ($reports->count() > 0) {
@@ -107,7 +107,7 @@ class WorkCollaboratorWhenOnlineListener implements ShouldQueue
     {
         $withDraws = WithDraw::where([
             'status' => 0,
-            'collaborator_id' => null
+            'collaborator_id' => null,
         ])->get();
 
         if ($withDraws->count() > 0) {

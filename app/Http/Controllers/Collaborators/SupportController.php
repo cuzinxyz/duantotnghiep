@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Collaborators;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Support;
+use App\Http\Controllers\Controller;
 use App\Models\ChMessage;
+use App\Models\Support;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Http\Controllers\Controller;
 
 class SupportController extends Controller
 {
@@ -23,7 +23,7 @@ class SupportController extends Controller
         $supports = Support::with(['user'])->select(['id', 'user_id', 'title', 'category', 'created_at'])
             ->where([
                 'status' => 0,
-                'collaborator_id' => $collaborator_id
+                'collaborator_id' => $collaborator_id,
             ])
             ->orderBy('created_at', 'desc')
             ->get();
@@ -32,7 +32,7 @@ class SupportController extends Controller
             ->addColumn(
                 'view',
                 function ($support) {
-                    return '<a href="' . route('collaborators.supportDetail', $support->id) . '" class="btn btn-warning">Xem chi tiết</a>';
+                    return '<a href="'.route('collaborators.supportDetail', $support->id).'" class="btn btn-warning">Xem chi tiết</a>';
                 }
             )
 
@@ -49,6 +49,7 @@ class SupportController extends Controller
     public function supportDetail($id)
     {
         $support = Support::find($id);
+
         return view('collaborators.supports.detail', compact('support'));
     }
 
@@ -70,16 +71,15 @@ class SupportController extends Controller
         $collaborator['total_assign'] = $total_assign;
         $collaborator->save();
 
-
-        // Gửi thông báo cho khách hàng 
-        $reason = 'Chào bạn ' . $support->user->name . ',
-            Trả lời vấn đề '. $support->title .' của bạn: '.$request->reason .'
+        // Gửi thông báo cho khách hàng
+        $reason = 'Chào bạn '.$support->user->name.',
+            Trả lời vấn đề '.$support->title.' của bạn: '.$request->reason.'
             Cảm ơn bạn đã sử dụng dịch vụ của DRIVCO, nếu có thắc mắc vui lòng liên hệ chúng tôi để được hỗ trợ sớm nhất.';
 
         ChMessage::create([
             'from_id' => $bot->id,
             'to_id' => $support->user_id,
-            'body' => $reason
+            'body' => $reason,
         ]);
 
         return redirect()->route('collaborators.listSupport');

@@ -2,11 +2,8 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -18,6 +15,7 @@ class reassignUnfinishedTasksAfterDayEvent
      * Create a new event instance.
      */
     public $collaboratorID;
+
     public function __construct($collaboratorID)
     {
         $this->collaboratorID = $collaboratorID;

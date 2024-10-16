@@ -2,21 +2,21 @@
 
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
-use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class WithDrawRelationManager extends RelationManager
 {
     protected static string $relationship = 'withDraw';
 
     protected static ?string $title = 'Rút tiền';
+
     protected static ?string $label = 'Rút tiền';
 
     public function table(Table $table): Table
@@ -45,9 +45,15 @@ class WithDrawRelationManager extends RelationManager
                     ->label('Trạng thái')
                     ->badge()
                     ->state(function (Model $record) {
-                        if ($record->status == 0) return 'Chờ xác nhận';
-                        if ($record->status == 1) return 'Đã xác nhận';
-                        if ($record->status == 2) return 'Đã hủy yêu cầu';
+                        if ($record->status == 0) {
+                            return 'Chờ xác nhận';
+                        }
+                        if ($record->status == 1) {
+                            return 'Đã xác nhận';
+                        }
+                        if ($record->status == 2) {
+                            return 'Đã hủy yêu cầu';
+                        }
                     })
                     ->sortable(),
 
@@ -58,10 +64,13 @@ class WithDrawRelationManager extends RelationManager
                             $model->collaborator_id == null
                             && $model->status == 1
                             || $model->status == 2
-                        )
+                        ) {
                             return 'Quản trị viên';
+                        }
 
-                        if ($model->collaborator_id == null && $model->status == 0) return 'Chưa có người kiểm duyệt';
+                        if ($model->collaborator_id == null && $model->status == 0) {
+                            return 'Chưa có người kiểm duyệt';
+                        }
                     }),
             ])
             ->filters([
@@ -112,16 +121,17 @@ class WithDrawRelationManager extends RelationManager
                             ->label('Mã chuyển khoản')
                             ->defaultImageUrl(function (Model $model) {
                                 $urlBank = "https://img.vietqr.io/image/$model->bank_name-$model->bank_number-compact2.png?amount=$model->bank_price&addInfo=DRIVCO chuyen tien&accountName=$model->username";
+
                                 return url($urlBank);
                             })
                             ->width('100%')
                             ->height('auto')
-                            ->columnSpanFull()
+                            ->columnSpanFull(),
                     ])
                     ->columnSpan([
                         'default' => 1,
                         'lg' => 1,
-                    ])
+                    ]),
 
             ])
             ->columns([

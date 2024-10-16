@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdminResource\Pages;
-use App\Filament\Resources\AdminResource\RelationManagers;
 use App\Models\Admin;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -44,7 +43,7 @@ class AdminResource extends Resource
                             ->required(),
                     ])->columnSpan([
                         'md' => 1,
-                        'xl' => 2
+                        'xl' => 2,
                     ]),
                 Section::make()
                     ->schema([
@@ -55,12 +54,12 @@ class AdminResource extends Resource
                             ->label('Ảnh đại diện'),
                     ])->columnSpan([
                         'md' => 1,
-                        'xl' => 1
+                        'xl' => 1,
                     ]),
 
             ])->columns([
                 'md' => 2,
-                'xl' => 3
+                'xl' => 3,
             ]);
     }
 

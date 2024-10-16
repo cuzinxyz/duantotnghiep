@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class,'from_user_id');
-            $table->foreignIdFor(\App\Models\User::class,'to_user_id');
+            $table->foreignIdFor(\App\Models\User::class, 'from_user_id');
+            $table->foreignIdFor(\App\Models\User::class, 'to_user_id');
             $table->integer('start');
             $table->text('content');
             $table->timestamps();

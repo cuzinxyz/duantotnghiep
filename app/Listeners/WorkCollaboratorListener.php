@@ -2,16 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Models\Car;
-use App\Models\User;
-use App\Models\WithDraw;
 use App\Events\WorkCollaboratorEvent;
+use App\Models\Car;
 use App\Models\Demnad;
 use App\Models\Reported;
 use App\Models\Salon;
 use App\Models\Support;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\User;
+use App\Models\WithDraw;
 
 class WorkCollaboratorListener
 {
@@ -30,22 +28,21 @@ class WorkCollaboratorListener
     {
         $collaborator = User::where([
             'is_collaborator' => 1,
-            'active' => 1
+            'active' => 1,
         ])
             ->orderBy('total_assign', 'asc')
             ->first();
 
-        if($collaborator) {
+        if ($collaborator) {
             $total_assign = $collaborator->total_assign + 1;
 
             User::where('id', $collaborator->id)->update([
-                'total_assign' => $total_assign
+                'total_assign' => $total_assign,
             ]);
 
         } else {
             $collaborator = null;
         }
-        
 
         if ($event->data instanceof Car) {
             $this->taskAllocation(Car::class, $event->data, $collaborator);
@@ -63,7 +60,7 @@ class WorkCollaboratorListener
             $this->taskAllocation(Reported::class, $event->data, $collaborator);
         }
 
-        if($event->data instanceof WithDraw) {
+        if ($event->data instanceof WithDraw) {
             $this->taskAllocation(WithDraw::class, $event->data, $collaborator);
         }
 
@@ -73,13 +70,12 @@ class WorkCollaboratorListener
 
     }
 
-    public function taskAllocation($model, $data, $collaborator) {
-        if($collaborator) {
+    public function taskAllocation($model, $data, $collaborator)
+    {
+        if ($collaborator) {
             $model::where('id', $data->id)->update([
                 'collaborator_id' => $collaborator->id,
             ]);
         }
     }
-
-
 }
